@@ -24,18 +24,14 @@
    and add the hex to ACCESS_CODE_HASHES. The plaintext codes for the hashes
    below are listed in README.md.
    =========================================================================== */
-// Plaintext codes are intentionally NOT in this public repo — only their hashes.
-// Keep the hash→plaintext map privately (password manager). To add a code:
-//   echo -n "your-code" | shasum -a 256   →  paste the hex below.
-const ACCESS_CODE_HASHES = [
-  "f8b949d15bc5c4f11b37fe65f8554cfe70943bd237b38714e1dfe1be93816c4b",
-  "5ebe49e027e5af662cbed476ba4492ab02ebf7cdd2d7a6d6fabe9247f12363e5",
-  "8f554c2baa00e779cea28e8874295fbd945ac8111ce290ee99d735c34b996f17",
-  "5a612b55a4b7e2dd53b66a3850cfdd9fc8e75ff77b9f69520541faa9645dbf20",
-  "337499e37408a4d33d2e83e058951ce6e576ad5bfd38030c81ec92e330e1c176",
-  "01229c47e9ebfafe14aa89eb5482895f0b1d909e6dd790dbf2ec9911801878b0",
-  "53555bf955aa3d74d0b3a36db410f8ab73a8ab801634ecef9c1a27310fbd35b8",
-];
+// Access-code hashes are NOT committed. They are injected at deploy time from the
+// NOMIMA_ACCESS_CODES GitHub secret (see .github/workflows/deploy.yml), which the
+// CI hashes and writes into hashes.js as window.__NOMIMA_HASHES__. For local
+// testing, create your own hashes.js (gitignored) — see hashes.example.js.
+// If hashes.js is missing, the array is empty and the gate rejects every code.
+const ACCESS_CODE_HASHES = Array.isArray(window.__NOMIMA_HASHES__)
+  ? window.__NOMIMA_HASHES__
+  : [];
 
 // localStorage: hashes that have already been redeemed in THIS browser (burned).
 const CONSUMED_KEY = "nomima_consumed_codes";

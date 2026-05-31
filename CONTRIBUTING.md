@@ -41,8 +41,10 @@ Never commit credentials or plaintext access codes:
 
 - **`.htpasswd`** — generate it locally at deploy time; it is gitignored. See
   [`server-lock/README.md`](server-lock/README.md).
-- **Access-code plaintext** — only the SHA-256 hashes belong in `app.js`. Keep the
-  hash→plaintext mapping in a private place (password manager), never in the repo.
+- **Access codes** — the plaintext lives only in the `NOMIMA_ACCESS_CODES` GitHub
+  Actions secret. CI hashes them into `hashes.js` (gitignored) at deploy time; the
+  repo holds neither the codes nor the hashes. To test locally, copy
+  `hashes.example.js` → `hashes.js`. See [`README.md`](README.md#where-the-codes-live-github-secret-not-the-repo).
 - Treat the JS gate as a soft, casual-visitor deterrent only — the download link
   and code hashes are downloaded by every visitor. It is **not** real security.
 

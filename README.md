@@ -7,24 +7,33 @@ client-side password gate. No build step, no dependencies — plain HTML/CSS/JS.
 
 ```
 Nomima-Landing/
-├── index.html      ← the page (gate + landing + interactive graph)
-├── styles.css      ← styling (Nomima brand colors)
-├── app.js          ← password gate logic
-├── graph.js        ← interactive sample knowledge graph (pan/zoom)
-├── logo.svg        ← Nomima brand mark
+├── index.html          ← the page (gate + landing + interactive graph)
+├── styles.css          ← styling (Nomima brand colors)
+├── app.js              ← password gate logic
+├── graph.js            ← interactive sample knowledge graph (pan/zoom)
+├── logo.svg            ← Nomima brand mark
+├── hashes.example.js   ← template for the gitignored hashes.js (access-code hashes)
 ├── downloads/
 │   └── Nomima-0.1.0-arm64.zip   ← the app (Apple Silicon, signed + notarized)
-├── server-lock/    ← OPTIONAL real .htaccess lock (Apache/cPanel only — not the site)
-└── README.md       ← this file
+├── .github/workflows/
+│   └── deploy.yml      ← GitHub Pages deploy; injects code hashes from a secret
+├── server-lock/        ← OPTIONAL real .htaccess lock (Apache/cPanel only — not the site)
+└── README.md           ← this file
 ```
 
-The whole folder (except `server-lock/`) is ready to upload as-is. Keep the relative
-structure intact so `index.html` can find `downloads/Nomima-0.1.0-arm64.zip`.
+Deployment is automated (see [Deploying](#deploying-github-pages)). The static
+assets keep their relative structure so `index.html` finds
+`downloads/Nomima-0.1.0-arm64.zip`. `hashes.js` is generated at deploy time and is
+not committed.
 
-> The hero's 3D knowledge graph (`graph.js`) loads three.js + 3d-force-graph from a
-> CDN (esm.sh) via an import map in `index.html`, so the page needs internet to show
-> it (everything else is local). If the modules fail to load, the graph panel hides
-> itself gracefully and the rest of the page is unaffected.
+> The hero's knowledge graph (`graph.js`) is a faithful port of the app's own
+> Knowledge Graph view — same engine (`force-graph` / d3-force, 2D canvas), same
+> rendering (glowing lucide-icon nodes, curved directional edges, particles,
+> zoom-stable labels) and interactions (drag-pan, node-drag, click-to-focus,
+> ⌘/Ctrl-scroll zoom + toolbar). It loads `force-graph` from a CDN (esm.sh) via the
+> import map in `index.html`, so the page needs internet to show it (everything else
+> is local). If it fails to load, the graph panel hides itself and the rest of the
+> page is unaffected.
 
 ## The download
 
@@ -72,48 +81,66 @@ in that browser's `localStorage` and will be **rejected if entered again** there
 > anywhere), you need server-side state — a small serverless function that marks
 > the code consumed in a database. Not possible on a static, domain-only setup.
 
-### To add / rotate codes
+### Where the codes live (GitHub secret, not the repo)
 
-1. Pick a new code and hash it:
-   ```bash
-   echo -n "your-new-code" | shasum -a 256
-   ```
-2. Add the hex string to the `ACCESS_CODE_HASHES` array in `app.js` (and note the
-   plaintext in this table).
-3. To reset a "used" code while testing, clear the site's storage in the browser
-   (DevTools → Application → Local Storage → delete `nomima_consumed_codes`).
+The plaintext access codes are stored **only** in a GitHub Actions secret named
+`NOMIMA_ACCESS_CODES` (one code per line). On every push to `main`, the deploy
+workflow ([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)) hashes
+them with SHA-256 and writes the hashes into `hashes.js`, which the site loads as
+`window.__NOMIMA_HASHES__`. So:
+
+- The repo contains **no codes and no hashes** (`hashes.js` is gitignored).
+- The published site contains only the **hashes** (the plaintext never leaves the
+  secret).
+- `app.js` reads whatever hashes are present; if `hashes.js` is missing, the gate
+  rejects every code (fail-closed).
+
+**To add / rotate codes:** edit the `NOMIMA_ACCESS_CODES` secret
+(**Settings → Secrets and variables → Actions**) and re-run the deploy. Keep your
+own private map of which plaintext code you handed to whom.
+
+**To test locally:** copy [`hashes.example.js`](hashes.example.js) to `hashes.js`
+(gitignored) and add a test code's hash (`echo -n "code" | shasum -a 256`).
 
 > Note: opening the page consumes a code once per browser — including your own
-> tests. Use a spare code (or clear local storage) when testing repeatedly.
+> tests. Clear the site's storage to retry
+> (DevTools → Application → Local Storage → delete `nomima_consumed_codes`).
 
-## Deploying to your GoDaddy domain
+## Deploying (GitHub Pages)
 
-You said you currently own the **domain only** (no hosting plan yet). A static
-site needs somewhere to be served from. Two common paths:
+This repo deploys to **GitHub Pages** via GitHub Actions
+([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)). One-time setup:
 
-### Option A — Add GoDaddy Web Hosting (cPanel), then upload
-1. In GoDaddy, add a **Web Hosting (cPanel/Linux)** plan and attach your domain.
-2. Open **cPanel → File Manager → `public_html`**.
-3. Upload **the contents of this folder** (not the folder itself) into
-   `public_html` — so `index.html` sits at `public_html/index.html` and the DMG
-   at `public_html/downloads/...`.
-4. Visit your domain. Done.
-   - Bonus: cPanel hosting *also* supports a **real** password lock via
-     **Directory Privacy** (`.htaccess` Basic Auth) if you later want hard
-     protection instead of the JS gate.
+1. **Make the repo public** (Pages is free on public repos; private repos need a
+   paid GitHub plan). Note: a public repo means the download link in `index.html`
+   is readable in the source regardless of the gate.
+2. **Add the access codes secret.** Settings → Secrets and variables → Actions →
+   *New repository secret* → name `NOMIMA_ACCESS_CODES`, value = one code per line.
+3. **Enable Pages from Actions.** Settings → Pages → *Build and deployment* →
+   Source = **GitHub Actions**.
+4. **Push to `main`** (or run the workflow manually). The site builds and the
+   deploy URL appears in the Actions run and under Settings → Pages.
 
-### Option B — Point the domain at a free static host (recommended for static)
-Static hosts serve this kind of site for free, with HTTPS, and are easy to use:
-- **Cloudflare Pages**, **Netlify**, or **GitHub Pages**.
-- Upload/drag this folder, then in **GoDaddy → DNS** point your domain
-  (CNAME/A records) at the host per their instructions.
-- ⚠️ The 27 MB DMG exceeds some hosts' per-file limits on free tiers
-  (e.g. GitHub's soft 25 MB warning). Cloudflare Pages and Netlify handle it.
+### Custom domain
+Settings → Pages → *Custom domain* → enter your domain (this commits a `CNAME`).
+Then at **GoDaddy → DNS** point the domain at GitHub:
+- **apex** (`yourdomain.com`) → four `A` records: `185.199.108.153`,
+  `.109.153`, `.110.153`, `.111.153`
+- **www** → `CNAME` to `<username>.github.io`
 
-> Note: the password gate uses the Web Crypto API, which only runs in a **secure
-> context** (HTTPS or `localhost`). Over real `https://yourdomain.com` it works
-> fine. Opening `index.html` directly as a `file://` may block the hash check in
-> some browsers — always test over a server.
+Tick **Enforce HTTPS** once the certificate provisions.
+
+> The 27 MB app zip is within Pages' 100 MB/file limit, so it serves fine.
+
+> ⚠️ **Pages has no server-side auth.** The JS access-code gate is the only lock,
+> and it is soft (the hashes and download link are downloaded by every visitor).
+> For a *hard* lock you'd need a host that runs server-side code (e.g. a
+> Cloudflare Pages Function or Netlify Edge Function doing Basic Auth) — see
+> [`server-lock/`](server-lock/) for the Apache/cPanel equivalent.
+
+> Note: the gate uses the Web Crypto API, which only runs in a **secure context**
+> (HTTPS or `localhost`). It works over `https://yourdomain.com`; opening
+> `index.html` as a `file://` may block the hash check — always test over a server.
 
 ## Preview locally
 
