@@ -1,0 +1,6 @@
+{
+  "version": "0.1.1",
+  "notes": "Reliability fixes for completing items in Smart View and the Daily Brief (TodoList titles, reminders, AI actions), plus cleanup of stale references to deleted blocks. Adds a quiet in-app update check.",
+  "pub_date": "2026-05-31T00:00:00Z",
+  "url": "https://fng8111.github.io/Nomima-landing/"
+}
