@@ -1,0 +1,37 @@
+# =============================================================================
+# Nomima — REAL server-side password lock (Apache / cPanel Web Hosting only).
+#
+# This is a HARD lock: Apache prompts for a username+password (HTTP Basic Auth)
+# BEFORE serving any file in this directory — including index.html AND the .dmg.
+# Unlike the JavaScript gate, the protected files are never sent to the browser
+# until the password is correct, so the download link cannot be read from source.
+#
+# ── HOW TO USE (manual method) ───────────────────────────────────────────────
+# 1. Upload your site into public_html (index.html, styles.css, app.js, logo.svg,
+#    downloads/, etc.) as normal.
+# 2. Copy THIS file to public_html/.htaccess  (note the leading dot).
+# 3. Generate a .htpasswd locally (this repo is public, so one is NOT shipped):
+#       htpasswd -c .htpasswd nomima         # or: openssl passwd -apr1 "pw"
+#    Copy it to somewhere on the server — ideally OUTSIDE public_html,
+#    e.g.  /home/USERNAME/.htpasswd
+# 4. Edit the AuthUserFile line below to the ABSOLUTE path of that .htpasswd file.
+#    cPanel shows your home path; it usually looks like /home/USERNAME/.htpasswd
+# 5. Done — visiting the site now prompts for the credentials you generated.
+#
+# ── EASIER METHOD (recommended) ──────────────────────────────────────────────
+# Skip all of the above and use cPanel's built-in UI:
+#   cPanel → Files → "Directory Privacy" → select public_html →
+#   tick "Password protect this directory" → add a user + password → Save.
+# cPanel writes its own .htaccess + .htpasswd with the correct absolute paths.
+#
+# NOTE: Apache Basic Auth requires HTTPS to be safe (credentials are base64, not
+# encrypted, over the wire). Enable the free AutoSSL/Let's Encrypt cert in cPanel.
+#
+# If you use this server lock, the JavaScript access-code gate in app.js becomes
+# redundant (the server already blocks everyone) — you can leave it or remove it.
+# =============================================================================
+
+AuthType Basic
+AuthName "Nomima — private preview"
+AuthUserFile "/home/USERNAME/.htpasswd"
+Require valid-user

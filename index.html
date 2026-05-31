@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nomima — Your private, offline AI notebook</title>
+  <meta name="description" content="Nomima is a private, offline-first notebook with a built-in AI that organizes your thinking. For macOS." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "force-graph": "https://esm.sh/force-graph@1.49.5"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- ===================== PASSWORD GATE (see app.js) ===================== -->
+  <div id="gate" class="gate" aria-hidden="false">
+    <div class="gate-card">
+      <img src="logo.svg" alt="Nomima" class="gate-logo" width="56" height="56" />
+      <h1 class="gate-title">Nomima</h1>
+      <p class="gate-sub">This is a private preview. Enter your one-time access code to continue.</p>
+      <form id="gate-form" autocomplete="off">
+        <input id="gate-input" type="password" class="gate-input" placeholder="Access code" aria-label="Access code" autocomplete="off" autofocus />
+        <button type="submit" class="gate-btn">Unlock</button>
+      </form>
+      <p id="gate-error" class="gate-error" role="alert" hidden>Incorrect access code. Please try again.</p>
+    </div>
+    <p class="gate-foot">Nomima · invite only preview</p>
+  </div>
+
+  <!-- ===================== SITE ===================== -->
+  <main id="site" class="site" hidden>
+    <div class="glow glow-a" aria-hidden="true"></div>
+    <div class="glow glow-b" aria-hidden="true"></div>
+
+    <header class="nav">
+      <a class="brand" href="#top"><img src="logo.svg" alt="" width="28" height="28" /><span>Nomima</span></a>
+      <nav class="nav-links">
+        <a href="#features">Why Nomima</a>
+        <a href="#showcase">The editor</a>
+        <a class="nav-cta" href="#download">Download</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section id="top" class="hero">
+      <div class="hero-copy">
+        <span class="badge"><span class="badge-dot"></span> Now in private preview · for macOS</span>
+        <h1 class="hero-title">Your second brain,<br /><span class="grad">built by a private AI</span>.</h1>
+        <p class="hero-sub">
+          Nomima reads what you write, connects it into a living map of your ideas, and quietly
+          keeps you on top of everything — all on your Mac. Nothing ever leaves your device.
+        </p>
+        <div id="download" class="cta-row">
+          <a class="btn-primary" href="downloads/Nomima-0.1.0-arm64.zip" download>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701z"/></svg>
+            Download for Mac
+          </a>
+          <span class="cta-note">Free · Apple Silicon · runs 100% offline</span>
+        </div>
+      </div>
+
+      <!-- Knowledge graph (same engine + rendering as the app's KG view) -->
+      <div class="kg-stage">
+        <div id="kg" role="img" aria-label="A living knowledge graph connecting your notes, people, and ideas"></div>
+        <div class="kg-tools">
+          <button type="button" class="kg-btn" aria-label="Zoom in" onclick="NomimaKG.zoomBy(1.3)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M11 8v6M8 11h6"/></svg>
+          </button>
+          <button type="button" class="kg-btn" aria-label="Zoom out" onclick="NomimaKG.zoomBy(0.77)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M8 11h6"/></svg>
+          </button>
+          <button type="button" class="kg-btn" aria-label="Fit to view" onclick="NomimaKG.reset()">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/></svg>
+          </button>
+        </div>
+        <span class="kg-hint">Drag to pan · click a node to focus · ⌘/Ctrl-scroll to zoom</span>
+      </div>
+    </section>
+
+    <!-- WHY: three pillars -->
+    <section id="features" class="pillars">
+      <div class="sec-head">
+        <h2>A notebook that thinks with you</h2>
+        <p>Not another place to dump notes — an AI that actually makes sense of them.</p>
+      </div>
+      <div class="pillar-grid">
+        <article class="pillar">
+          <div class="pillar-ico ico-a">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3>Completely private</h3>
+          <p>The AI runs on your Mac, not in the cloud. No account, no sync, no tracking — your notes never leave your device.</p>
+        </article>
+        <article class="pillar">
+          <div class="pillar-ico ico-b">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg>
+          </div>
+          <h3>Connects your thinking</h3>
+          <p>Mention people, tag ideas, and Nomima weaves them into a living knowledge graph — surfacing links you'd never find by scrolling.</p>
+        </article>
+        <article class="pillar">
+          <div class="pillar-ico ico-c">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8"/><path d="m4.93 10.93 1.41 1.41"/><path d="M2 18h2"/><path d="M20 18h2"/><path d="m19.07 10.93-1.41 1.41"/><path d="M22 22H2"/><path d="m8 6 4-4 4 4"/><path d="M16 18a4 4 0 0 0-8 0"/></svg>
+          </div>
+          <h3>Keeps you on track</h3>
+          <p>Daily briefs, smart views, reminders and tasks — Nomima organizes what matters and tells you what's next, automatically.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- EDITOR showcase -->
+    <section id="showcase" class="showcase">
+      <div class="sec-head">
+        <h2>Write naturally. It does the organizing.</h2>
+        <p>Type <strong>@</strong> for people &amp; teams, <strong>#</strong> for projects &amp; ideas. Every pill becomes a node in your graph — automatically.</p>
+      </div>
+
+      <div class="note-window">
+        <div class="note-bar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="note-bar-title">Q3 Launch Plan — Nomima</span>
+        </div>
+        <div class="note-body">
+          <h3 class="note-h1">Q3 Launch Plan</h3>
+          <p class="note-p">
+            Kicking off the beta with
+            <span class="pill pill-person"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@Sarah</span>
+            and the
+            <span class="pill pill-team"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>@Design&nbsp;Team</span>.
+            <span class="pill pill-company"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4"/><path d="M9 6h.01M15 6h.01M12 6h.01M12 10h.01M9 10h.01M15 10h.01"/></svg>@Acme</span>
+            wants early access tied to
+            <span class="pill pill-idea"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5C17.7 10.2 18 9.2 18 8a6 6 0 0 0-12 0c0 1.2.3 2.2 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>#Q3-Goals</span>
+            — track everything under
+            <span class="pill pill-project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>#Roadmap</span>.
+          </p>
+
+          <div class="note-reminder">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M5 3 2 6M22 6l-3-3"/></svg>
+            <span>Send the
+              <span class="pill pill-project pill-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>#Launch</span>
+              checklist to
+              <span class="pill pill-team pill-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>@Marketing</span>
+            </span>
+            <span class="note-reminder-due">in 2 days</span>
+          </div>
+
+          <div class="note-tasklist">
+            <div class="note-tasklist-head">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+              <b>Launch checklist</b><span class="note-progress">1/3</span>
+            </div>
+            <label class="note-task done"><span class="cb"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span><span>Finalize <span class="pill pill-topic pill-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3z"/><path d="M21 18a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-5a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3z"/></svg>#Design</span> mocks</span></label>
+            <label class="note-task"><span class="cb"></span><span>Email <span class="pill pill-company pill-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4"/></svg>@Acme</span> the build</span></label>
+            <label class="note-task"><span class="cb"></span><span>Publish <span class="pill pill-project pill-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>#Roadmap</span> update</span></label>
+          </div>
+
+          <div class="note-callout">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5C17.7 10.2 18 9.2 18 8a6 6 0 0 0-12 0c0 1.2.3 2.2 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+            <span>Nomima linked <b>4 notes</b> that mention
+              <span class="pill pill-person pill-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@Sarah</span>
+              this week.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slim capabilities row -->
+      <p class="caps-lead">Plus everything you'd expect in a modern editor —</p>
+      <div class="caps">
+        <span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="7" rx="1.5"/><path d="m4.5 7.5 1.5 1.5 2.5-3"/><path d="M13 6h8M13 12h8M13 18h8"/></svg>To-Do lists</span>
+        <span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 9h0M11 9h5M8 13h8"/></svg>Callouts</span>
+        <span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 3 3 3-3"/><path d="M5 13h14M5 17h14"/></svg>Collapsible sections</span>
+        <span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M5 3 2 6M22 6l-3-3"/></svg>Reminders</span>
+        <span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg>Code blocks</span>
+        <span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M9 4v16M15 4v16"/></svg>Tables</span>
+        <span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/></svg>Files &amp; media</span>
+        <span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2v3a2 2 0 0 1-2 2"/><path d="M17 7h-2a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2v3a2 2 0 0 1-2 2"/></svg>Quotes</span>
+        <span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Block links</span>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="cta-band">
+      <h2>Think clearer. Privately.</h2>
+      <p>Free while in preview. Apple Silicon, macOS 11 and up.</p>
+      <a class="btn-primary" href="downloads/Nomima-0.1.0-arm64.zip" download>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701z"/></svg>
+        Download Nomima
+      </a>
+    </section>
+
+    <footer class="foot">
+      <img src="logo.svg" alt="" width="20" height="20" />
+      <span>Nomima © 2026 · Your notes. Your machine. Your mind.</span>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+  <script type="module" src="graph.js"></script>
+</body>
+</html>

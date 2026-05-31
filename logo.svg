@@ -1,0 +1,18 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="leftBar" x1="312" y1="97" x2="312" y2="927" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#351F96"/>
+      <stop offset="1" stop-color="#4256EC"/>
+    </linearGradient>
+    <linearGradient id="rightBar" x1="712" y1="97" x2="712" y2="927" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF2A94"/>
+      <stop offset="1" stop-color="#7E1DB4"/>
+    </linearGradient>
+  </defs>
+  <!-- Left vertical bar -->
+  <line x1="312" y1="200" x2="312" y2="824" stroke="url(#leftBar)" stroke-width="205" stroke-linecap="round"/>
+  <!-- Right vertical bar -->
+  <line x1="712" y1="200" x2="712" y2="824" stroke="url(#rightBar)" stroke-width="205" stroke-linecap="round"/>
+  <!-- Diagonal stroke (translucent violet) sweeping top-left to bottom-right -->
+  <line x1="312" y1="200" x2="712" y2="824" stroke="#5A29B6" stroke-width="205" stroke-linecap="round" opacity="0.5"/>
+</svg>

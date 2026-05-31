@@ -1,0 +1,6 @@
+.DS_Store
+
+# Never commit real credentials — this repo is public.
+# Generate locally at deploy time (see server-lock/README.md).
+.htpasswd
+server-lock/.htpasswd
