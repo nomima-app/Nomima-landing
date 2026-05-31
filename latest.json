@@ -1,6 +1,6 @@
 {
-  "version": "0.1.1",
-  "notes": "Reliability fixes for completing items in Smart View and the Daily Brief (TodoList titles, reminders, AI actions), plus cleanup of stale references to deleted blocks. Adds a quiet in-app update check.",
+  "version": "0.1.2",
+  "notes": "Big memory & stability fix: the on-device AI now uses far less RAM and releases it when idle, fixing startup crashes and slowdowns on lower-RAM Macs. No change to AI quality.",
   "pub_date": "2026-05-31T00:00:00Z",
   "url": "https://fng8111.github.io/Nomima-landing/"
 }
