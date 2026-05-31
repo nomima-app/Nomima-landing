@@ -14,7 +14,7 @@ Nomima-Landing/
 ├── logo.svg            ← Nomima brand mark
 ├── hashes.example.js   ← template for the gitignored hashes.js (access-code hashes)
 ├── downloads/
-│   └── Nomima-0.1.0-arm64.zip   ← the app (Apple Silicon, signed + notarized)
+│   └── Nomima-0.1.0-arm64.dmg   ← the app (Apple Silicon, signed + notarized DMG)
 ├── .github/workflows/
 │   └── deploy.yml      ← GitHub Pages deploy; injects code hashes from a secret
 ├── server-lock/        ← OPTIONAL real .htaccess lock (Apache/cPanel only — not the site)
@@ -23,7 +23,7 @@ Nomima-Landing/
 
 Deployment is automated (see [Deploying](#deploying-github-pages)). The static
 assets keep their relative structure so `index.html` finds
-`downloads/Nomima-0.1.0-arm64.zip`. `hashes.js` is generated at deploy time and is
+`downloads/Nomima-0.1.0-arm64.dmg`. `hashes.js` is generated at deploy time and is
 not committed.
 
 > The hero's knowledge graph (`graph.js`) is a faithful port of the app's own
@@ -37,16 +37,17 @@ not committed.
 
 ## The download
 
-`downloads/Nomima-0.1.0-arm64.zip` is the **signed + Apple-notarized** app
-(Developer ID: Fouad Ghandour, Team KGPABSJY76), Apple Silicon, macOS 11+. The app
-inside carries a stapled notarization ticket, so users just unzip, drag `Nomima.app`
-to Applications, and open — **no Gatekeeper warning**.
+`downloads/Nomima-0.1.0-arm64.dmg` is the **signed + Apple-notarized** disk image
+(Developer ID: Fouad Ghandour, Team KGPABSJY76), Apple Silicon, macOS 11+. The DMG
+itself is notarized with a stapled ticket, so users open it, drag `Nomima.app` to
+Applications, and launch — **no Gatekeeper warning**, and it verifies offline.
 
-> We ship the notarized **app in a ZIP** rather than a DMG because the build's `.app`
-> is notarized + stapled while the `.dmg` wrapper was not notarized. A ditto-made ZIP
-> preserves the stapled app and is Gatekeeper-clean. To switch to a DMG later,
-> notarize + staple the `.dmg` itself, then drop it into `downloads/` and update the
-> link in `index.html`.
+> We previously shipped a ZIP of the notarized `.app` (because that build's `.dmg`
+> wrapper hadn't been notarized). The `.dmg` has since been notarized + stapled
+> directly (`xcrun notarytool submit … && xcrun stapler staple`), so we now ship the
+> DMG — the standard Mac format, which also avoids browser "uncommon ZIP" friction.
+> To rebuild: notarize + staple the new `.dmg`, drop it into `downloads/`, and update
+> the link in `index.html`.
 
 ## Access codes (one-time use)
 
@@ -130,7 +131,7 @@ Then at **GoDaddy → DNS** point the domain at GitHub:
 
 Tick **Enforce HTTPS** once the certificate provisions.
 
-> The 27 MB app zip is within Pages' 100 MB/file limit, so it serves fine.
+> The 27 MB app DMG is within Pages' 100 MB/file limit, so it serves fine.
 
 > ⚠️ **Pages has no server-side auth.** The JS access-code gate is the only lock,
 > and it is soft (the hashes and download link are downloaded by every visitor).
