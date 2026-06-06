@@ -1,6 +1,6 @@
 {
-  "version": "0.1.2",
-  "notes": "Big memory & stability fix: the on-device AI now uses far less RAM and releases it when idle, fixing startup crashes and slowdowns on lower-RAM Macs. No change to AI quality.",
-  "pub_date": "2026-05-31T00:00:00Z",
-  "url": "https://fng8111.github.io/Nomima-landing/"
+  "version": "0.16.0-beta.3",
+  "notes": "Beta 3: fixes Tab on pill suggestions in TaskList — accepting a suggestion no longer also indents the task row.",
+  "pub_date": "2026-06-06T00:00:00Z",
+  "url": "https://nomima-app.github.io/Nomima-landing/"
 }
