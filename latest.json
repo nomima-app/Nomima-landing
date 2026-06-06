@@ -1,6 +1,6 @@
 {
-  "version": "0.16.0-beta.5",
-  "notes": "Beta 5: Tab-to-accept a pill suggestion now works correctly in Kanban cards and Column cells — accepting a suggestion no longer also jumps to the next card or column.",
+  "version": "0.16.0-beta.6",
+  "notes": "Beta 6: AI assistance (bring your own key) — a Settings → AI Models tab (Anthropic / OpenAI / Gemini / local), an AI Chat block, and an inline /generate that writes structured blocks (Mermaid, Kanban, Gantt, Widgets, tables…) grounded in your notebook and its files, with @mentions and #hashtags as real Smart Tags. Plus Dashboard/Widget calculation hardening.",
   "pub_date": "2026-06-06T00:00:00Z",
   "url": "https://nomima.io/"
 }
