@@ -10,7 +10,7 @@
   <meta http-equiv="Expires" content="0" />
   <title>Nomima — Your private, offline AI notebook</title>
   <meta name="description" content="Nomima is a private, offline-first notebook with a built-in AI that organizes your thinking. For macOS." />
-  <meta name="robots" content="noindex, nofollow" />
+  <meta name="robots" content="index, follow" />
   <link rel="icon" type="image/svg+xml" href="logo.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -300,23 +300,8 @@
   </script>
 </head>
 <body>
-  <!-- ===================== PASSWORD GATE (see app.js) ===================== -->
-  <div id="gate" class="gate" aria-hidden="false">
-    <div class="gate-card">
-      <img src="logo.svg" alt="Nomima" class="gate-logo" width="56" height="56" />
-      <h1 class="gate-title">Nomima</h1>
-      <p class="gate-sub">This is a private preview. Enter your one-time access code to continue.</p>
-      <form id="gate-form" autocomplete="off">
-        <input id="gate-input" type="password" class="gate-input" placeholder="Access code" aria-label="Access code" autocomplete="off" autofocus />
-        <button type="submit" class="gate-btn">Unlock</button>
-      </form>
-      <p id="gate-error" class="gate-error" role="alert" hidden>Incorrect access code. Please try again.</p>
-    </div>
-    <p class="gate-foot">Nomima · invite only preview</p>
-  </div>
-
   <!-- ===================== SITE ===================== -->
-  <main id="site" class="site" hidden>
+  <main id="site" class="site">
     <div class="glow glow-a" aria-hidden="true"></div>
     <div class="glow glow-b" aria-hidden="true"></div>
 
@@ -850,10 +835,6 @@
     <span class="sd-rail-label">Smart&nbsp;Dashes</span>
   </main>
 
-  <!-- Access-code hashes, generated at deploy time from a GitHub secret (gitignored;
-       absent locally → the gate simply rejects everything). See hashes.example.js. -->
-  <script src="hashes.js"></script>
-  <script src="app.js"></script>
   <script src="smartdashes.js?v=3"></script>
 
   <!-- Animated hero: scroll progress → pill morph steps + the SmartDashes rail
