@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Don't let the browser cache the page itself — otherwise edits to the inline
+       styles/markup or the ?v= asset pins below silently never reach the viewer. -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <title>Nomima — Your private, offline AI notebook</title>
   <meta name="description" content="Nomima is a private, offline-first notebook with a built-in AI that organizes your thinking. For macOS." />
   <meta name="robots" content="noindex, nofollow" />
@@ -10,7 +15,260 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=2" />
+  <!-- The real Nomima component look (vendored .smart-pill / --nm-* tokens) + the
+       pinned-scroll stage & SmartDashes rail shared with blocks.html. -->
+  <link rel="stylesheet" href="editor.css" />
+  <link rel="stylesheet" href="stage.css?v=7" />
+  <style>
+    /* ── Animated hero: words morph into real Smart Pills as you scroll ────── */
+    .anim-hero { position: relative; z-index: 1; }
+    #top .scroll-track { height: 3400vh; } /* sentence (4) + 11 blocks */ /* longer track → the morph unfolds slowly, time to read */
+    /* Intro: chrome-free, text left-aligned (globe sits top-right), no navbar. */
+    #top .stage { align-items: flex-start; padding-left: max(7vw, 44px); padding-right: 92px; text-align: left; }
+    .intro-lead { margin: 0; font-size: clamp(13px, 1.4vw, 16px); font-weight: 500; letter-spacing: 0.02em; color: var(--nm-subtle-fg);
+      transition: opacity .5s ease, font-size .5s ease, color .5s ease; }
+    /* In Act 2 the lead floats as a WHITE top-of-screen header describing the block. */
+    #top .stage.act2 .intro-lead { position: absolute; top: 7vh; left: 0; right: 0; text-align: center; padding: 0 8vw; z-index: 4;
+      color: var(--nm-heading); font-size: clamp(17px, 2.1vw, 26px); font-weight: 600; letter-spacing: -.01em; }
+    /* The cursive flourish — "Tag-type, with style." on the FIRST block (the section). */
+    #top .stage.act2 .intro-lead.cursive {
+      font-family: 'Snell Roundhand', 'Brush Script MT', 'Segoe Script', cursive;
+      font-size: clamp(34px, 5vw, 60px); font-weight: 500; font-style: italic; letter-spacing: 0;
+      background: linear-gradient(110deg, #8a9bff, var(--nm-accent-secondary, #f048a8));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    /* Living knowledge-graph backdrop (kgbg.js, force-graph) — anchored top-right;
+       brightens + zooms into focus as you scroll and each tag-node flies in. */
+    .kg-bg {
+      position: absolute; top: 3%; bottom: 3%; right: -6%; width: 64%; height: auto;  /* equal top/bottom = vertically centred */
+      pointer-events: none; opacity: 0.36;
+      transform-origin: center; will-change: transform, opacity; /* kgbg.js animates transform+opacity each frame */
+    }
+    .kg-bg canvas { display: block; }
+    .sentence {
+      position: relative;
+      font-size: clamp(26px, 4vw, 50px);   /* headline-scale notes — big through the whole pile-up + isolate */
+      font-weight: 700; line-height: 1.4; letter-spacing: -0.01em;
+      white-space: normal; color: var(--nm-fg);   /* wraps so all pills stay visible */
+      transition: opacity .55s ease, font-size .85s cubic-bezier(.5,0,.2,1), line-height .85s ease;
+    }
+    /* The pile-up FEED: a masked window the inner column scrolls through as notes
+       accumulate, so older notes are pushed up and out (faded by the top mask). JS
+       drives the scroll (translateY on .notes-feed-inner). */
+    .notes-stack { position: relative; font-size: clamp(26px, 4vw, 50px); height: 5em; overflow: hidden; transform-origin: left center;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 32%, #000 88%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0, #000 32%, #000 88%, transparent 100%); }
+    .notes-feed-inner { display: flex; flex-direction: column; gap: 0.4em; will-change: transform; }
+    /* ALL notes (fillers + hero) are headline-scale, so the pile-up reads big and flows
+       smoothly into the singled-out note. */
+    /* Fillers stay single-line so the scrolling feed reads cleanly; the hero note
+       (which is also .sentence) wraps via the .sentence override — so all pills
+       including "urgent" stay visible and can be recognised as smart tags. */
+    .note-line { font-size: clamp(26px, 4vw, 50px); font-weight: 700; line-height: 1.25; letter-spacing: -.01em;
+      white-space: nowrap; color: var(--nm-fg); transition: opacity .5s ease, transform .6s cubic-bezier(.2,.7,.2,1), filter .5s ease; }
+    /* Fillers start hidden — revealed one per scroll step, slide up into view. */
+    .note-line.filler { color: var(--nm-subtle-fg); opacity: 0; transform: translateY(10px); }
+    .note-line.filler.is-shown { opacity: 1; transform: none; }
+    #heroNote { white-space: normal; }   /* hero wraps — all smart tags stay on screen */
+    /* Once the hero note is singled out, the fillers fade away up. */
+    .notes-stack.isolated .note-line.filler { opacity: 0 !important; filter: blur(3px); transform: translateY(-6px) !important; }
+    /* In the section the feed is just the hero note — no window, no mask, no fillers. */
+    #top .stage.act2 .notes-stack { height: auto; overflow: visible; -webkit-mask-image: none; mask-image: none; }
+    #top .stage.act2 .notes-feed-inner { transform: none !important; gap: 10px; }
+    #top .stage.act2 .note-line.filler { display: none; }
+    .pw {
+      display: inline-flex; align-items: baseline; border-radius: 999px;
+      padding: 0.02em 0; margin: 0 0.03em; color: inherit; background: transparent; white-space: nowrap;
+      transition: background-color .55s cubic-bezier(.2,.7,.2,1), color .55s cubic-bezier(.2,.7,.2,1), padding .55s cubic-bezier(.2,.7,.2,1);
+    }
+    .pw .pill-ico {
+      width: 0; height: 0.82em; opacity: 0; margin-right: 0; vertical-align: -0.06em; flex-shrink: 0; overflow: hidden;
+      transition: width .55s cubic-bezier(.2,.7,.2,1), opacity .4s ease, margin-right .55s cubic-bezier(.2,.7,.2,1);
+    }
+    .pw.is-pill { padding: 0.06em 0.52em 0.06em 0.42em; }
+    .pw.is-pill .pill-ico { width: 0.82em; opacity: 1; margin-right: 0.22em; }
+    .pw.is-pill[data-kind="mention"][data-entity="person"] { color: var(--nm-entity-person); background: color-mix(in srgb, var(--nm-entity-person) 17%, transparent); }
+    .pw.is-pill[data-kind="hashtag"][data-entity="topic"]  { color: var(--nm-entity-topic);  background: color-mix(in srgb, var(--nm-entity-topic) 17%, transparent); }
+    .pw.is-pill[data-kind="hashtag"][data-entity="status"] { color: var(--nm-entity-status); background: color-mix(in srgb, var(--nm-entity-status) 17%, transparent); }
+    .pw.is-pill[data-kind="date"]                          { color: var(--nm-date-fg);       background: var(--nm-date-bg); }
+    .complete-pill {
+      display: inline-flex; align-items: baseline; gap: 0.2em; border-radius: 999px;
+      padding: 0.06em 0.52em 0.06em 0.42em; color: var(--nm-entity-status); background: color-mix(in srgb, var(--nm-entity-status) 17%, transparent);
+      margin-left: 0.3em; opacity: 0; transform: translateY(0.3em) scale(.9); font-size: 0.92em;
+      transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.2,1);
+    }
+    .complete-pill .pill-ico { width: 0.82em; height: 0.82em; opacity: 1; margin-right: 0; }
+    .sentence.is-done .complete-pill { opacity: 1; transform: none; }
+    /* Completed: the whole task reads done — dimmed out, with one strike-through
+       line drawn across the entire line (inline-flex pills don't take text-decoration). */
+    .sentence.is-done { opacity: 0.5; }
+    .sentence.is-done::after {
+      content: ""; position: absolute; left: -0.12em; right: -0.12em; top: 50%;
+      height: 2px; transform: translateY(-50%); border-radius: 2px;
+      background: color-mix(in srgb, var(--nm-fg) 52%, transparent);
+      animation: strike .45s cubic-bezier(.2,.7,.2,1) both;
+    }
+    @keyframes strike { from { transform: translateY(-50%) scaleX(0); transform-origin: left; } to { transform: translateY(-50%) scaleX(1); } }
+
+    /* End-of-note actions, revealed once the note completes: a modern Download
+       button (Mac app) + a text-only "Explore more" → the Blocks page. Left-aligned. */
+    .intro-cta {
+      position: absolute; left: max(7vw, 44px); bottom: 13vh;
+      display: inline-flex; align-items: center; gap: 24px;
+      opacity: 0; transform: translateY(12px); pointer-events: none; z-index: 4;
+      transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.2,1);
+    }
+    .intro-cta.is-on { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .dl-btn {
+      display: inline-flex; align-items: center; gap: 10px; padding: 12px 22px; border-radius: 13px;
+      font-size: 15px; font-weight: 600; color: var(--nm-heading); text-decoration: none;
+      background: color-mix(in srgb, var(--nm-accent) 13%, var(--nm-surface));
+      border: 1px solid color-mix(in srgb, var(--nm-accent) 36%, var(--nm-surface-border));
+      transition: background .15s ease, border-color .15s ease, transform .15s ease;
+    }
+    .dl-btn:hover { background: color-mix(in srgb, var(--nm-accent) 22%, var(--nm-surface)); border-color: color-mix(in srgb, var(--nm-accent) 55%, var(--nm-surface-border)); transform: translateY(-1px); }
+    .dl-btn svg { width: 17px; height: 17px; color: var(--nm-accent); }
+    .dl-sub { font-weight: 400; font-size: 12.5px; color: var(--nm-subtle-fg); margin-left: 1px; }
+    .explore-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14.5px; font-weight: 500; color: var(--nm-subtle-fg); text-decoration: none;
+      transition: color .15s ease;
+    }
+    .explore-link:hover { color: var(--nm-fg); }
+    .explore-link svg { width: 15px; height: 15px; transition: transform .2s ease; }
+    .explore-link:hover svg { transform: translateX(3px); }
+
+    /* ── ACT 2: the same note morphs through block types, one at a time ──────── */
+    .intro-lead, .explain-deck { transition: opacity .5s ease; }
+    .act-off { opacity: 0 !important; pointer-events: none !important; }
+
+    /* A fixed-height frame, vertically centred. Blocks are anchored to its TOP (not
+       each centred), so every block's kicker + card start at the SAME height on the
+       page regardless of the block's own height — no vertical jumping between blocks. */
+    .block-morph {
+      position: absolute; left: max(7vw, 44px); top: 50%; transform: translateY(-50%);
+      width: min(640px, 52vw); height: 440px; z-index: 3; pointer-events: none;
+      opacity: 0; transition: opacity .5s ease;
+    }
+    .block-morph.is-on { opacity: 1; }
+    /* Blocks ride a horizontal CONVEYOR, vertically centred. The current block sits
+       centred; already-seen blocks are parked off-screen LEFT (is-past); upcoming
+       blocks wait off-screen RIGHT (the default). Scrolling forward slides the current
+       block out to the left while the next slides in from the right — and back the
+       other way on scroll-up. */
+    .bm-block {
+      position: absolute; left: 0; right: 0; top: 50%; text-align: left;
+      transform: translate(118%, -50%); opacity: 0;
+      transition: transform .8s cubic-bezier(.5, 0, .2, 1), opacity .55s ease;
+      will-change: transform, opacity;
+    }
+    .bm-block.is-on   { transform: translate(0, -50%);    opacity: 1; }
+    .bm-block.is-past { transform: translate(-118%, -50%); opacity: 0; }
+    .bm-kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--nm-accent); margin-bottom: 16px; }
+    .bm-kicker .num { font-variant-numeric: tabular-nums; color: var(--nm-muted-fg); }
+    .bm-note { margin-top: 18px; font-size: 13.5px; line-height: 1.55; color: var(--nm-subtle-fg); max-width: 46ch; }
+    .bm-note strong { color: var(--nm-heading); font-weight: 700; }
+    .bm-block .nm-callout, .bm-block .nm-tasklist, .bm-block .nm-kanban, .bm-block .nm-gantt,
+    .bm-block .nm-table-wrap, .bm-block .nm-reminder, .bm-block .nm-blockquote, .bm-block .nm-sectionlite { margin: 0; }
+
+    /* lightweight Section block (not vendored in editor.css) */
+    .nm-sectionlite { border: 1px solid var(--nm-border); border-radius: 11px; background: var(--nm-surface); overflow: hidden; }
+    .nm-sectionlite-head { display: flex; align-items: center; gap: 9px; padding: 9px 13px; border-bottom: 1px solid var(--nm-border); background: color-mix(in srgb, var(--nm-accent) 6%, var(--nm-surface)); }
+    .nm-sectionlite-chev { color: var(--nm-muted-fg); display: inline-flex; } .nm-sectionlite-chev svg { width: 15px; height: 15px; }
+    .nm-sectionlite-title { font-size: 13.5px; font-weight: 700; color: var(--nm-heading); }
+    .nm-sectionlite-count { margin-left: auto; font-size: 10.5px; color: var(--nm-muted-fg); background: var(--nm-hover); padding: 2px 8px; border-radius: 999px; }
+    .nm-sectionlite-body { padding: 12px 14px; font-size: 14px; line-height: 1.6; color: var(--nm-fg); }
+
+    /* ── ACT 3: MCP ───────────────────────────────────────────────────────────── */
+    .mcp-act {
+      position: absolute; left: max(7vw, 44px); top: 50%; transform: translateY(-50%) translateY(14px);
+      width: min(620px, 50vw); z-index: 3; opacity: 0; pointer-events: none;
+      transition: opacity .55s ease, transform .72s cubic-bezier(.2,.7,.2,1);
+    }
+    .mcp-act.is-on { opacity: 1; transform: translateY(-50%); }
+    .mcp-kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--nm-accent); margin-bottom: 14px; }
+    .mcp-kicker svg { width: 15px; height: 15px; }
+    .mcp-h { font-size: clamp(25px, 3vw, 37px); font-weight: 800; letter-spacing: -.025em; line-height: 1.08; color: var(--nm-heading); margin: 0 0 12px; }
+    .mcp-p { font-size: 14.5px; line-height: 1.6; color: var(--nm-subtle-fg); margin: 0 0 20px; max-width: 52ch; }
+    .mcp-p strong { color: var(--nm-heading); font-weight: 700; }
+    .mcp-act .nm-codeblock { margin: 0; }
+
+    /* ════ ACT 2 LAYOUT SWAP: globe → left, the note → right as a Section ════ */
+    /* Globe: vertically centred + sits a bit right of the left edge (not cut off). */
+    .kg-bg { left: 42%; right: auto; transition: left .9s cubic-bezier(.5,0,.2,1), opacity .6s ease; }
+    #top .stage.act2 .kg-bg { left: -8%; }   /* a bit right of the edge, clear of the blocks */
+
+    /* The note flies right and becomes a Section card the SAME SIZE as the blocks —
+       the FONT animates down (not a tiny scale), so padding/header stay block-sized. */
+    .note-card { position: relative; width: min(90vw, 1180px);
+      transform-origin: left center;
+      transition: transform .9s cubic-bezier(.5,0,.2,1), width .9s cubic-bezier(.5,0,.2,1), opacity .45s ease; }
+    /* The visual card (border/bg/padding) lives on an inner wrapper so the note-card
+       itself is just the positioned box — and the kicker can sit ABOVE that card. */
+    .nc-inner { position: relative; border: 1px solid transparent; border-radius: 13px; background: transparent; padding: 0;
+      transition: background .6s ease, border-color .6s ease, padding .6s ease; }
+    /* Section kicker — same chrome as the block kickers ("02 · AS A TO-DO LIST"),
+       IN-FLOW above the card exactly like a block's kicker (so kicker + card start at
+       the same height as the blocks). Collapsed in the hero, expands in the section. */
+    .nc-kicker { display: flex; align-items: center; white-space: nowrap;
+      opacity: 0; max-height: 0; margin: 0; overflow: hidden; pointer-events: none;
+      transition: opacity .4s ease, max-height .45s ease, margin .45s ease; }
+    .nc-head { position: absolute; top: -4px; left: 16px; right: 16px; display: flex; align-items: center; gap: 8px;
+      opacity: 0; pointer-events: none; transition: opacity .5s ease .15s, top .6s ease; }
+    .nc-chev svg { width: 15px; height: 15px; color: var(--nm-muted-fg); }
+    .nc-title { font-size: 13px; font-weight: 700; color: var(--nm-accent); }
+    .nc-count { margin-left: auto; font-size: 10.5px; color: var(--nm-muted-fg); background: var(--nm-hover); padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+    /* The section card must land on the EXACT same box as the blocks (which sit at
+       right:max(7vw,44px), width min(720px,55vw)). It flies in from its flow-left
+       hero position, so translateX = the gap between that left edge and the block's
+       left edge: 100vw − 2·(stage padding) − blockWidth. (Was a flat 43vw, which
+       overshot ~150px and clipped off the right edge.) */
+    /* Absolutely positioned on the SAME frame as .block-morph (right-anchored, same
+       width + 440px height) so the section's kicker+card start at the identical height
+       as every block — independent of the hero's flex flow. */
+    #top .stage.act2 .note-card {
+      position: absolute; left: auto; right: max(7vw, 44px); top: 50%;
+      width: min(720px, 55vw); height: 440px;
+      display: flex; flex-direction: column; justify-content: center;  /* content centred, like the blocks */
+      transform: translateY(-50%); }
+    #top .stage.act2 .note-card .nc-inner {
+      background: var(--nm-surface); border-color: var(--nm-border); padding: 46px 22px 20px; }
+    #top .stage.act2 .nc-kicker { opacity: 1; max-height: 32px; margin-bottom: 14px; }
+    #top .stage.outro .nc-kicker { opacity: 0; }
+    #top .stage.act2 .note-card .nc-head { opacity: 1; top: 16px; }
+    #top .stage.act2 .sentence { font-size: 16px; white-space: normal; line-height: 1.55; }
+    #top .stage.act2 .note-card.nc-gone { transform: translate(-118%, -50%); opacity: 0; }   /* slides out LEFT, like the blocks */
+    /* In the section the note reads live, not struck through */
+    #top .stage.act2 .sentence.is-done { opacity: 1; }
+    #top .stage.act2 .sentence.is-done::after { display: none; }
+
+    /* Blocks live on the RIGHT in Act 2, and are bigger */
+    .block-morph { left: auto; right: max(7vw, 44px); width: min(720px, 55vw); }
+
+    /* ════ "And many other block types" — a row of mini block cards ════ */
+    .bm-many { display: flex; gap: 12px; flex-wrap: wrap; }
+    .bm-mini { flex: 1 1 0; min-width: 92px; display: flex; flex-direction: column; align-items: center; gap: 9px;
+      padding: 18px 12px; border-radius: 12px; background: var(--nm-surface); border: 1px solid var(--nm-border);
+      font-size: 12.5px; font-weight: 600; color: var(--nm-heading); }
+    .bm-mini-ico { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center;
+      color: var(--c); background: color-mix(in srgb, var(--c) 15%, transparent); }
+    .bm-mini-ico svg { width: 20px; height: 20px; }
+
+    /* ════ FINAL SCREEN — a real <footer> section (normal flow). Because it's the last
+       element on the page and a full viewport tall, you scroll to it and simply stop —
+       no pinned-stage release, no overscroll into black. Hero-style orb backdrop. ════ */
+    .footer-hero {
+      position: relative; z-index: 20; min-height: 100vh; width: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+      text-align: center; padding: 0 8vw; overflow: hidden; background: var(--bg);
+    }
+    .fh-bg { position: absolute; inset: 0; z-index: 0; }
+    .footer-hero .outro-h, .footer-hero .dl-btn { position: relative; z-index: 1; }
+    .outro-h { margin: 0; max-width: 17ch; font-size: clamp(30px, 4.6vw, 58px); font-weight: 800;
+      letter-spacing: -.03em; line-height: 1.08; color: var(--nm-heading); }
+    .outro-h .accent { background: linear-gradient(110deg, #8a9bff, var(--nm-accent-secondary, #f048a8)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  </style>
   <script type="importmap">
   {
     "imports": {
@@ -40,172 +298,635 @@
     <div class="glow glow-a" aria-hidden="true"></div>
     <div class="glow glow-b" aria-hidden="true"></div>
 
-    <header class="nav">
-      <a class="brand" href="#top"><img src="logo.svg" alt="" width="28" height="28" /><span>Nomima</span></a>
-      <nav class="nav-links">
-        <a href="#features">Why Nomima</a>
-        <a href="#showcase">The editor</a>
-        <a class="nav-cta" href="#download">Download</a>
-      </nav>
-    </header>
-
-    <!-- HERO -->
-    <section id="top" class="hero">
-      <div class="hero-copy">
-        <span class="badge"><span class="badge-dot"></span> Now in private preview · for macOS</span>
-        <h1 class="hero-title">Your second brain,<br /><span class="grad">built by a private AI</span>.</h1>
-        <p class="hero-sub">
-          Nomima reads what you write, connects it into a living map of your ideas, and quietly
-          keeps you on top of everything — all on your Mac. Nothing ever leaves your device.
-        </p>
-        <div id="download" class="cta-row">
-          <a class="btn-primary" href="downloads/Nomima-0.1.2-arm64.dmg" download>
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701z"/></svg>
-            Download for Mac
-          </a>
-          <span class="cta-note">Free · Apple Silicon · runs 100% offline</span>
-        </div>
-      </div>
-
-      <!-- Knowledge graph (same engine + rendering as the app's KG view) -->
-      <div class="kg-stage">
-        <div id="kg" role="img" aria-label="A living knowledge graph connecting your notes, people, and ideas"></div>
-        <div class="kg-tools">
-          <button type="button" class="kg-btn" aria-label="Zoom in" onclick="NomimaKG.zoomBy(1.3)">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M11 8v6M8 11h6"/></svg>
-          </button>
-          <button type="button" class="kg-btn" aria-label="Zoom out" onclick="NomimaKG.zoomBy(0.77)">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M8 11h6"/></svg>
-          </button>
-          <button type="button" class="kg-btn" aria-label="Fit to view" onclick="NomimaKG.reset()">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/></svg>
-          </button>
-        </div>
-        <span class="kg-hint">Drag to pan · click a node to focus · ⌘/Ctrl-scroll to zoom</span>
-      </div>
-    </section>
-
-    <!-- WHY: three pillars -->
-    <section id="features" class="pillars">
-      <div class="sec-head">
-        <h2>A notebook that thinks with you</h2>
-        <p>Not another place to dump notes — an AI that actually makes sense of them.</p>
-      </div>
-      <div class="pillar-grid">
-        <article class="pillar">
-          <div class="pillar-ico ico-a">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
-          </div>
-          <h3>Completely private</h3>
-          <p>The AI runs on your Mac, not in the cloud. No account, no sync, no tracking — your notes never leave your device.</p>
-        </article>
-        <article class="pillar">
-          <div class="pillar-ico ico-b">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg>
-          </div>
-          <h3>Connects your thinking</h3>
-          <p>Mention people, tag ideas, and Nomima weaves them into a living knowledge graph — surfacing links you'd never find by scrolling.</p>
-        </article>
-        <article class="pillar">
-          <div class="pillar-ico ico-c">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8"/><path d="m4.93 10.93 1.41 1.41"/><path d="M2 18h2"/><path d="M20 18h2"/><path d="m19.07 10.93-1.41 1.41"/><path d="M22 22H2"/><path d="m8 6 4-4 4 4"/><path d="M16 18a4 4 0 0 0-8 0"/></svg>
-          </div>
-          <h3>Keeps you on track</h3>
-          <p>Daily briefs, smart views, reminders and tasks — Nomima organizes what matters and tells you what's next, automatically.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- EDITOR showcase -->
-    <section id="showcase" class="showcase">
-      <div class="sec-head">
-        <h2>Write naturally. It does the organizing.</h2>
-        <p>Type <strong>@</strong> for people &amp; teams, <strong>#</strong> for projects &amp; ideas. Every pill becomes a node in your graph — automatically.</p>
-      </div>
-
-      <div class="note-window">
-        <div class="note-bar">
-          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-          <span class="note-bar-title">Q3 Launch Plan — Nomima</span>
-        </div>
-        <div class="note-body">
-          <h3 class="note-h1">Q3 Launch Plan</h3>
-          <p class="note-p">
-            Kicking off the beta with
-            <span class="pill pill-person"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@Sarah</span>
-            and the
-            <span class="pill pill-team"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>@Design&nbsp;Team</span>.
-            <span class="pill pill-company"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4"/><path d="M9 6h.01M15 6h.01M12 6h.01M12 10h.01M9 10h.01M15 10h.01"/></svg>@Acme</span>
-            wants early access tied to
-            <span class="pill pill-idea"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5C17.7 10.2 18 9.2 18 8a6 6 0 0 0-12 0c0 1.2.3 2.2 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>#Q3-Goals</span>
-            — track everything under
-            <span class="pill pill-project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>#Roadmap</span>.
-          </p>
-
-          <div class="note-reminder">
-            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M5 3 2 6M22 6l-3-3"/></svg>
-            <span>Send the
-              <span class="pill pill-project pill-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>#Launch</span>
-              checklist to
-              <span class="pill pill-team pill-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>@Marketing</span>
-            </span>
-            <span class="note-reminder-due">in 2 days</span>
-          </div>
-
-          <div class="note-tasklist">
-            <div class="note-tasklist-head">
-              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
-              <b>Launch checklist</b><span class="note-progress">1/3</span>
+    <!-- ===== INTRO — a chrome-free hero; your words become Smart Pills as you scroll ===== -->
+    <section id="top" class="anim-hero">
+      <div class="scroll-track">
+        <div class="stage">
+          <div class="bg3d" aria-hidden="true">
+            <div class="bg3d-inner">
+              <div class="bg-orb bg-orb-a"></div>
+              <div class="bg-orb bg-orb-b"></div>
+              <div class="kg-wrap"><div class="kg-bg" id="kgbg"></div></div>
             </div>
-            <label class="note-task done"><span class="cb"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span><span>Finalize <span class="pill pill-topic pill-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3z"/><path d="M21 18a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-5a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3z"/></svg>#Design</span> mocks</span></label>
-            <label class="note-task"><span class="cb"></span><span>Email <span class="pill pill-company pill-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4"/></svg>@Acme</span> the build</span></label>
-            <label class="note-task"><span class="cb"></span><span>Publish <span class="pill pill-project pill-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>#Roadmap</span> update</span></label>
+          </div>
+          <p class="intro-lead">It all starts with a quick note:</p>
+
+          <div class="note-card" id="noteCard">
+            <div class="bm-kicker nc-kicker"><span class="num">01</span> As a quick note</div>
+            <div class="nc-inner">
+              <div class="nc-head">
+                <span class="nc-chev">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </span>
+                <span class="nc-title">#q3 · Launch Plan</span>
+                <span class="nc-count">1 note</span>
+              </div>
+              <div class="notes-stack" id="notesStack">
+                <div class="notes-feed-inner" id="notesFeedInner">
+                  <div class="note-line filler">Plan family vacation to Tokyo</div>
+                  <div class="note-line filler">Book to read: Gödel, Escher, Bach</div>
+                  <div class="note-line filler">Falcon migration project at work</div>
+                  <div class="note-line filler">Prepare for team sync meeting</div>
+                  <div class="note-line filler">Run 5k before breakfast (#health)</div>
+                  <div class="note-line sentence" id="heroNote">
+                    Briefing on <span class="pw" data-kind="hashtag" data-entity="project"><svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg><span class="pw-t">Falcon</span></span>
+                    with <span class="pw" data-kind="mention" data-entity="person"><svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="pw-t">FinanceSarah</span></span>
+                    <span class="pw" data-kind="date"><svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span class="pw-t">tonight</span></span>
+                    <span class="pw" data-kind="hashtag" data-entity="status"><svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg><span class="pw-t">urgent</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="note-callout">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5C17.7 10.2 18 9.2 18 8a6 6 0 0 0-12 0c0 1.2.3 2.2 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-            <span>Nomima linked <b>4 notes</b> that mention
-              <span class="pill pill-person pill-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@Sarah</span>
-              this week.</span>
+          <div class="explain-deck">
+            <div class="explain" data-step="1">
+              <span class="explain-ico" style="color:var(--nm-entity-person); background: color-mix(in srgb, var(--nm-entity-person) 16%, transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+              <div>
+                <h4>@mentions — you tag who matters</h4>
+                <p>Type <strong>@</strong> and pick — <strong>John</strong> becomes a Person you can open, link and find everywhere. Nomima never auto-scans your notes; <em>you</em> choose what becomes an entity, and it can be a person, company, place, product or team.</p>
+                <div class="ent-chips">
+                  <span class="ent-chip" style="color:var(--nm-entity-person); background:color-mix(in srgb,var(--nm-entity-person) 15%,transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Person</span>
+                  <span class="ent-chip" style="color:var(--nm-entity-company); background:color-mix(in srgb,var(--nm-entity-company) 15%,transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M16 10h.01M8 10h.01"/></svg>Company</span>
+                  <span class="ent-chip" style="color:var(--nm-entity-location); background:color-mix(in srgb,var(--nm-entity-location) 15%,transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Place</span>
+                  <span class="ent-chip" style="color:var(--nm-entity-product); background:color-mix(in srgb,var(--nm-entity-product) 15%,transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg>Product</span>
+                  <span class="ent-chip" style="color:var(--nm-entity-team); background:color-mix(in srgb,var(--nm-entity-team) 15%,transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Team</span>
+                </div>
+              </div>
+            </div>
+            <div class="explain" data-step="2">
+              <span class="explain-ico" style="color:var(--nm-hashtag-fg); background: color-mix(in srgb, var(--nm-hashtag-fg) 16%, transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg></span>
+              <div><h4>#hashtags — you tag the topic</h4><p>Type <strong>#</strong> to tag what a note is about — <strong style="color:var(--nm-entity-topic)">#earnings_report</strong>, <strong style="color:var(--nm-entity-status)">#urgent</strong>. You add the tags you want; Nomima types, colour-codes and rolls them up across your whole vault.</p></div>
+            </div>
+            <div class="explain" data-step="3">
+      <span class="explain-ico" style="color:var(--nm-date-fg); background: color-mix(in srgb, var(--nm-date-fg) 16%, transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span>
+              <div><h4>Dates — you write them, your way</h4><p>Write a date in plain words — “tonight”, “next Friday”, “in 3 hours” — and Nomima turns what <em>you</em> wrote into a real, trackable date: counted down, surfaced when due, and red the moment it’s overdue.</p></div>
+            </div>
+            <div class="explain" data-step="4">
+              <span class="explain-ico" style="color:var(--nm-entity-status); background: color-mix(in srgb, var(--nm-entity-status) 16%, transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg></span>
+              <div><h4>Done is as easy as 1 · 2 · 3</h4><p>Type the status tag <strong style="color:var(--nm-entity-status)">#complete</strong> and it’s done — struck through here and marked complete in Stats, search and the knowledge graph. No checkbox hunting.</p></div>
+            </div>
           </div>
+          <div class="block-morph" id="blockMorph">
+            <!-- Step 3 (bstep 1): Rigid categories -->
+            <div class="bm-block" data-bstep="1">
+              <div class="bm-kicker"><span class="num">02</span> Rigid Databases</div>
+              <div class="nm-tasklist" style="border-color: rgba(239, 68, 68, 0.28); background: rgba(239, 68, 68, 0.04); padding: 18px 20px;">
+                <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #ef4444; margin-bottom: 12px; letter-spacing: 0.08em; display: flex; align-items: center; gap: 6px;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px; height:14px;"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>
+                  Categorize before thinking
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--nm-subtle-fg); border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
+                    <span>Is this a Task?</span>
+                    <span style="color: #ef4444; font-weight: 600;">[Select Category]</span>
+                  </div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--nm-subtle-fg); border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
+                    <span>Or a Note? A Reminder?</span>
+                    <span style="color: #ef4444; font-weight: 600;">[Choose Type]</span>
+                  </div>
+                </div>
+              </div>
+              <div class="bm-note">Traditional tools force you to decide what your thoughts are before you've even had time to think them.</div>
+            </div>
+
+            <!-- Step 4 (bstep 2): Capture First -->
+            <div class="bm-block" data-bstep="2">
+              <div class="bm-kicker"><span class="num">03</span> Capture First</div>
+              <div class="nm-sectionlite">
+                <div class="nm-sectionlite-head">
+                  <span class="nm-sectionlite-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+                  <span class="nm-sectionlite-title">Quick draft block</span>
+                </div>
+                <div class="nm-sectionlite-body" style="font-family: ui-monospace, monospace; font-size: 13px; color: var(--nm-fg); padding: 16px;">
+                  Plan family vacation to Tokyo with @Dad and @Mom #Vacation2027 by next Friday
+                </div>
+              </div>
+              <div class="bm-note">Write naturally. Categorizing can wait. Let ideas evolve into tasks or projects on their own.</div>
+            </div>
+
+            <!-- Step 5 (bstep 3): Block checklist -->
+            <div class="bm-block" data-bstep="3">
+              <div class="bm-kicker"><span class="num">04</span> Grow as a Block</div>
+              <div class="nm-tasklist">
+                <div class="nm-tasklist-head">
+                  <span class="nm-tasklist-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+                  <span class="nm-block-title">Vacation plans</span>
+                  <span class="nm-tasklist-progress">
+                    <span class="nm-tasklist-progress-track"><div style="width:50%"></div></span>
+                    <span class="nm-tasklist-count">1/2</span>
+                  </span>
+                </div>
+                <div class="nm-tasklist-body">
+                  <div class="nm-task" data-checked="true"><span class="nm-task-cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="nm-task-text">Book flights with <span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@Mom</span></span></div>
+                  <div class="nm-task" data-checked="false"><span class="nm-task-cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="nm-task-text">Research hotels in Tokyo <span class="smart-pill smart-pill--hashtag" data-entity-type="topic"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>#Vacation2027</span></span></div>
+                </div>
+              </div>
+              <div class="bm-note">Every block can grow, connect, and evolve. If yes, Nomima preserves the knowledge.</div>
+            </div>
+
+            <!-- Step 6 (bstep 4): Think like a human -->
+            <div class="bm-block" data-bstep="4">
+              <div class="bm-kicker"><span class="num">05</span> Human Language</div>
+              <div class="nm-sectionlite" style="padding: 16px;">
+                <div style="font-size: 13.5px; line-height: 1.65; color: var(--nm-fg);">
+                  Discuss <span class="smart-pill smart-pill--hashtag" data-entity-type="project"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>#Falcon</span> migration with <span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@FinanceSarah</span> on <span class="smart-pill smart-pill--mention" data-entity-type="team"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>@AWS</span>
+                </div>
+              </div>
+              <div class="bm-note">Nomima embraces shortcuts. You don't remember complete corporate names; you remember associations.</div>
+            </div>
+
+            <!-- Step 7 (bstep 5): Autocomplete suggestions -->
+            <div class="bm-block" data-bstep="5">
+              <div class="bm-kicker"><span class="num">06</span> Autocomplete</div>
+              <div class="nm-brainstorm-block" style="padding: 18px 20px; overflow: visible;">
+                <div class="nm-brainstorm-input-line">
+                  Meeting with @FinanceS<span class="nm-brainstorm-cursor"></span>
+                  <div class="nm-autocomplete-popover">
+                    <div class="nm-popover-item active">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px; height:12px;"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                      @FinanceSarah
+                    </div>
+                    <div class="nm-popover-item">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px; height:12px;"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                      @FinanceSteve
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="bm-note">Nomima learns your associations immediately. As you type, recommendations appear automatically.</div>
+            </div>
+
+            <!-- Step 8 (bstep 6): Learns your world -->
+            <div class="bm-block" data-bstep="6">
+              <div class="bm-kicker"><span class="num">07</span> Learns Your World</div>
+              <div class="nm-sectionlite" style="padding: 16px;">
+                <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--nm-muted-fg); margin-bottom: 10px; letter-spacing: 0.05em;">Learned Entities</div>
+                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                  <span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@Dad</span>
+                  <span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@Mom</span>
+                  <span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@Lawyer</span>
+                  <span class="smart-pill smart-pill--hashtag" data-entity-type="project"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>#Migration</span>
+                  <span class="smart-pill smart-pill--hashtag" data-entity-type="topic"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>#Health</span>
+                  <span class="smart-pill smart-pill--hashtag" data-entity-type="topic"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>#Nomima</span>
+                </div>
+              </div>
+              <div class="bm-note">No administration. No config. Nomima gradually maps your people, projects, and goals.</div>
+            </div>
+
+            <!-- Step 9 (bstep 7): Smart detect -->
+            <div class="bm-block" data-bstep="7">
+              <div class="bm-kicker"><span class="num">08</span> Smart Detection</div>
+              <div class="nm-sectionlite">
+                <div class="nm-sectionlite-head">
+                  <span class="nm-sectionlite-title">Pasted transcript</span>
+                </div>
+                <div class="nm-sectionlite-body" style="font-size: 13.5px; line-height: 1.6; color: var(--nm-fg); padding: 14px 16px;">
+                  Pasted: Discussing Q3 roadmap and <span style="border-bottom: 1.5px dashed var(--nm-hashtag-fg); cursor: pointer;" title="Suggested: #launch">launch</span> targets with the <span style="border-bottom: 1.5px dashed var(--nm-mention-fg); cursor: pointer;" title="Suggested: @Legal">Legal</span> team.
+                </div>
+              </div>
+              <div class="bm-note">Nomima automatically detects hashtags, mentions, and dates. You decide what becomes permanent context.</div>
+            </div>
+
+            <!-- Step 10 (bstep 8): Smart Scrollbar -->
+            <div class="bm-block" data-bstep="8">
+              <div class="bm-kicker"><span class="num">09</span> Smart Scrollbar</div>
+              <div class="nm-sectionlite" style="padding: 16px;">
+                <div style="font-size: 13px; color: var(--nm-subtle-fg); line-height: 1.55;">
+                  The scrollbar displays colored ticks for key references. Navigate directly by clicking the entities: <span class="smart-pill smart-pill--mention" data-entity-type="team"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>@Legal</span> or <span class="smart-pill smart-pill--hashtag" data-entity-type="project"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>#launch</span>.
+                </div>
+              </div>
+              <div class="bm-note">Navigate by meaning, not position. Quickly jumps to decisions and people in large notes.</div>
+            </div>
+
+            <!-- Step 11 (bstep 9): One System (Work/Life notebooks) -->
+            <div class="bm-block" data-bstep="9">
+              <div class="bm-kicker"><span class="num">10</span> Work &amp; Life</div>
+              <div class="nm-sectionlite">
+                <div class="nm-sectionlite-head">
+                  <span class="nm-sectionlite-title">Workspace Vault</span>
+                </div>
+                <div class="nm-sectionlite-body" style="padding: 14px 16px; display: flex; flex-direction: column; gap: 10px;">
+                  <div style="font-size: 13.5px; font-weight: 600; color: var(--nm-heading);"><span style="color:var(--nm-accent); margin-right: 8px;">■</span> Work: Falcon Migration (#Falcon)</div>
+                  <div style="font-size: 13.5px; font-weight: 600; color: var(--nm-heading);"><span style="color:var(--nm-accent-secondary); margin-right: 8px;">■</span> Life: Personal Fitness (#Health)</div>
+                </div>
+              </div>
+              <div class="bm-note">Work and life are not separate systems. They are connected parts of the same story. Manage both.</div>
+            </div>
+
+            <!-- Step 12 (bstep 10): Home Dashboard -->
+            <div class="bm-block" data-bstep="10">
+              <div class="bm-kicker"><span class="num">11</span> Daily Briefing</div>
+              <div class="nm-home-block">
+                <div class="nm-home-header">
+                  <h3 class="nm-home-title">Good morning<span>Sawubona</span></h3>
+                  <div class="nm-home-subtitle">Saturday, June 6</div>
+                </div>
+                <div class="nm-home-sec-title">Due soon</div>
+                <div class="nm-home-row">
+                  <div class="nm-home-row-left">
+                    <span>Topic:</span>
+                    <span class="smart-pill smart-pill--hashtag" data-entity-type="topic"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>#new-idea</span>
+                    <span class="smart-pill smart-pill--date"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>today</span>
+                    <span>with</span>
+                    <span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@MaraVelez</span>
+                  </div>
+                  <div class="nm-home-row-right">Today</div>
+                </div>
+                <div class="nm-home-row">
+                  <div class="nm-home-row-left">
+                    <span>Week of</span>
+                    <span class="smart-pill smart-pill--date"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>today</span>
+                    <span class="smart-pill smart-pill--hashtag" data-entity-type="topic"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>#focus</span>
+                  </div>
+                  <div class="nm-home-row-right">Today</div>
+                </div>
+              </div>
+              <div class="bm-note">Greeted by context, not folders and menus. A daily briefing generated dynamically.</div>
+            </div>
+
+            <!-- Step 13 (bstep 11): Bento Personal Dashboard -->
+            <div class="bm-block" data-bstep="11">
+              <div class="bm-kicker"><span class="num">12</span> Bento Dashboards</div>
+              <div class="nm-bento-dashboard">
+                <div class="nm-bento-title">Personal Dashboard</div>
+                <div class="nm-bento-subtitle">Week of today · #focus · #health</div>
+                <div class="nm-bento-banner">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+                  <div><strong>Today's one thing</strong> — the single outcome that makes today a win.</div>
+                </div>
+                <div class="nm-bento-grid">
+                  <div class="nm-bento-widget">
+                    <span class="nm-bento-w-label">Open Tasks</span>
+                    <span class="nm-bento-w-val" style="color:var(--nm-mention-fg)">9</span>
+                  </div>
+                  <div class="nm-bento-widget">
+                    <span class="nm-bento-w-label">Completion</span>
+                    <div class="nm-bento-progress-container">
+                      <svg class="nm-bento-progress-ring" width="54" height="54">
+                        <circle class="ring-bg" cx="27" cy="27" r="23"></circle>
+                        <circle class="ring-bar" cx="27" cy="27" r="23"></circle>
+                      </svg>
+                      <div class="nm-bento-progress-text">36%</div>
+                    </div>
+                  </div>
+                  <div class="nm-bento-widget">
+                    <span class="nm-bento-w-label">Due Today</span>
+                    <span class="nm-bento-w-val" style="color:#fb923c">2</span>
+                  </div>
+                  <div class="nm-bento-widget">
+                    <span class="nm-bento-w-label">Overdue</span>
+                    <span class="nm-bento-w-val" style="color:#ef4444">0</span>
+                  </div>
+                </div>
+              </div>
+              <div class="bm-note">Group metrics by people, projects, notebooks, or dates. Build widgets that reflect how you think.</div>
+            </div>
+
+            <!-- Step 14 (bstep 12): Privacy -->
+            <div class="bm-block" data-bstep="12">
+              <div class="bm-kicker"><span class="num">13</span> Privacy First</div>
+              <div class="nm-privacy-card">
+                <div class="nm-privacy-shield">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <div class="nm-privacy-title">Fully local database</div>
+                <div class="nm-privacy-desc">Your thoughts remain on your device. Offline first. No tracking. No cloud requirements.</div>
+              </div>
+              <div class="bm-note">Your thoughts belong to you. Nomima never trains models or syncs data without your permission.</div>
+            </div>
+
+            <!-- Step 15 (bstep 13): Built for the AI era -->
+            <div class="bm-block" data-bstep="13">
+              <div class="bm-kicker"><span class="num">14</span> AI Integration</div>
+              <div class="nm-codeblock">
+                <div class="nm-codeblock-head"><span class="nm-codeblock-lang">MCP · local tools</span></div>
+                <pre><code>agent.<span class="nm-hl-fn">call</span>(<span class="nm-hl-string">"nomima.create_block"</span>, {
+  <span class="nm-hl-keyword">type</span>: <span class="nm-hl-string">"callout"</span>,
+  <span class="nm-hl-keyword">text</span>: <span class="nm-hl-string">"Brief @Sarah on #launch tonight"</span>
+})
+<span class="nm-hl-comment">// ✓ #mcp · created · linked into your graph</span></code></pre>
+              </div>
+              <div class="bm-note">Every installation includes local MCP services. Connect your preferred AI coding agents and tools safely.</div>
+            </div>
+          </div>
+        </section>
+
+    <!-- ===== FINAL SCREEN — a real footer section (normal flow), so it's a stable
+         last screen you scroll to and physically cannot pass. Hero-style backdrop. ===== -->
+    <footer class="footer-hero">
+      <div class="bg3d fh-bg" aria-hidden="true">
+        <div class="bg3d-inner">
+          <div class="bg-orb bg-orb-a"></div>
+          <div class="bg-orb bg-orb-b"></div>
         </div>
       </div>
-
-      <!-- Slim capabilities row -->
-      <p class="caps-lead">Plus everything you'd expect in a modern editor —</p>
-      <div class="caps">
-        <span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="7" rx="1.5"/><path d="m4.5 7.5 1.5 1.5 2.5-3"/><path d="M13 6h8M13 12h8M13 18h8"/></svg>To-Do lists</span>
-        <span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 9h0M11 9h5M8 13h8"/></svg>Callouts</span>
-        <span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 3 3 3-3"/><path d="M5 13h14M5 17h14"/></svg>Collapsible sections</span>
-        <span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M5 3 2 6M22 6l-3-3"/></svg>Reminders</span>
-        <span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg>Code blocks</span>
-        <span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M9 4v16M15 4v16"/></svg>Tables</span>
-        <span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/></svg>Files &amp; media</span>
-        <span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2v3a2 2 0 0 1-2 2"/><path d="M17 7h-2a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2v3a2 2 0 0 1-2 2"/></svg>Quotes</span>
-        <span class="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Block links</span>
-      </div>
-    </section>
-
-    <!-- FINAL CTA -->
-    <section class="cta-band">
-      <h2>Think clearer. Privately.</h2>
-      <p>Free while in preview. Apple Silicon, macOS 11 and up.</p>
-      <a class="btn-primary" href="downloads/Nomima-0.1.2-arm64.dmg" download>
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701z"/></svg>
-        Download Nomima
+      <h2 class="outro-h">Putting the <span class="accent">fun</span> back into note-taking — backed by your data.</h2>
+      <a class="dl-btn" href="downloads/Nomima-0.1.2-arm64.dmg" download>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701z"/></svg>
+        Download Nomima now <span class="dl-sub">for macOS</span>
       </a>
-    </section>
-
-    <footer class="foot">
-      <img src="logo.svg" alt="" width="20" height="20" />
-      <span>Nomima © 2026 · Your notes. Your machine. Your mind.</span>
     </footer>
+
+    <!-- Nomima SmartDashes rail + scroll cue (fixed; ride along with the hero) -->
+    <div class="scroll-cue" id="cue"><div class="mouse"></div><span>Scroll</span></div>
+    <div class="sd-rail" id="rail"><div class="sd-here" id="here"></div></div>
+    <div class="sd-tip" id="tip"><span class="ico"></span><span class="meta"><span class="ty"></span><span class="vl"></span></span></div>
+    <span class="sd-rail-label">Smart&nbsp;Dashes</span>
   </main>
 
   <!-- Access-code hashes, generated at deploy time from a GitHub secret (gitignored;
        absent locally → the gate simply rejects everything). See hashes.example.js. -->
   <script src="hashes.js"></script>
   <script src="app.js"></script>
-  <script type="module" src="graph.js"></script>
+  <script src="smartdashes.js?v=3"></script>
+
+  <!-- Animated hero: scroll progress → pill morph steps + the SmartDashes rail
+       + the living knowledge-graph globe. kgbg.js + this block are modules
+       (force-graph is an ESM); smartdashes.js stays classic and runs first. -->
+  <script type="module" src="kgbg.js?v=11"></script>
+  <script type="module">
+    (function () {
+      // One dash per pill, in scroll order, coloured + iconed by its real Nomima tag.
+      const DASHES = [
+        // Act 1 (the initial note's tags)
+        { color: 'var(--nm-entity-person)', icon: 'person',   ty: 'Person', vl: 'FinanceSarah', step: 6 },
+        { color: 'var(--nm-entity-project)', icon: 'topic',    ty: 'Project', vl: '#Falcon',      step: 6 },
+        { color: 'var(--nm-date-fg)',       icon: 'calendar', ty: 'Date',   vl: 'tonight',      step: 6 },
+        { color: 'var(--nm-entity-status)', icon: 'flag',     ty: 'Status', vl: '#urgent',      step: 6 },
+        // Act 2 (each block's tags)
+        { color: 'var(--nm-entity-person)', icon: 'person',   ty: 'Person', vl: 'Mom',          step: 9 },
+        { color: 'var(--nm-entity-topic)',  icon: 'topic',    ty: 'Topic',  vl: '#Vacation2027',step: 9 },
+        { color: 'var(--nm-entity-person)', icon: 'person',   ty: 'Person', vl: 'FinanceSarah', step: 10 },
+        { color: 'var(--nm-entity-team)',   icon: 'team',     ty: 'Team',   vl: 'AWS',          step: 10 },
+        { color: 'var(--nm-entity-project)', icon: 'topic',    ty: 'Project', vl: '#Falcon',      step: 10 },
+        { color: 'var(--nm-entity-person)', icon: 'person',   ty: 'Person', vl: 'FinanceSteve', step: 11 },
+        { color: 'var(--nm-entity-person)', icon: 'person',   ty: 'Person', vl: 'Dad',          step: 12 },
+        { color: 'var(--nm-entity-person)', icon: 'person',   ty: 'Person', vl: 'Mom',          step: 12 },
+        { color: 'var(--nm-entity-project)', icon: 'topic',    ty: 'Project', vl: '#Migration',   step: 12 },
+        { color: 'var(--nm-entity-topic)',  icon: 'topic',    ty: 'Topic',  vl: '#Health',      step: 12 },
+        { color: 'var(--nm-entity-team)',   icon: 'team',     ty: 'Team',   vl: 'Legal',        step: 13 },
+        { color: 'var(--nm-entity-project)', icon: 'topic',    ty: 'Project', vl: '#launch',      step: 13 },
+        { color: 'var(--nm-accent)',        icon: 'topic',    ty: 'System', vl: 'Scrollbar',    step: 14 },
+        { color: 'var(--nm-entity-project)', icon: 'topic',    ty: 'Project', vl: '#Falcon',      step: 15 },
+        { color: 'var(--nm-entity-topic)',  icon: 'topic',    ty: 'Topic',  vl: '#Health',      step: 15 },
+        { color: 'var(--nm-entity-person)', icon: 'person',   ty: 'Person', vl: 'MaraVelez',    step: 16 },
+        { color: 'var(--nm-entity-topic)',  icon: 'topic',    ty: 'Topic',  vl: '#new-idea',    step: 16 },
+        { color: 'var(--nm-entity-status)', icon: 'flag',     ty: 'Status', vl: '#metrics',     step: 17 },
+        { color: '#10b981',                 icon: 'flag',     ty: 'System', vl: 'Offline',      step: 18 },
+        { color: 'var(--nm-accent)',        icon: 'topic',    ty: 'System', vl: '#mcp',         step: 19 },
+      ];
+
+      const TOTAL_STEPS = 21; // 21 total steps in the manifesto story
+      const _perStep = {};
+      DASHES.forEach((d) => {
+        const k = (_perStep[d.step] = (_perStep[d.step] || 0)); _perStep[d.step]++;
+        d.frac = (((d.step - 0.5) / TOTAL_STEPS) * 0.9 + 0.05) + k * 0.009;
+      });
+      const sd = window.SmartDashes && window.SmartDashes.create({
+        rail: 'rail', here: 'here', tip: 'tip', dashes: DASHES,
+        onSeek: (frac) => {
+          const tr = document.querySelector('#top .scroll-track');
+          if (!tr) return;
+          const top = tr.getBoundingClientRect().top + window.scrollY;
+          const scrollable = tr.offsetHeight - window.innerHeight;
+          window.scrollTo({ top: Math.round(top + Math.min(1, Math.max(0, frac)) * scrollable), behavior: 'smooth' });
+        },
+      });
+      window.__sd = sd;
+
+      const kgEl = document.getElementById('kgbg');
+      const KG_NODES = [
+        { id: 'note',     name: 'Vault Hub',     kind: 'note',    weight: 12, step: 0 },
+        // Step 6 (initial note tags)
+        { id: 'sarah',    name: 'FinanceSarah', kind: 'person',  weight: 6,  step: 6 },
+        { id: 'falcon',   name: '#Falcon',      kind: 'project', weight: 8,  step: 6 },
+        { id: 'tonight',  name: 'Tonight',      kind: 'date',    weight: 4,  step: 6 },
+        { id: 'urgent',   name: '#urgent',      kind: 'status',  weight: 5,  step: 6 },
+        // Step 10 (shortcuts)
+        { id: 'aws',      name: '@AWS',         kind: 'team',    weight: 5,  step: 10 },
+        // Step 11 (autocomplete)
+        { id: 'steve',    name: '@FinanceSteve', kind: 'person',  weight: 5,  step: 11 },
+        // Step 12 (world tags)
+        { id: 'dad',      name: '@Dad',         kind: 'person',  weight: 4,  step: 12 },
+        { id: 'mom',      name: '@Mom',         kind: 'person',  weight: 4,  step: 12 },
+        { id: 'lawyer',   name: '@Lawyer',      kind: 'person',  weight: 4,  step: 12 },
+        { id: 'migration',name: '#Migration',   kind: 'project', weight: 5,  step: 12 },
+        { id: 'health',   name: '#Health',      kind: 'topic',   weight: 6,  step: 12 },
+        { id: 'nomima',   name: '#Nomima',      kind: 'topic',   weight: 7,  step: 12 },
+        // Step 13 (smart detect)
+        { id: 'legal',    name: '@Legal',       kind: 'team',    weight: 5,  step: 13 },
+        { id: 'launch',   name: '#launch',      kind: 'project', weight: 6,  step: 13 },
+        // Step 15 (work/life)
+        { id: 'work',     name: 'Work',         kind: 'note',    weight: 6,  step: 15 },
+        { id: 'life',     name: 'Life',         kind: 'note',    weight: 6,  step: 15 },
+        // Step 16 (home dashboard)
+        { id: 'mara',     name: '@MaraVelez',   kind: 'person',  weight: 5,  step: 16 },
+        { id: 'daniel',   name: '@DanielKim',   kind: 'person',  weight: 5,  step: 16 },
+        { id: 'design',   name: '@Design',      kind: 'team',    weight: 5,  step: 16 },
+        { id: 'newidea',  name: '#new-idea',    kind: 'topic',   weight: 6,  step: 16 },
+        { id: 'focus',    name: '#focus',       kind: 'topic',   weight: 5,  step: 16 },
+        // Step 17 (personal dashboard)
+        { id: 'metrics',  name: '#metrics',     kind: 'topic',   weight: 5,  step: 17 },
+        // Step 19 (AI MCP)
+        { id: 'mcp',      name: '#mcp',         kind: 'topic',   weight: 6,  step: 19 },
+      ];
+
+      const KG_LINKS = [
+        // Step 6 links
+        { source: 'note', target: 'sarah',    step: 6 },
+        { source: 'note', target: 'falcon',   step: 6 },
+        { source: 'note', target: 'tonight',  step: 6 },
+        { source: 'note', target: 'urgent',   step: 6 },
+        { source: 'sarah', target: 'falcon',  step: 6, typed: true, rel: 'owns' },
+        // Step 10
+        { source: 'note', target: 'aws',      step: 10 },
+        // Step 11
+        { source: 'note', target: 'steve',    step: 11 },
+        // Step 12
+        { source: 'note', target: 'dad',      step: 12 },
+        { source: 'note', target: 'mom',      step: 12 },
+        { source: 'note', target: 'lawyer',   step: 12 },
+        { source: 'note', target: 'migration',step: 12 },
+        { source: 'note', target: 'health',   step: 12 },
+        { source: 'note', target: 'nomima',   step: 12 },
+        // Step 13
+        { source: 'note', target: 'legal',    step: 13 },
+        { source: 'note', target: 'launch',   step: 13 },
+        { source: 'legal', target: 'launch',  step: 13, typed: true, rel: 'signs' },
+        // Step 15
+        { source: 'note', target: 'work',     step: 15 },
+        { source: 'note', target: 'life',     step: 15 },
+        { source: 'work', target: 'falcon',   step: 15, typed: true, rel: 'contains' },
+        { source: 'life', target: 'health',   step: 15, typed: true, rel: 'contains' },
+        // Step 16
+        { source: 'note', target: 'mara',     step: 16 },
+        { source: 'note', target: 'daniel',   step: 16 },
+        { source: 'note', target: 'design',   step: 16 },
+        { source: 'note', target: 'newidea',  step: 16 },
+        { source: 'note', target: 'focus',    step: 16 },
+        { source: 'mara', target: 'newidea',  step: 16, typed: true, rel: 'drafts' },
+        // Step 17
+        { source: 'note', target: 'metrics',  step: 17 },
+        // Step 19
+        { source: 'note', target: 'mcp',      step: 19 },
+      ];
+
+      const kg = (kgEl && window.HeroKG) ? window.HeroKG.create(kgEl, { hubId: 'note', nodes: KG_NODES, links: KG_LINKS }) : null;
+      window.__kg = kg;
+
+      const track = document.querySelector('#top .scroll-track');
+      const stage = document.querySelector('#top .stage');
+      const notesStack = document.getElementById('notesStack');
+      const notesFeedInner = document.getElementById('notesFeedInner');
+      const heroNote = document.getElementById('heroNote');
+      const feedNotes = [...document.querySelectorAll('#top .notes-feed-inner > .note-line')];
+      const lead = document.querySelector('#top .intro-lead');
+
+      const LEAD_COPY = {
+        0: 'Welcome to Nomima.',
+        1: 'Think about everything that occupies your mind today.',
+        2: 'A project at work, a family vacation to plan, a health goal, a reminder...',
+        3: 'At first glance, they all appear different. Different categories, tools, workflows.',
+        4: 'But underneath them all lies a single truth.',
+        5: 'They are either complete. Or they are not yet complete. Everything else is just context.',
+        6: 'Most software forces rigid categories from the beginning: note, task, project...',
+        7: 'Life doesn\'t work this way. Everything evolves. Capture first, organize later, complete eventually.',
+        8: 'Inside Nomima, everything starts as a simple block. A block can grow, connect, and become anything.',
+        9: 'Traditional databases make you think like them. Humans create shortcuts and associations.',
+        10: 'You write @FinanceSarah, @AWS, #Falcon. Humans build their own language.',
+        11: 'Mention a person or tag once, Nomima learns immediately. Suggestions appear automatically.',
+        12: 'Over time, Nomima learns your world — your projects, people, interests, and goals.',
+        13: 'Paste notes or documents. Nomima automatically detects entities. You decide what joins.',
+        14: 'As folders overflow, the Smart Scrollbar acts as a visual map of meaning, not position.',
+        15: 'Work and life are not separate systems. They are connected parts of the same story.',
+        16: 'Start your day with context. Good Morning, today\'s priorities, relevant topics.',
+        17: 'Dashboards are just another view of your knowledge. Group by people, topics, or dates.',
+        18: 'Privacy is a requirement. Nomima runs fully offline. Your notes stay on your device.',
+        19: 'Built for the AI era. Local MCP services let your AI tools interact with your workspace.',
+        20: 'Mentions and hashtags contribute to a living map of your world. A second brain.',
+        21: 'Welcome to the personal operating system for unfinished things.',
+      };
+
+      const explainDeck = document.querySelector('#top .explain-deck');
+      const pws = [...document.querySelectorAll('#top .pw')];
+      pws.forEach((w) => {
+        w.dataset.step = 6; // All hero tags light up at Step 6 in the new flow
+      });
+      const explains = [...document.querySelectorAll('#top .explain')];
+      const noteCard = document.getElementById('noteCard');
+      const blockMorph = document.getElementById('blockMorph');
+      const bmBlocks = [...document.querySelectorAll('#top .bm-block')];
+      const cue = document.getElementById('cue');
+      const orbA = document.querySelector('#top .bg-orb-a');
+      const orbB = document.querySelector('#top .bg-orb-b');
+      const kgWrap = document.querySelector('#top .kg-wrap');
+      const bg3dInner = document.querySelector('#top .bg3d-inner');
+
+      const SENT = 6, NBLOCKS = bmBlocks.length, SECTION = SENT + 1, STEPS = 21;
+      const N_FILLERS = 5; 
+      const LAST_BLOCK = 19; 
+      if (!track) return;
+
+      function render() {
+        if (window.__lockStep) return;
+        const rect = track.getBoundingClientRect();
+        const trackTop = rect.top + window.scrollY;
+        const scrollable = track.offsetHeight - window.innerHeight;
+        const p = scrollable > 0 ? Math.min(1, Math.max(0, (window.scrollY - trackTop) / scrollable)) : 0;
+        const eased = Math.min(1, Math.max(0, (p - 0.05) / 0.9));
+        const step = p < 0.008 ? 0 : Math.min(STEPS, Math.floor(eased * (STEPS + 1)));
+
+        const inSentence = step <= SENT;
+        const inBlocks   = step >= SECTION && step <= LAST_BLOCK;
+        const act2 = step >= SECTION;
+        const graphOnly = step === 20;
+
+        stage.classList.toggle('act2', act2);
+        stage.classList.toggle('graph-only', graphOnly);
+
+        if (notesFeedInner && notesStack && feedNotes.length) {
+          const fillerNotes = feedNotes.filter(n => n.classList.contains('filler'));
+          const inPileUp = step >= 1 && step <= 5;
+          const isolate = step >= 6;
+          
+          fillerNotes.forEach((f, i) => f.classList.toggle('is-shown', inPileUp && i < step));
+          notesStack.classList.toggle('isolated', isolate);
+
+          // Strike-through completed items at step 6
+          fillerNotes.forEach((f, i) => {
+            // Mark vacation, GeB book, run completed for visual effect
+            if (step >= 6 && (i === 0 || i === 1 || i === 4)) {
+              f.style.textDecoration = 'line-through';
+              f.style.opacity = '0.36';
+            } else {
+              f.style.textDecoration = '';
+              f.style.opacity = '';
+            }
+          });
+
+          const pileFrac = Math.min(1, Math.max(0, (step - 1) / 4));
+          const scale = isolate || act2 ? 1 : 1.06 - 0.22 * pileFrac;
+          notesStack.style.transform = act2 ? '' : `scale(${scale.toFixed(3)})`;
+          
+          const windowH = notesStack.clientHeight || 1;
+          const centerOf = (n) => n.offsetTop + n.offsetHeight / 2;
+          let targetCenter;
+          if (isolate) {
+            targetCenter = centerOf(heroNote);
+          } else if (inPileUp && step >= 1) {
+            targetCenter = centerOf(fillerNotes[Math.min(step - 1, fillerNotes.length - 1)]);
+          } else {
+            targetCenter = windowH / 2;
+          }
+          if (!act2) notesFeedInner.style.transform = `translateY(${Math.round(windowH / 2 - targetCenter)}px)`;
+        }
+
+        pws.forEach((w) => w.classList.toggle('is-pill', step >= +w.dataset.step));
+
+        if (lead) {
+          const showLead = step >= 0 && step <= STEPS;
+          lead.classList.toggle('act-off', !showLead);
+          lead.classList.toggle('cursive', step === SECTION);
+          if (showLead && LEAD_COPY[step]) lead.textContent = LEAD_COPY[step];
+        }
+
+        explains.forEach((e) => e.classList.toggle('is-on', inSentence && step > 6 && (step - 6) === +e.dataset.step));
+        if (explainDeck) explainDeck.classList.toggle('act-off', true); // always hide explainer deck in new flow
+
+        if (noteCard) noteCard.classList.toggle('nc-gone', step >= SECTION);
+
+        if (blockMorph) blockMorph.classList.toggle('is-on', inBlocks);
+        const bstep = step - SECTION + 1; // 1..NBLOCKS
+        bmBlocks.forEach((b) => {
+          const bs = +b.dataset.bstep;
+          b.classList.toggle('is-on', inBlocks && bs === bstep);
+          b.classList.toggle('is-past', bs < bstep);
+        });
+
+        if (sd) { sd.setProgress(p); sd.lightUpTo(step); }
+        if (kg) kg.setStep(step, eased);
+
+        stage.style.setProperty('--sd', eased.toFixed(3));
+        
+        const vw = window.innerWidth / 100;
+        if (orbA) { orbA.style.transform = `translateZ(-460px) translateX(${(eased * -7 * vw).toFixed(1)}px) translateY(${(eased * -16).toFixed(1)}px)`; orbA.style.filter = `blur(74px) hue-rotate(${(eased * 70).toFixed(1)}deg)`; }
+        if (orbB) { orbB.style.transform = `translateZ(-210px) translateX(${(eased * 11 * vw).toFixed(1)}px) translateY(${(eased * 22).toFixed(1)}px)`; orbB.style.filter = `blur(74px) hue-rotate(${(eased * 70).toFixed(1)}deg)`; }
+        if (kgWrap) kgWrap.style.transform = `translateZ(-30px) translateX(${(eased * -3.5 * vw).toFixed(1)}px)`;
+        if (bg3dInner) bg3dInner.style.transform = `rotateX(${(eased * 4).toFixed(2)}deg)`;
+        cue.style.opacity = p > 0.04 ? '0' : '1';
+
+        const inHero = stage.getBoundingClientRect().bottom > window.innerHeight * 0.45;
+        document.body.classList.toggle('hero-active', inHero);
+      }
+
+      if (sd && 'ResizeObserver' in window) {
+        new ResizeObserver(() => { sd.buildTicks(); render(); }).observe(track);
+      }
+      window.addEventListener('scroll', render, { passive: true });
+      window.addEventListener('resize', render);
+      render();
+    })();
+  </script>
 </body>
 </html>

@@ -16,7 +16,9 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+/* overscroll-behavior:none stops the macOS rubber-band bounce past the bottom — that
+   overscroll into the dark body background WAS the "last screen flashes then goes dark". */
+html { scroll-behavior: smooth; overscroll-behavior-y: none; }
 body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--bg);
@@ -24,7 +26,8 @@ body {
   -webkit-font-smoothing: antialiased;
   line-height: 1.6;
   min-height: 100vh;
-  overflow-x: hidden;
+  overscroll-behavior-y: none;
+  overflow-x: clip; /* clip (not hidden) — `hidden` coerces overflow-y to auto, making body a scroll container that breaks window scroll + the hero's position:sticky */
 }
 a { color: inherit; text-decoration: none; }
 
@@ -70,7 +73,7 @@ a { color: inherit; text-decoration: none; }
 .gate-foot { color: var(--fg-faint); font-size: 12px; letter-spacing: 0.04em; }
 
 /* ----------------------------------------------------------------- SITE -- */
-.site { position: relative; overflow: hidden; }
+.site { position: relative; overflow-x: clip; } /* clip (not hidden) so the pinned-scroll hero's position:sticky still works */
 .site[hidden] { display: none; }
 .glow { position: absolute; border-radius: 50%; filter: blur(130px); z-index: 0; pointer-events: none; }
 .glow-a { width: 600px; height: 600px; background: rgba(99, 102, 241, 0.26); top: -200px; left: -160px; }
@@ -280,3 +283,384 @@ a { color: inherit; text-decoration: none; }
   .note-body { padding: 18px 18px 22px; }
   .kg-stage { height: 340px; }
 }
+
+/* ── MOCKUPS FOR STORYTELLING STAGES (Nomima Style) ─────────────────────── */
+
+/* Home Dashboard (Screenshot 1: Sawubona) */
+.nm-home-block {
+  background: var(--nm-surface);
+  border: 1px solid var(--nm-border);
+  border-radius: 16px;
+  padding: 24px 28px;
+  text-align: left;
+  box-shadow: var(--nm-shadow-2);
+}
+.nm-home-header {
+  margin-bottom: 22px;
+}
+.nm-home-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--nm-heading);
+  letter-spacing: -0.025em;
+  margin-bottom: 4px;
+}
+.nm-home-title span {
+  font-weight: 400;
+  color: var(--nm-muted-fg);
+  font-size: 15px;
+  margin-left: 8px;
+}
+.nm-home-subtitle {
+  font-size: 13px;
+  color: var(--nm-subtle-fg);
+}
+.nm-home-sec-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--nm-muted-fg);
+  margin: 20px 0 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 6px;
+}
+.nm-home-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 13.5px;
+  color: var(--nm-fg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+.nm-home-row:last-child {
+  border-bottom: none;
+}
+.nm-home-row-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.nm-home-row-right {
+  font-size: 12px;
+  color: var(--nm-muted-fg);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Bento Personal Dashboard (Screenshot 2) */
+.nm-bento-dashboard {
+  background: var(--nm-surface);
+  border: 1px solid var(--nm-border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--nm-shadow-2);
+  text-align: left;
+}
+.nm-bento-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--nm-heading);
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.nm-bento-subtitle {
+  font-size: 12.5px;
+  color: var(--nm-muted-fg);
+  margin-bottom: 14px;
+}
+.nm-bento-banner {
+  border: 1px solid rgba(217, 119, 6, 0.38);
+  background: rgba(217, 119, 6, 0.09);
+  padding: 10px 14px;
+  border-radius: 9px;
+  font-size: 13.5px;
+  color: #fbbf24;
+  margin: 12px 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 1.4;
+}
+.nm-bento-banner svg {
+  width: 16px;
+  height: 16px;
+  color: #fb923c;
+  flex-shrink: 0;
+}
+.nm-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.nm-bento-widget {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--nm-border);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 96px;
+}
+.nm-bento-widget.span-2 {
+  grid-column: span 2;
+  align-items: stretch;
+  text-align: left;
+}
+.nm-bento-w-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--nm-muted-fg);
+  margin-bottom: 6px;
+  width: 100%;
+}
+.nm-bento-w-val {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.nm-bento-w-sub {
+  font-size: 11px;
+  color: var(--nm-subtle-fg);
+  margin-top: 4px;
+}
+/* Progress Ring Widget */
+.nm-bento-progress-container {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  margin: 2px 0;
+}
+.nm-bento-progress-ring {
+  transform: rotate(-90deg);
+}
+.nm-bento-progress-ring circle {
+  fill: none;
+  stroke-width: 4.8;
+}
+.nm-bento-progress-ring .ring-bg {
+  stroke: var(--nm-hover);
+}
+.nm-bento-progress-ring .ring-bar {
+  stroke: #10b981;
+  stroke-linecap: round;
+  stroke-dasharray: 144;
+  stroke-dashoffset: 92; /* 36% completion */
+  transition: stroke-dashoffset 1s ease;
+}
+.nm-bento-progress-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--nm-heading);
+}
+
+/* Themes Word Cloud (Bento Grid) */
+.nm-bento-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-content: center;
+  height: 100%;
+}
+.nm-bento-cloud span {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--nm-hover);
+}
+.nm-bento-cloud .cloud-lg {
+  font-size: 15px;
+  font-weight: 700;
+  background: rgba(99, 102, 241, 0.12);
+  color: var(--nm-mention-fg);
+}
+.nm-bento-cloud .cloud-md {
+  font-size: 13.5px;
+  font-weight: 650;
+  background: rgba(240, 72, 168, 0.12);
+  color: var(--nm-hashtag-fg);
+}
+
+/* Next 7 Days Sparkline */
+.nm-bento-sparkline {
+  margin-top: auto;
+  height: 34px;
+  display: flex;
+  align-items: flex-end;
+}
+.nm-bento-sparkline svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Brainstorm Workspace (Screenshot 3) */
+.nm-brainstorm-block {
+  background: var(--nm-surface);
+  border: 1px solid var(--nm-border);
+  border-radius: 16px;
+  padding: 22px 24px;
+  text-align: left;
+  box-shadow: var(--nm-shadow-2);
+  position: relative;
+}
+.nm-brainstorm-header {
+  border-bottom: 1px solid var(--nm-border);
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+.nm-brainstorm-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--nm-heading);
+  letter-spacing: -0.02em;
+}
+.nm-brainstorm-meta {
+  font-size: 11px;
+  color: var(--nm-muted-fg);
+  margin-top: 4px;
+}
+.nm-brainstorm-prompt {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--nm-border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  color: var(--nm-subtle-fg);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nm-brainstorm-prompt svg {
+  width: 15px;
+  height: 15px;
+  color: #fbbf24;
+  flex-shrink: 0;
+}
+.nm-brainstorm-input-line {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 14px;
+  color: var(--nm-fg);
+  padding: 8px 12px;
+  border: 1.5px solid var(--nm-accent);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  position: relative;
+}
+.nm-brainstorm-cursor {
+  width: 7px;
+  height: 16px;
+  background: var(--nm-accent-secondary);
+  animation: blink 0.9s steps(2, start) infinite;
+}
+@keyframes blink { to { visibility: hidden; } }
+
+/* Autocomplete Popover List */
+.nm-autocomplete-popover {
+  position: absolute;
+  top: 100%;
+  left: 12px;
+  width: 180px;
+  background: var(--nm-surface-raised);
+  border: 1px solid var(--nm-surface-border);
+  border-radius: 8px;
+  padding: 4px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  z-index: 12;
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+}
+.nm-popover-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  font-size: 12.5px;
+  color: var(--nm-fg);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.nm-popover-item.active {
+  background: var(--nm-accent);
+  color: #fff;
+}
+.nm-popover-item svg {
+  width: 13px;
+  height: 13px;
+  color: inherit;
+}
+
+/* Privacy offline card */
+.nm-privacy-card {
+  background: var(--nm-surface);
+  border: 1px solid var(--nm-border);
+  border-radius: 16px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: var(--nm-shadow-2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.nm-privacy-shield {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.11);
+  border: 2px dashed rgba(16, 185, 129, 0.42);
+  display: grid;
+  place-items: center;
+  color: #10b981;
+  filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.25));
+}
+.nm-privacy-shield svg {
+  width: 32px;
+  height: 32px;
+}
+.nm-privacy-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--nm-heading);
+}
+.nm-privacy-desc {
+  font-size: 13.5px;
+  color: var(--nm-subtle-fg);
+  line-height: 1.55;
+  max-width: 38ch;
+}
+
+/* Graph-only center focus state (Step 20) */
+#top .stage.graph-only .kg-bg {
+  left: 15% !important;
+  width: 70% !important;
+  opacity: 0.95 !important;
+}
+#top .stage.graph-only .block-morph,
+#top .stage.graph-only .note-card,
+#top .stage.graph-only .intro-lead {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+
