@@ -2,5 +2,5 @@
   "version": "0.16.0-beta.5",
   "notes": "Beta 5: Tab-to-accept a pill suggestion now works correctly in Kanban cards and Column cells — accepting a suggestion no longer also jumps to the next card or column.",
   "pub_date": "2026-06-06T00:00:00Z",
-  "url": "https://nomima-app.github.io/Nomima-landing/"
+  "url": "https://nomima.io/"
 }
