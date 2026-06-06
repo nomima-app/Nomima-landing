@@ -103,7 +103,7 @@ if (
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const attempt = input.value.trim();
+  const attempt = input.value.trim().toUpperCase();
   if (!attempt) return;
 
   let hex;
