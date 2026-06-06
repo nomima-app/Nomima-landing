@@ -1,6 +1,6 @@
 {
-  "version": "0.16.0-beta.3",
-  "notes": "Beta 3: fixes Tab on pill suggestions in TaskList — accepting a suggestion no longer also indents the task row.",
+  "version": "0.16.0-beta.4",
+  "notes": "Beta 4: fixes update banner not appearing between beta releases — pre-release versions are now ordered correctly (beta.4 > beta.3 > beta.2). Also includes beta.3 fix: Tab on a pill suggestion in TaskList no longer also indents the task row.",
   "pub_date": "2026-06-06T00:00:00Z",
   "url": "https://nomima-app.github.io/Nomima-landing/"
 }
