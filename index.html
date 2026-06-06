@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=2" />
+  <link rel="stylesheet" href="styles.css?v=3" />
   <!-- The real Nomima component look (vendored .smart-pill / --nm-* tokens) + the
        pinned-scroll stage & SmartDashes rail shared with blocks.html. -->
   <link rel="stylesheet" href="editor.css" />
@@ -23,9 +23,8 @@
   <style>
     /* ── Animated hero: words morph into real Smart Pills as you scroll ────── */
     .anim-hero { position: relative; z-index: 1; }
-    #top .scroll-track { height: 3400vh; } /* sentence (4) + 11 blocks */ /* longer track → the morph unfolds slowly, time to read */
-    /* Intro: chrome-free, text left-aligned (globe sits top-right), no navbar. */
-    #top .stage { align-items: flex-start; padding-left: max(7vw, 44px); padding-right: 92px; text-align: left; }
+    #top .scroll-track { height: 3612vh; } /* sentence (4) + 11 blocks */ /* longer track → the morph unfolds slowly, time to read */
+    /* stage styles are in styles.css */
     .intro-lead { margin: 0; font-size: clamp(13px, 1.4vw, 16px); font-weight: 500; letter-spacing: 0.02em; color: var(--nm-subtle-fg);
       transition: opacity .5s ease, font-size .5s ease, color .5s ease; }
     /* In Act 2 the lead floats as a WHITE top-of-screen header describing the block. */
@@ -48,27 +47,23 @@
     .kg-bg canvas { display: block; }
     .sentence {
       position: relative;
-      font-size: clamp(26px, 4vw, 50px);   /* headline-scale notes — big through the whole pile-up + isolate */
-      font-weight: 700; line-height: 1.4; letter-spacing: -0.01em;
+      font-size: 16px;   /* mockup-scale active note */
+      font-weight: 700; line-height: 1.5; letter-spacing: -0.01em;
       white-space: normal; color: var(--nm-fg);   /* wraps so all pills stay visible */
       transition: opacity .55s ease, font-size .85s cubic-bezier(.5,0,.2,1), line-height .85s ease;
     }
     /* The pile-up FEED: a masked window the inner column scrolls through as notes
        accumulate, so older notes are pushed up and out (faded by the top mask). JS
        drives the scroll (translateY on .notes-feed-inner). */
-    .notes-stack { position: relative; font-size: clamp(26px, 4vw, 50px); height: 5em; overflow: hidden; transform-origin: left center;
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 32%, #000 88%, transparent 100%);
-      mask-image: linear-gradient(to bottom, transparent 0, #000 32%, #000 88%, transparent 100%); }
-    .notes-feed-inner { display: flex; flex-direction: column; gap: 0.4em; will-change: transform; }
-    /* ALL notes (fillers + hero) are headline-scale, so the pile-up reads big and flows
-       smoothly into the singled-out note. */
-    /* Fillers stay single-line so the scrolling feed reads cleanly; the hero note
-       (which is also .sentence) wraps via the .sentence override — so all pills
-       including "urgent" stay visible and can be recognised as smart tags. */
-    .note-line { font-size: clamp(26px, 4vw, 50px); font-weight: 700; line-height: 1.25; letter-spacing: -.01em;
-      white-space: nowrap; color: var(--nm-fg); transition: opacity .5s ease, transform .6s cubic-bezier(.2,.7,.2,1), filter .5s ease; }
+    .notes-stack { position: relative; font-size: 16px; height: 108px; overflow: hidden; transform-origin: left center;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 8%, #000 92%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0, #000 8%, #000 92%, transparent 100%); }
+    .notes-feed-inner { display: flex; flex-direction: column; gap: 12px; will-change: transform; }
+    /* ALL notes (fillers + hero) are mockup-scale, so the pile-up reads cleanly. */
+    .note-line { font-size: 16px; font-weight: 600; line-height: 1.5; letter-spacing: -.01em;
+      white-space: normal; color: var(--nm-fg); transition: opacity .5s ease, transform .6s cubic-bezier(.2,.7,.2,1), filter .5s ease; }
     /* Fillers start hidden — revealed one per scroll step, slide up into view. */
-    .note-line.filler { color: var(--nm-subtle-fg); opacity: 0; transform: translateY(10px); }
+    .note-line.filler { color: var(--nm-subtle-fg); opacity: 0; transform: translateY(10px); white-space: normal; }
     .note-line.filler.is-shown { opacity: 1; transform: none; }
     #heroNote { white-space: normal; }   /* hero wraps — all smart tags stay on screen */
     /* Once the hero note is singled out, the fillers fade away up. */
@@ -88,10 +83,11 @@
     }
     .pw.is-pill { padding: 0.06em 0.52em 0.06em 0.42em; }
     .pw.is-pill .pill-ico { width: 0.82em; opacity: 1; margin-right: 0.22em; }
-    .pw.is-pill[data-kind="mention"][data-entity="person"] { color: var(--nm-entity-person); background: color-mix(in srgb, var(--nm-entity-person) 17%, transparent); }
-    .pw.is-pill[data-kind="hashtag"][data-entity="topic"]  { color: var(--nm-entity-topic);  background: color-mix(in srgb, var(--nm-entity-topic) 17%, transparent); }
-    .pw.is-pill[data-kind="hashtag"][data-entity="status"] { color: var(--nm-entity-status); background: color-mix(in srgb, var(--nm-entity-status) 17%, transparent); }
-    .pw.is-pill[data-kind="date"]                          { color: var(--nm-date-fg);       background: var(--nm-date-bg); }
+    .pw.is-pill[data-kind="mention"][data-entity="person"]  { color: var(--nm-entity-person);  background: color-mix(in srgb, var(--nm-entity-person) 17%, transparent); }
+    .pw.is-pill[data-kind="hashtag"][data-entity="project"] { color: var(--nm-entity-project); background: color-mix(in srgb, var(--nm-entity-project) 17%, transparent); }
+    .pw.is-pill[data-kind="hashtag"][data-entity="topic"]   { color: var(--nm-entity-topic);   background: color-mix(in srgb, var(--nm-entity-topic) 17%, transparent); }
+    .pw.is-pill[data-kind="hashtag"][data-entity="status"]  { color: var(--nm-entity-status);  background: color-mix(in srgb, var(--nm-entity-status) 17%, transparent); }
+    .pw.is-pill[data-kind="date"]                           { color: var(--nm-date-fg);        background: var(--nm-date-bg); }
     .complete-pill {
       display: inline-flex; align-items: baseline; gap: 0.2em; border-radius: 999px;
       padding: 0.06em 0.52em 0.06em 0.42em; color: var(--nm-entity-status); background: color-mix(in srgb, var(--nm-entity-status) 17%, transparent);
@@ -110,6 +106,24 @@
       animation: strike .45s cubic-bezier(.2,.7,.2,1) both;
     }
     @keyframes strike { from { transform: translateY(-50%) scaleX(0); transform-origin: left; } to { transform: translateY(-50%) scaleX(1); } }
+
+    /* Entity-type legend — appears once Smart Pills form (step 6) */
+    .entity-legend {
+      margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--nm-border);
+      opacity: 0; transform: translateY(8px); pointer-events: none;
+      transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.2,1);
+    }
+    .entity-legend.is-on { opacity: 1; transform: none; }
+    .entity-legend-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--nm-subtle-fg); margin-bottom: 8px;
+    }
+    .ent-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .ent-chip {
+      display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600;
+      padding: 4px 10px 4px 8px; border-radius: 999px;
+    }
+    .ent-chip svg { width: 12px; height: 12px; }
 
     /* End-of-note actions, revealed once the note completes: a modern Download
        button (Mac app) + a text-only "Explore more" → the Blocks page. Left-aligned. */
@@ -147,8 +161,8 @@
        each centred), so every block's kicker + card start at the SAME height on the
        page regardless of the block's own height — no vertical jumping between blocks. */
     .block-morph {
-      position: absolute; left: max(7vw, 44px); top: 50%; transform: translateY(-50%);
-      width: min(640px, 52vw); height: 440px; z-index: 3; pointer-events: none;
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      width: 100%; max-width: 600px; height: 440px; z-index: 3; pointer-events: none;
       opacity: 0; transition: opacity .5s ease;
     }
     .block-morph.is-on { opacity: 1; }
@@ -196,55 +210,75 @@
 
     /* ════ ACT 2 LAYOUT SWAP: globe → left, the note → right as a Section ════ */
     /* Globe: vertically centred + sits a bit right of the left edge (not cut off). */
-    .kg-bg { left: 42%; right: auto; transition: left .9s cubic-bezier(.5,0,.2,1), opacity .6s ease; }
+    .kg-bg { left: 42%; right: auto; transition: left .9s cubic-bezier(.5,0,.2,1), width .9s cubic-bezier(.5,0,.2,1), opacity .6s ease; }
     #top .stage.act2 .kg-bg { left: -8%; }   /* a bit right of the edge, clear of the blocks */
 
-    /* The note flies right and becomes a Section card the SAME SIZE as the blocks —
-       the FONT animates down (not a tiny scale), so padding/header stay block-sized. */
-    .note-card { position: relative; width: min(90vw, 1180px);
+    /* The note card fits inside the split-grid's right column visual container.
+       The visual card (border/bg/padding) lives on an inner wrapper. */
+    /* ── Logo inside note card (step 3 only) ───────────────────────── */
+    .nc-logo {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 13px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .6s ease;
+      z-index: 4;
+    }
+    #top .stage.show-logo .nc-logo {
+      opacity: 1;
+    }
+    /* Fade the note content out while logo is shown */
+    #top .stage.show-logo .nc-head,
+    #top .stage.show-logo .notes-stack,
+    #top .stage.show-logo .entity-legend {
+      opacity: 0;
+      transition: opacity .4s ease;
+    }
+    .nc-logo-img {
+      width: clamp(90px, 10vw, 130px);
+      height: auto;
+      filter: drop-shadow(0 0 24px color-mix(in srgb, var(--nm-accent) 65%, transparent))
+              drop-shadow(0 0 56px color-mix(in srgb, var(--nm-accent) 30%, transparent));
+      animation: logo-bob 4s ease-in-out infinite;
+    }
+    @keyframes logo-bob {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-8px); }
+    }
+    /* ─────────────────────────────────────────────────────────────── */
+
+    .note-card {
       transform-origin: left center;
-      transition: transform .9s cubic-bezier(.5,0,.2,1), width .9s cubic-bezier(.5,0,.2,1), opacity .45s ease; }
-    /* The visual card (border/bg/padding) lives on an inner wrapper so the note-card
-       itself is just the positioned box — and the kicker can sit ABOVE that card. */
-    .nc-inner { position: relative; border: 1px solid transparent; border-radius: 13px; background: transparent; padding: 0;
-      transition: background .6s ease, border-color .6s ease, padding .6s ease; }
+      transition: transform .9s cubic-bezier(.5,0,.2,1), opacity .45s ease;
+    }
+    .nc-inner {
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 13px;
+      background: rgba(20, 20, 28, 0.52);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.38);
+      padding: 46px 26px 22px;
+      transition: background .6s ease, border-color .6s ease, padding .6s ease;
+    }
     /* Section kicker — same chrome as the block kickers ("02 · AS A TO-DO LIST"),
-       IN-FLOW above the card exactly like a block's kicker (so kicker + card start at
-       the same height as the blocks). Collapsed in the hero, expands in the section. */
+       IN-FLOW above the card exactly like a block's kicker. */
     .nc-kicker { display: flex; align-items: center; white-space: nowrap;
       opacity: 0; max-height: 0; margin: 0; overflow: hidden; pointer-events: none;
       transition: opacity .4s ease, max-height .45s ease, margin .45s ease; }
-    .nc-head { position: absolute; top: -4px; left: 16px; right: 16px; display: flex; align-items: center; gap: 8px;
-      opacity: 0; pointer-events: none; transition: opacity .5s ease .15s, top .6s ease; }
+    .nc-head { position: absolute; top: 16px; left: 16px; right: 16px; display: flex; align-items: center; gap: 8px;
+      opacity: 1; pointer-events: none; transition: opacity .5s ease .15s, top .6s ease; }
     .nc-chev svg { width: 15px; height: 15px; color: var(--nm-muted-fg); }
     .nc-title { font-size: 13px; font-weight: 700; color: var(--nm-accent); }
     .nc-count { margin-left: auto; font-size: 10.5px; color: var(--nm-muted-fg); background: var(--nm-hover); padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
-    /* The section card must land on the EXACT same box as the blocks (which sit at
-       right:max(7vw,44px), width min(720px,55vw)). It flies in from its flow-left
-       hero position, so translateX = the gap between that left edge and the block's
-       left edge: 100vw − 2·(stage padding) − blockWidth. (Was a flat 43vw, which
-       overshot ~150px and clipped off the right edge.) */
-    /* Absolutely positioned on the SAME frame as .block-morph (right-anchored, same
-       width + 440px height) so the section's kicker+card start at the identical height
-       as every block — independent of the hero's flex flow. */
-    #top .stage.act2 .note-card {
-      position: absolute; left: auto; right: max(7vw, 44px); top: 50%;
-      width: min(720px, 55vw); height: 440px;
-      display: flex; flex-direction: column; justify-content: center;  /* content centred, like the blocks */
-      transform: translateY(-50%); }
-    #top .stage.act2 .note-card .nc-inner {
-      background: var(--nm-surface); border-color: var(--nm-border); padding: 46px 22px 20px; }
+
     #top .stage.act2 .nc-kicker { opacity: 1; max-height: 32px; margin-bottom: 14px; }
     #top .stage.outro .nc-kicker { opacity: 0; }
-    #top .stage.act2 .note-card .nc-head { opacity: 1; top: 16px; }
     #top .stage.act2 .sentence { font-size: 16px; white-space: normal; line-height: 1.55; }
-    #top .stage.act2 .note-card.nc-gone { transform: translate(-118%, -50%); opacity: 0; }   /* slides out LEFT, like the blocks */
     /* In the section the note reads live, not struck through */
     #top .stage.act2 .sentence.is-done { opacity: 1; }
     #top .stage.act2 .sentence.is-done::after { display: none; }
-
-    /* Blocks live on the RIGHT in Act 2, and are bigger */
-    .block-morph { left: auto; right: max(7vw, 44px); width: min(720px, 55vw); }
 
     /* ════ "And many other block types" — a row of mini block cards ════ */
     .bm-many { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -255,19 +289,7 @@
       color: var(--c); background: color-mix(in srgb, var(--c) 15%, transparent); }
     .bm-mini-ico svg { width: 20px; height: 20px; }
 
-    /* ════ FINAL SCREEN — a real <footer> section (normal flow). Because it's the last
-       element on the page and a full viewport tall, you scroll to it and simply stop —
-       no pinned-stage release, no overscroll into black. Hero-style orb backdrop. ════ */
-    .footer-hero {
-      position: relative; z-index: 20; min-height: 100vh; width: 100%;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px;
-      text-align: center; padding: 0 8vw; overflow: hidden; background: var(--bg);
-    }
-    .fh-bg { position: absolute; inset: 0; z-index: 0; }
-    .footer-hero .outro-h, .footer-hero .dl-btn { position: relative; z-index: 1; }
-    .outro-h { margin: 0; max-width: 17ch; font-size: clamp(30px, 4.6vw, 58px); font-weight: 800;
-      letter-spacing: -.03em; line-height: 1.08; color: var(--nm-heading); }
-    .outro-h .accent { background: linear-gradient(110deg, #8a9bff, var(--nm-accent-secondary, #f048a8)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
   </style>
   <script type="importmap">
   {
@@ -298,6 +320,13 @@
     <div class="glow glow-a" aria-hidden="true"></div>
     <div class="glow glow-b" aria-hidden="true"></div>
 
+    <header class="nav">
+      <a class="brand" href="#top" title="Nomima"><img src="logo.svg" alt="" width="28" height="28" /><span>Nomima</span></a>
+      <nav class="nav-links">
+        <a class="nav-cta" href="https://github.com/nomima-app/Nomima-landing/releases/tag/v0.16.0-beta.2">Download</a>
+      </nav>
+    </header>
+
     <!-- ===== INTRO — a chrome-free hero; your words become Smart Pills as you scroll ===== -->
     <section id="top" class="anim-hero">
       <div class="scroll-track">
@@ -317,133 +346,110 @@
               <div class="story-slide active" data-slide="0">
                 <div class="story-kicker">01 · Welcome</div>
                 <h2 class="story-title">Welcome to Nomima</h2>
-                <p class="story-desc">The personal operating system for unfinished things.</p>
+                <p class="story-desc">A modern offline note-taking and knowledge management app.</p>
               </div>
               <!-- Slide 1 -->
               <div class="story-slide" data-slide="1">
-                <div class="story-kicker">02 · Completeness</div>
-                <h2 class="story-title">The Active Mind</h2>
-                <p class="story-desc">Think about everything that occupies your mind today. Tasks, reminders, notes, plans.</p>
+                <div class="story-kicker">02 · The Note</div>
+                <h2 class="story-title">Think of this typical quick note.</h2>
+                <p class="story-note-sample">"Send finance report to John today urgent"</p>
+                <p class="story-desc">A single sentence that holds a task, a person, a deadline, and a priority.</p>
               </div>
               <!-- Slide 2 -->
               <div class="story-slide" data-slide="2">
-                <div class="story-kicker">03 · Inbox Feed</div>
-                <h2 class="story-title">Your Unstructured Stream</h2>
-                <p class="story-desc">A feed of quick ideas: customer sessions with <strong>@Slack</strong>, reviewing partnership notes on <strong>@YouTube</strong>, and api pricing on <strong>@Google</strong>.</p>
+                <div class="story-kicker">03 · Associations</div>
+                <h2 class="story-title">Your brain already connects it all.</h2>
+                <p class="story-note-sample story-note-pills">Send&nbsp;<span class="snp snp-project">finance_report</span>&nbsp;to&nbsp;<span class="snp snp-person">@John</span>&nbsp;<span class="snp snp-date">today</span>&nbsp;<span class="snp snp-status">urgent</span></p>
+                <p class="story-desc">In one sentence you already know who, what, when, and how urgent. Apps just don't see it.</p>
               </div>
               <!-- Slide 3 -->
               <div class="story-slide" data-slide="3">
-                <div class="story-kicker">04 · Friction</div>
-                <h2 class="story-title">Rigid Categories Feel Wrong</h2>
-                <p class="story-desc">Most software forces you to categorize before you've even had time to think: note, task, project, reminder...</p>
+                <div class="story-kicker">04 · The Gap</div>
+                <h2 class="story-title">Note taking apps Don't..</h2>
+                <div class="story-html-block"><span class="html-tag">&lt;h3&gt;</span><span class="html-content">Send finance report to John today urgent</span><span class="html-tag">&lt;/h3&gt;</span></div>
+                <p class="story-desc">Either a basic text box that ignores your intent entirely, or a massively complex setup that demands hours of configuration before you can do anything useful.</p>
               </div>
               <!-- Slide 4 -->
               <div class="story-slide" data-slide="4">
-                <div class="story-kicker">05 · Core Lifecycle</div>
-                <h2 class="story-title">One Simple Truth</h2>
-                <p class="story-desc">But underneath them all, every thought lies in a single state: they are either complete, or not yet complete.</p>
+                <div class="story-kicker">05 · Meet Nomima</div>
+                <h2 class="story-title">Meet Nomima.</h2>
+                <p class="story-desc">Where every piece of text can be data with many dimensions.</p>
               </div>
               <!-- Slide 5 -->
               <div class="story-slide" data-slide="5">
-                <div class="story-kicker">06 · Approach</div>
-                <h2 class="story-title">Context is Secondary</h2>
-                <p class="story-desc">Nomima takes a different approach. Capture first. Organize later. Complete eventually.</p>
+                <div class="story-kicker">06 · Entities</div>
+                <h2 class="story-title">Identify on the fly.</h2>
+                <p class="story-desc">Mention people, projects, and statuses in normal sentences. Nomima extracts them as smart entities automatically.</p>
               </div>
               <!-- Slide 6 -->
               <div class="story-slide" data-slide="6">
-                <div class="story-kicker">07 · Smart Tags</div>
-                <h2 class="story-title">Turn Words into Entities</h2>
-                <p class="story-desc">Type naturally. Mentioning a person like <strong>@John</strong> or a project like <strong>#Q3Planning</strong> turns them into smart links automatically.</p>
+                <div class="story-kicker">07 · Timing</div>
+                <h2 class="story-title">Understand time automatically.</h2>
+                <p class="story-desc">Type natural phrases like "today", "tomorrow", or "next Friday". They instantly become active calendar hooks.</p>
               </div>
               <!-- Slide 7 -->
               <div class="story-slide" data-slide="7">
-                <div class="story-kicker">08 · Database Contrast</div>
-                <h2 class="story-title">Rigid Databases</h2>
-                <p class="story-desc">Traditional databases force rigid schemas and drop-downs. Nomima lets you type naturally first.</p>
+                <div class="story-kicker">08 · Presentation</div>
+                <h2 class="story-title">Express your thoughts.</h2>
+                <p class="story-desc">Your plain text is polymorphic. Instantly view your notes as checklists, roadmaps, timelines, or structured tables.</p>
               </div>
               <!-- Slide 8 -->
               <div class="story-slide" data-slide="8">
-                <div class="story-kicker">09 · Drafting</div>
-                <h2 class="story-title">Capture First</h2>
-                <p class="story-desc">Write without structure. Draft your thought, then watch it evolve into tasks or notebooks on its own.</p>
+                <div class="story-kicker">09 · Checklists</div>
+                <h2 class="story-title">Live Checklists.</h2>
+                <p class="story-desc">Nested tasks roll up into a live progress bar. Tick the parent and every child completes instantly.</p>
               </div>
               <!-- Slide 9 -->
               <div class="story-slide" data-slide="9">
-                <div class="story-kicker">10 · Actionable Blocks</div>
-                <h2 class="story-title">Evolve as a Block</h2>
-                <p class="story-desc">Evolve blocks dynamically. Turn a simple note into a checklist, add tasks, and track real-time progress.</p>
+                <div class="story-kicker">10 · Timelines</div>
+                <h2 class="story-title">Gantt Charts.</h2>
+                <p class="story-desc">Dated tasks become a Gantt timeline automatically. Drag bars to reschedule — completed work greys out.</p>
               </div>
               <!-- Slide 10 -->
               <div class="story-slide" data-slide="10">
-                <div class="story-kicker">11 · Language</div>
-                <h2 class="story-title">Think Like a Human</h2>
-                <p class="story-desc">Create associations and shortcuts naturally. Your brain remembers connections like <strong>@DanielKim</strong> or <strong>#Nomima</strong>.</p>
+                <div class="story-kicker">11 · Structure</div>
+                <h2 class="story-title">Tables with living data.</h2>
+                <p class="story-desc">Every cell holds active Smart Pills. An entity inside a table is the same living object as in your paragraphs.</p>
               </div>
               <!-- Slide 11 -->
               <div class="story-slide" data-slide="11">
-                <div class="story-kicker">12 · Speed</div>
-                <h2 class="story-title">Build Your Language</h2>
-                <p class="story-desc">The moment you create an entity, Nomima remembers. Recommendations and autocomplete popovers appear as you type.</p>
+                <div class="story-kicker">12 · Metrics</div>
+                <h2 class="story-title">Live Metrics.</h2>
+                <p class="story-desc">Draw dynamic Bento widgets—counts, progress arcs, and activity charts—from the entities you tag.</p>
               </div>
               <!-- Slide 12 -->
               <div class="story-slide" data-slide="12">
-                <div class="story-kicker">13 · Mapping</div>
-                <h2 class="story-title">Learns Your World</h2>
-                <p class="story-desc">Without configuration, Nomima learns your projects, interests, and teammates as you write.</p>
+                <div class="story-kicker">13 · Privacy</div>
+                <h2 class="story-title">Privacy by design.</h2>
+                <p class="story-desc">Nomima runs completely offline. Your vault stays secure on your device. No cloud dependencies, no tracking.</p>
               </div>
               <!-- Slide 13 -->
               <div class="story-slide" data-slide="13">
-                <div class="story-kicker">14 · Smart Parsing</div>
-                <h2 class="story-title">Smart Without Intrusion</h2>
-                <p class="story-desc">Paste raw notes or meeting transcripts. Nomima auto-detects tags and connections while you keep control.</p>
+                <div class="story-kicker">14 · AI</div>
+                <h2 class="story-title">AI Ready and Loaded.</h2>
+                <p class="story-desc">Securely connect autonomous agents using the standard Model Context Protocol (MCP) directly to your local database.</p>
               </div>
-              <!-- Slide 14 -->
+              <!-- Slide 14 — graph reveal -->
               <div class="story-slide" data-slide="14">
-                <div class="story-kicker">15 · Navigation</div>
-                <h2 class="story-title">The Smart Scrollbar</h2>
-                <p class="story-desc">Skip folders. Scrollbar ticks act as a map of meaning, pointing straight to mentions like <strong>@Google</strong> or <strong>#MCP</strong>.</p>
+                <div class="story-kicker">15 · Knowledge</div>
+                <h2 class="story-title">A Living Graph.</h2>
+                <p class="story-desc">Every link, tag, and entity quietly maps your thoughts into a second brain, visualizing connections naturally.</p>
               </div>
-              <!-- Slide 15 -->
+              <!-- Slide 15 — teaser -->
               <div class="story-slide" data-slide="15">
-                <div class="story-kicker">16 · Unified Workspace</div>
-                <h2 class="story-title">One System for Work &amp; Life</h2>
-                <p class="story-desc">Work and life are parts of the same story. Manage both seamlessly in one unified vault.</p>
+                <div class="story-kicker">16 · And More</div>
+                <h2 class="story-title">And much, much more.</h2>
+                <p class="story-desc">Kanban boards, drawing canvases, math blocks, media embeds, bookmarks, custom callouts — all living in one place.</p>
               </div>
-              <!-- Slide 16 -->
+              <!-- Slide 16 — outro -->
               <div class="story-slide" data-slide="16">
-                <div class="story-kicker">17 · Home Briefing</div>
-                <h2 class="story-title">Start Your Day Differently</h2>
-                <p class="story-desc">Instead of folders, greet your morning with active context: daily priorities, relevant topics, and next-up deadlines.</p>
-              </div>
-              <!-- Slide 17 -->
-              <div class="story-slide" data-slide="17">
-                <div class="story-kicker">18 · Aggregation</div>
-                <h2 class="story-title">See Info from Any Angle</h2>
-                <p class="story-desc">Notes become metrics. Group widgets by project, person, or hashtag into a personalized Bento workspace dashboard.</p>
-              </div>
-              <!-- Slide 18 -->
-              <div class="story-slide" data-slide="18">
-                <div class="story-kicker">19 · Security</div>
-                <h2 class="story-title">Privacy is a Requirement</h2>
-                <p class="story-desc">Nomima is designed to work fully offline. Your vault stays on your device. No cloud sync, no tracking.</p>
-              </div>
-              <!-- Slide 19 -->
-              <div class="story-slide" data-slide="19">
-                <div class="story-kicker">20 · Interoperability</div>
-                <h2 class="story-title">Built for the AI Era</h2>
-                <p class="story-desc">Connect AI agents via Model Context Protocol (MCP) tool integrations, working securely on top of your local database.</p>
-              </div>
-              <!-- Slide 20 -->
-              <div class="story-slide" data-slide="20">
-                <div class="story-kicker">21 · Network</div>
-                <h2 class="story-title">A Living Knowledge Graph</h2>
-                <p class="story-desc">Every note, link, and tag quietly contributes to a second brain, mapping your connections naturally.</p>
-              </div>
-              <!-- Slide 21 -->
-              <div class="story-slide" data-slide="21">
-                <div class="story-kicker">22 · Conclusion</div>
-                <h2 class="story-title">Welcome to Nomima</h2>
-                <p class="story-desc">Capture anything. Connect everything. Learn continuously. Complete what matters.</p>
+                <div class="story-kicker">17 · Outro</div>
+                <h2 class="story-title">Type it,<br>Tag it,<br><span class="story-struck">Get it Done</span> <span class="story-complete-tag">#complete</span></h2>
+                <p class="story-desc" style="margin-bottom: 28px;"></p>
+                <a class="dl-btn dl-btn-cta" href="https://github.com/nomima-app/Nomima-landing/releases/tag/v0.16.0-beta.2">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701z"/></svg>
+                  Download Nomima <span class="dl-sub">for macOS</span>
+                </a>
               </div>
             </div>
           </div>
@@ -451,273 +457,391 @@
           <!-- Right Column: Visual Stage (Notes & Mockups) -->
           <div class="story-visual-container">
             <!-- Act 1 Note stack -->
-            <div class="note-card" id="noteCard">
+             <div class="note-card" id="noteCard">
               <div class="nc-inner">
+                <!-- Logo overlay — visible only at step 3, fades out as note content appears -->
+                <div class="nc-logo" id="ncLogo">
+                  <img src="logo.svg" alt="Nomima" class="nc-logo-img" />
+                </div>
                 <div class="nc-head">
                   <span class="nc-chev">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                   </span>
-                  <span class="nc-title">#Q3Planning · Stress Test</span>
-                  <span class="nc-count">6 notes</span>
+                  <span class="nc-title">Quick Notes</span>
                 </div>
                 <div class="notes-stack" id="notesStack">
                   <div class="notes-feed-inner" id="notesFeedInner">
-                    <div class="note-line filler">Potential customer feedback session with @Slack team next month.</div>
-                    <div class="note-line filler">Remember to review notes from @YouTube creator partnership discussion.</div>
-                    <div class="note-line filler">@Google has announced changes to their API pricing.</div>
-                    <div class="note-line filler">Discuss with @DanielKim and @MaraVelez before Friday.</div>
-                    <div class="note-line filler">Need to investigate impact on #Nomima and #MCP integrations.</div>
                     <div class="note-line sentence" id="heroNote">
-                      Need to follow up with <span class="pw" data-kind="mention" data-entity="person"><svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="pw-t">John</span></span>
-                      <span class="pw" data-kind="date"><svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span class="pw-t">tomorrow</span></span>
-                      regarding <span class="pw" data-kind="hashtag" data-entity="project"><svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg><span class="pw-t">Q3Planning</span></span>
-                      and <span class="pw" data-kind="hashtag" data-entity="project"><svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg><span class="pw-t">BudgetReview</span></span>
+                      Send
+                      <span class="pw" data-step="5" data-kind="hashtag" data-entity="project">
+                        <svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        <span class="pw-raw">finance report</span><span class="pw-pill-text">finance_report</span>
+                      </span>
+                      to
+                      <span class="pw" data-step="5" data-kind="mention" data-entity="person">
+                        <svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <span class="pw-raw">John</span><span class="pw-pill-text">@John</span>
+                      </span>
+                      <span class="pw" data-step="6" data-kind="date">
+                        <svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                        <span class="pw-raw">today</span><span class="pw-pill-text">today</span>
+                      </span>
+                      <span class="pw" data-step="5" data-kind="hashtag" data-entity="status">
+                        <svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>
+                        <span class="pw-raw">urgent</span><span class="pw-pill-text">urgent</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="entity-legend" id="entityLegend">
+                  <div class="entity-legend-label">You categorize on the fly</div>
+                  <div class="ent-chips">
+                    <span class="ent-chip" style="color:var(--nm-entity-person); background:color-mix(in srgb,var(--nm-entity-person) 15%,transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Person</span>
+                    <span class="ent-chip" style="color:var(--nm-entity-project); background:color-mix(in srgb,var(--nm-entity-project) 15%,transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Project</span>
+                    <span class="ent-chip" style="color:var(--nm-entity-status); background:color-mix(in srgb,var(--nm-entity-status) 15%,transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>Status</span>
+                    <span class="ent-chip" style="color:var(--nm-date-fg); background:var(--nm-date-bg)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>Date</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Act 2 Mockups -->
+            <div class="block-morph" id="blockMorph">
+              <!-- Block 1 (bstep 1): Callouts -->
+              <div class="bm-block" data-bstep="1">
+                <div class="bm-mockup-wrap">
+                  <div class="bm-mockup-title">
+                    <span class="bm-mockup-title-icon" style="color:var(--accent); background:rgba(99, 102, 241, 0.15)">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px; height:14px;"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                    </span>
+                    Callouts
+                  </div>
+                  <div class="nm-callout-stack" style="display:flex; flex-direction:column; gap:10px;">
+                    <!-- Callout 1 (Info) -->
+                    <div class="nm-callout" style="--nm-callout-accent:#6366f1; display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:10px;">
+                      <span class="nm-callout-emoji" style="display:inline-flex; align-items:center;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px; height:16px;"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                      </span>
+                      <span class="nm-callout-body" style="font-size:13.5px;">
+                        Ship the beta to <span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@Sarah</span> before the board sync — she owns the <span class="smart-pill smart-pill--hashtag" data-entity-type="project"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>#rollout</span>.
+                      </span>
+                    </div>
+                    <!-- Callout 2 (Warning) -->
+                    <div class="nm-callout" style="--nm-callout-accent:#f59e0b; display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:10px;">
+                      <span class="nm-callout-emoji" style="display:inline-flex; align-items:center;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px; height:16px;"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12" y1="17" y2="17"/></svg>
+                      </span>
+                      <span class="nm-callout-body" style="font-size:13.5px;">
+                        Launch contract needs <span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@Legal</span> sign-off — chase today.
+                      </span>
+                    </div>
+                    <!-- Callout 3 (Success) -->
+                    <div class="nm-callout" style="--nm-callout-accent:#10b981; display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:10px;">
+                      <span class="nm-callout-emoji" style="display:inline-flex; align-items:center;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px; height:16px;"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                      </span>
+                      <span class="nm-callout-body" style="font-size:13.5px;">
+                        Design review passed — onboarding approved.
+                      </span>
+                    </div>
+                  </div>
+                  <div class="bm-legend-card">
+                    <span class="bm-legend-icon" style="color:var(--accent); background:rgba(99, 102, 241, 0.15)">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                    </span>
+                    <div class="bm-legend-content">
+                      <div class="bm-legend-title">Callouts that carry meaning</div>
+                      <div class="bm-legend-desc">Flag what matters — info, warning, success, idea. 12 colour-coded types, each with its own icon.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Block 2 (bstep 2): To-Do List -->
+              <div class="bm-block" data-bstep="2">
+                <div class="bm-mockup-wrap">
+                  <div class="bm-mockup-title">
+                    <span class="bm-mockup-title-icon" style="color:#10b981; background:rgba(16, 185, 129, 0.15)">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px; height:14px;"><rect x="3" y="5" width="6" height="6" rx="1"/><path d="m3 17 2 2 4-4"/><path d="M13 6h8M13 12h8M13 18h8"/></svg>
+                    </span>
+                    To-Do List
+                  </div>
+                  <div class="nm-tasklist">
+                    <div class="nm-tasklist-head">
+                      <span class="nm-tasklist-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+                      <span class="nm-block-title" style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;">LAUNCH CHECKLIST</span>
+                      <span class="nm-tasklist-progress">
+                        <span class="nm-tasklist-progress-track"><div style="width:50%; background:#10b981;"></div></span>
+                        <span class="nm-tasklist-count" style="font-size:11px;">2/4</span>
+                      </span>
+                    </div>
+                    <div class="nm-tasklist-body" style="display:flex; flex-direction:column; gap:8px; padding-top:10px;">
+                      <div class="nm-task" data-checked="true" style="display:flex; align-items:center; gap:10px; opacity:0.5; text-decoration:line-through; font-size:13.5px;">
+                        <span class="nm-task-cb" style="background:#10b981; border-color:#10b981; color:#fff; display:grid; place-items:center; border-radius:4px; width:16px; height:16px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px; height:12px;"><path d="M20 6 9 17l-5-5"/></svg></span>
+                        <span class="nm-task-text">Finalise <span class="smart-pill smart-pill--hashtag" data-entity-type="project"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>#design</span> mocks</span>
+                      </div>
+                      <div class="nm-task" data-checked="true" style="display:flex; align-items:center; gap:10px; opacity:0.5; text-decoration:line-through; font-size:13.5px;">
+                        <span class="nm-task-cb" style="background:#10b981; border-color:#10b981; color:#fff; display:grid; place-items:center; border-radius:4px; width:16px; height:16px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="width:12px; height:12px;"><path d="M20 6 9 17l-5-5"/></svg></span>
+                        <span class="nm-task-text">Email <span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M16 10h.01M8 10h.01"/></svg>@Acme</span> the build</span>
+                      </div>
+                      <div class="nm-task" data-checked="false" style="display:flex; align-items:center; gap:10px; font-size:13.5px;">
+                        <span class="nm-task-cb" style="border:1px solid var(--nm-border); border-radius:4px; width:16px; height:16px;"></span>
+                        <span class="nm-task-text">Notify <span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@Marketing</span></span>
+                      </div>
+                      <div class="nm-task" data-checked="false" style="display:flex; align-items:center; gap:10px; font-size:13.5px;">
+                        <span class="nm-task-cb" style="border:1px solid var(--nm-border); border-radius:4px; width:16px; height:16px;"></span>
+                        <span class="nm-task-text">Publish release notes</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bm-legend-card">
+                    <span class="bm-legend-icon" style="color:#10b981; background:rgba(16, 185, 129, 0.15)">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="6" height="6" rx="1"/><path d="m3 17 2 2 4-4"/><path d="M13 6h8M13 12h8M13 18h8"/></svg>
+                    </span>
+                    <div class="bm-legend-content">
+                      <div class="bm-legend-title">Checklists with live progress</div>
+                      <div class="bm-legend-desc">Tasks roll up into a live progress bar. Tick the title — the whole list completes.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Block 3 (bstep 3): Gantt Chart -->
+              <div class="bm-block" data-bstep="3">
+                <div class="bm-mockup-wrap">
+                  <div class="bm-mockup-title">
+                    <span class="bm-mockup-title-icon" style="color:#c084fc; background:rgba(192, 132, 252, 0.15)">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px; height:14px;"><path d="M8 6h10M6 12h12M10 18h8"/><path d="M3 4v16"/></svg>
+                    </span>
+                    Gantt Chart
+                  </div>
+                  <div class="nm-gantt-card" style="border:1px solid var(--nm-border); border-radius:10px; background:var(--nm-surface); padding:16px;">
+                    <div style="font-size:11px; font-weight:700; color:var(--nm-muted-fg); text-transform:uppercase; margin-bottom:14px; letter-spacing:0.06em;">Q3 ROADMAP</div>
+                    <div class="nm-gantt-grid" style="display:grid; grid-template-columns: 80px 1fr; gap: 12px 16px;">
+                      <!-- Header row for months -->
+                      <div></div>
+                      <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--nm-muted-fg); border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:6px;">
+                        <span style="flex:1; text-align:center;">Jul</span>
+                        <span style="flex:1; text-align:center;">Aug</span>
+                        <span style="flex:1; text-align:center;">Sep</span>
+                        <span style="flex:1; text-align:center;">Oct</span>
+                      </div>
+                      <!-- Row 1: Spec -->
+                      <div style="font-size:13.5px; color:var(--nm-muted-fg); text-decoration:line-through; display:flex; align-items:center;">Spec</div>
+                      <div style="position:relative; height:24px; display:flex; align-items:center;">
+                        <div style="position:absolute; left:0; width:25%; height:14px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15); border-radius:4px; display:flex; align-items:center; padding-left:6px; font-size:10px; color:var(--nm-muted-fg);">Spec</div>
+                      </div>
+                      <!-- Row 2: Design -->
+                      <div style="font-size:13.5px; color:var(--nm-fg); display:flex; align-items:center;">Design</div>
+                      <div style="position:relative; height:24px; display:flex; align-items:center;">
+                        <div style="position:absolute; left:25%; width:40%; height:14px; background:#6366f1; border-radius:4px; display:flex; align-items:center; padding-left:6px; font-size:10px; color:#fff; font-weight:600;">Design</div>
+                      </div>
+                      <!-- Row 3: Build -->
+                      <div style="font-size:13.5px; color:var(--nm-fg); display:flex; align-items:center;">Build</div>
+                      <div style="position:relative; height:24px; display:flex; align-items:center;">
+                        <div style="position:absolute; left:50%; width:45%; height:14px; background:#f59e0b; border-radius:4px; display:flex; align-items:center; padding-left:6px; font-size:10px; color:#fff; font-weight:600;">Build</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bm-legend-card">
+                    <span class="bm-legend-icon" style="color:#c084fc; background:rgba(192, 132, 252, 0.15)">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h10M6 12h12M10 18h8"/><path d="M3 4v16"/></svg>
+                    </span>
+                    <div class="bm-legend-content">
+                      <div class="bm-legend-title">Gantt timelines from your notes</div>
+                      <div class="bm-legend-desc">Dated tasks become a Gantt view instantly. Drag bars to reschedule — done work greys out.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Block 4 (bstep 4): Table -->
+              <div class="bm-block" data-bstep="4">
+                <div class="bm-mockup-wrap">
+                  <div class="bm-mockup-title">
+                    <span class="bm-mockup-title-icon" style="color:#06b6d4; background:rgba(6, 182, 212, 0.15)">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px; height:14px;"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M10 9v12"/></svg>
+                    </span>
+                    Table
+                  </div>
+                  <div class="nm-table-wrap" style="border:1px solid var(--nm-border); border-radius:10px; background:var(--nm-surface); overflow:hidden;">
+                    <table style="width:100%; border-collapse:collapse; text-align:left; font-size:13.5px;">
+                      <thead>
+                        <tr style="background:rgba(255,255,255,0.02); border-bottom:1px solid var(--nm-border); color:var(--nm-muted-fg); font-weight:600;">
+                          <th style="padding:10px 14px;">Initiative</th>
+                          <th style="padding:10px 14px;">Owner</th>
+                          <th style="padding:10px 14px;">Tag</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+                          <td style="padding:10px 14px; color:var(--nm-fg);">Beta launch</td>
+                          <td style="padding:10px 14px;"><span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@Sarah</span></td>
+                          <td style="padding:10px 14px;"><span class="smart-pill smart-pill--hashtag" data-entity-type="project"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>#rollout</span></td>
+                        </tr>
+                        <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+                          <td style="padding:10px 14px; color:var(--nm-fg);">Pricing</td>
+                          <td style="padding:10px 14px;"><span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@Priya</span></td>
+                          <td style="padding:10px 14px; color:var(--nm-subtle-fg);">On hold</td>
+                        </tr>
+                        <tr>
+                          <td style="padding:10px 14px; color:var(--nm-fg);">Docs</td>
+                          <td style="padding:10px 14px;"><span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@John</span></td>
+                          <td style="padding:10px 14px; color:var(--nm-subtle-fg);">Done</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="bm-legend-card">
+                    <span class="bm-legend-icon" style="color:#06b6d4; background:rgba(6, 182, 212, 0.15)">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M10 9v12"/></svg>
+                    </span>
+                    <div class="bm-legend-content">
+                      <div class="bm-legend-title">Tables that hold structure</div>
+                      <div class="bm-legend-desc">Cells carry Smart Pills — a name in a table is the same entity as everywhere else.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Block 5 (bstep 5): Dashboard -->
+              <div class="bm-block" data-bstep="5">
+                <div class="bm-mockup-wrap">
+                  <div class="bm-mockup-title">
+                    <span class="bm-mockup-title-icon" style="color:#f59e0b; background:rgba(245, 158, 11, 0.15)">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px; height:14px;"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+                    </span>
+                    Dashboard
+                  </div>
+                  <div class="nm-bento-dashboard" style="border:1px solid var(--nm-border); border-radius:10px; background:var(--nm-surface); padding:14px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--nm-muted-fg); text-transform:uppercase; margin-bottom:10px; letter-spacing:0.06em;">DASHBOARD</div>
+                    <div class="nm-bento-grid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                      <!-- Widget 1: Notes -->
+                      <div class="nm-bento-widget" style="background:rgba(255,255,255,0.02); border:1px solid var(--nm-border); border-radius:8px; padding:10px; display:flex; flex-direction:column;">
+                        <span style="font-size:10px; color:var(--nm-muted-fg); font-weight:600;">Notes</span>
+                        <span style="font-size:20px; font-weight:800; color:#fff; line-height:1.2; margin-top:2px;">128</span>
+                        <span style="font-size:9px; color:#10b981; margin-top:auto;">+12 this week</span>
+                      </div>
+                      <!-- Widget 2: Activity Graph -->
+                      <div class="nm-bento-widget" style="background:rgba(255,255,255,0.02); border:1px solid var(--nm-border); border-radius:8px; padding:10px; display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start;">
+                        <span style="font-size:10px; color:var(--nm-muted-fg); font-weight:600; display:block;">Activity</span>
+                        <div style="display:flex; align-items:flex-end; gap:3px; height:38px; margin-top:8px; width:100%;">
+                          <div style="flex:1; height:8px;  background:rgba(99,102,241,0.45); border-radius:2px 2px 0 0;"></div>
+                          <div style="flex:1; height:18px; background:rgba(99,102,241,0.55); border-radius:2px 2px 0 0;"></div>
+                          <div style="flex:1; height:25px; background:rgba(99,102,241,0.65); border-radius:2px 2px 0 0;"></div>
+                          <div style="flex:1; height:13px; background:rgba(99,102,241,0.55); border-radius:2px 2px 0 0;"></div>
+                          <div style="flex:1; height:33px; background:rgba(99,102,241,0.8);  border-radius:2px 2px 0 0;"></div>
+                          <div style="flex:1; height:21px; background:rgba(99,102,241,0.65); border-radius:2px 2px 0 0;"></div>
+                          <div style="flex:1; height:27px; background:rgba(99,102,241,0.72); border-radius:2px 2px 0 0;"></div>
+                        </div>
+                      </div>
+                      <!-- Widget 3: Tasks progress ring -->
+                      <div class="nm-bento-widget" style="background:rgba(255,255,255,0.02); border:1px solid var(--nm-border); border-radius:8px; padding:10px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                        <span style="font-size:10px; color:var(--nm-muted-fg); font-weight:600; align-self:flex-start;">Tasks</span>
+                        <div style="position:relative; margin-top:4px;">
+                          <svg viewBox="0 0 40 40" style="width:40px; height:40px; transform:rotate(-90deg);">
+                            <circle cx="20" cy="20" r="15" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="4"/>
+                            <circle cx="20" cy="20" r="15" fill="none" stroke="#10b981" stroke-width="4" stroke-dasharray="81 15" stroke-linecap="round"/>
+                          </svg>
+                          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#fff;margin-top:2px;">86%</div>
+                        </div>
+                      </div>
+                      <!-- Widget 4: People -->
+                      <div class="nm-bento-widget" style="background:rgba(255,255,255,0.02); border:1px solid var(--nm-border); border-radius:8px; padding:10px; display:flex; flex-direction:column;">
+                        <span style="font-size:10px; color:var(--nm-muted-fg); font-weight:600;">People</span>
+                        <span style="font-size:20px; font-weight:800; color:#fff; line-height:1.2; margin-top:2px;">34</span>
+                      </div>
+                      <!-- Widget 5: Due -->
+                      <div class="nm-bento-widget" style="background:rgba(255,255,255,0.02); border:1px solid var(--nm-border); border-radius:8px; padding:10px; display:flex; flex-direction:column;">
+                        <span style="font-size:10px; color:var(--nm-muted-fg); font-weight:600;">Due</span>
+                        <span style="font-size:20px; font-weight:800; color:#fff; line-height:1.2; margin-top:2px;">5</span>
+                      </div>
+                      <!-- Widget 6: Graph links -->
+                      <div class="nm-bento-widget" style="background:rgba(255,255,255,0.02); border:1px solid var(--nm-border); border-radius:8px; padding:10px; display:flex; flex-direction:column;">
+                        <span style="font-size:10px; color:var(--nm-muted-fg); font-weight:600;">Graph links</span>
+                        <span style="font-size:20px; font-weight:800; color:#fff; line-height:1.2; margin-top:2px;">317</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bm-legend-card">
+                    <span class="bm-legend-icon" style="color:#f59e0b; background:rgba(245, 158, 11, 0.15)">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+                    </span>
+                    <div class="bm-legend-content">
+                      <div class="bm-legend-title">Your numbers, in the note</div>
+                      <div class="bm-legend-desc">Live bento widgets — counts, trends, graph links — drawn from everything you tag.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Block 6 (bstep 6): Privacy -->
+              <div class="bm-block" data-bstep="6">
+                <div class="bm-mockup-wrap">
+                  <div class="bm-mockup-title">
+                    <span class="bm-mockup-title-icon" style="color:var(--accent); background:rgba(99, 102, 241, 0.15)">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </span>
+                    Privacy
+                  </div>
+                  <div class="nm-privacy-card">
+                    <div class="nm-privacy-shield">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <div class="nm-privacy-title">Fully local database</div>
+                    <div class="nm-privacy-desc">Your thoughts remain on your device. Offline first. No tracking. No cloud requirements.</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Block 7 (bstep 7): Built for the AI era -->
+              <div class="bm-block" data-bstep="7">
+                <div class="bm-mockup-wrap">
+                  <div class="bm-mockup-title">
+                    <span class="bm-mockup-title-icon" style="color:var(--accent-2); background:rgba(240, 72, 168, 0.15)">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                    </span>
+                    Interoperability
+                  </div>
+                  <div class="nm-codeblock">
+                    <div class="nm-codeblock-head"><span class="nm-codeblock-lang">TypeScript config</span></div>
+                    <pre><code><span class="nm-hl-keyword">interface</span> <span class="nm-hl-fn">Task</span> {
+  id: <span class="nm-hl-string">string</span>;
+  title: <span class="nm-hl-string">string</span>;
+  tags: <span class="nm-hl-string">string[]</span>;
+}</code></pre>
+                  </div>
+                  <div class="bm-legend-card">
+                    <span class="bm-legend-icon" style="color:var(--accent-2); background:rgba(240, 72, 168, 0.15)">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                    </span>
+                    <div class="bm-legend-content">
+                      <div class="bm-legend-title">Built for the AI Era</div>
+                      <div class="bm-legend-desc">Connect local AI agents securely using standard Model Context Protocol.</div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Act 2 Mockups -->
-            <div class="block-morph" id="blockMorph">
-              <!-- Step 7 (bstep 1): Rigid Databases -->
-              <div class="bm-block" data-bstep="1">
-                <div class="nm-tasklist" style="border-color: rgba(239, 68, 68, 0.28); background: rgba(239, 68, 68, 0.04); padding: 18px 20px;">
-                  <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #ef4444; margin-bottom: 12px; letter-spacing: 0.08em; display: flex; align-items: center; gap: 6px;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px; height:14px;"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>
-                    Rigid Database Schema
-                  </div>
-                  <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--nm-subtle-fg); border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
-                      <span>Task Owner?</span>
-                      <span style="color: #ef4444; font-weight: 600;">[Select User]</span>
-                    </div>
-                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--nm-subtle-fg); border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
-                      <span>Task Due Date?</span>
-                      <span style="color: #ef4444; font-weight: 600;">[Choose Calendar Date]</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Step 8 (bstep 2): Capture First -->
-              <div class="bm-block" data-bstep="2">
-                <div class="nm-sectionlite">
-                  <div class="nm-sectionlite-head">
-                    <span class="nm-sectionlite-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
-                    <span class="nm-sectionlite-title">Quick Notes</span>
-                  </div>
-                  <div class="nm-sectionlite-body" style="font-family: ui-monospace, monospace; font-size: 13px; color: var(--nm-fg); padding: 16px; min-height: 80px;">
-                    Tomorrow at 9am John will meet Daniel. Google and YouTube APIs need investigation. Slack integration is pending. Nomima should support MCP.
-                  </div>
-                </div>
-              </div>
-
-              <!-- Step 9 (bstep 3): Block checklist -->
-              <div class="bm-block" data-bstep="3">
-                <div class="nm-tasklist">
-                  <div class="nm-tasklist-head">
-                    <span class="nm-tasklist-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
-                    <span class="nm-block-title">Future Tasks</span>
-                    <span class="nm-tasklist-progress">
-                      <span class="nm-tasklist-progress-track"><div style="width:37%"></div></span>
-                      <span class="nm-tasklist-count">3/8</span>
-                    </span>
-                  </div>
-                  <div class="nm-tasklist-body">
-                    <div class="nm-task" data-checked="true"><span class="nm-task-cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="nm-task-text">Review with <span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@John</span></span></div>
-                    <div class="nm-task" data-checked="true"><span class="nm-task-cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="nm-task-text">Schedule meeting with <span class="smart-pill smart-pill--mention" data-entity-type="company"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M16 10h.01M8 10h.01"/></svg>@Google</span></span></div>
-                    <div class="nm-task" data-checked="true"><span class="nm-task-cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="nm-task-text">Publish video on <span class="smart-pill smart-pill--mention" data-entity-type="company"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M16 10h.01M8 10h.01"/></svg>@YouTube</span></span></div>
-                    <div class="nm-task" data-checked="false"><span class="nm-task-cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="nm-task-text">Create channel in <span class="smart-pill smart-pill--mention" data-entity-type="company"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M16 10h.01M8 10h.01"/></svg>@Slack</span></span></div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Step 10 (bstep 4): Think like a human -->
-              <div class="bm-block" data-bstep="4">
-                <div class="nm-sectionlite" style="padding: 16px;">
-                  <div style="font-size: 13.5px; line-height: 1.65; color: var(--nm-fg);">
-                    Discuss <span class="smart-pill smart-pill--hashtag" data-entity-type="project"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>#Nomima</span> and <span class="smart-pill smart-pill--hashtag" data-entity-type="project"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>#MCP</span> integrations with <span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@DanielKim</span> and <span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@MaraVelez</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Step 11 (bstep 5): Autocomplete suggestions -->
-              <div class="bm-block" data-bstep="5">
-                <div class="nm-brainstorm-block" style="padding: 18px 20px; overflow: visible;">
-                  <div class="nm-brainstorm-input-line">
-                    Discuss architecture with @Daniel<span class="nm-brainstorm-cursor"></span>
-                    <div class="nm-autocomplete-popover">
-                      <div class="nm-popover-item active">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px; height:12px;"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                        @DanielKim
-                      </div>
-                      <div class="nm-popover-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px; height:12px;"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                        @DanielSmith
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Step 12 (bstep 6): Learns your world -->
-              <div class="bm-block" data-bstep="6">
-                <div class="nm-sectionlite" style="padding: 16px;">
-                  <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--nm-muted-fg); margin-bottom: 10px; letter-spacing: 0.05em;">Learned Entities</div>
-                  <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-                    <span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@John</span>
-                    <span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@DanielKim</span>
-                    <span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@MaraVelez</span>
-                    <span class="smart-pill smart-pill--hashtag" data-entity-type="project"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>#Q3Planning</span>
-                    <span class="smart-pill smart-pill--hashtag" data-entity-type="project"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>#Nomima</span>
-                    <span class="smart-pill smart-pill--hashtag" data-entity-type="project"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>#MCP</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Step 13 (bstep 7): Smart detect -->
-              <div class="bm-block" data-bstep="7">
-                <div class="nm-sectionlite">
-                  <div class="nm-sectionlite-head">
-                    <span class="nm-sectionlite-title">Smart Detection</span>
-                  </div>
-                  <div class="nm-sectionlite-body" style="font-size: 13.5px; line-height: 1.6; color: var(--nm-fg); padding: 14px 16px;">
-                    Pasted: <span style="border-bottom: 1.5px dashed var(--nm-mention-fg); cursor: pointer;" title="Suggested: @Slack">Slack</span> integration is pending. <span style="border-bottom: 1.5px dashed var(--nm-hashtag-fg); cursor: pointer;" title="Suggested: #Nomima">Nomima</span> should support <span style="border-bottom: 1.5px dashed var(--nm-hashtag-fg); cursor: pointer;" title="Suggested: #MCP">MCP</span>.
-                  </div>
-                </div>
-              </div>
-
-              <!-- Step 14 (bstep 8): Smart Scrollbar -->
-              <div class="bm-block" data-bstep="8">
-                <div class="nm-sectionlite" style="padding: 16px;">
-                  <div style="font-size: 13px; color: var(--nm-subtle-fg); line-height: 1.55;">
-                    Smart Scrollbar displays colored ticks for key references. Navigate directly: <span class="smart-pill smart-pill--mention" data-entity-type="company"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M16 10h.01M8 10h.01"/></svg>@Google</span> or <span class="smart-pill smart-pill--hashtag" data-entity-type="project"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>#MCP</span>.
-                  </div>
-                </div>
-              </div>
-
-              <!-- Step 15 (bstep 9): One System (Work/Life notebooks) -->
-              <div class="bm-block" data-bstep="9">
-                <div class="nm-sectionlite">
-                  <div class="nm-sectionlite-head">
-                    <span class="nm-sectionlite-title">Workspace Vault</span>
-                  </div>
-                  <div class="nm-sectionlite-body" style="padding: 14px 16px; display: flex; flex-direction: column; gap: 10px;">
-                    <div style="font-size: 13.5px; font-weight: 600; color: var(--nm-heading);"><span style="color:var(--nm-accent); margin-right: 8px;">■</span> Work: Q3 Planning (#Q3Planning)</div>
-                    <div style="font-size: 13.5px; font-weight: 600; color: var(--nm-heading);"><span style="color:var(--nm-accent-secondary); margin-right: 8px;">■</span> Life: Personal Fitness (#health)</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Step 16 (bstep 10): Home Dashboard -->
-              <div class="bm-block" data-bstep="10">
-                <div class="nm-home-block">
-                  <div class="nm-home-header">
-                    <h3 class="nm-home-title">Good morning<span>Sawubona</span></h3>
-                    <div class="nm-home-subtitle">Saturday, June 6</div>
-                  </div>
-                  <div class="nm-home-sec-title">Due soon</div>
-                  <div class="nm-home-row">
-                    <div class="nm-home-row-left">
-                      <span>Topic:</span>
-                      <span class="smart-pill smart-pill--hashtag" data-entity-type="project"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>#Q3Planning</span>
-                      <span class="smart-pill smart-pill--date"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>tomorrow</span>
-                      <span>with</span>
-                      <span class="smart-pill smart-pill--mention" data-entity-type="person"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>@John</span>
-                    </div>
-                    <div class="nm-home-row-right">Tomorrow</div>
-                  </div>
-                  <div class="nm-home-row">
-                    <div class="nm-home-row-left">
-                      <span>Week of</span>
-                      <span class="smart-pill smart-pill--date"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>today</span>
-                      <span class="smart-pill smart-pill--hashtag" data-entity-type="topic"><svg class="smart-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>#focus</span>
-                    </div>
-                    <div class="nm-home-row-right">Today</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Step 17 (bstep 11): Bento Personal Dashboard -->
-              <div class="bm-block" data-bstep="11">
-                <div class="nm-bento-dashboard">
-                  <div class="nm-bento-title">Personal Dashboard</div>
-                  <div class="nm-bento-subtitle">Week of today · #focus · #health</div>
-                  <div class="nm-bento-banner">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
-                    <div><strong>Today's one thing</strong> — architecture review with @John.</div>
-                  </div>
-                  <div class="nm-bento-grid">
-                    <div class="nm-bento-widget">
-                      <span class="nm-bento-w-label">Open Tasks</span>
-                      <span class="nm-bento-w-val" style="color:var(--nm-mention-fg)">8</span>
-                    </div>
-                    <div class="nm-bento-widget">
-                      <span class="nm-bento-w-label">Completion</span>
-                      <div class="nm-bento-progress-container">
-                        <svg class="nm-bento-progress-ring" width="54" height="54">
-                          <circle class="ring-bg" cx="27" cy="27" r="23"></circle>
-                          <circle class="ring-bar" cx="27" cy="27" r="23"></circle>
-                        </svg>
-                        <div class="nm-bento-progress-text">37%</div>
-                      </div>
-                    </div>
-                    <div class="nm-bento-widget">
-                      <span class="nm-bento-w-label">Due Today</span>
-                      <span class="nm-bento-w-val" style="color:#fb923c">0</span>
-                    </div>
-                    <div class="nm-bento-widget">
-                      <span class="nm-bento-w-label">Overdue</span>
-                      <span class="nm-bento-w-val" style="color:#ef4444">0</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Step 18 (bstep 12): Privacy -->
-              <div class="bm-block" data-bstep="12">
-                <div class="nm-privacy-card">
-                  <div class="nm-privacy-shield">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                  </div>
-                  <div class="nm-privacy-title">Fully local database</div>
-                  <div class="nm-privacy-desc">Your thoughts remain on your device. Offline first. No tracking. No cloud requirements.</div>
-                </div>
-              </div>
-
-              <!-- Step 19 (bstep 13): Built for the AI era -->
-              <div class="bm-block" data-bstep="13">
-                <div class="nm-codeblock">
-                  <div class="nm-codeblock-head"><span class="nm-codeblock-lang">TypeScript sample</span></div>
-                  <pre><code><span class="nm-hl-keyword">interface</span> <span class="nm-hl-fn">Task</span> {
-  id: <span class="nm-hl-string">string</span>;
-  title: <span class="nm-hl-string">string</span>;
-  owner: <span class="nm-hl-string">string</span>;
-  tags: <span class="nm-hl-string">string[]</span>;
-  complete: <span class="nm-hl-string">boolean</span>;
-}</code></pre>
-                </div>
+            <!-- Outro Card (Step 20) -->
+            <div class="outro-card" id="outroCard">
+              <h2 class="outro-title">Capture.<br>Connect.<br><span class="accent">Complete.</span></h2>
+              <p class="story-desc" style="margin-bottom: 28px; max-width: 38ch; font-size: 16px;">Private. Offline. Yours. Tag on the fly, evolve into blocks, finish with <strong style="color:var(--nm-entity-status)">#complete</strong>.</p>
+              <div style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+                <a class="dl-btn" href="https://github.com/nomima-app/Nomima-landing/releases/tag/v0.16.0-beta.2">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701z"/></svg>
+                  Download Nomima <span class="dl-sub">for macOS</span>
+                </a>
               </div>
             </div>
           </div>
         </div>
-
-    <!-- ===== FINAL SCREEN — a real footer section (normal flow), so it's a stable
-         last screen you scroll to and physically cannot pass. Hero-style backdrop. ===== -->
-    <footer class="footer-hero">
-      <div class="bg3d fh-bg" aria-hidden="true">
-        <div class="bg3d-inner">
-          <div class="bg-orb bg-orb-a"></div>
-          <div class="bg-orb bg-orb-b"></div>
-        </div>
       </div>
-      <h2 class="outro-h">Putting the <span class="accent">fun</span> back into note-taking — backed by your data.</h2>
-      <a class="dl-btn" href="downloads/Nomima-0.1.2-arm64.dmg" download>
-         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701z"/></svg>
-        Download Nomima now <span class="dl-sub">for macOS</span>
-      </a>
-    </footer>
+    </section>
+
+
 
     <!-- Nomima SmartDashes rail + scroll cue (fixed; ride along with the hero) -->
     <div class="scroll-cue" id="cue"><div class="mouse"></div><span>Scroll</span></div>
@@ -741,34 +865,22 @@
       // One dash per pill, in scroll order, coloured + iconed by its real Nomima tag.
       const DASHES = [
         // Act 1 (the initial note's tags)
-        { color: 'var(--nm-entity-person)', icon: 'person',   ty: 'Person', vl: 'John',          step: 6 },
-        { color: 'var(--nm-date-fg)',       icon: 'calendar', ty: 'Date',   vl: 'tomorrow',      step: 6 },
-        { color: 'var(--nm-entity-project)', icon: 'topic',    ty: 'Project', vl: '#Q3Planning',   step: 6 },
-        { color: 'var(--nm-entity-project)', icon: 'topic',    ty: 'Project', vl: '#BudgetReview', step: 6 },
+        { color: 'var(--nm-entity-project)', icon: 'topic',    ty: 'Project', vl: '#finance_report', step: 5 },
+        { color: 'var(--nm-entity-person)',  icon: 'person',   ty: 'Person',  vl: '@John',           step: 5 },
+        { color: 'var(--nm-entity-status)',  icon: 'flag',     ty: 'Status',  vl: '#urgent',         step: 5 },
+        { color: 'var(--nm-date-fg)',        icon: 'calendar', ty: 'Date',    vl: 'today',           step: 6 },
         // Act 2 (each block's tags)
-        { color: 'var(--nm-entity-person)', icon: 'person',   ty: 'Person', vl: 'Mom',          step: 9 },
-        { color: 'var(--nm-entity-topic)',  icon: 'topic',    ty: 'Topic',  vl: '#Vacation2027',step: 9 },
-        { color: 'var(--nm-entity-person)', icon: 'person',   ty: 'Person', vl: 'FinanceSarah', step: 10 },
-        { color: 'var(--nm-entity-team)',   icon: 'team',     ty: 'Team',   vl: 'AWS',          step: 10 },
-        { color: 'var(--nm-entity-project)', icon: 'topic',    ty: 'Project', vl: '#Falcon',      step: 10 },
-        { color: 'var(--nm-entity-person)', icon: 'person',   ty: 'Person', vl: 'FinanceSteve', step: 11 },
-        { color: 'var(--nm-entity-person)', icon: 'person',   ty: 'Person', vl: 'Dad',          step: 12 },
-        { color: 'var(--nm-entity-person)', icon: 'person',   ty: 'Person', vl: 'Mom',          step: 12 },
-        { color: 'var(--nm-entity-project)', icon: 'topic',    ty: 'Project', vl: '#Migration',   step: 12 },
-        { color: 'var(--nm-entity-topic)',  icon: 'topic',    ty: 'Topic',  vl: '#Health',      step: 12 },
-        { color: 'var(--nm-entity-team)',   icon: 'team',     ty: 'Team',   vl: 'Legal',        step: 13 },
-        { color: 'var(--nm-entity-project)', icon: 'topic',    ty: 'Project', vl: '#launch',      step: 13 },
-        { color: 'var(--nm-accent)',        icon: 'topic',    ty: 'System', vl: 'Scrollbar',    step: 14 },
-        { color: 'var(--nm-entity-project)', icon: 'topic',    ty: 'Project', vl: '#Falcon',      step: 15 },
-        { color: 'var(--nm-entity-topic)',  icon: 'topic',    ty: 'Topic',  vl: '#Health',      step: 15 },
-        { color: 'var(--nm-entity-person)', icon: 'person',   ty: 'Person', vl: 'MaraVelez',    step: 16 },
-        { color: 'var(--nm-entity-topic)',  icon: 'topic',    ty: 'Topic',  vl: '#new-idea',    step: 16 },
-        { color: 'var(--nm-entity-status)', icon: 'flag',     ty: 'Status', vl: '#metrics',     step: 17 },
-        { color: '#10b981',                 icon: 'flag',     ty: 'System', vl: 'Offline',      step: 18 },
-        { color: 'var(--nm-accent)',        icon: 'topic',    ty: 'System', vl: '#mcp',         step: 19 },
+        { color: 'var(--nm-entity-person)',  icon: 'person',   ty: 'Person',  vl: '@Sarah',          step: 7 },
+        { color: 'var(--nm-entity-project)', icon: 'topic',    ty: 'Project', vl: '#rollout',        step: 7 },
+        { color: 'var(--nm-entity-person)',  icon: 'person',   ty: 'Person',  vl: '@Legal',          step: 7 },
+        { color: 'var(--nm-entity-project)', icon: 'topic',    ty: 'Project', vl: '#design',         step: 8 },
+        { color: 'var(--nm-entity-company)', icon: 'company',  ty: 'Company', vl: '@Acme',           step: 8 },
+        { color: 'var(--nm-entity-person)',  icon: 'person',   ty: 'Person',  vl: '@Marketing',      step: 8 },
+        { color: 'var(--nm-entity-person)',  icon: 'person',   ty: 'Person',  vl: '@Priya',          step: 10 },
+        { color: 'var(--nm-accent)',         icon: 'topic',    ty: 'System',  vl: '#mcp',            step: 13 },
       ];
 
-      const TOTAL_STEPS = 21; // 21 total steps in the manifesto story
+      const TOTAL_STEPS = 16; // 16 total steps in the manifesto story
       const _perStep = {};
       DASHES.forEach((d) => {
         const k = (_perStep[d.step] = (_perStep[d.step] || 0)); _perStep[d.step]++;
@@ -789,78 +901,66 @@
       const kgEl = document.getElementById('kgbg');
       const KG_NODES = [
         { id: 'note',     name: 'Vault Hub',     kind: 'note',    weight: 12, step: 0 },
-        // Step 6 (initial note tags)
-        { id: 'john',     name: '@John',        kind: 'person',  weight: 6,  step: 6 },
-        { id: 'q3plan',   name: '#Q3Planning',   kind: 'project', weight: 8,  step: 6 },
-        { id: 'tomorrow', name: 'Tomorrow',      kind: 'date',    weight: 4,  step: 6 },
-        { id: 'budget',   name: '#BudgetReview', kind: 'project', weight: 5,  step: 6 },
-        // Step 10 (shortcuts)
-        { id: 'aws',      name: '@AWS',         kind: 'team',    weight: 5,  step: 10 },
-        // Step 11 (autocomplete)
-        { id: 'steve',    name: '@FinanceSteve', kind: 'person',  weight: 5,  step: 11 },
-        // Step 12 (world tags)
-        { id: 'dad',      name: '@Dad',         kind: 'person',  weight: 4,  step: 12 },
-        { id: 'mom',      name: '@Mom',         kind: 'person',  weight: 4,  step: 12 },
-        { id: 'lawyer',   name: '@Lawyer',      kind: 'person',  weight: 4,  step: 12 },
-        { id: 'migration',name: '#Migration',   kind: 'project', weight: 5,  step: 12 },
-        { id: 'health',   name: '#Health',      kind: 'topic',   weight: 6,  step: 12 },
-        { id: 'nomima',   name: '#Nomima',      kind: 'topic',   weight: 7,  step: 12 },
-        // Step 13 (smart detect)
-        { id: 'legal',    name: '@Legal',       kind: 'team',    weight: 5,  step: 13 },
-        { id: 'launch',   name: '#launch',      kind: 'project', weight: 6,  step: 13 },
-        // Step 15 (work/life)
-        { id: 'work',     name: 'Work',         kind: 'note',    weight: 6,  step: 15 },
-        { id: 'life',     name: 'Life',         kind: 'note',    weight: 6,  step: 15 },
-        // Step 16 (home dashboard)
-        { id: 'mara',     name: '@MaraVelez',   kind: 'person',  weight: 5,  step: 16 },
-        { id: 'daniel',   name: '@DanielKim',   kind: 'person',  weight: 5,  step: 16 },
-        { id: 'design',   name: '@Design',      kind: 'team',    weight: 5,  step: 16 },
-        { id: 'newidea',  name: '#new-idea',    kind: 'topic',   weight: 6,  step: 16 },
-        { id: 'focus',    name: '#focus',       kind: 'topic',   weight: 5,  step: 16 },
-        // Step 17 (personal dashboard)
-        { id: 'metrics',  name: '#metrics',     kind: 'topic',   weight: 5,  step: 17 },
-        // Step 19 (AI MCP)
-        { id: 'mcp',      name: '#mcp',         kind: 'topic',   weight: 6,  step: 19 },
+        // Step 5
+        { id: 'john',     name: '@John',         kind: 'person',  weight: 7,  step: 5 },
+        { id: 'finance',  name: '#finance_report', kind: 'project', weight: 8,  step: 5 },
+        { id: 'urgent',   name: '#urgent',       kind: 'status',  weight: 6,  step: 5 },
+        // Step 6
+        { id: 'today',    name: 'today',         kind: 'date',    weight: 5,  step: 6 },
+        // Step 7
+        { id: 'sarah',    name: '@Sarah',        kind: 'person',  weight: 6,  step: 7 },
+        { id: 'rollout',  name: '#rollout',      kind: 'project', weight: 7,  step: 7 },
+        { id: 'legal',    name: '@Legal',        kind: 'person',  weight: 5,  step: 7 },
+        // Step 8
+        { id: 'design',   name: '#design',       kind: 'project', weight: 6,  step: 8 },
+        { id: 'acme',     name: '@Acme',         kind: 'company', weight: 5,  step: 8 },
+        { id: 'marketing', name: '@Marketing',   kind: 'person',  weight: 5,  step: 8 },
+        // Step 9
+        { id: 'roadmap',  name: '#Q3Roadmap',    kind: 'project', weight: 6,  step: 9 },
+        // Step 10
+        { id: 'priya',    name: '@Priya',        kind: 'person',  weight: 5,  step: 10 },
+        // Step 13
+        { id: 'mcp',      name: '#MCP',          kind: 'topic',   weight: 6,  step: 13 },
+        // Step 14
+        { id: 'work',     name: 'Work',          kind: 'note',    weight: 7,  step: 14 },
+        { id: 'life',     name: 'Life',          kind: 'note',    weight: 7,  step: 14 },
+        // Step 15
+        { id: 'health',   name: '#health',       kind: 'topic',   weight: 5,  step: 15 },
+        { id: 'focus',    name: '#focus',        kind: 'topic',   weight: 5,  step: 15 },
       ];
 
       const KG_LINKS = [
+        // Step 5 links
+        { source: 'note', target: 'john',     step: 5 },
+        { source: 'note', target: 'finance',  step: 5 },
+        { source: 'note', target: 'urgent',   step: 5 },
         // Step 6 links
-        { source: 'note', target: 'john',     step: 6 },
-        { source: 'note', target: 'q3plan',   step: 6 },
-        { source: 'note', target: 'tomorrow',  step: 6 },
-        { source: 'note', target: 'budget',   step: 6 },
-        { source: 'john', target: 'q3plan',   step: 6, typed: true, rel: 'owns' },
-        // Step 10
-        { source: 'note', target: 'aws',      step: 10 },
-        // Step 11
-        { source: 'note', target: 'steve',    step: 11 },
-        // Step 12
-        { source: 'note', target: 'dad',      step: 12 },
-        { source: 'note', target: 'mom',      step: 12 },
-        { source: 'note', target: 'lawyer',   step: 12 },
-        { source: 'note', target: 'migration',step: 12 },
-        { source: 'note', target: 'health',   step: 12 },
-        { source: 'note', target: 'nomima',   step: 12 },
-        // Step 13
-        { source: 'note', target: 'legal',    step: 13 },
-        { source: 'note', target: 'launch',   step: 13 },
-        { source: 'legal', target: 'launch',  step: 13, typed: true, rel: 'signs' },
-        // Step 15
-        { source: 'note', target: 'work',     step: 15 },
-        { source: 'note', target: 'life',     step: 15 },
-        { source: 'work', target: 'q3plan',   step: 15, typed: true, rel: 'contains' },
+        { source: 'note', target: 'today',    step: 6 },
+        // Step 7 links
+        { source: 'note', target: 'sarah',    step: 7 },
+        { source: 'note', target: 'rollout',  step: 7 },
+        { source: 'note', target: 'legal',    step: 7 },
+        { source: 'sarah', target: 'rollout', step: 7, typed: true, rel: 'owns' },
+        // Step 8 links
+        { source: 'note', target: 'design',   step: 8 },
+        { source: 'note', target: 'acme',     step: 8 },
+        { source: 'note', target: 'marketing',step: 8 },
+        { source: 'marketing', target: 'design', step: 8, typed: true, rel: 'approves' },
+        // Step 9 links
+        { source: 'note', target: 'roadmap',  step: 9 },
+        // Step 10 links
+        { source: 'note', target: 'priya',    step: 10 },
+        { source: 'priya', target: 'rollout', step: 10, typed: true, rel: 'helps' },
+        // Step 13 links
+        { source: 'note', target: 'mcp',      step: 13 },
+        // Step 14 links
+        { source: 'note', target: 'work',     step: 14 },
+        { source: 'note', target: 'life',     step: 14 },
+        { source: 'work', target: 'rollout',  step: 14, typed: true, rel: 'contains' },
+        // Step 15 links
         { source: 'life', target: 'health',   step: 15, typed: true, rel: 'contains' },
-        // Step 16
-        { source: 'note', target: 'mara',     step: 16 },
-        { source: 'note', target: 'daniel',   step: 16 },
-        { source: 'note', target: 'design',   step: 16 },
-        { source: 'note', target: 'newidea',  step: 16 },
-        { source: 'note', target: 'focus',    step: 16 },
-        { source: 'mara', target: 'newidea',  step: 16, typed: true, rel: 'drafts' },
-        // Step 17
-        { source: 'note', target: 'metrics',  step: 17 },
-        // Step 19
-        { source: 'note', target: 'mcp',      step: 19 },
+        { source: 'work', target: 'focus',    step: 15, typed: true, rel: 'focuses' },
+        { source: 'life', target: 'focus',    step: 15, typed: true, rel: 'focuses' },
       ];
 
       const kg = (kgEl && window.HeroKG) ? window.HeroKG.create(kgEl, { hubId: 'note', nodes: KG_NODES, links: KG_LINKS }) : null;
@@ -871,27 +971,25 @@
       const notesStack = document.getElementById('notesStack');
       const notesFeedInner = document.getElementById('notesFeedInner');
       const heroNote = document.getElementById('heroNote');
-      const feedNotes = [...document.querySelectorAll('#top .notes-feed-inner > .note-line')];
       
       const textContainer = document.getElementById('storyTextContainer');
       const textScroller = document.getElementById('storyTextScroller');
       const textSlides = [...document.querySelectorAll('.story-slide')];
 
       const pws = [...document.querySelectorAll('#top .pw')];
-      pws.forEach((w) => {
-        w.dataset.step = 6; // All hero tags light up at Step 6
-      });
       const noteCard = document.getElementById('noteCard');
       const blockMorph = document.getElementById('blockMorph');
       const bmBlocks = [...document.querySelectorAll('#top .bm-block')];
+      const outroCard = document.getElementById('outroCard');
+      const entityLegend = document.getElementById('entityLegend');
       const cue = document.getElementById('cue');
       const orbA = document.querySelector('#top .bg-orb-a');
       const orbB = document.querySelector('#top .bg-orb-b');
       const kgWrap = document.querySelector('#top .kg-wrap');
       const bg3dInner = document.querySelector('#top .bg3d-inner');
 
-      const SENT = 6, NBLOCKS = bmBlocks.length, SECTION = SENT + 1, STEPS = 21;
-      const LAST_BLOCK = 19;
+      const SENT = 6, NBLOCKS = bmBlocks.length, SECTION = SENT + 1, STEPS = 16;
+      const LAST_BLOCK = 13;
       if (!track) return;
 
       function render() {
@@ -903,10 +1001,15 @@
         const step = Math.min(STEPS, Math.floor(p * (STEPS + 1)));
 
         const act2 = step >= SECTION;
-        const graphOnly = step === 20;
+        const graphOnly = step >= 16;
+        const graphRight = step >= 14; /* keeps KG on-screen through step 16 ; graph-only CSS wins where both apply */
 
         stage.classList.toggle('act2', act2);
         stage.classList.toggle('graph-only', graphOnly);
+        stage.classList.toggle('graph-right', graphRight);
+        stage.classList.toggle('show-logo', step === 4);
+        stage.style.setProperty('--sd', p.toFixed(4));
+        if (outroCard) outroCard.classList.remove('is-on');
 
         // Center active text slide and animate elements
         if (textScroller && textContainer && textSlides.length) {
@@ -921,31 +1024,17 @@
           }
         }
 
-        if (notesFeedInner && notesStack && feedNotes.length) {
-          const fillerNotes = feedNotes.filter(n => n.classList.contains('filler'));
-          const isolate = step >= 6;
-          notesStack.classList.toggle('isolated', isolate);
-
-          // Strike-through completed items at step 6
-          fillerNotes.forEach((f, i) => {
-            if (step >= 6 && (i === 0 || i === 1 || i === 2)) {
-              f.style.textDecoration = 'line-through';
-              f.style.opacity = '0.36';
-            } else {
-              f.style.textDecoration = '';
-              f.style.opacity = '';
-            }
-          });
-
-          const windowH = notesStack.clientHeight || 1;
-          const centerOf = (n) => n.offsetTop + n.offsetHeight / 2;
-          let targetCenter = isolate ? centerOf(heroNote) : windowH / 2;
-          if (!act2) notesFeedInner.style.transform = `translateY(${Math.round(windowH / 2 - targetCenter)}px)`;
-        }
-
+        // Act 1 Note stack highlights and legend visibility
         pws.forEach((w) => w.classList.toggle('is-pill', step >= +w.dataset.step));
 
-        if (noteCard) noteCard.classList.toggle('nc-gone', step >= SECTION);
+        if (entityLegend) {
+          entityLegend.classList.toggle('is-on', step >= 5 && step < SECTION);
+        }
+
+        if (noteCard) {
+          noteCard.classList.toggle('nc-visible', step >= 3 && step < SECTION);
+          noteCard.classList.toggle('nc-gone', step >= SECTION);
+        }
 
         if (blockMorph) blockMorph.classList.toggle('is-on', act2 && step <= LAST_BLOCK);
         const bstep = step - SECTION + 1;
@@ -972,6 +1061,14 @@
       }
       window.addEventListener('scroll', render, { passive: true });
       window.addEventListener('resize', render);
+      
+      // Safety triggers to ensure correct layout dimensions after fonts/styles load
+      if (document.fonts) {
+        document.fonts.ready.then(() => { render(); });
+      }
+      setTimeout(render, 100);
+      setTimeout(render, 300);
+      
       render();
     })();
   </script>

@@ -1,0 +1,358 @@
+/* ============================================================================
+   editor.css — vendored straight from the Nomima app (src/App.css + the Nomima
+   dark theme). This is how the landing "uses the editor's components": the exact
+   same class names, markup and CSS that render Smart Pills + blocks in the real
+   app, so what you see here is pixel-identical to what you type in Nomima.
+   Keep in sync with the app when the editor styling changes.
+   ========================================================================== */
+
+:root {
+  /* ── Nomima dark ("Glass") theme tokens the editor reads ── */
+  --nm-fg: #f3f3f7;
+  --nm-heading: #ffffff;
+  --nm-muted-fg: rgba(255, 255, 255, 0.46);
+  --nm-subtle-fg: rgba(255, 255, 255, 0.62);
+  --nm-border: rgba(255, 255, 255, 0.11);
+  --nm-hover: rgba(255, 255, 255, 0.08);
+  --nm-surface: #1b1b20;
+  --nm-surface-raised: #232329;
+  --nm-surface-border: rgba(255, 255, 255, 0.14);
+  --nm-accent: #6d5ef7;
+  --nm-accent-secondary: #ff3d9a;
+  --nm-shadow-2: 0 10px 28px rgba(0, 0, 0, 0.5);
+
+  /* Smart-Tag trio (violet mentions, pink hashtags, teal dates) */
+  --nm-mention-fg: #9b8cff;
+  --nm-mention-bg: color-mix(in srgb, #9b8cff 20%, transparent);
+  --nm-hashtag-fg: #ff5ba8;
+  --nm-hashtag-bg: color-mix(in srgb, #ff5ba8 20%, transparent);
+  --nm-date-fg: #2dd4bf;
+  --nm-date-bg: color-mix(in srgb, #2dd4bf 20%, transparent);
+  --nm-link: #38bdf8;
+
+  /* Per-entity hues (typed @mentions / #hashtags) */
+  --nm-entity-person: #60a5fa;
+  --nm-entity-company: #c084fc;
+  --nm-entity-location: #34d399;
+  --nm-entity-product: #fb7185;
+  --nm-entity-technology: #5eead4;
+  --nm-entity-team: #22d3ee;
+  --nm-entity-project: #fb923c;
+  --nm-entity-idea: #fbbf24;
+  --nm-entity-topic: #a3e635;
+  --nm-entity-status: #e879f9;
+}
+
+/* ── Smart pills (verbatim from src/App.css) ──────────────────────────────── */
+.smart-pill {
+  position: relative;
+  display: inline;
+  vertical-align: baseline;
+  border-radius: 999px;
+  padding: 0.04em 0.55em 0.04em 0.45em;
+  font: inherit;
+  font-size: 0.92em;
+  line-height: 1.35;
+  letter-spacing: inherit;
+  white-space: normal;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.smart-pill-icon {
+  display: inline-block;
+  width: 0.95em;
+  height: 0.95em;
+  vertical-align: -0.16em;
+  margin-right: 0.26em;
+  flex-shrink: 0;
+}
+.smart-pill:hover {
+  cursor: pointer;
+}
+
+.smart-pill--mention {
+  color: var(--nm-mention-fg);
+  background: var(--nm-mention-bg);
+}
+.smart-pill--mention[data-entity-type="person"] {
+  color: var(--nm-entity-person);
+  background: color-mix(in srgb, var(--nm-entity-person) 17%, transparent);
+}
+.smart-pill--mention[data-entity-type="company"] {
+  color: var(--nm-entity-company);
+  background: color-mix(in srgb, var(--nm-entity-company) 17%, transparent);
+}
+.smart-pill--mention[data-entity-type="location"] {
+  color: var(--nm-entity-location);
+  background: color-mix(in srgb, var(--nm-entity-location) 17%, transparent);
+}
+.smart-pill--mention[data-entity-type="product"] {
+  color: var(--nm-entity-product);
+  background: color-mix(in srgb, var(--nm-entity-product) 17%, transparent);
+}
+.smart-pill--mention[data-entity-type="technology"] {
+  color: var(--nm-entity-technology);
+  background: color-mix(in srgb, var(--nm-entity-technology) 17%, transparent);
+}
+.smart-pill--mention[data-entity-type="team"] {
+  color: var(--nm-entity-team);
+  background: color-mix(in srgb, var(--nm-entity-team) 17%, transparent);
+}
+
+.smart-pill--hashtag {
+  color: var(--nm-hashtag-fg);
+  background: var(--nm-hashtag-bg);
+}
+.smart-pill--hashtag[data-entity-type="project"] {
+  color: var(--nm-entity-project);
+  background: color-mix(in srgb, var(--nm-entity-project) 17%, transparent);
+}
+.smart-pill--hashtag[data-entity-type="idea"] {
+  color: var(--nm-entity-idea);
+  background: color-mix(in srgb, var(--nm-entity-idea) 17%, transparent);
+}
+.smart-pill--hashtag[data-entity-type="topic"] {
+  color: var(--nm-entity-topic);
+  background: color-mix(in srgb, var(--nm-entity-topic) 17%, transparent);
+}
+.smart-pill--hashtag[data-entity-type="status"] {
+  color: var(--nm-entity-status);
+  background: color-mix(in srgb, var(--nm-entity-status) 17%, transparent);
+}
+
+.smart-pill--date {
+  color: var(--nm-date-fg);
+  background: var(--nm-date-bg);
+}
+.smart-pill.is-overdue {
+  background: color-mix(in oklab, #ef4444 20%, transparent) !important;
+  color: #ef4444 !important;
+}
+.smart-pill.is-done {
+  background: var(--nm-hover) !important;
+  color: var(--nm-muted-fg) !important;
+}
+
+/* A block/line marked #complete reads "done" — struck + dimmed (any block type). */
+.nm-block-complete {
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--nm-fg) 45%, transparent);
+  opacity: 0.6;
+}
+
+/* ============================================================================
+   Editor blocks — vendored from src/App.css (+ the components' Tailwind layout
+   resolved to plain CSS). These render the Callout / To-Do / Kanban / Dashboard
+   blocks exactly as they look in the app, for the blocks.html scroll showcase.
+   Static (non-interactive): drag/menu/collapse-only rules are omitted.
+   ========================================================================== */
+
+/* Shared compact uppercase block title/label (matches .nm-block-title). */
+.nm-block-title {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--nm-muted-fg); line-height: 1.3;
+}
+
+/* ── Callout ─────────────────────────────────────────────────────────────── */
+.nm-callout {
+  position: relative; display: flex; gap: 10px; margin: 10px 0; padding: 11px 13px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--nm-callout-accent, var(--nm-accent)) 38%, var(--nm-border));
+  border-left: 3px solid color-mix(in srgb, var(--nm-callout-accent, var(--nm-accent)) 70%, transparent);
+  background: color-mix(in srgb, var(--nm-callout-accent, var(--nm-accent)) 9%, var(--nm-surface));
+}
+.nm-callout-emoji {
+  flex-shrink: 0; width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center;
+  line-height: 1; border: none; background: transparent; border-radius: 6px;
+  color: var(--nm-callout-accent, var(--nm-accent));
+}
+.nm-callout-emoji svg { width: 18px; height: 18px; }
+.nm-callout-body { flex: 1 1 auto; min-width: 0; font-size: 14px; line-height: 1.55; color: var(--nm-fg); }
+.nm-callout-body > :first-child { margin-top: 0; }
+.nm-callout-body > :last-child { margin-bottom: 0; }
+.nm-callout-body strong { color: var(--nm-heading); }
+
+/* ── To-Do list (TaskList block) ─────────────────────────────────────────── */
+.nm-tasklist {
+  position: relative; margin: 8px 0; overflow: hidden; border-radius: 9px;
+  border: 1px solid var(--nm-border);
+  background: color-mix(in srgb, var(--nm-accent) 6%, var(--nm-surface));
+}
+.nm-tasklist[data-complete="true"] { border-color: color-mix(in srgb, #10b981 45%, transparent); }
+.nm-tasklist-head {
+  display: flex; align-items: center; gap: 9px; padding: 8px 12px 9px;
+  border-bottom: 1px solid var(--nm-border);
+}
+.nm-tasklist-chevron { color: var(--nm-subtle-fg); display: inline-flex; flex-shrink: 0; }
+.nm-tasklist-chevron svg { width: 15px; height: 15px; }
+.nm-tasklist-progress { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.nm-tasklist-progress-track { height: 6px; width: 78px; overflow: hidden; border-radius: 999px; background: var(--nm-hover); }
+.nm-tasklist-progress-track > div { height: 100%; border-radius: 999px; background: linear-gradient(to right, #10b981, #2dd4bf); }
+.nm-tasklist-count {
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
+  background: var(--nm-hover); color: var(--nm-muted-fg); font-variant-numeric: tabular-nums;
+}
+.nm-tasklist-body { padding: 5px 0 7px; }
+.nm-task { display: flex; align-items: flex-start; gap: 9px; padding: 4px 14px; font-size: 14px; color: var(--nm-fg); }
+.nm-task-cb {
+  flex-shrink: 0; width: 17px; height: 17px; margin-top: 1px; border-radius: 5px;
+  border: 1.6px solid color-mix(in srgb, var(--nm-subtle-fg) 78%, transparent);
+  display: inline-flex; align-items: center; justify-content: center; color: #fff;
+}
+.nm-task-cb svg { width: 11px; height: 11px; opacity: 0; }
+.nm-task[data-checked="true"] .nm-task-cb { background: linear-gradient(135deg, #10b981, #2dd4bf); border-color: transparent; }
+.nm-task[data-checked="true"] .nm-task-cb svg { opacity: 1; }
+.nm-task[data-checked="true"] .nm-task-text { text-decoration: line-through; color: var(--nm-muted-fg); }
+
+/* ── Kanban board ────────────────────────────────────────────────────────── */
+.nm-kanban {
+  display: block; position: relative; margin: 0.6em 0; padding: 11px; border: 1px solid var(--nm-border);
+  border-radius: 12px; background: color-mix(in srgb, var(--nm-accent) 6%, var(--nm-surface));
+}
+.nm-kanban-title {
+  padding: 2px 0 9px; margin-bottom: 10px; border-bottom: 1px solid var(--nm-surface-border);
+  font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--nm-muted-fg);
+}
+.nm-kanban-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; align-items: start; }
+.nm-kanban-column {
+  display: flex; flex-direction: column; gap: 6px; min-width: 0; border: 1px solid var(--nm-border);
+  border-radius: 8px; background: color-mix(in srgb, var(--nm-hover) 30%, transparent); padding: 8px;
+}
+.nm-kanban-column-title { font-weight: 600; font-size: 12.5px; color: var(--nm-fg); padding: 2px 4px 6px; border-bottom: 1px solid var(--nm-border); }
+.nm-kanban-card {
+  display: flex; align-items: flex-start; gap: 4px; border: 1px solid var(--nm-border); border-radius: 6px;
+  background: var(--nm-surface); padding: 6px 8px; font-size: 13px; line-height: 1.4; color: var(--nm-fg);
+}
+.nm-kanban-card.nm-block-complete { text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--nm-fg) 45%, transparent); opacity: 0.6; }
+.nm-kanban-addcard { display: flex; align-items: center; gap: 4px; padding: 4px 6px; border-radius: 6px; color: var(--nm-muted-fg); font-size: 12px; }
+.nm-kanban-addcard svg { width: 13px; height: 13px; }
+
+/* ── Dashboard (bento widget grid) ───────────────────────────────────────── */
+.nm-dashboard-block { margin: 0.6em 0; border: 1px solid var(--nm-border); border-radius: 12px; background: color-mix(in srgb, var(--nm-accent) 6%, var(--nm-surface)); overflow: hidden; }
+.nm-dashboard-head { display: flex; align-items: center; gap: 6px; padding: 7px 11px; border-bottom: 1px solid var(--nm-border); }
+.nm-dashboard-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--nm-muted-fg); }
+.nm-dashboard-body { padding: 11px; }
+.nm-dashboard-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 76px; gap: 10px; }
+.nm-widget { border: 1px solid var(--nm-surface-border); border-radius: 12px; background: var(--nm-surface); padding: 10px 12px; display: flex; flex-direction: column; overflow: hidden; }
+.nm-widget-label { font-size: 10.5px; font-weight: 600; color: var(--nm-muted-fg); display: flex; align-items: center; gap: 5px; }
+.nm-widget-label svg { width: 12px; height: 12px; }
+.nm-widget-value { font-size: 23px; font-weight: 800; color: var(--nm-heading); letter-spacing: -0.02em; margin-top: auto; line-height: 1; }
+.nm-widget-sub { font-size: 10.5px; color: var(--nm-subtle-fg); margin-top: 3px; }
+.nm-widget-bars { display: flex; align-items: flex-end; gap: 4px; margin-top: auto; height: 34px; }
+.nm-widget-bars i { flex: 1; border-radius: 2px 2px 0 0; background: linear-gradient(to top, var(--nm-accent), color-mix(in srgb, var(--nm-accent) 30%, transparent)); }
+.nm-widget-ring { margin-top: auto; align-self: flex-start; }
+
+/* ── More editor blocks: table, code, reminder, quote (vendored from App.css) ─ */
+:root { --nm-code-bg: #16161d; --nm-code-border: rgba(255, 255, 255, 0.09); --nm-code-fg: #e7e7f1; }
+
+/* Table */
+.nm-table-wrap { border: 1px solid var(--nm-border); border-radius: 9px; overflow: hidden; background: color-mix(in srgb, var(--nm-accent) 4%, var(--nm-surface)); }
+.nm-table { border-collapse: collapse; table-layout: fixed; width: 100%; font-size: 13.5px; color: var(--nm-fg); }
+.nm-table th, .nm-table td { border: 1px solid var(--nm-border); padding: 7px 11px; vertical-align: top; text-align: left; }
+.nm-table th { background: var(--nm-hover); padding: 5px 11px; font-weight: 600; font-size: 0.9em; color: var(--nm-muted-fg); }
+.nm-table td { color: var(--nm-subtle-fg); }
+.nm-table tr th:first-child, .nm-table tr td:first-child { border-left: none; }
+.nm-table tr th:last-child, .nm-table tr td:last-child { border-right: none; }
+.nm-table th { border-top: none; }
+.nm-table tr:last-child td { border-bottom: none; }
+
+/* Code block */
+.nm-codeblock { margin: 0; border-radius: 10px; border: 1px solid var(--nm-code-border); background: var(--nm-code-bg); overflow: hidden; }
+.nm-codeblock-head { display: flex; justify-content: flex-end; padding: 5px 8px; border-bottom: 1px solid var(--nm-code-border); }
+.nm-codeblock-lang { background: transparent; border: 1px solid var(--nm-border); border-radius: 6px; color: var(--nm-subtle-fg); font-size: 11px; padding: 2px 8px; }
+.nm-codeblock pre { margin: 0; padding: 12px 14px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; line-height: 1.6; color: var(--nm-code-fg); }
+.nm-codeblock code { font: inherit; background: none; border: none; padding: 0; }
+.nm-hl-comment { color: #6b7280; font-style: italic; }
+.nm-hl-keyword { color: #c792ea; }
+.nm-hl-string  { color: #c3e88d; }
+.nm-hl-number  { color: #f78c6c; }
+.nm-hl-fn      { color: #82aaff; }
+.nm-hl-attr    { color: #ffcb6b; }
+.nm-hl-type    { color: #89ddff; }
+
+/* Reminder (with the loud overdue variant) */
+.nm-reminder { margin: 0; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--nm-surface-border); background: var(--nm-surface); display: flex; flex-direction: column; gap: 10px; }
+.nm-reminder--overdue { border-color: color-mix(in srgb, #f04848 50%, var(--nm-surface-border)); background: color-mix(in srgb, #f04848 8%, var(--nm-surface)); }
+.nm-reminder-head { display: flex; align-items: flex-start; gap: 9px; }
+.nm-reminder-icon { color: var(--nm-accent); flex-shrink: 0; display: inline-flex; }
+.nm-reminder-icon svg { width: 18px; height: 18px; }
+.nm-reminder--overdue .nm-reminder-icon { color: #f04848; }
+.nm-reminder-label { flex: 1; min-width: 0; font-size: 14px; color: var(--nm-fg); line-height: 1.5; }
+.nm-reminder-meta { display: flex; align-items: center; gap: 10px; }
+.nm-reminder-due { font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 999px; background: var(--nm-hover); color: var(--nm-muted-fg); }
+.nm-reminder--overdue .nm-reminder-due { background: color-mix(in srgb, #f04848 16%, transparent); color: #f87171; }
+.nm-reminder-actions { margin-left: auto; display: flex; gap: 6px; }
+.nm-reminder-btn { font-size: 12px; padding: 4px 11px; border-radius: 8px; border: 1px solid var(--nm-surface-border); color: var(--nm-subtle-fg); background: transparent; }
+
+/* Quote / blockquote */
+.nm-blockquote { margin: 0; padding: 4px 0 4px 16px; border-left: 3px solid var(--nm-accent); color: var(--nm-muted-fg); font-style: italic; font-size: 15px; line-height: 1.6; }
+.nm-blockquote cite { display: block; margin-top: 9px; font-style: normal; font-size: 12.5px; color: var(--nm-subtle-fg); }
+
+/* ── Gantt chart (vendored from App.css) ─────────────────────────────────── */
+.nm-gantt { position: relative; margin: 0; border: 1px solid var(--nm-surface-border); border-radius: 12px; background: var(--nm-surface); padding: 10px 14px 12px; }
+.nm-gantt-title { min-height: 30px; display: flex; align-items: center; padding: 2px 0 8px; border-bottom: 1px solid var(--nm-border); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--nm-muted-fg); }
+.nm-gantt-axis { display: flex; padding: 5px 0 3px 168px; }
+.nm-gantt-axis span { flex: 1; font-size: 10px; color: var(--nm-muted-fg); }
+.nm-gantt-row { display: flex; align-items: center; height: 32px; }
+.nm-gantt-labelcol { width: 168px; flex: none; font-size: 13px; color: var(--nm-fg); padding-right: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nm-gantt-track { position: relative; flex: 1; height: 32px; border-left: 1px solid var(--nm-border); }
+.nm-gantt-bar { position: absolute; top: 7px; height: 18px; border-radius: 5px; background: var(--nm-accent); display: flex; align-items: center; padding: 0 8px; font-size: 10px; color: #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.25); overflow: hidden; white-space: nowrap; }
+.nm-gantt-row.is-done .nm-gantt-name { text-decoration: line-through; opacity: 0.6; }
+.nm-gantt-row.is-done .nm-gantt-bar { opacity: 0.45; filter: grayscale(0.6); }
+
+/* ── Drawing block (Excalidraw frame; we mock the sketch surface) ─────────── */
+.nm-drawing-block { margin: 0; border: 1px solid var(--nm-border); border-radius: 12px; background: var(--nm-surface); overflow: hidden; }
+.nm-drawing-head { display: flex; align-items: center; gap: 6px; padding: 6px 9px; border-bottom: 1px solid var(--nm-border); }
+.nm-drawing-label { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--nm-muted-fg); }
+.nm-drawing-label svg { width: 12px; height: 12px; }
+.nm-drawing-btn { margin-left: auto; display: inline-flex; padding: 3px; border-radius: 6px; color: var(--nm-muted-fg); }
+.nm-drawing-canvas { position: relative; width: 100%; height: 168px; background:
+  linear-gradient(color-mix(in srgb, var(--nm-border) 60%, transparent) 1px, transparent 1px) 0 0 / 22px 22px,
+  linear-gradient(90deg, color-mix(in srgb, var(--nm-border) 60%, transparent) 1px, transparent 1px) 0 0 / 22px 22px,
+  #fbfbfe; }
+.nm-drawing-canvas svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* ── ASMR keyboard block ─────────────────────────────────────────────────── */
+.nm-asmr-block { position: relative; margin: 0; padding: 9px 13px 11px; border-radius: 10px; border: 1px solid var(--nm-border); background: color-mix(in srgb, var(--nm-accent) 6%, var(--nm-surface)); }
+.nm-asmr-header { display: flex; align-items: center; gap: 7px; margin-bottom: 9px; }
+.nm-asmr-badge { flex-shrink: 0; width: 22px; height: 22px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; color: var(--nm-accent); background: color-mix(in srgb, var(--nm-accent) 12%, transparent); }
+.nm-asmr-badge svg { width: 14px; height: 14px; }
+.nm-asmr-label { font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--nm-muted-fg); }
+.nm-asmr-mute { margin-left: auto; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; color: var(--nm-subtle-fg); background: transparent; border: none; }
+.nm-asmr-mute svg { width: 14px; height: 14px; }
+.nm-asmr-body { color: var(--nm-fg); font-size: 14px; line-height: 1.55; }
+.nm-asmr-keys { display: grid; grid-template-columns: repeat(11, 1fr); gap: 5px; margin-top: 10px; }
+.nm-asmr-key { height: 24px; border-radius: 5px; background: var(--nm-surface); border: 1px solid var(--nm-border); box-shadow: 0 1.5px 0 color-mix(in srgb, var(--nm-fg) 12%, transparent); }
+.nm-asmr-key.is-press { background: color-mix(in srgb, var(--nm-accent) 32%, var(--nm-surface)); border-color: color-mix(in srgb, var(--nm-accent) 60%, transparent); box-shadow: none; transform: translateY(1.5px); }
+
+/* ── RSS Feed block (vendored from App.css → .nm-rss-*) ─────────────────────── */
+.nm-rss-block { margin: 0; border: 1px solid var(--nm-border); border-radius: 12px; background: var(--nm-surface); overflow: hidden; }
+.nm-rss-head { display: flex; align-items: center; gap: 6px; min-height: 30px; padding: 5px 8px 5px 12px; border-bottom: 1px solid var(--nm-border); }
+.nm-rss-head-icon { flex: none; color: var(--nm-accent); display: inline-flex; }
+.nm-rss-head-icon svg { width: 16px; height: 16px; }
+.nm-rss-head-tags { display: flex; align-items: center; gap: 6px; flex: 1; min-width: 0; overflow: hidden; }
+.nm-rss-head-tag { font-size: 13px; font-weight: 700; color: var(--nm-accent); white-space: nowrap; }
+.nm-rss-body { max-height: 360px; overflow: hidden; }
+.nm-rss-status { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--nm-muted-fg); padding: 6px 12px; border-bottom: 1px solid var(--nm-border); background: var(--nm-surface); }
+.nm-rss-items { list-style: none; margin: 0; padding: 3px 4px; }
+.nm-rss-item { display: flex; align-items: center; margin: 1px 0; border-radius: 12px; }
+.nm-rss-item-open { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; text-align: left; padding: 7px 7px 7px 8px; border: none; background: transparent; }
+.nm-rss-thumb { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 15px; }
+.nm-rss-item-main { display: flex; flex-direction: column; gap: 1px; min-width: 0; flex: 1; }
+.nm-rss-item-title { font-size: 14px; font-weight: 600; line-height: 1.25; color: var(--nm-fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nm-rss-item.is-read .nm-rss-item-title { font-weight: 500; color: var(--nm-muted-fg); }
+.nm-rss-dot { display: inline-block; vertical-align: middle; width: 7px; height: 7px; border-radius: 50%; background: var(--nm-accent); margin-right: 6px; }
+.nm-rss-item-meta { font-size: 12.5px; color: var(--nm-muted-fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ── RSS Memory block (vendored from App.css → .nm-memory-*) ────────────────── */
+.nm-memory { margin: 0; border: 1px solid var(--nm-border); border-radius: 10px; background: var(--nm-surface); overflow: hidden; }
+.nm-memory-head { display: flex; align-items: center; gap: 6px; min-height: 30px; padding: 5px 6px 5px 12px; border-bottom: 1px solid var(--nm-border); background: color-mix(in srgb, var(--nm-accent) 7%, var(--nm-surface)); }
+.nm-memory-icon { flex: none; color: var(--nm-accent); display: inline-flex; }
+.nm-memory-icon svg { width: 15px; height: 15px; }
+.nm-memory-label { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--nm-accent); }
+.nm-memory-article { display: flex; gap: 12px; align-items: center; padding: 11px 13px; }
+.nm-memory-thumb { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 16px; }
+.nm-memory-article-main { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.nm-memory-title { text-align: left; font-size: 14.5px; font-weight: 600; line-height: 1.3; color: var(--nm-fg); }
+.nm-memory-meta { font-size: 11px; color: var(--nm-muted-fg); }
+.nm-memory-snippet { font-size: 12px; line-height: 1.45; color: var(--nm-subtle-fg); }

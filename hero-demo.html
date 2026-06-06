@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nomima — hero animation (dev)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="editor.css" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      overflow-x: clip; /* one-line hero never spills a horizontal page scrollbar; clip (not hidden) keeps sticky pinning intact */
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(1100px 700px at 18% -8%, rgba(109,94,247,0.16), transparent 60%),
+        radial-gradient(900px 650px at 88% 0%, rgba(255,61,154,0.11), transparent 55%),
+        #0c0c10;
+      color: var(--nm-fg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .scroll-track { position: relative; height: 560vh; }
+    .stage {
+      position: sticky; top: 0; height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 30px; padding: 0 80px 0 24px; text-align: center;
+    }
+
+    .stage-eyebrow {
+      font-size: 11.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--nm-muted-fg); display: inline-flex; align-items: center; gap: 8px;
+    }
+    .stage-eyebrow .brand-mark { width: 16px; height: 16px; filter: drop-shadow(0 0 9px color-mix(in srgb, var(--nm-accent) 55%, transparent)); }
+
+    /* Smaller, calmer sentence — one line, scales with the viewport so the full
+       pill state never wraps. */
+    .sentence {
+      font-size: clamp(15px, 2.5vw, 33px);
+      font-weight: 700; line-height: 1.4; letter-spacing: -0.01em;
+      white-space: nowrap; color: var(--nm-fg);
+    }
+
+    .pw {
+      display: inline-flex; align-items: baseline; border-radius: 999px;
+      padding: 0.02em 0; margin: 0 0.03em; color: inherit; background: transparent;
+      transition: background-color .55s cubic-bezier(.2,.7,.2,1), color .55s cubic-bezier(.2,.7,.2,1), padding .55s cubic-bezier(.2,.7,.2,1);
+      white-space: nowrap;
+    }
+    .pw .pill-ico {
+      width: 0; height: 0.82em; opacity: 0; margin-right: 0; vertical-align: -0.06em; flex-shrink: 0; overflow: hidden;
+      transition: width .55s cubic-bezier(.2,.7,.2,1), opacity .4s ease, margin-right .55s cubic-bezier(.2,.7,.2,1);
+    }
+    .pw.is-pill { padding: 0.06em 0.52em 0.06em 0.42em; }
+    .pw.is-pill .pill-ico { width: 0.82em; opacity: 1; margin-right: 0.22em; }
+    .pw.is-pill[data-kind="mention"][data-entity="person"]  { color: var(--nm-entity-person);  background: color-mix(in srgb, var(--nm-entity-person) 17%, transparent); }
+    .pw.is-pill[data-kind="hashtag"][data-entity="topic"]   { color: var(--nm-entity-topic);   background: color-mix(in srgb, var(--nm-entity-topic) 17%, transparent); }
+    .pw.is-pill[data-kind="hashtag"][data-entity="status"]  { color: var(--nm-entity-status);  background: color-mix(in srgb, var(--nm-entity-status) 17%, transparent); }
+    .pw.is-pill[data-kind="date"]                           { color: var(--nm-date-fg);       background: var(--nm-date-bg); }
+
+    .complete-pill {
+      display: inline-flex; align-items: baseline; gap: 0.2em; border-radius: 999px;
+      padding: 0.06em 0.52em 0.06em 0.42em; color: var(--nm-entity-status); background: color-mix(in srgb, var(--nm-entity-status) 17%, transparent);
+      margin-left: 0.3em; opacity: 0; transform: translateY(0.3em) scale(.9); font-size: 0.92em;
+      transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.2,1);
+    }
+    .complete-pill .pill-ico { width: 0.82em; height: 0.82em; opacity: 1; margin-right: 0; }
+    .sentence.is-done .complete-pill { opacity: 1; transform: none; }
+    .sentence.is-done .done-target {
+      text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--nm-fg) 42%, transparent);
+      opacity: 0.55; transition: opacity .5s ease;
+    }
+
+    .explain-deck { position: relative; height: 132px; width: min(540px, 92vw); }
+    .explain {
+      position: absolute; inset: 0; display: flex; gap: 14px; align-items: flex-start; text-align: left;
+      padding: 16px 18px; border-radius: 16px;
+      background: color-mix(in srgb, var(--nm-surface) 86%, transparent);
+      border: 1px solid var(--nm-surface-border); box-shadow: var(--nm-shadow-2); backdrop-filter: blur(12px);
+      opacity: 0; transform: translateY(14px) scale(.98); pointer-events: none;
+      transition: opacity .45s ease, transform .45s cubic-bezier(.2,.7,.2,1);
+    }
+    .explain.is-on { opacity: 1; transform: none; }
+    .explain-ico { flex-shrink: 0; width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; }
+    .explain-ico svg { width: 18px; height: 18px; }
+    .explain h4 { margin: 1px 0 3px; font-size: 14px; font-weight: 700; color: var(--nm-heading); }
+    .explain p  { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--nm-subtle-fg); }
+    /* Entity-type chips, shown in the @mentions card — Person, Company, Place… */
+    .ent-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+    .ent-chip {
+      display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 600;
+      padding: 2px 7px 2px 5px; border-radius: 999px;
+    }
+    .ent-chip svg { width: 11px; height: 11px; }
+
+    .scroll-cue {
+      position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%);
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nm-muted-fg);
+      display: flex; flex-direction: column; align-items: center; gap: 7px; transition: opacity .4s ease;
+    }
+    .scroll-cue .mouse { width: 22px; height: 34px; border: 2px solid var(--nm-muted-fg); border-radius: 12px; position: relative; }
+    .scroll-cue .mouse::after { content:""; position:absolute; left:50%; top:7px; width:3px; height:6px; border-radius:2px; background: var(--nm-muted-fg); transform: translateX(-50%); animation: wheel 1.5s infinite; }
+    @keyframes wheel { 0%{opacity:1; top:7px} 70%{opacity:0; top:15px} 100%{opacity:0} }
+
+    /* ── Nomima SmartDashes rail (vendored look from SmartScrollbar) ──────────
+       A dash per pill, coloured by its Nomima tag, that lights up as its pill
+       forms. Hover a dash to magnify it + show a tooltip with the type + value.
+       A white "you are here" indicator tracks scroll progress. */
+    .sd-rail { position: fixed; top: 50%; right: 12px; transform: translateY(-50%); height: 62vh; width: 56px; z-index: 6; cursor: crosshair; }
+    /* Faint backdrop "ruler" — dense ticks the whole height, exactly like the app's
+       SmartScrollbar; colored dashes sit on top. Both magnify with the cursor. */
+    .sd-tick {
+      position: absolute; right: 0; height: 2px; width: 10px; border-radius: 2px;
+      background: var(--nm-muted-fg); opacity: 0.14; transform: translateY(-50%);
+      transition: width .09s ease, opacity .12s ease;
+    }
+    .sd-dash {
+      position: absolute; right: 0; height: 3px; width: 14px; border-radius: 2px;
+      transform: translateY(-50%); opacity: 0.32;
+      transition: width .09s ease, opacity .35s ease, box-shadow .3s ease;
+    }
+    .sd-dash.lit { opacity: 1; box-shadow: 0 0 7px currentColor; }
+    .sd-here {
+      position: absolute; right: 0; width: 20px; height: 3px; border-radius: 2px;
+      background: var(--nm-fg); opacity: 0.95; transform: translateY(-50%);
+      box-shadow: 0 0 7px var(--nm-fg); transition: top .08s linear;
+    }
+    .sd-tip {
+      position: fixed; right: 64px; z-index: 7; transform: translateY(-50%);
+      display: none; align-items: center; gap: 8px; max-width: 240px;
+      padding: 7px 11px 7px 9px; border-radius: 11px;
+      background: var(--nm-surface); border: 1px solid var(--nm-surface-border); box-shadow: var(--nm-shadow-2);
+      white-space: nowrap; pointer-events: none;
+    }
+    .sd-tip.on { display: inline-flex; }
+    .sd-tip .ico { width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; flex-shrink: 0; }
+    .sd-tip .ico svg { width: 13px; height: 13px; }
+    .sd-tip .meta { display: flex; flex-direction: column; line-height: 1.25; }
+    .sd-tip .meta .ty { font-size: 9.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--nm-muted-fg); }
+    .sd-tip .meta .vl { font-size: 12.5px; font-weight: 650; color: var(--nm-heading); }
+    .sd-rail-label { position: fixed; right: 12px; top: calc(50% + 33vh + 14px); transform: translateX(0); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--nm-muted-fg); writing-mode: vertical-rl; }
+  </style>
+</head>
+<body>
+  <div class="scroll-track">
+    <div class="stage">
+      <span class="stage-eyebrow"><img class="brand-mark" src="logo.svg" alt="Nomima" /> You tag it. Nomima connects it.</span>
+
+      <div class="sentence" id="sentence">
+        Send <span class="pw done-target" data-step="2" data-kind="hashtag" data-entity="topic"><svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg><span class="pw-t">earnings report</span></span>
+        to <span class="pw done-target" data-step="1" data-kind="mention" data-entity="person"><svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="pw-t">John</span></span>
+        <span class="pw done-target" data-step="3" data-kind="date"><svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span class="pw-t">tonight</span></span>
+        <span class="pw done-target" data-step="2" data-kind="hashtag" data-entity="status"><svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg><span class="pw-t">#urgent</span></span><span class="complete-pill"><svg class="pill-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>#complete</span>
+      </div>
+
+      <div class="explain-deck">
+        <div class="explain" data-step="1">
+          <span class="explain-ico" style="color:var(--nm-entity-person); background: color-mix(in srgb, var(--nm-entity-person) 16%, transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+          <div>
+            <h4>@mentions — you tag who matters</h4>
+            <p>Type <strong>@</strong> and pick — <strong>John</strong> becomes a Person you can open, link and find everywhere. Nomima never auto-scans your notes; <em>you</em> choose what becomes an entity, and it can be a person, company, place, product or team.</p>
+            <div class="ent-chips">
+              <span class="ent-chip" style="color:var(--nm-entity-person); background:color-mix(in srgb,var(--nm-entity-person) 15%,transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Person</span>
+              <span class="ent-chip" style="color:var(--nm-entity-company); background:color-mix(in srgb,var(--nm-entity-company) 15%,transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M16 10h.01M8 10h.01"/></svg>Company</span>
+              <span class="ent-chip" style="color:var(--nm-entity-location); background:color-mix(in srgb,var(--nm-entity-location) 15%,transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Place</span>
+              <span class="ent-chip" style="color:var(--nm-entity-product); background:color-mix(in srgb,var(--nm-entity-product) 15%,transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg>Product</span>
+              <span class="ent-chip" style="color:var(--nm-entity-team); background:color-mix(in srgb,var(--nm-entity-team) 15%,transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Team</span>
+            </div>
+          </div>
+        </div>
+        <div class="explain" data-step="2">
+          <span class="explain-ico" style="color:var(--nm-hashtag-fg); background: color-mix(in srgb, var(--nm-hashtag-fg) 16%, transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg></span>
+          <div><h4>#hashtags — you tag the topic</h4><p>Type <strong>#</strong> to tag what a note is about — <strong style="color:var(--nm-entity-topic)">#earnings_report</strong>, <strong style="color:var(--nm-entity-status)">#urgent</strong>. You add the tags you want; Nomima types, colour-codes and rolls them up across your whole vault.</p></div>
+        </div>
+        <div class="explain" data-step="3">
+          <span class="explain-ico" style="color:var(--nm-date-fg); background: color-mix(in srgb, var(--nm-date-fg) 16%, transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span>
+          <div><h4>Dates — you write them, your way</h4><p>Write a date in plain words — “tonight”, “next Friday”, “in 3 hours” — and Nomima turns what <em>you</em> wrote into a real, trackable date: counted down, surfaced when due, and red the moment it’s overdue.</p></div>
+        </div>
+        <div class="explain" data-step="4">
+          <span class="explain-ico" style="color:var(--nm-entity-status); background: color-mix(in srgb, var(--nm-entity-status) 16%, transparent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg></span>
+          <div><h4>Done is as easy as 1 · 2 · 3</h4><p>Type the status tag <strong style="color:var(--nm-entity-status)">#complete</strong> and it’s done — struck through here and marked complete in Stats, search and the knowledge graph. No checkbox hunting.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue" id="cue"><div class="mouse"></div><span>Scroll</span></div>
+
+  <!-- Nomima SmartDashes rail -->
+  <div class="sd-rail" id="rail"><div class="sd-here" id="here"></div></div>
+  <div class="sd-tip" id="tip"><span class="ico"></span><span class="meta"><span class="ty"></span><span class="vl"></span></span></div>
+  <span class="sd-rail-label">Smart&nbsp;Dashes</span>
+
+  <script>
+    const ICONS = {
+      person:  '<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+      topic:   '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+      flag:    '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/>',
+      calendar:'<path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/>'
+    };
+    // One dash per pill, in scroll order, coloured + iconed by its real Nomima tag.
+    const DASHES = [
+      { frac: 0.15, color: 'var(--nm-entity-person)', icon: 'person',   ty: 'Person',  vl: 'John',             step: 1 },
+      { frac: 0.31, color: 'var(--nm-entity-topic)',  icon: 'topic',    ty: 'Topic',   vl: '#earnings_report', step: 2 },
+      { frac: 0.40, color: 'var(--nm-entity-status)', icon: 'flag',     ty: 'Status',  vl: '#urgent',          step: 2 },
+      { frac: 0.58, color: 'var(--nm-date-fg)',       icon: 'calendar', ty: 'Date',    vl: 'tonight',          step: 3 },
+      { frac: 0.80, color: 'var(--nm-entity-status)', icon: 'flag',     ty: 'Status',  vl: '#complete',        step: 4 },
+    ];
+
+    const rail = document.getElementById('rail');
+    const here = document.getElementById('here');
+    const tip = document.getElementById('tip');
+    const railH = () => rail.clientHeight;
+
+    const dashEls = DASHES.map(d => {
+      const el = document.createElement('div');
+      el.className = 'sd-dash';
+      el.style.top = (d.frac * 100) + '%';
+      el.style.background = d.color;
+      el.style.color = d.color;
+      el.style.zIndex = '1';
+      rail.appendChild(el);
+      return el;
+    });
+    here.style.zIndex = '2';
+
+    // Cubic smoothstep + dock-style proximity magnification — the exact curve the
+    // editor's SmartScrollbar uses (smooth(1 - dist/MAG_RADIUS)).
+    const smooth = (t) => { const x = Math.min(1, Math.max(0, t)); return x * x * (3 - 2 * x); };
+    const MAG_RADIUS = 92, TICK_GAP = 9;
+    const W_REST = 14, W_MAX = 34, TW_REST = 10, TW_MAX = 24;
+
+    // Dense backdrop ruler — faint ticks every TICK_GAP px (rebuilt on resize), the
+    // dense scale the real SmartScrollbar shows behind the coloured dashes.
+    let tickEls = [];
+    function buildTicks() {
+      tickEls.forEach(t => t.remove());
+      tickEls = [];
+      const n = Math.floor(rail.clientHeight / TICK_GAP);
+      for (let i = 1; i < n; i++) {
+        const t = document.createElement('div');
+        t.className = 'sd-tick';
+        t.style.top = (i * TICK_GAP) + 'px';
+        rail.appendChild(t);
+        tickEls.push(t);
+      }
+    }
+
+    function showTip(d, cy) {
+      const ico = tip.querySelector('.ico');
+      ico.style.color = d.color;
+      ico.style.background = `color-mix(in srgb, ${d.color} 16%, transparent)`;
+      ico.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[d.icon]}</svg>`;
+      tip.querySelector('.ty').textContent = d.ty;
+      tip.querySelector('.vl').textContent = d.vl;
+      tip.style.top = cy + 'px';
+      tip.classList.add('on');
+    }
+
+    let raf = 0, lastY = null;
+    function applyMag(cursorY) {
+      const rect = rail.getBoundingClientRect();
+      tickEls.forEach((t, i) => {
+        const cy = rect.top + (i + 1) * TICK_GAP;
+        const magT = cursorY == null ? 0 : smooth(1 - Math.abs(cy - cursorY) / MAG_RADIUS);
+        t.style.width = (TW_REST + magT * (TW_MAX - TW_REST)) + 'px';
+        t.style.opacity = 0.14 + magT * 0.42;
+      });
+      let best = null, bestDist = Infinity;
+      dashEls.forEach((el, i) => {
+        const cy = rect.top + DASHES[i].frac * rect.height;
+        const dist = cursorY == null ? Infinity : Math.abs(cy - cursorY);
+        const magT = cursorY == null ? 0 : smooth(1 - dist / MAG_RADIUS);
+        el.style.width = (W_REST + magT * (W_MAX - W_REST)) + 'px';
+        if (dist < bestDist) { bestDist = dist; best = { d: DASHES[i], cy }; }
+      });
+      if (cursorY != null && best && bestDist < MAG_RADIUS) showTip(best.d, best.cy);
+      else tip.classList.remove('on');
+    }
+    function magnify(cursorY) { lastY = cursorY; if (!raf) raf = requestAnimationFrame(() => { raf = 0; applyMag(lastY); }); }
+    window.__applyMag = applyMag; // test hook (offscreen preview never fires rAF)
+    rail.addEventListener('mousemove', (e) => magnify(e.clientY));
+    rail.addEventListener('mouseleave', () => magnify(null));
+    buildTicks();
+    window.addEventListener('resize', () => { buildTicks(); applyMag(null); });
+    applyMag(null);
+
+    const track = document.querySelector('.scroll-track');
+    const sentence = document.getElementById('sentence');
+    const pws = [...document.querySelectorAll('.pw')];
+    const explains = [...document.querySelectorAll('.explain')];
+    const cue = document.getElementById('cue');
+    const STEPS = 4;
+
+    function render() {
+      if (window.__lockStep) return; // test hook: freeze a step for screenshots
+      const top = track.offsetTop;
+      const scrollable = track.offsetHeight - window.innerHeight;
+      const p = Math.min(1, Math.max(0, (window.scrollY - top) / scrollable));
+      const eased = Math.min(1, Math.max(0, (p - 0.06) / 0.84));
+      const step = Math.min(STEPS, Math.floor(eased * STEPS) + (eased > 0 ? 1 : 0));
+
+      pws.forEach(w => w.classList.toggle('is-pill', step >= +w.dataset.step));
+      sentence.classList.toggle('is-done', step >= 4);
+      explains.forEach(e => e.classList.toggle('is-on', step === +e.dataset.step));
+      dashEls.forEach((el, i) => el.classList.toggle('lit', step >= DASHES[i].step));
+      here.style.top = (eased * railH()) + 'px';
+      cue.style.opacity = p > 0.04 ? '0' : '1';
+    }
+    window.addEventListener('scroll', render, { passive: true });
+    window.addEventListener('resize', render);
+    render();
+  </script>
+</body>
+</html>

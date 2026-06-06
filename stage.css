@@ -1,0 +1,147 @@
+/* ============================================================================
+   stage.css — Apple-style pinned-scroll "stage" + the Nomima SmartDashes rail.
+   Shared by index.html (pill hero) and blocks.html (block hero). The page-specific
+   morph rules (.pw pills / .blk blocks) live inline in each page; everything here
+   is common chrome. Pairs with editor.css (the real Nomima component look) and the
+   site's own styles.css (brand shell). Keep the rail math in sync with smartdashes.js.
+   ========================================================================== */
+
+/* --sd (scroll progress 0→1, set on .stage each frame) MUST be a registered typed
+   number — otherwise `calc(var(--sd) * 70deg)` / `* -7vw` silently resolve to 0 (an
+   unregistered custom property can't be multiplied by a unit in calc). With @property
+   it works AND animates smoothly. Drives the orb parallax/hue + the 3D tilt. */
+@property --sd {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+/* A tall track whose inner .stage pins to the viewport while you scroll through it. */
+.scroll-track { position: relative; height: 560vh; }
+
+/* ── 3D-depth background ─────────────────────────────────────────────────────
+   Two soft glow orbs + the living globe, each at a different depth (translateZ)
+   inside a perspective. As you scroll, --sd (0→1) tilts the whole plane back, so
+   the layers parallax against each other — a subtle 3D recession. The globe sits
+   in .kg-wrap, which each page can swing sideways (blocks.html moves it opposite
+   the active block so it's never hidden behind one). */
+.bg3d { position: absolute; inset: 0; z-index: -1; perspective: 1000px; pointer-events: none; }
+.bg3d-inner {
+  position: absolute; inset: 0; transform-style: preserve-3d;
+  /* A subtle scroll-driven tilt for depth — but NO vertical translate: the old
+     translateY(var(--sd)·-16px) made the globe creep upward as you scrolled (it sat
+     low at the first block and rose). The tilt alone keeps it vertically anchored. */
+  transform: rotateX(calc(var(--sd, 0) * 4deg));
+  transition: transform .14s linear;
+}
+/* The two glow orbs sit at different depths (translateZ) and now PARALLAX horizontally
+   in opposite directions as you scroll (--sd 0→1), while their hue rotates — so the
+   backdrop drifts and shifts colour behind the sliding blocks, adding depth/perspective.
+   The far orb (a, −460px) moves least; the near orb (b, −210px) moves more = parallax. */
+/* Static bases — the horizontal parallax + hue shift are driven per-frame from JS
+   (render() in index.html), so no CSS transition here (it would lag the scroll). */
+.bg-orb { position: absolute; border-radius: 50%; filter: blur(74px); opacity: 0.42; }
+.bg-orb-a { width: 56%; height: 62%; left: 5%; top: 0%; background: radial-gradient(circle, color-mix(in srgb, var(--nm-accent) 55%, transparent), transparent 70%); transform: translateZ(-460px); }
+.bg-orb-b { width: 46%; height: 52%; right: 2%; bottom: 2%; background: radial-gradient(circle, color-mix(in srgb, var(--nm-accent-secondary) 45%, transparent), transparent 70%); transform: translateZ(-210px); }
+/* The globe layer also drifts horizontally with scroll (its own depth rate) — between
+   the far orbs and the foreground blocks — so the three planes parallax against each
+   other. (The camera also rotates around the globe per block, in kgbg.js.) */
+/* translateX drift is applied per-frame from JS (render); base is just the depth.
+   No transform transition — it would lag the per-frame parallax. */
+.kg-wrap { position: absolute; inset: 0; transform: translateZ(-30px); transform-style: preserve-3d; }
+.stage {
+  position: sticky; top: 0; height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 30px; padding: 0 80px 0 24px; text-align: center;
+}
+
+.stage-eyebrow {
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--nm-muted-fg); display: inline-flex; align-items: center; gap: 8px;
+}
+.stage-eyebrow .brand-mark { width: 16px; height: 16px; filter: drop-shadow(0 0 9px color-mix(in srgb, var(--nm-accent) 55%, transparent)); }
+
+/* ── Explainer cards (one per scroll step) ──────────────────────────────── */
+.explain-deck { position: relative; height: 132px; width: min(540px, 92vw); }
+.explain {
+  position: absolute; inset: 0; display: flex; gap: 14px; align-items: flex-start; text-align: left;
+  padding: 16px 18px; border-radius: 16px;
+  background: color-mix(in srgb, var(--nm-surface) 86%, transparent);
+  border: 1px solid var(--nm-surface-border); box-shadow: var(--nm-shadow-2); backdrop-filter: blur(12px);
+  opacity: 0; transform: translateY(14px) scale(.98); pointer-events: none;
+  transition: opacity .45s ease, transform .45s cubic-bezier(.2,.7,.2,1);
+}
+.explain.is-on { opacity: 1; transform: none; }
+.explain-ico { flex-shrink: 0; width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; }
+.explain-ico svg { width: 18px; height: 18px; }
+.explain h4 { margin: 1px 0 3px; font-size: 14px; font-weight: 700; color: var(--nm-heading); }
+.explain p  { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--nm-subtle-fg); }
+/* Entity-type chips, shown in the @mentions card — Person, Company, Place… */
+.ent-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.ent-chip {
+  display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 600;
+  padding: 2px 7px 2px 5px; border-radius: 999px;
+}
+.ent-chip svg { width: 11px; height: 11px; }
+
+/* ── Scroll cue (fades after the first nudge) ───────────────────────────── */
+.scroll-cue {
+  position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%); z-index: 6;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nm-muted-fg);
+  display: flex; flex-direction: column; align-items: center; gap: 7px; transition: opacity .4s ease;
+}
+.scroll-cue .mouse { width: 22px; height: 34px; border: 2px solid var(--nm-muted-fg); border-radius: 12px; position: relative; }
+.scroll-cue .mouse::after { content:""; position:absolute; left:50%; top:7px; width:3px; height:6px; border-radius:2px; background: var(--nm-muted-fg); transform: translateX(-50%); animation: wheel 1.5s infinite; }
+@keyframes wheel { 0%{opacity:1; top:7px} 70%{opacity:0; top:15px} 100%{opacity:0} }
+
+/* ── Nomima SmartDashes rail (vendored look from SmartScrollbar) ────────────
+   A dash per pill/block, coloured by its Nomima tag, that lights up as its
+   element forms. Behind them sits a dense faint "ruler" of ticks, exactly like
+   the app's SmartScrollbar. Hover to magnify (dock-style) + show a tooltip with
+   the type + value. A white "you are here" indicator tracks scroll progress. */
+.sd-rail { position: fixed; top: 50%; right: 12px; transform: translateY(-50%); height: 62vh; width: 56px; z-index: 6; cursor: pointer; }
+/* Ruler ticks + dashes ease (.16s) when the cursor is AWAY; while it's on the
+   rail (.is-hovering) they snap instantly so the dock magnification has weight —
+   this mirrors SmartScrollbar's `transition: cursorY==null ? … : "none"`. */
+.sd-tick {
+  position: absolute; right: 0; height: 2px; width: 10px; border-radius: 1px;
+  background: var(--nm-muted-fg); opacity: 0.12; transform: translateY(-50%);
+  transition: width .16s ease, opacity .16s ease;
+}
+.sd-dash {
+  position: absolute; right: 0; height: 3px; width: 18px; border-radius: 2px;
+  transform: translateY(-50%); opacity: 0.4;
+  transition: width .16s ease, opacity .3s ease, box-shadow .3s ease;
+}
+.sd-dash.lit { opacity: 0.92; }
+.sd-dash.focus { box-shadow: 0 0 6px currentColor; opacity: 1; }
+.sd-rail.is-hovering .sd-tick,
+.sd-rail.is-hovering .sd-dash { transition: none; }
+.sd-here {
+  position: absolute; right: 0; width: 18px; height: 3px; border-radius: 2px;
+  background: var(--nm-fg); opacity: 0.95; transform: translateY(-50%);
+  box-shadow: 0 0 6px var(--nm-fg);
+  /* No transition — the marker must track the scroll position 1:1 (instant), like
+     the editor's SmartScrollbar thumb. A transition here reads as lag. */
+}
+.sd-tip {
+  position: fixed; right: 64px; z-index: 7; transform: translateY(-50%);
+  display: none; align-items: center; gap: 8px; max-width: 240px;
+  padding: 7px 11px 7px 9px; border-radius: 11px;
+  background: var(--nm-surface); border: 1px solid var(--nm-surface-border); box-shadow: var(--nm-shadow-2);
+  white-space: nowrap; pointer-events: none;
+}
+.sd-tip.on { display: inline-flex; }
+.sd-tip .ico { width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; flex-shrink: 0; }
+.sd-tip .ico svg { width: 13px; height: 13px; }
+.sd-tip .meta { display: flex; flex-direction: column; line-height: 1.25; }
+.sd-tip .meta .ty { font-size: 9.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--nm-muted-fg); }
+.sd-tip .meta .vl { font-size: 12.5px; font-weight: 650; color: var(--nm-heading); }
+.sd-rail-label { position: fixed; right: 12px; top: calc(50% + 33vh + 14px); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--nm-muted-fg); writing-mode: vertical-rl; z-index: 6; }
+
+/* The rail + cue belong to the pinned hero — fade them out once it's scrolled past. */
+.sd-rail, .sd-tip, .sd-rail-label, .scroll-cue { transition: opacity .4s ease; }
+body:not(.hero-active) .sd-rail,
+body:not(.hero-active) .sd-tip,
+body:not(.hero-active) .sd-rail-label,
+body:not(.hero-active) .scroll-cue { opacity: 0 !important; pointer-events: none; }
