@@ -121,25 +121,54 @@
     .inline-list li svg { flex-shrink: 0; margin-top: 1px; color: var(--green); opacity: 0.9; }
 
     /* ── Problem narrative ── */
-    .narrative { max-width: 760px; margin: 0 auto; padding: 80px 24px 72px; text-align: center; }
+    .narrative { max-width: 800px; margin: 0 auto; padding: 96px 24px 80px; text-align: center; }
     .narrative-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 20px; }
-    .narrative-intro { font-size: 18px; color: var(--fg-dim); line-height: 1.7; margin-bottom: 36px; }
+    .narrative-intro { font-size: 20px; color: var(--fg-dim); line-height: 1.65; margin-bottom: 40px; }
     .note-card {
-      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-      border-radius: 16px; padding: 28px 32px; margin: 0 auto 28px;
-      max-width: 580px; text-align: left;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px; padding: 28px 36px 32px; margin: 0 auto 0;
+      max-width: 600px; text-align: left;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.45), 0 0 0 0.5px rgba(255,255,255,0.04) inset;
     }
-    .note-chrome { display: flex; gap: 6px; margin-bottom: 16px; }
-    .note-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.10); }
-    .note-body { font-size: 17px; line-height: 1.7; color: var(--fg-dim); font-style: italic; }
+    .note-chrome { display: flex; align-items: center; gap: 7px; margin-bottom: 20px; }
+    .note-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .note-dot:nth-child(1) { background: rgba(255,95,87,0.55); }
+    .note-dot:nth-child(2) { background: rgba(255,189,46,0.55); }
+    .note-dot:nth-child(3) { background: rgba(40,200,64,0.55); }
+    .note-title { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: var(--fg-faint); margin-left: 6px; text-transform: uppercase; }
+    .note-body { font-size: 19px; line-height: 1.75; color: var(--fg); font-style: italic; letter-spacing: -0.01em; }
+    .note-cursor { display: inline-block; width: 2px; height: 1.1em; background: var(--accent); vertical-align: text-bottom; margin-left: 2px; border-radius: 1px; animation: blink-cursor 1.1s step-end infinite; }
+    @keyframes blink-cursor { 0%,100%{opacity:1} 50%{opacity:0} }
     .ne-person { color: var(--blue); font-style: normal; font-weight: 700; }
     .ne-date   { color: var(--green); font-style: normal; font-weight: 700; }
     .ne-flag   { color: var(--accent-2); font-style: normal; font-weight: 700; }
-    .narrative-contrast {
-      font-size: 20px; font-weight: 800; letter-spacing: -0.02em;
-      color: var(--fg-faint); margin-bottom: 32px;
+    .note-parse-row {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin: 28px auto 40px; max-width: 600px; flex-wrap: wrap;
     }
-    .narrative-solution { font-size: 17px; color: var(--fg-dim); line-height: 1.75; max-width: 580px; margin: 0 auto; }
+    .note-parse-row .parse-label {
+      font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--fg-faint); white-space: nowrap;
+    }
+    .note-parse-row .parse-sep { width: 24px; height: 1px; background: var(--border-soft); flex-shrink: 0; }
+    .ne-pill {
+      display: inline-flex; flex-direction: column; align-items: flex-start;
+      padding: 7px 13px 7px 11px; border-radius: 10px; gap: 2px;
+    }
+    .ne-pill .pill-val { font-size: 13px; font-weight: 700; line-height: 1; }
+    .ne-pill .pill-type { font-size: 9.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.65; }
+    .ne-pill.person { background: rgba(96,165,250,0.12); border: 1px solid rgba(96,165,250,0.28); color: var(--blue); }
+    .ne-pill.date   { background: rgba(52,211,153,0.10); border: 1px solid rgba(52,211,153,0.26); color: var(--green); }
+    .ne-pill.flag   { background: rgba(240,72,168,0.10); border: 1px solid rgba(240,72,168,0.26); color: var(--accent-2); }
+    .ne-pill.topic  { background: rgba(99,102,241,0.10); border: 1px solid rgba(99,102,241,0.26); color: var(--accent); }
+    .narrative-contrast {
+      font-size: clamp(24px, 3.5vw, 36px); font-weight: 900; letter-spacing: -0.03em; line-height: 1.15;
+      color: var(--fg); margin-bottom: 12px;
+    }
+    .narrative-contrast-sub {
+      font-size: 15px; color: var(--fg-faint); margin-bottom: 44px; font-style: italic;
+    }
+    .narrative-solution { font-size: 16.5px; color: var(--fg-dim); line-height: 1.8; max-width: 560px; margin: 0 auto; }
     .narrative-solution strong { color: var(--fg); }
 
     /* ── Smart Tags ── */
@@ -326,11 +355,11 @@
     .plan-features { list-style: none; display: flex; flex-direction: column; gap: 11px; }
     .plan-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.45; }
     .plan-features li.on  { color: var(--fg-dim); }
-    .plan-features li.off { color: var(--fg-faint); opacity: 0.55; }
-    .plan-features .check { color: var(--green); opacity: 0.9; flex-shrink: 0; margin-top: 1px; }
-    .plan-features .lock  { color: var(--fg-faint); opacity: 0.45; flex-shrink: 0; margin-top: 1px; }
+    .plan-features li.off { color: var(--fg-faint); text-decoration: line-through; }
+    /* Free card: grey checks; Pro card (featured): green checks */
+    .plan-card           .check { color: rgba(255,255,255,0.28); flex-shrink: 0; margin-top: 1px; }
+    .plan-card.featured  .check { color: var(--green); opacity: 0.9; flex-shrink: 0; margin-top: 1px; }
     .plan-features .cross { color: var(--fg-faint); opacity: 0.6; flex-shrink: 0; margin-top: 1px; }
-    .plan-locked-label { font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--fg-faint); opacity: 0.5; margin: 12px 0 4px; padding-top: 12px; border-top: 1px solid var(--border-soft); }
     .plan-features .section-head { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin-top: 6px; padding-bottom: 4px; }
     .plan-upgrade-nudge { margin-top: auto; padding-top: 20px; font-size: 13px; color: var(--accent); font-weight: 600; }
     .plan-upgrade-nudge:hover { color: var(--accent-2); }
@@ -549,14 +578,27 @@
     <div class="narrative">
       <p class="narrative-label">The problem with notes</p>
       <p class="narrative-intro">Think about the last note you dashed off:</p>
+
       <div class="note-card">
         <div class="note-chrome">
           <span class="note-dot"></span><span class="note-dot"></span><span class="note-dot"></span>
+          <span class="note-title">Untitled note</span>
         </div>
-        <p class="note-body">"Send finance report to <span class="ne-person">John</span> <span class="ne-date">today</span> — <span class="ne-flag">urgent</span>"</p>
+        <p class="note-body">"Send the finance report to <span class="ne-person">John</span> <span class="ne-date">today</span> — <span class="ne-flag">urgent</span>"<span class="note-cursor"></span></p>
       </div>
-      <p class="narrative-intro" style="font-size:15px;max-width:560px;margin:0 auto 24px;">Your brain already parsed everything in that sentence. John is a person. The finance report is a project. Today is a deadline. Urgent is a priority.</p>
+
+      <!-- What Nomima extracts -->
+      <div class="note-parse-row">
+        <span class="parse-label">Nomima sees</span>
+        <span class="parse-sep"></span>
+        <span class="ne-pill person"><span class="pill-val">@John</span><span class="pill-type">person</span></span>
+        <span class="ne-pill date"><span class="pill-val">today</span><span class="pill-type">deadline</span></span>
+        <span class="ne-pill flag"><span class="pill-val">urgent</span><span class="pill-type">priority</span></span>
+        <span class="ne-pill topic"><span class="pill-val">#finance</span><span class="pill-type">project</span></span>
+      </div>
+
       <p class="narrative-contrast">Your note-taking app saw none of it.</p>
+      <p class="narrative-contrast-sub">It stored a sentence. Nomima built a map.</p>
       <p class="narrative-solution">Basic apps are just digital sticky pads — they store text and forget it. Complex ones demand hours of configuration before you can do anything useful.<br /><br /><strong>Nomima does what neither does:</strong> it reads your intent as you type, and quietly turns your words into living, connected data.</p>
     </div>
   </div>
@@ -1241,16 +1283,13 @@
           <a class="plan-cta outline" href="#download">Download Free</a>
           <div class="plan-divider"></div>
           <ul class="plan-features">
-            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Block editor — text, headings, lists, tasks, tables</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Full block editor — text, headings, lists, tasks, tables</li>
             <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Smart Tags — #hashtag · @mention · dates</li>
-            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Knowledge graph &amp; reminders</li>
-            <li class="plan-locked-label">Not included</li>
-            <li class="off"><span class="lock"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>Kanban &amp; Gantt boards</li>
-            <li class="off"><span class="lock"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>Dashboard &amp; widgets</li>
-            <li class="off"><span class="lock"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>AI Chat, Drawing &amp; Diagrams</li>
-            <li class="off"><span class="lock"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>Math, Media &amp; Bookmark blocks</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>3D knowledge graph &amp; semantic search</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Reminders, daily brief &amp; notifications</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>20+ templates · 100% offline · no account</li>
           </ul>
-          <a class="plan-upgrade-nudge" href="https://buy.stripe.com/7sYaEX1PDaQu0XHg4v2Ji00" target="_blank" rel="noopener">Unlock all 10 power blocks — $39 →</a>
+          <a class="plan-upgrade-nudge" href="https://buy.stripe.com/7sYaEX1PDaQu0XHg4v2Ji00" target="_blank" rel="noopener">Unlock 10 power blocks for $39 →</a>
         </div>
 
         <!-- PRO CARD -->
