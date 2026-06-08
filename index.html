@@ -126,7 +126,7 @@
     .narrative-intro { font-size: 20px; color: var(--fg-dim); line-height: 1.65; margin-bottom: 40px; }
     .note-card {
       background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 20px; padding: 28px 36px 32px; margin: 0 auto 0;
+      border-radius: 20px; padding: 28px 36px 32px; margin: 0 auto;
       max-width: 600px; text-align: left;
       box-shadow: 0 8px 48px rgba(0,0,0,0.45), 0 0 0 0.5px rgba(255,255,255,0.04) inset;
     }
@@ -161,7 +161,19 @@
     .ne-pill.date   { background: rgba(52,211,153,0.10); border: 1px solid rgba(52,211,153,0.26); color: var(--green); }
     .ne-pill.flag   { background: rgba(240,72,168,0.10); border: 1px solid rgba(240,72,168,0.26); color: var(--accent-2); }
     .ne-pill.topic  { background: rgba(99,102,241,0.10); border: 1px solid rgba(99,102,241,0.26); color: var(--accent); }
-    .narrative-brain { font-size: 15px; color: var(--fg-dim); line-height: 1.75; max-width: 520px; margin: 28px auto 40px; }
+    .narrative-split { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; max-width: 760px; margin: 0 auto 56px; text-align: left; }
+    @media (max-width: 680px) { .narrative-split { grid-template-columns: 1fr; gap: 28px; } }
+    .narrative-split .note-card { margin: 0; max-width: 100%; }
+    .brain-parse { }
+    .brain-parse-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 22px; }
+    .bp-item { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .bp-word { font-size: 15px; font-weight: 700; font-style: italic; min-width: 100px; }
+    .bp-word.person { color: var(--blue); }
+    .bp-word.date   { color: var(--green); }
+    .bp-word.flag   { color: var(--accent-2); }
+    .bp-word.topic  { color: var(--accent); }
+    .bp-arrow { color: var(--fg-faint); font-size: 13px; flex-shrink: 0; }
+    .bp-type { font-size: 12.5px; font-weight: 600; color: var(--fg-dim); background: rgba(255,255,255,0.05); border: 1px solid var(--border-soft); padding: 3px 11px; border-radius: 6px; }
     .narrative-contrast {
       font-size: clamp(24px, 3.5vw, 36px); font-weight: 900; letter-spacing: -0.03em; line-height: 1.15;
       color: var(--fg); margin-bottom: 12px;
@@ -581,15 +593,41 @@
       <p class="narrative-label">The problem with notes</p>
       <p class="narrative-intro">Think about the last note you dashed off:</p>
 
-      <div class="note-card">
-        <div class="note-chrome">
-          <span class="note-dot"></span><span class="note-dot"></span><span class="note-dot"></span>
-          <span class="note-title">Untitled note</span>
+      <div class="narrative-split">
+        <!-- Left: the note -->
+        <div class="note-card">
+          <div class="note-chrome">
+            <span class="note-dot"></span><span class="note-dot"></span><span class="note-dot"></span>
+            <span class="note-title">Untitled note</span>
+          </div>
+          <p class="note-body">"Send the finance report to <span class="ne-person">John</span> <span class="ne-date">today</span> — <span class="ne-flag">urgent</span>"<span class="note-cursor"></span></p>
         </div>
-        <p class="note-body">"Send the finance report to <span class="ne-person">John</span> <span class="ne-date">today</span> — <span class="ne-flag">urgent</span>"<span class="note-cursor"></span></p>
-      </div>
 
-      <p class="narrative-brain">Your brain already parsed everything in that sentence. John is a person. The finance report is a project. Today is a deadline. Urgent is a priority.</p>
+        <!-- Right: what your brain parsed -->
+        <div class="brain-parse">
+          <p class="brain-parse-label">What your brain instantly parsed</p>
+          <div class="bp-item">
+            <span class="bp-word person">John</span>
+            <span class="bp-arrow">→</span>
+            <span class="bp-type">Person</span>
+          </div>
+          <div class="bp-item">
+            <span class="bp-word date">today</span>
+            <span class="bp-arrow">→</span>
+            <span class="bp-type">Deadline</span>
+          </div>
+          <div class="bp-item">
+            <span class="bp-word flag">urgent</span>
+            <span class="bp-arrow">→</span>
+            <span class="bp-type">Priority</span>
+          </div>
+          <div class="bp-item">
+            <span class="bp-word topic">finance report</span>
+            <span class="bp-arrow">→</span>
+            <span class="bp-type">Project</span>
+          </div>
+        </div>
+      </div>
 
       <p class="narrative-contrast">Your note-taking app saw none of it.</p>
       <p class="narrative-contrast-sub">It stored a sentence. Nomima built a map.</p>
