@@ -363,12 +363,13 @@
     .plan-features .section-head { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin-top: 6px; padding-bottom: 4px; }
     .plan-upgrade-nudge { margin-top: auto; padding-top: 20px; font-size: 13px; color: var(--accent); font-weight: 600; }
     .plan-upgrade-nudge:hover { color: var(--accent-2); }
-    .plan-blocks-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 10px; }
-    .plan-blocks-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
-    .plan-blocks-grid span { font-size: 12px; font-weight: 600; padding: 4px 11px; border-radius: 6px; background: rgba(52,211,153,0.07); border: 1px solid rgba(52,211,153,0.20); color: var(--green); }
-    .plan-trust { display: flex; flex-wrap: wrap; gap: 6px 18px; padding-top: 16px; border-top: 1px solid var(--border-soft); margin-top: 8px; }
-    .plan-trust span { font-size: 12px; color: var(--fg-dim); display: flex; align-items: center; gap: 5px; }
-    .plan-trust svg { color: var(--green); flex-shrink: 0; }
+    .plan-more { margin-top: 16px; border-top: 1px solid rgba(52,211,153,0.14); padding-top: 14px; }
+    .plan-more-toggle { list-style: none; display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 700; color: var(--green); cursor: pointer; user-select: none; outline: none; }
+    .plan-more-toggle::-webkit-details-marker { display: none; }
+    .plan-more-toggle:hover { color: #6ee7b7; }
+    .plan-more-chevron { transition: transform 0.2s; flex-shrink: 0; }
+    details[open] .plan-more-chevron { transform: rotate(180deg); }
+    .plan-more-list { margin-top: 14px; }
 
     /* ── Bottom CTA ── */
     .bottom-cta { text-align: center; padding: 90px 24px 100px; }
@@ -585,16 +586,6 @@
           <span class="note-title">Untitled note</span>
         </div>
         <p class="note-body">"Send the finance report to <span class="ne-person">John</span> <span class="ne-date">today</span> — <span class="ne-flag">urgent</span>"<span class="note-cursor"></span></p>
-      </div>
-
-      <!-- What Nomima extracts -->
-      <div class="note-parse-row">
-        <span class="parse-label">Nomima sees</span>
-        <span class="parse-sep"></span>
-        <span class="ne-pill person"><span class="pill-val">@John</span><span class="pill-type">person</span></span>
-        <span class="ne-pill date"><span class="pill-val">today</span><span class="pill-type">deadline</span></span>
-        <span class="ne-pill flag"><span class="pill-val">urgent</span><span class="pill-type">priority</span></span>
-        <span class="ne-pill topic"><span class="pill-val">#finance</span><span class="pill-type">project</span></span>
       </div>
 
       <p class="narrative-contrast">Your note-taking app saw none of it.</p>
@@ -1303,25 +1294,28 @@
           <p class="plan-launch-note">Pay once, own it forever — no subscription, all future updates included.</p>
           <a class="plan-cta filled" href="https://buy.stripe.com/7sYaEX1PDaQu0XHg4v2Ji00" target="_blank" rel="noopener">Buy Nomima Pro — $39</a>
           <div class="plan-divider"></div>
-          <p class="plan-blocks-label">Everything in Free, plus 10 power blocks</p>
-          <div class="plan-blocks-grid">
-            <span>Kanban</span>
-            <span>Gantt</span>
-            <span>Dashboard</span>
-            <span>Widget</span>
-            <span>Drawing</span>
-            <span>Diagram</span>
-            <span>Math</span>
-            <span>Media</span>
-            <span>Bookmark</span>
-            <span>AI Chat</span>
-          </div>
-          <div class="plan-trust">
-            <span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>One payment, yours forever</span>
-            <span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>No subscription, ever</span>
-            <span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>All future updates included</span>
-            <span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>AI with your own API key</span>
-          </div>
+          <ul class="plan-features">
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Everything in Free</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Kanban board — drag cards across stages</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Gantt timeline — visual project planning</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Dashboard with live metric widgets</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>AI Chat — BYOK, 100% on-device</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Drawing canvas (Excalidraw)</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Diagrams &amp; flowcharts (Mermaid)</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Math equations (LaTeX / KaTeX)</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Media blocks — embed audio &amp; video</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Bookmark blocks — rich offline previews</li>
+          </ul>
+          <details class="plan-more">
+            <summary class="plan-more-toggle">Much, much more <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="plan-more-chevron"><polyline points="6 9 12 15 18 9"/></svg></summary>
+            <ul class="plan-features plan-more-list">
+              <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>PDF export — any note, one click</li>
+              <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>MCP integration — AI agents read &amp; write your vault</li>
+              <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Sound packs &amp; keyboard ASMR</li>
+              <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>All future updates — forever</li>
+              <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>One payment, no subscription ever</li>
+            </ul>
+          </details>
         </div>
 
       </div>
