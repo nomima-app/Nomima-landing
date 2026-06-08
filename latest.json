@@ -1,6 +1,6 @@
 {
-  "version": "0.16.0-beta.6",
-  "notes": "Beta 6: AI assistance (bring your own key) — a Settings → AI Models tab (Anthropic / OpenAI / Gemini / local), an AI Chat block, and an inline /generate that writes structured blocks (Mermaid, Kanban, Gantt, Widgets, tables…) grounded in your notebook and its files, with @mentions and #hashtags as real Smart Tags. Plus Dashboard/Widget calculation hardening.",
-  "pub_date": "2026-06-06T00:00:00Z",
+  "version": "0.16.0-beta.7",
+  "notes": "Beta 7: PDF export — download or share any notebook as a full-length, continuous PDF with exact colours. Freemium model — Nomima is now free to use; Pro features (11 blocks including Kanban, Gantt, Reminder, AI Chat; AI Models / MCP Server / Smart Tag Types settings; PDF export) unlocked via trial or activation key.",
+  "pub_date": "2026-06-08T00:00:00Z",
   "url": "https://nomima.io/"
 }
