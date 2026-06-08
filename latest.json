@@ -1,6 +1,6 @@
 {
-  "version": "0.1.2",
-  "notes": "Big memory & stability fix: the on-device AI now uses far less RAM and releases it when idle, fixing startup crashes and slowdowns on lower-RAM Macs. No change to AI quality.",
-  "pub_date": "2026-05-31T00:00:00Z",
-  "url": "https://fng8111.github.io/Nomima-landing/"
+  "version": "1.0.2",
+  "notes": "v1.0.2: License keys now actually work — the Keygen API returns results in a field called 'code', not 'constant'. Every key activation has been silently failing since launch. This is fixed. Better per-error messages too.",
+  "pub_date": "2026-06-08T00:00:00Z",
+  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.0.2/Nomima_1.0.2_aarch64.dmg"
 }
