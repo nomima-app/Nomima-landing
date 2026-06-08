@@ -91,14 +91,19 @@ function showError(message) {
   input.focus();
 }
 
-// Already unlocked in this tab/session? Skip straight in (no code re-entry).
-if (sessionStorage.getItem(SESSION_KEY) === "1") {
+// Already unlocked in this tab/session, running on localhost, or using the bypass query? Skip straight in.
+if (
+  sessionStorage.getItem(SESSION_KEY) === "1" ||
+  location.hostname === "localhost" ||
+  location.hostname === "127.0.0.1" ||
+  location.search.includes("bypass=1")
+) {
   reveal();
 }
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const attempt = input.value.trim();
+  const attempt = input.value.trim().toUpperCase();
   if (!attempt) return;
 
   let hex;
