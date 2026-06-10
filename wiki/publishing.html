@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Publishing — Nomima Guide</title>
+  <meta name="description" content="Publish a Nomima notebook to the web as a pixel-faithful, view-code-protected page that updates automatically as you edit." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link" href="../features.html">Features</a>
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#pricing">Download Free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">AI &amp; integrations <span class="pro-badge">Pro</span></div>
+        <h1 class="docs-title">Publishing</h1>
+        <p class="docs-sub">Put a notebook on the web as a read-only page that looks <em>exactly</em> like it does in your editor — protected by a view-code, and kept up to date automatically as you keep writing.</p>
+      </header>
+
+      <p class="pro-box"><strong>Pro feature.</strong> Publishing requires a <a href="settings-privacy.html#pro">Nomima Pro</a> license. Everything else about your vault stays local — only the notes you explicitly publish ever leave your Mac.</p>
+
+      <h2 id="publish">Publishing a note</h2>
+      <ol>
+        <li>Open the notebook and click its <strong>publish badge</strong> in the note header.</li>
+        <li>Nomima gives you two things: a private link at <strong>read.nomima.io</strong> and a <strong>view-code</strong>.</li>
+        <li>Share them however you like — send the link and code separately for extra care, or share the single combined link that fills the code in automatically.</li>
+      </ol>
+      <p>Anyone opening the bare link is asked for the code first; without it, the page shows nothing.</p>
+
+      <h2 id="replica">What readers see</h2>
+      <ul>
+        <li>A <strong>pixel-faithful replica</strong> of your note — the published page uses the editor's own rendering and your theme, so every callout, Smart-Tag pill, kanban board, table, equation and diagram looks exactly as it does in the app.</li>
+        <li>It's <strong>read-only</strong> — readers can't edit, and none of your vault's structure travels with it. The raw note data is never published, only the rendered page.</li>
+        <li>The page shows when the note was created and last edited, so readers know how fresh it is.</li>
+      </ul>
+
+      <h2 id="fresh">It stays up to date by itself</h2>
+      <ul>
+        <li><strong>Edits auto-update the page.</strong> Keep writing — changes flow to the published version automatically (briefly debounced, and skipped entirely when nothing actually changed).</li>
+        <li><strong>Offline-friendly.</strong> Publish, update or unpublish without a connection and the action waits in a durable queue, sending when you're back online — even across an app restart.</li>
+        <li><strong>The badge tells the truth.</strong> The note header shows the live state at all times: <em>Draft → Publishing → Published</em>, plus <em>Update queued</em> or <em>Failed</em> when something is pending or wrong.</li>
+      </ul>
+
+      <h2 id="files">Sharing attached files</h2>
+      <p>Files attached to the notebook are <strong>not shared by default</strong>. The publish menu lists them with checkboxes — tick the ones you want readers to have and they appear as <strong>download chips</strong> at the top of the published page. Everything unticked stays on your Mac.</p>
+
+      <h2 id="control">Privacy &amp; control</h2>
+      <ul>
+        <li>Only people with <strong>both the link and the view-code</strong> can read the page.</li>
+        <li><strong>Unpublish any time</strong> — the page is taken down, including from the offline queue if you're not connected.</li>
+        <li>Publishing is the only Nomima feature that uploads note content anywhere, and it does so only for the notes you choose — see <a href="settings-privacy.html#privacy">the complete privacy story</a>.</li>
+      </ul>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>

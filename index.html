@@ -113,6 +113,8 @@
     .section-title { font-size: clamp(28px, 3.5vw, 42px); font-weight: 900; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px; }
     .section-sub { font-size: 16px; color: var(--fg-dim); line-height: 1.65; max-width: 520px; }
     .section-sub.centered { text-align: center; margin: 0 auto; max-width: 560px; }
+    .learn-more { display: inline-block; margin-top: 14px; font-size: 13.5px; font-weight: 600; color: var(--accent); text-decoration: none; }
+    .learn-more:hover { color: var(--fg); }
     .centered { text-align: center; }
 
     /* ── Inline check list ── */
@@ -387,13 +389,6 @@
     .plan-features .section-head { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin-top: 6px; padding-bottom: 4px; }
     .plan-upgrade-nudge { margin-top: auto; padding-top: 20px; font-size: 13px; color: var(--accent); font-weight: 600; }
     .plan-upgrade-nudge:hover { color: var(--accent-2); }
-    .plan-more { margin-top: 16px; border-top: 1px solid rgba(52,211,153,0.14); padding-top: 14px; }
-    .plan-more-toggle { list-style: none; display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 700; color: var(--green); cursor: pointer; user-select: none; outline: none; }
-    .plan-more-toggle::-webkit-details-marker { display: none; }
-    .plan-more-toggle:hover { color: #6ee7b7; }
-    .plan-more-chevron { transition: transform 0.2s; flex-shrink: 0; }
-    details[open] .plan-more-chevron { transform: rotate(180deg); }
-    .plan-more-list { margin-top: 14px; }
 
     /* ── Bottom CTA ── */
     .bottom-cta { text-align: center; padding: 90px 24px 100px; }
@@ -543,23 +538,23 @@
     </a>
     <div class="nav-right">
       <a class="nav-text-link" href="features.html">Features</a>
-      <a class="btn-nav filled" href="https://github.com/nomima-app/Nomima-landing/releases/download/v1.1.1/Nomima_1.1.1_aarch64.dmg">Download Free</a>
+      <a class="btn-nav filled" href="https://github.com/nomima-app/Nomima-landing/releases/download/v1.6.0/Nomima_1.6.0_aarch64.dmg">Download Free</a>
     </div>
   </nav>
 
   <!-- HERO -->
   <div class="layer">
     <div class="hero">
-      <div class="hero-badge"><span class="badge-dot"></span> v1.1.1 · macOS · $39 one-time</div>
+      <div class="hero-badge"><span class="badge-dot"></span> v1.6.0 · macOS · $19 one-time</div>
       <h1>Type it. Tag it.<br /><span class="grad" style="text-decoration:line-through;text-decoration-color:#fff;">Complete it.</span></h1>
       <p class="hero-sub">Nomima is a private, offline notebook where every word you write becomes structured, searchable knowledge — automatically.</p>
       <div class="hero-ctas">
-        <a class="btn-primary" href="https://github.com/nomima-app/Nomima-landing/releases/download/v1.1.1/Nomima_1.1.1_aarch64.dmg">
+        <a class="btn-primary" href="https://github.com/nomima-app/Nomima-landing/releases/download/v1.6.0/Nomima_1.6.0_aarch64.dmg">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Download Free
         </a>
-        <a class="btn-secondary" href="https://buy.stripe.com/7sYaEX1PDaQu0XHg4v2Ji00" target="_blank" rel="noopener">
-          Buy Pro — $39
+        <a class="btn-secondary" href="https://buy.stripe.com/8x2aEXcuh5wabCl6tV2Ji01" target="_blank" rel="noopener">
+          Buy Pro — $19
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
       </div>
@@ -740,7 +735,7 @@
     <div class="section">
       <p class="section-label">Smart Tags</p>
       <h2 class="section-title">Your words become data the<br />moment you write them.</h2>
-      <p class="section-sub">Type naturally. Nomima does the rest.</p>
+      <p class="section-sub">Type naturally. Nomima does the rest.<br /><a class="learn-more" href="wiki/smart-tags.html">How Smart Tags work →</a></p>
 
       <div class="stags-layout">
         <div class="stag-rows">
@@ -793,7 +788,7 @@
     <div class="section">
       <p class="section-label">Blocks</p>
       <h2 class="section-title">Your note is polymorphic.</h2>
-      <p class="section-sub">Nomima's slash-command editor lets you place any block anywhere. The same Smart Tags you type in a sentence work identically inside every block — a name in a table is the same entity as in a paragraph.</p>
+      <p class="section-sub">Any block, anywhere — and the same Smart Tags work identically inside every one.<br /><a class="learn-more" href="wiki/blocks.html">Every block, explained →</a></p>
 
       <div class="block-catalog">
         <p class="block-group-label">Core blocks — Free forever</p>
@@ -840,79 +835,85 @@
           </div>
         </div>
 
-        <p class="block-group-label">Power blocks — Pro</p>
+        <p class="block-group-label">Power blocks — free too</p>
         <div class="block-grid">
-          <div class="block-item pro">
-            <span class="pro-tag">PRO</span>
+          <div class="block-item">
             <div class="block-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1z"/><path d="M15 5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1z"/></svg></div>
             <div class="block-name">Kanban Board</div>
             <div class="block-desc">Three fixed columns. Drag cards to move. #complete flies to Done automatically.</div>
           </div>
-          <div class="block-item pro">
-            <span class="pro-tag">PRO</span>
+          <div class="block-item">
             <div class="block-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="3" y2="3"/><line x1="3" y1="21" x2="21" y2="21"/><rect x="7" y="5" width="8" height="3" rx="1"/><rect x="5" y="10" width="12" height="3" rx="1"/><rect x="9" y="15" width="7" height="3" rx="1"/></svg></div>
             <div class="block-name">Gantt Chart</div>
             <div class="block-desc">Draggable project timeline. Zoom from full-fit to Day/Week/Month.</div>
           </div>
-          <div class="block-item pro">
-            <span class="pro-tag">PRO</span>
+          <div class="block-item">
             <div class="block-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></div>
             <div class="block-name">Dashboard</div>
             <div class="block-desc">Live bento grid of widgets — counts, rings, bar charts, heatmaps, tag clouds.</div>
           </div>
-          <div class="block-item pro">
-            <span class="pro-tag">PRO</span>
+          <div class="block-item">
             <div class="block-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/><line x1="3" y1="20" x2="21" y2="20"/></svg></div>
             <div class="block-name">Widget</div>
             <div class="block-desc">Single live chart or stat embedded right inside a note.</div>
           </div>
-          <div class="block-item pro">
-            <span class="pro-tag">PRO</span>
+          <div class="block-item">
             <div class="block-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg></div>
             <div class="block-name">Drawing</div>
             <div class="block-desc">Freeform Excalidraw canvas — shapes, arrows, freehand. Saves with the note.</div>
           </div>
-          <div class="block-item pro">
-            <span class="pro-tag">PRO</span>
+          <div class="block-item">
             <div class="block-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg></div>
             <div class="block-name">RSS Feed</div>
             <div class="block-desc">30 curated topics or paste any feed URL. Articles cached offline.</div>
           </div>
-          <div class="block-item pro">
-            <span class="pro-tag">PRO</span>
+          <div class="block-item">
             <div class="block-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg></div>
             <div class="block-name">Diagrams</div>
             <div class="block-desc">Mermaid flowcharts and sequence diagrams, live preview as you type.</div>
           </div>
-          <div class="block-item pro">
-            <span class="pro-tag">PRO</span>
+          <div class="block-item">
             <div class="block-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 7H6l6 5-6 5h12"/></svg></div>
             <div class="block-name">Math</div>
             <div class="block-desc">LaTeX equations rendered inline via KaTeX — display and inline modes.</div>
           </div>
-          <div class="block-item pro">
-            <span class="pro-tag">PRO</span>
+          <div class="block-item">
             <div class="block-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg></div>
             <div class="block-name">Media</div>
             <div class="block-desc">Embed audio and video directly. Files stored in your vault — no hosting needed.</div>
           </div>
-          <div class="block-item pro">
-            <span class="pro-tag">PRO</span>
+          <div class="block-item">
             <div class="block-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg></div>
             <div class="block-name">Bookmarks</div>
             <div class="block-desc">Paste a URL → rich offline preview card. Title, description, favicon, cover image.</div>
           </div>
-          <div class="block-item pro">
-            <span class="pro-tag">PRO</span>
-            <div class="block-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-            <div class="block-name">AI Chat</div>
-            <div class="block-desc">BYO key — Anthropic, OpenAI, Google, or local model. Reads your vault context.</div>
           </div>
+
+        <p class="block-group-label">Summon, AI, MCP &amp; Publish — Pro</p>
+        <div class="block-grid">
           <div class="block-item pro">
             <span class="pro-tag">PRO</span>
             <div class="block-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg></div>
-            <div class="block-name">Generate</div>
-            <div class="block-desc">AI-authored structured blocks — tasks, tables, callouts — created in one command.</div>
+            <div class="block-name">Summon</div>
+            <div class="block-desc">Your AI sidekick — <kbd>⌘⇧Space</kbd> or <code>/summon</code>. Searches your notes, builds real blocks, drafts whole notebooks.</div>
+          </div>
+          <div class="block-item pro">
+            <span class="pro-tag">PRO</span>
+            <div class="block-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <div class="block-name">AI Models</div>
+            <div class="block-desc">Bring your own key — Claude, GPT, Gemini, or a fully local model via Ollama / LM Studio.</div>
+          </div>
+          <div class="block-item pro">
+            <span class="pro-tag">PRO</span>
+            <div class="block-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="20" height="12" rx="2"/><path d="M12 3v6M8 6l4 3 4-3"/></svg></div>
+            <div class="block-name">MCP</div>
+            <div class="block-desc">Claude Code, Cursor or any MCP client reads &amp; writes your vault. Local-only, token-gated.</div>
+          </div>
+          <div class="block-item pro">
+            <span class="pro-tag">PRO</span>
+            <div class="block-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+            <div class="block-name">Publish</div>
+            <div class="block-desc">Put a pixel-faithful, view-code-gated copy of a note on the web. Edits update it automatically.</div>
           </div>
         </div>
       </div>
@@ -978,7 +979,7 @@
         <div>
           <p class="section-label">Knowledge Graph</p>
           <h2 class="section-title">Your second brain,<br />made visible.</h2>
-          <p class="section-sub">Every tag, link, date, and entity quietly builds a living map of your thinking. The same 3D graph lives behind every note in the app.</p>
+          <p class="section-sub">Every tag, link, date, and entity quietly builds a living map of your thinking.<br /><a class="learn-more" href="wiki/knowledge-graph.html">Explore the graph →</a></p>
           <ul class="inline-list" style="margin-top:28px;">
             <li>
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -1012,7 +1013,7 @@
         <div>
           <p class="section-label">AI Chat</p>
           <h2 class="section-title">Your key.<br />Your model.</h2>
-          <p class="section-sub">Built-in AI Chat with your vault as context. Bring your own API key — stored in macOS Keychain, never seen by Nomima. Or go fully offline with a local model.</p>
+          <p class="section-sub">Summon, the built-in assistant, answers with your vault as context. Bring your own key — Claude, GPT, Gemini — or go fully offline with a local model.<br /><a class="learn-more" href="wiki/summon.html">Meet Summon →</a></p>
         </div>
         <div class="byok-grid">
           <div class="byok-card">
@@ -1048,7 +1049,7 @@
         <div>
           <p class="section-label">MCP Integration</p>
           <h2 class="section-title">Your vault.<br />Any agent.</h2>
-          <p class="section-sub">The built-in MCP server lets Claude Code, Cursor, or any MCP client read and write your vault directly. Local loopback only. Bearer-token-gated. Zero setup required.</p>
+          <p class="section-sub">The built-in MCP server lets Claude Code, Cursor, or any MCP client read and write your vault. Local-only, token-gated.<br /><a class="learn-more" href="wiki/mcp.html">Set it up in two minutes →</a></p>
         </div>
         <div class="mcp-code-block">
           <div class="mcp-code-header">
@@ -1084,7 +1085,7 @@
     <div class="section">
       <p class="section-label">Reminders</p>
       <h2 class="section-title">Just type when.</h2>
-      <p class="section-sub">Set a reminder by writing what you mean — no buttons, no date pickers, no friction. The reminder collapses into a tidy row with a live countdown.</p>
+      <p class="section-sub">Write what you mean — no date pickers. A live countdown, then a desktop alert.<br /><a class="learn-more" href="wiki/dates-and-reminders.html">Dates &amp; reminders, in detail →</a></p>
 
       <div class="reminder-demos">
         <div class="reminder-pill">
@@ -1129,7 +1130,7 @@
         <div>
           <p class="section-label">Smart Scrollbar</p>
           <h2 class="section-title">Your scrollbar<br />is a map.</h2>
-          <p class="section-sub" style="margin-bottom:32px;">As you scroll through a long note, colored dashes pulse along the scrollbar track — showing exactly where every date, mention, and tag lives. Click any dash to jump there instantly.</p>
+          <p class="section-sub" style="margin-bottom:32px;">Colored dashes show where every date, mention, and tag lives in the note. Click one to jump there.<br /><a class="learn-more" href="wiki/smart-views.html">Smart Views &amp; the scrollbar →</a></p>
           <ul class="inline-list" style="max-width:420px;">
             <li>
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -1220,7 +1221,7 @@
     <div class="section">
       <p class="section-label">Privacy</p>
       <h2 class="section-title">No cloud. No tracking.<br />No compromise.</h2>
-      <p class="section-sub">Nomima is local-first by design. Your vault is a plain SQLite database on your Mac. Nothing is uploaded. Nothing is sent to a server.</p>
+      <p class="section-sub">Your vault is a plain SQLite database on your Mac. Nothing is uploaded — ever.<br /><a class="learn-more" href="wiki/settings-privacy.html">The complete privacy story →</a></p>
 
       <div class="privacy-grid">
         <div class="privacy-item">
@@ -1275,7 +1276,7 @@
     <div class="section">
       <p class="section-label">Export</p>
       <h2 class="section-title">Your notes, anywhere<br /><span class="grad">you need them.</span></h2>
-      <p class="section-sub">Everything in Nomima lives locally — and can leave whenever you want. Export any note to PDF in one click, or share it to any app on your Mac via the native Share Sheet.</p>
+      <p class="section-sub">Your notes can leave whenever you want — one-click PDF export, or the native Share Sheet.</p>
 
       <div class="export-grid">
         <div class="export-card export-card--featured">
@@ -1308,8 +1309,8 @@
     <div class="section">
       <div class="centered">
         <p class="section-label">Pricing</p>
-        <h2 class="section-title">Free core. Pro power blocks.<br />One payment, forever.</h2>
-        <p class="section-sub centered">The core notebook is <strong style="color:var(--green)">free forever</strong>. Unlock every Pro block — Kanban, Gantt, AI Chat, Dashboard, and more — for a single $39 one-time payment. No subscription, ever.</p>
+        <h2 class="section-title">The notebook is free.<br />Pro adds the AI layer.</h2>
+        <p class="section-sub centered">Every block, the graph, every view — <strong style="color:var(--green)">free forever</strong>. Pro unlocks Summon, your own AI models, the MCP server, publishing to the web, and template creation for a single $19 one-time payment. No subscription, ever.</p>
       </div>
 
       <div class="pricing-grid">
@@ -1322,16 +1323,16 @@
             <span class="period">/ forever</span>
           </div>
           <p class="plan-price-note">No credit card. No time limit.</p>
-          <a class="plan-cta outline" href="https://github.com/nomima-app/Nomima-landing/releases/download/v1.1.1/Nomima_1.1.1_aarch64.dmg">Download Free</a>
+          <a class="plan-cta outline" href="https://github.com/nomima-app/Nomima-landing/releases/download/v1.6.0/Nomima_1.6.0_aarch64.dmg">Download Free</a>
           <div class="plan-divider"></div>
           <ul class="plan-features">
-            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Full block editor — text, headings, lists, tasks, tables</li>
-            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Smart Tags — #hashtag · @mention · dates</li>
-            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>3D knowledge graph &amp; semantic search</li>
-            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Reminders, daily brief &amp; notifications</li>
-            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>20+ templates · 100% offline · no account</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Every block — tasks, Kanban, Gantt, code, diagrams, drawings</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Smart Tags — #hashtag · @mention · dates &amp; reminders</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>3D knowledge graph, Smart Views &amp; daily brief</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>PDF export · 20+ templates · comments</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>100% offline · no account · no telemetry</li>
           </ul>
-          <a class="plan-upgrade-nudge" href="https://buy.stripe.com/7sYaEX1PDaQu0XHg4v2Ji00" target="_blank" rel="noopener">Unlock 10 power blocks for $39 →</a>
+          <a class="plan-upgrade-nudge" href="https://buy.stripe.com/8x2aEXcuh5wabCl6tV2Ji01" target="_blank" rel="noopener">Add the AI layer for $19 →</a>
         </div>
 
         <!-- PRO CARD -->
@@ -1339,34 +1340,21 @@
           <span class="plan-badge">PRO</span>
           <p class="plan-name">Pro</p>
           <div class="plan-price">
-            <span class="amount">$39</span>
+            <span class="amount">$19</span>
             <span class="period">/ one-time</span>
           </div>
           <p class="plan-launch-note">Pay once, own it forever — no subscription, all future updates included.</p>
-          <a class="plan-cta filled" href="https://buy.stripe.com/7sYaEX1PDaQu0XHg4v2Ji00" target="_blank" rel="noopener">Buy Nomima Pro — $39</a>
+          <a class="plan-cta filled" href="https://buy.stripe.com/8x2aEXcuh5wabCl6tV2Ji01" target="_blank" rel="noopener">Buy Nomima Pro — $19</a>
           <div class="plan-divider"></div>
           <ul class="plan-features">
             <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Everything in Free</li>
-            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Kanban board — drag cards across stages</li>
-            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Gantt timeline — visual project planning</li>
-            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Dashboard with live metric widgets</li>
-            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>AI Chat — BYOK, 100% on-device</li>
-            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Drawing canvas (Excalidraw)</li>
-            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Diagrams &amp; flowcharts (Mermaid)</li>
-            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Math equations (LaTeX / KaTeX)</li>
-            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Media blocks — embed audio &amp; video</li>
-            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Bookmark blocks — rich offline previews</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Summon — the AI assistant that knows your notes</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>AI models with your own key — Claude, GPT, Gemini, or fully local</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>MCP server — Claude Code &amp; Cursor read/write your vault</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Publish notebooks to the web — view-code gated, always up to date</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Create your own templates</li>
+            <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>One payment · all future updates · no subscription</li>
           </ul>
-          <details class="plan-more">
-            <summary class="plan-more-toggle">Much, much more <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="plan-more-chevron"><polyline points="6 9 12 15 18 9"/></svg></summary>
-            <ul class="plan-features plan-more-list">
-              <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>PDF export — any note, one click</li>
-              <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>MCP integration — AI agents read &amp; write your vault</li>
-              <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>AI Generate, Expand &amp; Research</li>
-              <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>All future updates — forever</li>
-              <li class="on"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>One payment, no subscription ever</li>
-            </ul>
-          </details>
         </div>
 
       </div>
@@ -1377,11 +1365,11 @@
   <div class="divider layer"></div>
   <div class="layer" id="download">
     <div class="bottom-cta">
-      <h2>Get Nomima.<br /><span class="grad">Yours forever, for $39.</span></h2>
+      <h2>Get Nomima.<br /><span class="grad">Free forever. Pro for $19.</span></h2>
       <p>Private. Offline. No account required. One payment — all future updates included. Available for Apple Silicon Macs.</p>
-      <a class="btn-primary" href="https://buy.stripe.com/7sYaEX1PDaQu0XHg4v2Ji00" target="_blank" rel="noopener">
+      <a class="btn-primary" href="https://buy.stripe.com/8x2aEXcuh5wabCl6tV2Ji01" target="_blank" rel="noopener">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Buy Nomima — $39
+        Buy Nomima Pro — $19
       </a>
       <p class="bottom-note">Secure checkout via Stripe · No subscription · All future updates included</p>
     </div>
@@ -1399,6 +1387,7 @@
       </div>
       <nav class="footer-nav">
         <a href="features.html">Features</a>
+        <a href="wiki/index.html">Guide</a>
         <a href="contact.html">Contact</a>
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>

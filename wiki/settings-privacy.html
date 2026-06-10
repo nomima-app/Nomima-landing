@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings, privacy &amp; Pro — Nomima Guide</title>
+  <meta name="description" content="A map of every Nomima setting, exactly what stays on your device, and what's free vs Pro." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link" href="../features.html">Features</a>
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#pricing">Download Free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Everything else</div>
+        <h1 class="docs-title">Settings, privacy &amp; Pro</h1>
+        <p class="docs-sub">Every settings panel explained, an honest accounting of what (rarely) touches the network, and exactly what a Pro license unlocks.</p>
+      </header>
+
+      <h2 id="settings">Settings map</h2>
+      <table>
+        <tr><th>Panel</th><th>What’s in it</th></tr>
+        <tr><td>General</td><td>Update notifications and core preferences.</td></tr>
+        <tr><td>Appearance</td><td>Theme presets and light/dark mode.</td></tr>
+        <tr><td>Smart Tag Types</td><td>Add and edit mention/hashtag types — label, icon, color, attribute fields — and the “Suggest Smart Tags as I type” toggle. See <a href="smart-tags.html#custom">Mentions &amp; hashtags</a>.</td></tr>
+        <tr><td>Sound</td><td>Keyboard sound packs for ASMR blocks and the smart-tag recognition chime.</td></tr>
+        <tr><td>Vault</td><td>Storage stats (size, notebooks, files, index), the full <strong>Re-index</strong> button, cleanup utilities, and your vault’s metadata.</td></tr>
+        <tr><td>AI Models <span class="pro-badge">Pro</span></td><td>Provider keys, model choice, test connection. See <a href="ai-models.html">AI models</a>.</td></tr>
+        <tr><td>Summon Agent <span class="pro-badge">Pro</span></td><td>Permissions for web search, filesystem and shell. See <a href="summon.html">Summon</a>.</td></tr>
+        <tr><td>MCP Server <span class="pro-badge">Pro</span></td><td>Enable the server, manage the token, allow writes, watch the activity log. See <a href="mcp.html">MCP server</a>.</td></tr>
+        <tr><td>About</td><td>Version, license activation, update checker, and Nomima’s privacy guarantees.</td></tr>
+      </table>
+
+      <h2 id="privacy">Privacy: what stays, what leaves</h2>
+      <p>Nomima is local-first in the literal sense. Your vault — every note, file, comment and graph relationship — lives in a folder on your Mac (under <code>~/Library/Application Support</code>), stored in an ordinary SQLite database. No account exists, no telemetry is collected, nothing syncs anywhere.</p>
+      <h3>The complete list of network calls</h3>
+      <table>
+        <tr><th>Call</th><th>When</th><th>What’s sent</th></tr>
+        <tr><td>Update check</td><td>On launch / when you click “Check for updates”</td><td>A request for a version file — nothing about you or your notes</td></tr>
+        <tr><td>License validation</td><td>On activation, then occasionally</td><td>Your license key and a machine fingerprint — never note content</td></tr>
+        <tr><td>AI provider calls</td><td>Only when <em>you</em> use Summon or AI blocks, with a provider <em>you</em> configured</td><td>The conversation and relevant note context, to your chosen provider (or to a local model: nothing leaves at all)</td></tr>
+        <tr><td>Summon web search</td><td>Only if you enabled it in Settings</td><td>The search query</td></tr>
+        <tr><td>Publishing</td><td>Only when you publish, update or unpublish a note</td><td>The note’s rendered page (and files you explicitly ticked) to the read.nomima.io service</td></tr>
+      </table>
+      <p>That’s the whole list. Offline, with no AI configured, Nomima makes <strong>zero</strong> network requests that involve your data — and every feature outside the AI section works exactly the same.</p>
+
+      <h2 id="pro">Free vs Pro</h2>
+      <p>The free tier isn’t a trial — the entire notebook is free, forever. Pro unlocks the AI and integration layer:</p>
+      <table>
+        <tr><th>Feature</th><th>Free</th><th>Pro</th></tr>
+        <tr><td>Notes, all blocks, smart tags, dates, reminders</td><td>✓</td><td>✓</td></tr>
+        <tr><td>Smart Views, Home, Knowledge Graph, search</td><td>✓</td><td>✓</td></tr>
+        <tr><td>Comments, files, PDF export, using templates</td><td>✓</td><td>✓</td></tr>
+        <tr><td>Summon assistant &amp; AI blocks</td><td>—</td><td>✓</td></tr>
+        <tr><td>AI model configuration</td><td>—</td><td>✓</td></tr>
+        <tr><td>MCP server</td><td>—</td><td>✓</td></tr>
+        <tr><td>Publishing notebooks to the web</td><td>—</td><td>✓</td></tr>
+        <tr><td>Creating templates</td><td>—</td><td>✓</td></tr>
+      </table>
+
+      <h2 id="license">Activating a license</h2>
+      <ol>
+        <li>Open <strong>Settings → About</strong> and enter your license key.</li>
+        <li>Activation registers this Mac to your license (one quick online check; beta keys work fully offline).</li>
+        <li>After that, Nomima trusts the cached license — losing internet never locks you out of Pro features.</li>
+      </ol>
+      <p class="note"><strong>Stored safely:</strong> the key lives in your macOS Keychain. Deactivate from the same panel if you’re moving to a new machine.</p>
+
+      <h2 id="vault-care">Vault care</h2>
+      <ul>
+        <li><strong>Back up</strong> your vault folder like any other documents — it’s self-contained and portable.</li>
+        <li><strong>Re-index</strong> (Settings → Vault) rebuilds search and the Knowledge Graph from your notes if anything ever looks stale.</li>
+        <li><strong>Storage stats</strong> on the same panel show exactly where the space goes.</li>
+      </ul>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paste, templates &amp; shortcuts — Nomima Guide</title>
+  <meta name="description" content="SmartCopy paste, reusable templates, keyboard navigation, comments and other Nomima power tools." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link" href="../features.html">Features</a>
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#pricing">Download Free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Everything else</div>
+        <h1 class="docs-title">Paste, templates &amp; shortcuts</h1>
+        <p class="docs-sub">The quality-of-life layer: paste that understands where text came from, reusable note templates, comments, and a keyboard that always does what you expect.</p>
+      </header>
+
+      <h2 id="smartcopy">SmartCopy — paste that reads the room</h2>
+      <p>Paste with <kbd>⌘V</kbd> and Nomima looks at <em>what</em> you’re pasting and <em>where it came from</em>, then converts it into real blocks instead of a wall of flat text:</p>
+      <ul>
+        <li><strong>AI chat answers</strong> (Claude, ChatGPT…) unpack into proper headings, lists, checkboxes, tables, code blocks with the right language, Mermaid diagrams and rendered math.</li>
+        <li><strong>Source-aware cleanup</strong> — Slack pastes lose their markup junk but keep links; Outlook bullet salads become real lists; Excel ranges become tables; GitHub code keeps its language.</li>
+        <li><strong>Tags on arrival</strong> — <code>@names</code>, <code>#tags</code> and dates in pasted text become smart pills. Code is exempt: a <code>#</code> in a comment stays a comment.</li>
+        <li><strong>Safe by construction</strong> — scripts and <code>javascript:</code> links are stripped; pasting can never run code.</li>
+      </ul>
+      <p class="tip"><strong>Want it raw?</strong> <kbd>⌘⇧V</kbd> pastes plain text with no interpretation at all.</p>
+
+      <h2 id="templates">Templates</h2>
+      <ul>
+        <li><strong>Use a template</strong> (free): when creating a notebook, pick a template and it starts with that structure — meeting notes, weekly review, whatever you’ve saved.</li>
+        <li><strong>Save as template</strong> <span class="pro-badge">Pro</span>: open the <code>⋯</code> menu on any notebook and choose <strong>Save as template…</strong> — its block structure becomes reusable. Rename or delete templates from the same picker.</li>
+      </ul>
+
+      <h2 id="comments">Comments</h2>
+      <p>Select any text and add a comment. Threads support replies and a resolved state. Comment locations show as accent-colored dashes on the <strong>Smart Scrollbar</strong> — hover to peek, click to jump to the thread. Resolved threads fade out of the way.</p>
+
+      <h2 id="export">Export &amp; sharing</h2>
+      <p>Any notebook can be exported as a <strong>PDF</strong> from its <code>⋯</code> menu — free, like the rest of core Nomima.</p>
+
+      <h2 id="keyboard">Keyboard reference</h2>
+      <h3>Markdown-style shortcuts</h3>
+      <table>
+        <tr><th>Type</th><th>Get</th></tr>
+        <tr><td><code>[]</code> + space</td><td>Task list</td></tr>
+        <tr><td><code>/</code></td><td>Block menu</td></tr>
+        <tr><td><code>@</code> / <code>#</code></td><td>Mention / hashtag menu</td></tr>
+        <tr><td>“tomorrow 3pm” + space</td><td>Date pill</td></tr>
+      </table>
+      <h3>Navigation &amp; editing</h3>
+      <table>
+        <tr><th>Keys</th><th>Action</th></tr>
+        <tr><td><kbd>⌘K</kbd></td><td>Command palette — search everything, run commands</td></tr>
+        <tr><td><kbd>Tab</kbd></td><td>Accept the suggested tag / ghost suggestion; indent in lists and code</td></tr>
+        <tr><td><kbd>Enter</kbd></td><td>Accept tag suggestion; arm a reminder; jump from a block title into its body</td></tr>
+        <tr><td><kbd>Esc</kbd></td><td>Dismiss menus and ghosts; close Summon</td></tr>
+        <tr><td><kbd>←</kbd> <kbd>→</kbd></td><td>Step across a pill as a single unit</td></tr>
+        <tr><td><kbd>↑</kbd> <kbd>↓</kbd></td><td>Move between lines normally — pills, blocks and lists never trap the caret</td></tr>
+        <tr><td><kbd>Backspace</kbd></td><td>Delete a whole pill in one keystroke; on an empty task list, delete the list</td></tr>
+        <tr><td><kbd>⌘Enter</kbd></td><td>Exit a code block</td></tr>
+        <tr><td><kbd>⇧Tab</kbd></td><td>Outdent in lists and code</td></tr>
+      </table>
+
+      <h2 id="updates">Staying up to date</h2>
+      <p>Nomima checks for new versions quietly (it never auto-installs anything). When an update exists you’ll see a dismissible banner, and <strong>Settings → About</strong> always has a <strong>Check for updates</strong> button with a download link to the latest release.</p>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>
