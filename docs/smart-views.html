@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Views &amp; Home — Nomima Guide</title>
+  <meta name="description" content="Nomima's Smart View lenses, the Home daily agenda, the Smart Scrollbar minimap and the command palette." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link" href="../features.html">Features</a>
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#pricing">Download Free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Finding &amp; seeing</div>
+        <h1 class="docs-title">Smart Views &amp; Home</h1>
+        <p class="docs-sub">Your notes are written once but readable from every angle: by person, by project, by date, by task, by file. Nothing here needs maintaining — it’s all derived from what you wrote.</p>
+      </header>
+
+      <h2 id="lenses">The lens switcher</h2>
+      <p>Open <strong>Smart View</strong> from the sidebar. A floating bar of round lens buttons sits over the content — hover one to see its label, click to switch. One lens is active at a time.</p>
+      <table>
+        <tr><th>Lens</th><th>Shows</th></tr>
+        <tr><td>Hashtags</td><td>Every # tag in the vault, sorted by open work.</td></tr>
+        <tr><td>Mentions</td><td>Every @ mention, same treatment.</td></tr>
+        <tr><td>Person / Team / Company / Location / Product</td><td>Only mentions of that type.</td></tr>
+        <tr><td>Project / Idea / Topic / Status</td><td>Only hashtags of that type.</td></tr>
+        <tr><td>Tasks</td><td>Every checkbox in the vault, open items first, grouped by notebook.</td></tr>
+        <tr><td>Dates</td><td>A day-by-day agenda of everything dated (details below).</td></tr>
+        <tr><td>Files</td><td>Every imported file, grouped by notebook (details below).</td></tr>
+        <tr><td>Alerts</td><td>The notifications view — overdue and upcoming reminders and tasks.</td></tr>
+      </table>
+
+      <h2 id="cards">Tag cards</h2>
+      <p>Inside a lens, each tag gets a card:</p>
+      <ul>
+        <li>The <strong>colored chip</strong> with the tag’s name, type and note count.</li>
+        <li>An <strong>open-work badge</strong> (“3 open”) when there are unfinished items.</li>
+        <li>A <strong>progress bar</strong> tracking done vs. total.</li>
+        <li><strong>Every block that mentions the tag</strong>, as a checkable row — checkbox, snippet, and source notebook. Click the text to jump to the note; tick the box to complete the block right there (see <a href="tracking.html">Complete &amp; incomplete</a>).</li>
+        <li>Completed rows tuck under an <strong>“N completed”</strong> toggle so the card stays focused on what’s open.</li>
+      </ul>
+
+      <h2 id="dates-lens">The Dates lens</h2>
+      <p>A single agenda merging <strong>dated tasks</strong> (checkboxes with due dates) and <strong>dates mentioned in prose</strong> (“meet Sara friday”) — deduplicated so nothing appears twice. Items group into sticky buckets: <strong>Overdue</strong> (red), <strong>Today</strong>, <strong>Tomorrow</strong>, <strong>This week</strong>, <strong>This month</strong>, <strong>Later</strong>. Every row has a checkbox and a link back to its source note.</p>
+
+      <h2 id="files-lens">The Files lens</h2>
+      <p>Everything you’ve attached, grouped by notebook:</p>
+      <ul>
+        <li><strong>Click a file</strong> to open it in its default app.</li>
+        <li>Each row shows name, size, type and an <strong>indexing state</strong>: <em>Embedded</em> (text extracted and searchable), <em>Processing</em>, or <em>No text</em> (stored, nothing to extract).</li>
+        <li><strong>Delete</strong> (hover for the trash icon) removes the file, its extracted text and embeddings, <em>and</em> the file pill in the note — one action purges everything, with a confirmation first.</li>
+      </ul>
+
+      <h2 id="home">Home — your daily agenda</h2>
+      <p>Home greets you (in English plus a rotating second language with a phonetic guide), shows today’s date, and lays out your day — computed live from your notes, no AI required and nothing to refresh:</p>
+      <ul>
+        <li><strong>Active reminders</strong> — what’s counting down right now.</li>
+        <li><strong>Overdue</strong> — red rows with “done? · snooze?” shortcuts.</li>
+        <li><strong>Today</strong>, then the <strong>next few days</strong> grouped per day, then <strong>Later</strong>.</li>
+        <li><strong>Recently completed</strong> — shown when you’re all caught up, so an empty day feels earned.</li>
+      </ul>
+      <p>Use the small tabs at the top right to regroup the agenda by <strong>Time</strong> (default), <strong>@Mentions</strong> or <strong>#Tags</strong> — the same items organized around people and projects instead of the clock.</p>
+
+      <h2 id="scrollbar">The Smart Scrollbar</h2>
+      <p>Every note has a slim minimap rail on its right edge — a fingerprint of the document:</p>
+      <ul>
+        <li><strong>Colored dashes</strong> mark blocks containing smart tags, in the tag’s own color. Grey dashes are completed blocks; plain structural blocks get faint placeholder dashes so the rail mirrors the whole document.</li>
+        <li><strong>Red dashes and icons</strong> flag overdue work: a calendar icon for overdue dates, a clock for overdue reminders, with counts.</li>
+        <li><strong>Accent dashes</strong> mark comment threads.</li>
+        <li><strong>Hover</strong> the rail and dashes magnify (dock-style) with a tooltip listing the entities at that spot — open ones first, done ones struck through.</li>
+        <li><strong>Click</strong> any dash to jump there; the block flashes so you don’t lose it. A white dash shows where you currently are.</li>
+      </ul>
+
+      <h2 id="palette">The command palette</h2>
+      <p><kbd>⌘K</kbd> opens search across everything: notebooks, blocks, hashtags, mentions, dates (try “tomorrow” or a weekday name), files, and app commands. Pressing <kbd>Enter</kbd> on a tag opens its lens and flashes it. You can <strong>stack multiple tags</strong> and toggle between matching <em>all</em> or <em>any</em> of them — instant ad-hoc filtered views.</p>
+
+      <p class="note"><strong>Nothing here is manual.</strong> There are no refresh buttons in Nomima — lenses, Home, the graph and the briefs all update on the fly as you write, complete and import. The only manual action that exists is the deep “Re-index” in Settings → Vault, and you should rarely need it.</p>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>

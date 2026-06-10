@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Complete &amp; incomplete — Nomima Guide</title>
+  <meta name="description" content="Nomima's universal completion system — the #complete status tag, checkboxes everywhere, progress tracking and how every view stays in sync." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link" href="../features.html">Features</a>
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#pricing">Download Free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Writing</div>
+        <h1 class="docs-title">Complete &amp; incomplete</h1>
+        <p class="docs-sub">One completion system for everything. Any block — not just checkboxes — can be marked done, from anywhere, and every view in Nomima agrees instantly.</p>
+      </header>
+
+      <h2 id="how">How completion works</h2>
+      <p>A block counts as <strong>complete</strong> when either of two things is true:</p>
+      <ul>
+        <li>It’s a <strong>checked task</strong> — a checkbox you ticked, or</li>
+        <li>It carries a <span class="pill pill-status">#complete</span> <strong>status tag</strong> — a hashtag of the Status type stamped onto the block.</li>
+      </ul>
+      <p>That’s it. There’s no hidden “done” database that can drift out of sync with what you see — completion is always visible right in the note, either as a tick or as a tag.</p>
+
+      <h2 id="ways">Every way to mark something done</h2>
+      <table>
+        <tr><th>Where</th><th>How</th></tr>
+        <tr><td>In a task list</td><td>Tick the checkbox.</td></tr>
+        <tr><td>On any other block</td><td>Type <span class="pill pill-status">#complete</span> on the line — the line greys out and gets struck through. Delete the tag to un-complete it.</td></tr>
+        <tr><td>Overdue date pill</td><td>An overdue date shows a red <strong>“done?”</strong> shortcut — one click stamps <span class="pill pill-status">#complete</span> for you.</td></tr>
+        <tr><td>Smart View lenses</td><td>Every block listed under a tag’s card has a checkbox — checking it completes the block back in the source note.</td></tr>
+        <tr><td>Home agenda</td><td>Every overdue/today/upcoming row has a checkbox too.</td></tr>
+        <tr><td>Dates lens</td><td>Both dated tasks and dates mentioned in prose get checkboxes.</td></tr>
+        <tr><td>Alerts view / bell</td><td>The ✓ button completes a reminder or task without leaving the list.</td></tr>
+        <tr><td>Reminder</td><td>The <strong>Clear</strong> button completes it (and stamps <span class="pill pill-status">#complete</span>).</td></tr>
+      </table>
+      <p class="note"><strong>Two-way sync:</strong> these are all the <em>same</em> action. Checking a row in a Smart View edits the actual note; un-checking in the note updates every view. Progress bars, briefs and badges recompute immediately.</p>
+
+      <h2 id="containers">Completion in container blocks</h2>
+      <ul>
+        <li><strong>Task List</strong> — shows a live <code>3/5</code> progress badge and auto-completes (turns green) when every item is checked. Adding a new item reopens it.</li>
+        <li><strong>Section</strong> — stamp <span class="pill pill-status">#complete</span> on the summary line and the whole section greys out, contents included.</li>
+        <li><strong>Callout</strong> — a completed callout swaps its icon for a green checkmark.</li>
+        <li><strong>Kanban</strong> — a card completes via its checkbox or tag; the whole board completes when everything reaches Done.</li>
+        <li><strong>Gantt</strong> — rows complete individually; the chart completes when all rows are done.</li>
+      </ul>
+
+      <h2 id="effects">What changes when something is done</h2>
+      <ul>
+        <li><strong>In the note</strong> — the text greys out and gets a strikethrough; its date pills turn <span class="pill pill-done">grey</span> and stop counting as overdue.</li>
+        <li><strong>Smart Scrollbar</strong> — the block’s minimap dash turns grey, so a glance at the rail shows how much of a note is finished.</li>
+        <li><strong>Smart Views</strong> — the item moves under the collapsed “N completed” toggle; the tag’s progress bar and “open” badge update.</li>
+        <li><strong>Home</strong> — it leaves Overdue/Today; when nothing is pending, Home shows your recently completed items instead.</li>
+        <li><strong>Knowledge Graph</strong> — the node dims to grey.</li>
+        <li><strong>Briefs</strong> — per-tag summaries recount open vs. done work.</li>
+      </ul>
+
+      <h2 id="undo">Changing your mind</h2>
+      <p>Completion is never destructive. Untick the checkbox or delete the <span class="pill pill-status">#complete</span> tag and the block returns to open everywhere — overdue dates turn red again, badges recount, and the item reappears in your agendas.</p>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>

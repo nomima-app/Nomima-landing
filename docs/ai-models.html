@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI models — Nomima Guide</title>
+  <meta name="description" content="Connect Claude, GPT, Gemini or a fully local model to Nomima. Your keys, stored in your Keychain — AI is optional and off by default." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link" href="../features.html">Features</a>
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#pricing">Download Free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">AI &amp; integrations <span class="pro-badge">Pro</span></div>
+        <h1 class="docs-title">AI models</h1>
+        <p class="docs-sub">Nomima doesn’t lock you into anyone’s AI. Bring your own key for Claude, GPT or Gemini — or point it at a model running entirely on your Mac and keep everything offline.</p>
+      </header>
+
+      <p class="pro-box"><strong>Pro feature.</strong> Running AI (Summon and AI blocks) requires a <a href="settings-privacy.html#pro">Nomima Pro</a> license. Everything else in Nomima — including the Knowledge Graph, Smart Views and search — works without any AI model at all.</p>
+
+      <h2 id="providers">Supported providers</h2>
+      <table>
+        <tr><th>Provider</th><th>Examples</th><th>Needs internet?</th></tr>
+        <tr><td>Anthropic</td><td>Claude models</td><td>Yes — calls Anthropic with your API key</td></tr>
+        <tr><td>OpenAI</td><td>GPT models</td><td>Yes — calls OpenAI with your API key</td></tr>
+        <tr><td>Google</td><td>Gemini models</td><td>Yes — calls Google with your API key</td></tr>
+        <tr><td>Local / OpenAI-compatible</td><td>Ollama, LM Studio, vLLM…</td><td><strong>No</strong> — talks to a server on your machine (e.g. <code>http://localhost:11434/v1</code>)</td></tr>
+      </table>
+      <p class="tip"><strong>Want 100% offline AI?</strong> Install <a href="https://ollama.com" rel="noopener">Ollama</a> or LM Studio, pull a model, and add it as the Local provider. Summon then runs without a single byte leaving your Mac.</p>
+
+      <h2 id="setup">Setting up a provider</h2>
+      <ol>
+        <li>Open <strong>Settings → AI Models</strong>.</li>
+        <li>Pick a provider card and paste your API key (or, for Local, the base URL of your server).</li>
+        <li>Choose a model — pick from the curated defaults or type any model name your provider supports.</li>
+        <li>Click <strong>Test</strong> — Nomima makes one small call to confirm the credentials work.</li>
+        <li>Set your <strong>default provider</strong>; that’s what Summon and AI blocks use unless told otherwise.</li>
+      </ol>
+
+      <h2 id="keys">How your keys are protected</h2>
+      <ul>
+        <li>Keys are stored in the <strong>macOS Keychain</strong>, not in a config file. In the UI you’ll only ever see the last few characters.</li>
+        <li>Keys are used for exactly one thing: calling the provider <em>you</em> configured, <em>when you</em> invoke AI. Nomima has no server of its own and never proxies your traffic.</li>
+        <li>Delete a key any time from the same panel.</li>
+      </ul>
+
+      <h2 id="uses">What actually uses AI</h2>
+      <table>
+        <tr><th>Feature</th><th>Uses your AI model?</th></tr>
+        <tr><td><a href="summon.html">Summon assistant</a></td><td>Yes</td></tr>
+        <tr><td>AI generation blocks</td><td>Yes</td></tr>
+        <tr><td>Knowledge Graph, briefs, themes</td><td>No — built with on-device analysis</td></tr>
+        <tr><td>Search, Smart Views, Home agenda</td><td>No</td></tr>
+        <tr><td>Date detection, smart tags</td><td>No</td></tr>
+      </table>
+      <p>If you never configure a provider, Nomima simply never makes an AI call. The app is fully functional as a private, offline notebook.</p>
+
+      <h2 id="errors">If something fails</h2>
+      <p>Nomima tells you exactly what went wrong rather than failing silently: an <strong>invalid key</strong> (fix the key), <strong>quota exhausted</strong> (top up with your provider), <strong>rate limited</strong> (wait a moment and retry), or a <strong>network error</strong> (check your connection — or your local server, if you’re running one).</p>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>
