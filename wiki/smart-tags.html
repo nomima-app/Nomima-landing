@@ -81,8 +81,19 @@
       <ul>
         <li><strong>Appears in</strong> — every notebook and block that references the entity, deduplicated and clickable.</li>
         <li><strong>Attributes</strong> — add arbitrary fields to an entity: an email and role for a person, a URL for a company, anything you like. Attributes are stored durably with the entity, not with any single note.</li>
-        <li><strong>Custom icon</strong> — upload a photo for a person (compressed automatically), or give a company, product or technology a website and Nomima fetches its favicon for you — either replaces the icon on every pill.</li>
+        <li><strong>Avatars &amp; favicons</strong> — upload a photo for a person (compressed automatically) and it appears <em>on that person's pill everywhere in your notes</em>, replacing the default icon. Give a company, product or technology entity a <strong>website URL</strong> and Nomima fetches the site's favicon automatically (parsing <code>&lt;link rel="icon"&gt;</code> in the page, falling back to <code>/favicon.ico</code>) — the favicon then shows on every pill for that entity too. Both are cached in your vault; no external request is made after the first fetch.</li>
         <li><strong>Type schema</strong> — in <strong>Settings → Smart Tag Types</strong> you can define which attribute fields a <em>type</em> should have, so every Person card offers the same fields by default.</li>
+      </ul>
+
+      <h2 id="link-pills">Link &amp; email pills</h2>
+      <p>URLs and email addresses you type also become pills automatically — no <code>@</code> or <code>#</code> needed.</p>
+      <ul>
+        <li><strong>Type a URL</strong> (anything starting with <code>https://</code>, <code>http://</code>, <code>www.</code>, or a bare domain with a common TLD like <code>.com</code> / <code>.io</code> / <code>.dev</code> / <code>.ai</code>) and press <kbd>Space</kbd> — it converts to a <strong>link pill</strong>.</li>
+        <li><strong>Type an email address</strong> (<code>local@domain.tld</code>) and press <kbd>Space</kbd> — it converts to an <strong>email pill</strong>.</li>
+        <li><strong>Pasted URLs and emails</strong> also become link/email pills automatically.</li>
+        <li><strong>Clicking a link pill</strong> opens the URL in your default browser. <strong>Clicking an email pill</strong> opens your mail client. Neither shows an entity card.</li>
+        <li>Link and email pills are <strong>not tracked</strong> in the Knowledge Graph — they don't create entities.</li>
+        <li>Bare hostnames like <code>node.js</code>, version strings like <code>v1.2</code>, or file extensions like <code>README.md</code> are intentionally left as plain text — only real URLs convert.</li>
       </ul>
 
       <h2 id="behavior">Pill behavior in the editor</h2>
