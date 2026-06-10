@@ -3,7 +3,7 @@
    if features changed. The sidebar, prev/next pager, and footer stamp on
    every page are generated from this file — edit nothing else for nav. */
 
-const GUIDE_VERSION = "1.4.0";
+const GUIDE_VERSION = "1.6.0";
 const GUIDE_UPDATED = "June 10, 2026";
 
 const PAGES = [
@@ -25,6 +25,7 @@ const PAGES = [
   { file: "ai-models.html",        title: "AI models", pro: true },
   { file: "summon.html",           title: "Summon assistant", pro: true },
   { file: "mcp.html",              title: "MCP server", pro: true },
+  { file: "publishing.html",       title: "Publishing", pro: true },
 
   { section: "Everything else" },
   { file: "power-tools.html",      title: "Paste, templates & shortcuts" },
