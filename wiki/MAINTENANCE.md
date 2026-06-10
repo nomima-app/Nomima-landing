@@ -1,6 +1,6 @@
 # User Guide maintenance
 
-The guide in this folder (`docs/`) is part of every Nomima release. **A release is not done until the guide matches the app.** This file is the process.
+The guide in this folder (`wiki/`) is part of every Nomima release. **A release is not done until the guide matches the app.** This file is the process.
 
 ## How the guide is wired
 
