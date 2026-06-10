@@ -1,6 +1,6 @@
 {
-  "version": "1.1.1",
-  "notes": "v1.1.1: Completion polish — finished blocks recede (greyed, no loud borders); marking a Section done sweeps the whole thing. Summon answers link to the notes they cite and return tickable checklists. Editor: Tab in code blocks, a text-size toggle, and a cleaner export.",
-  "pub_date": "2026-06-09T00:00:00Z",
-  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.1.1/Nomima_1.1.1_aarch64.dmg"
+  "version": "1.6.0",
+  "notes": "v1.6.0: Notebook Publishing — publish any notebook to a private, read-only web page at read.nomima.io (share a link + view-code). Pixel-faithful to the editor, offline-first, with opt-in file downloads and view analytics (coarse location & returning visitors, no raw IPs). Plus a refined minimap rail (Dock-style magnify, overdue-only date markers) and reliability fixes.",
+  "pub_date": "2026-06-10T00:00:00Z",
+  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.6.0/Nomima_1.6.0_aarch64.dmg"
 }
