@@ -67,7 +67,7 @@
       <p>Summon’s reach beyond your vault is <strong>off by default</strong> and controlled in <strong>Settings → Summon Agent</strong>:</p>
       <ul>
         <li><strong>Web search</strong> — let Summon look things up online (via DuckDuckGo).</li>
-        <li><strong>Filesystem access</strong> — let it read files in Documents, Desktop and Downloads.</li>
+        <li><strong>Filesystem access</strong> — let it read and write files in Documents, Desktop and Downloads. Reads run freely; every file write (and shell command) pauses for an inline <strong>Allow / Deny</strong> right in the chat.</li>
         <li><strong>Shell commands</strong> — strictly allowlist-based: you add the exact commands it may run, and chaining/piping is blocked.</li>
       </ul>
       <p class="note"><strong>Privacy reminder:</strong> when Summon answers a question about your notes, the relevant note content is sent to the AI provider you configured — that’s how the model reads it. Use a local model if you want even that to stay on-device. Nothing is ever sent anywhere when you’re not actively using Summon.</p>

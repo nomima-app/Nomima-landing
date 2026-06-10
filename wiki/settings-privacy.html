@@ -40,35 +40,37 @@
         <tr><td>Appearance</td><td>Theme presets and light/dark mode.</td></tr>
         <tr><td>Smart Tag Types</td><td>Add and edit mention/hashtag types — label, icon, color, attribute fields — and the “Suggest Smart Tags as I type” toggle. See <a href="smart-tags.html#custom">Mentions &amp; hashtags</a>.</td></tr>
         <tr><td>Sound</td><td>Keyboard sound packs for ASMR blocks and the smart-tag recognition chime.</td></tr>
-        <tr><td>Vault</td><td>Storage stats (size, notebooks, files, index), the full <strong>Re-index</strong> button, cleanup utilities, and your vault’s metadata.</td></tr>
+        <tr><td>Vault</td><td>Storage stats (size, notebooks, files, index), the full <strong>Re-index</strong> button, and your vault’s metadata.</td></tr>
         <tr><td>AI Models <span class="pro-badge">Pro</span></td><td>Provider keys, model choice, test connection. See <a href="ai-models.html">AI models</a>.</td></tr>
         <tr><td>Summon Agent <span class="pro-badge">Pro</span></td><td>Permissions for web search, filesystem and shell. See <a href="summon.html">Summon</a>.</td></tr>
-        <tr><td>MCP Server <span class="pro-badge">Pro</span></td><td>Enable the server, manage the token, allow writes, watch the activity log. See <a href="mcp.html">MCP server</a>.</td></tr>
+        <tr><td>MCP Server <span class="pro-badge">Pro</span></td><td>Server status (on by default for Pro), token, write access, and the Configuration &amp; Logs tabs. See <a href="mcp.html">MCP server</a>.</td></tr>
         <tr><td>About</td><td>Version, license activation, update checker, and Nomima’s privacy guarantees.</td></tr>
       </table>
 
       <h2 id="privacy">Privacy: what stays, what leaves</h2>
-      <p>Nomima is local-first in the literal sense. Your vault — every note, file, comment and graph relationship — lives in a folder on your Mac (under <code>~/Library/Application Support</code>), stored in an ordinary SQLite database. No account exists, no telemetry is collected, nothing syncs anywhere.</p>
+      <p>Nomima is local-first in the literal sense. Your vault — every note, file, comment and graph relationship — lives in a folder on your Mac (under <code>~/Library/Application Support</code>), stored in an ordinary SQLite database. (Vaults from very early versions that lived in Documents are migrated there automatically.) No account exists, no telemetry is collected, nothing syncs anywhere.</p>
       <h3>The complete list of network calls</h3>
       <table>
         <tr><th>Call</th><th>When</th><th>What’s sent</th></tr>
         <tr><td>Update check</td><td>On launch / when you click “Check for updates”</td><td>A request for a version file — nothing about you or your notes</td></tr>
         <tr><td>License validation</td><td>On activation, then occasionally</td><td>Your license key and a machine fingerprint — never note content</td></tr>
-        <tr><td>AI provider calls</td><td>Only when <em>you</em> use Summon or AI blocks, with a provider <em>you</em> configured</td><td>The conversation and relevant note context, to your chosen provider (or to a local model: nothing leaves at all)</td></tr>
+        <tr><td>AI provider calls</td><td>Only when <em>you</em> use Summon or the <code>/generate</code> command, with a provider <em>you</em> configured</td><td>The conversation and relevant note context, to your chosen provider (or to a local model: nothing leaves at all)</td></tr>
         <tr><td>Summon web search</td><td>Only if you enabled it in Settings</td><td>The search query</td></tr>
         <tr><td>Publishing</td><td>Only when you publish, update or unpublish a note</td><td>The note’s rendered page (and files you explicitly ticked) to the read.nomima.io service</td></tr>
+        <tr><td>RSS feeds</td><td>Only for feeds you subscribed in an RSS block</td><td>A fetch of that feed and its article images (cached locally)</td></tr>
+        <tr><td>Link previews &amp; favicons</td><td>When you paste a URL into a Bookmark block or set an entity’s website</td><td>A direct fetch of that page’s metadata or icon</td></tr>
       </table>
-      <p>That’s the whole list. Offline, with no AI configured, Nomima makes <strong>zero</strong> network requests that involve your data — and every feature outside the AI section works exactly the same.</p>
+      <p>That’s the whole list — and every entry is something <em>you</em> invoked. Offline, Nomima makes <strong>zero</strong> network requests that involve your data, and everything outside AI, RSS, link previews and publishing works exactly the same.</p>
 
       <h2 id="pro">Free vs Pro</h2>
-      <p>The free tier isn’t a trial — the entire notebook is free, forever. Pro unlocks the AI and integration layer:</p>
+      <p>The free tier isn’t a trial — the entire notebook is free, forever. Pro unlocks the AI and integration layer, and comes with a <strong>3-day trial</strong> so you can try all of it first:</p>
       <table>
         <tr><th>Feature</th><th>Free</th><th>Pro</th></tr>
         <tr><td>Notes, all blocks, smart tags, dates, reminders</td><td>✓</td><td>✓</td></tr>
         <tr><td>Smart Views, Home, Knowledge Graph, search</td><td>✓</td><td>✓</td></tr>
         <tr><td>Comments, files, PDF export, using templates</td><td>✓</td><td>✓</td></tr>
-        <tr><td>Summon assistant &amp; AI blocks</td><td>—</td><td>✓</td></tr>
-        <tr><td>AI model configuration</td><td>—</td><td>✓</td></tr>
+        <tr><td>Summon assistant &amp; the <code>/generate</code> command</td><td>—</td><td>✓</td></tr>
+        <tr><td>AI model configuration (adding keys)</td><td>✓</td><td>✓ (running AI needs Pro)</td></tr>
         <tr><td>MCP server</td><td>—</td><td>✓</td></tr>
         <tr><td>Publishing notebooks to the web</td><td>—</td><td>✓</td></tr>
         <tr><td>Creating templates</td><td>—</td><td>✓</td></tr>

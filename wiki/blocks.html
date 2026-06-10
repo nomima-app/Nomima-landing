@@ -69,7 +69,7 @@
       <h2 id="technical">Code, math &amp; diagrams</h2>
       <table>
         <tr><th>Block</th><th>What it does</th></tr>
-        <tr><td>Code Block</td><td>Syntax-highlighted code with a language picker. <kbd>Tab</kbd>/<kbd>Shift Tab</kbd> indent and outdent; <kbd>⌘ Enter</kbd> exits the block.</td></tr>
+        <tr><td>Code Block</td><td>Syntax-highlighted code with a language picker. <kbd>Tab</kbd>/<kbd>Shift Tab</kbd> indent and outdent; press <kbd>Enter</kbd> twice on a blank line to exit the block.</td></tr>
         <tr><td>Equation</td><td>LaTeX math rendered beautifully with KaTeX.</td></tr>
         <tr><td>Diagram</td><td>Mermaid diagrams — flowcharts, sequence diagrams, ER diagrams, mind maps, Gantt syntax and more.</td></tr>
         <tr><td>Drawing</td><td>A freeform whiteboard canvas (powered by Excalidraw) for sketches and doodles.</td></tr>
@@ -77,24 +77,25 @@
 
       <h2 id="boards">Boards &amp; timelines</h2>
       <h3>Kanban Board</h3>
-      <p>Draggable cards organized into columns. Columns come from <span class="pill pill-hashtag">#status</span> tags on the cards, so dragging a card to another column updates its status tag automatically — the board and your notes can never disagree. The header shows an active-of-total count, and a card’s checkbox (or a <span class="pill pill-status">#complete</span> tag) marks it done.</p>
+      <p>Draggable cards in three fixed columns — <strong>To Do</strong>, <strong>In Progress</strong> and <strong>Done</strong>. Tagging a card <span class="pill pill-status">#complete</span> sends it to Done; dragging a card into or out of Done adds or removes that tag for you, so the board and your notes can never disagree. Any other status tag is free-form and simply stays on the card. The header shows an active-of-total count.</p>
       <h3>Gantt Chart</h3>
-      <p>A timeline of tasks with start and end dates. Switch between <strong>Fit</strong> (default), Day, Week and Month zoom. Edit mode exposes name, start, end and assignee fields per row; preview mode shows just the chart. Tasks complete via their checkbox or a <span class="pill pill-status">#complete</span> tag.</p>
+      <p>A timeline of tasks with start and end dates. Switch between <strong>Fit</strong> (default), Day, Week and Month zoom. Edit mode exposes name, start, end and assignee fields per row; preview mode shows just the chart. Task names take Smart Tags — typing <span class="pill pill-status">#complete</span> in a task’s name marks it done.</p>
       <h3>Dashboard &amp; Widget</h3>
       <p><strong>Dashboard</strong> is a live grid of widgets showing stats and trends about your vault; <strong>Widget</strong> is a single resizable chart or metric you can drop anywhere in a note.</p>
 
       <h2 id="media">Media &amp; references</h2>
       <table>
         <tr><th>Block</th><th>What it does</th></tr>
-        <tr><td>File</td><td>Attach any file from disk (you can also just drag &amp; drop one onto the note). The file is copied into your vault and appears as a pill with its name and size. Click to preview, or open it in its default app. Text is extracted and indexed so the file’s contents join your Knowledge Graph and search.</td></tr>
-        <tr><td>Bookmark / Video</td><td>Paste a link to get a rich preview card; YouTube and Vimeo links embed a playable video.</td></tr>
-        <tr><td>RSS Feed</td><td>Subscribe to a feed inside a note — incoming articles flow into your Knowledge Graph.</td></tr>
+        <tr><td>File</td><td>Attach any file from disk up to 10&nbsp;MB (you can also just drag &amp; drop one onto the note). The file is copied into your vault and appears as a pill with its name and size. Click to preview, or open it in its default app. Text is extracted and indexed so the file’s contents join your Knowledge Graph and search.</td></tr>
+        <tr><td>Bookmark / Video</td><td>Paste a link to get a rich preview card; Vimeo embeds a playable video, and YouTube shows a thumbnail with a play button that opens the video in your browser.</td></tr>
+        <tr><td>RSS Feed</td><td>Subscribe to topics or paste feed URLs and read articles right inside the note, cached for offline. <strong>Pin</strong> an article to keep it as an “RSS Memory” you can tag and annotate — only pinned memories join your Knowledge Graph; browsing the news adds nothing.</td></tr>
         <tr><td>Block Reference</td><td>Link to another notebook or to a specific block inside one.</td></tr>
         <tr><td>Reminder</td><td>A countdown with a desktop alert — covered in depth in <a href="dates-and-reminders.html">Dates &amp; reminders</a>.</td></tr>
       </table>
 
       <h2 id="ai">AI</h2>
       <p><strong>Summon</strong> <span class="pro-badge">Pro</span> — opens the AI assistant with your cursor’s context (current block, selection) already attached. See <a href="summon.html">Summon assistant</a>.</p>
+      <p><strong>/generate</strong> <span class="pro-badge">Pro</span> — describe what you want (with @mentions and #hashtags) and AI-written blocks appear at your cursor — task lists, tables, Kanban boards, diagrams — grounded in your notebook. Needs a configured <a href="ai-models.html">AI model</a>.</p>
 
       <h2 id="style">Just for fun</h2>
       <table>

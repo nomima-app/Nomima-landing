@@ -37,10 +37,9 @@
       <p>The <strong>Model Context Protocol</strong> is an open standard that lets AI applications connect to data sources. Nomima speaks it natively: enable the server and any MCP-capable tool on your Mac can ask Nomima questions like “search the vault for X” or “list open tasks” — instead of you copy-pasting notes around.</p>
       <p class="note"><strong>Local only:</strong> the server listens on <code>127.0.0.1</code> — your own machine. It is never reachable from the network, every request needs a secret token, and write access is a separate opt-in switch.</p>
 
-      <h2 id="enable">Enabling it</h2>
+      <h2 id="enable">Finding it</h2>
       <ol>
-        <li>Open <strong>Settings → MCP Server</strong> (Pro).</li>
-        <li>Toggle <strong>Enable Server</strong>. It starts at <code>http://127.0.0.1:4123/mcp</code>.</li>
+        <li>The server is <strong>on by default</strong> for Pro users, at <code>http://127.0.0.1:4123/mcp</code>. Open <strong>Settings → MCP Server</strong> to see its status — the <strong>Configuration</strong> tab — and toggle it off any time.</li>
         <li>Copy the <strong>bearer token</strong> shown (masked until you reveal it). Use <strong>Rotate Token</strong> any time to invalidate old credentials instantly.</li>
         <li>Optionally toggle <strong>Allow writes</strong> if you want external tools to be able to create and edit notes — leave it off for read-only access.</li>
       </ol>
@@ -63,7 +62,7 @@
         <tr><td>search_notes</td><td>Full-text search across the vault</td></tr>
         <tr><td>list_notebooks</td><td>All notes with previews</td></tr>
         <tr><td>get_note</td><td>A complete note’s content</td></tr>
-        <tr><td>knowledge_graph</td><td>Entities, relations and clusters</td></tr>
+        <tr><td>knowledge_graph</td><td>Entities and their relations</td></tr>
         <tr><td>list_tasks</td><td>Open and dated checkboxes, chronologically</td></tr>
         <tr><td>list_reminders</td><td>Tracked reminders with due times</td></tr>
         <tr><td>get_editor_schema</td><td>Nomima’s block catalogue, so clients write well-formed notes</td></tr>
@@ -77,7 +76,7 @@
       </table>
 
       <h2 id="log">Watching the activity log</h2>
-      <p>The MCP panel keeps a live log of every request: which client (Claude, Cursor, …), what it called, whether it succeeded, and how long it took — with request and response previews. If you ever wonder what an external tool just did to your vault, the answer is right there.</p>
+      <p>The <strong>Logs</strong> tab keeps a live log of every request: which client (Claude, Cursor, …), what it called, whether it succeeded, and how long it took — click any entry for the full request and response. The log window is configurable (50–1,000 entries) and one click clears it. If you ever wonder what an external tool just did to your vault, the answer is right there.</p>
 
       <h2 id="ideas">Things people do with it</h2>
       <ul>

@@ -74,23 +74,25 @@
         <tr><td>Idle</td><td>No due time yet — the label is fully editable and shows a “Remind me to…” placeholder.</td></tr>
         <tr><td>Running</td><td>A live countdown ticking down to the due moment.</td></tr>
         <tr><td>Overdue</td><td>Red, showing how long ago it fired (“overdue by 2h”). It stays visible until you act — reminders never silently complete themselves.</td></tr>
-        <tr><td>Done</td><td>Green border, “Completed at …”. Clearing a reminder stamps the block with <span class="pill pill-status">#complete</span>.</td></tr>
-        <tr><td>Cancelled</td><td>Red border — dismissed without completing. Its date pills grey out.</td></tr>
+        <tr><td>Done</td><td>Greys out and recedes — struck through, with <span class="pill pill-status">#complete</span> stamped on the block. Delete the tag to make it active again.</td></tr>
+        <tr><td>Cancelled</td><td>Greyed out — dismissed without completing. It never counts as overdue.</td></tr>
       </table>
       <h3>Controls</h3>
       <ul>
         <li><strong>Clear / Done</strong> — marks the reminder complete.</li>
-        <li><strong>Snooze</strong> — quick presets (5, 15, 30 minutes, 1 hour, tomorrow morning…). Snoozing updates the date pill and the alert fires again at the new time.</li>
-        <li><strong>Set again</strong> — reopens a completed reminder back to editable.</li>
+        <li><strong>Snooze</strong> — quick presets: 30 minutes, 1 hour, 3 hours, or 1 day from now. Snoozing updates the reminder’s time and the alert fires again.</li>
+        <li><strong>Reopening</strong> — delete the <span class="pill pill-status">#complete</span> tag on a done reminder and it’s live again.</li>
       </ul>
 
       <h2 id="notifications">Desktop notifications</h2>
-      <p>Reminders fire <strong>real macOS notifications</strong> — and they work even when the note is closed. Nomima checks every 20 seconds in the background, fires each alert exactly once per due time, and clicking the notification brings the app to the front.</p>
+      <p>Reminders fire <strong>real macOS notifications</strong> — and they work even when the note is closed. Each alert fires exactly once per due time and carries <strong>Clear</strong> and <strong>Snooze 1h</strong> buttons right on the notification; clicking it opens the note and scrolls to the exact reminder. Overdue reminders also <strong>badge the Dock icon</strong> until you complete or snooze them.</p>
       <h3>The bell &amp; the Alerts view</h3>
       <ul>
         <li>The <strong>bell</strong> in the sidebar shows a red badge with the count of overdue reminders and tasks, or a subtle dot when only upcoming items exist.</li>
         <li>Opening it (or the <strong>Alerts</strong> lens in Smart View) shows everything in two sections — <strong>Overdue</strong> and <strong>Upcoming</strong> — each row with a one-click ✓ complete, a snooze (for overdue reminders) or dismiss (for upcoming ones), and a link to the source note.</li>
       </ul>
+
+      <p class="note"><strong>Reference-only dates:</strong> a date that’s just context (“we met <em>last Tuesday</em>”) can be marked reference-only — it keeps its pill but stays out of your agendas and never turns red.</p>
 
       <p class="tip"><strong>Date pill vs. reminder — which one?</strong> Use a plain date pill when you want something <em>tracked</em> (it shows in agendas and turns red when missed). Use a reminder when you want to be <em>interrupted</em> at that moment with a notification.</p>
 

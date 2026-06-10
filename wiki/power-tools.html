@@ -39,21 +39,22 @@
         <li><strong>AI chat answers</strong> (Claude, ChatGPT…) unpack into proper headings, lists, checkboxes, tables, code blocks with the right language, Mermaid diagrams and rendered math.</li>
         <li><strong>Source-aware cleanup</strong> — Slack pastes lose their markup junk but keep links; Outlook bullet salads become real lists; Excel ranges become tables; GitHub code keeps its language.</li>
         <li><strong>Tags on arrival</strong> — <code>@names</code>, <code>#tags</code> and dates in pasted text become smart pills. Code is exempt: a <code>#</code> in a comment stays a comment.</li>
+        <li><strong>Links, files and images too</strong> — pasted hyperlinks become link pills, files on the clipboard import straight into your vault, and remote images are pulled local so notes stay offline-readable.</li>
         <li><strong>Safe by construction</strong> — scripts and <code>javascript:</code> links are stripped; pasting can never run code.</li>
       </ul>
       <p class="tip"><strong>Want it raw?</strong> <kbd>⌘⇧V</kbd> pastes plain text with no interpretation at all.</p>
 
       <h2 id="templates">Templates</h2>
       <ul>
-        <li><strong>Use a template</strong> (free): when creating a notebook, pick a template and it starts with that structure — meeting notes, weekly review, whatever you’ve saved.</li>
+        <li><strong>Use a template</strong> (free): when creating a notebook, pick from <strong>20 built-ins across five categories</strong> (Work, Engineering, Research, Personal, Creative) — every seeded date lands relative to today, so a sprint board is live the moment it opens.</li>
         <li><strong>Save as template</strong> <span class="pro-badge">Pro</span>: open the <code>⋯</code> menu on any notebook and choose <strong>Save as template…</strong> — its block structure becomes reusable. Rename or delete templates from the same picker.</li>
       </ul>
 
-      <h2 id="comments">Comments</h2>
-      <p>Select any text and add a comment. Threads support replies and a resolved state. Comment locations show as accent-colored dashes on the <strong>Smart Scrollbar</strong> — hover to peek, click to jump to the thread. Resolved threads fade out of the way.</p>
+      <h2 id="comments">Selection toolbar &amp; comments</h2>
+      <p>Select any text and a floating toolbar appears — formatting, multi-color highlights, turning the selection into a Smart Tag, and adding a comment. Threads support replies and a resolved state. Comment locations show as accent-colored dashes on the <strong>Smart Scrollbar</strong> — hover to peek, click to jump to the thread. Resolved threads fade out of the way.</p>
 
       <h2 id="export">Export &amp; sharing</h2>
-      <p>Any notebook can be exported as a <strong>PDF</strong> from its <code>⋯</code> menu — free, like the rest of core Nomima.</p>
+      <p>Any notebook exports as a single continuous, exact-color <strong>PDF</strong> from its <code>⋯</code> menu — <strong>Download</strong> saves it, <strong>Share</strong> hands it straight to the macOS share sheet (Mail, AirDrop, Messages, Slack…). A <strong>text-size toggle</strong> lives in the same menu, and any notebook can switch to a <strong>wide view</strong> when you need the room. All free, like the rest of core Nomima.</p>
 
       <h2 id="keyboard">Keyboard reference</h2>
       <h3>Markdown-style shortcuts</h3>
@@ -74,7 +75,7 @@
         <tr><td><kbd>←</kbd> <kbd>→</kbd></td><td>Step across a pill as a single unit</td></tr>
         <tr><td><kbd>↑</kbd> <kbd>↓</kbd></td><td>Move between lines normally — pills, blocks and lists never trap the caret</td></tr>
         <tr><td><kbd>Backspace</kbd></td><td>Delete a whole pill in one keystroke; on an empty task list, delete the list</td></tr>
-        <tr><td><kbd>⌘Enter</kbd></td><td>Exit a code block</td></tr>
+        <tr><td><kbd>Enter</kbd> twice</td><td>On a blank line: exit a code block</td></tr>
         <tr><td><kbd>⇧Tab</kbd></td><td>Outdent in lists and code</td></tr>
       </table>
 

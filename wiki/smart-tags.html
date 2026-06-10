@@ -65,14 +65,14 @@
         <tr><td># hashtag</td><td>Topic</td><td>book</td><td>Subjects and themes</td></tr>
         <tr><td># hashtag</td><td>Status</td><td>flag</td><td>States like <span class="pill pill-status">#complete</span>, #blocked, #in-review</td></tr>
       </table>
-      <p class="note"><strong>Status is special:</strong> the Status type powers Nomima’s universal completion system. Stamping <span class="pill pill-status">#complete</span> on any block marks it done everywhere — see <a href="tracking.html">Complete &amp; incomplete</a>. Status tags also drive Kanban columns.</p>
+      <p class="note"><strong>Status is special:</strong> the Status type powers Nomima’s universal completion system. Stamping <span class="pill pill-status">#complete</span> on any block marks it done everywhere — see <a href="tracking.html">Complete &amp; incomplete</a> — and sends a Kanban card to its Done column.</p>
 
       <h2 id="custom">Custom types</h2>
       <p>You’re not limited to the built-ins. In <strong>Settings → Smart Tag Types</strong> you can:</p>
       <ul>
         <li><strong>Add a new type</strong> to either family — pick a label, an icon from the icon gallery, and a color.</li>
         <li><strong>Edit built-ins</strong> — change a type’s icon or color (its family is fixed).</li>
-        <li><strong>Delete custom types</strong> you no longer need. Reserved types like Status can’t be removed.</li>
+        <li><strong>Delete custom types</strong> you no longer need — nothing is lost: tags of that type fall back to plain mentions or hashtags, keeping their text. Reserved types like Status can’t be removed.</li>
       </ul>
       <p>Custom types get their own color in the Knowledge Graph legend and their own grouping in search — they’re first-class citizens.</p>
 
@@ -81,7 +81,7 @@
       <ul>
         <li><strong>Appears in</strong> — every notebook and block that references the entity, deduplicated and clickable.</li>
         <li><strong>Attributes</strong> — add arbitrary fields to an entity: an email and role for a person, a URL for a company, anything you like. Attributes are stored durably with the entity, not with any single note.</li>
-        <li><strong>Custom icon</strong> — give an entity a photo (a person’s face, a company favicon) and the pill shows it everywhere instead of the type icon.</li>
+        <li><strong>Custom icon</strong> — upload a photo for a person (compressed automatically), or give a company, product or technology a website and Nomima fetches its favicon for you — either replaces the icon on every pill.</li>
         <li><strong>Type schema</strong> — in <strong>Settings → Smart Tag Types</strong> you can define which attribute fields a <em>type</em> should have, so every Person card offers the same fields by default.</li>
       </ul>
 
@@ -96,7 +96,7 @@
       <h2 id="payoff">Why bother tagging?</h2>
       <p>Tags are the fuel for everything downstream:</p>
       <ul>
-        <li><a href="smart-views.html"><strong>Smart Views</strong></a> — open the Person lens and see every person with their open work, progress bars, and checkable items.</li>
+        <li><a href="smart-views.html"><strong>Smart Views</strong></a> — open the Person lens and see every person with their open work, progress bars, and checkable items; the <strong>Entities</strong> view is a browsable directory of everything you’ve tagged, with avatars and note counts.</li>
         <li><a href="knowledge-graph.html"><strong>Knowledge Graph</strong></a> — entities become glowing nodes connected by what you wrote.</li>
         <li><strong>Smart Scrollbar</strong> — every tag paints a colored dash on the note’s minimap so you can see at a glance what a long note contains.</li>
         <li><strong>Home</strong> — group your daily agenda by @mention or #hashtag instead of by time.</li>
