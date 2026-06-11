@@ -72,8 +72,9 @@
         <tr><th>Tool</th><th>What it does</th></tr>
         <tr><td>create_note</td><td>Creates a new notebook from a title and Markdown body</td></tr>
         <tr><td>append_to_note</td><td>Appends Markdown to an existing note</td></tr>
-        <tr><td>add_blocks</td><td>Inserts structured Nomima blocks — checklists, callouts, tables, code, reminders and more</td></tr>
+        <tr><td>add_blocks</td><td>Inserts structured Nomima blocks — checklists, callouts, columns, <strong>databases</strong> (typed columns whose cells become Smart Tags), <strong>terminals</strong>, <strong>embeds / video</strong>, code, reminders, Kanban/Gantt/widgets and more, with a layout guide for composing complex notebooks</td></tr>
       </table>
+      <p class="note"><strong>Discoverable schema:</strong> a connected tool can call <code>get_editor_schema</code> (or read the <code>nomima://schema/editor</code> resource) to fetch the exact shape of every block it can author — fields, examples, and how to nest them — so what it sends always renders correctly.</p>
 
       <h2 id="log">Watching the activity log</h2>
       <p>The <strong>Logs</strong> tab keeps a live log of every request: which client (Claude, Cursor, …), what it called, whether it succeeded, and how long it took — click any entry for the full request and response. The log window is configurable (50–1,000 entries) and one click clears it. If you ever wonder what an external tool just did to your vault, the answer is right there.</p>
