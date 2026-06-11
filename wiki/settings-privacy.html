@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Settings, privacy &amp; Pro — Nomima Guide</title>
-  <meta name="description" content="A map of every Nomima setting, exactly what stays on your device, and what's free vs Pro." />
+  <title>Settings, privacy &amp; the free model — Nomima Guide</title>
+  <meta name="description" content="A map of every Nomima setting, exactly what stays on your device, and how Nomima is fully free." />
   <link rel="icon" type="image/svg+xml" href="../logo.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,8 +29,8 @@
     <main class="docs-main">
       <header class="docs-header">
         <div class="docs-label">Everything else</div>
-        <h1 class="docs-title">Settings, privacy &amp; Pro</h1>
-        <p class="docs-sub">Every settings panel explained, an honest accounting of what (rarely) touches the network, and exactly what a Pro license unlocks.</p>
+        <h1 class="docs-title">Settings, privacy &amp; the free model</h1>
+        <p class="docs-sub">Every settings panel explained, an honest accounting of what (rarely) touches the network, and and how the whole app is free.</p>
       </header>
 
       <h2 id="settings">Settings map</h2>
@@ -41,9 +41,9 @@
         <tr><td>Smart Tag Types</td><td>Add and edit mention/hashtag types — label, icon, color, attribute fields — and the “Suggest Smart Tags as I type” toggle. See <a href="smart-tags.html#custom">Mentions &amp; hashtags</a>.</td></tr>
         <tr><td>Sound</td><td>Keyboard sound packs for ASMR blocks and the smart-tag recognition chime.</td></tr>
         <tr><td>Vault</td><td>Storage stats (size, notebooks, files, index), the full <strong>Re-index</strong> button, and your vault’s metadata.</td></tr>
-        <tr><td>AI Models <span class="pro-badge">Pro</span></td><td>Provider keys, model choice, test connection. See <a href="ai-models.html">AI models</a>.</td></tr>
-        <tr><td>Summon Agent <span class="pro-badge">Pro</span></td><td>Permissions for web search, filesystem and shell. See <a href="summon.html">Summon</a>.</td></tr>
-        <tr><td>MCP Server <span class="pro-badge">Pro</span></td><td>Server status (on by default for Pro), token, write access, and the Configuration &amp; Logs tabs. See <a href="mcp.html">MCP server</a>.</td></tr>
+        <tr><td>AI Models</td><td>Provider keys, model choice, test connection. See <a href="ai-models.html">AI models</a>.</td></tr>
+        <tr><td>Summon Agent</td><td>Permissions for web search, filesystem and shell. See <a href="summon.html">Summon</a>.</td></tr>
+        <tr><td>MCP Server</td><td>Server status (on by default), token, write access, and the Configuration &amp; Logs tabs. See <a href="mcp.html">MCP server</a>.</td></tr>
         <tr><td>About</td><td>Version, license activation, update checker, and Nomima’s privacy guarantees.</td></tr>
       </table>
       <p class="note"><strong>Looking for Publishing?</strong> It isn’t a Settings panel — each notebook is published from the <strong>publish badge</strong> in its own header, where you’ll find the link, view-code, file checkboxes and view analytics. See <a href="publishing.html">Publishing</a>.</p>
@@ -67,7 +67,6 @@
       <table>
         <tr><th>Call</th><th>When</th><th>What’s sent</th></tr>
         <tr><td>Update check</td><td>On launch / when you click “Check for updates”</td><td>A request for a version file — nothing about you or your notes</td></tr>
-        <tr><td>License validation</td><td>On activation, then occasionally</td><td>Your license key and a machine fingerprint — never note content</td></tr>
         <tr><td>AI provider calls</td><td>Only when <em>you</em> use Summon or the <code>/generate</code> command, with a provider <em>you</em> configured</td><td>The conversation and relevant note context, to your chosen provider (or to a local model: nothing leaves at all)</td></tr>
         <tr><td>Summon web search</td><td>Only if you enabled it in Settings</td><td>The search query</td></tr>
         <tr><td>Publishing</td><td>Only when you publish, update or unpublish a note</td><td>The note’s rendered page (and files you explicitly ticked) to the read.nomima.io service</td></tr>
@@ -87,28 +86,17 @@
         <tr><td>Shell command injection</td><td>Allowlist only, no shell interpreter</td><td>The agent can only run bare command names (e.g. <code>git</code>, <code>grep</code>) that appear on your allowlist. Paths, spaces and shell metacharacters in the command name are rejected outright — the command is passed as an argv array, never through <code>sh -c</code>.</td></tr>
       </table>
       <p>The default shell allowlist is: <code>git ls cat grep rg find echo pwd wc head tail npm node python python3 cargo</code>. You can add or remove entries in Settings → Summon Agent. Filesystem writes and all shell commands additionally require an interactive <strong>Allow / Deny</strong> prompt in the Summon panel before they execute — there is no way for the agent to skip this step.</p>
-      <p class="note">All three capabilities are gated behind <strong>Pro</strong>. Even with Pro, all three default to <em>off</em> — enable only what you need.</p>
-      <h2 id="pro">Free vs Pro</h2>
-      <p>The free tier isn’t a trial — the entire notebook is free, forever. Pro unlocks the AI and integration layer, and comes with a <strong>3-day trial</strong> so you can try all of it first:</p>
-      <table>
-        <tr><th>Feature</th><th>Free</th><th>Pro</th></tr>
-        <tr><td>Notes, all blocks, smart tags, dates, reminders</td><td>✓</td><td>✓</td></tr>
-        <tr><td>Smart Views, Home, Knowledge Graph, search</td><td>✓</td><td>✓</td></tr>
-        <tr><td>Comments, files, PDF export, using templates</td><td>✓</td><td>✓</td></tr>
-        <tr><td>Summon assistant &amp; the <code>/generate</code> command</td><td>—</td><td>✓</td></tr>
-        <tr><td>AI model configuration</td><td>—</td><td>✓</td></tr>
-        <tr><td>MCP server</td><td>—</td><td>✓</td></tr>
-        <tr><td>Publishing notebooks to the web</td><td>—</td><td>✓</td></tr>
-        <tr><td>Creating templates</td><td>—</td><td>✓</td></tr>
-      </table>
-
-      <h2 id="license">Activating a license</h2>
-      <ol>
-        <li>Open <strong>Settings → About</strong> and enter your license key.</li>
-        <li>Activation registers this Mac to your license (one quick online check; beta keys work fully offline).</li>
-        <li>After that, Nomima trusts the cached license — losing internet never locks you out of Pro features.</li>
-      </ol>
-      <p class="note"><strong>Stored safely:</strong> the key lives in your macOS Keychain. Deactivate from the same panel if you’re moving to a new machine.</p>
+      <p class="note">All three capabilities default to <em>off</em> — enable only what you need.</p>
+      <h2 id="pro">Completely free</h2>
+      <p>Nomima is <strong>free</strong> — there is no Pro tier, no license to activate, and no upgrade prompts. Every feature is unlocked for everyone:</p>
+      <ul>
+        <li>The full editor and <strong>every</strong> block, Smart Tags, dates &amp; reminders</li>
+        <li>Smart Views, Home, the 3D Knowledge Graph &amp; search</li>
+        <li>Comments, files, PDF export, and all templates — including creating your own</li>
+        <li>The <strong>Summon</strong> assistant and the <code>/generate</code> command (bring your own AI key, or run a local model)</li>
+        <li>Configuring AI models, the <strong>MCP server</strong>, and <strong>publishing notebooks to the web</strong></li>
+      </ul>
+      <p class="note">No license, nothing to buy. Your data stays on your device; the only things that ever leave your Mac are the notebooks you explicitly publish and any AI requests you make with your own key.</p>
 
       <h2 id="vault-care">Vault care</h2>
       <ul>

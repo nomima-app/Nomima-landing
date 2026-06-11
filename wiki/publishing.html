@@ -28,12 +28,12 @@
     <aside class="docs-sidebar" id="docs-sidebar"></aside>
     <main class="docs-main">
       <header class="docs-header">
-        <div class="docs-label">AI &amp; integrations <span class="pro-badge">Pro</span></div>
+        <div class="docs-label">AI &amp; integrations</div>
         <h1 class="docs-title">Publishing</h1>
         <p class="docs-sub">Put a notebook on the web as a read-only page that looks <em>exactly</em> like it does in your editor — protected by a view-code, and kept up to date automatically as you keep writing.</p>
       </header>
 
-      <p class="pro-box"><strong>Pro feature.</strong> Publishing requires a <a href="settings-privacy.html#pro">Nomima Pro</a> license. Everything else about your vault stays local — only the notes you explicitly publish ever leave your Mac.</p>
+      <p class="pro-box"><strong>Free.</strong> Publishing is free for everyone. Everything else about your vault stays local — only the notes you explicitly publish ever leave your Mac.</p>
 
       <h2 id="publish">Publishing a note</h2>
       <ol>
@@ -59,9 +59,9 @@
 
       <h3 id="offline-queue-retry">How the offline queue retries</h3>
 <p>When a publish, update or unpublish operation fails because of a network problem or a server error (5xx), the entry stays in the durable outbox and the worker retries with exponential back-off: the first retry fires after 5 seconds, then 10 s, 20 s, 40 s … up to a maximum of 1 hour between attempts. The badge shows <em>Update queued</em> (not Failed) while retries are pending.</p>
-<p>Errors that are <em>not</em> retried — a rejected license key (401/403), a malformed request (other 4xx), or a local database error — are <strong>definitive failures</strong>: the outbox row is dropped immediately and the badge switches to <em>Failed</em>. The publish menu then shows a <strong>Try again</strong> button that re-enqueues the operation from scratch.</p>
+<p>Errors that are <em>not</em> retried — a rejected request (401/403), a malformed request (other 4xx), or a local database error — are <strong>definitive failures</strong>: the outbox row is dropped immediately and the badge switches to <em>Failed</em>. The publish menu then shows a <strong>Try again</strong> button that re-enqueues the operation from scratch.</p>
 <p class="note">There is no manual "force retry" command. If the badge is stuck on <em>Failed</em>, open the publish menu and click <strong>Try again</strong>. The app will re-enqueue the operation and begin the normal retry cycle.</p>
-<p class="note">If your Pro license is deactivated while an update is still queued, the backend will reject the next attempt with a license error. That turns the entry into a definitive failure (badge: <em>Failed</em>) — the queued payload is discarded and the already-live page is not automatically taken down. You can unpublish manually while the notebook still shows as published locally.</p>
+<p class="note">If the backend rejects a queued update with a definitive error, the entry becomes a definitive failure (badge: <em>Failed</em>) — the queued payload is discarded and the already-live page is not automatically taken down. You can unpublish manually while the notebook still shows as published locally.</p>
 
       <h2 id="files">Sharing attached files</h2>
       <p>Files attached to the notebook are <strong>not shared by default</strong>. The publish menu lists them with checkboxes — tick the ones you want readers to have and they appear as <strong>download chips</strong> at the top of the published page. Everything unticked stays on your Mac.</p>
