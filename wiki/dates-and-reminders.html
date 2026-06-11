@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dates &amp; reminders — Nomima Guide</title>
+  <meta name="description" content="Natural-language dates, live date pills, countdown reminders, snoozing and desktop notifications in Nomima." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link" href="../features.html">Features</a>
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#pricing">Download Free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Writing</div>
+        <h1 class="docs-title">Dates &amp; reminders</h1>
+        <p class="docs-sub">Write dates the way you’d say them. Nomima turns them into live pills, tracks them across your whole vault, and can ping you when the moment arrives.</p>
+      </header>
+
+      <h2 id="date-pills">Date pills</h2>
+      <p>Type a date or time in plain words and, the moment you follow it with a space, comma, period or <kbd>Enter</kbd>, it becomes a <span class="pill pill-date">date pill</span>. Recognized phrases include:</p>
+      <table>
+        <tr><th>You type</th><th>Nomima understands</th></tr>
+        <tr><td>tomorrow, yesterday, next Monday</td><td>Relative days</td></tr>
+        <tr><td>June 5, Jun 5 3pm</td><td>Explicit dates, with or without a time</td></tr>
+        <tr><td>in 3 days, in 2 hours, in 30 min</td><td>Relative offsets from now</td></tr>
+        <tr><td>3pm, 14:00, at 3 p.m.</td><td>Times today</td></tr>
+        <tr><td>eod, end of day</td><td>Today at 6pm</td></tr>
+        <tr><td>after tomorrow</td><td>The day after tomorrow</td></tr>
+      </table>
+      <ul>
+        <li><strong>Your words are kept.</strong> The pill shows what you wrote (“tomorrow”, “in 3 hours”) — Nomima stores the resolved moment behind it.</li>
+        <li><strong>Labels stay alive.</strong> Same-day pills count down (“in 15 min”) and update as time passes; day-level pills roll over at midnight (“tomorrow” becomes “today”).</li>
+        <li><strong>Overdue turns red.</strong> A past date on an unfinished block becomes <span class="pill pill-overdue">overdue</span> — and an inline “done?” shortcut appears so you can close it on the spot.</li>
+        <li><strong>Done turns grey.</strong> Once the block is complete, its dates show as <span class="pill pill-done">done</span> and stop nagging you.</li>
+      </ul>
+
+      <h2 id="tracked">Where dates show up</h2>
+      <p>Every date pill is tracked vault-wide, automatically:</p>
+      <ul>
+        <li><strong>Home</strong> — your daily agenda buckets everything into Overdue, Today, the next few days, and Later.</li>
+        <li><strong>Dates lens</strong> in Smart View — a full day-by-day agenda merging dated tasks and dates mentioned in prose, deduplicated, each with a completion checkbox.</li>
+        <li><strong>Smart Scrollbar</strong> — dated blocks get a calendar icon on the note’s minimap; overdue ones are red with a count.</li>
+        <li><strong>Notifications</strong> — overdue dated tasks appear in the Alerts view and the sidebar bell badge.</li>
+      </ul>
+
+      <h3 id="pill-refresh">How often the label updates</h3>
+      <p>Date pill labels refresh on two different schedules depending on how far away the date is:</p>
+      <ul>
+        <li><strong>Within 26 hours of now</strong> — the label re-evaluates every <strong>30 seconds</strong>, so a pill that reads "in 15 min" will tick down visibly as time passes.</li>
+        <li><strong>More than 26 hours away</strong> — the label only rolls over at <strong>local midnight</strong> (e.g. "tomorrow" becomes "today" overnight). No per-minute or per-hour ticking occurs for far-future dates.</li>
+      </ul>
+      <p>The overdue/done colour state (red vs. grey) also recomputes the instant you add or remove a <span class="pill pill-status">#complete</span> pill on the same block — no page reload needed.</p>
+      <p class="note">The timers run while Nomima is in the foreground or background; there is no pause when the app is hidden. If you leave the app open overnight, pills will have already rolled over by the time you look at them in the morning.</p>
+      <h2 id="reminders">Reminders</h2>
+      <p>A reminder is a block with a countdown and a desktop alert. Insert one with <code>/reminder</code>.</p>
+      <h3>Setting one up</h3>
+      <ol>
+        <li>Type what it’s about in the label — e.g. “call mom <strong>tomorrow 3pm</strong>”. The label is normal rich text: mentions, hashtags and date pills all work inside it.</li>
+        <li>Make sure the label contains a date pill — that’s the due time.</li>
+        <li>Press <kbd>Enter</kbd> to <strong>arm</strong> it. The countdown starts and the label locks so you can’t nudge it by accident.</li>
+      </ol>
+      <h3>Reminder states</h3>
+      <table>
+        <tr><th>State</th><th>What you see</th></tr>
+        <tr><td>Idle</td><td>No due time yet — the label is fully editable and shows a “Remind me to…” placeholder.</td></tr>
+        <tr><td>Running</td><td>A live countdown ticking down to the due moment.</td></tr>
+        <tr><td>Overdue</td><td>Red, showing how long ago it fired (“overdue by 2h”). It stays visible until you act — reminders never silently complete themselves.</td></tr>
+        <tr><td>Done</td><td>Greys out and recedes — struck through, with <span class="pill pill-status">#complete</span> stamped on the block. Delete the tag to make it active again.</td></tr>
+        <tr><td>Cancelled</td><td>Greyed out — dismissed without completing. It never counts as overdue.</td></tr>
+      </table>
+      <h3>Controls</h3>
+      <ul>
+        <li><strong>Clear / Done</strong> — marks the reminder complete.</li>
+        <li><strong>Snooze</strong> — quick presets: 30 minutes, 1 hour, 3 hours, or 1 day from now. Snoozing updates the reminder’s time and the alert fires again.</li>
+        <li><strong>Reopening</strong> — delete the <span class="pill pill-status">#complete</span> tag on a done reminder and it’s live again.</li>
+      </ul>
+
+      <h3 id="snooze-ui">How Snooze works</h3>
+      <p>The <strong>Snooze</strong> button appears on the reminder row whenever the reminder is <em>running</em> (counting down or overdue). It is not available on idle, done, or cancelled reminders. Clicking it opens a small dropdown titled <em>"Snooze for…"</em> with four preset durations:</p>
+      <table>
+        <tr><th>Preset</th><th>New due time</th></tr>
+        <tr><td>30 minutes</td><td>Now + 30 min</td></tr>
+        <tr><td>1 hour</td><td>Now + 1 h</td></tr>
+        <tr><td>3 hours</td><td>Now + 3 h</td></tr>
+        <tr><td>1 day</td><td>Now + 24 h</td></tr>
+      </table>
+      <p>All durations are measured from <strong>the moment you click</strong>, not from the original due time. Picking a preset does two things at once: the reminder re-arms as running at the new instant, and the date pill text inside the label updates to a fresh relative phrase (e.g. <span class="pill pill-date">in 1 hour</span>) so the label still reads naturally. The desktop notification fires again when the new time arrives.</p>
+      <p class="note">Close the dropdown without choosing by clicking anywhere outside it or pressing <kbd>Esc</kbd>.</p>
+      <h2 id="notifications">Desktop notifications</h2>
+      <p>Reminders fire <strong>real macOS notifications</strong> — and they work even when the note is closed. Each alert fires exactly once per due time and carries <strong>Clear</strong> and <strong>Snooze 1h</strong> buttons right on the notification; clicking it opens the note and scrolls to the exact reminder. Overdue reminders also <strong>badge the Dock icon</strong> until you complete or snooze them.</p>
+      <h3>The bell &amp; the Alerts view</h3>
+      <ul>
+        <li>The <strong>bell</strong> in the sidebar shows a red badge with the count of overdue reminders and tasks, or a subtle dot when only upcoming items exist.</li>
+        <li>Opening it (or the <strong>Alerts</strong> lens in Smart View) shows everything in two sections — <strong>Overdue</strong> and <strong>Upcoming</strong> — each row with a one-click ✓ complete, a snooze (for overdue reminders) or dismiss (for upcoming ones), and a link to the source note.</li>
+      </ul>
+
+      <h2 id="tracked-vs-reference">Tracked vs. reference dates</h2>
+      <p>Not every date in your notes is a commitment — some are just context. Nomima makes that an explicit choice on every date pill:</p>
+      <table>
+        <tr><th>Mode</th><th>What it means</th></tr>
+        <tr><td>Tracked (default)</td><td>The date is a real obligation: it appears in Home and the Dates lens, counts toward the bell and Dock badges, and turns <span class="pill pill-overdue">red</span> when it passes unfinished.</td></tr>
+        <tr><td>Reference only</td><td>The date is just information — “we met <em>last Tuesday</em>”, “founded in <em>1998</em>”. The pill dims slightly, never appears in any agenda, and never turns red.</td></tr>
+      </table>
+      <p><strong>To switch:</strong> click any date pill to open its date picker, then click the <strong>Tracked date / Reference only</strong> toggle at the bottom. The same popover lets you move the date on a calendar, jump to <strong>Today</strong>, or remove the pill entirely — so a missed deadline can be rescheduled, demoted to context, or cleared in one click.</p>
+
+      <p class="tip"><strong>Date pill vs. reminder — which one?</strong> Use a plain date pill when you want something <em>tracked</em> (it shows in agendas and turns red when missed). Use a reminder when you want to be <em>interrupted</em> at that moment with a notification.</p>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>

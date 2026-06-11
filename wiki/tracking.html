@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Complete &amp; incomplete — Nomima Guide</title>
+  <meta name="description" content="Nomima's universal completion system — the #complete status tag, checkboxes everywhere, progress tracking and how every view stays in sync." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link" href="../features.html">Features</a>
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#pricing">Download Free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Writing</div>
+        <h1 class="docs-title">Complete &amp; incomplete</h1>
+        <p class="docs-sub">One completion system for everything. Any block — not just checkboxes — can be marked done, from anywhere, and every view in Nomima agrees instantly.</p>
+      </header>
+
+      <h2 id="how">How completion works</h2>
+      <p>A block counts as <strong>complete</strong> when either of two things is true:</p>
+      <ul>
+        <li>It’s a <strong>checked task</strong> — a checkbox you ticked, or</li>
+        <li>It carries a <span class="pill pill-status">#complete</span> <strong>status tag</strong> — a hashtag of the Status type stamped onto the block.</li>
+      </ul>
+      <p>That’s it. There’s no hidden “done” database that can drift out of sync with what you see — completion is always visible right in the note, either as a tick or as a tag.</p>
+
+      <h2 id="ways">Every way to mark something done</h2>
+      <table>
+        <tr><th>Where</th><th>How</th></tr>
+        <tr><td>In a task list</td><td>Tick the checkbox.</td></tr>
+        <tr><td>On any other block</td><td>Type <span class="pill pill-status">#complete</span> on the line — the line greys out and gets struck through. Delete the tag to un-complete it.</td></tr>
+        <tr><td>Overdue date pill</td><td>An overdue date shows a red <strong>“done?”</strong> shortcut — one click stamps <span class="pill pill-status">#complete</span> for you.</td></tr>
+        <tr><td>Smart View lenses</td><td>Every block listed under a tag’s card has a checkbox — checking it completes the block back in the source note.</td></tr>
+        <tr><td>Home agenda</td><td>Every overdue/today/upcoming row has a checkbox too.</td></tr>
+        <tr><td>Dates lens</td><td>Both dated tasks and dates mentioned in prose get checkboxes.</td></tr>
+        <tr><td>Alerts view / bell</td><td>The ✓ button completes a reminder or task without leaving the list.</td></tr>
+        <tr><td>Reminder</td><td>The <strong>Clear</strong> button completes it (and stamps <span class="pill pill-status">#complete</span>).</td></tr>
+      </table>
+      <p class="note"><strong>Two-way sync:</strong> these are all the <em>same</em> action. Checking a row in a Smart View edits the actual note; un-checking in the note updates every view. Progress bars, briefs and badges recompute immediately.</p>
+
+      <h2 id="containers">Completion in container blocks</h2>
+      <ul>
+        <li><strong>Task List</strong> — shows a live <code>3/5</code> progress badge and auto-completes (turns green) when every item is checked. Adding a new item reopens it.</li>
+        <li><strong>Section</strong> — stamp <span class="pill pill-status">#complete</span> on the summary line and the whole section greys out, contents included.</li>
+        <li><strong>Callout</strong> — a completed callout swaps its icon for a green checkmark.</li>
+        <li><strong>Kanban</strong> — a card completes via its <span class="pill pill-status">#complete</span> tag or by dragging it to Done; the board completes when every card is done.</li>
+        <li><strong>Gantt</strong> — rows complete individually; the chart completes when all rows are done.</li>
+      </ul>
+
+      <h2 id="cascade">Completion cascade — how it spreads</h2>
+      <p>Marking a container complete (or incomplete) automatically propagates down to its children, and checking off the last child automatically marks the container complete. The three cascade layers are:</p>
+
+      <h3 id="cascade-task">Task list: parent checkbox drives all descendants</h3>
+      <p>Ticking or unticking a <strong>parent task</strong> in a Task List immediately sets every indented sub-task (and their sub-tasks, however deeply nested) to match. Un-ticking a single child does <em>not</em> propagate upward — only the parent drives downward.</p>
+      <p>Stamping <span class="pill pill-status">#complete</span> on the <strong>list title</strong> drives the same thing: every task item in that list (including nested sub-tasks) is checked, and the title's <span class="pill pill-status">#complete</span> pill is removed when you uncheck any task. Removing the tag from the title unchecks every item in the list.</p>
+      <p class="note">The checkbox and the <span class="pill pill-status">#complete</span> status tag on a task item are always kept in sync automatically. Ticking the box stamps the tag; typing <span class="pill pill-status">#complete</span> on the row ticks the box. An existing status tag (like <span class="pill pill-status">#pending</span>) is replaced rather than left alongside the new one.</p>
+
+      <h3 id="cascade-section">Section: completing the summary marks every container child</h3>
+      <p>When a <strong>collapsible Section's</strong> summary line gains a <span class="pill pill-status">#complete</span> tag, Nomima cascades completion to every <strong>container child</strong> — Task Lists, Kanban boards, Gantt charts, and nested Sections — by stamping their titles. Each of those containers then runs its own cascade internally, so a single stamp on a top-level section can tick every task inside every nested list in one go.</p>
+      <p>Plain paragraphs and bullet lists inside the section are <em>not</em> individually stamped. Instead, the section's completion decoration greys out the entire subtree visually — so prose still reads as done without cluttering each line with a tag.</p>
+      <p>Removing the <span class="pill pill-status">#complete</span> tag from the summary reverses this: every container child is reopened by stripping the tag from its title, which in turn unchecks all tasks.</p>
+
+      <h3 id="cascade-upstream">Upstream: finishing all children completes the container</h3>
+      <p>The cascade also works <strong>bottom-up</strong>. When the last incomplete item in a container (Task List, Kanban, Gantt, or Section) is completed, Nomima automatically stamps <span class="pill pill-status">#complete</span> on that container's title. When any item is reopened, the tag is removed from the title.</p>
+      <p>This propagates through the full nesting hierarchy in a single pass: finishing the last task in a nested list can complete the inner list's title, which makes it a fully-complete child of its enclosing Section, which then completes the Section's title too — all at once.</p>
+      <p class="tip">The upstream pass skips containers that have no children, so an empty Task List or empty Section never auto-completes.</p>
+
+      <table>
+        <tr><th>What you do</th><th>What cascades automatically</th></tr>
+        <tr><td>Tick a parent task</td><td>Every indented sub-task is checked.</td></tr>
+        <tr><td>Untick a parent task</td><td>Every indented sub-task is unchecked.</td></tr>
+        <tr><td>Stamp <span class="pill pill-status">#complete</span> on a list title</td><td>Every task item (and sub-task) in the list is checked.</td></tr>
+        <tr><td>Remove <span class="pill pill-status">#complete</span> from a list title</td><td>Every task item in the list is unchecked.</td></tr>
+        <tr><td>Stamp <span class="pill pill-status">#complete</span> on a Section's summary</td><td>Every Task List, Kanban, Gantt, and nested Section child is completed.</td></tr>
+        <tr><td>Remove <span class="pill pill-status">#complete</span> from a Section's summary</td><td>Every container child is reopened.</td></tr>
+        <tr><td>Complete the last item in any container</td><td>The container's title is automatically stamped with <span class="pill pill-status">#complete</span>.</td></tr>
+        <tr><td>Reopen any item in a container</td><td>The container's title loses its <span class="pill pill-status">#complete</span> tag.</td></tr>
+      </table>
+
+      <h2 id="effects">What changes when something is done</h2>
+      <ul>
+        <li><strong>In the note</strong> — the text greys out and gets a strikethrough; its date pills turn <span class="pill pill-done">grey</span> and stop counting as overdue.</li>
+        <li><strong>Smart Scrollbar</strong> — the block’s minimap dash turns grey, so a glance at the rail shows how much of a note is finished.</li>
+        <li><strong>Smart Views</strong> — the item moves under the collapsed “N completed” toggle; the tag’s progress bar and “open” badge update.</li>
+        <li><strong>Home</strong> — it leaves Overdue/Today; when nothing is pending, Home shows your recently completed items instead.</li>
+        <li><strong>Knowledge Graph</strong> — the node dims to grey.</li>
+        <li><strong>Tag cards</strong> — every lens’s progress bars and open-work badges recount instantly.</li>
+      </ul>
+
+      <h2 id="undo">Changing your mind</h2>
+      <p>Completion is never destructive. Untick the checkbox or delete the <span class="pill pill-status">#complete</span> tag and the block returns to open everywhere — overdue dates turn red again, badges recount, and the item reappears in your agendas.</p>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>

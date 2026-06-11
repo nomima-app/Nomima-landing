@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Knowledge Graph — Nomima Guide</title>
+  <meta name="description" content="Nomima's Knowledge Graph — how it's built automatically from your notes, how to navigate the 3D view, and the in-note cover graph." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link" href="../features.html">Features</a>
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#pricing">Download Free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Finding &amp; seeing</div>
+        <h1 class="docs-title">Knowledge Graph</h1>
+        <p class="docs-sub">A living map of everything you’ve written — every person, project, date, file and note, connected. You never build it; it builds itself while you write.</p>
+      </header>
+
+      <h2 id="auto">It builds itself</h2>
+      <p>Every time you save or leave a note, Nomima indexes just that note: its tags, dates, tasks, files and links become entities and connections in the graph. There is no “sync” or “generate” button — by the time you open the graph, it already reflects your latest edit. Entities mentioned in the same block get connected, and attached files and pinned RSS Memories contribute entities from their text too.</p>
+
+      <h2 id="reading">Reading the graph</h2>
+      <ul>
+        <li><strong>Nodes are entities</strong> — glowing orbs colored by type, using the exact same colors as the pills in your notes (including your custom types). The legend in the corner lists every type present with its count.</li>
+        <li><strong>Size means connectedness</strong> — the more an entity appears across your vault, the bigger its node.</li>
+        <li><strong>Grey means done</strong> — completed items dim, so the bright part of your graph is the live part.</li>
+        <li><strong>Edges are relationships</strong> — select a node and its connections light up with a neon glow.</li>
+      </ul>
+
+      <h2 id="nav">Navigating</h2>
+      <table>
+        <tr><th>Action</th><th>How</th></tr>
+        <tr><td>Spin / orbit</td><td>Click and drag — throw the graph and it glides to a stop.</td></tr>
+        <tr><td>Rearrange</td><td>Drag a node — the physics simulation settles around it.</td></tr>
+        <tr><td>Zoom</td><td>Scroll (in the full view) — in the in-note cover graph hold <kbd>⌘</kbd>/<kbd>Ctrl</kbd> while scrolling so the page itself still scrolls normally.</td></tr>
+        <tr><td>Inspect</td><td>Click a node to open its detail panel.</td></tr>
+        <tr><td>Find</td><td><kbd>⌘K</kbd>, type an entity’s name, and jump straight to it.</td></tr>
+        <tr><td>Reframe</td><td>Use the fit/reset buttons in the toolbar to bring everything back into view.</td></tr>
+        <tr><td>Re-cluster</td><td>Change the clustering basis in the legend — group the graph around notebooks (default) or around any entity type.</td></tr>
+      </table>
+
+
+      <h3 id="clustering">Clustering and the legend</h3>
+      <p>The legend in the corner lists every entity type present in the current view, with a node count for each. You can use it to change the clustering basis — the grouping that controls how nodes are spatially arranged:</p>
+      <ul>
+        <li><strong>Default (by notebook):</strong> nodes cluster around the notebooks they appear in. Entities shared across many notebooks sit near the center.</li>
+        <li><strong>By entity type:</strong> click any type in the legend to re-cluster around that type — useful when you want to see all your <em>@person</em> mentions together or find which projects co-occur most.</li>
+      </ul>
+      <p>To return to the default notebook-based clustering, click the active legend entry again or use the reset button in the toolbar.</p>
+
+      <h2 id="panel">The entity panel</h2>
+      <p>Clicking a node opens a panel showing the entity’s name, type and connection count, plus its relationships grouped by kind — <em>Appears in</em>, <em>Assigned to</em>, <em>Due</em>, <em>Related</em> and so on. Every related item is clickable: hop from a person to a project to the note where they intersect. For attributes, photos and editing, click the entity’s pill in a note to open its full <strong>entity card</strong> (see <a href="smart-tags.html#entity-cards">Mentions &amp; hashtags</a>).</p>
+
+      <h2 id="cover">The in-note cover graph</h2>
+      <p>Each notebook can show a compact graph above the page — just that note’s entities and their immediate connections. It’s fully interactive (drag to pan, drag nodes, click to inspect, <kbd>⌘</kbd>+scroll to zoom), and when you scroll down to write, it parks itself to keep the editor fast.</p>
+
+
+      <h3 id="cover-interact">Interacting with the cover graph</h3>
+      <table>
+        <tr><th>Action</th><th>How</th></tr>
+        <tr><td>Pan the canvas</td><td>Click and drag on the background.</td></tr>
+        <tr><td>Move a node</td><td>Drag the node itself — the layout settles around it.</td></tr>
+        <tr><td>Zoom</td><td>Hold <kbd>⌘</kbd> (or <kbd>Ctrl</kbd>) while scrolling. Without the modifier, the page scrolls normally.</td></tr>
+        <tr><td>Inspect an entity</td><td>Click any node to open its detail panel.</td></tr>
+        <tr><td>Hide the graph</td><td>Open the notebook's cover options (the icon at the top-right of the cover area) and toggle the graph off. The graph stays hidden for that notebook until you re-enable it.</td></tr>
+      </table>
+      <p class="note">The cover graph only shows entities from that single notebook. For cross-vault connections, open the full Knowledge Graph view from the sidebar.</p>
+
+      <h2 id="maintenance">If something looks off</h2>
+      <p><strong>Settings → Vault → Re-index</strong> rebuilds the entire graph from scratch, deterministically. It’s the only manual maintenance action in Nomima and exists as a safety net — day to day, the graph keeps itself current.</p>
+
+
+      <h3 id="reindex-detail">What re-index does (and doesn't do)</h3>
+      <p>There are two modes, both triggered from <strong>Settings → Vault</strong>:</p>
+      <ul>
+        <li><strong>Incremental (the default automatic refresh):</strong> chunks whose text is unchanged keep their existing vectors, entities that are already embedded are skipped, and the Daily Brief is only regenerated if something actually moved. On an unchanged vault this completes near-instantly.</li>
+        <li><strong>Full re-index:</strong> forces every chunk and entity to be re-embedded from scratch and regenerates the brief unconditionally. This is slow — use it only after upgrading the app (new extraction or embedding model) or if you suspect the index is corrupted.</li>
+      </ul>
+      <p><strong>Non-destructive:</strong> neither mode wipes the graph before it starts. Each notebook's derived data is replaced in place as it is processed. If the operation is interrupted, you are left with a partially-refreshed graph — never an empty one.</p>
+      <p><strong>Editing is not blocked:</strong> you can keep writing while a re-index runs. The background indexer is briefly paused at the start to prevent conflicting writes, then resumes automatically.</p>
+      <p class="note"><strong>What &ldquo;deterministic&rdquo; means:</strong> the graph and the Daily Brief are derived entirely from your saved note content — there is no randomness or LLM-generated structure involved. Running re-index twice on the same vault produces the same result. This means a re-index is a reliable repair tool, not a gamble.</p>
+
+      <p class="note"><strong>Privacy:</strong> the graph is computed entirely on your Mac. Nothing about your notes — entities, relationships, connections — ever leaves your device. See <a href="settings-privacy.html">Settings &amp; privacy</a>.</p>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>

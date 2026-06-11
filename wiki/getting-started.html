@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting started — Nomima Guide</title>
+  <meta name="description" content="Install Nomima, meet the interface, and write your first connected note in five minutes." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link" href="../features.html">Features</a>
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#pricing">Download Free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Start here</div>
+        <h1 class="docs-title">Getting started</h1>
+        <p class="docs-sub">From download to your first connected note. Nomima runs entirely on your Mac — no account, no cloud, no setup wizard.</p>
+      </header>
+
+      <h2 id="install">Install</h2>
+      <ol>
+        <li>Download the <code>.dmg</code> from the <a href="../index.html#pricing">Nomima site</a>. Nomima is free and built for Apple&nbsp;Silicon Macs (M1 and later, macOS&nbsp;11+).</li>
+        <li>Open the <code>.dmg</code> and drag <strong>Nomima</strong> into your Applications folder.</li>
+        <li>Launch it. That’s the whole setup — there is no sign-up, login, or onboarding form.</li>
+      </ol>
+      <p class="note"><strong>Where your notes live:</strong> on first launch Nomima creates a local <em>vault</em> on your Mac. Everything — notes, files, the knowledge graph — is stored there and never leaves your device. See <a href="settings-privacy.html">Settings &amp; privacy</a> for details.</p>
+
+      <h2 id="welcome">The Welcome notebook</h2>
+      <p>A fresh vault opens with a <strong>“Welcome to Nomima”</strong> notebook. It’s a single scripted page, not a read-only tour: it starts as plain prose and builds up — your first task list, your first <span class="pill pill-mention">@mention</span>, then a “week in the life” of a small team shipping <span class="pill pill-hashtag">#northstar</span> that introduces every block in context, so the Knowledge Graph and the minimap light up as you read. Edit it, break it, delete it — it’s yours.</p>
+
+      <h2 id="interface">The interface at a glance</h2>
+      <table>
+        <tr><th>Area</th><th>What it does</th></tr>
+        <tr><td>Sidebar</td><td>Search, Home, Smart View, your notebook list, notifications bell, and Settings.</td></tr>
+        <tr><td>Editor</td><td>Where you write. Type <code>/</code> for blocks, <code>@</code> for people and things, <code>#</code> for topics and projects.</td></tr>
+        <tr><td>Smart Scrollbar</td><td>The slim colored rail on the editor’s right edge — a minimap of every tag, date, reminder and comment in the note. Hover to magnify, click to jump.</td></tr>
+        <tr><td>Note cover graph</td><td>A compact, interactive Knowledge Graph above each note showing what that note connects to.</td></tr>
+        <tr><td>Home</td><td>Your daily agenda — overdue, today, upcoming, reminders — built automatically from your notes.</td></tr>
+        <tr><td>Smart View</td><td>Lenses that reorganize the whole vault by mention, hashtag, date, task or file.</td></tr>
+        <tr><td>Summon button</td><td>The glowing button in the bottom-right corner opens the AI assistant.</td></tr>
+      </table>
+
+      <p class="note"><strong>Smart Scrollbar color coding:</strong> each entity type gets its own color on the rail — persons, teams, dates, projects, topics, and any custom tag types all appear as differently-colored dashes matching the pills in the note itself. Hover over the rail to magnify the dashes nearest your cursor and see a tooltip naming the entities at that position; click any dash to jump straight to that block.</p>
+      <p class="note"><strong>Note cover graph interactions:</strong> the graph above each note is fully interactive — drag to orbit the 3D layout, scroll to zoom, and click any node to open its entity card or navigate to a related notebook. To hide it, simply scroll down into the note; the cover scrolls away automatically and reappears when you scroll back to the top.</p>
+      <h2 id="first-note">Write your first note</h2>
+      <ol>
+        <li><strong>Create a notebook.</strong> Click the new-notebook button in the sidebar, type a title, and press <kbd>Enter</kbd> — the caret drops straight into the page.</li>
+        <li><strong>Just write.</strong> Plain paragraphs are fine. Nomima’s structure is opt-in, not required.</li>
+        <li><strong>Add a task list.</strong> Type <code>[]</code> followed by a space at the start of a line, or type <code>/task</code> and pick <strong>Task List</strong>. Give it a title, press <kbd>Enter</kbd>, and start adding items.</li>
+        <li><strong>Tag a person.</strong> Type <code>@</code> and a name — e.g. <code>@Sara</code> — and press <kbd>Enter</kbd> or <kbd>Tab</kbd> to accept. It becomes a <span class="pill pill-mention">@Sara</span> pill connected to everything else mentioning Sara.</li>
+        <li><strong>Tag a project.</strong> Type <code>#</code> and a topic — e.g. <code>#launch</code> → <span class="pill pill-hashtag">#launch</span>.</li>
+        <li><strong>Type a date in plain words.</strong> Write “call the venue <strong>tomorrow 3pm</strong>” — the date turns into a live <span class="pill pill-date">tomorrow 3pm</span> pill that shows up in your Home agenda and Dates view automatically.</li>
+      </ol>
+      <p>That’s the core loop: <strong>write naturally, tag as you go, and Nomima organizes everything for you</strong> — no folders to maintain, no databases to configure.</p>
+
+      <h2 id="organize">Organize your notebooks</h2>
+      <p>Notebooks nest into folders in the sidebar — drag to rearrange. Right-click a notebook to <strong>pin</strong> it to the top, <strong>archive</strong> it out of the way, or move it to <strong>trash</strong> (recoverable until you purge). Every note shows a word count and reading time in its footer, plus <strong>backlinks</strong> — every place that references it.</p>
+
+      <h2 id="find">Find anything</h2>
+      <p>Press <kbd>⌘K</kbd> to open the command palette. It searches notebooks, blocks, every mention and hashtag, and files — and it runs commands like creating a notebook or opening Settings. Press <kbd>Enter</kbd> on a tag to open its Smart View lens; you can even stack several tags to filter by all or any of them.</p>
+
+      <h2 id="next">Where to go next</h2>
+      <ul>
+        <li><a href="blocks.html"><strong>Blocks</strong></a> — everything the <code>/</code> menu can insert.</li>
+        <li><a href="smart-tags.html"><strong>Mentions &amp; hashtags</strong></a> — tag types, custom types, and entity cards.</li>
+        <li><a href="dates-and-reminders.html"><strong>Dates &amp; reminders</strong></a> — natural-language dates and desktop alerts.</li>
+        <li><a href="smart-views.html"><strong>Smart Views &amp; Home</strong></a> — see your vault from every angle.</li>
+      </ul>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>

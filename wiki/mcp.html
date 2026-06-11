@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MCP server — Nomima Guide</title>
+  <meta name="description" content="Nomima's built-in MCP server lets tools like Claude Code and Cursor read and write your vault — locally, with a token, writes off by default." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link" href="../features.html">Features</a>
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#pricing">Download Free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">AI &amp; integrations</div>
+        <h1 class="docs-title">MCP server</h1>
+        <p class="docs-sub">Let your other AI tools see your notes. Nomima ships a built-in MCP server so apps like Claude Code, Claude Desktop and Cursor can search, read — and optionally write — your vault.</p>
+      </header>
+
+      <h2 id="what">What is MCP?</h2>
+      <p>The <strong>Model Context Protocol</strong> is an open standard that lets AI applications connect to data sources. Nomima speaks it natively: enable the server and any MCP-capable tool on your Mac can ask Nomima questions like “search the vault for X” or “list open tasks” — instead of you copy-pasting notes around.</p>
+      <p class="note"><strong>Local only:</strong> the server listens on <code>127.0.0.1</code> — your own machine. It is never reachable from the network, every request needs a secret token, and write access is a separate opt-in switch.</p>
+
+      <h2 id="enable">Finding it</h2>
+      <ol>
+        <li>The server is <strong>on by default</strong>, at <code>http://127.0.0.1:4123/mcp</code>. Open <strong>Settings → MCP Server</strong> to see its status — the <strong>Configuration</strong> tab — and toggle it off any time.</li>
+        <li>Copy the <strong>bearer token</strong> shown (masked until you reveal it). Use <strong>Rotate Token</strong> any time to invalidate old credentials instantly.</li>
+        <li>Optionally toggle <strong>Allow writes</strong> if you want external tools to be able to create and edit notes — leave it off for read-only access.</li>
+      </ol>
+
+      <h2 id="connect">Connecting a client</h2>
+      <p>Point any MCP client at the URL with the token as a bearer credential. For Claude Code, for example:</p>
+      <pre><code>claude mcp add --transport http nomima \
+  http://127.0.0.1:4123/mcp \
+  --header "Authorization: Bearer YOUR_TOKEN"</code></pre>
+      <p>Or in a JSON-based client config:</p>
+      <pre><code>{
+  "url": "http://127.0.0.1:4123/mcp",
+  "headers": { "Authorization": "Bearer YOUR_TOKEN" }
+}</code></pre>
+
+      <h2 id="tools">What clients can do</h2>
+      <h3>Read tools (always available while the server is on)</h3>
+      <table>
+        <tr><th>Tool</th><th>What it returns</th></tr>
+        <tr><td>search_notes</td><td>Full-text search across the vault</td></tr>
+        <tr><td>list_notebooks</td><td>All notes with previews</td></tr>
+        <tr><td>get_note</td><td>A complete note’s content</td></tr>
+        <tr><td>knowledge_graph</td><td>Entities and their relations</td></tr>
+        <tr><td>list_tasks</td><td>Open and dated checkboxes, chronologically</td></tr>
+        <tr><td>list_reminders</td><td>Tracked reminders with due times</td></tr>
+        <tr><td>get_editor_schema</td><td>Nomima’s block catalogue, so clients write well-formed notes</td></tr>
+      </table>
+      <h3>Write tools (only when “Allow writes” is on)</h3>
+      <table>
+        <tr><th>Tool</th><th>What it does</th></tr>
+        <tr><td>create_note</td><td>Creates a new notebook from a title and Markdown body</td></tr>
+        <tr><td>append_to_note</td><td>Appends Markdown to an existing note</td></tr>
+        <tr><td>add_blocks</td><td>Inserts structured Nomima blocks — checklists, callouts, columns, <strong>databases</strong> (typed columns whose cells become Smart Tags), <strong>terminals</strong>, <strong>embeds / video</strong>, code, reminders, Kanban/Gantt/widgets and more, with a layout guide for composing complex notebooks</td></tr>
+      </table>
+      <p class="note"><strong>Discoverable schema:</strong> a connected tool can call <code>get_editor_schema</code> (or read the <code>nomima://schema/editor</code> resource) to fetch the exact shape of every block it can author — fields, examples, and how to nest them — so what it sends always renders correctly.</p>
+
+      <h2 id="log">Watching the activity log</h2>
+      <p>The <strong>Logs</strong> tab keeps a live log of every request: which client (Claude, Cursor, …), what it called, whether it succeeded, and how long it took — click any entry for the full request and response. The log window is configurable (50–1,000 entries) and one click clears it. If you ever wonder what an external tool just did to your vault, the answer is right there.</p>
+
+      <h3 id="log-fields">Log entry fields</h3>
+      <p>Each row in the Logs tab represents one complete request/response cycle. Clicking a row expands the full detail. The fields shown are:</p>
+      <table>
+        <tr><th>Field</th><th>What it contains</th></tr>
+        <tr><td>Timestamp</td><td>Unix epoch in milliseconds (<code>timestamp_ms</code>) — shown as a human-readable time in the UI.</td></tr>
+        <tr><td>Client</td><td>The name the connecting tool reported when it first initialised the session (e.g. <code>claude-code</code>, <code>cursor</code>). Empty if the client has not yet sent an <code>initialize</code> request.</td></tr>
+        <tr><td>Method</td><td>The JSON-RPC method name — for tool calls this is <code>tools/call</code>; for listing tools it is <code>tools/list</code>; shown as <code>?</code> for requests that could not be parsed or that were rejected before parsing.</td></tr>
+        <tr><td>Query preview</td><td>A short human-readable excerpt: the tool name plus an argument preview, or the URI for resource requests.</td></tr>
+        <tr><td>Status</td><td>One of four values — see the table below.</td></tr>
+        <tr><td>Duration</td><td>Round-trip time in milliseconds from request received to response sent.</td></tr>
+        <tr><td>Request body</td><td>Raw JSON of the incoming request, truncated to 4,096 characters.</td></tr>
+        <tr><td>Response preview</td><td>Raw JSON of the outgoing response, truncated to 512 characters.</td></tr>
+      </table>
+
+      <h3 id="log-status">Interpreting the status</h3>
+      <table>
+        <tr><th>Status</th><th>Meaning</th></tr>
+        <tr><td><code>ok</code></td><td>The request completed and the response contains a <code>result</code> field — the tool ran successfully.</td></tr>
+        <tr><td><code>error</code></td><td>The server processed the request but the response contains an <code>error</code> field — for example, a tool was called with invalid arguments, or the vault returned no match. Expand the entry to read the error message and code.</td></tr>
+        <tr><td><code>unauthorized</code></td><td>The <code>Authorization</code> header was missing or the bearer token did not match. The server returns HTTP 401; no tool ran. Use <strong>Rotate Token</strong> and update your client config if you see this unexpectedly.</td></tr>
+        <tr><td><code>parse_error</code></td><td>The request body was not valid JSON-RPC — JSON-RPC error code <code>-32700</code>. The method field is shown as <code>?</code>. This usually means the client sent a malformed message.</td></tr>
+      </table>
+      <p class="note"><strong>Log retention:</strong> the window holds a configurable number of entries (10–1,000, default 200). When the window is full the oldest entry is evicted automatically. Click <strong>Clear</strong> to wipe all entries immediately. The log is in-memory only — it does not persist across app restarts.</p>
+
+      <h2 id="ideas">Things people do with it</h2>
+      <ul>
+        <li>Ask <strong>Claude Code</strong> to check project notes for context while coding — “what did I decide about the API design? check my Nomima notes”.</li>
+        <li>Have an agent file <strong>meeting summaries</strong> or research results directly into the vault as proper notes.</li>
+        <li>Query open tasks from any MCP-capable workflow tool.</li>
+      </ul>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>

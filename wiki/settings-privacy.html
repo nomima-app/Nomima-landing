@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings, privacy &amp; the free model — Nomima Guide</title>
+  <meta name="description" content="A map of every Nomima setting, exactly what stays on your device, and how Nomima is fully free." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link" href="../features.html">Features</a>
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#pricing">Download Free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Everything else</div>
+        <h1 class="docs-title">Settings, privacy &amp; the free model</h1>
+        <p class="docs-sub">Every settings panel explained, an honest accounting of what (rarely) touches the network, and and how the whole app is free.</p>
+      </header>
+
+      <h2 id="settings">Settings map</h2>
+      <table>
+        <tr><th>Panel</th><th>What’s in it</th></tr>
+        <tr><td>General</td><td>Update notifications and core preferences.</td></tr>
+        <tr><td>Appearance</td><td>Theme presets and light/dark mode.</td></tr>
+        <tr><td>Smart Tag Types</td><td>Add and edit mention/hashtag types — label, icon, color, attribute fields — and the “Suggest Smart Tags as I type” toggle. See <a href="smart-tags.html#custom">Mentions &amp; hashtags</a>.</td></tr>
+        <tr><td>Sound</td><td>Keyboard sound packs for ASMR blocks and the smart-tag recognition chime.</td></tr>
+        <tr><td>Vault</td><td>Storage stats (size, notebooks, files, index), the full <strong>Re-index</strong> button, and your vault’s metadata.</td></tr>
+        <tr><td>AI Models</td><td>Provider keys, model choice, test connection. See <a href="ai-models.html">AI models</a>.</td></tr>
+        <tr><td>Summon Agent</td><td>Permissions for web search, filesystem and shell. See <a href="summon.html">Summon</a>.</td></tr>
+        <tr><td>MCP Server</td><td>Server status (on by default), token, write access, and the Configuration &amp; Logs tabs. See <a href="mcp.html">MCP server</a>.</td></tr>
+        <tr><td>About</td><td>Version, license activation, update checker, and Nomima’s privacy guarantees.</td></tr>
+      </table>
+      <p class="note"><strong>Looking for Publishing?</strong> It isn’t a Settings panel — each notebook is published from the <strong>publish badge</strong> in its own header, where you’ll find the link, view-code, file checkboxes and view analytics. See <a href="publishing.html">Publishing</a>.</p>
+
+      <h2 id="vault-stats">Vault stats &amp; metadata</h2>
+      <p>Settings → Vault shows a live snapshot of your vault's contents. The numbers come directly from the database — no estimation:</p>
+      <table>
+        <tr><th>Stat</th><th>What it counts</th></tr>
+        <tr><td>Notebooks</td><td>All non-deleted notebooks in the vault.</td></tr>
+        <tr><td>Files</td><td>Every attachment you have imported (count and total size on disk).</td></tr>
+        <tr><td>Knowledge Graph nodes</td><td>Extracted entity nodes in the graph index (<code>kg_entity</code> rows).</td></tr>
+        <tr><td>Vault size</td><td>Total bytes used by the vault folder — <em>excluding</em> the bundled AI model weights in the <code>models/</code> subfolder, which are a fixed app asset rather than your data.</td></tr>
+      </table>
+      <p>The same panel also shows the <strong>vault location</strong> (the full path on disk) and a <strong>Move vault</strong> action that copies everything to a new parent folder you pick. After a successful move, Nomima restarts pointing at the new location. The old folder is not deleted automatically — remove it yourself once you have confirmed the move.</p>
+      <p class="note"><strong>Re-index</strong> rebuilds the search index and Knowledge Graph from scratch. Use it if search results look stale or the graph is missing entries after an import. It does not delete or move any notes or files.</p>
+      <h3 id="file-reextraction">File text extraction</h3>
+      <p>When you import a file (PDF, Word document, etc.) Nomima extracts its text immediately at import time and stores it alongside the attachment. If extraction failed — for example because a PDF was scanned-only or password-protected — the file's entry in the Files Smart View will show an "unextracted" state. There is currently no per-file re-extraction button; running <strong>Re-index</strong> (Settings → Vault) will retry extraction for any file whose text is missing as part of the full re-index pass.</p>
+      <h2 id="privacy">Privacy: what stays, what leaves</h2>
+      <p>Nomima is local-first in the literal sense. Your vault — every note, file, comment and graph relationship — lives in a folder on your Mac (under <code>~/Library/Application Support</code>), stored in an ordinary SQLite database. (Vaults from very early versions that lived in Documents are migrated there automatically.) No account exists, no telemetry is collected, nothing syncs anywhere.</p>
+      <h3>The complete list of network calls</h3>
+      <table>
+        <tr><th>Call</th><th>When</th><th>What’s sent</th></tr>
+        <tr><td>Update check</td><td>On launch / when you click “Check for updates”</td><td>A request for a version file — nothing about you or your notes</td></tr>
+        <tr><td>AI provider calls</td><td>Only when <em>you</em> use Summon or the <code>/generate</code> command, with a provider <em>you</em> configured</td><td>The conversation and relevant note context, to your chosen provider (or to a local model: nothing leaves at all)</td></tr>
+        <tr><td>Summon web search</td><td>Only if you enabled it in Settings</td><td>The search query</td></tr>
+        <tr><td>Publishing</td><td>Only when you publish, update or unpublish a note</td><td>The note’s rendered page (and files you explicitly ticked) to the read.nomima.io service</td></tr>
+        <tr><td>RSS feeds</td><td>Only for feeds you subscribed in an RSS block</td><td>A fetch of that feed and its article images (cached locally)</td></tr>
+        <tr><td>Link previews &amp; favicons</td><td>When you paste a URL into a Bookmark block or set an entity’s website</td><td>A direct fetch of that page’s metadata or icon</td></tr>
+      </table>
+      <p>That’s the whole list — and every entry is something <em>you</em> invoked. Offline, Nomima makes <strong>zero</strong> network requests that involve your data, and everything outside AI, RSS, link previews and publishing works exactly the same.</p>
+
+      <h2 id="agent-security">Summon Agent: security boundaries</h2>
+      <p>The three Summon Agent capabilities — web, filesystem and shell — are each off by default and must be enabled individually in <strong>Settings → Summon Agent</strong>. Every toggle is enforced in Rust; disabling one from Settings cannot be bypassed by a running conversation. See <a href="summon.html">Summon</a> for the full usage guide.</p>
+      <h3>Hard limits (cannot be overridden from a prompt)</h3>
+      <table>
+        <tr><th>Capability</th><th>Limit</th><th>Detail</th></tr>
+        <tr><td>Web fetch</td><td>6 KB of text per page</td><td>HTML is stripped to plain text before the cap is applied. Only <code>http://</code> and <code>https://</code> URLs are accepted.</td></tr>
+        <tr><td>Filesystem read</td><td>256 KB per file</td><td>Larger files are truncated with a <code>…(truncated)</code> marker. The agent can only read and write inside your <strong>Documents</strong>, <strong>Desktop</strong>, and <strong>Downloads</strong> folders — every path is canonicalised before the range check, so <code>..</code> traversal and symlink escapes are both blocked.</td></tr>
+        <tr><td>Shell output</td><td>64 KB (stdout + stderr combined)</td><td>Output beyond the cap is truncated. Commands run with a <strong>30-second timeout</strong> and kill the process if it does not finish in time.</td></tr>
+        <tr><td>Shell command injection</td><td>Allowlist only, no shell interpreter</td><td>The agent can only run bare command names (e.g. <code>git</code>, <code>grep</code>) that appear on your allowlist. Paths, spaces and shell metacharacters in the command name are rejected outright — the command is passed as an argv array, never through <code>sh -c</code>.</td></tr>
+      </table>
+      <p>The default shell allowlist is: <code>git ls cat grep rg find echo pwd wc head tail npm node python python3 cargo</code>. You can add or remove entries in Settings → Summon Agent. Filesystem writes and all shell commands additionally require an interactive <strong>Allow / Deny</strong> prompt in the Summon panel before they execute — there is no way for the agent to skip this step.</p>
+      <p class="note">All three capabilities default to <em>off</em> — enable only what you need.</p>
+      <h2 id="pro">Completely free</h2>
+      <p>Nomima is <strong>free</strong> — there is no Pro tier, no license to activate, and no upgrade prompts. Every feature is unlocked for everyone:</p>
+      <ul>
+        <li>The full editor and <strong>every</strong> block, Smart Tags, dates &amp; reminders</li>
+        <li>Smart Views, Home, the 3D Knowledge Graph &amp; search</li>
+        <li>Comments, files, PDF export, and all templates — including creating your own</li>
+        <li>The <strong>Summon</strong> assistant and the <code>/generate</code> command (bring your own AI key, or run a local model)</li>
+        <li>Configuring AI models, the <strong>MCP server</strong>, and <strong>publishing notebooks to the web</strong></li>
+      </ul>
+      <p class="note">No license, nothing to buy. Your data stays on your device; the only things that ever leave your Mac are the notebooks you explicitly publish and any AI requests you make with your own key.</p>
+
+      <h2 id="vault-care">Vault care</h2>
+      <ul>
+        <li><strong>Back up</strong> your vault folder like any other documents — it’s self-contained and portable.</li>
+        <li><strong>Re-index</strong> (Settings → Vault) rebuilds search and the Knowledge Graph from your notes if anything ever looks stale.</li>
+        <li><strong>Storage stats</strong> on the same panel show exactly where the space goes.</li>
+      </ul>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>
