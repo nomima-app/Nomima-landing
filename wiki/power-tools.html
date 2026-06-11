@@ -53,8 +53,50 @@
       <h2 id="comments">Selection toolbar &amp; comments</h2>
       <p>Select any text and a floating toolbar appears — formatting, multi-color highlights, turning the selection into a Smart Tag, and adding a comment. Threads support replies and a resolved state. Comment locations show as accent-colored dashes on the <strong>Smart Scrollbar</strong> — hover to peek, click to jump to the thread. Resolved threads fade out of the way.</p>
 
+      <h2 id="templates">Templates</h2>
+      <ul>
+        <li><strong>Use a template</strong> (free): when creating a notebook, pick from <strong>20 built-ins across five categories</strong> (Work, Engineering, Research, Personal, Creative) — every seeded date lands relative to today, so a sprint board is live the moment it opens.</li>
+        <li><strong>Save as template</strong> <span class="pro-badge">Pro</span>: open the <code>⋯</code> menu on any notebook and choose <strong>Save as template…</strong> — the note's block structure is captured as a reusable template. Templates are listed newest-first in the picker.</li>
+        <li><strong>Rename a template</strong> <span class="pro-badge">Pro</span>: select any user-saved template in the picker to rename it.</li>
+        <li><strong>Delete a template</strong> <span class="pro-badge">Pro</span>: remove any user-saved template permanently from the picker.</li>
+      </ul>
+      <p class="note">Saving a template captures the note's block structure at that moment. Later edits to the original notebook do not update the saved template.</p>
+
+      <h2 id="comments">Selection toolbar &amp; comments</h2>
+      <p>Select any text and a floating toolbar appears above the selection. Its buttons are grouped left to right:</p>
+      <table>
+        <tr><th>Section</th><th>What it does</th></tr>
+        <tr><td><strong>Inline format</strong></td><td>Bold, Italic, Underline, Strikethrough, Inline code — toggle any combination on the selected text.</td></tr>
+        <tr><td><strong>Smart tags</strong></td><td>Convert the selection to a <code>#hashtag</code> or <code>@mention</code> pill. Only shown for selections of 1–3 words — longer phrases are not offered because they cannot form a single tag.</td></tr>
+        <tr><td><strong>Text colour</strong></td><td>8 preset colours (red, orange, yellow, green, teal, blue, violet, pink) plus a reset-to-default option.</td></tr>
+        <tr><td><strong>Highlight</strong></td><td>6 translucent highlight colours (yellow, green, sky, purple, pink, orange) plus a clear option.</td></tr>
+        <tr><td><strong>Alignment</strong></td><td>Left, Centre, Right — applies to the paragraph or heading that contains the selection.</td></tr>
+        <tr><td><strong>Link</strong></td><td>Opens an inline URL input; <kbd>Enter</kbd> applies the link, <kbd>Esc</kbd> cancels. Click the button again on an already-linked selection to remove the link.</td></tr>
+        <tr><td><strong>Comment</strong></td><td>Opens a new comment thread anchored to the selected text (see below).</td></tr>
+      </table>
+      <p class="tip">The Smart tag buttons only appear when your selection is 1–3 words long. For longer selections they are automatically hidden.</p>
+
+      <h3 id="comment-threads">Comment threads</h3>
+      <p>Clicking the comment button creates a <strong>thread</strong> anchored to the selected text. The quoted excerpt is stored with the thread so you always know what it refers to. Threads work like this:</p>
+      <ul>
+        <li><strong>Replies</strong> — anyone can add further entries to any thread at any time.</li>
+        <li><strong>Resolve</strong> — mark a thread done; it fades out of the way but stays in the note's history.</li>
+        <li><strong>Reopen</strong> — a resolved thread can be reopened if the conversation needs to continue.</li>
+        <li><strong>Delete</strong> — remove a thread and all its entries permanently.</li>
+      </ul>
+      <p>Every open comment thread appears as an <strong>accent-coloured dash</strong> on the Smart Scrollbar. Hover a dash to peek at the thread; click it to jump straight to the anchored text. Resolved threads do not show a dash.</p>
+
       <h2 id="export">Export &amp; sharing</h2>
       <p>Any notebook exports as a single continuous, exact-color <strong>PDF</strong> from its <code>⋯</code> menu — <strong>Download</strong> saves it, <strong>Share</strong> hands it straight to the macOS share sheet (Mail, AirDrop, Messages, Slack…). A <strong>text-size toggle</strong> lives in the same menu, and any notebook can switch to a <strong>wide view</strong> when you need the room. All free, like the rest of core Nomima.</p>
+
+      <h2 id="export">Export &amp; sharing</h2>
+      <p>Any notebook exports as a single continuous, exact-colour <strong>PDF</strong> from its <code>⋯</code> menu. Two paths are available:</p>
+      <ul>
+        <li><strong>Download</strong> — presents a save-file dialog and writes the PDF to a path you choose on disk.</li>
+        <li><strong>Share</strong> — captures the PDF to a temporary file and immediately presents the macOS <strong>Share sheet</strong> anchored to the share button, so you can send it via Mail, Messages, AirDrop, Slack, Teams, or any other sharing service installed on your Mac.</li>
+      </ul>
+      <p>The export uses the native macOS <code>WKWebView</code> PDF API and requires macOS 11 or later. The resulting PDF captures the notebook exactly as it appears on screen, including all block styles and colours. PDF export is a core free feature.</p>
+      <p class="note">PDF export is only available on macOS.</p>
 
       <h2 id="keyboard">Keyboard reference</h2>
       <h3>Markdown-style shortcuts</h3>

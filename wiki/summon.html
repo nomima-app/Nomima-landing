@@ -63,6 +63,25 @@
       </table>
       <p>Quick-action chips above the input cover the common ones: <em>Brief of the day</em>, <em>What’s overdue?</em>, <em>Prep for tomorrow</em>, <em>Recap my week</em>, <em>Find in notes</em>, <em>Capture a note</em>.</p>
 
+      <h3 id="proposals">Accepting or rejecting block proposals</h3>
+      <p>When Summon drafts a new notebook or template it doesn't write it immediately. It presents a <strong>proposal card</strong> in the conversation showing the notebook title and a summary of what it will contain. Two buttons appear at the bottom of the card:</p>
+      <ul>
+        <li><strong>Accept</strong> — creates the notebook, writes the proposed blocks into it, and shows an <em>Open</em> button so you can jump straight to it.</li>
+        <li><strong>Reject</strong> — marks the proposal as rejected (shown as dimmed text, no further action taken) and nothing is added to your vault.</li>
+      </ul>
+      <p class="note">Rejecting is permanent for that proposal — it stays in the chat history as a record, but the card is no longer actionable. You can follow up in the conversation to ask Summon to try a different approach.</p>
+      <h2 id="quick-actions">Quick-action chips</h2>
+      <p>Clicking a chip on the welcome screen (or picking one from the <strong>+</strong> menu) fires a pre-written prompt so you don't have to type it. The six chips are:</p>
+      <table>
+        <tr><th>Chip</th><th>What it does</th></tr>
+        <tr><td><strong>Brief of the day</strong></td><td>Pulls today's reminders, due tasks and dated notes from your vault, groups them (overdue / today / coming up) and highlights what matters most.</td></tr>
+        <tr><td><strong>What's overdue?</strong></td><td>Lists every overdue reminder and past-due task across your vault, sorted most urgent first, with the notebook each item lives in.</td></tr>
+        <tr><td><strong>Prep for tomorrow</strong></td><td>Collects tomorrow's reminders, tasks and meetings from your vault and flags anything you should prepare in advance.</td></tr>
+        <tr><td><strong>Recap my week</strong></td><td>Summarises the notes, decisions and progress recorded in your vault over the last seven days into a short, grouped overview.</td></tr>
+        <tr><td><strong>Find in my notes</strong></td><td>Asks what you're looking for, then searches your notes and files and returns the most relevant results with their notebooks.</td></tr>
+        <tr><td><strong>Capture a note</strong></td><td>Asks what to capture, then creates a new notebook and writes your content into it.</td></tr>
+      </table>
+      <p class="tip">The same chips appear in the <strong>+</strong> menu next to the input box once a conversation is already open.</p>
       <h2 id="permissions">Agent permissions</h2>
       <p>Summon’s reach beyond your vault is <strong>off by default</strong> and controlled in <strong>Settings → Summon Agent</strong>:</p>
       <ul>
@@ -72,6 +91,17 @@
       </ul>
       <p class="note"><strong>Privacy reminder:</strong> when Summon answers a question about your notes, the relevant note content is sent to the AI provider you configured — that’s how the model reads it. Use a local model if you want even that to stay on-device. Nothing is ever sent anywhere when you’re not actively using Summon.</p>
 
+      <h2 id="security-limits">Hard security limits</h2>
+      <p>The following caps are enforced in the Rust backend and cannot be changed from the frontend or by the AI model:</p>
+      <table>
+        <tr><th>Limit</th><th>Value</th></tr>
+        <tr><td>Web page fetch (characters returned to the model)</td><td>6 000 characters — content beyond this is truncated</td></tr>
+        <tr><td>Filesystem file read</td><td>256 KB — content beyond this is truncated</td></tr>
+        <tr><td>Shell command output (stdout + stderr each)</td><td>64 KB — output beyond this is truncated</td></tr>
+        <tr><td>Shell command timeout</td><td>30 seconds — the command is killed and an error is returned</td></tr>
+      </table>
+      <p>Filesystem access is confined to your <strong>Documents</strong>, <strong>Desktop</strong> and <strong>Downloads</strong> folders. Every path is canonicalised before the range check, so <code>..</code> traversal and symlink escapes are blocked. Shell commands run as a bare command name against a fixed allowlist (default: <code>git ls cat grep rg find echo pwd wc head tail npm node python python3 cargo</code>); paths, spaces and shell metacharacters in the command name are rejected outright — there is no <code>sh -c</code> wrapper. Web fetches are restricted to <code>http://</code> and <code>https://</code> URLs only.</p>
+      <p class="tip">You can extend the shell allowlist in <strong>Settings → Summon Agent</strong>. Filesystem and shell access are off by default; web access is on by default.</p>
       <nav class="docs-pager" id="docs-pager"></nav>
       <footer class="docs-foot" id="docs-foot"></footer>
     </main>

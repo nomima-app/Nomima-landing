@@ -72,6 +72,30 @@
       </table>
       <p>If you never configure a provider, Nomima simply never makes an AI call. The app is fully functional as a private, offline notebook.</p>
 
+      <h2 id="fallback">How Nomima picks your provider</h2>
+      <p>Every AI call goes through two resolver steps before anything is sent to a model.</p>
+
+      <h3>Provider resolution</h3>
+      <p>Nomima picks the effective provider in this order of priority:</p>
+      <ol>
+        <li><strong>Block-level override</strong> — if the specific Summon block or <code>/generate</code> call has a provider pinned to it, that is used unconditionally.</li>
+        <li><strong>Default provider</strong> — the provider you marked as default in <strong>Settings → AI Models</strong>.</li>
+        <li><strong>First ready provider</strong> — if no default is set, Nomima scans the provider list in order and uses the first one that is <em>ready</em>: either it requires no API key (a Local server with no authentication) or a key has already been saved for it.</li>
+        <li><strong>Anthropic</strong> — if no provider is ready at all, Nomima falls back to <code>anthropic</code> as the ultimate default. You will be prompted to enter a key before any call succeeds.</li>
+      </ol>
+      <p class="note"><strong>"Ready" means a key is saved, not validated.</strong> A provider is considered ready as soon as its API key has been stored in the Keychain — Nomima does not re-validate the key on every call. If the saved key is invalid or expired you will see an error after the first attempt; fix it in <strong>Settings → AI Models → Test</strong>.</p>
+
+      <h3>Model resolution</h3>
+      <p>Once the provider is known, the model is chosen as follows:</p>
+      <ol>
+        <li>If the block has a model pinned to it, that model is used.</li>
+        <li>Otherwise, the model you configured for the resolved provider in <strong>Settings → AI Models</strong> is used.</li>
+      </ol>
+      <p class="note">There is no automatic timeout or retry across providers. If the chosen provider's endpoint is unreachable you will see a network error for that provider; switch providers manually in Settings if needed.</p>
+
+      <h3>Local provider auto-heal</h3>
+      <p>When Nomima loads, it queries your configured Local endpoint for its list of installed models. If the model you had selected is no longer present (for example because you removed it from Ollama), Nomima automatically switches to the first model that <em>is</em> installed. If the endpoint is offline the check is skipped and your existing selection is left unchanged.</p>
+
       <h2 id="errors">If something fails</h2>
       <p>Nomima tells you exactly what went wrong rather than failing silently: an <strong>invalid key</strong> (fix the key), <strong>quota exhausted</strong> (top up with your provider), <strong>rate limited</strong> (wait a moment and retry), or a <strong>network error</strong> (check your connection — or your local server, if you’re running one).</p>
 

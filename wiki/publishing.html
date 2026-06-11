@@ -57,11 +57,26 @@
         <li><strong>The badge tells the truth.</strong> The note header shows the live state at all times: <em>Draft → Publishing → Published</em>, plus <em>Update queued</em> or <em>Failed</em> when something is pending or wrong.</li>
       </ul>
 
+      <h3 id="offline-queue-retry">How the offline queue retries</h3>
+<p>When a publish, update or unpublish operation fails because of a network problem or a server error (5xx), the entry stays in the durable outbox and the worker retries with exponential back-off: the first retry fires after 5 seconds, then 10 s, 20 s, 40 s … up to a maximum of 1 hour between attempts. The badge shows <em>Update queued</em> (not Failed) while retries are pending.</p>
+<p>Errors that are <em>not</em> retried — a rejected license key (401/403), a malformed request (other 4xx), or a local database error — are <strong>definitive failures</strong>: the outbox row is dropped immediately and the badge switches to <em>Failed</em>. The publish menu then shows a <strong>Try again</strong> button that re-enqueues the operation from scratch.</p>
+<p class="note">There is no manual "force retry" command. If the badge is stuck on <em>Failed</em>, open the publish menu and click <strong>Try again</strong>. The app will re-enqueue the operation and begin the normal retry cycle.</p>
+<p class="note">If your Pro license is deactivated while an update is still queued, the backend will reject the next attempt with a license error. That turns the entry into a definitive failure (badge: <em>Failed</em>) — the queued payload is discarded and the already-live page is not automatically taken down. You can unpublish manually while the notebook still shows as published locally.</p>
+
       <h2 id="files">Sharing attached files</h2>
       <p>Files attached to the notebook are <strong>not shared by default</strong>. The publish menu lists them with checkboxes — tick the ones you want readers to have and they appear as <strong>download chips</strong> at the top of the published page. Everything unticked stays on your Mac.</p>
 
       <h2 id="analytics">Know your readers</h2>
       <p>Every published note has a <strong>Views panel</strong>: total, unique and returning visitors, average read time, a views-over-time chart, top countries, and a per-visitor list showing coarse location (country and city — no raw IP is stored), device, and time spent. Readers can optionally leave a name when they open the page.</p>
+
+      <h3 id="analytics-access">Accessing the analytics panel</h3>
+<p>Analytics are available in two places once a notebook is published:</p>
+<ul>
+  <li><strong>View-count pill in the note header.</strong> A small pill showing the total view count appears in the notebook header next to the publish badge. It refreshes automatically every 30 seconds while you are online. Clicking it opens the <em>Views &amp; visitors</em> panel.</li>
+  <li><strong>Link inside the publish menu.</strong> Open the publish menu (click the publish badge), scroll to the bottom of the published state, and click <strong>View analytics &amp; visitors</strong> to open the same panel.</li>
+</ul>
+<p>The panel shows total, unique and returning visitor counts, average read time, a 14-day views bar chart, top countries (up to six), and a per-visitor list with coarse location (city and country — no raw IP address is stored), device (OS and browser), time spent, and an optional name the visitor may have entered. Analytics require an internet connection; the panel shows a message rather than stale data when you are offline.</p>
+<p class="note">There is no option to disable analytics tracking per note or globally. All published notes collect the same view metrics on the nomima.io backend.</p>
 
       <h2 id="control">Privacy &amp; control</h2>
       <ul>

@@ -64,6 +64,36 @@
         <li><strong>Gantt</strong> — rows complete individually; the chart completes when all rows are done.</li>
       </ul>
 
+      <h2 id="cascade">Completion cascade — how it spreads</h2>
+      <p>Marking a container complete (or incomplete) automatically propagates down to its children, and checking off the last child automatically marks the container complete. The three cascade layers are:</p>
+
+      <h3 id="cascade-task">Task list: parent checkbox drives all descendants</h3>
+      <p>Ticking or unticking a <strong>parent task</strong> in a Task List immediately sets every indented sub-task (and their sub-tasks, however deeply nested) to match. Un-ticking a single child does <em>not</em> propagate upward — only the parent drives downward.</p>
+      <p>Stamping <span class="pill pill-status">#complete</span> on the <strong>list title</strong> drives the same thing: every task item in that list (including nested sub-tasks) is checked, and the title's <span class="pill pill-status">#complete</span> pill is removed when you uncheck any task. Removing the tag from the title unchecks every item in the list.</p>
+      <p class="note">The checkbox and the <span class="pill pill-status">#complete</span> status tag on a task item are always kept in sync automatically. Ticking the box stamps the tag; typing <span class="pill pill-status">#complete</span> on the row ticks the box. An existing status tag (like <span class="pill pill-status">#pending</span>) is replaced rather than left alongside the new one.</p>
+
+      <h3 id="cascade-section">Section: completing the summary marks every container child</h3>
+      <p>When a <strong>collapsible Section's</strong> summary line gains a <span class="pill pill-status">#complete</span> tag, Nomima cascades completion to every <strong>container child</strong> — Task Lists, Kanban boards, Gantt charts, and nested Sections — by stamping their titles. Each of those containers then runs its own cascade internally, so a single stamp on a top-level section can tick every task inside every nested list in one go.</p>
+      <p>Plain paragraphs and bullet lists inside the section are <em>not</em> individually stamped. Instead, the section's completion decoration greys out the entire subtree visually — so prose still reads as done without cluttering each line with a tag.</p>
+      <p>Removing the <span class="pill pill-status">#complete</span> tag from the summary reverses this: every container child is reopened by stripping the tag from its title, which in turn unchecks all tasks.</p>
+
+      <h3 id="cascade-upstream">Upstream: finishing all children completes the container</h3>
+      <p>The cascade also works <strong>bottom-up</strong>. When the last incomplete item in a container (Task List, Kanban, Gantt, or Section) is completed, Nomima automatically stamps <span class="pill pill-status">#complete</span> on that container's title. When any item is reopened, the tag is removed from the title.</p>
+      <p>This propagates through the full nesting hierarchy in a single pass: finishing the last task in a nested list can complete the inner list's title, which makes it a fully-complete child of its enclosing Section, which then completes the Section's title too — all at once.</p>
+      <p class="tip">The upstream pass skips containers that have no children, so an empty Task List or empty Section never auto-completes.</p>
+
+      <table>
+        <tr><th>What you do</th><th>What cascades automatically</th></tr>
+        <tr><td>Tick a parent task</td><td>Every indented sub-task is checked.</td></tr>
+        <tr><td>Untick a parent task</td><td>Every indented sub-task is unchecked.</td></tr>
+        <tr><td>Stamp <span class="pill pill-status">#complete</span> on a list title</td><td>Every task item (and sub-task) in the list is checked.</td></tr>
+        <tr><td>Remove <span class="pill pill-status">#complete</span> from a list title</td><td>Every task item in the list is unchecked.</td></tr>
+        <tr><td>Stamp <span class="pill pill-status">#complete</span> on a Section's summary</td><td>Every Task List, Kanban, Gantt, and nested Section child is completed.</td></tr>
+        <tr><td>Remove <span class="pill pill-status">#complete</span> from a Section's summary</td><td>Every container child is reopened.</td></tr>
+        <tr><td>Complete the last item in any container</td><td>The container's title is automatically stamped with <span class="pill pill-status">#complete</span>.</td></tr>
+        <tr><td>Reopen any item in a container</td><td>The container's title loses its <span class="pill pill-status">#complete</span> tag.</td></tr>
+      </table>
+
       <h2 id="effects">What changes when something is done</h2>
       <ul>
         <li><strong>In the note</strong> — the text greys out and gets a strikethrough; its date pills turn <span class="pill pill-done">grey</span> and stop counting as overdue.</li>

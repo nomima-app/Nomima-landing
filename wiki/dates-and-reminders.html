@@ -60,6 +60,14 @@
         <li><strong>Notifications</strong> — overdue dated tasks appear in the Alerts view and the sidebar bell badge.</li>
       </ul>
 
+      <h3 id="pill-refresh">How often the label updates</h3>
+      <p>Date pill labels refresh on two different schedules depending on how far away the date is:</p>
+      <ul>
+        <li><strong>Within 26 hours of now</strong> — the label re-evaluates every <strong>30 seconds</strong>, so a pill that reads "in 15 min" will tick down visibly as time passes.</li>
+        <li><strong>More than 26 hours away</strong> — the label only rolls over at <strong>local midnight</strong> (e.g. "tomorrow" becomes "today" overnight). No per-minute or per-hour ticking occurs for far-future dates.</li>
+      </ul>
+      <p>The overdue/done colour state (red vs. grey) also recomputes the instant you add or remove a <span class="pill pill-status">#complete</span> pill on the same block — no page reload needed.</p>
+      <p class="note">The timers run while Nomima is in the foreground or background; there is no pause when the app is hidden. If you leave the app open overnight, pills will have already rolled over by the time you look at them in the morning.</p>
       <h2 id="reminders">Reminders</h2>
       <p>A reminder is a block with a countdown and a desktop alert. Insert one with <code>/reminder</code>.</p>
       <h3>Setting one up</h3>
@@ -84,6 +92,17 @@
         <li><strong>Reopening</strong> — delete the <span class="pill pill-status">#complete</span> tag on a done reminder and it’s live again.</li>
       </ul>
 
+      <h3 id="snooze-ui">How Snooze works</h3>
+      <p>The <strong>Snooze</strong> button appears on the reminder row whenever the reminder is <em>running</em> (counting down or overdue). It is not available on idle, done, or cancelled reminders. Clicking it opens a small dropdown titled <em>"Snooze for…"</em> with four preset durations:</p>
+      <table>
+        <tr><th>Preset</th><th>New due time</th></tr>
+        <tr><td>30 minutes</td><td>Now + 30 min</td></tr>
+        <tr><td>1 hour</td><td>Now + 1 h</td></tr>
+        <tr><td>3 hours</td><td>Now + 3 h</td></tr>
+        <tr><td>1 day</td><td>Now + 24 h</td></tr>
+      </table>
+      <p>All durations are measured from <strong>the moment you click</strong>, not from the original due time. Picking a preset does two things at once: the reminder re-arms as running at the new instant, and the date pill text inside the label updates to a fresh relative phrase (e.g. <span class="pill pill-date">in 1 hour</span>) so the label still reads naturally. The desktop notification fires again when the new time arrives.</p>
+      <p class="note">Close the dropdown without choosing by clicking anywhere outside it or pressing <kbd>Esc</kbd>.</p>
       <h2 id="notifications">Desktop notifications</h2>
       <p>Reminders fire <strong>real macOS notifications</strong> — and they work even when the note is closed. Each alert fires exactly once per due time and carries <strong>Clear</strong> and <strong>Snooze 1h</strong> buttons right on the notification; clicking it opens the note and scrolls to the exact reminder. Overdue reminders also <strong>badge the Dock icon</strong> until you complete or snooze them.</p>
       <h3>The bell &amp; the Alerts view</h3>

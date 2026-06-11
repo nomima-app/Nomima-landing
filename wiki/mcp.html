@@ -78,6 +78,30 @@
       <h2 id="log">Watching the activity log</h2>
       <p>The <strong>Logs</strong> tab keeps a live log of every request: which client (Claude, Cursor, …), what it called, whether it succeeded, and how long it took — click any entry for the full request and response. The log window is configurable (50–1,000 entries) and one click clears it. If you ever wonder what an external tool just did to your vault, the answer is right there.</p>
 
+      <h3 id="log-fields">Log entry fields</h3>
+      <p>Each row in the Logs tab represents one complete request/response cycle. Clicking a row expands the full detail. The fields shown are:</p>
+      <table>
+        <tr><th>Field</th><th>What it contains</th></tr>
+        <tr><td>Timestamp</td><td>Unix epoch in milliseconds (<code>timestamp_ms</code>) — shown as a human-readable time in the UI.</td></tr>
+        <tr><td>Client</td><td>The name the connecting tool reported when it first initialised the session (e.g. <code>claude-code</code>, <code>cursor</code>). Empty if the client has not yet sent an <code>initialize</code> request.</td></tr>
+        <tr><td>Method</td><td>The JSON-RPC method name — for tool calls this is <code>tools/call</code>; for listing tools it is <code>tools/list</code>; shown as <code>?</code> for requests that could not be parsed or that were rejected before parsing.</td></tr>
+        <tr><td>Query preview</td><td>A short human-readable excerpt: the tool name plus an argument preview, or the URI for resource requests.</td></tr>
+        <tr><td>Status</td><td>One of four values — see the table below.</td></tr>
+        <tr><td>Duration</td><td>Round-trip time in milliseconds from request received to response sent.</td></tr>
+        <tr><td>Request body</td><td>Raw JSON of the incoming request, truncated to 4,096 characters.</td></tr>
+        <tr><td>Response preview</td><td>Raw JSON of the outgoing response, truncated to 512 characters.</td></tr>
+      </table>
+
+      <h3 id="log-status">Interpreting the status</h3>
+      <table>
+        <tr><th>Status</th><th>Meaning</th></tr>
+        <tr><td><code>ok</code></td><td>The request completed and the response contains a <code>result</code> field — the tool ran successfully.</td></tr>
+        <tr><td><code>error</code></td><td>The server processed the request but the response contains an <code>error</code> field — for example, a tool was called with invalid arguments, or the vault returned no match. Expand the entry to read the error message and code.</td></tr>
+        <tr><td><code>unauthorized</code></td><td>The <code>Authorization</code> header was missing or the bearer token did not match. The server returns HTTP 401; no tool ran. Use <strong>Rotate Token</strong> and update your client config if you see this unexpectedly.</td></tr>
+        <tr><td><code>parse_error</code></td><td>The request body was not valid JSON-RPC — JSON-RPC error code <code>-32700</code>. The method field is shown as <code>?</code>. This usually means the client sent a malformed message.</td></tr>
+      </table>
+      <p class="note"><strong>Log retention:</strong> the window holds a configurable number of entries (10–1,000, default 200). When the window is full the oldest entry is evicted automatically. Click <strong>Clear</strong> to wipe all entries immediately. The log is in-memory only — it does not persist across app restarts.</p>
+
       <h2 id="ideas">Things people do with it</h2>
       <ul>
         <li>Ask <strong>Claude Code</strong> to check project notes for context while coding — “what did I decide about the API design? check my Nomima notes”.</li>

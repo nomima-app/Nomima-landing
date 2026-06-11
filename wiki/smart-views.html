@@ -70,6 +70,23 @@
         <li><strong>Delete</strong> (hover for the trash icon) removes the file, its extracted text and knowledge-graph entries, <em>and</em> the file pill in the note — one action purges everything, with a confirmation first.</li>
       </ul>
 
+      <h3 id="files-supported-types">Supported file types and how extraction works</h3>
+      <p>Text is extracted immediately at import time — not deferred — on a background thread so the app stays responsive. The extracted text is stored in the vault alongside the original file and feeds the knowledge graph without any extra step.</p>
+      <p>File types that produce searchable, indexed text:</p>
+      <table>
+        <tr><th>Format</th><th>Extensions</th></tr>
+        <tr><td>Plain text &amp; markup</td><td><code>.txt</code> <code>.md</code> <code>.markdown</code> <code>.text</code> <code>.log</code> <code>.json</code> <code>.csv</code> <code>.tsv</code></td></tr>
+        <tr><td>Web</td><td><code>.html</code> <code>.htm</code> (script/style blocks stripped)</td></tr>
+        <tr><td>PDF</td><td><code>.pdf</code></td></tr>
+        <tr><td>Microsoft Word</td><td><code>.docx</code></td></tr>
+        <tr><td>Microsoft PowerPoint</td><td><code>.pptx</code> (slide text + speaker notes, in slide order)</td></tr>
+        <tr><td>Spreadsheets</td><td><code>.xlsx</code> <code>.xls</code> <code>.xlsb</code> <code>.ods</code> (all sheets, real cell values)</td></tr>
+        <tr><td>Rich Text</td><td><code>.rtf</code></td></tr>
+        <tr><td>OpenDocument</td><td><code>.odt</code> <code>.odp</code></td></tr>
+      </table>
+      <p>Files of any other type (images, video, audio, archives, etc.) are stored and attached as-is — the pill appears in the note and the file opens in its default app, but no text is extracted and no knowledge-graph entities are derived from the content.</p>
+      <p class="note">A scan-only PDF (no embedded text layer) stores cleanly but shows <em>No text</em> in the Files lens — the same as an unsupported type. The original file is always kept intact regardless of extraction outcome. The import size limit is 10 MB per file.</p>
+
       <h2 id="home">Home — your daily agenda</h2>
       <p>Home greets you (in English plus a rotating second language with a phonetic guide), shows today’s date, and lays out your day — computed live from your notes, no AI required and nothing to refresh:</p>
       <ul>
@@ -79,6 +96,19 @@
         <li><strong>Recently completed</strong> — shown when you’re all caught up, so an empty day feels earned.</li>
       </ul>
       <p>Use the small tabs at the top right to regroup the agenda by <strong>Time</strong> (default), <strong>@Mentions</strong> or <strong>#Tags</strong> — the same items organized around people and projects instead of the clock.</p>
+
+      <h2 id="cover-graph">The note cover graph</h2>
+      <p>Each notebook opens with a small interactive knowledge-graph panel above the editor — a scoped view showing the entities found in that note, their typed relations, and up to five semantically related notes orbiting the central hub.</p>
+      <ul>
+        <li><strong>Drag-pan</strong> — click and drag anywhere on the graph to reposition it.</li>
+        <li><strong>Node drag</strong> — drag an individual node to pin it somewhere on the canvas; the force layout adapts around it.</li>
+        <li><strong>⌘+scroll (or Ctrl+scroll)</strong> to zoom in and out — plain scroll is reserved for the note itself, so the modifier key keeps both actions unambiguous.</li>
+        <li><strong>Click a node</strong> to open its entity profile panel (showing attributes, related notes, and all blocks that mention it). Clicking a related-note node opens that notebook. Clicking the central hub node does nothing.</li>
+        <li><strong>Hover a node</strong> for a small tooltip with the entity's name, type, and sentiment indicator.</li>
+        <li><strong>Cluster-by legend</strong> — the legend strip in the top-right corner lists the entity types present in the note. Clicking a type recolors the graph by that type, grouping nodes into clusters. Click again or pick a different type to switch; no selection removes clustering.</li>
+      </ul>
+      <p>The cover graph scrolls away naturally as you move into the note — it is part of the scroll flow, not a fixed overlay. Once it has scrolled out of view the force simulation pauses automatically to save resources; scrolling back up remounts and relays out the graph. The compact entity-kind strip that appears in the app titlebar once the cover is hidden reflects the same entity types.</p>
+      <p class="note">There is no button to hide the cover graph permanently — scrolling past it is the intended pattern. The graph only appears when there is at least one entity in the note.</p>
 
       <h2 id="scrollbar">The Smart Scrollbar</h2>
       <p>Every note has a slim minimap rail on its right edge — a fingerprint of the document:</p>
@@ -90,8 +120,52 @@
         <li><strong>Click</strong> any dash to jump there; the block flashes so you don’t lose it. A white dash shows where you currently are.</li>
       </ul>
 
+      <h3 id="scrollbar-colors">Dash colors and what they mean</h3>
+      <p>Each dash on the rail uses the same color as the pill it represents, resolved from the live entity-type registry so a recolored type appears correctly everywhere. The rules, in priority order:</p>
+      <table>
+        <tr><th>Dash appearance</th><th>Meaning</th></tr>
+        <tr><td>Tag's own color (project, idea, topic, status, or generic hashtag color)</td><td>A block containing a hashtag of that type, with open work.</td></tr>
+        <tr><td>Mention's own color (person, team, company, location, product, or generic mention color)</td><td>A block containing a mention of that type, with open work.</td></tr>
+        <tr><td>Red dash + clock icon + number</td><td>A block with one or more <strong>overdue reminders</strong>. The number is the overdue count; the clock icon distinguishes reminders from plain dates.</td></tr>
+        <tr><td>Red dash + number (no clock)</td><td>A block with an <strong>overdue date</strong> (a non-reminder date pill that has passed its due instant).</td></tr>
+        <tr><td>Purple/accent dash + clock icon</td><td>A block containing an <strong>active (running) reminder</strong> that is not yet overdue.</td></tr>
+        <tr><td>Accent-color dash (no entity entities)</td><td>A <strong>comment thread</strong> anchored in the document at that position.</td></tr>
+        <tr><td>Grey dash, reduced opacity</td><td>A block that is <strong>completed</strong> — the task is checked, the block has a <code>#complete</code> status pill, or every item in a TodoList/Kanban is done.</td></tr>
+        <tr><td>White dash</td><td>Your <strong>current scroll position</strong> (center of the visible viewport).</td></tr>
+      </table>
+      <p class="note">Plain future dates (not overdue, not part of a reminder) do not get a dash — only dates that need attention appear on the rail.</p>
+
+      <h3 id="scrollbar-hover">Hover magnification and the tooltip</h3>
+      <p>Move your pointer into the rail column and dashes nearest the cursor expand sideways (macOS Dock-style magnification). The focused dash — the one closest to the cursor while the pointer is over the dash column — shows a tooltip to its left listing every entity in that block:</p>
+      <ul>
+        <li>Open (pending) entities appear in their own color with their type icon.</li>
+        <li>Completed entities appear greyed, struck through, and with a green check mark.</li>
+        <li>The tooltip shows up to eight entities; additional ones are summarised as "+N more".</li>
+        <li>When a block has both open and done entities, the header line shows the counts: "2 open · 1 done".</li>
+        <li>For comment dashes, the tooltip shows the quoted text and the last reply body.</li>
+        <li>At the bottom of every tooltip: "click to jump" (or "overdue · click to jump" for overdue blocks).</li>
+      </ul>
+
+      <h3 id="scrollbar-comments">Comments on the minimap</h3>
+      <p>Yes — every open comment thread gets its own accent-color dash on the rail, placed at the vertical center of the highlighted text. Resolved threads appear at reduced opacity. Clicking a comment dash scrolls to and flashes the commented block, then opens the thread popover anchored to the highlighted span.</p>
+
       <h2 id="palette">The command palette</h2>
       <p><kbd>⌘K</kbd> opens search across everything: notebooks, blocks, hashtags, mentions, files, and app commands. Pressing <kbd>Enter</kbd> on a tag opens its lens and flashes it. You can <strong>stack multiple tags</strong> and toggle between matching <em>all</em> or <em>any</em> of them — instant ad-hoc filtered views.</p>
+
+      <h3 id="palette-scope">Search scope, ranking, and scope hints</h3>
+      <p>The command palette searches the <strong>entire vault</strong> — not just the current notebook. Results come from three pools searched in parallel:</p>
+      <ul>
+        <li><strong>Blocks</strong> — full-text search across every block in every notebook (up to 25 hits, debounced at 120 ms). Results show the block text and the notebook it lives in.</li>
+        <li><strong>Entities</strong> — every @mention, #hashtag, and date pill in the vault. Entity hits are sorted first by type order (Person → Team → Company → Location → Product → Mention → Project → Idea → Topic → Status → Tag → Date), then by how many notebooks reference them. Up to 12 entity hits show per query.</li>
+        <li><strong>Files</strong> — attachment names from every notebook, matched by substring (up to 8 hits). Selecting a file hit opens the notebook that contains it.</li>
+      </ul>
+      <p>Matching is <strong>substring AND</strong>: every space-separated token must appear somewhere in the item's text (case-insensitive). There is no wildcard syntax — partial tokens match because the test is <code>includes</code>, not exact equality.</p>
+      <p>Two <strong>scope hints</strong> narrow entity results without affecting block or file search:</p>
+      <ul>
+        <li>Type <kbd>@</kbd> at the start of your query to restrict entity results to @mentions only.</li>
+        <li>Type <kbd>#</kbd> at the start of your query to restrict entity results to #hashtags only.</li>
+      </ul>
+      <p>When the query is empty the palette shows your six most recent notebooks and the core quick-actions (New notebook, New from template, Open Settings, switch Theme).</p>
 
       <p class="note"><strong>Nothing here is manual.</strong> There are no refresh buttons in Nomima — lenses, Home, the graph and the briefs all update on the fly as you write, complete and import. The only manual action that exists is the deep “Re-index” in Settings → Vault, and you should rarely need it.</p>
 

@@ -48,6 +48,19 @@
       </table>
       <p class="note"><strong>Looking for Publishing?</strong> It isn’t a Settings panel — each notebook is published from the <strong>publish badge</strong> in its own header, where you’ll find the link, view-code, file checkboxes and view analytics. See <a href="publishing.html">Publishing</a>.</p>
 
+      <h2 id="vault-stats">Vault stats &amp; metadata</h2>
+      <p>Settings → Vault shows a live snapshot of your vault's contents. The numbers come directly from the database — no estimation:</p>
+      <table>
+        <tr><th>Stat</th><th>What it counts</th></tr>
+        <tr><td>Notebooks</td><td>All non-deleted notebooks in the vault.</td></tr>
+        <tr><td>Files</td><td>Every attachment you have imported (count and total size on disk).</td></tr>
+        <tr><td>Knowledge Graph nodes</td><td>Extracted entity nodes in the graph index (<code>kg_entity</code> rows).</td></tr>
+        <tr><td>Vault size</td><td>Total bytes used by the vault folder — <em>excluding</em> the bundled AI model weights in the <code>models/</code> subfolder, which are a fixed app asset rather than your data.</td></tr>
+      </table>
+      <p>The same panel also shows the <strong>vault location</strong> (the full path on disk) and a <strong>Move vault</strong> action that copies everything to a new parent folder you pick. After a successful move, Nomima restarts pointing at the new location. The old folder is not deleted automatically — remove it yourself once you have confirmed the move.</p>
+      <p class="note"><strong>Re-index</strong> rebuilds the search index and Knowledge Graph from scratch. Use it if search results look stale or the graph is missing entries after an import. It does not delete or move any notes or files.</p>
+      <h3 id="file-reextraction">File text extraction</h3>
+      <p>When you import a file (PDF, Word document, etc.) Nomima extracts its text immediately at import time and stores it alongside the attachment. If extraction failed — for example because a PDF was scanned-only or password-protected — the file's entry in the Files Smart View will show an "unextracted" state. There is currently no per-file re-extraction button; running <strong>Re-index</strong> (Settings → Vault) will retry extraction for any file whose text is missing as part of the full re-index pass.</p>
       <h2 id="privacy">Privacy: what stays, what leaves</h2>
       <p>Nomima is local-first in the literal sense. Your vault — every note, file, comment and graph relationship — lives in a folder on your Mac (under <code>~/Library/Application Support</code>), stored in an ordinary SQLite database. (Vaults from very early versions that lived in Documents are migrated there automatically.) No account exists, no telemetry is collected, nothing syncs anywhere.</p>
       <h3>The complete list of network calls</h3>
@@ -63,6 +76,18 @@
       </table>
       <p>That’s the whole list — and every entry is something <em>you</em> invoked. Offline, Nomima makes <strong>zero</strong> network requests that involve your data, and everything outside AI, RSS, link previews and publishing works exactly the same.</p>
 
+      <h2 id="agent-security">Summon Agent: security boundaries</h2>
+      <p>The three Summon Agent capabilities — web, filesystem and shell — are each off by default and must be enabled individually in <strong>Settings → Summon Agent</strong>. Every toggle is enforced in Rust; disabling one from Settings cannot be bypassed by a running conversation. See <a href="summon.html">Summon</a> for the full usage guide.</p>
+      <h3>Hard limits (cannot be overridden from a prompt)</h3>
+      <table>
+        <tr><th>Capability</th><th>Limit</th><th>Detail</th></tr>
+        <tr><td>Web fetch</td><td>6 KB of text per page</td><td>HTML is stripped to plain text before the cap is applied. Only <code>http://</code> and <code>https://</code> URLs are accepted.</td></tr>
+        <tr><td>Filesystem read</td><td>256 KB per file</td><td>Larger files are truncated with a <code>…(truncated)</code> marker. The agent can only read and write inside your <strong>Documents</strong>, <strong>Desktop</strong>, and <strong>Downloads</strong> folders — every path is canonicalised before the range check, so <code>..</code> traversal and symlink escapes are both blocked.</td></tr>
+        <tr><td>Shell output</td><td>64 KB (stdout + stderr combined)</td><td>Output beyond the cap is truncated. Commands run with a <strong>30-second timeout</strong> and kill the process if it does not finish in time.</td></tr>
+        <tr><td>Shell command injection</td><td>Allowlist only, no shell interpreter</td><td>The agent can only run bare command names (e.g. <code>git</code>, <code>grep</code>) that appear on your allowlist. Paths, spaces and shell metacharacters in the command name are rejected outright — the command is passed as an argv array, never through <code>sh -c</code>.</td></tr>
+      </table>
+      <p>The default shell allowlist is: <code>git ls cat grep rg find echo pwd wc head tail npm node python python3 cargo</code>. You can add or remove entries in Settings → Summon Agent. Filesystem writes and all shell commands additionally require an interactive <strong>Allow / Deny</strong> prompt in the Summon panel before they execute — there is no way for the agent to skip this step.</p>
+      <p class="note">All three capabilities are gated behind <strong>Pro</strong>. Even with Pro, all three default to <em>off</em> — enable only what you need.</p>
       <h2 id="pro">Free vs Pro</h2>
       <p>The free tier isn’t a trial — the entire notebook is free, forever. Pro unlocks the AI and integration layer, and comes with a <strong>3-day trial</strong> so you can try all of it first:</p>
       <table>

@@ -35,6 +35,22 @@
 
       <p class="tip"><strong>Tip:</strong> blocks that have a title (Task List, Section, Kanban, Gantt, Dashboard, Widget) drop the caret straight into the title when created — name it, press <kbd>Enter</kbd>, and keep writing. Mentions, hashtags and dates work inside those titles too.</p>
 
+      <h2 id="block-anatomy">Block anatomy</h2>
+      <p>Most rich blocks share a common header row. Understanding it once means you know how every board, chart, diagram, and drawing works.</p>
+
+      <h3>Collapse chevron</h3>
+      <p>Every rich block (Kanban, Gantt, Mermaid, Math, Drawing, Dashboard, Widget, Bookmark, RSS, Task List, Section) shows a small <strong>icon-toggle</strong> on the left of its header. At rest the icon identifies the block type (a ChartGantt icon for timelines, a GitBranch icon for diagrams, and so on). Hover over it and it becomes a <strong>collapse chevron</strong>. Click to fold the block body down to its header row; click again to expand. The content is never destroyed — it stays indexed by the Knowledge Graph even while folded. This collapse is distinct from the Toggle List block, which is a plain inline disclosure without any card chrome.</p>
+      <p class="note"><strong>Note:</strong> the collapse chevron is also the block's drag handle. Grab it and drag to reorder the block within the note.</p>
+
+      <h3>Block caption (title row)</h3>
+      <p>Kanban, Gantt, Mermaid, Math, Drawing, Dashboard, Widget, Bookmark, and RSS blocks share a unified <strong>editable caption</strong> row at the top. It is a real text field — not a plain attribute — so:</p>
+      <ul>
+        <li><strong>@mentions, #hashtags, and dates</strong> work inside every caption for free.</li>
+        <li>Typing <span class="pill pill-status">#complete</span> in the caption marks the <em>whole block</em> done: it acquires an emerald border and a struck title, and counts as complete in Smart Views and the Daily Brief — just like checking off a task.</li>
+        <li>Pressing <kbd>Enter</kbd> in the caption moves the caret into the block's content rather than splitting the caption (a caption holds only inline content).</li>
+      </ul>
+      <p class="tip"><strong>Tip:</strong> completing a block via its caption is the fastest way to archive a finished Kanban board, Gantt timeline, or diagram without deleting it.</p>
+
       <h2 id="basic">Text basics</h2>
       <table>
         <tr><th>Block</th><th>What it does</th></tr>
@@ -57,6 +73,10 @@
       </ul>
       <p class="note"><strong>Note:</strong> the <code>/</code> block menu is intentionally disabled inside checklist items — checklists stay checklists. Press <kbd>Enter</kbd> to leave the list first.</p>
 
+      <h3 id="tasklist-subtasks">Task List — subtasks and nesting</h3>
+      <p>Press <kbd>Tab</kbd> on any task row to indent it under the row above, creating a <strong>subtask</strong>. Subtasks can be nested at any depth. <kbd>Shift Tab</kbd> outdents one level. The header badge shows two counts when subtasks exist: <code>2/5</code> for top-level tasks and a second badge (with a corner-arrow icon) for subtasks, e.g. <code>↵ 3/4</code>. The main progress bar reflects top-level completion only.</p>
+      <p>The <code>/</code> block menu is disabled inside task rows at every nesting depth — checklists stay checklists. Press <kbd>Tab</kbd> past the last non-indentable row to exit the list to the next block.</p>
+
       <h2 id="containers">Containers</h2>
       <table>
         <tr><th>Block</th><th>What it does</th></tr>
@@ -65,6 +85,21 @@
         <tr><td>Callout</td><td>A tinted box with an icon badge. Click the badge to pick the type: Note, Info, Tip, Idea, Important, Success, Warning, Urgent, Critical, Bug, Question, or Research — each with its own color and line icon. A completed callout shows a green checkmark regardless of type.</td></tr>
         <tr><td>Columns</td><td>Side-by-side layout with two or three columns; each column holds normal blocks.</td></tr>
       </table>
+
+      <h3 id="columns-detail">Columns — ratio presets</h3>
+      <p>After inserting a Columns block you can adjust the split ratio from the block's toolbar. The available presets depend on the column count:</p>
+      <table>
+        <tr><th>Columns</th><th>Preset</th><th>Ratio</th></tr>
+        <tr><td rowspan="3">Two columns</td><td>Equal halves</td><td>1 : 1</td></tr>
+        <tr><td>One third · two thirds</td><td>1 : 2</td></tr>
+        <tr><td>Two thirds · one third</td><td>2 : 1</td></tr>
+        <tr><td rowspan="2">Three columns</td><td>Equal thirds</td><td>1 : 1 : 1</td></tr>
+        <tr><td>Quarter · half · quarter</td><td>1 : 2 : 1</td></tr>
+      </table>
+      <p>Ratios are implemented as CSS <code>fr</code> tracks (<code>minmax(0, Nfr)</code>), so columns shrink gracefully on narrow notes and never overflow.</p>
+
+      <h3 id="callout-detail">Callout — completion icon</h3>
+      <p>When any block inside a callout carries <span class="pill pill-status">#complete</span>, the callout's icon badge changes to a <strong>green CircleCheck</strong> regardless of the callout's type — a clear "done" stamp on the whole box. The type is unchanged internally (the picker still shows it), but the accent color that drives the border, rail, background tint, and icon all flip to emerald until the pill is removed.</p>
 
       <h2 id="technical">Code, math &amp; diagrams</h2>
       <table>
@@ -75,6 +110,16 @@
         <tr><td>Drawing</td><td>A freeform whiteboard canvas (powered by Excalidraw) for sketches and doodles.</td></tr>
       </table>
 
+      <h3 id="mermaid-detail">Diagram (Mermaid) — editing workflow</h3>
+      <p>A freshly inserted diagram block opens straight into <strong>Edit</strong> mode: a full-width textarea where you write Mermaid source. The toolbar shows <strong>Preview</strong> and <strong>Copy</strong> buttons. Click <strong>Preview</strong> (or blur the textarea) to render the diagram; click <strong>Edit</strong> to return to the source. If the source has a parse error, the block shows the error message with an <em>Edit source</em> button — fix the syntax and preview again. Copying a diagram block as text yields its raw source.</p>
+      <p class="note"><strong>Note:</strong> Mermaid supports flowcharts, sequence diagrams, ER diagrams, class diagrams, mind maps, pie charts, and Gantt syntax. Check the <a href="https://mermaid.js.org" target="_blank" rel="noopener">Mermaid docs</a> for the full language reference.</p>
+
+      <h3 id="math-detail">Equation (LaTeX / KaTeX) — editing workflow</h3>
+      <p>An empty equation block opens in <strong>edit mode</strong> automatically. Type LaTeX source in the textarea (resize by adding lines); the rendered equation appears as soon as you click the checkmark or press <kbd>Esc</kbd> / <kbd>⌘ Enter</kbd>. To edit an existing equation click the rendered output — it flips back to the textarea. Editing the LaTeX while the block carries <span class="pill pill-status">#complete</span> automatically strips the completion pill in the same undo step, so revising an equation un-completes it.</p>
+
+      <h3 id="drawing-detail">Drawing (Excalidraw) — resize</h3>
+      <p>The drawing canvas starts at 440 px tall. Drag the <strong>resize edge</strong> at the bottom of the canvas to set a custom height (minimum 220 px, maximum 900 px). The height is saved in the block and restored on next load. The Excalidraw toolbar is hidden when the block is collapsed.</p>
+
       <h2 id="boards">Boards &amp; timelines</h2>
       <h3>Kanban Board</h3>
       <p>Draggable cards in three fixed columns — <strong>To Do</strong>, <strong>In Progress</strong> and <strong>Done</strong>. Tagging a card <span class="pill pill-status">#complete</span> sends it to Done; dragging a card into or out of Done adds or removes that tag for you, so the board and your notes can never disagree. Any other status tag is free-form and simply stays on the card. The header shows an active-of-total count.</p>
@@ -82,6 +127,33 @@
       <p>A timeline of tasks with start and end dates. Switch between <strong>Fit</strong> (default), Day, Week and Month zoom. Edit mode exposes name, start, end and assignee fields per row; preview mode shows just the chart. Task names take Smart Tags — typing <span class="pill pill-status">#complete</span> in a task’s name marks it done.</p>
       <h3>Dashboard &amp; Widget</h3>
       <p><strong>Dashboard</strong> is a live grid of widgets showing stats and trends about your vault; <strong>Widget</strong> is a single resizable chart or metric you can drop anywhere in a note.</p>
+
+      <h3 id="kanban-status">Kanban — status tags and the Done column</h3>
+      <p>The board's one and only automation is the <span class="pill pill-status">#complete</span> pill. Every other status tag you type on a card (<span class="pill pill-status">#in-review</span>, <span class="pill pill-status">#blocked</span>, and so on) is a freeform label that stays on the card and never triggers a column move. Only <span class="pill pill-status">#complete</span> relocates the card.</p>
+      <ul>
+        <li>Adding <span class="pill pill-status">#complete</span> to a card in <em>any</em> column moves it to <strong>Done</strong> immediately and remembers which column it came from.</li>
+        <li>Removing <span class="pill pill-status">#complete</span> from a card in Done flies it back to the column it came from (defaulting to the first column).</li>
+        <li>Dragging a card into Done stamps <span class="pill pill-status">#complete</span> on it; dragging it out strips the pill — so the board and your tags are always in sync.</li>
+        <li>Adding <span class="pill pill-status">#complete</span> to the board's <strong>title</strong> stamps it on every card at once, sending them all to Done. Removing it from the title sends every card back.</li>
+      </ul>
+
+      <h3 id="gantt-detail">Gantt — zoom levels and assignees</h3>
+      <p>The chart rests at <strong>Fit</strong> view — the whole timeline compressed into one screenful with no horizontal scrolling. The toolbar offers three manual zoom levels:</p>
+      <table>
+        <tr><th>Level</th><th>Scale</th><th>Tick step</th></tr>
+        <tr><td>Fit (default)</td><td>Auto — spans the full range</td><td>6 evenly-spaced labels</td></tr>
+        <tr><td>Day</td><td>26 px / day</td><td>Every 7 days</td></tr>
+        <tr><td>Week</td><td>10 px / day</td><td>Every 14 days</td></tr>
+        <tr><td>Month</td><td>3 px / day</td><td>Every 30 days</td></tr>
+      </table>
+      <p>Zoom is <strong>transient</strong>: the chart auto-reverts to Fit a moment after your pointer leaves it. Switch to <strong>Edit</strong> mode (pencil icon in the toolbar) to see and edit each task's <strong>name, start date, end date, and assignees</strong>. Assignees are free text (e.g. <em>Dana, Sam</em>). The bar itself is still draggable in Edit mode — drag the bar to move the span, drag either edge to resize it, or click an edge to open a date picker.</p>
+      <p>Typing <span class="pill pill-status">#complete</span> in a task name strikes and greys the task. Adding <span class="pill pill-status">#complete</span> to the Gantt's <strong>title</strong> marks every task done at once; removing it reopens them all.</p>
+      <p>Press <kbd>Enter</kbd> on a task with text to add a new task below it. Press <kbd>Tab</kbd> from any task to exit the chart to the next block.</p>
+
+      <h3 id="dashboard-widget-detail">Dashboard and Widget — resize</h3>
+      <p><strong>Dashboard</strong> starts as a 4-column, 1-row bento grid (1 to 6 rows). Drag the <strong>bottom edge</strong> of the grid to add or remove rows (snaps to whole square rows; can never shrink below occupied content). The grid is full-width only — insert it at the top level, not inside a column or callout.</p>
+      <p><strong>Widget</strong> is a single chart or metric that can sit anywhere (including inside a Columns block). Drag the <strong>corner handle</strong> to resize it freely (minimum 180 × 120 px, maximum height 640 px). The widget shrinks to fit a narrowing parent column without overflowing.</p>
+      <p>Both blocks share the unified caption row: the title accepts smart tags, and typing <span class="pill pill-status">#complete</span> marks the whole block done.</p>
 
       <h2 id="media">Media &amp; references</h2>
       <table>
@@ -94,6 +166,35 @@
         <tr><td>Reminder</td><td>A countdown with a desktop alert — covered in depth in <a href="dates-and-reminders.html">Dates &amp; reminders</a>.</td></tr>
       </table>
 
+      <h3 id="bookmark-detail">Bookmark / Video — offline image caching</h3>
+      <p>When you paste a URL into a Bookmark block, the Rust backend fetches the page's OpenGraph metadata (title, description, site name, cover image, favicon) and copies the images into your vault. The card renders those vault copies via the <code>asset:</code> protocol, so it looks right offline and the webview never touches the network again. Clicking the card opens the URL in your OS browser. The block stores everything needed to render — <code>url</code>, <code>title</code>, <code>description</code>, <code>siteName</code>, <code>imagePath</code>, <code>faviconPath</code> — in the node, so the preview survives note export and re-import.</p>
+      <p>For video URLs, Vimeo embeds a playable inline player. YouTube shows a thumbnail with a play button that opens the video in your browser — YouTube's player requires a valid HTTP referrer that a packaged offline app cannot supply, so in-app playback is not available for YouTube.</p>
+
+      <h3 id="rss-detail">RSS Feed — topics, custom URLs, and pinning</h3>
+      <p>The RSS block has two feed sources that can be combined:</p>
+      <ul>
+        <li><strong>Topic catalog</strong> — a curated grid of hashtag topics (e.g. <code>#tech</code>, <code>#science</code>). Click up to <strong>3 topics</strong> from the picker grid. Articles are fetched privately and cached on your device; browsing them adds nothing to your Knowledge Graph.</li>
+        <li><strong>Custom URLs</strong> — paste any RSS/Atom feed URL into the text field and press <kbd>Enter</kbd> or the <kbd>+</kbd> button to add it. Multiple URLs are listed below the field and can be removed individually.</li>
+      </ul>
+      <p>Once configured, click <strong>Fetch articles</strong> to load the feed. While articles are showing, a <strong>Settings</strong> button (gear icon) reopens the picker to change your selection.</p>
+      <p><strong>Pinning:</strong> while reading an article inside the block, click <strong>Pin</strong> to save it as an <em>RSS Memory</em> block inserted immediately after the feed block. Only pinned memories are ingested into your Knowledge Graph and become taggable, searchable, annotatable entries — the rest of the feed is ephemeral. An alternative is <strong>Add as block</strong>, which inserts the article as a Section block (headline as title, body as content) that you can then edit freely.</p>
+      <p class="note"><strong>Offline:</strong> the block shows cached articles when the device is offline with a banner saying "Offline — showing saved articles". A failed refresh never blanks the article list.</p>
+
+      <h3 id="block-reference-detail">Block Reference — creation and preview</h3>
+      <p>Type <code>/</code> and choose <strong>Block Reference</strong>, or use the <code>[[</code> shortcut where supported, to open a reference picker overlay. The picker has two levels:</p>
+      <ul>
+        <li><strong>Top level</strong> — search across all notebooks. Select a notebook to insert a notebook-level reference, or drill into it to pick a specific block.</li>
+        <li><strong>Block level</strong> — after drilling into a notebook, search within it and pick the exact block.</li>
+      </ul>
+      <p>The reference appears inline as a pill with the target's label and a link icon. Hover the pill to see a <strong>hover card</strong> with the notebook title and a short preview. Click the pill to navigate directly to that notebook (or scroll to the specific block).</p>
+
+      <h3 id="file-detail">File — size limit, preview, and Knowledge Graph</h3>
+      <p>Files can be attached via the <code>/</code> menu, by dragging a file onto a note, or via the Files Smart View. Each file is limited to <strong>10 MB per file</strong>. The file is copied into your vault and text is extracted automatically (PDFs, Office documents, plain text). The extracted text is embedded and joins your Knowledge Graph and full-text search — the file's content is searchable even when the file itself is closed.</p>
+      <p>Click a file pill to preview it inline (images show directly; PDFs open in a sandboxed reader); click the external-link icon to open the file in its default macOS app. Deleting a file from the Files Smart View purges the vault copy, the extracted text, the embeddings, and removes the pill from any open editor in one operation.</p>
+
+      <h3 id="table-detail">Table — navigation and exit</h3>
+      <p><kbd>Tab</kbd> moves to the next cell (right, then down to the next row); <kbd>Shift Tab</kbd> moves to the previous cell. Arrow keys move between lines inside a multi-line cell. To exit the table entirely: press <kbd>↓</kbd> from the last row's last cell, or <kbd>↑</kbd> from the first row — the caret steps out to a paragraph above or below the table (creating one if the table sits at the document boundary).</p>
+
       <h2 id="ai">AI</h2>
       <p><strong>Summon</strong> <span class="pro-badge">Pro</span> — opens the AI assistant with your cursor’s context (current block, selection) already attached. See <a href="summon.html">Summon assistant</a>.</p>
       <p><strong>/generate</strong> <span class="pro-badge">Pro</span> — describe what you want (with @mentions and #hashtags) and AI-written blocks appear at your cursor — task lists, tables, Kanban boards, diagrams — grounded in your notebook. Needs a configured <a href="ai-models.html">AI model</a>.</p>
@@ -105,6 +206,10 @@
         <tr><td>Cursive</td><td>Flowing script lettering.</td></tr>
         <tr><td>ASMR Block</td><td>Mechanical-keyboard sounds while you type in it. Pick the sound pack in <strong>Settings → Sound</strong>.</td></tr>
       </table>
+
+      <h3 id="asmr-detail">ASMR Block — mute toggle and sound settings</h3>
+      <p>Each ASMR block has a <strong>per-block mute toggle</strong> (speaker icon) in its header. Click it to silence that block without affecting other blocks or the global sound setting. The icon shows a crossed-out speaker when muted. The sound pack (the set of key variants and timing) is configured globally in <strong>Settings → Sound</strong>.</p>
+      <p>Typing <kbd>Enter</kbd> on a non-empty line adds a new line within the block; pressing <kbd>Enter</kbd> on an <em>empty</em> trailing line exits the block to a plain paragraph in the main editor. Arrow keys navigate in and out of the block past its non-editable header.</p>
 
       <nav class="docs-pager" id="docs-pager"></nav>
       <footer class="docs-foot" id="docs-foot"></footer>
