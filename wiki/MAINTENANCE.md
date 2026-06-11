@@ -16,7 +16,8 @@ The guide in this folder (`wiki/`) is part of every Nomima release. **A release 
 4. **Removed/renamed feature?** Delete or rewrite the section — stale docs are worse than missing docs.
 5. **Pro gating changed?** Update the Free vs Pro table in `settings-privacy.html`, the `pro: true` flags in `docs.js`, and any `pro-box` callouts on affected pages.
 6. **Click through locally** (`python3 serve.py` or any static server): sidebar highlights, pager links, and footer stamp on a few pages.
-7. Ship the guide update in the **same PR** (or release branch) as the `latest.json` bump, so the live site and the live app can never disagree.
+7. **Manual QA ran?** The app repo's hand-run checklists (`Nomima/docs/qa/SMOKE-TEST.md`, and `FULL-QA-CHECKLIST.md` for major releases) are maintained in lockstep with the same features this guide documents — confirm the release's smoke-test row is logged there before announcing, and reuse what QA surfaced when updating pages (a failing or changed behavior is exactly what the guide must not promise).
+8. Ship the guide update in the **same PR** (or release branch) as the `latest.json` bump, so the live site and the live app can never disagree.
 
 ## Feature → page map
 
