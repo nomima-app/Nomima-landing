@@ -122,7 +122,7 @@
         </li>
         <li>
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          If you buy Pro, Stripe processes the payment. We only receive a licence key status signal — no card details, ever.
+          Nomima is free — there are no payments, no accounts, and no licence checks.
         </li>
       </ul>
     </div>
@@ -142,7 +142,6 @@
           <li>Your notes, blocks, tags, links, and attachments are stored in a SQLite database inside your vault folder (a directory you choose).</li>
           <li>Embedded media files (audio, video, images) are stored in a <code>media/</code> subfolder inside your vault.</li>
           <li>AI provider keys (Anthropic, OpenAI, Google, or local endpoints) are stored in your <strong>macOS Keychain</strong>, not in any file we can access.</li>
-          <li>Licensing state (trial start date, licence key validation cache) is stored in a small local file and your macOS Keychain.</li>
           <li>Application preferences (theme, sound settings, etc.) are stored in macOS <code>UserDefaults</code>.</li>
         </ul>
         <p>None of this data is transmitted to our servers. We have no backend that receives your notes or personal content.</p>
@@ -156,7 +155,7 @@
           <li>Analytics, usage statistics, or feature telemetry.</li>
           <li>Crash reports or error logs sent to our servers.</li>
           <li>Your IP address or location.</li>
-          <li>Device identifiers beyond what is needed for licence validation (see §5).</li>
+          <li>Device identifiers, accounts, or sign-in of any kind.</li>
         </ul>
       </div>
 
@@ -164,25 +163,18 @@
         <h2>4. Network requests the app makes</h2>
         <p>Nomima only initiates outbound network requests in the following situations:</p>
         <ul>
-          <li><strong>Licence validation</strong> — if you activate a Pro licence key, the app contacts the Keygen licensing API (keygen.sh) to confirm your key is valid. This check uses your licence key and a stable machine identifier only. No note content is included.</li>
           <li><strong>Bookmark metadata</strong> — when you paste a URL into a Bookmark block, the app fetches the page's <code>&lt;meta&gt;</code> tags (title, description, image) from that URL. This is a direct request from your Mac to the target website — it does not pass through our servers.</li>
           <li><strong>RSS feeds</strong> — when you use the RSS Feed block, the app fetches the feed URL directly from your Mac. No proxy is involved.</li>
           <li><strong>AI providers</strong> — if you use the Summon assistant or the <code>/generate</code> command, your messages are sent directly from your Mac to the provider you chose (Anthropic, OpenAI, Google, or a local server). Nomima does not relay or log these requests.</li>
           <li><strong>Update check</strong> — the app fetches a small version manifest from our website to tell you when a new release exists. The request contains no personal data or note content.</li>
-          <li><strong>Publishing (Pro, opt-in)</strong> — if you publish a notebook, its rendered page (and only the attached files you explicitly tick) is uploaded to our publishing service so it can be viewed at read.nomima.io. Unpublishing removes it. Notes you do not publish never leave your Mac.</li>
+          <li><strong>Publishing (opt-in)</strong> — if you publish a notebook, its rendered page (and only the attached files you explicitly tick) is uploaded to our publishing service so it can be viewed at read.nomima.io. Unpublishing removes it. Notes you do not publish never leave your Mac.</li>
           <li><strong>MCP server</strong> — the built-in MCP server listens on local loopback (<code>127.0.0.1</code>) only and is not accessible from the internet.</li>
         </ul>
       </div>
 
       <div class="policy-section">
         <h2>5. Licensing and payments</h2>
-        <p>Nomima offers a free tier with a paid Pro upgrade. If you purchase Pro:</p>
-        <ul>
-          <li>Payment is processed by <strong>Stripe</strong> (<a href="https://stripe.com" target="_blank" rel="noopener noreferrer">stripe.com</a>), a third-party payment processor. We never receive your card number, billing address, or full payment details.</li>
-          <li>After purchase you receive a licence key. The app periodically contacts the Keygen validation endpoint to confirm the key is still active. This call includes only your licence key and a non-personal machine identifier (a hash of your Mac's hardware UUID). No content data is included.</li>
-          <li>Stripe&rsquo;s own privacy policy governs how they handle payment information: <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer">stripe.com/privacy</a>.</li>
-        </ul>
-        <p>Beta access keys are validated entirely on-device — activating one involves no network request.</p>
+        <p>Nomima is <strong>free</strong>. There is no paid tier, no licence key, no account, and no payment — so there is no payment processor, and the app makes no licence-validation network calls. The only money you might ever spend is with a third-party AI provider, if you choose to use the AI features with your own key; you pay them directly and we receive nothing.</p>
       </div>
 
       <div class="policy-section">
