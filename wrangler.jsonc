@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nomima-landing",
+  "main": "cf/worker.js",
+  "compatibility_date": "2025-05-01",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "nomima-landing",
+      "database_id": "98e09c3f-bfeb-44e0-8bd6-64581eaaa0e2"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}

@@ -1,0 +1,14 @@
+# Files that should NOT be served as static assets by the Worker.
+/cf/
+/node_modules/
+/.git/
+/.github/
+/server-lock/
+/downloads/
+/wrangler.jsonc
+/.assetsignore
+/package.json
+/package-lock.json
+/serve.py
+*.md
+.DS_Store

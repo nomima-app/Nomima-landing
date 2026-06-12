@@ -1465,10 +1465,9 @@ note.<span class="nm-hl-fn">entities</span>().<span class="nm-hl-fn">forEach</sp
   })();
   </script>
 
-  <!-- Email capture → Mailchimp (a Make.com automation emails the welcome + tokenized download link) -->
+  <!-- Email capture → Cloudflare Worker (/api/request-download). -->
   <script>
   (function() {
-    var MC_URL = 'https://nomima.us7.list-manage.com/subscribe/post-json?u=7c90b6d387736e44a9461299c&id=1dd3512540&f_id=00bac2e1f0';
     var btn = document.getElementById('get-btn');
     var input = document.getElementById('get-email');
     if (!btn || !input) return;
@@ -1478,44 +1477,27 @@ note.<span class="nm-hl-fn">entities</span>().<span class="nm-hl-fn">forEach</sp
       setTimeout(function() { input.style.borderColor = ''; }, 1800);
     }
 
-    btn.addEventListener('click', function() {
+    function submit() {
       var email = input.value.trim();
-      if (!email || !email.includes('@')) {
-        input.focus();
-        flagError();
-        return;
-      }
+      if (!email || !email.includes('@')) { input.focus(); flagError(); return; }
       btn.textContent = 'Sending…';
       btn.disabled = true;
+      fetch('/api/request-download', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email: email }),
+      })
+        .then(function(res) {
+          if (res.ok) {
+            document.getElementById('get-capture').style.display = 'none';
+            document.getElementById('get-success').classList.add('visible');
+          } else { btn.textContent = 'Email my link'; btn.disabled = false; flagError(); }
+        })
+        .catch(function() { btn.textContent = 'Email my link'; btn.disabled = false; flagError(); });
+    }
 
-      var cbName = '__mc_get_' + Date.now();
-      window[cbName] = function(data) {
-        delete window[cbName];
-        var msg = (data.msg || '').toLowerCase();
-        if (data.result === 'success' || msg.includes('already subscribed')) {
-          document.getElementById('get-capture').style.display = 'none';
-          document.getElementById('get-success').classList.add('visible');
-        } else {
-          btn.textContent = 'Email my link';
-          btn.disabled = false;
-          flagError();
-        }
-      };
-      var s = document.createElement('script');
-      s.onerror = function() {
-        delete window[cbName];
-        btn.textContent = 'Email my link';
-        btn.disabled = false;
-        flagError();
-      };
-      s.src = MC_URL + '&EMAIL=' + encodeURIComponent(email) + '&c=' + cbName;
-      document.body.appendChild(s);
-    });
-
-    // Submit on Enter
-    input.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') btn.click();
-    });
+    btn.addEventListener('click', submit);
+    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') submit(); });
   })();
   </script>
 
