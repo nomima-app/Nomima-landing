@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mentions &amp; hashtags — Nomima Guide</title>
+  <meta name="description" content="How Nomima smart tags work — @mentions, #hashtags, their types, custom types, entity cards and attributes." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#get">Get it free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Writing</div>
+        <h1 class="docs-title">Mentions &amp; hashtags</h1>
+        <p class="docs-sub">Smart tags are how Nomima understands <em>who</em> and <em>what</em> your notes are about. Tag once while writing — every view, lens and graph updates automatically.</p>
+      </header>
+
+      <h2 id="what">What smart tags are</h2>
+      <p>A smart tag is a small colored <em>pill</em> embedded in your text. There are two families:</p>
+      <ul>
+        <li><span class="pill pill-mention">@mention</span> — <strong>who</strong>: people, teams, companies, places, products.</li>
+        <li><span class="pill pill-hashtag">#hashtag</span> — <strong>what</strong>: projects, ideas, topics, statuses.</li>
+      </ul>
+      <p>Every tag becomes an <strong>entity</strong> in your Knowledge Graph. Tag <span class="pill pill-mention">@Sara</span> in five different notes and Nomima knows they’re all about the same person — her Smart View lens, graph node and entity card collect everything in one place.</p>
+
+      <h2 id="create">Creating a tag</h2>
+      <ol>
+        <li>Type <code>@</code> or <code>#</code> followed by a name. A suggestion menu appears with matching entities you’ve used before.</li>
+        <li>Press <kbd>Enter</kbd> or <kbd>Tab</kbd> to accept the highlighted suggestion — <kbd>Tab</kbd> always accepts the <em>suggested</em> tag, so you can type two letters and let Nomima finish the name.</li>
+        <li>If the name is new, choose <strong>Add</strong> from the menu to create a fresh entity.</li>
+        <li>Press <kbd>Esc</kbd> to dismiss the menu and keep the text plain.</li>
+      </ol>
+      <p class="tip"><strong>Ghost suggestions:</strong> as you type ordinary text, Nomima may show a faint dashed preview of a tag it recognizes (type “Mo” and see <em>@Moe</em> ghosted ahead) with a small <kbd>⇥</kbd> hint. Press <kbd>Tab</kbd> or click it to convert; <kbd>Esc</kbd> dismisses it for that spot. You can turn this off with <strong>Settings → Smart Tag Types → “Suggest Smart Tags as I type”</strong>.</p>
+
+      <h2 id="types">Built-in types</h2>
+      <p>Each tag has a <em>type</em> that controls its icon, its color everywhere (pill, graph node, minimap dash), and which Smart View lens it appears under.</p>
+      <table>
+        <tr><th>Family</th><th>Type</th><th>Icon</th><th>Use for</th></tr>
+        <tr><td>@ mention</td><td>Person</td><td>user</td><td>Individual people</td></tr>
+        <tr><td>@ mention</td><td>Team</td><td>users</td><td>Groups, squads, departments</td></tr>
+        <tr><td>@ mention</td><td>Company</td><td>building</td><td>Organizations, clients, vendors</td></tr>
+        <tr><td>@ mention</td><td>Location</td><td>map pin</td><td>Places, offices, cities</td></tr>
+        <tr><td>@ mention</td><td>Product</td><td>package</td><td>Products and services</td></tr>
+        <tr><td>@ mention</td><td>Technology</td><td>cpu</td><td>Tools, languages, platforms</td></tr>
+        <tr><td># hashtag</td><td>Project</td><td>briefcase</td><td>Initiatives with a beginning and end</td></tr>
+        <tr><td># hashtag</td><td>Idea</td><td>lightbulb</td><td>Things you might do someday</td></tr>
+        <tr><td># hashtag</td><td>Topic</td><td>book</td><td>Subjects and themes</td></tr>
+        <tr><td># hashtag</td><td>Status</td><td>flag</td><td>States like <span class="pill pill-status">#complete</span>, #blocked, #in-review</td></tr>
+      </table>
+      <p class="note"><strong>Status is special:</strong> the Status type powers Nomima’s universal completion system. Stamping <span class="pill pill-status">#complete</span> on any block marks it done everywhere — see <a href="tracking.html">Complete &amp; incomplete</a>. Status tags also drive Kanban columns.</p>
+
+      <h2 id="custom">Custom types</h2>
+      <p>You’re not limited to the built-ins. In <strong>Settings → Smart Tag Types</strong> you can:</p>
+      <ul>
+        <li><strong>Add a new type</strong> to either family — pick a label, an icon from the icon gallery, and a color.</li>
+        <li><strong>Edit built-ins</strong> — change a type’s icon or color (its family is fixed).</li>
+        <li><strong>Delete custom types</strong> you no longer need. Reserved types like Status can’t be removed.</li>
+      </ul>
+      <p>Custom types get their own color in the Knowledge Graph legend and their own grouping in search — they’re first-class citizens.</p>
+
+      <h2 id="entity-cards">Entity cards &amp; attributes</h2>
+      <p>Click any pill to open its <strong>entity card</strong> — the hub for that person, project or thing:</p>
+      <ul>
+        <li><strong>Appears in</strong> — every notebook and block that references the entity, deduplicated and clickable.</li>
+        <li><strong>Attributes</strong> — add arbitrary fields to an entity: an email and role for a person, a URL for a company, anything you like. Attributes are stored durably with the entity, not with any single note.</li>
+        <li><strong>Custom icon</strong> — give an entity a photo (a person’s face, a company favicon) and the pill shows it everywhere instead of the type icon.</li>
+        <li><strong>Type schema</strong> — in <strong>Settings → Smart Tag Types</strong> you can define which attribute fields a <em>type</em> should have, so every Person card offers the same fields by default.</li>
+      </ul>
+
+      <h2 id="behavior">Pill behavior in the editor</h2>
+      <ul>
+        <li>Pills are single units: <kbd>←</kbd>/<kbd>→</kbd> step across a pill in one keystroke, and <kbd>Backspace</kbd> removes it in one keystroke.</li>
+        <li>Hover a pill for a tooltip showing its type.</li>
+        <li>Pills work everywhere text does — inside task titles, reminder labels, section summaries, callouts and table cells.</li>
+        <li>Pasted text gets tagged too: SmartCopy converts <code>@names</code>, <code>#tags</code> and dates in pasted content into real pills (and is smart enough to leave code comments alone). See <a href="power-tools.html">Paste, templates &amp; shortcuts</a>.</li>
+      </ul>
+
+      <h2 id="payoff">Why bother tagging?</h2>
+      <p>Tags are the fuel for everything downstream:</p>
+      <ul>
+        <li><a href="smart-views.html"><strong>Smart Views</strong></a> — open the Person lens and see every person with their open work, progress bars, and checkable items.</li>
+        <li><a href="knowledge-graph.html"><strong>Knowledge Graph</strong></a> — entities become glowing nodes connected by what you wrote.</li>
+        <li><strong>Smart Scrollbar</strong> — every tag paints a colored dash on the note’s minimap so you can see at a glance what a long note contains.</li>
+        <li><strong>Home</strong> — group your daily agenda by @mention or #hashtag instead of by time.</li>
+      </ul>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>

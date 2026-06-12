@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nomima — Your download</title>
+  <meta name="description" content="Your private Nomima download link." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:          #07070e;
+      --fg:          #f4f5fb;
+      --fg-dim:      rgba(244,245,251,0.62);
+      --fg-faint:    rgba(244,245,251,0.36);
+      --accent:      #6366f1;
+      --accent-2:    #f048a8;
+      --green:       #34d399;
+      --card:        rgba(255,255,255,0.04);
+      --card-border: rgba(255,255,255,0.09);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      min-height: 100%;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--fg);
+      -webkit-font-smoothing: antialiased;
+    }
+    .glow { position: fixed; border-radius: 50%; filter: blur(140px); pointer-events: none; z-index: 0; }
+    .glow-a { width: 700px; height: 700px; background: rgba(99,102,241,0.24); top: -240px; left: -200px; }
+    .glow-b { width: 600px; height: 600px; background: rgba(52,211,153,0.14); bottom: -200px; right: -180px; }
+
+    .page { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; }
+    .card {
+      width: 100%; max-width: 480px;
+      background: var(--card); border: 1px solid var(--card-border);
+      border-radius: 24px; padding: 44px 40px 36px;
+      backdrop-filter: blur(28px);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 0 0.5px rgba(255,255,255,0.04) inset;
+      text-align: center;
+      animation: rise 0.6s cubic-bezier(0.2,0.8,0.2,1) both;
+    }
+    .logo { display: flex; align-items: center; justify-content: center; gap: 9px; margin-bottom: 26px; }
+    .logo img { width: 34px; height: 34px; filter: drop-shadow(0 3px 12px rgba(99,102,241,0.55)); }
+    .logo-name { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
+
+    .check-ring { margin: 0 auto 18px; width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center;
+      background: rgba(52,211,153,0.12); border: 1px solid rgba(52,211,153,0.28); color: var(--green); }
+
+    .headline { font-size: 26px; font-weight: 900; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+    .grad { background: linear-gradient(130deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .sub { font-size: 14px; color: var(--fg-dim); line-height: 1.6; max-width: 360px; margin: 0 auto 26px; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 14px 24px; font-size: 15px; font-weight: 700;
+      font-family: inherit; color: #fff; cursor: pointer; text-decoration: none;
+      border: none; border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 4px 20px rgba(99,102,241,0.38);
+      transition: filter 0.12s, transform 0.1s;
+    }
+    .btn:hover { filter: brightness(1.1); }
+    .btn:active { transform: scale(0.98); }
+    .btn[aria-disabled="true"] { opacity: 0.55; pointer-events: none; }
+
+    .meta { margin-top: 16px; font-size: 12px; color: var(--fg-faint); line-height: 1.6; }
+    .restart { color: var(--fg-dim); text-decoration: underline; text-underline-offset: 2px; }
+    .restart:hover { color: var(--fg); }
+
+    .footer { margin-top: 22px; font-size: 11.5px; color: var(--fg-faint); }
+    @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="glow glow-a" aria-hidden="true"></div>
+  <div class="glow glow-b" aria-hidden="true"></div>
+
+  <div class="page">
+    <div class="card">
+      <div class="logo">
+        <img src="logo.svg" alt="Nomima" />
+        <span class="logo-name">Nomima</span>
+      </div>
+
+      <!-- VALID TOKEN → download ready -->
+      <div id="ready">
+        <div class="check-ring">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h1 class="headline">Your download is <span class="grad">ready</span></h1>
+        <p class="sub">Thanks for joining Nomima. Your private copy is starting now — if it doesn't, use the button below.</p>
+        <a id="dl-btn" class="btn" href="#" download>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Nomima<span id="dl-ver"></span>
+        </a>
+        <p class="meta">Apple Silicon · macOS 13+ · Free forever<br />First launch: right-click the app → Open.</p>
+      </div>
+
+      <!-- NO / MISSING TOKEN → ask them to request a link -->
+      <div id="needlink" class="hidden">
+        <h1 class="headline">This link looks incomplete</h1>
+        <p class="sub">Download links are personal and arrive by email. Pop your address in and we'll send a fresh one straight to your inbox.</p>
+        <a class="btn" href="index.html#get">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Email me a download link
+        </a>
+      </div>
+    </div>
+
+    <p class="footer">© 2026 Nomima · Private. Offline. Yours.</p>
+  </div>
+
+  <script>
+  (function () {
+    // The tokenized link (built by the Make.com automation) looks like:
+    //   https://<site>/download.html?t=<token>
+    // The token is generated + logged by Make.com. Validation here is intentionally
+    // soft (the token only needs to be present and non-trivial) — this is a free,
+    // email-gated download, not DRM. To start serving the DMG, the link just needs ?t=.
+    var params = new URLSearchParams(location.search);
+    var token = (params.get('t') || params.get('token') || '').trim();
+    var ready = document.getElementById('ready');
+    var needlink = document.getElementById('needlink');
+
+    if (token.length < 6) {
+      ready.classList.add('hidden');
+      needlink.classList.remove('hidden');
+      return;
+    }
+
+    // Pull the current DMG URL + version from latest.json so this page never goes stale.
+    var FALLBACK_URL = 'https://github.com/nomima-app/Nomima-landing/releases/latest';
+    var btn = document.getElementById('dl-btn');
+    var verEl = document.getElementById('dl-ver');
+
+    function arm(url, version) {
+      btn.href = url;
+      if (version) verEl.textContent = ' ' + version;
+      // Auto-start the download shortly after the page settles.
+      setTimeout(function () {
+        try {
+          var a = document.createElement('a');
+          a.href = url; a.download = ''; a.rel = 'noopener';
+          document.body.appendChild(a); a.click(); a.remove();
+        } catch (e) { /* user can click the button */ }
+      }, 900);
+    }
+
+    fetch('latest.json', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        if (data && data.url) arm(data.url, data.version ? ('v' + data.version) : '');
+        else arm(FALLBACK_URL, '');
+      })
+      .catch(function () { arm(FALLBACK_URL, ''); });
+  })();
+  </script>
+</body>
+</html>

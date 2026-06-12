@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Summon assistant — Nomima Guide</title>
+  <meta name="description" content="Summon is Nomima's built-in AI assistant — it searches your vault, answers questions about your notes, and writes directly into the editor." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#get">Get it free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">AI &amp; integrations</div>
+        <h1 class="docs-title">Summon</h1>
+        <p class="docs-sub">An assistant that actually knows your notes. Summon searches your vault, answers questions, creates notebooks and streams writing straight into your editor — with whatever AI model you chose.</p>
+      </header>
+
+      <p class="pro-box"><strong>Before you start:</strong> Summon is free — it just needs at least one configured <a href="ai-models.html">AI model</a> (your own API key, or a local model). With a local model (Ollama / LM Studio) it runs fully offline.</p>
+
+      <h2 id="opening">Opening Summon</h2>
+      <ul>
+        <li>Click the <strong>glowing button</strong> in the bottom-right corner — it breathes quietly when idle and animates while Summon is working, with a badge counting in-flight tasks.</li>
+        <li>Or type <code>/summon</code> in any note — your current block and selection travel along as context.</li>
+        <li>Summon opens as a <strong>compact dock</strong> on the right edge; the expand button promotes it to a <strong>full-screen view</strong>. Close with <kbd>Esc</kbd> — the conversation survives, even as you switch notebooks.</li>
+      </ul>
+
+      <h2 id="chat-note">Chat or Note — your choice, per message</h2>
+      <p>Every response has a toggle deciding where it lands:</p>
+      <ul>
+        <li><strong>Chat</strong> — stays in the conversation, ephemeral.</li>
+        <li><strong>Note</strong> — streams <em>live into your editor</em>, token by token, as a new notebook or appended to the current one. You watch the note write itself, as real blocks — headings, lists, checklists — not a pasted wall of text.</li>
+      </ul>
+
+      <h2 id="tools">What Summon can do</h2>
+      <p>Summon isn’t a generic chatbot with your note pasted in — it has tools to work with your vault directly:</p>
+      <table>
+        <tr><th>Capability</th><th>Example ask</th></tr>
+        <tr><td>Search your notes</td><td>“Find everything about the venue contract”</td></tr>
+        <tr><td>Read a note</td><td>“Summarize my Q3 planning notebook”</td></tr>
+        <tr><td>Query the Knowledge Graph</td><td>“What’s connected to @Sara?”</td></tr>
+        <tr><td>List tasks &amp; reminders</td><td>“What’s overdue?” · “What’s due this week?”</td></tr>
+        <tr><td>Create a notebook</td><td>“Draft a project brief for the rebrand”</td></tr>
+        <tr><td>Append &amp; add blocks</td><td>“Add a checklist of these action items to my meeting note” — it writes proper Nomima blocks, including callouts, tables and reminders</td></tr>
+      </table>
+      <p>Quick-action chips above the input cover the common ones: <em>Brief of the day</em>, <em>What’s overdue?</em>, <em>Prep for tomorrow</em>, <em>Recap my week</em>, <em>Find in notes</em>, <em>Capture a note</em>.</p>
+
+      <h2 id="permissions">Agent permissions</h2>
+      <p>Summon’s reach beyond your vault is <strong>off by default</strong> and controlled in <strong>Settings → Summon Agent</strong>:</p>
+      <ul>
+        <li><strong>Web search</strong> — let Summon look things up online (via DuckDuckGo).</li>
+        <li><strong>Filesystem access</strong> — let it read files in Documents, Desktop and Downloads.</li>
+        <li><strong>Shell commands</strong> — strictly allowlist-based: you add the exact commands it may run, and chaining/piping is blocked.</li>
+      </ul>
+      <p class="note"><strong>Privacy reminder:</strong> when Summon answers a question about your notes, the relevant note content is sent to the AI provider you configured — that’s how the model reads it. Use a local model if you want even that to stay on-device. Nothing is ever sent anywhere when you’re not actively using Summon.</p>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>

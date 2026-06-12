@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MCP server — Nomima Guide</title>
+  <meta name="description" content="Nomima's built-in MCP server lets tools like Claude Code and Cursor read and write your vault — locally, with a token, writes off by default." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#get">Get it free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">AI &amp; integrations</div>
+        <h1 class="docs-title">MCP server</h1>
+        <p class="docs-sub">Let your other AI tools see your notes. Nomima ships a built-in MCP server so apps like Claude Code, Claude Desktop and Cursor can search, read — and optionally write — your vault.</p>
+      </header>
+
+      <h2 id="what">What is MCP?</h2>
+      <p>The <strong>Model Context Protocol</strong> is an open standard that lets AI applications connect to data sources. Nomima speaks it natively: enable the server and any MCP-capable tool on your Mac can ask Nomima questions like “search the vault for X” or “list open tasks” — instead of you copy-pasting notes around.</p>
+      <p class="note"><strong>Local only:</strong> the server listens on <code>127.0.0.1</code> — your own machine. It is never reachable from the network, every request needs a secret token, and write access is a separate opt-in switch.</p>
+
+      <h2 id="enable">Enabling it</h2>
+      <ol>
+        <li>Open <strong>Settings → MCP Server</strong>.</li>
+        <li>Toggle <strong>Enable Server</strong>. It starts at <code>http://127.0.0.1:4123/mcp</code>.</li>
+        <li>Copy the <strong>bearer token</strong> shown (masked until you reveal it). Use <strong>Rotate Token</strong> any time to invalidate old credentials instantly.</li>
+        <li>Optionally toggle <strong>Allow writes</strong> if you want external tools to be able to create and edit notes — leave it off for read-only access.</li>
+      </ol>
+
+      <h2 id="connect">Connecting a client</h2>
+      <p>Point any MCP client at the URL with the token as a bearer credential. For Claude Code, for example:</p>
+      <pre><code>claude mcp add --transport http nomima \
+  http://127.0.0.1:4123/mcp \
+  --header "Authorization: Bearer YOUR_TOKEN"</code></pre>
+      <p>Or in a JSON-based client config:</p>
+      <pre><code>{
+  "url": "http://127.0.0.1:4123/mcp",
+  "headers": { "Authorization": "Bearer YOUR_TOKEN" }
+}</code></pre>
+
+      <h2 id="tools">What clients can do</h2>
+      <h3>Read tools (always available while the server is on)</h3>
+      <table>
+        <tr><th>Tool</th><th>What it returns</th></tr>
+        <tr><td>search_notes</td><td>Full-text search across the vault</td></tr>
+        <tr><td>list_notebooks</td><td>All notes with previews</td></tr>
+        <tr><td>get_note</td><td>A complete note’s content</td></tr>
+        <tr><td>knowledge_graph</td><td>Entities, relations and clusters</td></tr>
+        <tr><td>list_tasks</td><td>Open and dated checkboxes, chronologically</td></tr>
+        <tr><td>list_reminders</td><td>Tracked reminders with due times</td></tr>
+        <tr><td>get_editor_schema</td><td>Nomima’s block catalogue, so clients write well-formed notes</td></tr>
+      </table>
+      <h3>Write tools (only when “Allow writes” is on)</h3>
+      <table>
+        <tr><th>Tool</th><th>What it does</th></tr>
+        <tr><td>create_note</td><td>Creates a new notebook from a title and Markdown body</td></tr>
+        <tr><td>append_to_note</td><td>Appends Markdown to an existing note</td></tr>
+        <tr><td>add_blocks</td><td>Inserts structured Nomima blocks — checklists, callouts, columns, <strong>databases</strong> (typed columns whose cells become Smart Tags), <strong>terminals</strong>, <strong>embeds / video</strong>, code, reminders, Kanban/Gantt/widgets and more, with a layout guide for composing complex notebooks</td></tr>
+      </table>
+      <p class="note"><strong>Discoverable schema:</strong> a connected tool can call <code>get_editor_schema</code> (or read the <code>nomima://schema/editor</code> resource) to fetch the exact shape of every block it can author — fields, examples, and how to nest them — so what it sends always renders correctly.</p>
+
+      <h2 id="log">Watching the activity log</h2>
+      <p>The MCP panel keeps a live log of every request: which client (Claude, Cursor, …), what it called, whether it succeeded, and how long it took — with request and response previews. If you ever wonder what an external tool just did to your vault, the answer is right there.</p>
+
+      <h2 id="ideas">Things people do with it</h2>
+      <ul>
+        <li>Ask <strong>Claude Code</strong> to check project notes for context while coding — “what did I decide about the API design? check my Nomima notes”.</li>
+        <li>Have an agent file <strong>meeting summaries</strong> or research results directly into the vault as proper notes.</li>
+        <li>Query open tasks from any MCP-capable workflow tool.</li>
+      </ul>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>
