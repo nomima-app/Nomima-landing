@@ -1,6 +1,6 @@
 {
-  "version": "1.6.0",
-  "notes": "v1.6.0: Notebook Publishing — publish any notebook to a private, read-only web page at read.nomima.io (share a link + view-code). Pixel-faithful to the editor, offline-first, with opt-in file downloads and view analytics (coarse location & returning visitors, no raw IPs). Plus a refined minimap rail (Dock-style magnify, overdue-only date markers) and reliability fixes.",
-  "pub_date": "2026-06-10T00:00:00Z",
-  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.6.0/Nomima_1.6.0_aarch64.dmg"
+  "version": "1.11.0",
+  "notes": "v1.11.0: Semantic Map (3D embedding projection in the Knowledge Graph), Summon with persistent memory and proactive nudges, scroll-spy Table of Contents, country flags on @location mentions, and 9 deep built-in templates rebuilt with real databases, kanban, gantt, and live query grids.",
+  "pub_date": "2026-06-12T00:00:00Z",
+  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.11.0/Nomima_1.11.0_aarch64.dmg"
 }
