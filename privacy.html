@@ -122,7 +122,7 @@
         </li>
         <li>
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          If you buy Pro, Lemon Squeezy processes the payment. We only receive a licence key status signal — no card details, ever.
+          Nomima is free. To send your download link we collect your email (via Mailchimp) — nothing else, and never any payment details.
         </li>
       </ul>
     </div>
@@ -142,7 +142,6 @@
           <li>Your notes, blocks, tags, links, and attachments are stored in a SQLite database inside your vault folder (a directory you choose).</li>
           <li>Embedded media files (audio, video, images) are stored in a <code>media/</code> subfolder inside your vault.</li>
           <li>AI provider keys (Anthropic, OpenAI, Google, or local endpoints) are stored in your <strong>macOS Keychain</strong>, not in any file we can access.</li>
-          <li>Licensing state (trial start date, licence key validation cache) is stored in a small local file and your macOS Keychain.</li>
           <li>Application preferences (theme, sound settings, etc.) are stored in macOS <code>UserDefaults</code>.</li>
         </ul>
         <p>None of this data is transmitted to our servers. We have no backend that receives your notes or personal content.</p>
@@ -156,7 +155,7 @@
           <li>Analytics, usage statistics, or feature telemetry.</li>
           <li>Crash reports or error logs sent to our servers.</li>
           <li>Your IP address or location.</li>
-          <li>Device identifiers beyond what is needed for licence validation (see §5).</li>
+          <li>Any device or hardware identifiers.</li>
         </ul>
       </div>
 
@@ -164,7 +163,7 @@
         <h2>4. Network requests the app makes</h2>
         <p>Nomima only initiates outbound network requests in the following situations:</p>
         <ul>
-          <li><strong>Licence validation</strong> — if you activate a Pro licence key, the app contacts the Lemon Squeezy API to confirm your key is valid. This check uses your licence key and a stable machine identifier only. No note content is included.</li>
+          <li><strong>Update checks</strong> — the app periodically fetches a small version manifest to tell you when a newer release is available. This request contains no account or personal data.</li>
           <li><strong>Bookmark metadata</strong> — when you paste a URL into a Bookmark block, the app fetches the page's <code>&lt;meta&gt;</code> tags (title, description, image) from that URL. This is a direct request from your Mac to the target website — it does not pass through our servers.</li>
           <li><strong>RSS feeds</strong> — when you use the RSS Feed block, the app fetches the feed URL directly from your Mac. No proxy is involved.</li>
           <li><strong>AI providers</strong> — if you use the AI Chat or /Generate features, your messages are sent directly from your Mac to the provider you chose (Anthropic, OpenAI, Google, or a local server). Nomima does not relay or log these requests.</li>
@@ -173,14 +172,14 @@
       </div>
 
       <div class="policy-section">
-        <h2>5. Licensing and payments</h2>
-        <p>Nomima offers a free tier with a paid Pro upgrade. If you purchase Pro:</p>
+        <h2>5. Downloads and your email</h2>
+        <p>Nomima is <strong>completely free</strong> — there is no paid tier, no payment processor, and no licence key.</p>
         <ul>
-          <li>Payment is processed by <strong>Lemon Squeezy</strong> (<a href="https://www.lemonsqueezy.com" target="_blank" rel="noopener noreferrer">lemonsqueezy.com</a>), a third-party payment processor. We never receive your card number, billing address, or full payment details.</li>
-          <li>After purchase you receive a licence key. The app periodically contacts Lemon Squeezy's validation endpoint to confirm the key is still active. This call includes only your licence key and a non-personal machine identifier (a hash of your Mac's hardware UUID). No content data is included.</li>
-          <li>Lemon Squeezy's own privacy policy governs how they handle payment information: <a href="https://www.lemonsqueezy.com/privacy" target="_blank" rel="noopener noreferrer">lemonsqueezy.com/privacy</a>.</li>
+          <li>To download the app from our website, you give us an email address. We use it to send you a download link and a welcome message, and occasionally to let you know about important updates.</li>
+          <li>Your email is stored with <strong>Mailchimp</strong> (<a href="https://mailchimp.com" target="_blank" rel="noopener noreferrer">mailchimp.com</a>), which we use to manage our mailing list and deliver these emails. Mailchimp's own privacy policy governs how they process it: <a href="https://www.intuit.com/privacy/statement/" target="_blank" rel="noopener noreferrer">intuit.com/privacy</a>.</li>
+          <li>We never sell or share your email, and you can unsubscribe at any time using the link in any email we send.</li>
+          <li>The app itself never asks for or transmits your email — collecting it happens only on the website, only when you request a download.</li>
         </ul>
-        <p>During the beta period, no payment is required and no licence checks occur.</p>
       </div>
 
       <div class="policy-section">
@@ -231,8 +230,10 @@
   <footer>
     <p>© 2026 Nomima · Built for thinkers who own their data.</p>
     <div class="footer-links">
-      <a href="contact.html">Contact</a>
+      <a href="docs/index.html">Guide</a>
+      <a href="terms.html">Terms</a>
       <a href="privacy.html">Privacy</a>
+      <a href="contact.html">Contact</a>
       <a href="index.html">Home</a>
     </div>
   </footer>

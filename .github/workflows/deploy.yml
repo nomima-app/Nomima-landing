@@ -1,10 +1,8 @@
 name: Deploy to GitHub Pages
 
-# Builds the static site and publishes it to GitHub Pages. The access-code hashes
-# are NOT in the repo — they are generated here from the NOMIMA_ACCESS_CODES secret
-# (Settings → Secrets and variables → Actions) and injected into hashes.js at deploy
-# time. The plaintext codes live only in that secret; only their hashes reach the
-# published (public) site.
+# Builds the static site and publishes it to GitHub Pages. Nomima is free: visitors
+# request a download by submitting their email (Mailchimp), and a Make.com automation
+# emails them a welcome note + a tokenized link to download.html. No access codes.
 
 on:
   push:
@@ -28,27 +26,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate hashes.js from the access-codes secret
-        env:
-          NOMIMA_ACCESS_CODES: ${{ secrets.NOMIMA_ACCESS_CODES }}
-        run: |
-          if [ -z "${NOMIMA_ACCESS_CODES}" ]; then
-            echo "::error::Secret NOMIMA_ACCESS_CODES is not set. Add it under" \
-                 "Settings → Secrets and variables → Actions (one access code per line)."
-            exit 1
-          fi
-          # Hash each plaintext code → only the hashes are written to disk / shipped.
-          python3 - <<'PY'
-          import hashlib, json, os
-          raw = os.environ["NOMIMA_ACCESS_CODES"].replace(",", "\n").splitlines()
-          codes = [c.strip() for c in raw if c.strip()]
-          hashes = [hashlib.sha256(c.encode("utf-8")).hexdigest() for c in codes]
-          with open("hashes.js", "w") as f:
-              f.write("// Generated at deploy time from the NOMIMA_ACCESS_CODES secret. Do not edit.\n")
-              f.write("window.__NOMIMA_HASHES__ = " + json.dumps(hashes, indent=2) + ";\n")
-          print(f"Wrote hashes.js with {len(hashes)} access-code hash(es).")
-          PY
-
       - name: Assemble the published site (exclude repo meta)
         run: |
           mkdir -p _site
@@ -59,7 +36,6 @@ jobs:
             --exclude='server-lock' \
             --exclude='node_modules' \
             --exclude='*.md' \
-            --exclude='hashes.example.js' \
             --exclude='_site' \
             ./ _site/
           # Disable Jekyll processing on the served site.

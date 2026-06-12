@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blocks — Nomima Guide</title>
+  <meta name="description" content="Every block in Nomima's slash menu — task lists, sections, callouts, code, equations, diagrams, Kanban boards, Gantt charts and more." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#get">Get it free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Writing</div>
+        <h1 class="docs-title">Blocks</h1>
+        <p class="docs-sub">Type <code>/</code> anywhere in a note to open the block menu, then keep typing to filter it. Press <kbd>Enter</kbd> to insert the highlighted block, <kbd>Esc</kbd> to dismiss.</p>
+      </header>
+
+      <p class="tip"><strong>Tip:</strong> blocks that have a title (Task List, Section, Database, Kanban, Gantt, Dashboard, Widget) drop the caret straight into the title when created — name it, press <kbd>Enter</kbd>, and keep writing. Mentions, hashtags and dates work inside those titles too.</p>
+
+      <h2 id="basic">Text basics</h2>
+      <table>
+        <tr><th>Block</th><th>What it does</th></tr>
+        <tr><td>Paragraph</td><td>Plain body text — the default.</td></tr>
+        <tr><td>Title</td><td>A big section heading (H1).</td></tr>
+        <tr><td>Subtitle</td><td>A smaller heading (H3).</td></tr>
+        <tr><td>Quote</td><td>A blockquote with an accent bar.</td></tr>
+        <tr><td>Horizontal Line</td><td>A visual divider between sections.</td></tr>
+        <tr><td>Table / Database</td><td>Inserts a <strong>Database</strong> — see <a href="#database">Database</a> below. (Plain tables have been replaced by the Database; pasting a table from the web also becomes one.)</td></tr>
+      </table>
+
+      <h2 id="tasklist">Task List</h2>
+      <p>A titled checklist card. Create it from the <code>/</code> menu or by typing <code>[]</code> + space at the start of a line.</p>
+      <ul>
+        <li><strong>Editable title</strong> — name the list; pressing <kbd>Enter</kbd> in the title jumps to the first task. @mentions, #hashtags and dates work in the title.</li>
+        <li><strong>Progress badge</strong> — the card header shows <code>3/5</code> style progress as you check items off.</li>
+        <li><strong>Collapsible</strong> — the chevron folds the list down to its title row.</li>
+        <li><strong>Auto-complete</strong> — when every task is checked, the whole list turns green and counts as complete. Add a new task and it flips back automatically.</li>
+        <li><strong>Backspace on an empty list</strong> deletes the whole list cleanly; arrow keys escape out of it in every direction.</li>
+      </ul>
+      <p class="note"><strong>Note:</strong> the <code>/</code> block menu is intentionally disabled inside checklist items — checklists stay checklists. Press <kbd>Enter</kbd> to leave the list first.</p>
+
+      <h2 id="containers">Containers</h2>
+      <table>
+        <tr><th>Block</th><th>What it does</th></tr>
+        <tr><td>Section</td><td>A titled, collapsible container that can hold any other blocks. The summary line stays visible when folded. Mark the summary with <span class="pill pill-status">#complete</span> and the whole section greys out — done, filed, out of the way.</td></tr>
+        <tr><td>Toggle List</td><td>A lighter inline disclosure — just a chevron and content, no card chrome.</td></tr>
+        <tr><td>Callout</td><td>A tinted box with an icon badge. Click the badge to pick the type: Note, Info, Tip, Idea, Important, Success, Warning, Urgent, Critical, Bug, Question, or Research — each with its own color and line icon. A completed callout shows a green checkmark regardless of type.</td></tr>
+        <tr><td>Columns</td><td>Side-by-side layout with two or three columns; each column holds normal blocks.</td></tr>
+      </table>
+
+      <h2 id="database">Database</h2>
+      <p>The Database is Nomima’s table — but every <strong>row is a record</strong> and every <strong>column has a type</strong>. Create it from the <code>/</code> menu (“Table / Database”). Name it in the title row, then <kbd>Enter</kbd> drops into the first cell.</p>
+      <ul>
+        <li><strong>Typed columns</strong> — click a column header to set its type: plain <em>Text</em>, <em>Date</em>, <em>Number</em>, or any Smart Tag type (Person, Status, Project…). Cells in a typed column become real Smart Tags, so the people and tags inside your table show up in search and the Knowledge Graph.</li>
+        <li><strong>Records &amp; completion</strong> — each row is its own block. A <span class="pill pill-status">#complete</span> in a Status cell (or the row’s checkbox) marks just that row done; mark the title <span class="pill pill-status">#complete</span> to complete the whole table.</li>
+        <li><strong>Totals &amp; sorting</strong> — the calc strip under each column offers type-aware totals (Sum/Average/Min/Max on numbers, Done-count on status, Count on anything); the column menu sorts rows; drag a header edge to resize.</li>
+        <li><strong>Keyboard</strong> — <kbd>Tab</kbd>/<kbd>Shift Tab</kbd> walk cells, <kbd>Enter</kbd> adds a row, and arrow keys hop between rows and out to the title.</li>
+      </ul>
+      <p class="note"><strong>Pasting a table</strong> from a web page, Google Docs, Notion or Markdown drops in as a Database automatically — the header row becomes your columns and each row a record.</p>
+      <p class="tip"><strong>Derived tables:</strong> <code>/entity-table</code> builds a live table of every entity of a type (one row per Person, Project…, editable straight from the grid), and <code>/query-table</code> builds a filtered view of blocks across your notebooks. Both stay in sync as you edit elsewhere.</p>
+
+      <h2 id="technical">Code, math &amp; diagrams</h2>
+      <table>
+        <tr><th>Block</th><th>What it does</th></tr>
+        <tr><td>Code Block</td><td>Syntax-highlighted code with a language picker. <kbd>Tab</kbd>/<kbd>Shift Tab</kbd> indent and outdent; <kbd>⌘ Enter</kbd> exits the block.</td></tr>
+        <tr><td>Equation</td><td>LaTeX math rendered beautifully with KaTeX.</td></tr>
+        <tr><td>Diagram</td><td>Mermaid diagrams — flowcharts, sequence diagrams, ER diagrams, mind maps, Gantt syntax and more.</td></tr>
+        <tr><td>Drawing</td><td>A freeform whiteboard canvas (powered by Excalidraw) for sketches and doodles.</td></tr>
+      </table>
+
+      <h2 id="boards">Boards &amp; timelines</h2>
+      <h3>Kanban Board</h3>
+      <p>Draggable cards organized into columns. Columns come from <span class="pill pill-hashtag">#status</span> tags on the cards, so dragging a card to another column updates its status tag automatically — the board and your notes can never disagree. The header shows an active-of-total count, and a card’s checkbox (or a <span class="pill pill-status">#complete</span> tag) marks it done.</p>
+      <h3>Gantt Chart</h3>
+      <p>A timeline of tasks with start and end dates. Switch between <strong>Fit</strong> (default), Day, Week and Month zoom. Edit mode exposes name, start, end and assignee fields per row; preview mode shows just the chart. Tasks complete via their checkbox or a <span class="pill pill-status">#complete</span> tag.</p>
+      <h3>Dashboard &amp; Widget</h3>
+      <p><strong>Dashboard</strong> is a live grid of widgets showing stats and trends about your vault; <strong>Widget</strong> is a single resizable chart or metric you can drop anywhere in a note.</p>
+
+      <h2 id="media">Media &amp; references</h2>
+      <table>
+        <tr><th>Block</th><th>What it does</th></tr>
+        <tr><td>File</td><td>Attach any file from disk (you can also just drag &amp; drop one onto the note). The file is copied into your vault and appears as a pill with its name and size. Click to preview, or open it in its default app. Text is extracted and indexed so the file’s contents join your Knowledge Graph and search.</td></tr>
+        <tr><td>Embed / Bookmark / Video</td><td>Paste a link. <strong>Vimeo, Loom, Figma, CodePen, Spotify and Google Maps</strong> play or render right inside the note as a live frame. <strong>YouTube</strong> shows a thumbnail you click to watch in your browser. Any other link becomes a rich preview card (image, title, description, favicon), fetched and cached so it works offline — click it to open the page.</td></tr>
+        <tr><td>RSS Feed</td><td>Subscribe to a feed inside a note — incoming articles flow into your Knowledge Graph.</td></tr>
+        <tr><td>Block Reference</td><td>Link to another notebook or to a specific block inside one.</td></tr>
+        <tr><td>Reminder</td><td>A countdown with a desktop alert — covered in depth in <a href="dates-and-reminders.html">Dates &amp; reminders</a>.</td></tr>
+      </table>
+
+      <h2 id="ai">AI</h2>
+      <p><strong>Summon</strong> — opens the AI assistant with your cursor’s context (current block, selection) already attached. See <a href="summon.html">Summon assistant</a>.</p>
+
+      <h2 id="style">Just for fun</h2>
+      <table>
+        <tr><th>Block</th><th>What it does</th></tr>
+        <tr><td>Funky Text</td><td>Hand-drawn marker font.</td></tr>
+        <tr><td>Cursive</td><td>Flowing script lettering.</td></tr>
+        <tr><td>ASMR Block</td><td>Mechanical-keyboard sounds while you type in it. Pick the sound pack in <strong>Settings → Sound</strong>.</td></tr>
+      </table>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>
