@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Email Preview — Nomima</title>
+  <style>
+    body { margin: 0; padding: 40px 16px; background: #07070e; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Helvetica,Arial,sans-serif; }
+    @media (max-width:600px) { .email-card { border-radius:0 !important; } .email-body { padding:28px 20px !important; } }
+    /* Dev helper bar */
+    #devbar { position:fixed; top:0; left:0; right:0; background:rgba(99,102,241,0.15); border-bottom:1px solid rgba(99,102,241,0.3); padding:6px 16px; font-size:11px; color:#8b8df5; z-index:999; }
+  </style>
+</head>
+<body>
+<div id="devbar">📧 Email preview — edit <code>cf/worker.js → welcomeEmailHtml()</code> then refresh</div>
+
+<div style="padding-top:28px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#07070e;padding:40px 16px 48px;">
+  <tr><td align="center">
+    <table role="presentation" class="email-card" width="100%" cellpadding="0" cellspacing="0"
+      style="max-width:460px;background:#0e0e1a;border-radius:20px;border:1px solid rgba(99,102,241,0.18);box-shadow:0 0 80px rgba(99,102,241,0.12),0 0 0 1px rgba(99,102,241,0.08);overflow:hidden;">
+
+      <!-- Header: sidebar-style logo + wordmark -->
+      <tr><td style="padding:32px 36px 20px;background:#0e0e1a;background:radial-gradient(ellipse 90% 120% at 50% 0%,rgba(99,102,241,0.14) 0%,transparent 70%);">
+        <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+          <td valign="middle" style="padding-right:14px;">
+            <div style="display:inline-block;filter:drop-shadow(0 0 14px rgba(99,102,241,0.7)) drop-shadow(0 0 6px rgba(240,72,168,0.4));">
+              <svg width="52" height="52" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="el" x1="312" y1="97" x2="312" y2="927" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#7c6ff7"/>
+                    <stop offset="1" stop-color="#5a72f5"/>
+                  </linearGradient>
+                  <linearGradient id="er" x1="712" y1="97" x2="712" y2="927" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#ff4db0"/>
+                    <stop offset="1" stop-color="#a040d0"/>
+                  </linearGradient>
+                </defs>
+                <line x1="312" y1="200" x2="312" y2="824" stroke="url(#el)" stroke-width="205" stroke-linecap="round"/>
+                <line x1="712" y1="200" x2="712" y2="824" stroke="url(#er)" stroke-width="205" stroke-linecap="round"/>
+                <line x1="312" y1="200" x2="712" y2="824" stroke="#6a3cc4" stroke-width="205" stroke-linecap="round" opacity="0.55"/>
+              </svg>
+            </div>
+          </td>
+          <td valign="middle">
+            <span style="font-size:24px;font-weight:800;letter-spacing:-0.03em;color:#ffffff;">Nomima</span>
+          </td>
+        </tr></table>
+      </td></tr>
+
+      <!-- Body -->
+      <tr><td class="email-body" style="padding:4px 36px 32px;">
+
+        <!-- Greeting -->
+        <h1 style="margin:0 0 8px;font-size:20px;font-weight:800;letter-spacing:-0.02em;color:#f0f0fa;">Welcome to Nomima 👋</h1>
+        <p style="margin:0 0 22px;font-size:13.5px;line-height:1.7;color:#7a7a9a;">
+          Your next great notebook is a few clicks away.
+        </p>
+
+        <!-- Fake task list -->
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 26px;">
+          <tr><td style="background:#13131f;border:1px solid rgba(99,102,241,0.16);border-radius:12px;padding:6px 18px 14px;">
+            <!-- List title -->
+            <p style="margin:0 0 2px;padding:12px 0 8px;font-size:12px;font-weight:700;color:#5a5a7a;letter-spacing:0.04em;border-bottom:1px solid rgba(255,255,255,0.05);">Getting started checklist</p>
+
+            <!-- Task 1 -->
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:10px;">
+              <tr>
+                <td width="18" valign="top" style="padding-top:2px;">
+                  <div style="width:14px;height:14px;border-radius:4px;border:1.5px solid rgba(99,102,241,0.4);background:transparent;"></div>
+                </td>
+                <td style="padding-left:10px;font-size:13px;line-height:1.5;color:#b0b0cc;">
+                  Get to know
+                  <span style="display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:600;background:rgba(96,165,250,0.12);border:1px solid rgba(96,165,250,0.28);color:#60A5FA;">@Nomima</span>
+                  — start with the Welcome notebook
+                </td>
+              </tr>
+            </table>
+
+            <!-- Task 2 -->
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:10px;">
+              <tr>
+                <td width="18" valign="top" style="padding-top:2px;">
+                  <div style="width:14px;height:14px;border-radius:4px;border:1.5px solid rgba(99,102,241,0.4);background:transparent;"></div>
+                </td>
+                <td style="padding-left:10px;font-size:13px;line-height:1.5;color:#b0b0cc;">
+                  Read the
+                  <span style="display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:600;background:rgba(45,212,191,0.12);border:1px solid rgba(45,212,191,0.28);color:#2DD4BF;">User Guide →</span>
+                  — five minutes, everything clicks
+                </td>
+              </tr>
+            </table>
+
+            <!-- Task 3 -->
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:10px;">
+              <tr>
+                <td width="18" valign="top" style="padding-top:2px;">
+                  <div style="width:14px;height:14px;border-radius:4px;border:1.5px solid rgba(99,102,241,0.4);background:transparent;"></div>
+                </td>
+                <td style="padding-left:10px;font-size:13px;line-height:1.5;color:#b0b0cc;">
+                  Check out the templates —
+                  <span style="display:inline-block;padding:1px 8px;border-radius:6px;font-size:12px;font-weight:600;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#c0c0d8;font-family:monospace;">⌘K</span>
+                  is your best friend
+                </td>
+              </tr>
+            </table>
+
+            <!-- Task 4 -->
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:10px;">
+              <tr>
+                <td width="18" valign="top" style="padding-top:2px;">
+                  <div style="width:14px;height:14px;border-radius:4px;border:1.5px solid rgba(99,102,241,0.4);background:transparent;"></div>
+                </td>
+                <td style="padding-left:10px;font-size:13px;line-height:1.5;color:#b0b0cc;">
+                  Try tagging something with
+                  <span style="display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:600;background:rgba(99,102,241,0.10);border:1px solid rgba(99,102,241,0.26);color:#8b8df5;">#ideas</span>
+                  — watch the graph light up
+                </td>
+              </tr>
+            </table>
+
+            <!-- Task 5 -->
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:10px;">
+              <tr>
+                <td width="18" valign="top" style="padding-top:2px;">
+                  <div style="width:14px;height:14px;border-radius:4px;border:1.5px solid rgba(99,102,241,0.4);background:transparent;"></div>
+                </td>
+                <td style="padding-left:10px;font-size:13px;line-height:1.5;color:#b0b0cc;">
+                  Set your first reminder — add
+                  <span style="display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:600;background:rgba(232,121,249,0.12);border:1px solid rgba(232,121,249,0.22);color:#E879F9;">June 20</span>
+                  to any note and it just works
+                </td>
+              </tr>
+            </table>
+
+          </td></tr>
+        </table>
+
+        <!-- Download button -->
+        <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 10px;">
+          <tr>
+            <td style="border-radius:999px;background:linear-gradient(135deg,#6366f1,#f048a8);box-shadow:0 4px 22px rgba(99,102,241,0.38);">
+              <a href="#"
+                 style="display:inline-block;padding:11px 28px;font-size:13.5px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:999px;letter-spacing:-0.01em;">
+                ↓&nbsp;&nbsp;Download Nomima
+              </a>
+            </td>
+          </tr>
+        </table>
+        <p style="margin:0 0 28px;font-size:11px;line-height:1.5;color:#44445a;">Personal link · works once · expires in 24 h · Apple Silicon · macOS 13+</p>
+
+        <!-- Divider -->
+        <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(99,102,241,0.2),rgba(240,72,168,0.12),transparent);margin-bottom:24px;"></div>
+
+        <!-- Guide section -->
+        <p style="margin:0 0 5px;font-size:13px;font-weight:700;color:#c0c0e0;">New to Nomima?</p>
+        <p style="margin:0 0 12px;font-size:13px;line-height:1.62;color:#6a6a88;">The User Guide walks you through Smart Tags, the knowledge graph, and reminders — five minutes to get the most out of it from day one.</p>
+        <a href="#" style="font-size:13px;font-weight:600;color:#8b8df5;text-decoration:none;">Read the User Guide →</a>
+      </td></tr>
+
+      <!-- Footer -->
+      <tr><td style="padding:16px 36px;border-top:1px solid rgba(255,255,255,0.05);text-align:center;">
+        <p style="margin:0;font-size:11px;color:#35354a;line-height:1.6;">
+          © 2026 Nomima · Private. Offline. Yours.<br>
+          You received this because you requested a download at <a href="https://nomima.io" style="color:#4a4a7a;text-decoration:none;">nomima.io</a>.
+        </p>
+      </td></tr>
+
+    </table>
+  </td></tr>
+</table>
+</div>
+</body></html>

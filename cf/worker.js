@@ -198,34 +198,112 @@ function welcomeEmailText({ downloadUrl, guideUrl }) {
 function welcomeEmailHtml({ downloadUrl, guideUrl, logoUrl }) {
   const FONT = "-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Helvetica,Arial,sans-serif";
   return `<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"></head>
-<body style="margin:0;padding:0;background:#f3f3f7;-webkit-font-smoothing:antialiased;">
-  <div style="display:none;max-height:0;overflow:hidden;opacity:0;">Your Nomima download link is inside — works once, expires in 24 hours.</div>
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3f3f7;padding:32px 16px;">
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <style>
+    @media (max-width:600px) {
+      .email-card { border-radius:0 !important; }
+      .email-body { padding:28px 20px !important; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background:#07070e;-webkit-font-smoothing:antialiased;">
+  <!-- Preview text -->
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;font-size:1px;color:#07070e;">Your Nomima download link — works once, expires in 24 hours.</div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#07070e;padding:40px 16px 48px;">
     <tr><td align="center">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background:#ffffff;border-radius:18px;overflow:hidden;box-shadow:0 10px 34px rgba(20,20,40,0.10);">
-        <tr><td style="background:#6366f1;background:linear-gradient(135deg,#6366f1 0%,#f048a8 100%);padding:30px 32px;text-align:center;">
-          <img src="${logoUrl}" width="46" height="46" alt="Nomima" style="display:inline-block;border-radius:11px;border:0;outline:none;text-decoration:none;">
-          <div style="font:800 18px ${FONT};color:#ffffff;margin-top:11px;letter-spacing:-0.02em;">Nomima</div>
-        </td></tr>
-        <tr><td style="padding:32px;font-family:${FONT};color:#1c1c28;">
-          <h1 style="margin:0 0 12px;font-size:21px;font-weight:800;letter-spacing:-0.02em;">Welcome to Nomima 👋</h1>
-          <p style="margin:0 0 22px;font-size:14.5px;line-height:1.62;color:#4a4a5a;">Thanks for joining. Your private, offline notebook is ready — every word you write becomes structured, searchable knowledge, all on your Mac.</p>
-          <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 10px;"><tr>
-            <td style="border-radius:12px;background:#6366f1;background:linear-gradient(135deg,#6366f1 0%,#f048a8 100%);">
-              <a href="${downloadUrl}" style="display:inline-block;padding:13px 28px;font:700 15px ${FONT};color:#ffffff;text-decoration:none;border-radius:12px;">↓&nbsp;&nbsp;Download Nomima</a>
+      <table role="presentation" class="email-card" width="100%" cellpadding="0" cellspacing="0"
+        style="max-width:460px;background:#0e0e1a;border-radius:20px;border:1px solid rgba(99,102,241,0.18);box-shadow:0 0 80px rgba(99,102,241,0.12),0 0 0 1px rgba(99,102,241,0.08);overflow:hidden;">
+
+        <!-- Header: N mark + wordmark -->
+        <tr><td style="padding:32px 36px 20px;background:#0e0e1a;background:radial-gradient(ellipse 90% 120% at 50% 0%,rgba(99,102,241,0.14) 0%,transparent 70%);">
+          <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+            <td valign="middle" style="padding-right:14px;">
+              <div style="display:inline-block;filter:drop-shadow(0 0 14px rgba(99,102,241,0.7)) drop-shadow(0 0 6px rgba(240,72,168,0.4));">
+                <svg width="52" height="52" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="el" x1="312" y1="97" x2="312" y2="927" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stop-color="#7c6ff7"/>
+                      <stop offset="1" stop-color="#5a72f5"/>
+                    </linearGradient>
+                    <linearGradient id="er" x1="712" y1="97" x2="712" y2="927" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stop-color="#ff4db0"/>
+                      <stop offset="1" stop-color="#a040d0"/>
+                    </linearGradient>
+                  </defs>
+                  <line x1="312" y1="200" x2="312" y2="824" stroke="url(#el)" stroke-width="205" stroke-linecap="round"/>
+                  <line x1="712" y1="200" x2="712" y2="824" stroke="url(#er)" stroke-width="205" stroke-linecap="round"/>
+                  <line x1="312" y1="200" x2="712" y2="824" stroke="#6a3cc4" stroke-width="205" stroke-linecap="round" opacity="0.55"/>
+                </svg>
+              </div>
+            </td>
+            <td valign="middle">
+              <span style="font-family:${FONT};font-size:24px;font-weight:800;letter-spacing:-0.03em;color:#ffffff;">Nomima</span>
             </td>
           </tr></table>
-          <p style="margin:8px 0 26px;font-size:12px;line-height:1.5;color:#9a9aa8;">This link is personal and works once — it expires in 24 hours. Apple Silicon · macOS 13+.</p>
-          <div style="border-top:1px solid #ececf2;padding-top:22px;">
-            <p style="margin:0 0 6px;font-size:14px;font-weight:700;color:#1c1c28;">New to Nomima?</p>
-            <p style="margin:0 0 12px;font-size:13.5px;line-height:1.58;color:#4a4a5a;">The User Guide walks you through Smart Tags, the knowledge graph, reminders and everything else in a few minutes — so you get the best out of it from day one.</p>
-            <a href="${guideUrl}" style="font:600 13.5px ${FONT};color:#6366f1;text-decoration:none;">Read the User Guide →</a>
-          </div>
         </td></tr>
-        <tr><td style="padding:20px 32px;background:#fafafc;border-top:1px solid #ececf2;text-align:center;">
-          <p style="margin:0;font:400 11.5px ${FONT};color:#9a9aa8;line-height:1.6;">© 2026 Nomima · Private. Offline. Yours.<br>You're receiving this because you requested a download at nomima.io.</p>
+
+        <!-- Body -->
+        <tr><td class="email-body" style="padding:4px 36px 32px;font-family:${FONT};">
+
+          <!-- Greeting -->
+          <h1 style="margin:0 0 8px;font-size:20px;font-weight:800;letter-spacing:-0.02em;color:#f0f0fa;">Welcome 👋 Your notebook is ready.</h1>
+          <p style="margin:0 0 24px;font-size:13.5px;line-height:1.7;color:#7a7a9a;">
+            Write the way you think. Nomima quietly turns your notes into a knowledge graph — surfacing connections, people, and deadlines without any extra effort.
+          </p>
+
+          <!-- Fake note block — shows smart tags in context -->
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 26px;">
+            <tr><td style="background:#13131f;border:1px solid rgba(99,102,241,0.16);border-radius:12px;padding:16px 18px;">
+              <p style="margin:0 0 8px;font-size:12px;font-weight:600;color:#44445a;letter-spacing:0.05em;text-transform:uppercase;">From your first note</p>
+              <p style="margin:0;font-size:13.5px;line-height:1.72;color:#b0b0cc;">
+                Catch up with
+                <span style="display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:600;background:rgba(96,165,250,0.12);border:1px solid rgba(96,165,250,0.28);color:#60A5FA;">@Alex</span>
+                about the
+                <span style="display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:600;background:rgba(99,102,241,0.10);border:1px solid rgba(99,102,241,0.26);color:#8b8df5;">#launch</span>
+                plan — review deck by
+                <span style="display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:600;background:rgba(45,212,191,0.12);border:1px solid rgba(45,212,191,0.28);color:#2DD4BF;">June 14</span>
+                and mark
+                <span style="display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:600;background:rgba(232,121,249,0.12);border:1px solid rgba(232,121,249,0.22);color:#E879F9;">#complete</span>
+                when done.
+              </p>
+            </td></tr>
+          </table>
+
+          <!-- Download button -->
+          <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 10px;">
+            <tr>
+              <td style="border-radius:999px;background:linear-gradient(135deg,#6366f1,#f048a8);box-shadow:0 4px 22px rgba(99,102,241,0.38);">
+                <a href="${downloadUrl}"
+                   style="display:inline-block;padding:11px 28px;font-family:${FONT};font-size:13.5px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:999px;letter-spacing:-0.01em;">
+                  ↓&nbsp;&nbsp;Download Nomima
+                </a>
+              </td>
+            </tr>
+          </table>
+          <p style="margin:0 0 28px;font-size:11px;line-height:1.5;color:#44445a;">Personal link · works once · expires in 24 h · Apple Silicon · macOS 13+</p>
+
+          <!-- Divider -->
+          <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(99,102,241,0.2),rgba(240,72,168,0.12),transparent);margin-bottom:24px;"></div>
+
+          <!-- Guide section -->
+          <p style="margin:0 0 5px;font-size:13px;font-weight:700;color:#c0c0e0;">New to Nomima?</p>
+          <p style="margin:0 0 12px;font-size:13px;line-height:1.62;color:#6a6a88;">The User Guide walks you through Smart Tags, the knowledge graph, and reminders — five minutes to get the most out of it from day one.</p>
+          <a href="${guideUrl}" style="font-family:${FONT};font-size:13px;font-weight:600;color:#8b8df5;text-decoration:none;">Read the User Guide →</a>
         </td></tr>
+
+        <!-- Footer -->
+        <tr><td style="padding:16px 36px;border-top:1px solid rgba(255,255,255,0.05);text-align:center;">
+          <p style="margin:0;font-family:${FONT};font-size:11px;color:#35354a;line-height:1.6;">
+            © 2026 Nomima · Private. Offline. Yours.<br>
+            You received this because you requested a download at <a href="https://nomima.io" style="color:#4a4a7a;text-decoration:none;">nomima.io</a>.
+          </p>
+        </td></tr>
+
       </table>
     </td></tr>
   </table>
