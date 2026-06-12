@@ -69,6 +69,6 @@ const PAGES = [
   if (foot) {
     foot.innerHTML =
       `<span>Written for Nomima v${GUIDE_VERSION} · last updated ${GUIDE_UPDATED}</span>` +
-      `<span><a href="../index.html">nomima.app</a> · <a href="../contact.html">Something wrong or missing? Tell us</a></span>`;
+      `<span><a href="../index.html">nomima.io</a> · <a href="../contact.html">Something wrong or missing? Tell us</a></span>`;
   }
 })();
