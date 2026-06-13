@@ -1,6 +1,6 @@
 {
-  "version": "1.13.0",
-  "notes": "v1.13.0: Dashboards now count real blocks — accurate per-block analytics with a live-preview widget gallery and new block-type / contains filters. Smarter dates (ambiguous text like \"16/8\" stays text; \"Text\" dates read exactly as typed), Select tags (Priority/Severity), follow-up chains, a tidier Summon with richer templates and a rewritten welcome note, plus a notification startup-crash fix.",
+  "version": "1.13.1",
+  "notes": "v1.13.1: Fixes a display glitch where adding a #hashtag or @mention to a block header (a to-do list, board, timeline, database, or drawing title) could drop the cursor onto a phantom second line. Headers stay on one tidy line now.",
   "pub_date": "2026-06-13T00:00:00Z",
-  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.13.0/Nomima_1.13.0_aarch64.dmg"
+  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.13.1/Nomima_1.13.1_aarch64.dmg"
 }
