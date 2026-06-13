@@ -29,7 +29,7 @@ The guide in this folder (`docs/`) is part of every Nomima release. **A release 
 | #complete, checkboxes, progress, container completion | `tracking.html` |
 | Lenses, tag cards, Dates/Files/Tasks/Alerts lenses, Home, Smart Scrollbar, ⌘K | `smart-views.html` |
 | Graph view, cover graph, entity panel, re-index | `knowledge-graph.html` |
-| Providers, keys, local models, what uses AI | `ai-models.html` |
+| Providers, keys, frontier models, what uses AI | `ai-models.html` |
 | Summon FAB/dock, tools, chat/note, agent permissions | `summon.html` |
 | MCP enable/connect/tools/log | `mcp.html` |
 | SmartCopy paste, templates, comments, PDF export, keyboard | `power-tools.html` |

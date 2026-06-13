@@ -3,8 +3,8 @@
    if features changed. The sidebar, prev/next pager, and footer stamp on
    every page are generated from this file — edit nothing else for nav. */
 
-const GUIDE_VERSION = "1.9.0";
-const GUIDE_UPDATED = "June 11, 2026";
+const GUIDE_VERSION = "1.12.0";
+const GUIDE_UPDATED = "June 13, 2026";
 
 const PAGES = [
   { section: "Start here" },
@@ -69,6 +69,6 @@ const PAGES = [
   if (foot) {
     foot.innerHTML =
       `<span>Written for Nomima v${GUIDE_VERSION} · last updated ${GUIDE_UPDATED}</span>` +
-      `<span><a href="../index.html">nomima.app</a> · <a href="../contact.html">Something wrong or missing? Tell us</a></span>`;
+      `<span><a href="../index.html">nomima.io</a> · <a href="../contact.html">Something wrong or missing? Tell us</a></span>`;
   }
 })();
