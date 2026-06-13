@@ -1,7 +1,10 @@
 # Files that should NOT be served as static assets by the Worker.
 /cf/
 /node_modules/
-/.git/
+# `.git` matches both a real dir AND a worktree's `.git` FILE (gitdir pointer),
+# so deploying from a git worktree doesn't publish it. Same for wrangler's build dir.
+/.git
+/.wrangler
 /.github/
 /server-lock/
 /downloads/
