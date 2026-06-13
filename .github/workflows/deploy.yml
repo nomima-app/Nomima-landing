@@ -56,3 +56,26 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # Deploy the LIVE Cloudflare Worker (cf/worker.js) — the real nomima.io: the
+  # static site (ASSETS binding) + the download/access/admin backend. GitHub
+  # Pages above is only a static mirror and lacks the backend + /admin. This is
+  # what keeps /admin online release-to-release (see RELEASING.md).
+  #
+  # No-ops with a warning until the repo secret CLOUDFLARE_API_TOKEN is set
+  # (scopes: Workers Scripts:Edit + the account's Workers/D1 perms), so it never
+  # fails CI before the token exists; once set, every push to main deploys.
+  deploy-worker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: wrangler deploy (Cloudflare Worker)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::warning::CLOUDFLARE_API_TOKEN not set — skipping live Worker deploy. Run 'wrangler deploy' manually (see RELEASING.md) or add the secret to automate."
+            exit 0
+          fi
+          npx --yes wrangler@4 deploy
