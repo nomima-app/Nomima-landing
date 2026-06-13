@@ -25,6 +25,70 @@ const TOKEN_TTL_HOURS = 24 * 30; // 30 days
 const FALLBACK_DMG = "https://github.com/nomima-app/Nomima-landing/releases/latest";
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
+// Apple model identifier → human marketing name (with the real screen size).
+// system_profiler only reports the generic "MacBook Pro"/"MacBook Air"; the size
+// lives in the identifier (e.g. Mac15,12 = 13-inch — the "15" is the chip
+// generation, NOT the screen size). Resolving it here fixes the dashboard for
+// every already-installed device with no app rebuild. Falls back to the raw id.
+const MODEL_NAMES = {
+  // MacBook Air
+  "MacBookAir10,1": "MacBook Air (13-inch, M1, 2020)",
+  "Mac14,2":  "MacBook Air (13-inch, M2, 2022)",
+  "Mac14,15": "MacBook Air (15-inch, M2, 2023)",
+  "Mac15,12": "MacBook Air (13-inch, M3, 2024)",
+  "Mac15,13": "MacBook Air (15-inch, M3, 2024)",
+  "Mac16,12": "MacBook Air (13-inch, M4, 2025)",
+  "Mac16,13": "MacBook Air (15-inch, M4, 2025)",
+  // MacBook Pro 13"
+  "MacBookPro17,1": "MacBook Pro (13-inch, M1, 2020)",
+  "Mac14,7":  "MacBook Pro (13-inch, M2, 2022)",
+  // MacBook Pro 14" / 16"
+  "MacBookPro18,3": "MacBook Pro (14-inch, M1 Pro, 2021)",
+  "MacBookPro18,4": "MacBook Pro (14-inch, M1 Max, 2021)",
+  "MacBookPro18,1": "MacBook Pro (16-inch, M1 Pro, 2021)",
+  "MacBookPro18,2": "MacBook Pro (16-inch, M1 Max, 2021)",
+  "Mac14,9":  "MacBook Pro (14-inch, M2 Pro, 2023)",
+  "Mac14,5":  "MacBook Pro (14-inch, M2 Max, 2023)",
+  "Mac14,10": "MacBook Pro (16-inch, M2 Pro, 2023)",
+  "Mac14,6":  "MacBook Pro (16-inch, M2 Max, 2023)",
+  "Mac15,3":  "MacBook Pro (14-inch, M3, 2023)",
+  "Mac15,6":  "MacBook Pro (14-inch, M3 Pro, 2023)",
+  "Mac15,8":  "MacBook Pro (14-inch, M3 Max, 2023)",
+  "Mac15,10": "MacBook Pro (14-inch, M3 Max, 2023)",
+  "Mac15,7":  "MacBook Pro (16-inch, M3 Pro, 2023)",
+  "Mac15,9":  "MacBook Pro (16-inch, M3 Max, 2023)",
+  "Mac15,11": "MacBook Pro (16-inch, M3 Max, 2023)",
+  "Mac16,1":  "MacBook Pro (14-inch, M4, 2024)",
+  "Mac16,6":  "MacBook Pro (14-inch, M4 Pro, 2024)",
+  "Mac16,8":  "MacBook Pro (14-inch, M4 Max, 2024)",
+  "Mac16,7":  "MacBook Pro (16-inch, M4 Pro, 2024)",
+  "Mac16,5":  "MacBook Pro (16-inch, M4 Max, 2024)",
+  // Mac mini
+  "Macmini9,1": "Mac mini (M1, 2020)",
+  "Mac14,3":  "Mac mini (M2, 2023)",
+  "Mac14,12": "Mac mini (M2 Pro, 2023)",
+  "Mac16,10": "Mac mini (M4, 2024)",
+  "Mac16,11": "Mac mini (M4 Pro, 2024)",
+  // iMac (24")
+  "iMac21,1": "iMac (24-inch, M1, 2021)",
+  "iMac21,2": "iMac (24-inch, M1, 2021)",
+  "Mac15,4":  "iMac (24-inch, M3, 2023)",
+  "Mac15,5":  "iMac (24-inch, M3, 2023)",
+  "Mac16,3":  "iMac (24-inch, M4, 2024)",
+  // Mac Studio / Mac Pro
+  "Mac13,1":  "Mac Studio (M1 Max, 2022)",
+  "Mac13,2":  "Mac Studio (M1 Ultra, 2022)",
+  "Mac14,13": "Mac Studio (M2 Max, 2023)",
+  "Mac14,14": "Mac Studio (M2 Ultra, 2023)",
+  "Mac15,14": "Mac Studio (M3 Ultra, 2025)",
+  "Mac16,9":  "Mac Studio (M4 Max, 2025)",
+  "Mac14,8":  "Mac Pro (M2 Ultra, 2023)",
+};
+
+function modelMarketingName(model) {
+  return model ? (MODEL_NAMES[model] || null) : null;
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -480,9 +544,9 @@ async function handleAdminExport(request, env, type) {
     const { results } = await env.DB.prepare(
       "SELECT fingerprint, hw_name, hw_model, chip, memory, cpu_cores, os_version, version, ip_country, city, region, first_seen, last_seen, checkin_count FROM device_checkins ORDER BY last_seen DESC"
     ).all();
-    const header = csvRow(["fingerprint", "device", "board_id", "chip", "memory", "cpu_cores", "macos", "app_version", "country", "city", "region", "first_seen", "last_seen", "checkins"]);
+    const header = csvRow(["fingerprint", "device", "model", "board_id", "chip", "memory", "cpu_cores", "macos", "app_version", "country", "city", "region", "first_seen", "last_seen", "checkins"]);
     const rows = (results || []).map((r) =>
-      csvRow([r.fingerprint, r.hw_name, r.hw_model, r.chip, r.memory, r.cpu_cores, r.os_version, r.version, r.ip_country, r.city, r.region, r.first_seen, r.last_seen, r.checkin_count])
+      csvRow([r.fingerprint, r.hw_name, modelMarketingName(r.hw_model) || r.hw_name || r.hw_model, r.hw_model, r.chip, r.memory, r.cpu_cores, r.os_version, r.version, r.ip_country, r.city, r.region, r.first_seen, r.last_seen, r.checkin_count])
     );
     const today = new Date().toISOString().slice(0, 10);
     return new Response([header, ...rows].join("\n"), {
@@ -549,8 +613,9 @@ async function handleAdminDashboard(request, env) {
     const del = `<button class="btn-delete" data-fp="${r.fingerprint}" title="Delete record and permanently revoke">Delete</button>`;
     const specs = [r.chip, r.memory, r.cpu_cores ? r.cpu_cores.replace(/ \(.*\)/, '') + ' cores' : null]
       .filter(Boolean).join(' · ');
-    const deviceCell = (r.hw_name || r.hw_model)
-      ? `<span class="device-name">${r.hw_name || r.hw_model}</span>` +
+    const friendly = modelMarketingName(r.hw_model) || r.hw_name || r.hw_model;
+    const deviceCell = friendly
+      ? `<span class="device-name">${friendly}</span>` +
         (r.hw_model ? `<br><span class="device-id">${r.hw_model}</span>` : '') +
         (specs ? `<br><span class="device-specs">${specs}</span>` : '')
       : "—";
@@ -717,7 +782,7 @@ document.addEventListener('click', async (e) => {
   // Device delete (+ auto-revoke)
   if (btn.classList.contains('btn-delete')) {
     const fp = btn.dataset.fp;
-    if (!confirm('Delete this install record and permanently revoke the device?\n\n' + fp)) return;
+    if (!confirm('Delete this install record and permanently revoke the device?\\n\\n' + fp)) return;
     btn.disabled = true;
     try {
       const data = await apiPost('/admin/delete-device', { fingerprint: fp });
@@ -730,7 +795,7 @@ document.addEventListener('click', async (e) => {
   // Lead delete
   if (btn.classList.contains('btn-delete-lead')) {
     const email = btn.dataset.email;
-    if (!confirm('Delete all records for ' + email + '?\n\nThis removes the lead and all their download tokens.')) return;
+    if (!confirm('Delete all records for ' + email + '?\\n\\nThis removes the lead and all their download tokens.')) return;
     btn.disabled = true;
     try {
       const data = await apiPost('/admin/delete-lead', { email });
