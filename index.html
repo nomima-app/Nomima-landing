@@ -1150,6 +1150,12 @@ note.<span class="nm-hl-fn">entities</span>().<span class="nm-hl-fn">forEach</sp
           </div>
           <p class="plan-price-note">No credit card. No account. No subscription, ever.</p>
 
+          <!-- Shown when an expired/invalid download link bounces back here (?link=…). -->
+          <div class="beta-notice" id="get-notice" style="display:none;align-items:flex-start;gap:7px;margin-bottom:14px;padding:11px 14px;border-radius:10px;background:rgba(240,72,168,0.08);border:1px solid rgba(240,72,168,0.28);font-size:12.5px;line-height:1.5;color:#f7a8d0;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:1px;flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span id="get-notice-text">That download link has expired. Enter your email below and we'll send a fresh one.</span>
+          </div>
+
           <!-- Email capture (required to download) -->
           <div class="beta-capture" id="get-capture">
             <p class="beta-capture-label">Enter your email — we'll send your download link</p>
@@ -1159,7 +1165,7 @@ note.<span class="nm-hl-fn">entities</span>().<span class="nm-hl-fn">forEach</sp
             </div>
             <p class="beta-note">
               <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:2px;flex-shrink:0;"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              We'll email you a welcome note and a private, one-time download link. No spam — unsubscribe any time.
+              We'll email you a welcome note and a private download link that works for 30 days. No spam — unsubscribe any time.
             </p>
           </div>
           <div class="beta-success" id="get-success">
@@ -1494,6 +1500,21 @@ note.<span class="nm-hl-fn">entities</span>().<span class="nm-hl-fn">forEach</sp
 
     btn.addEventListener('click', submit);
     input.addEventListener('keydown', function(e) { if (e.key === 'Enter') submit(); });
+
+    // If a download link bounced back here (expired/invalid token), explain why
+    // and point the visitor at the form instead of leaving them on a silent home page.
+    try {
+      var linkState = new URLSearchParams(window.location.search).get('link');
+      if (linkState === 'expired' || linkState === 'invalid') {
+        var notice = document.getElementById('get-notice');
+        var noticeText = document.getElementById('get-notice-text');
+        if (noticeText && linkState === 'invalid') {
+          noticeText.textContent = "That download link wasn't valid. Enter your email below and we'll send a fresh one.";
+        }
+        if (notice) notice.style.display = 'flex';
+        input.focus();
+      }
+    } catch (e) { /* no-op */ }
   })();
   </script>
 

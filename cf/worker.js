@@ -1,13 +1,15 @@
 // Nomima landing — Cloudflare Worker.
 //
 // Serves the static marketing site (via the ASSETS binding) AND a small backend:
-//   POST /api/request-download  → store the lead, mint a single-use token, email the link
-//   GET  /get?t=<token>         → validate the token (unused + unexpired), burn it, 302 → DMG
+//   POST /api/request-download  → store the lead, mint a per-email token, email the link
+//   GET  /get?t=<token>         → validate the token (unexpired), 302 → DMG
 //
 // The DMG itself stays on GitHub Releases; its URL is only ever handed out after a
-// valid token redemption (never linked on the site).
+// valid token redemption (never linked on the site). The token is reusable within
+// its validity window — a single-use link breaks on double-clicks and on the link
+// scanners many mail providers run, both of which would burn it before the human.
 
-const TOKEN_TTL_HOURS = 24;
+const TOKEN_TTL_HOURS = 24 * 30; // 30 days
 const FALLBACK_DMG = "https://github.com/nomima-app/Nomima-landing/releases/latest";
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
@@ -95,18 +97,19 @@ async function handleGet(request, env, url) {
     .first();
 
   const now = new Date();
-  if (!row || row.used_at || new Date(row.expires_at) < now) {
+  if (!row || new Date(row.expires_at) < now) {
     return Response.redirect(`${url.origin}/?link=expired#get`, 302);
   }
 
-  // Burn it (single use). The WHERE guard avoids a double-spend race.
-  const upd = await env.DB.prepare(
-    "UPDATE download_tokens SET used_at = ?1 WHERE token = ?2 AND used_at IS NULL",
-  )
-    .bind(now.toISOString(), token)
-    .run();
-  if (!upd.meta.changes) {
-    return Response.redirect(`${url.origin}/?link=expired#get`, 302);
+  // Record first use (for analytics) but allow re-download within the window:
+  // the link stays valid until it expires, so double-clicks and mail link-scanners
+  // can't kill it.
+  if (!row.used_at) {
+    await env.DB.prepare(
+      "UPDATE download_tokens SET used_at = ?1 WHERE token = ?2 AND used_at IS NULL",
+    )
+      .bind(now.toISOString(), token)
+      .run();
   }
 
   const dmg = await resolveDmgUrl(env, url);
@@ -186,7 +189,7 @@ function welcomeEmailText({ downloadUrl, guideUrl }) {
     "Thanks for joining. Your private, offline notebook is ready — download it here:",
     downloadUrl,
     "",
-    "This link is personal, works once, and expires in 24 hours. Apple Silicon · macOS 13+.",
+    "This link is personal — keep it; it works for 30 days. Apple Silicon · macOS 13+.",
     "",
     "New to Nomima? The User Guide walks you through Smart Tags, the knowledge graph, and more:",
     guideUrl,
@@ -200,7 +203,7 @@ function welcomeEmailHtml({ downloadUrl, guideUrl, logoUrl }) {
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"></head>
 <body style="margin:0;padding:0;background:#f3f3f7;-webkit-font-smoothing:antialiased;">
-  <div style="display:none;max-height:0;overflow:hidden;opacity:0;">Your Nomima download link is inside — works once, expires in 24 hours.</div>
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;">Your Nomima download link is inside — keep it, it works for 30 days.</div>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3f3f7;padding:32px 16px;">
     <tr><td align="center">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background:#ffffff;border-radius:18px;overflow:hidden;box-shadow:0 10px 34px rgba(20,20,40,0.10);">
@@ -216,7 +219,7 @@ function welcomeEmailHtml({ downloadUrl, guideUrl, logoUrl }) {
               <a href="${downloadUrl}" style="display:inline-block;padding:13px 28px;font:700 15px ${FONT};color:#ffffff;text-decoration:none;border-radius:12px;">↓&nbsp;&nbsp;Download Nomima</a>
             </td>
           </tr></table>
-          <p style="margin:8px 0 26px;font-size:12px;line-height:1.5;color:#9a9aa8;">This link is personal and works once — it expires in 24 hours. Apple Silicon · macOS 13+.</p>
+          <p style="margin:8px 0 26px;font-size:12px;line-height:1.5;color:#9a9aa8;">This link is personal — keep it; it works for 30 days. Apple Silicon · macOS 13+.</p>
           <div style="border-top:1px solid #ececf2;padding-top:22px;">
             <p style="margin:0 0 6px;font-size:14px;font-weight:700;color:#1c1c28;">New to Nomima?</p>
             <p style="margin:0 0 12px;font-size:13.5px;line-height:1.58;color:#4a4a5a;">The User Guide walks you through Smart Tags, the knowledge graph, reminders and everything else in a few minutes — so you get the best out of it from day one.</p>
