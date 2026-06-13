@@ -717,7 +717,7 @@ document.addEventListener('click', async (e) => {
   // Device delete (+ auto-revoke)
   if (btn.classList.contains('btn-delete')) {
     const fp = btn.dataset.fp;
-    if (!confirm('Delete this install record and permanently revoke the device?\n\n' + fp)) return;
+    if (!confirm('Delete this install record and permanently revoke the device?\\n\\n' + fp)) return;
     btn.disabled = true;
     try {
       const data = await apiPost('/admin/delete-device', { fingerprint: fp });
@@ -730,7 +730,7 @@ document.addEventListener('click', async (e) => {
   // Lead delete
   if (btn.classList.contains('btn-delete-lead')) {
     const email = btn.dataset.email;
-    if (!confirm('Delete all records for ' + email + '?\n\nThis removes the lead and all their download tokens.')) return;
+    if (!confirm('Delete all records for ' + email + '?\\n\\nThis removes the lead and all their download tokens.')) return;
     btn.disabled = true;
     try {
       const data = await apiPost('/admin/delete-lead', { email });
