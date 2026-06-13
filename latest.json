@@ -1,6 +1,6 @@
 {
-  "version": "1.13.1",
-  "notes": "v1.13.1: Fixes a display glitch where adding a #hashtag or @mention to a block header (a to-do list, board, timeline, database, or drawing title) could drop the cursor onto a phantom second line. Headers stay on one tidy line now.",
+  "version": "1.13.2",
+  "notes": "v1.13.2: The access screen now paints a solid background instead of letting your desktop show through it.",
   "pub_date": "2026-06-13T00:00:00Z",
-  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.13.1/Nomima_1.13.1_aarch64.dmg"
+  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.13.2/Nomima_1.13.2_aarch64.dmg"
 }
