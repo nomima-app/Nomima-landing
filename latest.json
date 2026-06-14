@@ -1,6 +1,6 @@
 {
-  "version": "1.13.2",
-  "notes": "v1.13.2: The access screen now paints a solid background instead of letting your desktop show through it.",
-  "pub_date": "2026-06-13T00:00:00Z",
-  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.13.2/Nomima_1.13.2_aarch64.dmg"
+  "version": "1.13.4",
+  "notes": "v1.13.4: Pinned RSS Memories are now searchable by Summon — article titles, sources and full text are indexed when you save. Summon chat no longer expands horizontally for code blocks.",
+  "pub_date": "2026-06-14T00:00:00Z",
+  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.13.4/Nomima_1.13.4_aarch64.dmg"
 }
