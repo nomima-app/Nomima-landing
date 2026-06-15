@@ -40,14 +40,19 @@
       </ul>
       <p>Every tag becomes an <strong>entity</strong> in your Knowledge Graph. Tag <span class="pill pill-mention">@Sara</span> in five different notes and Nomima knows they’re all about the same person — her Smart View lens, graph node and entity card collect everything in one place.</p>
 
-      <h2 id="create">Creating a tag</h2>
+      <h2 id=”create”>Creating a tag</h2>
+      <h3>Trigger menu</h3>
       <ol>
-        <li>Type <code>@</code> or <code>#</code> followed by a name. A suggestion menu appears with matching entities you’ve used before.</li>
-        <li>Press <kbd>Enter</kbd> or <kbd>Tab</kbd> to accept the highlighted suggestion — <kbd>Tab</kbd> always accepts the <em>suggested</em> tag, so you can type two letters and let Nomima finish the name.</li>
-        <li>If the name is new, choose <strong>Add</strong> from the menu to create a fresh entity.</li>
-        <li>Press <kbd>Esc</kbd> to dismiss the menu and keep the text plain.</li>
+        <li>Type <code>@</code> for a mention or <code>#</code> for a hashtag. A suggestion menu opens immediately.</li>
+        <li>Keep typing to filter — <code>@sa</code> narrows to names starting with “Sa”. The list is fuzzy so a few letters usually find what you want.</li>
+        <li><kbd>↑</kbd>/<kbd>↓</kbd> navigate the list. <kbd>Enter</kbd> or <kbd>Tab</kbd> accept the highlighted entry — <kbd>Tab</kbd> is quicker when you’ve only typed a couple of letters and trust the top suggestion.</li>
+        <li>If no match exists, the menu shows an <strong>Add “@name”</strong> option at the bottom — press <kbd>Enter</kbd> to create the entity and insert the pill in one step.</li>
+        <li><kbd>Esc</kbd> dismisses the menu and leaves your typed characters as plain text.</li>
       </ol>
-      <p class="tip"><strong>Ghost suggestions:</strong> as you type ordinary text, Nomima may show a faint dashed preview of a tag it recognizes (type “Mo” and see <em>@Moe</em> ghosted ahead) with a small <kbd>⇥</kbd> hint. Press <kbd>Tab</kbd> or click it to convert; <kbd>Esc</kbd> dismisses it for that spot. You can turn this off with <strong>Settings → Smart Tag Types → “Suggest Smart Tags as I type”</strong>.</p>
+      <h3>Type selector</h3>
+      <p>When you’re creating a <em>new</em> entity, a second row appears in the menu letting you pick its type (Person, Company, Project, etc.) before committing. You can change the type later from the entity card.</p>
+      <h3>Ghost suggestions (inline)</h3>
+      <p>While writing ordinary prose, Nomima watches for names it recognises. When it spots one, it ghosts a faint dashed pill ahead of the cursor — type “Mo” and you might see <span style=”opacity:0.45;text-decoration:underline dashed”>@Moe</span> with a small <kbd>⇥</kbd> hint alongside. Press <kbd>Tab</kbd> to accept it as a real pill; <kbd>Esc</kbd> dismisses the ghost for that word and keeps it as plain text. Toggle this behaviour in <strong>Settings → Smart Tag Types → “Suggest Smart Tags as I type”</strong>.</p>
 
       <h2 id="types">Built-in types</h2>
       <p>Each tag has a <em>type</em> that controls its icon, its color everywhere (pill, graph node, minimap dash), and which Smart View lens it appears under.</p>
@@ -78,11 +83,31 @@
       <h2 id="entity-cards">Entity cards &amp; attributes</h2>
       <p>Click any pill to open its <strong>entity card</strong> — the hub for that person, project or thing:</p>
       <ul>
-        <li><strong>Appears in</strong> — every notebook and block that references the entity, deduplicated and clickable.</li>
-        <li><strong>Attributes</strong> — add arbitrary fields to an entity: an email and role for a person, a URL for a company, anything you like. Attributes are stored durably with the entity, not with any single note.</li>
-        <li><strong>Custom icon</strong> — give an entity a photo (a person’s face, a company favicon) and the pill shows it everywhere instead of the type icon.</li>
-        <li><strong>Type schema</strong> — in <strong>Settings → Smart Tag Types</strong> you can define which attribute fields a <em>type</em> should have, so every Person card offers the same fields by default.</li>
+        <li><strong>Appears in</strong> — every notebook and block that references the entity, deduplicated by notebook, and clickable to jump straight there.</li>
+        <li><strong>Attributes</strong> — add arbitrary fields: an email, phone and role for a person; a URL and description for a company; anything you like. Attributes are stored with the entity, not with any single note, so they follow the entity everywhere.</li>
+        <li><strong>Type schema</strong> — in <strong>Settings → Smart Tag Types</strong> you can define which attribute fields a <em>type</em> should carry by default, so every new Person card always offers Email, Role and Company without you having to add them manually.</li>
       </ul>
+
+      <h2 id="thumbnails">Entity thumbnails &amp; favicons</h2>
+      <p>Every entity can carry a custom image that replaces the generic type icon — and the image appears <strong>on every pill instance across your entire vault</strong>, not just in the entity card. This is one of the most visually impactful things you can do to make long notes scannable at a glance.</p>
+      <h3>What it looks like</h3>
+      <ul>
+        <li>A <span class="pill pill-mention">@Sara</span> pill with Sara’s headshot instead of the person icon.</li>
+        <li>A <span class="pill pill-mention">@Acme Corp</span> pill showing the Acme logo instead of the building icon.</li>
+        <li>A <span class="pill pill-mention">@France</span> location entity showing a flag thumbnail.</li>
+        <li>A <span class="pill pill-hashtag">#Nomima</span> project pill showing the product’s icon.</li>
+      </ul>
+      <p>The image is small (shown as a circular thumbnail ~16px in the pill) but immediately recognisable, especially when scanning a note that references many different people or companies.</p>
+      <h3>How to set one</h3>
+      <ol>
+        <li>Click any pill to open its entity card.</li>
+        <li>Click the icon area at the top of the card (or drag an image file onto it).</li>
+        <li>Choose: upload a file from disk, paste an image URL, or — for companies and products — paste the website URL and Nomima fetches the favicon automatically.</li>
+        <li>Nomima fetches and caches the image locally. All pills update instantly and work offline from that point on.</li>
+      </ol>
+      <p class="tip"><strong>Company favicons:</strong> paste a company’s homepage URL (e.g. <code>https://stripe.com</code>) and Nomima pulls the favicon. It’s the fastest way to brand every @Company pill without hunting for a logo file.</p>
+      <h3>Removing or changing it</h3>
+      <p>Open the entity card and click the image — a remove option appears. Removing it reverts the pill back to the default type icon everywhere.</p>
 
       <h2 id="behavior">Pill behavior in the editor</h2>
       <ul>

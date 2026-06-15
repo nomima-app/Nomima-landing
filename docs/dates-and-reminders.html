@@ -32,6 +32,23 @@
         <p class="docs-sub">Write dates the way you’d say them. Nomima turns them into live pills, tracks them across your whole vault, and can ping you when the moment arrives.</p>
       </header>
 
+      <h2 id="two-kinds">Two kinds of dates</h2>
+      <p>Nomima has two ways a date can exist in your notes. Understanding the difference helps you pick the right one.</p>
+      <table>
+        <tr><th>Kind</th><th>What it is</th><th>Use when…</th></tr>
+        <tr>
+          <td><strong>Text date</strong> (inline pill)</td>
+          <td>A date typed inside any block of prose or rich text. It auto-converts to a live pill as you type.</td>
+          <td>You mention a date naturally while writing — "meet @Sara <span class="pill pill-date">friday 2pm</span> to review the deck".</td>
+        </tr>
+        <tr>
+          <td><strong>Task date</strong> (due date on a task)</td>
+          <td>A date pill that lives inside a checklist or task item. It doubles as the item's due date.</td>
+          <td>You want a checkbox item with a deadline — "✗ Send invoice <span class="pill pill-date">June 20</span>".</td>
+        </tr>
+      </table>
+      <p>Both kinds become date pills and both show up in the <a href="smart-views.html#dates-lens">Dates lens</a> and <a href="smart-views.html#home">Home</a> agenda. The practical difference is that <strong>task dates</strong> also carry a completion checkbox — ticking the task resolves the date. <strong>Text dates</strong> are resolved by marking the containing block complete (via <span class="pill pill-status">#complete</span> or the inline "done?" shortcut that appears when a date goes overdue).</p>
+
       <h2 id="date-pills">Date pills</h2>
       <p>Type a date or time in plain words and, the moment you follow it with a space, comma, period or <kbd>Enter</kbd>, it becomes a <span class="pill pill-date">date pill</span>. Recognized phrases include:</p>
       <table>

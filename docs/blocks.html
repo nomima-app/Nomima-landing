@@ -74,7 +74,19 @@
         <li><strong>Keyboard</strong> — <kbd>Tab</kbd>/<kbd>Shift Tab</kbd> walk cells, <kbd>Enter</kbd> adds a row, and arrow keys hop between rows and out to the title.</li>
       </ul>
       <p class="note"><strong>Pasting a table</strong> from a web page, Google Docs, Notion or Markdown drops in as a Database automatically — the header row becomes your columns and each row a record.</p>
-      <p class="tip"><strong>Derived tables:</strong> <code>/entity-table</code> builds a live table of every entity of a type (one row per Person, Project…, editable straight from the grid), and <code>/query-table</code> builds a filtered view of blocks across your notebooks. Both stay in sync as you edit elsewhere.</p>
+
+      <h3 id="entity-table">Entity table</h3>
+      <p>Type <code>/entity-table</code> and pick a type (Person, Company, Project…). Nomima builds a live grid with one row per entity of that type — every <span class="pill pill-mention">@Sara</span>, every <span class="pill pill-hashtag">#launch</span> and so on. Columns come from the entity's attribute schema, so you can bulk-edit attributes right in the table. Edits write back to the entity immediately.</p>
+
+      <h3 id="query-table">Query table</h3>
+      <p>Type <code>/query-table</code>. A query table is a filtered, live view of <em>blocks</em> across your entire vault:</p>
+      <ul>
+        <li><strong>Filter by tag</strong> — choose one or more @mentions or #hashtags; only blocks that contain those pills appear as rows.</li>
+        <li><strong>Filter by type</strong> — narrow to tasks, reminders, dated blocks, or any block kind.</li>
+        <li><strong>Live</strong> — as you write and tag in other notebooks, rows appear and disappear in real time. Nothing needs refreshing.</li>
+        <li><strong>Checkable in place</strong> — task rows have their checkbox right in the table; marking one done updates the original block.</li>
+      </ul>
+      <p class="tip">Query tables are the fastest way to build a "give me all open tasks tagged <span class="pill pill-hashtag">#Q3</span>" view without leaving the page you're on.</p>
 
       <h2 id="technical">Code, math &amp; diagrams</h2>
       <table>
@@ -90,18 +102,29 @@
       <p>Draggable cards organized into columns. Columns come from <span class="pill pill-hashtag">#status</span> tags on the cards, so dragging a card to another column updates its status tag automatically — the board and your notes can never disagree. The header shows an active-of-total count, and a card’s checkbox (or a <span class="pill pill-status">#complete</span> tag) marks it done.</p>
       <h3>Gantt Chart</h3>
       <p>A timeline of tasks with start and end dates. Switch between <strong>Fit</strong> (default), Day, Week and Month zoom. Edit mode exposes name, start, end and assignee fields per row; preview mode shows just the chart. Tasks complete via their checkbox or a <span class="pill pill-status">#complete</span> tag.</p>
-      <h3>Dashboard &amp; Widget</h3>
-      <p><strong>Dashboard</strong> is a live grid of widgets showing stats and trends about your vault; <strong>Widget</strong> is a single resizable chart or metric you can drop anywhere in a note.</p>
+      <h3 id="dashboard">Dashboard &amp; Widget</h3>
+      <p>Insert a <strong>Dashboard</strong> with <code>/dashboard</code> — a full-width live grid of metric and chart widgets that updates as your vault changes. Each widget panel is resizable and rearrangeable by drag.</p>
+      <p>Insert a <strong>Widget</strong> with <code>/widget</code> to drop a single resizable chart or stat inline anywhere in a note — the same components as Dashboard, just one at a time. Available widgets include:</p>
+      <ul>
+        <li><strong>Metric</strong> — a big number with a label (e.g. total tasks, open reminders, files indexed).</li>
+        <li><strong>Bar / Line chart</strong> — trends over time (notes created, tasks completed per day).</li>
+        <li><strong>Donut chart</strong> — breakdown by tag type, completion ratio, etc.</li>
+        <li><strong>Progress ring</strong> — percentage complete for a tag or date range.</li>
+      </ul>
+      <p class="note">Dashboard and Widget data are computed from your vault on device — no AI, no network, no refresh button needed.</p>
 
       <h2 id="media">Media &amp; references</h2>
       <table>
         <tr><th>Block</th><th>What it does</th></tr>
         <tr><td>File</td><td>Attach any file from disk (you can also just drag &amp; drop one onto the note). The file is copied into your vault and appears as a pill with its name and size. Click to preview, or open it in its default app. Text is extracted and indexed so the file’s contents join your Knowledge Graph and search.</td></tr>
-        <tr><td>Embed / Bookmark / Video</td><td>Paste a link. <strong>Vimeo, Loom, Figma, CodePen, Spotify and Google Maps</strong> play or render right inside the note as a live frame. <strong>YouTube</strong> shows a thumbnail you click to watch in your browser. Any other link becomes a rich preview card (image, title, description, favicon), fetched and cached so it works offline — click it to open the page.</td></tr>
+        <tr><td>Embed / Bookmark / Video</td><td>Paste a link and Nomima identifies what it is:<br /><br /><strong>Live frames</strong> — Vimeo, Loom, Figma, CodePen, Spotify and Google Maps render as interactive iframes right inside the note. Resize by dragging the handle.<br /><br /><strong>YouTube</strong> — shows a high-res thumbnail with a play button; clicking opens the video in your browser (Tauri can't iframe YouTube directly).<br /><br /><strong>Bookmark card</strong> — any other URL becomes a rich preview card: the site's <strong>og:image thumbnail</strong> on the left, title, description and <strong>favicon</strong> on the right, fetched and cached on first insert so it works fully offline afterwards. Click the card to open the page. The thumbnail and favicon are pulled from the page's meta tags; if a page doesn't supply them the card falls back to a link-icon placeholder.</td></tr>
         <tr><td>RSS Feed</td><td>Subscribe to a feed inside a note — incoming articles flow into your Knowledge Graph.</td></tr>
         <tr><td>Block Reference</td><td>Link to another notebook or to a specific block inside one.</td></tr>
         <tr><td>Reminder</td><td>A countdown with a desktop alert — covered in depth in <a href="dates-and-reminders.html">Dates &amp; reminders</a>.</td></tr>
       </table>
+
+      <h2 id="terminal">Terminal</h2>
+      <p>Insert a <strong>Terminal</strong> block with <code>/terminal</code>. It embeds a read-only shell output panel in your note — useful for pasting command output alongside your notes, or for Summon to run a command and capture the result directly into the document. The output is static (not an interactive shell) and scrollable.</p>
 
       <h2 id="ai">AI</h2>
       <p><strong>Summon</strong> — opens the AI assistant with your cursor’s context (current block, selection) already attached. See <a href="summon.html">Summon assistant</a>.</p>

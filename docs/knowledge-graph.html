@@ -32,8 +32,40 @@
         <p class="docs-sub">A living map of everything you’ve written — every person, project, date, file and note, connected. You never build it; it builds itself while you write.</p>
       </header>
 
-      <h2 id="auto">It builds itself</h2>
+      <h2 id=”auto”>It builds itself</h2>
       <p>Every time you save or leave a note, Nomima indexes just that note: its tags, dates, tasks, files and links become entities and connections in the graph. There is no “sync” or “generate” button — by the time you open the graph, it already reflects your latest edit. Entities mentioned in the same block get connected, and attached files and RSS articles contribute entities from their text too.</p>
+
+      <h2 id=”pipeline”>How indexing works</h2>
+      <p>Nomima's indexing pipeline runs in two layers. Both happen automatically — you never trigger them manually.</p>
+      <h3>Layer 1 — Structural index (instant)</h3>
+      <p>The moment you save or leave a note, Nomima parses it and writes the structural index: every <span class=”pill pill-mention”>@mention</span>, <span class=”pill pill-hashtag”>#hashtag</span>, date pill, task, reminder and file attachment is recorded as an entity or relationship in the local SQLite database. This is why Smart Views, Home, the scrollbar minimap and the relational graph update <em>instantly</em> — no processing lag at all.</p>
+      <h3>Layer 2 — Semantic index (background)</h3>
+      <p>In the background, each block of text is also <strong>embedded</strong>: converted into a dense vector of numbers that captures its meaning, then stored in the local vector database. This powers:</p>
+      <ul>
+        <li><strong>Semantic search</strong> — Summon finds notes by meaning, not just keywords (“find my thoughts on team dynamics” surfaces notes without that exact phrase).</li>
+        <li><strong>Similar nodes in the graph</strong> — the Semantic mode of the Knowledge Graph draws connections between entities that <em>appear in semantically similar contexts</em>, not just those that share a tag. Two notes about the same person but using different names can still cluster together.</li>
+        <li><strong>Deep research</strong> — when Summon does multi-step vault research, it retrieves by embedding similarity first, then reads the full blocks.</li>
+      </ul>
+      <p class=”note”>Embedding is done entirely on your Mac — the same local language model that runs the Knowledge Graph. Nothing is sent to any cloud for this step, even if you have a cloud AI key configured.</p>
+
+      <h2 id=”file-ingestion”>File ingestion</h2>
+      <p>When you attach a file (drag-drop, <code>/file</code>, or paste), Nomima ingests it in three steps:</p>
+      <ol>
+        <li><strong>Extract</strong> — text is pulled from the file (PDF pages, Word paragraphs, Markdown headings, code comments, spreadsheet cells…) and stored locally.</li>
+        <li><strong>Chunk</strong> — the extracted text is split into meaningful segments (a few paragraphs each) that fit the embedding model's context window.</li>
+        <li><strong>Embed</strong> — each chunk is vectorized and stored. From this point on the file's content is fully searchable, and its entities join the Knowledge Graph.</li>
+      </ol>
+      <p>The <strong>Files lens</strong> in Smart View shows the state of every file: <em>Embedded</em> (all three steps done), <em>Processing</em> (in progress), or <em>No text</em> (binary/image — stored, but nothing to extract).</p>
+
+      <h2 id=”queue”>The background queue &amp; offline behaviour</h2>
+      <p>Embedding is compute-intensive, so Nomima processes it in a background queue at low priority — it never slows down your typing or the app's responsiveness. A few things to know:</p>
+      <ul>
+        <li><strong>Notes index instantly, embeddings follow.</strong> After saving a note you can immediately use Smart Views and the relational graph — those use the structural index. The semantic layer (Summon's meaning-based search, semantic graph mode) catches up within seconds in the background.</li>
+        <li><strong>Offline is fine.</strong> The queue runs entirely on-device; there's nothing to wait for from the network. If you write without any AI configured, the embedding step still runs using the bundled local model.</li>
+        <li><strong>Bulk imports queue gracefully.</strong> Drop 50 PDFs at once — they all enter the queue and process one-by-one without blocking anything. Watch the Files lens to see progress.</li>
+        <li><strong>Queue survives restarts.</strong> Unfinished jobs are persisted. If you quit Nomima mid-import, the queue resumes exactly where it left off on next launch.</li>
+        <li><strong>Re-index</strong> (Settings → Vault) wipes and rebuilds both layers from scratch — the only manual intervention that ever exists, and rarely needed.</li>
+      </ul>
 
       <h2 id="reading">Reading the graph</h2>
       <ul>
