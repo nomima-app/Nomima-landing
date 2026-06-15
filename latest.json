@@ -1,6 +1,6 @@
 {
-  "version": "1.13.7",
-  "notes": "v1.13.7: Published pages no longer show editing buttons (entity table type selector, '+ Add field', query table '+ Add filter', calendar navigation bar). Old published notebooks now render Gantt blocks, Terminal output, RSS cards, and more instead of blank spaces.",
+  "version": "1.13.8",
+  "notes": "v1.13.8: Report a bug right from Settings → Help & diagnostics. Describe one or more issues, attach screenshots, and send — the app attaches a redacted snapshot of recent activity (you review it first; your notes are never included). Reports queue offline and send on their own. Public board at nomima.io/report.",
   "pub_date": "2026-06-15T00:00:00Z",
-  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.13.7/Nomima_1.13.7_aarch64.dmg"
+  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.13.8/Nomima_1.13.8_aarch64.dmg"
 }
