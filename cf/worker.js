@@ -1087,7 +1087,7 @@ async function apiPost(path, body) {
 }
 
 document.addEventListener('click', async (e) => {
-  const btn = e.target.closest('.btn-revoke, .btn-unrevoke, .btn-delete, .btn-delete-lead');
+  const btn = e.target.closest('.btn-revoke, .btn-unrevoke, .btn-delete, .btn-delete-lead, .btn-detail, .btn-hide, .btn-bug-del');
   if (!btn) return;
 
   // Device revoke / unrevoke
