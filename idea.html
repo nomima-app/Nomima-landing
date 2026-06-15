@@ -97,10 +97,108 @@
     .lc-loop { font: 600 13px -apple-system, sans-serif; fill: var(--muted); letter-spacing: .02em; }
     .lc-tick { stroke: rgba(255,255,255,.18); stroke-width: 1.5; }
 
+    /* --- AI-DLC phase flow diagram --- */
+    .aidlc-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; margin: 2rem 0 0; }
+    .aidlc-flow { display: flex; align-items: stretch; gap: 0; min-width: 680px; }
+    .aidlc-phase {
+      flex: 1; border-radius: 14px; border: 1px solid var(--border);
+      padding: 16px 14px; position: relative;
+    }
+    .aidlc-phase.ph-discovery { background: rgba(108,108,255,.08); border-color: rgba(108,108,255,.3); }
+    .aidlc-phase.ph-development { background: rgba(150,80,220,.07); border-color: rgba(150,80,220,.28); }
+    .aidlc-phase.ph-quality { background: rgba(203,82,193,.07); border-color: rgba(203,82,193,.28); }
+    .aidlc-phase.ph-docs     { background: rgba(56,189,248,.07); border-color: rgba(56,189,248,.25); }
+    .aidlc-phase.ph-delivery { background: rgba(240,72,168,.07); border-color: rgba(240,72,168,.28); }
+    .aidlc-phase-label {
+      font-size: 10px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; margin-bottom: 13px;
+    }
+    .ph-discovery .aidlc-phase-label { color: #a5b4fc; }
+    .ph-development .aidlc-phase-label { color: #c4b5fd; }
+    .ph-quality .aidlc-phase-label { color: #e879f9; }
+    .ph-docs .aidlc-phase-label     { color: #7dd3fc; }
+    .ph-delivery .aidlc-phase-label { color: #f9a8d4; }
+    .aidlc-stage {
+      display: flex; align-items: flex-start; gap: 9px; padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+    .aidlc-stage:last-child { border-bottom: none; }
+    .aidlc-step-num {
+      flex-shrink: 0; width: 22px; height: 22px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800; background: rgba(255,255,255,.1); color: var(--fg);
+    }
+    .aidlc-step-name { font-size: 13px; font-weight: 700; line-height: 1.3; }
+    .aidlc-step-desc { font-size: 11.5px; color: var(--muted); margin-top: 2px; line-height: 1.45; }
+    .aidlc-connector {
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      padding: 0 6px; color: rgba(255,255,255,.22); font-size: 18px; font-weight: 300;
+    }
+    .aidlc-monitor {
+      text-align: center; color: var(--muted); font-size: 12.5px; font-weight: 600;
+      padding: 12px 0 2px; letter-spacing: .01em;
+    }
+
+    /* --- tool grid --- */
+    .tool-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin: 1.5rem 0 1rem; }
+    .tool-card {
+      background: rgba(255,255,255,.04); border: 1px solid var(--border);
+      border-radius: 16px; padding: 20px 16px;
+      transition: border-color .2s, background .2s;
+    }
+    .tool-card:hover { border-color: rgba(108,108,255,.45); background: rgba(108,108,255,.06); }
+    .tool-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border-radius: 11px;
+      font-size: 13px; font-weight: 800; letter-spacing: .02em;
+      margin-bottom: 12px;
+    }
+    .tool-card-name { font-weight: 700; font-size: 1rem; margin-bottom: 5px; }
+    .tool-card-role { color: var(--muted); font-size: 12.5px; line-height: 1.55; }
+
+    /* --- LLM strip --- */
+    .llm-strip {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      margin: .7rem 0 2.2rem; padding: 12px 16px;
+      background: rgba(255,255,255,.025); border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .llm-label { font-size: 12px; color: var(--muted); font-weight: 600; margin-right: 2px; }
+    .llm-chip { font-size: 12px; font-weight: 600; padding: 3px 11px; border-radius: 999px; white-space: nowrap; }
+    .llm-chip.claude { background: rgba(108,108,255,.16); color: #a5b4fc; border: 1px solid rgba(108,108,255,.32); }
+    .llm-chip.gpt    { background: rgba(52,211,153,.13);  color: #6ee7b7; border: 1px solid rgba(52,211,153,.3);  }
+    .llm-chip.gemini { background: rgba(251,191,36,.13);  color: #fcd34d; border: 1px solid rgba(251,191,36,.3);  }
+    .llm-chip.misc   { background: rgba(255,255,255,.06); color: var(--muted); border: 1px solid var(--border);   }
+
+    /* --- orchestrator card --- */
+    .orchestrator-card {
+      background: linear-gradient(135deg, rgba(108,108,255,.1), rgba(240,72,168,.07));
+      border: 1px solid rgba(180,100,255,.35);
+      border-radius: 16px; padding: 22px 22px;
+      margin: 1.5rem 0 0; display: flex; align-items: center; gap: 18px;
+    }
+    .orch-icon {
+      flex-shrink: 0; width: 48px; height: 48px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(108,108,255,.28), rgba(240,72,168,.22));
+      border: 1px solid rgba(180,100,255,.35);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800; letter-spacing: .04em; color: #d8b4fe;
+    }
+    .orch-name { font-weight: 800; font-size: 1.05rem; margin-bottom: 4px; }
+    .orch-role { color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .orch-connector {
+      text-align: center; padding: 10px 0 2px;
+      font-size: 11px; font-weight: 700; letter-spacing: .07em;
+      text-transform: uppercase; color: rgba(255,255,255,.28);
+    }
+    .agents-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+      color: rgba(255,255,255,.3); margin: 0 0 10px;
+    }
+
     footer { text-align: center; color: var(--muted); font-size: 12.5px; padding: 2.4rem; border-top: 1px solid var(--border); margin-top: 3rem; }
     footer a { text-decoration: none; }
 
-    @media (max-width: 720px) { .steps, .team { grid-template-columns: 1fr; } }
+    @media (max-width: 720px) { .steps, .team, .tool-grid { grid-template-columns: 1fr; } .orchestrator-card { flex-direction: column; } }
   </style>
 </head>
 <body>
@@ -123,60 +221,84 @@
       <p>A single human holds the vision, makes the product calls, and gives the final yes or no. Everything else is handled by a team of AI agents — they <strong>research, design, build, test, document, secure, profile, ship, and watch it in production</strong>. They review each other's work, argue about trade-offs, and open pull requests; the human reviews, redirects, and merges.</p>
       <p>It's not a finished thesis, and it isn't magic. Some things work surprisingly well; others don't, and we adjust. Nomima — the app, this page, the tests behind every release — is simply the running result of the experiment so far. Treat it as evidence, not a victory lap.</p>
 
-      <h2>The lifecycle, end to end</h2>
-      <p>Every release runs the full loop — from the first idea to the deploy, then straight into the next one. The single human steers; the crew runs each stage.</p>
-      <div class="lifecycle"><div class="lifecycle-scroll"><svg viewBox="0 0 1160 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Nomima development lifecycle from ideation to release">
-  <defs>
-    <linearGradient id="lcLine" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#6c6cff"/><stop offset="1" stop-color="#f048a8"/>
-    </linearGradient>
-    <marker id="lcArrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#f048a8"/></marker>
-  </defs>
-  <line x1="70" y1="120" x2="1090" y2="120" stroke="url(#lcLine)" stroke-width="3"/>
-  <circle cx="70" cy="120" r="21" fill="#6c6cff" stroke="rgba(255,255,255,.18)"/>
-    <text class="lc-num" x="70" y="125" text-anchor="middle">1</text>
-    <text class="lc-name" x="70" y="70" text-anchor="middle">Ideate</text>
-    <text class="lc-desc" x="70" y="88" text-anchor="middle">research & trends</text>
-    <line class="lc-tick" x1="70" y1="99" x2="70" y2="75"/><circle cx="183" cy="120" r="21" fill="#7b68f5" stroke="rgba(255,255,255,.18)"/>
-    <text class="lc-num" x="183" y="125" text-anchor="middle">2</text>
-    <text class="lc-name" x="183" y="168" text-anchor="middle">Spec</text>
-    <text class="lc-desc" x="183" y="186" text-anchor="middle">vision & scope</text>
-    <line class="lc-tick" x1="183" y1="141" x2="183" y2="155"/><circle cx="297" cy="120" r="21" fill="#8a64eb" stroke="rgba(255,255,255,.18)"/>
-    <text class="lc-num" x="297" y="125" text-anchor="middle">3</text>
-    <text class="lc-name" x="297" y="70" text-anchor="middle">Design</text>
-    <text class="lc-desc" x="297" y="88" text-anchor="middle">architecture</text>
-    <line class="lc-tick" x1="297" y1="99" x2="297" y2="75"/><circle cx="410" cy="120" r="21" fill="#9860e2" stroke="rgba(255,255,255,.18)"/>
-    <text class="lc-num" x="410" y="125" text-anchor="middle">4</text>
-    <text class="lc-name" x="410" y="168" text-anchor="middle">Build</text>
-    <text class="lc-desc" x="410" y="186" text-anchor="middle">write the code</text>
-    <line class="lc-tick" x1="410" y1="141" x2="410" y2="155"/><circle cx="523" cy="120" r="21" fill="#a75cd8" stroke="rgba(255,255,255,.18)"/>
-    <text class="lc-num" x="523" y="125" text-anchor="middle">5</text>
-    <text class="lc-name" x="523" y="70" text-anchor="middle">Review</text>
-    <text class="lc-desc" x="523" y="88" text-anchor="middle">critique diffs</text>
-    <line class="lc-tick" x1="523" y1="99" x2="523" y2="75"/><circle cx="637" cy="120" r="21" fill="#b658ce" stroke="rgba(255,255,255,.18)"/>
-    <text class="lc-num" x="637" y="125" text-anchor="middle">6</text>
-    <text class="lc-name" x="637" y="168" text-anchor="middle">Test</text>
-    <text class="lc-desc" x="637" y="186" text-anchor="middle">QA & edge cases</text>
-    <line class="lc-tick" x1="637" y1="141" x2="637" y2="155"/><circle cx="750" cy="120" r="21" fill="#c454c5" stroke="rgba(255,255,255,.18)"/>
-    <text class="lc-num" x="750" y="125" text-anchor="middle">7</text>
-    <text class="lc-name" x="750" y="70" text-anchor="middle">Secure</text>
-    <text class="lc-desc" x="750" y="88" text-anchor="middle">threat-model</text>
-    <line class="lc-tick" x1="750" y1="99" x2="750" y2="75"/><circle cx="863" cy="120" r="21" fill="#d350bb" stroke="rgba(255,255,255,.18)"/>
-    <text class="lc-num" x="863" y="125" text-anchor="middle">8</text>
-    <text class="lc-name" x="863" y="168" text-anchor="middle">Optimize</text>
-    <text class="lc-desc" x="863" y="186" text-anchor="middle">performance</text>
-    <line class="lc-tick" x1="863" y1="141" x2="863" y2="155"/><circle cx="977" cy="120" r="21" fill="#e14cb2" stroke="rgba(255,255,255,.18)"/>
-    <text class="lc-num" x="977" y="125" text-anchor="middle">9</text>
-    <text class="lc-name" x="977" y="70" text-anchor="middle">Document</text>
-    <text class="lc-desc" x="977" y="88" text-anchor="middle">docs & wikis</text>
-    <line class="lc-tick" x1="977" y1="99" x2="977" y2="75"/><circle cx="1090" cy="120" r="21" fill="#f048a8" stroke="rgba(255,255,255,.18)"/>
-    <text class="lc-num" x="1090" y="125" text-anchor="middle">10</text>
-    <text class="lc-name" x="1090" y="168" text-anchor="middle">Release</text>
-    <text class="lc-desc" x="1090" y="186" text-anchor="middle">build & deploy</text>
-    <line class="lc-tick" x1="1090" y1="141" x2="1090" y2="155"/>
-  <path d="M 1090 154 C 1090 270, 70 270, 70 154" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="2" stroke-dasharray="2 6" marker-end="url(#lcArrow)"/>
-  <text class="lc-loop" x="580" y="270" text-anchor="middle">↻  Monitor in production  →  back to the next idea</text>
-</svg></div></div>
+      <h2>The AI-DLC pipeline</h2>
+      <p>Every release runs the full loop — from the first human prompt through research, dev, automated testing, and CI/CD, then straight into the next. The orchestrator routes each stage to the right specialist agent; the human steers and approves.</p>
+      <div class="aidlc-wrap"><div class="aidlc-flow">
+
+        <div class="aidlc-phase ph-discovery">
+          <div class="aidlc-phase-label">Discovery</div>
+          <div class="aidlc-stage">
+            <div class="aidlc-step-num">1</div>
+            <div><div class="aidlc-step-name">Ideate</div><div class="aidlc-step-desc">Human prompt &amp; AI clarifications</div></div>
+          </div>
+          <div class="aidlc-stage">
+            <div class="aidlc-step-num">2</div>
+            <div><div class="aidlc-step-name">Plan</div><div class="aidlc-step-desc">Architecture &amp; task decomposition</div></div>
+          </div>
+          <div class="aidlc-stage">
+            <div class="aidlc-step-num">3</div>
+            <div><div class="aidlc-step-name">Research</div><div class="aidlc-step-desc">Risk scan, patterns &amp; prior art</div></div>
+          </div>
+        </div>
+
+        <div class="aidlc-connector">→</div>
+
+        <div class="aidlc-phase ph-development">
+          <div class="aidlc-phase-label">Development</div>
+          <div class="aidlc-stage">
+            <div class="aidlc-step-num">4</div>
+            <div><div class="aidlc-step-name">Build</div><div class="aidlc-step-desc">Agent-driven implementation</div></div>
+          </div>
+          <div class="aidlc-stage">
+            <div class="aidlc-step-num">5</div>
+            <div><div class="aidlc-step-name">Profile</div><div class="aidlc-step-desc">Perf analysis &amp; optimization</div></div>
+          </div>
+        </div>
+
+        <div class="aidlc-connector">→</div>
+
+        <div class="aidlc-phase ph-quality">
+          <div class="aidlc-phase-label">Quality</div>
+          <div class="aidlc-stage">
+            <div class="aidlc-step-num">6</div>
+            <div><div class="aidlc-step-name">Test</div><div class="aidlc-step-desc">Unit + automated coverage gate</div></div>
+          </div>
+          <div class="aidlc-stage">
+            <div class="aidlc-step-num">7</div>
+            <div><div class="aidlc-step-name">QA</div><div class="aidlc-step-desc">Regression, edge cases &amp; sign-off</div></div>
+          </div>
+        </div>
+
+        <div class="aidlc-connector">→</div>
+
+        <div class="aidlc-phase ph-docs">
+          <div class="aidlc-phase-label">Docs</div>
+          <div class="aidlc-stage">
+            <div class="aidlc-step-num">8</div>
+            <div><div class="aidlc-step-name">Document</div><div class="aidlc-step-desc">Release notes &amp; user-facing docs</div></div>
+          </div>
+          <div class="aidlc-stage">
+            <div class="aidlc-step-num">9</div>
+            <div><div class="aidlc-step-name">Wiki Sync</div><div class="aidlc-step-desc">Architecture &amp; testing wikis updated</div></div>
+          </div>
+        </div>
+
+        <div class="aidlc-connector">→</div>
+
+        <div class="aidlc-phase ph-delivery">
+          <div class="aidlc-phase-label">Delivery</div>
+          <div class="aidlc-stage">
+            <div class="aidlc-step-num">10</div>
+            <div><div class="aidlc-step-name">CI/CD</div><div class="aidlc-step-desc">Automated pipeline, sign &amp; package</div></div>
+          </div>
+          <div class="aidlc-stage">
+            <div class="aidlc-step-num">11</div>
+            <div><div class="aidlc-step-name">Deploy</div><div class="aidlc-step-desc">Staged release &amp; ship</div></div>
+          </div>
+        </div>
+
+      </div></div>
+      <div class="aidlc-monitor">↻ &nbsp; Monitor in production &nbsp;→&nbsp; back to the next prompt</div>
 
 <h2>The journey so far</h2>
       <p>This is the experiment's progress — every release from the first pre-1.0 builds to today, colour-coded by what it advanced. Pre-1.0 and patch releases are the small dots; the unreleased work is the faint stop at the end. <strong>Hover any stop</strong> to see what it added.</p>
@@ -197,58 +319,43 @@
           g.addEventListener('click',function(){show(g,v);});});})();
       </script>
 
-      <h2>Meet the crew</h2>
-      <p>Twelve agents, each with a job and a personality, covering every stage of the life cycle — from the first idea to the 3am production alert.</p>
+      <h2>Meet the team</h2>
+      <p>One human holds the vision. An orchestrator agent coordinates three frontier AI providers — each covering distinct stages of the AI-DLC pipeline.</p>
 
-      <div class="team">
-        <div class="member">
-          <div class="row"><span class="name">Curious Cat</span></div>
-          <p class="role">Research &amp; trends — prowls the web for what's working, what's flopping, and every idea worth stealing.</p>
+      <div class="orchestrator-card">
+        <div class="orch-icon">Orch</div>
+        <div style="flex:1;">
+          <div class="orch-name">Orchestrator Agent</div>
+          <div class="orch-role">Decomposes the human's prompt into AI-DLC stage tasks, routes each to the right model, manages context hand-offs between stages, and enforces quality gates before CI/CD fires.</div>
         </div>
-        <div class="member">
-          <div class="row"><span class="name">The Blueprint</span></div>
-          <p class="role">Architecture — maps the modules, data flow and the offline-first engine before a line is written.</p>
+      </div>
+      <div class="orch-connector">↓ &nbsp; coordinates specialist agents &nbsp; ↓</div>
+
+      <div class="agents-label">Specialist Agents</div>
+      <div class="tool-grid">
+        <div class="tool-card">
+          <div class="tool-badge" style="background:rgba(108,108,255,.18);color:#a5b4fc;">Anth</div>
+          <div class="tool-card-name">Anthropic</div>
+          <div class="tool-card-role">Claude models drive Discovery and Build — ideation, clarification, architecture, and primary implementation across the full stack.</div>
         </div>
-        <div class="member">
-          <div class="row"><span class="name">Pixel Smith</span></div>
-          <p class="role">Frontend &amp; 3D — hand-crafts the editor, the Summon orb, and the page you're reading.</p>
+        <div class="tool-card">
+          <div class="tool-badge" style="background:rgba(52,211,153,.15);color:#6ee7b7;">OAI</div>
+          <div class="tool-card-name">OpenAI</div>
+          <div class="tool-card-role">GPT models handle Research and CI/CD — risk analysis, pattern lookup, code review, and automated pipeline scripting.</div>
         </div>
-        <div class="member">
-          <div class="row"><span class="name">Rusty</span></div>
-          <p class="role">The Rust core — storage, search, sync, and the indexer that never sleeps.</p>
+        <div class="tool-card">
+          <div class="tool-badge" style="background:rgba(251,191,36,.16);color:#fcd34d;">Gem</div>
+          <div class="tool-card-name">Google Gemini</div>
+          <div class="tool-card-role">Gemini models cover Quality and Profiling — long-context test generation, automated coverage gating, and performance analysis.</div>
         </div>
-        <div class="member">
-          <div class="row"><span class="name">Test Hawk</span></div>
-          <p class="role">QA — circles every change hunting the one edge case that breaks it.</p>
-        </div>
-        <div class="member">
-          <div class="row"><span class="name">Documentation OCDer</span></div>
-          <p class="role">Docs &amp; wikis — keeps all three wikis spotless and proposes new ones the moment a gap appears.</p>
-        </div>
-        <div class="member">
-          <div class="row"><span class="name">Red Team Raven</span></div>
-          <p class="role">Security — thinks like an attacker so no one else gets the chance.</p>
-        </div>
-        <div class="member">
-          <div class="row"><span class="name">Speed Demon</span></div>
-          <p class="role">Performance — profiles, trims, and refuses to ship anything that stutters.</p>
-        </div>
-        <div class="member">
-          <div class="row"><span class="name">Ship It</span></div>
-          <p class="role">Builds &amp; releases — notarized DMGs, the Cloudflare deploy, and the green checkmark.</p>
-        </div>
-        <div class="member">
-          <div class="row"><span class="name">The Critic</span></div>
-          <p class="role">Code review — reads every diff twice and is never quite satisfied.</p>
-        </div>
-        <div class="member">
-          <div class="row"><span class="name">Refactor Monk</span></div>
-          <p class="role">Cleanups — deletes more than it adds; allergic to duplication.</p>
-        </div>
-        <div class="member">
-          <div class="row"><span class="name">Watchful Owl</span></div>
-          <p class="role">Observability — watches production at 3am so the human doesn't have to.</p>
-        </div>
+      </div>
+
+      <div class="llm-strip">
+        <span class="llm-label">Latest models</span>
+        <span class="llm-chip claude">Claude Opus 4.8</span>
+        <span class="llm-chip gpt">GPT-5</span>
+        <span class="llm-chip gemini">Gemini 3.0</span>
+        <span class="llm-chip misc">+ others</span>
       </div>
 
       <div class="callout">
