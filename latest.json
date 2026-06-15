@@ -1,6 +1,6 @@
 {
-  "version": "1.13.4",
-  "notes": "v1.13.4: Pinned RSS Memories are now searchable by Summon — article titles, sources and full text are indexed when you save. Summon chat no longer expands horizontally for code blocks.",
-  "pub_date": "2026-06-14T00:00:00Z",
-  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.13.4/Nomima_1.13.4_aarch64.dmg"
+  "version": "1.13.6",
+  "notes": "v1.13.6: Completion state now syncs instantly — ticking a block in the Query panel or Summon agenda immediately updates the open editor. Clicking 'Incomplete?' no longer leaves sibling pills greyed until hover.",
+  "pub_date": "2026-06-15T00:00:00Z",
+  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.13.6/Nomima_1.13.6_aarch64.dmg"
 }
