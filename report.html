@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nomima — report an issue</title>
+  <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+  <style>
+    :root {
+      --bg: #0a0b10; --fg: #eef0f6; --muted: #9aa0b0;
+      --accent: #6c6cff; --pink: #f048a8; --border: rgba(255,255,255,.09);
+      --font: -apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Helvetica,Arial,sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--fg); font-family: var(--font); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 18px clamp(16px,5vw,48px); max-width: 1100px; margin: 0 auto; }
+    nav .brand { display: flex; align-items: center; gap: 9px; text-decoration: none; font-weight: 700; }
+    nav .brand img { width: 26px; height: 26px; }
+    nav .nav-link { text-decoration: none; color: var(--muted); font-size: 14px; }
+    nav .nav-cta { text-decoration: none; background: var(--accent); color: #fff; font-size: 13.5px; font-weight: 600; padding: 8px 16px; border-radius: 10px; }
+    main { max-width: 760px; margin: 0 auto; padding: 24px clamp(16px,5vw,48px) 80px; }
+    h1 { font-size: clamp(28px,5vw,40px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px; }
+    .sub { color: var(--muted); font-size: 15px; margin-bottom: 28px; max-width: 56ch; }
+    .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+    .toolbar h2 { font-size: 15px; font-weight: 700; }
+    .btn { font-family: var(--font); font-size: 13.5px; font-weight: 600; border-radius: 10px; padding: 9px 16px; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--fg); }
+    .btn.primary { background: var(--accent); border-color: transparent; color: #fff; }
+    .btn:disabled { opacity: .55; cursor: default; }
+    /* board */
+    .board { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .issue { display: flex; align-items: center; gap: 14px; padding: 13px 16px; border-bottom: 1px solid var(--border); }
+    .issue:last-child { border-bottom: none; }
+    .issue .ititle { flex: 1; min-width: 0; font-size: 14px; }
+    .issue .idate { color: var(--muted); font-size: 12px; white-space: nowrap; }
+    .sev { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; padding: 2px 8px; border-radius: 999px; border: 1px solid; white-space: nowrap; }
+    .status { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; white-space: nowrap; text-transform: capitalize; }
+    .muted-state { padding: 32px; text-align: center; color: var(--muted); font-size: 14px; }
+    /* form */
+    .form-wrap { border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 28px; background: rgba(255,255,255,.015); }
+    .bug-block { border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+    .bug-block .lbl { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; display: block; margin-bottom: 5px; }
+    .hint { font-size: 11px; color: var(--muted); margin: 3px 0 2px; }
+    input, textarea, select { width: 100%; font-family: var(--font); font-size: 14px; color: var(--fg); background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 9px; padding: 9px 11px; outline: none; }
+    input:focus, textarea:focus, select:focus { border-color: var(--accent); }
+    textarea { resize: vertical; min-height: 70px; }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 9px; }
+    .row select { width: 160px; }
+    .link { color: var(--accent); background: none; border: none; cursor: pointer; font-size: 13px; padding: 0; font-family: var(--font); }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+    .err { color: var(--pink); font-size: 12.5px; margin-top: 8px; }
+    .form-actions { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+    .success { text-align: center; padding: 26px 8px; }
+    .success .ok { display: inline-grid; place-items: center; width: 46px; height: 46px; border-radius: 999px; background: rgba(52,211,153,.14); color: #34d399; font-size: 24px; margin-bottom: 10px; }
+    footer { border-top: 1px solid var(--border); margin-top: 40px; padding: 26px clamp(16px,5vw,48px); max-width: 1100px; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; color: var(--muted); font-size: 13px; text-align: center; }
+    footer .foot-brand { display: inline-flex; align-items: center; gap: 7px; font-weight: 700; color: var(--fg); }
+    footer .foot-brand img { width: 20px; height: 20px; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="brand" href="/" aria-label="Nomima home"><img src="/logo.svg" alt="" /><span>Nomima</span></a>
+    <div style="display:flex; align-items:center; gap:18px;">
+      <a class="nav-link" href="/idea.html">The Idea</a>
+      <a class="nav-cta" href="/#get">Download — Free</a>
+    </div>
+  </nav>
+
+  <main>
+    <h1>Report an issue</h1>
+    <p class="sub">See what's already reported and being worked on — or tell us about a new bug.
+      The best reports come from inside the app (<strong>Settings → About → Report a bug</strong>),
+      which attaches a redacted diagnostic snapshot. This page is the open issues board.</p>
+
+    <div class="toolbar">
+      <h2>Reported issues</h2>
+      <button class="btn primary" id="report-toggle">Report a bug</button>
+    </div>
+
+    <div class="form-wrap" id="form-wrap" style="display:none;">
+      <div id="form-body">
+        <div id="bugs"></div>
+        <button class="link" id="add-bug">+ Add another bug</button>
+        <div style="margin-top:14px;">
+          <input type="email" id="email" placeholder="Your email (optional — so we can follow up)" />
+        </div>
+        <!-- honeypot: bots fill this; humans never see it -->
+        <input class="hp" type="text" id="company" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="err" id="form-err" style="display:none;"></div>
+        <div class="form-actions">
+          <button class="btn primary" id="submit-btn">Send report</button>
+          <button class="btn" id="cancel-btn">Cancel</button>
+        </div>
+      </div>
+      <div id="form-success" class="success" style="display:none;">
+        <div class="ok">✓</div>
+        <div style="font-weight:700;">Thanks — your report is in the queue</div>
+        <p style="color:var(--muted); font-size:13px; margin-top:6px;">It'll appear on the board below once accepted.</p>
+      </div>
+    </div>
+
+    <div class="board" id="board"><div class="muted-state">Loading…</div></div>
+  </main>
+
+  <footer>
+    <div class="foot-brand"><img src="/logo.svg" alt="" /> <span>Nomima</span></div>
+    © Nomima · <a href="/idea.html">The Idea</a> · <a href="/report.html">Report an issue</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/docs/index.html">Guide</a>
+  </footer>
+
+  <script>
+  (function () {
+    var STATUS_COLORS = {
+      "new":         ["rgba(255,255,255,.06)", "var(--muted)"],
+      "triaged":     ["rgba(90,169,246,.14)", "#5aa9f6"],
+      "confirmed":   ["rgba(251,191,36,.14)", "#fbbf24"],
+      "in-progress": ["rgba(108,108,255,.16)", "#a5b4fc"],
+      "fixed":       ["rgba(52,211,153,.14)", "#34d399"],
+      "wontfix":     ["rgba(255,255,255,.05)", "var(--muted)"]
+    };
+    var SEV_COLORS = { low: "#9aa0b0", medium: "#fbbf24", high: "#f97316", crash: "#f87171" };
+
+    function esc(s) {
+      return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+        return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c];
+      });
+    }
+    function ago(iso) {
+      var d = (Date.now() - new Date(iso).getTime()) / 1000;
+      if (d < 3600) return Math.max(1, Math.floor(d / 60)) + "m ago";
+      if (d < 86400) return Math.floor(d / 3600) + "h ago";
+      if (d < 86400 * 30) return Math.floor(d / 86400) + "d ago";
+      return new Date(iso).toISOString().slice(0, 10);
+    }
+
+    function renderBoard(bugs) {
+      var board = document.getElementById("board");
+      if (!bugs.length) { board.innerHTML = '<div class="muted-state">No issues reported yet.</div>'; return; }
+      board.innerHTML = bugs.map(function (b) {
+        var sc = SEV_COLORS[b.severity] || "#9aa0b0";
+        var st = STATUS_COLORS[b.status] || STATUS_COLORS["new"];
+        var label = (b.status || "new").replace("-", " ");
+        return '<div class="issue">' +
+          '<span class="sev" style="color:' + sc + ';border-color:' + sc + '66">' + esc(b.severity || "") + '</span>' +
+          '<span class="ititle">' + esc(b.title) + '</span>' +
+          '<span class="status" style="background:' + st[0] + ';color:' + st[1] + '">' + esc(label) + '</span>' +
+          '<span class="idate">' + ago(b.created_at) + '</span>' +
+          '</div>';
+      }).join("");
+    }
+
+    function loadBoard() {
+      fetch("/api/bugs/public").then(function (r) { return r.json(); })
+        .then(function (d) { renderBoard(d.bugs || []); })
+        .catch(function () { document.getElementById("board").innerHTML = '<div class="muted-state">Couldn\'t load the board.</div>'; });
+    }
+    loadBoard();
+
+    // ---- form ----
+    var bugsEl = document.getElementById("bugs");
+    function bugBlock(n) {
+      var d = document.createElement("div");
+      d.className = "bug-block";
+      d.innerHTML =
+        (n > 0 ? '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;"><span class="lbl">Bug ' + (n + 1) + '</span><button class="link remove-bug" type="button">Remove</button></div>' : '') +
+        '<input class="b-title" type="text" maxlength="200" placeholder="Short summary" />' +
+        '<div class="hint">Shown publicly on the board.</div>' +
+        '<textarea class="b-desc" maxlength="8000" placeholder="What happened? Steps to reproduce… (private)"></textarea>' +
+        '<div class="row"><select class="b-sev"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option><option value="crash">Crash / data loss</option></select>' +
+        '<label class="link" style="cursor:pointer;">+ Screenshot<input class="b-img" type="file" accept="image/*" multiple hidden /></label>' +
+        '<span class="b-imgcount" style="font-size:12px;color:var(--muted);"></span></div>';
+      d.querySelector(".b-img").addEventListener("change", function (e) {
+        var c = e.target.files ? e.target.files.length : 0;
+        d.querySelector(".b-imgcount").textContent = c ? c + " image" + (c > 1 ? "s" : "") + " attached" : "";
+      });
+      var rm = d.querySelector(".remove-bug");
+      if (rm) rm.addEventListener("click", function () { d.remove(); renumber(); });
+      return d;
+    }
+    function renumber() {
+      [].forEach.call(bugsEl.querySelectorAll(".bug-block .lbl"), function (el, i) { el.textContent = "Bug " + (i + 2); });
+    }
+    bugsEl.appendChild(bugBlock(0));
+    document.getElementById("add-bug").addEventListener("click", function () {
+      if (bugsEl.children.length >= 10) return;
+      bugsEl.appendChild(bugBlock(bugsEl.children.length));
+    });
+
+    var wrap = document.getElementById("form-wrap");
+    document.getElementById("report-toggle").addEventListener("click", function () {
+      var open = wrap.style.display !== "none";
+      wrap.style.display = open ? "none" : "block";
+      if (!open) wrap.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    document.getElementById("cancel-btn").addEventListener("click", function () { wrap.style.display = "none"; });
+
+    document.getElementById("submit-btn").addEventListener("click", function () {
+      var btn = this, errEl = document.getElementById("form-err");
+      errEl.style.display = "none";
+      var blocks = [].slice.call(bugsEl.children);
+      var bugs = [], fd = new FormData();
+      var valid = true;
+      blocks.forEach(function (bl, i) {
+        var title = bl.querySelector(".b-title").value.trim();
+        var desc = bl.querySelector(".b-desc").value.trim();
+        if (!title || !desc) { valid = false; return; }
+        bugs.push({ title: title, description: desc, severity: bl.querySelector(".b-sev").value });
+        var files = bl.querySelector(".b-img").files;
+        for (var k = 0; k < files.length && k < 4; k++) fd.append("img_" + i + "_" + k, files[k]);
+      });
+      if (!valid || !bugs.length) { errEl.textContent = "Each bug needs a title and a description."; errEl.style.display = "block"; return; }
+      fd.append("company", document.getElementById("company").value);
+      fd.append("payload", JSON.stringify({
+        source: "web",
+        email: document.getElementById("email").value.trim() || null,
+        bugs: bugs
+      }));
+      btn.disabled = true; btn.textContent = "Sending…";
+      fetch("/api/report-bug", { method: "POST", body: fd }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          if (res.ok && res.j.ok) {
+            document.getElementById("form-body").style.display = "none";
+            document.getElementById("form-success").style.display = "block";
+            setTimeout(loadBoard, 1200);
+          } else {
+            errEl.textContent = res.j.error === "rate_limited" ? "Too many reports — please try again later." : "Something went wrong. Please try again.";
+            errEl.style.display = "block"; btn.disabled = false; btn.textContent = "Send report";
+          }
+        })
+        .catch(function () { errEl.textContent = "Network error. Please try again."; errEl.style.display = "block"; btn.disabled = false; btn.textContent = "Send report"; });
+    });
+  })();
+  </script>
+</body>
+</html>
