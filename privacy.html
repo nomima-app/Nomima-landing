@@ -106,7 +106,7 @@
       <ul>
         <li>
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Your notes never leave your Mac. Everything is stored in a local SQLite database inside your vault folder.
+          Your notes live on your Mac in a local SQLite database. They only ever leave your device when you choose to use AI (Summon) or publish a note — never otherwise.
         </li>
         <li>
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -122,7 +122,7 @@
         </li>
         <li>
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Nomima is free. To send your download link we collect your email (via Mailchimp) — nothing else, and never any payment details.
+          Nomima is free. To send your download link we collect your email — stored in our own Cloudflare database and delivered via Resend — nothing else, and never any payment details.
         </li>
       </ul>
     </div>
@@ -137,14 +137,14 @@
 
       <div class="policy-section">
         <h2>2. What Nomima stores — and where</h2>
-        <p>Nomima is a <strong>local-first, offline application</strong>. All data it creates is stored entirely on your Mac:</p>
+        <p>Nomima is a <strong>local-first application</strong> — it works fully offline, and your content stays on your Mac unless you choose a feature that reaches out (AI or publishing). All data it creates is stored on your Mac:</p>
         <ul>
           <li>Your notes, blocks, tags, links, and attachments are stored in a SQLite database inside your vault folder (a directory you choose).</li>
           <li>Embedded media files (audio, video, images) are stored in a <code>media/</code> subfolder inside your vault.</li>
-          <li>AI provider keys (Anthropic, OpenAI, Google, or local endpoints) are stored in your <strong>macOS Keychain</strong>, not in any file we can access.</li>
+          <li>AI provider keys (Anthropic, OpenAI, or Google) are stored in your <strong>macOS Keychain</strong>, not in any file we can access.</li>
           <li>Application preferences (theme, sound settings, etc.) are stored in macOS <code>UserDefaults</code>.</li>
         </ul>
-        <p>None of this data is transmitted to our servers. We have no backend that receives your notes or personal content.</p>
+        <p>None of this is transmitted to our servers in normal use. The only exceptions are features you explicitly trigger: using Summon sends note content to your chosen AI provider, and publishing a notebook sends its read-only page to read.nomima.io (see section 4).</p>
       </div>
 
       <div class="policy-section">
@@ -166,7 +166,8 @@
           <li><strong>Update checks</strong> — the app periodically fetches a small version manifest to tell you when a newer release is available. This request contains no account or personal data.</li>
           <li><strong>Bookmark metadata</strong> — when you paste a URL into a Bookmark block, the app fetches the page's <code>&lt;meta&gt;</code> tags (title, description, image) from that URL. This is a direct request from your Mac to the target website — it does not pass through our servers.</li>
           <li><strong>RSS feeds</strong> — when you use the RSS Feed block, the app fetches the feed URL directly from your Mac. No proxy is involved.</li>
-          <li><strong>AI providers</strong> — if you use the AI Chat or /Generate features, your messages are sent directly from your Mac to the provider you chose (Anthropic, OpenAI, Google, or a local server). Nomima does not relay or log these requests.</li>
+          <li><strong>AI providers (Summon)</strong> — if you use Summon, the relevant note content is sent directly from your Mac to the frontier model you chose (Anthropic, OpenAI, or Google). Nomima supports frontier models only — there is no local/self-hosted option — and it does not relay or log these requests.</li>
+          <li><strong>Publishing</strong> — if you publish a notebook, its rendered, read-only page is sent to <strong>read.nomima.io</strong> so it can be viewed at a private link gated by a view-code. This only happens for notebooks you explicitly choose to publish; the raw note data and all other notebooks stay on your Mac.</li>
           <li><strong>MCP server</strong> — the built-in MCP server listens on local loopback (<code>127.0.0.1</code>) only and is not accessible from the internet.</li>
         </ul>
       </div>
@@ -176,15 +177,15 @@
         <p>Nomima is <strong>completely free</strong> — there is no paid tier, no payment processor, and no licence key.</p>
         <ul>
           <li>To download the app from our website, you give us an email address. We use it to send you a download link and a welcome message, and occasionally to let you know about important updates.</li>
-          <li>Your email is stored with <strong>Mailchimp</strong> (<a href="https://mailchimp.com" target="_blank" rel="noopener noreferrer">mailchimp.com</a>), which we use to manage our mailing list and deliver these emails. Mailchimp's own privacy policy governs how they process it: <a href="https://www.intuit.com/privacy/statement/" target="_blank" rel="noopener noreferrer">intuit.com/privacy</a>.</li>
-          <li>We never sell or share your email, and you can unsubscribe at any time using the link in any email we send.</li>
+          <li>Your email is stored in our own database on <strong>Cloudflare</strong> (which also hosts this website). The download link itself is delivered by <strong>Resend</strong> (<a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">resend.com/privacy</a>), a transactional email service. We do not use a third-party mailing-list provider.</li>
+          <li>We never sell or share your email, and you can ask us to delete it at any time by emailing <a href="mailto:support@nomima.io">support@nomima.io</a>.</li>
           <li>The app itself never asks for or transmits your email — collecting it happens only on the website, only when you request a download.</li>
         </ul>
       </div>
 
       <div class="policy-section">
         <h2>6. Third-party AI providers</h2>
-        <p>The AI Chat and /Generate features are <strong>bring-your-own-key</strong>. You supply the API key; the app stores it in your macOS Keychain and sends requests directly to your chosen provider. We do not proxy, store, or inspect these requests.</p>
+        <p>Summon (Nomima's AI) is <strong>bring-your-own-key</strong> and connects only to <strong>frontier models</strong> from Anthropic, OpenAI or Google — there is no local or self-hosted model option. You supply the API key; the app stores it in your macOS Keychain and sends requests directly to your chosen provider. We do not proxy, store, or inspect these requests.</p>
         <p>Each provider has its own data processing terms:</p>
         <ul>
           <li>Anthropic — <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener noreferrer">anthropic.com/privacy</a></li>
@@ -196,8 +197,8 @@
 
       <div class="policy-section">
         <h2>7. Website and contact form</h2>
-        <p>This website (<strong>nomima.io</strong>) does not use cookies, tracking pixels, or analytics scripts. If you submit the contact form, your name, email address, chosen topic, and message are sent to <a href="mailto:support@nomima.io">support@nomima.io</a> via <strong>FormSubmit</strong> (<a href="https://formsubmit.co" target="_blank" rel="noopener noreferrer">formsubmit.co</a>). We retain that information only as long as necessary to respond to your enquiry.</p>
-        <p>If you sign up for the waiting list, your email is stored with <strong>Mailchimp</strong> and governed by their privacy policy. You can unsubscribe at any time via the link in any email we send.</p>
+        <p>This website (<strong>nomima.io</strong>) is hosted on <strong>Cloudflare</strong> and does not use cookies, tracking pixels, or analytics scripts. If you submit the contact form, your name, email address, chosen topic, and message are delivered to <a href="mailto:support@nomima.io">support@nomima.io</a> via <strong>Formspree</strong> (<a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener noreferrer">formspree.io/privacy</a>). We retain that information only as long as necessary to respond to your enquiry.</p>
+        <p>When you request a download, your email is stored in our own Cloudflare database and used only to send your download link and occasional product updates — see section 5. There is no separate mailing list or waiting list.</p>
       </div>
 
       <div class="policy-section">

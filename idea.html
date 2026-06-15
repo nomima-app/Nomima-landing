@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Nomima Idea — spec'd by a human, built by AI</title>
+  <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+  <style>
+    :root {
+      --bg: #0a0b10; --fg: #eef0f6; --muted: #9aa0b0;
+      --accent: #6c6cff; --pink: #f048a8; --border: rgba(255,255,255,.09);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--fg);
+      font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+      -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+
+    nav { position: fixed; inset: 0 0 auto 0; z-index: 60;
+      display: flex; align-items: center; justify-content: space-between; padding: 14px 24px;
+      backdrop-filter: blur(10px); background: linear-gradient(to bottom, rgba(10,11,16,.85), rgba(10,11,16,0)); }
+    .brand { display: flex; align-items: center; gap: 9px; text-decoration: none; color: var(--fg); font-weight: 700; letter-spacing: -.02em; font-size: 18px; }
+    .brand img { width: 26px; height: 26px; filter: drop-shadow(0 2px 10px rgba(108,108,255,.5)); }
+    .nav-cta { background: var(--accent); color: #fff; text-decoration: none; font-weight: 600; padding: 8px 16px; border-radius: 10px; font-size: 14px; }
+
+    .wrap { max-width: 860px; margin: 0 auto; padding: 9rem 1.5rem 5rem; }
+
+    .hero-idea { text-align: center; margin-bottom: 4.5rem; position: relative; }
+    .hero-idea::after { content: ""; position: absolute; inset: -40px 0 auto 0; height: 360px; z-index: -1;
+      background: radial-gradient(600px 300px at 50% 30%, rgba(108,108,255,.2), transparent 70%); }
+    .kicker { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 700;
+      letter-spacing: .04em; text-transform: uppercase; color: var(--accent);
+      border: 1px solid rgba(108,108,255,.35); border-radius: 999px; padding: 5px 13px; margin-bottom: 22px; }
+    h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); line-height: 1.04; letter-spacing: -.03em; margin: 0 0 1.1rem; }
+    h1 .grad { background: linear-gradient(100deg, var(--accent), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-idea p { color: var(--muted); font-size: 1.18rem; max-width: 52ch; margin: 0 auto; }
+
+    .prose h2 { font-size: 1.6rem; letter-spacing: -.02em; margin: 3rem 0 .8rem; }
+    .prose p { color: #c6c9d4; margin: 0 0 1.1rem; }
+    .prose strong { color: var(--fg); }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 1.5rem 0; }
+    .step { background: rgba(255,255,255,.035); border: 1px solid var(--border); border-radius: 13px; padding: 18px; }
+    .step .n { font-size: 12px; font-weight: 800; letter-spacing: .08em; color: var(--accent); text-transform: uppercase; }
+    .step h3 { margin: 6px 0 4px; font-size: 1.05rem; }
+    .step p { color: var(--muted); font-size: 13.5px; margin: 0; }
+
+    .team { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 1.4rem 0 0; }
+    .member { background: rgba(255,255,255,.035); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; }
+    .member .row { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; }
+    .member .name { font-weight: 700; font-size: 1.15rem; }
+    .member .agent { font-size: 12.5px; font-weight: 600; color: var(--accent); background: rgba(108,108,255,.12);
+      border: 1px solid rgba(108,108,255,.3); border-radius: 999px; padding: 2px 10px; }
+    .member .role { color: var(--muted); font-size: 13.5px; margin: 8px 0 0; }
+
+    .callout { margin: 3.5rem 0 0; padding: 24px; border-radius: 16px; text-align: center;
+      background: linear-gradient(120deg, rgba(108,108,255,.12), rgba(240,72,168,.1));
+      border: 1px solid var(--border); }
+    .callout p { font-size: 1.15rem; margin: 0 0 1.2rem; }
+    .btn-primary { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; font-weight: 650;
+      padding: 12px 24px; border-radius: 12px; box-shadow: 0 10px 30px -8px rgba(108,108,255,.6); }
+
+
+    .rail-wrap { position: relative; width: 100vw; margin-left: calc(50% - 50vw); padding: 8px clamp(12px,4vw,40px) 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .rail-wrap svg { display: block; width: 100%; min-width: 680px; max-width: 1120px; margin: 0 auto; height: auto; }
+    .rail-stop { cursor: pointer; }
+    .rail-stop circle { transition: r .12s ease, opacity .12s ease; }
+    .rail-stop:hover circle { opacity: 1; r: 7; }
+    #railCard { display: none; position: fixed; z-index: 9999; width: 300px; background: #14151c;
+      border: 1px solid var(--border); border-radius: 13px; padding: 14px 16px; pointer-events: none;
+      box-shadow: 0 20px 48px rgba(0,0,0,.7); font-size: 12.5px; line-height: 1.55; }
+    #railCard .rc-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    #railCard .rc-ver { font-size: 14px; font-weight: 800; color: var(--fg); }
+    #railCard .rc-cat { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; text-transform: uppercase; letter-spacing: .5px; }
+    #railCard .rc-label { font-size: 12.5px; font-weight: 700; color: var(--fg); margin-bottom: 5px; }
+    #railCard .rc-body { margin: 0; color: var(--muted); font-size: 12px; }
+
+
+    .rail-stop { cursor: pointer; }
+    .rail-stop circle { transition: opacity .12s ease; }
+    .rail-stop:hover circle { opacity: 1; }
+    #railCard { display: none; position: fixed; z-index: 9999; width: 300px; background: #14151c;
+      border: 1px solid var(--border); border-radius: 13px; padding: 14px 16px; pointer-events: none;
+      box-shadow: 0 20px 48px rgba(0,0,0,.7); font-size: 12.5px; line-height: 1.55; }
+    #railCard .rc-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    #railCard .rc-ver { font-size: 14px; font-weight: 800; color: var(--fg); }
+    #railCard .rc-cat { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; text-transform: uppercase; letter-spacing: .5px; }
+    #railCard .rc-label { font-size: 12.5px; font-weight: 700; color: var(--fg); margin-bottom: 5px; }
+    #railCard .rc-body { margin: 0; color: var(--muted); font-size: 12px; }
+
+    .lifecycle { margin: 1.6rem 0 0.5rem; }
+    .lifecycle-scroll { overflow-x: auto; padding-bottom: 6px; -webkit-overflow-scrolling: touch; }
+    .lifecycle svg { display: block; width: 100%; min-width: 760px; height: auto; }
+    .lc-num { font: 800 14px -apple-system, sans-serif; fill: #fff; }
+    .lc-name { font: 700 15px -apple-system, sans-serif; fill: var(--fg); }
+    .lc-desc { font: 11.5px -apple-system, sans-serif; fill: var(--muted); }
+    .lc-loop { font: 600 13px -apple-system, sans-serif; fill: var(--muted); letter-spacing: .02em; }
+    .lc-tick { stroke: rgba(255,255,255,.18); stroke-width: 1.5; }
+
+    footer { text-align: center; color: var(--muted); font-size: 12.5px; padding: 2.4rem; border-top: 1px solid var(--border); margin-top: 3rem; }
+    footer a { text-decoration: none; }
+
+    @media (max-width: 720px) { .steps, .team { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="brand" href="/" aria-label="Nomima home">
+      <img src="/logo.svg" alt="" /> <span>Nomima</span>
+    </a>
+    <a class="nav-cta" href="/#get">Download — Free</a>
+  </nav>
+
+  <div class="wrap">
+    <header class="hero-idea">
+      <span class="kicker">✦ An experiment in AI-DLC</span>
+      <h1>How far can <span class="grad">one human and a team of agents</span> go?</h1>
+      <p>Nomima is an experiment. The question it's testing: how far can a real, shipping product get when <strong>a single human</strong> sets the direction and a team of <strong>AI agents</strong> does the building? This is us finding out — in the open.</p>
+    </header>
+
+    <div class="prose">
+      <h2>The setup</h2>
+      <p>A single human holds the vision, makes the product calls, and gives the final yes or no. Everything else is handled by a team of AI agents — they <strong>research, design, build, test, document, secure, profile, ship, and watch it in production</strong>. They review each other's work, argue about trade-offs, and open pull requests; the human reviews, redirects, and merges.</p>
+      <p>It's not a finished thesis, and it isn't magic. Some things work surprisingly well; others don't, and we adjust. Nomima — the app, this page, the tests behind every release — is simply the running result of the experiment so far. Treat it as evidence, not a victory lap.</p>
+
+      <h2>The lifecycle, end to end</h2>
+      <p>Every release runs the full loop — from the first idea to the deploy, then straight into the next one. The single human steers; the crew runs each stage.</p>
+      <div class="lifecycle"><div class="lifecycle-scroll"><svg viewBox="0 0 1160 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Nomima development lifecycle from ideation to release">
+  <defs>
+    <linearGradient id="lcLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6c6cff"/><stop offset="1" stop-color="#f048a8"/>
+    </linearGradient>
+    <marker id="lcArrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#f048a8"/></marker>
+  </defs>
+  <line x1="70" y1="120" x2="1090" y2="120" stroke="url(#lcLine)" stroke-width="3"/>
+  <circle cx="70" cy="120" r="21" fill="#6c6cff" stroke="rgba(255,255,255,.18)"/>
+    <text class="lc-num" x="70" y="125" text-anchor="middle">1</text>
+    <text class="lc-name" x="70" y="70" text-anchor="middle">Ideate</text>
+    <text class="lc-desc" x="70" y="88" text-anchor="middle">research & trends</text>
+    <line class="lc-tick" x1="70" y1="99" x2="70" y2="75"/><circle cx="183" cy="120" r="21" fill="#7b68f5" stroke="rgba(255,255,255,.18)"/>
+    <text class="lc-num" x="183" y="125" text-anchor="middle">2</text>
+    <text class="lc-name" x="183" y="168" text-anchor="middle">Spec</text>
+    <text class="lc-desc" x="183" y="186" text-anchor="middle">vision & scope</text>
+    <line class="lc-tick" x1="183" y1="141" x2="183" y2="155"/><circle cx="297" cy="120" r="21" fill="#8a64eb" stroke="rgba(255,255,255,.18)"/>
+    <text class="lc-num" x="297" y="125" text-anchor="middle">3</text>
+    <text class="lc-name" x="297" y="70" text-anchor="middle">Design</text>
+    <text class="lc-desc" x="297" y="88" text-anchor="middle">architecture</text>
+    <line class="lc-tick" x1="297" y1="99" x2="297" y2="75"/><circle cx="410" cy="120" r="21" fill="#9860e2" stroke="rgba(255,255,255,.18)"/>
+    <text class="lc-num" x="410" y="125" text-anchor="middle">4</text>
+    <text class="lc-name" x="410" y="168" text-anchor="middle">Build</text>
+    <text class="lc-desc" x="410" y="186" text-anchor="middle">write the code</text>
+    <line class="lc-tick" x1="410" y1="141" x2="410" y2="155"/><circle cx="523" cy="120" r="21" fill="#a75cd8" stroke="rgba(255,255,255,.18)"/>
+    <text class="lc-num" x="523" y="125" text-anchor="middle">5</text>
+    <text class="lc-name" x="523" y="70" text-anchor="middle">Review</text>
+    <text class="lc-desc" x="523" y="88" text-anchor="middle">critique diffs</text>
+    <line class="lc-tick" x1="523" y1="99" x2="523" y2="75"/><circle cx="637" cy="120" r="21" fill="#b658ce" stroke="rgba(255,255,255,.18)"/>
+    <text class="lc-num" x="637" y="125" text-anchor="middle">6</text>
+    <text class="lc-name" x="637" y="168" text-anchor="middle">Test</text>
+    <text class="lc-desc" x="637" y="186" text-anchor="middle">QA & edge cases</text>
+    <line class="lc-tick" x1="637" y1="141" x2="637" y2="155"/><circle cx="750" cy="120" r="21" fill="#c454c5" stroke="rgba(255,255,255,.18)"/>
+    <text class="lc-num" x="750" y="125" text-anchor="middle">7</text>
+    <text class="lc-name" x="750" y="70" text-anchor="middle">Secure</text>
+    <text class="lc-desc" x="750" y="88" text-anchor="middle">threat-model</text>
+    <line class="lc-tick" x1="750" y1="99" x2="750" y2="75"/><circle cx="863" cy="120" r="21" fill="#d350bb" stroke="rgba(255,255,255,.18)"/>
+    <text class="lc-num" x="863" y="125" text-anchor="middle">8</text>
+    <text class="lc-name" x="863" y="168" text-anchor="middle">Optimize</text>
+    <text class="lc-desc" x="863" y="186" text-anchor="middle">performance</text>
+    <line class="lc-tick" x1="863" y1="141" x2="863" y2="155"/><circle cx="977" cy="120" r="21" fill="#e14cb2" stroke="rgba(255,255,255,.18)"/>
+    <text class="lc-num" x="977" y="125" text-anchor="middle">9</text>
+    <text class="lc-name" x="977" y="70" text-anchor="middle">Document</text>
+    <text class="lc-desc" x="977" y="88" text-anchor="middle">docs & wikis</text>
+    <line class="lc-tick" x1="977" y1="99" x2="977" y2="75"/><circle cx="1090" cy="120" r="21" fill="#f048a8" stroke="rgba(255,255,255,.18)"/>
+    <text class="lc-num" x="1090" y="125" text-anchor="middle">10</text>
+    <text class="lc-name" x="1090" y="168" text-anchor="middle">Release</text>
+    <text class="lc-desc" x="1090" y="186" text-anchor="middle">build & deploy</text>
+    <line class="lc-tick" x1="1090" y1="141" x2="1090" y2="155"/>
+  <path d="M 1090 154 C 1090 270, 70 270, 70 154" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="2" stroke-dasharray="2 6" marker-end="url(#lcArrow)"/>
+  <text class="lc-loop" x="580" y="270" text-anchor="middle">↻  Monitor in production  →  back to the next idea</text>
+</svg></div></div>
+
+<h2>The journey so far</h2>
+      <p>This is the experiment's progress — every release from the first pre-1.0 builds to today, colour-coded by what it advanced. Pre-1.0 and patch releases are the small dots; the unreleased work is the faint stop at the end. <strong>Hover any stop</strong> to see what it added.</p>
+      <div class="rail-wrap"><svg viewBox="0 0 920 590" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Nomima release journey" style="width:100%;height:auto"><circle cx="60" cy="34" r="5" fill="#6d5ef7"/><text x="71" y="38" font-size="10.5" fill="var(--muted)">AI & KG</text><circle cx="228" cy="34" r="5" fill="#34d399"/><text x="239" y="38" font-size="10.5" fill="var(--muted)">Editor & blocks</text><circle cx="396" cy="34" r="5" fill="#5aa9f6"/><text x="407" y="38" font-size="10.5" fill="var(--muted)">Views & insight</text><circle cx="564" cy="34" r="5" fill="#fbbf24"/><text x="575" y="38" font-size="10.5" fill="var(--muted)">Platform</text><path d="M60,96 H860 M860,96 C900,96 900,246 860,246 M860,246 H60 M60,246 C20,246 20,396 60,396 M60,396 H860 M860,396 C900,396 900,546 860,546 M860,546 H60" fill="none" stroke="var(--border)" stroke-width="2.5"/><g class="rail-stop" data-rver="v0.1.0"><circle cx="60" cy="96" r="3.6" fill="#fbbf24" opacity="0.85"/><text x="60" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.1.0</text></g><g class="rail-stop" data-rver="v0.1.1"><circle cx="149" cy="96" r="3.6" fill="#74748a" opacity="0.85"/><text x="149" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.1.1</text></g><g class="rail-stop" data-rver="v0.1.2"><circle cx="238" cy="96" r="3.6" fill="#74748a" opacity="0.85"/><text x="238" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.1.2</text></g><g class="rail-stop" data-rver="v0.2.0"><circle cx="327" cy="96" r="3.6" fill="#6d5ef7" opacity="0.85"/><text x="327" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.2.0</text></g><g class="rail-stop" data-rver="v0.3.0"><circle cx="416" cy="96" r="3.6" fill="#6d5ef7" opacity="0.85"/><text x="416" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.3.0</text></g><g class="rail-stop" data-rver="v0.4.0"><circle cx="504" cy="96" r="3.6" fill="#6d5ef7" opacity="0.85"/><text x="504" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.4.0</text></g><g class="rail-stop" data-rver="v0.5.0"><circle cx="593" cy="96" r="3.6" fill="#5aa9f6" opacity="0.85"/><text x="593" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.5.0</text></g><g class="rail-stop" data-rver="v0.5.1"><circle cx="682" cy="96" r="3.6" fill="#74748a" opacity="0.85"/><text x="682" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.5.1</text></g><g class="rail-stop" data-rver="v0.6.0"><circle cx="771" cy="96" r="3.6" fill="#6d5ef7" opacity="0.85"/><text x="771" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.6.0</text></g><g class="rail-stop" data-rver="v0.7.0"><circle cx="860" cy="96" r="3.6" fill="#fbbf24" opacity="0.85"/><text x="860" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.7.0</text></g><g class="rail-stop" data-rver="v0.8.0"><circle cx="860" cy="246" r="3.6" fill="#5aa9f6" opacity="0.85"/><text x="860" y="262" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.8.0</text></g><g class="rail-stop" data-rver="v0.9.0"><circle cx="771" cy="246" r="3.6" fill="#6d5ef7" opacity="0.85"/><text x="771" y="262" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.9.0</text></g><g class="rail-stop" data-rver="v0.10.0"><circle cx="682" cy="246" r="3.6" fill="#34d399" opacity="0.85"/><text x="682" y="262" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.10.0</text></g><g class="rail-stop" data-rver="v0.11.0"><circle cx="593" cy="246" r="3.6" fill="#34d399" opacity="0.85"/><text x="593" y="262" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.11.0</text></g><g class="rail-stop" data-rver="v0.12.0"><circle cx="504" cy="246" r="3.6" fill="#34d399" opacity="0.85"/><text x="504" y="262" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.12.0</text></g><g class="rail-stop" data-rver="v0.13.0"><circle cx="416" cy="246" r="3.6" fill="#34d399" opacity="0.85"/><text x="416" y="262" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.13.0</text></g><g class="rail-stop" data-rver="v0.14.0"><circle cx="327" cy="246" r="3.6" fill="#34d399" opacity="0.85"/><text x="327" y="262" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.14.0</text></g><g class="rail-stop" data-rver="v0.15.0"><circle cx="238" cy="246" r="3.6" fill="#34d399" opacity="0.85"/><text x="238" y="262" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.15.0</text></g><g class="rail-stop" data-rver="v1.0.0"><circle cx="149" cy="246" r="6" fill="#5aa9f6"/><text x="149" y="233" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.0.0</text></g><g class="rail-stop" data-rver="v1.0.2"><circle cx="60" cy="246" r="3.6" fill="#74748a" opacity="0.85"/><text x="60" y="262" text-anchor="middle" font-size="8.5" fill="var(--muted)">1.0.2</text></g><g class="rail-stop" data-rver="v1.1.0"><circle cx="60" cy="396" r="6" fill="#6d5ef7"/><text x="60" y="383" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.1.0</text></g><g class="rail-stop" data-rver="v1.1.1"><circle cx="149" cy="396" r="3.6" fill="#74748a" opacity="0.85"/><text x="149" y="412" text-anchor="middle" font-size="8.5" fill="var(--muted)">1.1.1</text></g><g class="rail-stop" data-rver="v1.1.2"><circle cx="238" cy="396" r="3.6" fill="#74748a" opacity="0.85"/><text x="238" y="412" text-anchor="middle" font-size="8.5" fill="var(--muted)">1.1.2</text></g><g class="rail-stop" data-rver="v1.2.0"><circle cx="327" cy="396" r="6" fill="#34d399"/><text x="327" y="383" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.2.0</text></g><g class="rail-stop" data-rver="v1.3.0"><circle cx="416" cy="396" r="6" fill="#34d399"/><text x="416" y="383" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.3.0</text></g><g class="rail-stop" data-rver="v1.3.1"><circle cx="504" cy="396" r="3.6" fill="#74748a" opacity="0.85"/><text x="504" y="412" text-anchor="middle" font-size="8.5" fill="var(--muted)">1.3.1</text></g><g class="rail-stop" data-rver="v1.4.0"><circle cx="593" cy="396" r="6" fill="#34d399"/><text x="593" y="383" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.4.0</text></g><g class="rail-stop" data-rver="v1.5.0"><circle cx="682" cy="396" r="6" fill="#6d5ef7"/><text x="682" y="383" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.5.0</text></g><g class="rail-stop" data-rver="v1.6.0"><circle cx="771" cy="396" r="6" fill="#fbbf24"/><text x="771" y="383" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.6.0</text></g><g class="rail-stop" data-rver="v1.7.0"><circle cx="860" cy="396" r="6" fill="#34d399"/><text x="860" y="383" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.7.0</text></g><g class="rail-stop" data-rver="v1.8.0"><circle cx="860" cy="546" r="6" fill="#34d399"/><text x="860" y="533" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.8.0</text></g><g class="rail-stop" data-rver="v1.9.0"><circle cx="746" cy="546" r="6" fill="#fbbf24"/><text x="746" y="533" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.9.0</text></g><g class="rail-stop" data-rver="v1.10.0"><circle cx="631" cy="546" r="6" fill="#6d5ef7"/><text x="631" y="533" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.10.0</text></g><g class="rail-stop" data-rver="v1.11.0"><circle cx="517" cy="546" r="6" fill="#6d5ef7"/><text x="517" y="533" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.11.0</text></g><g class="rail-stop" data-rver="v1.12.0"><circle cx="403" cy="546" r="6" fill="#34d399"/><text x="403" y="533" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.12.0</text></g><g class="rail-stop" data-rver="v1.13.0"><circle cx="289" cy="546" r="6" fill="#34d399"/><text x="289" y="533" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.13.0</text></g><g class="rail-stop" data-rver="v1.13.4"><circle cx="174" cy="546" r="6" fill="#6d5ef7" stroke="#fff" stroke-width="2"/><text x="174" y="533" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.13.4</text></g><g class="rail-stop" data-rver="next"><circle cx="60" cy="546" r="4.5" fill="none" stroke="#74748a" stroke-width="1.5" stroke-dasharray="2.5 2.5"/><text x="60" y="563" text-anchor="middle" font-size="8.5" font-style="italic" fill="var(--muted)">In flight</text></g></svg></div>
+      <div id="railCard" aria-hidden="true"></div>
+      <script>
+      (function(){var R={"v0.1.0": {"cat": "Platform", "catC": "#fbbf24", "label": "First release", "body": "TipTap block editor with slash-command block picker"}, "v0.1.1": {"cat": "Platform", "catC": "#74748a", "label": "Update checker", "body": "Notify-only in-app update banner (no auto-download)"}, "v0.1.2": {"cat": "Platform", "catC": "#74748a", "label": "Memory fixes", "body": "KV cache quantized q8_0; 2 slots / 8k ctx / --no-warmup"}, "v0.2.0": {"cat": "AI & KG", "catC": "#6d5ef7", "label": "AI editor actions", "body": "AI agent actions inside the editor (draft, expand, summarize, rewrite)"}, "v0.3.0": {"cat": "AI & KG", "catC": "#6d5ef7", "label": "3D graph + palette", "body": "3D WebGL knowledge graph with cluster-by switcher (entity type / topic / notebook)"}, "v0.4.0": {"cat": "AI & KG", "catC": "#6d5ef7", "label": "Tag suggestions", "body": "As-you-type Smart Tag autocomplete (@ and # trigger the dropdown)"}, "v0.5.0": {"cat": "Views & insight", "catC": "#5aa9f6", "label": "Stats dashboard", "body": "Stats Dashboard page: query-driven widgets + charts over the whole vault"}, "v0.5.1": {"cat": "AI & KG", "catC": "#74748a", "label": "Smart Tags rename", "body": "\"Pills\" renamed to \"Smart Tags\" throughout app, docs, and help text"}, "v0.6.0": {"cat": "AI & KG", "catC": "#6d5ef7", "label": "3D cover graph", "body": "s cover becomes a live mini 3D knowledge graph (same engine as the full view)\","}, "v0.7.0": {"cat": "Platform", "catC": "#fbbf24", "label": "Fully offline", "body": "Separate Ask-AI chat page removed \u2014 AI is now only in-editor actions"}, "v0.8.0": {"cat": "Views & insight", "catC": "#5aa9f6", "label": "Overdue badges", "body": "Sidebar notebook items show red overdue-count badges"}, "v0.9.0": {"cat": "AI & KG", "catC": "#6d5ef7", "label": "Graph glow-up", "body": "Migrated from three.js to react-force-graph-2d (Canvas2D, much faster)"}, "v0.10.0": {"cat": "Editor & blocks", "catC": "#34d399", "label": "Drag \u00b7 Diagram \u00b7 Dashboard", "body": "Drag any block by its left handle to reorder"}, "v0.11.0": {"cat": "Editor & blocks", "catC": "#34d399", "label": "Kanban board", "body": "Kanban Board block: To Do \u00b7 In Progress \u00b7 Done (three fixed columns)"}, "v0.12.0": {"cat": "Editor & blocks", "catC": "#34d399", "label": "Callouts \u00b7 TodoList", "body": "12 typed callout styles: info, warning, tip, success, error, note\u2026"}, "v0.13.0": {"cat": "Editor & blocks", "catC": "#34d399", "label": "Insert \u00b7 selection", "body": "Click any gap between blocks to insert a new block at that position"}, "v0.14.0": {"cat": "Editor & blocks", "catC": "#34d399", "label": "Widget \u00b7 Gantt \u00b7 Drawing \u00b7 RSS", "body": "Single resizable Widget block: one standalone chart configured with the right-sidebar builder"}, "v0.15.0": {"cat": "Editor & blocks", "catC": "#34d399", "label": "RSS Memories \u00b7 Math \u00b7 Bookmark", "body": "RSS Memories: pin any article into the KG as an annotatable block with full article text"}, "v1.0.0": {"cat": "Views & insight", "catC": "#5aa9f6", "label": "Home + licensing", "body": "Home agenda view: overdue, today, and upcoming items across all notes"}, "v1.0.2": {"cat": "Platform", "catC": "#74748a", "label": "License fixes", "body": "Activation shows the real error reason instead of a generic \"invalid key\""}, "v1.1.0": {"cat": "AI & KG", "catC": "#6d5ef7", "label": "Summon sidekick", "body": "Bottom-right FAB + right-docked Summon panel inside every note"}, "v1.1.1": {"cat": "Views & insight", "catC": "#74748a", "label": "Completion polish", "body": "Completion visuals calmed down (less visual noise on #complete across block types)"}, "v1.1.2": {"cat": "Views & insight", "catC": "#74748a", "label": "Minimap overhaul", "body": "Minimap dashes match entity pill colours (same hue as the pill in the note)"}, "v1.2.0": {"cat": "Editor & blocks", "catC": "#34d399", "label": "BYOK AI \u00b7 unified headers", "body": "On-device embedding model removed \u2014 AI is now bring-your-own-key frontier clouds only (Anthropic Claude / OpenAI GPT / Google Gemini); Local/Ollama support was dropped"}, "v1.3.0": {"cat": "Editor & blocks", "catC": "#34d399", "label": "User templates", "body": "Save any note as a reusable template (\u22ef menu \u2192 Save as template\u2026)"}, "v1.3.1": {"cat": "Editor & blocks", "catC": "#74748a", "label": "Cross-block selection", "body": "Character-precise cross-block text selection \u2014 drag from mid-paragraph to mid-paragraph"}, "v1.4.0": {"cat": "Editor & blocks", "catC": "#34d399", "label": "SmartCopy paste", "body": "One paste becomes many real blocks: headings, lists, code+language, diagrams, math, tables"}, "v1.5.0": {"cat": "AI & KG", "catC": "#6d5ef7", "label": "Entity attributes", "body": "Smart Tags become entities with arbitrary attributes (phone, email, website, \u2026)"}, "v1.6.0": {"cat": "Platform", "catC": "#fbbf24", "label": "Publishing", "body": "Publish notebooks to read.nomima.io \u2014 pixel-faithful replicas (real CSS, Smart Tag pills intact)"}, "v1.7.0": {"cat": "Editor & blocks", "catC": "#34d399", "label": "Version time-travel", "body": "Per-notebook version history: drag a timeline scrubber to view any past state"}, "v1.8.0": {"cat": "Editor & blocks", "catC": "#34d399", "label": "Terminal block", "body": "/terminal block \u2014 interactive shell embedded in any note"}, "v1.9.0": {"cat": "Platform", "catC": "#fbbf24", "label": "Faithful pages \u00b7 Cloudflare", "body": "Published pages match your exact app theme (light, dark, or custom) and faithfully render every block type"}, "v1.10.0": {"cat": "AI & KG", "catC": "#6d5ef7", "label": "Summon assistant \u00b7 replicas", "body": "Summon: 22 vault tools, interactive agenda card, safe granular notebook surgery, persistent agent_memories, deep-research mode"}, "v1.11.0": {"cat": "AI & KG", "catC": "#6d5ef7", "label": "Smarter agent \u00b7 ToC \u00b7 templates", "body": "Summon got materially smarter \u2014 better planning, vault grounding, and tool use"}, "v1.12.0": {"cat": "Editor & blocks", "catC": "#34d399", "label": "Follow-up actions", "body": "Completing a container block (TaskList, Kanban, Gantt, Section, Callout) shows a \u21b3 to log a linked follow-up"}, "v1.13.0": {"cat": "Editor & blocks", "catC": "#34d399", "label": "Dashboards \u00b7 select tags", "body": "Exact per-block dashboard analytics, single-value option tags (Priority/Severity), and follow-up chains off any block."}, "v1.13.4": {"cat": "AI & KG", "catC": "#6d5ef7", "label": "Summon, smarter", "body": "Scope cards, vault Q&A with grounding badges, a persistent memory panel, and searchable RSS Memories."}, "next": {"cat": "Unreleased", "catC": "#74748a", "label": "In flight", "body": "Work merged to main but not yet in a numbered release \u2014 taking shape for the next version."}};var card=document.getElementById('railCard');var t=null;
+        function build(v){var r=R[v];if(!r)return'';return '<div class="rc-head"><span class="rc-ver">'+(v==='next'?'Unreleased':v)+'</span>'
+          +'<span class="rc-cat" style="background:'+r.catC+'1a;color:'+r.catC+';border:1px solid '+r.catC+'44">'+r.cat+'</span></div>'
+          +'<div class="rc-label">'+r.label+'</div><p class="rc-body">'+r.body+'</p>';}
+        function show(g,v){if(!R[v])return;clearTimeout(t);card.innerHTML=build(v);card.style.display='block';
+          var c=g.querySelector('circle');var cr=(c||g).getBoundingClientRect();var cW=300,cH=card.offsetHeight;
+          var cx=cr.left+cr.width/2;var left=Math.max(8,Math.min(cx-cW/2,window.innerWidth-cW-8));
+          var top=cr.top-cH-14;if(top<8)top=cr.bottom+10;card.style.left=left+'px';card.style.top=top+'px';}
+        function hide(){t=setTimeout(function(){card.style.display='none';},120);}
+        document.querySelectorAll('.rail-stop').forEach(function(g){var v=g.dataset.rver;
+          g.addEventListener('mouseenter',function(){show(g,v);});g.addEventListener('mouseleave',hide);
+          g.addEventListener('click',function(){show(g,v);});});})();
+      </script>
+
+      <h2>Meet the crew</h2>
+      <p>Twelve agents, each with a job and a personality, covering every stage of the life cycle — from the first idea to the 3am production alert.</p>
+
+      <div class="team">
+        <div class="member">
+          <div class="row"><span class="name">Curious Cat</span></div>
+          <p class="role">Research &amp; trends — prowls the web for what's working, what's flopping, and every idea worth stealing.</p>
+        </div>
+        <div class="member">
+          <div class="row"><span class="name">The Blueprint</span></div>
+          <p class="role">Architecture — maps the modules, data flow and the offline-first engine before a line is written.</p>
+        </div>
+        <div class="member">
+          <div class="row"><span class="name">Pixel Smith</span></div>
+          <p class="role">Frontend &amp; 3D — hand-crafts the editor, the Summon orb, and the page you're reading.</p>
+        </div>
+        <div class="member">
+          <div class="row"><span class="name">Rusty</span></div>
+          <p class="role">The Rust core — storage, search, sync, and the indexer that never sleeps.</p>
+        </div>
+        <div class="member">
+          <div class="row"><span class="name">Test Hawk</span></div>
+          <p class="role">QA — circles every change hunting the one edge case that breaks it.</p>
+        </div>
+        <div class="member">
+          <div class="row"><span class="name">Documentation OCDer</span></div>
+          <p class="role">Docs &amp; wikis — keeps all three wikis spotless and proposes new ones the moment a gap appears.</p>
+        </div>
+        <div class="member">
+          <div class="row"><span class="name">Red Team Raven</span></div>
+          <p class="role">Security — thinks like an attacker so no one else gets the chance.</p>
+        </div>
+        <div class="member">
+          <div class="row"><span class="name">Speed Demon</span></div>
+          <p class="role">Performance — profiles, trims, and refuses to ship anything that stutters.</p>
+        </div>
+        <div class="member">
+          <div class="row"><span class="name">Ship It</span></div>
+          <p class="role">Builds &amp; releases — notarized DMGs, the Cloudflare deploy, and the green checkmark.</p>
+        </div>
+        <div class="member">
+          <div class="row"><span class="name">The Critic</span></div>
+          <p class="role">Code review — reads every diff twice and is never quite satisfied.</p>
+        </div>
+        <div class="member">
+          <div class="row"><span class="name">Refactor Monk</span></div>
+          <p class="role">Cleanups — deletes more than it adds; allergic to duplication.</p>
+        </div>
+        <div class="member">
+          <div class="row"><span class="name">Watchful Owl</span></div>
+          <p class="role">Observability — watches production at 3am so the human doesn't have to.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p>The experiment is still running. The honest way to judge it is to try what it has produced so far.</p>
+        <a class="btn-primary" href="/#get">Try the result — it's free</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © Nomima · <a href="/">Home</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="docs/index.html">Guide</a>
+  </footer>
+</body>
+</html>

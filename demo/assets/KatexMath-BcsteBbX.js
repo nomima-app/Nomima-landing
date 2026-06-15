@@ -1,0 +1,1 @@
+import{dl as e,dj as o}from"./blobMesh-awI2exFJ.js";import a from"./katex-HP8lGamR.js";function m({latex:r}){const t=e.useMemo(()=>{try{return a.renderToString(r,{displayMode:!0,throwOnError:!1,errorColor:"var(--nm-danger, #ef4444)",output:"htmlAndMathml"})}catch{return""}},[r]);return o.jsx("div",{className:"nm-katex",dangerouslySetInnerHTML:{__html:t}})}export{m as default};
