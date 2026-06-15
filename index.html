@@ -294,6 +294,8 @@
     if (!track || !frame) return;
 
     var ticking = false;
+    var wasTakenOver = false;
+    var iframeEl = frame.querySelector('iframe');
     function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 
     function update() {
@@ -324,6 +326,16 @@
 
       var takenOver = ease > 0.985;
       frame.classList.toggle('locked', !takenOver);       // interactive only when full
+      // Tell the embedded editor to grab the caret the moment it fully takes over
+      // (so the top "Heading" placeholder is focused and obviously typable) and to
+      // let go when the user scrolls back past it — never steal focus during the hero.
+      if (takenOver !== wasTakenOver) {
+        wasTakenOver = takenOver;
+        if (iframeEl && iframeEl.contentWindow) {
+          iframeEl.contentWindow.postMessage(
+            { type: takenOver ? 'nomima-demo-focus' : 'nomima-demo-blur' }, '*');
+        }
+      }
       if (caption) caption.style.opacity = (1 - ease).toFixed(2);
       if (trytag) trytag.style.opacity = ease.toFixed(2);
       // Fade the landing nav out as the editor fills the screen, so it doesn't
