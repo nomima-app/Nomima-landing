@@ -3,8 +3,8 @@
    if features changed. The sidebar, prev/next pager, and footer stamp on
    every page are generated from this file — edit nothing else for nav. */
 
-const GUIDE_VERSION = "1.12.0";
-const GUIDE_UPDATED = "June 13, 2026";
+const GUIDE_VERSION = "1.13.4";
+const GUIDE_UPDATED = "June 14, 2026";
 
 const PAGES = [
   { section: "Start here" },

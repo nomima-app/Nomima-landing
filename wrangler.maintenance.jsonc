@@ -1,0 +1,22 @@
+{
+  // Temporary config to deploy the maintenance stub over the live `nomima-landing`
+  // worker. Same worker name → keeps the nomima.io custom domain attached AND the
+  // existing secrets (ADMIN_USER/ADMIN_PASS/RESEND_API_KEY). No ASSETS binding → the
+  // static marketing site is not served. D1 binding kept so the delegated /access +
+  // /admin routes (cf/maintenance.js → cf/worker.js) still hit the database.
+  // Re-enable: `git checkout main && wrangler deploy` (the real wrangler.jsonc).
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nomima-landing",
+  "main": "cf/maintenance.js",
+  "compatibility_date": "2025-05-01",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "nomima-landing",
+      "database_id": "98e09c3f-bfeb-44e0-8bd6-64581eaaa0e2"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}

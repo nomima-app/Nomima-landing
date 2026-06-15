@@ -194,7 +194,7 @@
       <!-- 4. Price -->
       <div class="ts">
         <h2 class="ts-title"><span class="ts-num">4</span> Price</h2>
-        <p><strong>Nomima is completely free.</strong> Every block and feature — including notebook publishing, the knowledge graph, and AI Chat — is included at no cost. There is no time limit, no credit card, no license fee, and no subscription.</p>
+        <p><strong>Nomima is completely free.</strong> Every block and feature — including notebook publishing, the knowledge graph, and Summon (AI) — is included at no cost. There is no time limit, no credit card, no license fee, and no subscription.</p>
         <p>To download, you provide an email address and we send you a personal download link. We use your email only to deliver that link and occasional product updates; you can unsubscribe at any time. See our <a href="privacy.html">Privacy Policy</a> for details.</p>
         <p>Because the App is free, there are no payments and therefore no refunds. If Nomima does not run on your supported hardware due to a defect, contact <a href="mailto:support@nomima.io">support@nomima.io</a> and we'll do our best to help.</p>
       </div>
@@ -202,8 +202,8 @@
       <!-- 5. AI Features & Third-Party API Keys -->
       <div class="ts">
         <h2 class="ts-title"><span class="ts-num">5</span> AI Features &amp; Third-Party API Keys</h2>
-        <p>Nomima's AI Chat feature works on a <strong>Bring Your Own Key (BYOK)</strong> basis. You supply an API key from a provider of your choice (Anthropic, OpenAI, Google, etc.). Nomima stores that key in your Mac's <strong>macOS Keychain</strong> and never transmits it to Nomima's servers.</p>
-        <p>When you use the AI Chat feature, your messages are sent <strong>directly from your Mac to the AI provider's API</strong> — Nomima does not proxy, log, or see these conversations. Your use of any AI provider's service is governed solely by that provider's terms and privacy policy.</p>
+        <p>Nomima's AI — <strong>Summon</strong> — works on a <strong>Bring Your Own Key (BYOK)</strong> basis and connects only to <strong>frontier models</strong> from Anthropic, OpenAI or Google. There is no local or self-hosted model option. You supply the API key; Nomima stores it in your Mac's <strong>macOS Keychain</strong> and never transmits it to Nomima's servers.</p>
+        <p>When you use Summon, the relevant note content is sent <strong>directly from your Mac to the AI provider's API</strong> — Nomima does not proxy, log, or see these conversations. Your use of any AI provider's service is governed solely by that provider's terms and privacy policy.</p>
         <p>Nomima is not responsible for:</p>
         <ul>
           <li>The accuracy, appropriateness, or safety of AI-generated responses.</li>
@@ -216,11 +216,12 @@
       <!-- 6. Your Data & Privacy -->
       <div class="ts">
         <h2 class="ts-title"><span class="ts-num">6</span> Your Data &amp; Privacy</h2>
-        <p>All notes, tags, attachments, and vault data are stored <strong>locally on your Mac</strong> in a SQLite database inside your App Support folder. Nomima does not sync, upload, or transmit your content to any server.</p>
+        <p>All notes, tags, attachments, and vault data are stored <strong>locally on your Mac</strong> in a SQLite database inside your App Support folder. Nomima never syncs or uploads your content in the background; it leaves your device only through features you explicitly use (AI and publishing, below).</p>
         <p>Nomima collects <strong>no analytics, usage telemetry, or crash data</strong>. The only network requests the App makes are:</p>
         <ul>
           <li>Update checks — the App periodically fetches a small version manifest to tell you when a new release is available. No account or personal data is sent.</li>
-          <li>AI API calls you initiate, sent directly to your chosen AI provider.</li>
+          <li>Summon (AI) requests you initiate, sent directly from your Mac to the frontier model you chose.</li>
+          <li>Publishing — when you publish a notebook, its read-only page is sent to read.nomima.io for viewing at a private, view-code link. Only notebooks you choose to publish are sent.</li>
           <li>RSS feed requests, if you use the RSS block, sent to the feed URLs you configure.</li>
           <li>Bookmark metadata fetch, if you use the Bookmark block, sent to the URL you paste.</li>
         </ul>

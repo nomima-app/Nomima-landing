@@ -66,6 +66,9 @@
       </table>
       <p class="note"><strong>Status is special:</strong> the Status type powers Nomima’s universal completion system. Stamping <span class="pill pill-status">#complete</span> on any block marks it done everywhere — see <a href="tracking.html">Complete &amp; incomplete</a>. Status tags also drive Kanban columns.</p>
 
+      <h2 id="select">Select (option) tags</h2>
+      <p>Some tags hold a single chosen value instead of acting as a free-form label. <strong>Select</strong> tags — like Priority or Severity — let you pick one value from a dropdown rather than typing a new one each time. They behave like a fixed set of options, so in a <a href="blocks.html#database">Database</a> you can sort and filter rows by them cleanly. (This is distinct from a normal multi-value <span class="pill pill-hashtag">#hashtag</span>, where you’re free to coin new tags as you go.)</p>
+
       <h2 id="custom">Custom types</h2>
       <p>You’re not limited to the built-ins. In <strong>Settings → Smart Tag Types</strong> you can:</p>
       <ul>
@@ -81,13 +84,17 @@
         <li><strong>Appears in</strong> — every notebook and block that references the entity, deduplicated and clickable.</li>
         <li><strong>Attributes</strong> — add arbitrary fields to an entity: an email and role for a person, a URL for a company, anything you like. Attributes are stored durably with the entity, not with any single note.</li>
         <li><strong>Custom icon</strong> — give an entity a photo (a person’s face, a company favicon) and the pill shows it everywhere instead of the type icon.</li>
+        <li><strong>Essential fields</strong> — each type keeps the fields that define it: a Person always keeps Name and Email, a Company a Website. You can leave them blank, but they can’t be deleted by accident.</li>
         <li><strong>Type schema</strong> — in <strong>Settings → Smart Tag Types</strong> you can define which attribute fields a <em>type</em> should have, so every Person card offers the same fields by default.</li>
       </ul>
+      <p><strong>Auto-photo from email.</strong> Type a person’s email and Nomima quietly fetches their Gravatar photo if they have one. The address is hashed before any lookup and never sent in the clear; if there’s no match, nothing is stored — and it never overwrites a photo you uploaded yourself.</p>
+      <p><strong>Profile tab.</strong> When an entity has an email, its card gains a <strong>Profile</strong> tab with public info looked up on demand by hash — name, location, bio, the organization inferred from the email domain, and any public social accounts. It’s fetched only when you open the tab.</p>
 
       <h2 id="behavior">Pill behavior in the editor</h2>
       <ul>
         <li>Pills are single units: <kbd>←</kbd>/<kbd>→</kbd> step across a pill in one keystroke, and <kbd>Backspace</kbd> removes it in one keystroke.</li>
         <li>Hover a pill for a tooltip showing its type.</li>
+        <li><strong>Country flags</strong> — a <span class="pill pill-mention">@location</span> mention for any of ~200 countries shows that country’s flag inline. It’s rendered entirely offline as an emoji, no lookup required.</li>
         <li>Pills work everywhere text does — inside task titles, reminder labels, section summaries, callouts and table cells.</li>
         <li>Pasted text gets tagged too: SmartCopy converts <code>@names</code>, <code>#tags</code> and dates in pasted content into real pills (and is smart enough to leave code comments alone). See <a href="power-tools.html">Paste, templates &amp; shortcuts</a>.</li>
       </ul>

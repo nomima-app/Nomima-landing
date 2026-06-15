@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Nomima — Live Demo</title>
+    <!-- Mirror the app's bundled block fonts (see index.html) so the demo renders
+         the Cursive/Funky blocks identically and offline. -->
+    <style>
+      @font-face {
+        font-family: "Dancing Script";
+        font-weight: 500 700;
+        font-display: swap;
+        src: url("/demo/fonts/dancing-script.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Permanent Marker";
+        font-weight: 400;
+        font-display: swap;
+        src: url("/demo/fonts/permanent-marker.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Patrick Hand";
+        font-weight: 400;
+        font-display: swap;
+        src: url("/demo/fonts/patrick-hand.woff2") format("woff2");
+      }
+    </style>
+    <script>
+      window.EXCALIDRAW_ASSET_PATH = "/demo/excalidraw-assets/";
+    </script>
+    <script type="module" crossorigin src="/demo/assets/demo-BiKssn3b.js"></script>
+    <link rel="modulepreload" crossorigin href="/demo/assets/blobMesh-awI2exFJ.js">
+    <link rel="stylesheet" crossorigin href="/demo/assets/demo-BSF0fNZx.css">
+  </head>
+
+  <body>
+    <div id="root">
+      <noscript>
+        <p style="margin: 1rem; font-family: system-ui, sans-serif; color: #e4e4e7">
+          The Nomima demo requires JavaScript enabled.
+        </p>
+      </noscript>
+    </div>
+  </body>
+</html>
