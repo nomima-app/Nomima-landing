@@ -14,6 +14,12 @@
       "database_id": "98e09c3f-bfeb-44e0-8bd6-64581eaaa0e2"
     }
   ],
+  "r2_buckets": [
+    {
+      "binding": "BUGS",
+      "bucket_name": "nomima-bug-uploads"
+    }
+  ],
   "observability": {
     "enabled": true
   }

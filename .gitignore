@@ -10,3 +10,5 @@ server-lock/.htpasswd
 hashes.js
 
 .wrangler/
+
+.dev.vars
