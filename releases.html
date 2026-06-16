@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Releases — Nomima</title>
+  <meta name="description" content="Every Nomima release from the first build to today — what shipped, what changed, and what's next." />
+  <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+  <style>
+    :root {
+      --bg: #0a0b10; --fg: #eef0f6; --muted: #9aa0b0;
+      --accent: #6c6cff; --pink: #f048a8; --border: rgba(255,255,255,.09);
+      --c-ai: #6d5ef7; --c-editor: #34d399; --c-views: #5aa9f6; --c-platform: #fbbf24;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--fg);
+      font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+      -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+
+    nav { position: fixed; inset: 0 0 auto 0; z-index: 60;
+      display: flex; align-items: center; justify-content: space-between; padding: 14px 24px;
+      backdrop-filter: blur(10px); background: linear-gradient(to bottom, rgba(10,11,16,.85), rgba(10,11,16,0)); }
+    .brand { display: flex; align-items: center; gap: 9px; text-decoration: none; color: var(--fg); font-weight: 700; letter-spacing: -.02em; font-size: 18px; }
+    .brand img { width: 26px; height: 26px; filter: drop-shadow(0 2px 10px rgba(108,108,255,.5)); }
+    .nav-links { display: flex; align-items: center; gap: 20px; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 13.5px; font-weight: 500; transition: color .15s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--fg); }
+    .nav-cta { background: var(--accent); color: #fff !important; text-decoration: none; font-weight: 600; padding: 8px 16px; border-radius: 10px; font-size: 14px; }
+
+    .wrap { max-width: 920px; margin: 0 auto; padding: 9rem 1.5rem 5rem; }
+
+    /* ---- hero ---- */
+    .hero { text-align: center; margin-bottom: 5rem; position: relative; }
+    .hero::after { content: ""; position: absolute; inset: -40px 0 auto 0; height: 360px; z-index: -1;
+      background: radial-gradient(600px 300px at 50% 30%, rgba(108,108,255,.18), transparent 70%); }
+    .kicker { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 700;
+      letter-spacing: .04em; text-transform: uppercase; color: var(--accent);
+      border: 1px solid rgba(108,108,255,.35); border-radius: 999px; padding: 5px 13px; margin-bottom: 22px; }
+    h1 { font-size: clamp(2.4rem, 6vw, 3.6rem); line-height: 1.06; letter-spacing: -.03em; margin: 0 0 1.1rem; }
+    h1 .grad { background: linear-gradient(100deg, var(--accent), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p { color: var(--muted); font-size: 1.15rem; max-width: 54ch; margin: 0 auto; }
+
+    /* ---- code rail ---- */
+    .rail-section { margin-bottom: 5rem; }
+    .rail-section h2 { font-size: 1.5rem; letter-spacing: -.02em; margin: 0 0 .5rem; }
+    .rail-section > p { color: var(--muted); font-size: 14.5px; margin: 0 0 1.6rem; }
+
+    .rail-legend { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 1.2rem; }
+    .rl-item { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--muted); }
+    .rl-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+    .rail-outer { background: rgba(255,255,255,.025); border: 1px solid var(--border); border-radius: 14px; padding: 24px 20px 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .rail-outer svg { display: block; width: 100%; min-width: 700px; max-width: 1100px; margin: 0 auto; height: auto; }
+    .rail-stop { cursor: pointer; }
+    .rail-stop circle { transition: r .12s ease, opacity .12s ease; }
+    .rail-stop:hover circle { opacity: 1; }
+    .rail-stop:hover circle:not([fill="none"]) { r: 8; }
+    #railCard { display: none; position: fixed; z-index: 99999; width: 300px; background: #14151c;
+      border: 1px solid var(--border); border-radius: 13px; padding: 14px 16px; pointer-events: none;
+      box-shadow: 0 20px 48px rgba(0,0,0,.7); font-size: 12.5px; line-height: 1.55; }
+    #railCard .rc-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    #railCard .rc-ver { font-size: 14px; font-weight: 800; color: var(--fg); }
+    #railCard .rc-cat { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; text-transform: uppercase; letter-spacing: .5px; }
+    #railCard .rc-label { font-size: 12.5px; font-weight: 700; color: var(--fg); margin-bottom: 5px; }
+    #railCard .rc-body { margin: 0; color: var(--muted); font-size: 12px; }
+
+    /* ---- release cards ---- */
+    .releases-grid { display: flex; flex-direction: column; gap: 0; }
+
+    .rel-group { margin-bottom: 4rem; }
+    .rel-group-title { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted); margin: 0 0 1.2rem; padding-bottom: .5rem; border-bottom: 1px solid var(--border); }
+
+    .rel-card { display: grid; grid-template-columns: 120px 1fr; gap: 0; border-bottom: 1px solid var(--border); padding: 1.6rem 0; }
+    .rel-card:last-child { border-bottom: none; }
+    .rel-card.featured { grid-template-columns: 1fr; background: rgba(108,108,255,.05); border: 1px solid rgba(108,108,255,.2); border-radius: 14px; padding: 1.8rem; margin-bottom: 2rem; }
+    .rel-card.featured .rel-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+    .rel-card.featured .rel-ver { font-size: 1.5rem; }
+
+    .rel-meta { display: flex; flex-direction: column; gap: 5px; padding-right: 1.5rem; padding-top: 2px; }
+    .rel-ver { font-size: 1.1rem; font-weight: 800; letter-spacing: -.02em; color: var(--fg); }
+    .rel-badge { display: inline-flex; align-items: center; font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em; padding: 2px 8px; border-radius: 999px; border: 1px solid; width: fit-content; }
+    .rel-badge.latest { background: rgba(251,191,36,.12); color: #fbbf24; border-color: rgba(251,191,36,.3); }
+    .rel-badge.ai { background: rgba(109,94,247,.12); color: #a5b4fc; border-color: rgba(109,94,247,.3); }
+    .rel-badge.editor { background: rgba(52,211,153,.1); color: #6ee7b7; border-color: rgba(52,211,153,.3); }
+    .rel-badge.platform { background: rgba(251,191,36,.1); color: #fcd34d; border-color: rgba(251,191,36,.25); }
+    .rel-badge.views { background: rgba(90,169,246,.1); color: #93c5fd; border-color: rgba(90,169,246,.3); }
+    .rel-badge.patch { background: rgba(255,255,255,.05); color: var(--muted); border-color: var(--border); }
+
+    .rel-body h3 { font-size: 1.15rem; letter-spacing: -.015em; margin: 0 0 .45rem; font-weight: 700; }
+    .rel-body p { color: #b8bccb; font-size: 14.5px; margin: 0 0 .7rem; line-height: 1.65; }
+    .rel-body p:last-child { margin-bottom: 0; }
+    .rel-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: .75rem; }
+    .rel-chip { font-size: 11.5px; font-weight: 500; padding: 3px 10px; border-radius: 999px;
+      background: rgba(255,255,255,.05); border: 1px solid var(--border); color: var(--muted); }
+
+    /* ---- compact patches ---- */
+    .patch-list { display: flex; flex-direction: column; gap: .35rem; }
+    .patch-row { display: flex; align-items: baseline; gap: 10px; font-size: 13.5px; padding: .4rem 0; border-bottom: 1px solid rgba(255,255,255,.04); }
+    .patch-row:last-child { border-bottom: none; }
+    .patch-ver { font-weight: 700; color: var(--fg); min-width: 56px; }
+    .patch-label { font-weight: 600; color: var(--muted); min-width: 160px; }
+    .patch-desc { color: #7a8090; flex: 1; }
+
+    /* ---- early builds ---- */
+    .early-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .early-card { background: rgba(255,255,255,.03); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+    .early-card .ev { font-size: 11.5px; font-weight: 800; color: var(--muted); margin-bottom: 4px; }
+    .early-card h4 { margin: 0 0 4px; font-size: .95rem; }
+    .early-card p { margin: 0; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+
+    /* ---- CTA ---- */
+    .cta-band { margin-top: 4rem; padding: 32px; border-radius: 16px; text-align: center;
+      background: linear-gradient(120deg, rgba(108,108,255,.1), rgba(240,72,168,.08));
+      border: 1px solid rgba(108,108,255,.2); }
+    .cta-band p { font-size: 1.1rem; margin: 0 0 1.2rem; color: var(--fg); }
+    .btn-primary { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; font-weight: 650;
+      padding: 12px 26px; border-radius: 12px; box-shadow: 0 10px 30px -8px rgba(108,108,255,.6); font-size: 15px; }
+
+    footer { text-align: center; font-size: 12.5px; color: var(--muted); padding: 28px 24px 36px; border-top: 1px solid var(--border); }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--fg); }
+
+    @media (max-width: 600px) {
+      .rel-card { grid-template-columns: 1fr; }
+      .rel-meta { flex-direction: row; align-items: center; padding-right: 0; padding-bottom: .75rem; }
+      .patch-label { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="brand" href="/">
+      <img src="/logo.svg" alt="Nomima" />
+      Nomima
+    </a>
+    <div class="nav-links">
+      <a href="/releases.html" class="active">Releases</a>
+      <a href="/docs/index.html">Guide</a>
+      <a href="/report.html">Report a bug</a>
+      <a class="nav-cta" href="/#get">Download</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+
+    <!-- hero -->
+    <div class="hero">
+      <div class="kicker">Release History</div>
+      <h1>Built in public,<br><span class="grad">shipped continuously</span></h1>
+      <p>From a blank TipTap editor to a full-stack AI-native workspace — every release, what it added, and where it's heading next.</p>
+    </div>
+
+    <!-- code rail -->
+    <div class="rail-section">
+      <h2>The journey so far</h2>
+      <p>Every release from the first pre-1.0 build to today, colour-coded by what it advanced. Hover any stop for details.</p>
+
+      <div class="rail-legend">
+        <div class="rl-item"><div class="rl-dot" style="background:#6d5ef7"></div>AI &amp; Knowledge Graph</div>
+        <div class="rl-item"><div class="rl-dot" style="background:#34d399"></div>Editor &amp; Blocks</div>
+        <div class="rl-item"><div class="rl-dot" style="background:#5aa9f6"></div>Views &amp; Insight</div>
+        <div class="rl-item"><div class="rl-dot" style="background:#fbbf24"></div>Platform</div>
+        <div class="rl-item"><div class="rl-dot" style="background:transparent;border:1.5px solid #74748a;width:8px;height:8px"></div>Patch / fix</div>
+      </div>
+
+      <div class="rail-outer">
+        <svg viewBox="0 0 920 740" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Nomima release journey" style="width:100%;height:auto">
+          <!-- track path: snake across 4 rows -->
+          <path d="M60,96 H860 M860,96 C900,96 900,246 860,246 M860,246 H60 M60,246 C20,246 20,396 60,396 M60,396 H860 M860,396 C900,396 900,546 860,546 M860,546 H60 M60,546 C20,546 20,696 60,696 M60,696 H416" fill="none" stroke="var(--border)" stroke-width="2.5"/>
+
+          <!-- row 1 — pre-1.0 early builds -->
+          <g class="rail-stop" data-rver="v0.1.0"><circle cx="60" cy="96" r="3.6" fill="#fbbf24" opacity="0.85"/><text x="60" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.1.0</text></g>
+          <g class="rail-stop" data-rver="v0.1.1"><circle cx="149" cy="96" r="3.6" fill="#74748a" opacity="0.85"/><text x="149" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.1.1</text></g>
+          <g class="rail-stop" data-rver="v0.1.2"><circle cx="238" cy="96" r="3.6" fill="#74748a" opacity="0.85"/><text x="238" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.1.2</text></g>
+          <g class="rail-stop" data-rver="v0.2.0"><circle cx="327" cy="96" r="3.6" fill="#6d5ef7" opacity="0.85"/><text x="327" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.2.0</text></g>
+          <g class="rail-stop" data-rver="v0.3.0"><circle cx="416" cy="96" r="3.6" fill="#6d5ef7" opacity="0.85"/><text x="416" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.3.0</text></g>
+          <g class="rail-stop" data-rver="v0.4.0"><circle cx="504" cy="96" r="3.6" fill="#6d5ef7" opacity="0.85"/><text x="504" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.4.0</text></g>
+          <g class="rail-stop" data-rver="v0.5.0"><circle cx="593" cy="96" r="3.6" fill="#5aa9f6" opacity="0.85"/><text x="593" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.5.0</text></g>
+          <g class="rail-stop" data-rver="v0.5.1"><circle cx="682" cy="96" r="3.6" fill="#74748a" opacity="0.85"/><text x="682" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.5.1</text></g>
+          <g class="rail-stop" data-rver="v0.6.0"><circle cx="771" cy="96" r="3.6" fill="#6d5ef7" opacity="0.85"/><text x="771" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.6.0</text></g>
+          <g class="rail-stop" data-rver="v0.7.0"><circle cx="860" cy="96" r="3.6" fill="#fbbf24" opacity="0.85"/><text x="860" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.7.0</text></g>
+
+          <!-- row 2 — v0.8–v1.0 -->
+          <g class="rail-stop" data-rver="v0.8.0"><circle cx="860" cy="246" r="3.6" fill="#5aa9f6" opacity="0.85"/><text x="860" y="262" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.8.0</text></g>
+          <g class="rail-stop" data-rver="v0.9.0"><circle cx="771" cy="246" r="3.6" fill="#6d5ef7" opacity="0.85"/><text x="771" y="262" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.9.0</text></g>
+          <g class="rail-stop" data-rver="v0.10.0"><circle cx="682" cy="246" r="3.6" fill="#34d399" opacity="0.85"/><text x="682" y="262" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.10.0</text></g>
+          <g class="rail-stop" data-rver="v0.11.0"><circle cx="593" cy="246" r="3.6" fill="#34d399" opacity="0.85"/><text x="593" y="262" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.11.0</text></g>
+          <g class="rail-stop" data-rver="v0.12.0"><circle cx="504" cy="246" r="3.6" fill="#34d399" opacity="0.85"/><text x="504" y="262" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.12.0</text></g>
+          <g class="rail-stop" data-rver="v0.13.0"><circle cx="416" cy="246" r="3.6" fill="#34d399" opacity="0.85"/><text x="416" y="262" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.13.0</text></g>
+          <g class="rail-stop" data-rver="v0.14.0"><circle cx="327" cy="246" r="3.6" fill="#34d399" opacity="0.85"/><text x="327" y="262" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.14.0</text></g>
+          <g class="rail-stop" data-rver="v0.15.0"><circle cx="238" cy="246" r="3.6" fill="#34d399" opacity="0.85"/><text x="238" y="262" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.15.0</text></g>
+          <g class="rail-stop" data-rver="v1.0.0"><circle cx="149" cy="246" r="6" fill="#5aa9f6"/><text x="149" y="233" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.0.0</text></g>
+          <g class="rail-stop" data-rver="v1.0.2"><circle cx="60" cy="246" r="3.6" fill="#74748a" opacity="0.85"/><text x="60" y="262" text-anchor="middle" font-size="8.5" fill="var(--muted)">1.0.2</text></g>
+
+          <!-- row 3 — v1.1–v1.7 -->
+          <g class="rail-stop" data-rver="v1.1.0"><circle cx="60" cy="396" r="6" fill="#6d5ef7"/><text x="60" y="383" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.1.0</text></g>
+          <g class="rail-stop" data-rver="v1.1.1"><circle cx="149" cy="396" r="3.6" fill="#74748a" opacity="0.85"/><text x="149" y="412" text-anchor="middle" font-size="8.5" fill="var(--muted)">1.1.1</text></g>
+          <g class="rail-stop" data-rver="v1.1.2"><circle cx="238" cy="396" r="3.6" fill="#74748a" opacity="0.85"/><text x="238" y="412" text-anchor="middle" font-size="8.5" fill="var(--muted)">1.1.2</text></g>
+          <g class="rail-stop" data-rver="v1.2.0"><circle cx="327" cy="396" r="6" fill="#34d399"/><text x="327" y="383" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.2.0</text></g>
+          <g class="rail-stop" data-rver="v1.3.0"><circle cx="416" cy="396" r="6" fill="#34d399"/><text x="416" y="383" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.3.0</text></g>
+          <g class="rail-stop" data-rver="v1.3.1"><circle cx="504" cy="396" r="3.6" fill="#74748a" opacity="0.85"/><text x="504" y="412" text-anchor="middle" font-size="8.5" fill="var(--muted)">1.3.1</text></g>
+          <g class="rail-stop" data-rver="v1.4.0"><circle cx="593" cy="396" r="6" fill="#34d399"/><text x="593" y="383" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.4.0</text></g>
+          <g class="rail-stop" data-rver="v1.5.0"><circle cx="682" cy="396" r="6" fill="#6d5ef7"/><text x="682" y="383" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.5.0</text></g>
+          <g class="rail-stop" data-rver="v1.6.0"><circle cx="771" cy="396" r="6" fill="#fbbf24"/><text x="771" y="383" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.6.0</text></g>
+          <g class="rail-stop" data-rver="v1.7.0"><circle cx="860" cy="396" r="6" fill="#34d399"/><text x="860" y="383" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.7.0</text></g>
+
+          <!-- row 4 — v1.8–v1.13.8 + next -->
+          <g class="rail-stop" data-rver="v1.8.0"><circle cx="860" cy="546" r="6" fill="#34d399"/><text x="860" y="533" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.8.0</text></g>
+          <g class="rail-stop" data-rver="v1.9.0"><circle cx="771" cy="546" r="6" fill="#fbbf24"/><text x="771" y="533" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.9.0</text></g>
+          <g class="rail-stop" data-rver="v1.10.0"><circle cx="682" cy="546" r="6" fill="#6d5ef7"/><text x="682" y="533" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.10.0</text></g>
+          <g class="rail-stop" data-rver="v1.11.0"><circle cx="593" cy="546" r="6" fill="#6d5ef7"/><text x="593" y="533" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.11.0</text></g>
+          <g class="rail-stop" data-rver="v1.12.0"><circle cx="504" cy="546" r="6" fill="#34d399"/><text x="504" y="533" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.12.0</text></g>
+          <g class="rail-stop" data-rver="v1.13.0"><circle cx="416" cy="546" r="6" fill="#34d399"/><text x="416" y="533" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.13.0</text></g>
+          <g class="rail-stop" data-rver="v1.13.1"><circle cx="327" cy="546" r="3.6" fill="#74748a" opacity="0.85"/><text x="327" y="562" text-anchor="middle" font-size="8.5" fill="var(--muted)">1.13.1</text></g>
+          <g class="rail-stop" data-rver="v1.13.2"><circle cx="238" cy="546" r="3.6" fill="#74748a" opacity="0.85"/><text x="238" y="562" text-anchor="middle" font-size="8.5" fill="var(--muted)">1.13.2</text></g>
+          <g class="rail-stop" data-rver="v1.13.3"><circle cx="149" cy="546" r="6" fill="#6d5ef7"/><text x="149" y="533" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.13.3</text></g>
+          <g class="rail-stop" data-rver="v1.13.4"><circle cx="60" cy="546" r="3.6" fill="#74748a" opacity="0.85"/><text x="60" y="562" text-anchor="middle" font-size="8.5" fill="var(--muted)">1.13.4</text></g>
+
+          <!-- row 5 — v1.13.5–1.13.8 + next -->
+          <g class="rail-stop" data-rver="v1.13.5"><circle cx="60" cy="696" r="6" fill="#6d5ef7"/><text x="60" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.13.5</text></g>
+          <g class="rail-stop" data-rver="v1.13.6"><circle cx="149" cy="696" r="6" fill="#34d399"/><text x="149" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.13.6</text></g>
+          <g class="rail-stop" data-rver="v1.13.7"><circle cx="238" cy="696" r="3.6" fill="#74748a" opacity="0.85"/><text x="238" y="712" text-anchor="middle" font-size="8.5" fill="var(--muted)">1.13.7</text></g>
+          <g class="rail-stop" data-rver="v1.13.8"><circle cx="327" cy="696" r="6" fill="#fbbf24" stroke="#fff" stroke-width="2"/><text x="327" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.13.8</text></g>
+          <g class="rail-stop" data-rver="next"><circle cx="416" cy="696" r="4.5" fill="none" stroke="#74748a" stroke-width="1.5" stroke-dasharray="2.5 2.5"/><text x="416" y="713" text-anchor="middle" font-size="8.5" font-style="italic" fill="var(--muted)">In flight</text></g>
+        </svg>
+      </div>
+    </div>
+    <div id="railCard" aria-hidden="true"></div>
+
+    <!-- ==================== RELEASE CARDS ==================== -->
+    <div class="releases-grid">
+
+      <!-- LATEST -->
+      <div class="rel-group">
+        <div class="rel-group-title">Latest</div>
+
+        <div class="rel-card featured">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.13.8</div>
+            <div class="rel-badge latest">Latest</div>
+            <div class="rel-badge platform">Platform</div>
+          </div>
+          <div class="rel-body">
+            <h3>In-app bug reporter</h3>
+            <p>Hit a snag? Report it without leaving the app. Settings → Help &amp; diagnostics lets you capture a redacted snapshot of recent activity, review exactly what's being sent, and submit — even when you're offline. The report queues and sends when you reconnect. A public issues board is also available at <a href="/report.html" style="color:var(--accent)">nomima.io/report</a>.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">Settings → Help &amp; diagnostics</span>
+              <span class="rel-chip">Redacted snapshots</span>
+              <span class="rel-chip">Offline queue</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- patches in this cluster -->
+        <div class="patch-list">
+          <div class="patch-row">
+            <span class="patch-ver">v1.13.7</span>
+            <span class="patch-label">Read-only published pages</span>
+            <span class="patch-desc">Published pages drop editor controls; old notebooks render Gantt, Terminal, RSS and Database blocks again instead of blank spaces.</span>
+          </div>
+          <div class="patch-row">
+            <span class="patch-ver">v1.13.6</span>
+            <span class="patch-label">Live completion sync</span>
+            <span class="patch-desc">Marking a block complete in the Query panel or Summon's agenda now instantly updates the open editor — no stale state, no reload.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- v1.13.x features -->
+      <div class="rel-group">
+        <div class="rel-group-title">v1.13 — Summon 2.0 &amp; Calendar</div>
+
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.13.5</div>
+            <div class="rel-badge ai">AI</div>
+          </div>
+          <div class="rel-body">
+            <h3>Composer Smart Tags</h3>
+            <p>Type @Name or #Topic directly in the Summon chat box — pills appear inline and Summon automatically receives the entity's full profile or matching vault passages as context. Coin a brand-new tag on the spot, no need to open the editor first.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">Inline pill composer</span>
+              <span class="rel-chip">Vault context injection</span>
+              <span class="rel-chip">Instant tag creation</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.13.3</div>
+            <div class="rel-badge ai">AI</div>
+          </div>
+          <div class="rel-body">
+            <h3>Summon: scope, memory &amp; vault grounding</h3>
+            <p>Summon now asks before it writes — a scope card shows exactly which notes will be touched. Ask "what do I know about X?" and get answers grounded in your vault with source badges. A persistent memory panel lets the agent remember across sessions. In-place conversational edits land precisely without breaking the surrounding document.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">Scope cards</span>
+              <span class="rel-chip">Vault Q&amp;A with grounding</span>
+              <span class="rel-chip">Persistent memory</span>
+              <span class="rel-chip">Conversational edits</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.13.0</div>
+            <div class="rel-badge editor">Editor</div>
+          </div>
+          <div class="rel-body">
+            <h3>Dashboards · select tags · follow-up chains</h3>
+            <p>Widget blocks now give you exact per-block analytics — query exactly the blocks you care about. Single-value option tags let you model Priority or Severity fields. Any block can now anchor a follow-up chain, so completed work doesn't disappear — it links forward to what comes next.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">Per-block analytics</span>
+              <span class="rel-chip">Option select tags</span>
+              <span class="rel-chip">Follow-up chains</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="patch-list">
+          <div class="patch-row">
+            <span class="patch-ver">v1.13.4</span>
+            <span class="patch-label">RSS Memories search</span>
+            <span class="patch-desc">Pinned RSS articles are now searchable by Summon — title, source, and full text indexed on save.</span>
+          </div>
+          <div class="patch-row">
+            <span class="patch-ver">v1.13.2</span>
+            <span class="patch-label">Access screen</span>
+            <span class="patch-desc">Solid background on the access screen — no more desktop showing through.</span>
+          </div>
+          <div class="patch-row">
+            <span class="patch-ver">v1.13.1</span>
+            <span class="patch-label">Header line fix</span>
+            <span class="patch-desc">Adding a Smart Tag to a heading no longer produces a phantom second line.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- v1.12 -->
+      <div class="rel-group">
+        <div class="rel-group-title">v1.12 — Follow-up actions</div>
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.12.0</div>
+            <div class="rel-badge editor">Editor</div>
+          </div>
+          <div class="rel-body">
+            <h3>Completing a block becomes a starting gun</h3>
+            <p>Finishing a TaskList, Kanban, Gantt, Section, or Callout now shows a ↳ prompt to log a linked follow-up action. Work doesn't just get marked done — it becomes an explicit handoff to whatever comes next, keeping your vault's chain of reasoning intact.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">Block completion hooks</span>
+              <span class="rel-chip">Linked follow-ups</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- v1.11 -->
+      <div class="rel-group">
+        <div class="rel-group-title">v1.11 — Smarter agent · Table of Contents · Templates</div>
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.11.0</div>
+            <div class="rel-badge ai">AI</div>
+          </div>
+          <div class="rel-body">
+            <h3>A sharper Summon, a navigable note</h3>
+            <p>Summon got materially better at planning, vault grounding, and precise tool use — fewer hallucinations, more surgical edits. Notebooks gained an always-on Table of Contents that highlights sections as you scroll (spy mode), and the template library was rebuilt around the full block palette: databases, query tables, entity tables, and scoped dashboards.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">ToC with scroll-spy</span>
+              <span class="rel-chip">9 deep templates</span>
+              <span class="rel-chip">Country-flag thumbnails</span>
+              <span class="rel-chip">Improved Summon planning</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- v1.10 -->
+      <div class="rel-group">
+        <div class="rel-group-title">v1.10 — Summon assistant · Faithful replicas</div>
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.10.0</div>
+            <div class="rel-badge ai">AI</div>
+          </div>
+          <div class="rel-body">
+            <h3>Summon grows up: 22 vault tools, deep research</h3>
+            <p>Summon moved from a simple chat panel to a full vault agent — 22 tools covering search, the knowledge graph, your agenda, entity data, and statistics. It can now perform safe granular edits to notebooks, maintain persistent memories across sessions, and run a deep-research mode that synthesizes across your whole vault before writing.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">22 vault tools</span>
+              <span class="rel-chip">Interactive agenda card</span>
+              <span class="rel-chip">Safe notebook surgery</span>
+              <span class="rel-chip">Agent memories</span>
+              <span class="rel-chip">Deep research mode</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- v1.9 -->
+      <div class="rel-group">
+        <div class="rel-group-title">v1.9 — Faithful pages · Cloudflare</div>
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.9.0</div>
+            <div class="rel-badge platform">Platform</div>
+          </div>
+          <div class="rel-body">
+            <h3>What you see in-app is what the world sees</h3>
+            <p>Published pages now match your exact app theme — light, dark, or any custom palette. Every block type renders faithfully: Kanban boards, Gantt charts, databases, embeds, and more. The publishing backend moved to Cloudflare (Worker + R2 + D1), and Nomima became fully free — no license key, no tier gate.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">Theme-accurate publishing</span>
+              <span class="rel-chip">All block types</span>
+              <span class="rel-chip">Cloudflare backend</span>
+              <span class="rel-chip">Fully free</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- v1.8 -->
+      <div class="rel-group">
+        <div class="rel-group-title">v1.8 — Terminal block</div>
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.8.0</div>
+            <div class="rel-badge editor">Editor</div>
+          </div>
+          <div class="rel-body">
+            <h3>A real shell embedded in any note</h3>
+            <p>Drop a /terminal block anywhere in a notebook and get a fully interactive shell — run scripts, tail logs, or test commands without leaving the document. Output is captured inline. Great for runbooks, dev notes, and any workflow where context and commands live together.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">/terminal slash command</span>
+              <span class="rel-chip">Inline shell output</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- v1.7 -->
+      <div class="rel-group">
+        <div class="rel-group-title">v1.7 — Version time-travel</div>
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.7.0</div>
+            <div class="rel-badge editor">Editor</div>
+          </div>
+          <div class="rel-body">
+            <h3>Drag back through every state your note has been in</h3>
+            <p>Every save creates a snapshot. Pull up the history scrubber and drag left to replay exactly what changed — additions highlighted green, deletions in red, in-place edits in amber. The editor scrolls to the nearest changed block automatically so nothing happens off-screen. Branching, restoring, and comparing versions is a single drag away.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">Visual diff scrubber</span>
+              <span class="rel-chip">Add / remove / change shading</span>
+              <span class="rel-chip">Auto-scroll to changes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- v1.6 -->
+      <div class="rel-group">
+        <div class="rel-group-title">v1.6 — Publishing</div>
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.6.0</div>
+            <div class="rel-badge platform">Platform</div>
+          </div>
+          <div class="rel-body">
+            <h3>Share a notebook with anyone, anywhere</h3>
+            <p>One click publishes a notebook to read.nomima.io — a pixel-faithful replica with Smart Tag pills intact, your theme, and all block types rendering correctly. The published URL is shareable with anyone; no Nomima account needed to read.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">read.nomima.io</span>
+              <span class="rel-chip">Smart Tag pills preserved</span>
+              <span class="rel-chip">No account to read</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- v1.5 -->
+      <div class="rel-group">
+        <div class="rel-group-title">v1.5 — Entity attributes</div>
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.5.0</div>
+            <div class="rel-badge ai">AI</div>
+          </div>
+          <div class="rel-body">
+            <h3>Smart Tags become full knowledge entities</h3>
+            <p>@mentions and #hashtags evolved from simple labels into entities with arbitrary attributes — phone number, email, website, description, photo or favicon. The entity card panel surfaces everything you know about a person, place, or topic in one click, and the knowledge graph now shows richer node detail.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">Custom entity attributes</span>
+              <span class="rel-chip">Photo / favicon override</span>
+              <span class="rel-chip">Entity card panel</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- v1.4 -->
+      <div class="rel-group">
+        <div class="rel-group-title">v1.4 — SmartCopy paste</div>
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.4.0</div>
+            <div class="rel-badge editor">Editor</div>
+          </div>
+          <div class="rel-body">
+            <h3>Paste anything, get real blocks</h3>
+            <p>Paste rich content from anywhere — a web page, a doc, a code file — and Nomima converts it into native blocks: headings, lists, code with language detection, diagrams, math formulas, and tables. No more stripping markdown by hand or fighting with plain-text walls.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">Smart paste conversion</span>
+              <span class="rel-chip">Code + language detection</span>
+              <span class="rel-chip">Math &amp; diagram blocks</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- v1.3 -->
+      <div class="rel-group">
+        <div class="rel-group-title">v1.3 — Templates</div>
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.3.0</div>
+            <div class="rel-badge editor">Editor</div>
+          </div>
+          <div class="rel-body">
+            <h3>Save any note as a reusable starting point</h3>
+            <p>Build a meeting note structure you love, a project tracker layout, or a daily briefing template — then save it once and reuse it forever. Templates spin up with all blocks pre-populated and databases scoped to the new notebook automatically. Nomima ships with 9 deep built-in templates covering launches, OKRs, bug tracking, research, and more.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">Custom templates</span>
+              <span class="rel-chip">9 built-in templates</span>
+              <span class="rel-chip">Scoped databases</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="patch-list">
+          <div class="patch-row">
+            <span class="patch-ver">v1.3.1</span>
+            <span class="patch-label">Cross-block selection</span>
+            <span class="patch-desc">Character-precise text selection that spans multiple block boundaries — drag from mid-paragraph to mid-paragraph.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- v1.2 -->
+      <div class="rel-group">
+        <div class="rel-group-title">v1.2 — BYOK AI</div>
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.2.0</div>
+            <div class="rel-badge editor">Editor</div>
+          </div>
+          <div class="rel-body">
+            <h3>Your keys, the best models in the world</h3>
+            <p>Nomima switched from a bundled on-device model to bring-your-own-key frontier AI. Connect Anthropic Claude, OpenAI GPT, or Google Gemini with your own API key and get access to the latest and most capable models — no waiting for Nomima to bundle a new version. Your data goes directly from your machine to the model provider of your choice.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">Anthropic Claude</span>
+              <span class="rel-chip">OpenAI GPT</span>
+              <span class="rel-chip">Google Gemini</span>
+              <span class="rel-chip">100% private</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- v1.1 -->
+      <div class="rel-group">
+        <div class="rel-group-title">v1.1 — Summon</div>
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.1.0</div>
+            <div class="rel-badge ai">AI</div>
+          </div>
+          <div class="rel-body">
+            <h3>Your AI sidekick, always one keystroke away</h3>
+            <p>Summon is a persistent AI panel embedded in every note. Open it from the bottom-right FAB or with a keyboard shortcut, ask it anything about your vault, and have it draft, rewrite, summarize, or create entire notebooks — without leaving the context of what you're working on. Answers stream directly into the editor if you ask it to write.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">Embedded in every note</span>
+              <span class="rel-chip">Vault-aware answers</span>
+              <span class="rel-chip">Streams into editor</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- v1.0 -->
+      <div class="rel-group">
+        <div class="rel-group-title">v1.0 — First stable release</div>
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.0.0</div>
+            <div class="rel-badge views">Views</div>
+          </div>
+          <div class="rel-body">
+            <h3>A home for everything across your vault</h3>
+            <p>The first 1.0 release introduced the Home view — a smart agenda that pulls overdue items, today's tasks, upcoming reminders, and open actions from every notebook into a single dashboard. No more opening each note to know what needs attention. The knowledge graph, editor, and Smart Tag system all reached a stable, coherent state in this release.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">Home agenda view</span>
+              <span class="rel-chip">Cross-vault task rollup</span>
+              <span class="rel-chip">Stable API</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- early builds -->
+      <div class="rel-group">
+        <div class="rel-group-title">Early builds — v0.1 → v0.15 (the foundation)</div>
+        <div class="early-grid">
+          <div class="early-card">
+            <div class="ev">v0.15.0</div>
+            <h4>RSS Memories · Math · Bookmark</h4>
+            <p>Pin any article as an annotatable block with full text; LaTeX math rendering; web bookmark cards.</p>
+          </div>
+          <div class="early-card">
+            <div class="ev">v0.14.0</div>
+            <h4>Widget · Gantt · Drawing · RSS</h4>
+            <p>Resizable chart widgets, Gantt timeline blocks, freehand drawing, and RSS feed blocks.</p>
+          </div>
+          <div class="early-card">
+            <div class="ev">v0.13.0</div>
+            <h4>Inline insert</h4>
+            <p>Click any gap between blocks to insert at that position — no more jumping to the end.</p>
+          </div>
+          <div class="early-card">
+            <div class="ev">v0.12.0</div>
+            <h4>Callouts · TodoList</h4>
+            <p>12 typed callout styles (info, warning, tip, success…) and collapsible TodoList blocks.</p>
+          </div>
+          <div class="early-card">
+            <div class="ev">v0.11.0</div>
+            <h4>Kanban board</h4>
+            <p>Native Kanban block: To Do · In Progress · Done, drag-and-drop cards between columns.</p>
+          </div>
+          <div class="early-card">
+            <div class="ev">v0.10.0</div>
+            <h4>Drag · Diagram · Dashboard</h4>
+            <p>Block-level drag-to-reorder, Mermaid diagram blocks, and the first stats dashboard.</p>
+          </div>
+          <div class="early-card">
+            <div class="ev">v0.9.0</div>
+            <h4>Graph glow-up</h4>
+            <p>Migrated to react-force-graph-2d — Canvas2D engine, much faster, curved directional edges.</p>
+          </div>
+          <div class="early-card">
+            <div class="ev">v0.6.0 – 0.8.0</div>
+            <h4>Cover graph · Badges</h4>
+            <p>Each note's cover became a live mini knowledge graph. Sidebar overdue-count badges.</p>
+          </div>
+          <div class="early-card">
+            <div class="ev">v0.3.0 – 0.5.0</div>
+            <h4>3D graph · Tags · Stats</h4>
+            <p>3D WebGL knowledge graph, @/# Smart Tag autocomplete, Stats Dashboard with query widgets.</p>
+          </div>
+          <div class="early-card">
+            <div class="ev">v0.1.0 – 0.2.0</div>
+            <h4>First build · AI actions</h4>
+            <p>TipTap block editor, slash-command picker, and the first AI in-editor actions (draft, expand, summarize).</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- end releases grid -->
+
+    <div class="cta-band">
+      <p>Nomima is free and runs entirely on your Mac — no subscription, no cloud sync, no account required.</p>
+      <a class="btn-primary" href="/#get">Download Nomima — it's free</a>
+    </div>
+
+  </div>
+
+  <footer>
+    © Nomima · <a href="/">Home</a> · <a href="/releases.html">Releases</a> · <a href="/report.html">Report an issue</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/docs/index.html">Guide</a> · <a href="mailto:hello@nomima.io">Contact</a>
+  </footer>
+
+  <script>
+  (function(){
+    var R = {
+      "v0.1.0":  {"cat":"Platform","catC":"#fbbf24","label":"First release","body":"TipTap block editor with slash-command block picker"},
+      "v0.1.1":  {"cat":"Platform","catC":"#74748a","label":"Update checker","body":"Notify-only in-app update banner (no auto-download)"},
+      "v0.1.2":  {"cat":"Platform","catC":"#74748a","label":"Memory fixes","body":"KV cache quantized q8_0; 2 slots / 8k ctx / --no-warmup"},
+      "v0.2.0":  {"cat":"AI & KG","catC":"#6d5ef7","label":"AI editor actions","body":"AI agent actions inside the editor (draft, expand, summarize, rewrite)"},
+      "v0.3.0":  {"cat":"AI & KG","catC":"#6d5ef7","label":"3D graph + palette","body":"3D WebGL knowledge graph with cluster-by switcher"},
+      "v0.4.0":  {"cat":"AI & KG","catC":"#6d5ef7","label":"Tag suggestions","body":"As-you-type Smart Tag autocomplete (@ and # trigger the dropdown)"},
+      "v0.5.0":  {"cat":"Views","catC":"#5aa9f6","label":"Stats dashboard","body":"Stats Dashboard page: query-driven widgets + charts over the whole vault"},
+      "v0.5.1":  {"cat":"AI & KG","catC":"#74748a","label":"Smart Tags rename","body":"\"Pills\" renamed to \"Smart Tags\" throughout app, docs, and help text"},
+      "v0.6.0":  {"cat":"AI & KG","catC":"#6d5ef7","label":"3D cover graph","body":"Every note's cover becomes a live mini 3D knowledge graph"},
+      "v0.7.0":  {"cat":"Platform","catC":"#fbbf24","label":"Fully offline","body":"Separate Ask-AI chat page removed — AI is now only in-editor actions"},
+      "v0.8.0":  {"cat":"Views","catC":"#5aa9f6","label":"Overdue badges","body":"Sidebar notebook items show red overdue-count badges"},
+      "v0.9.0":  {"cat":"AI & KG","catC":"#6d5ef7","label":"Graph glow-up","body":"Migrated from three.js to react-force-graph-2d (Canvas2D, much faster)"},
+      "v0.10.0": {"cat":"Editor","catC":"#34d399","label":"Drag · Diagram · Dashboard","body":"Drag any block by its left handle to reorder"},
+      "v0.11.0": {"cat":"Editor","catC":"#34d399","label":"Kanban board","body":"Kanban Board block: To Do · In Progress · Done (three fixed columns)"},
+      "v0.12.0": {"cat":"Editor","catC":"#34d399","label":"Callouts · TodoList","body":"12 typed callout styles: info, warning, tip, success, error, note…"},
+      "v0.13.0": {"cat":"Editor","catC":"#34d399","label":"Insert · selection","body":"Click any gap between blocks to insert a new block at that position"},
+      "v0.14.0": {"cat":"Editor","catC":"#34d399","label":"Widget · Gantt · Drawing · RSS","body":"Single resizable Widget block, Gantt timeline, freehand drawing, RSS feeds"},
+      "v0.15.0": {"cat":"Editor","catC":"#34d399","label":"RSS Memories · Math · Bookmark","body":"Pin articles into the KG as annotatable blocks; LaTeX math; web bookmarks"},
+      "v1.0.0":  {"cat":"Views","catC":"#5aa9f6","label":"Home + first stable","body":"Home agenda view: overdue, today, and upcoming items across all notes"},
+      "v1.0.2":  {"cat":"Platform","catC":"#74748a","label":"License fixes","body":"Activation shows the real error reason instead of a generic \"invalid key\""},
+      "v1.1.0":  {"cat":"AI & KG","catC":"#6d5ef7","label":"Summon sidekick","body":"Bottom-right FAB + right-docked Summon panel inside every note"},
+      "v1.1.1":  {"cat":"Views","catC":"#74748a","label":"Completion polish","body":"Completion visuals calmed down (less noise on #complete across block types)"},
+      "v1.1.2":  {"cat":"Views","catC":"#74748a","label":"Minimap overhaul","body":"Minimap dashes match entity pill colours (same hue as the pill in the note)"},
+      "v1.2.0":  {"cat":"Editor","catC":"#34d399","label":"BYOK AI","body":"Bring-your-own-key: Anthropic Claude, OpenAI GPT, or Google Gemini"},
+      "v1.3.0":  {"cat":"Editor","catC":"#34d399","label":"User templates","body":"Save any note as a reusable template (⋯ menu → Save as template…)"},
+      "v1.3.1":  {"cat":"Editor","catC":"#74748a","label":"Cross-block selection","body":"Character-precise cross-block text selection — drag from mid-paragraph to mid-paragraph"},
+      "v1.4.0":  {"cat":"Editor","catC":"#34d399","label":"SmartCopy paste","body":"One paste becomes many real blocks: headings, lists, code+language, diagrams, math, tables"},
+      "v1.5.0":  {"cat":"AI & KG","catC":"#6d5ef7","label":"Entity attributes","body":"Smart Tags become entities with arbitrary attributes (phone, email, website, …)"},
+      "v1.6.0":  {"cat":"Platform","catC":"#fbbf24","label":"Publishing","body":"Publish notebooks to read.nomima.io — pixel-faithful replicas with Smart Tag pills intact"},
+      "v1.7.0":  {"cat":"Editor","catC":"#34d399","label":"Version time-travel","body":"Per-notebook version history: drag a timeline scrubber to view any past state"},
+      "v1.8.0":  {"cat":"Editor","catC":"#34d399","label":"Terminal block","body":"/terminal block — interactive shell embedded in any note"},
+      "v1.9.0":  {"cat":"Platform","catC":"#fbbf24","label":"Faithful pages · Cloudflare","body":"Published pages match your exact app theme; backend moved to Cloudflare"},
+      "v1.10.0": {"cat":"AI & KG","catC":"#6d5ef7","label":"Summon assistant","body":"22 vault tools, interactive agenda card, safe notebook surgery, agent memories, deep research"},
+      "v1.11.0": {"cat":"AI & KG","catC":"#6d5ef7","label":"Smarter agent · ToC · templates","body":"Better planning + grounding; Table of Contents with scroll-spy; 9 deep templates"},
+      "v1.12.0": {"cat":"Editor","catC":"#34d399","label":"Follow-up actions","body":"Completing any container block shows a ↳ to log a linked follow-up"},
+      "v1.13.0": {"cat":"Editor","catC":"#34d399","label":"Dashboards · select tags","body":"Per-block analytics, single-value option tags, and follow-up chains off any block"},
+      "v1.13.1": {"cat":"Editor","catC":"#74748a","label":"Header line fix","body":"Adding a Smart Tag to a heading no longer drops the cursor onto a phantom second line"},
+      "v1.13.2": {"cat":"Platform","catC":"#74748a","label":"Access polish","body":"Solid background on the access screen — no more desktop showing through"},
+      "v1.13.3": {"cat":"AI & KG","catC":"#6d5ef7","label":"Summon: scope & memory","body":"Scope cards, vault Q&A with grounding, persistent memory, conversational in-place edits"},
+      "v1.13.4": {"cat":"AI & KG","catC":"#74748a","label":"RSS Memories search","body":"Pinned articles are now searchable by Summon — title, source, and full text indexed"},
+      "v1.13.5": {"cat":"AI & KG","catC":"#6d5ef7","label":"Composer Smart Tags","body":"Type @Name or #Topic in the Summon composer — pills appear inline with vault context"},
+      "v1.13.6": {"cat":"Editor","catC":"#34d399","label":"Live completion sync","body":"Marking a block complete in the Query panel or Summon instantly updates the open editor"},
+      "v1.13.7": {"cat":"Platform","catC":"#74748a","label":"Read-only published pages","body":"Published pages drop editor chrome; old notebooks render all block types again"},
+      "v1.13.8": {"cat":"Platform","catC":"#fbbf24","label":"In-app bug reporter","body":"Report bugs from Settings → Help & diagnostics with a redacted, reviewable snapshot"},
+      "next":    {"cat":"Unreleased","catC":"#74748a","label":"In flight","body":"Work merged to main but not yet in a numbered release — taking shape for the next version"}
+    };
+
+    var card = document.getElementById('railCard');
+    var t = null;
+
+    function build(v) {
+      var r = R[v]; if (!r) return '';
+      return '<div class="rc-head"><span class="rc-ver">' + (v === 'next' ? 'Unreleased' : v) + '</span>'
+        + '<span class="rc-cat" style="background:' + r.catC + '1a;color:' + r.catC + ';border:1px solid ' + r.catC + '44">' + r.cat + '</span></div>'
+        + '<div class="rc-label">' + r.label + '</div><p class="rc-body">' + r.body + '</p>';
+    }
+
+    function show(g, v) {
+      if (!R[v]) return;
+      clearTimeout(t);
+      card.innerHTML = build(v);
+      card.style.display = 'block';
+      var c = g.querySelector('circle');
+      var cr = (c || g).getBoundingClientRect();
+      var cW = 300, cH = card.offsetHeight;
+      var cx = cr.left + cr.width / 2;
+      var left = Math.max(8, Math.min(cx - cW / 2, window.innerWidth - cW - 8));
+      var top = cr.top - cH - 14;
+      if (top < 8) top = cr.bottom + 10;
+      card.style.left = left + 'px';
+      card.style.top = top + 'px';
+    }
+
+    function hide() { t = setTimeout(function(){ card.style.display = 'none'; }, 120); }
+
+    document.querySelectorAll('.rail-stop').forEach(function(g) {
+      var v = g.dataset.rver;
+      g.addEventListener('mouseenter', function() { show(g, v); });
+      g.addEventListener('mouseleave', hide);
+      g.addEventListener('click', function(e) { e.stopPropagation(); show(g, v); });
+    });
+  })();
+  </script>
+
+</body>
+</html>
