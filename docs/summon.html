@@ -48,21 +48,36 @@
         <li><strong>Note</strong> — streams <em>live into your editor</em>, token by token, as a new notebook or appended to the current one. You watch the note write itself, as real blocks — headings, lists, checklists — not a pasted wall of text.</li>
       </ul>
 
-      <h2 id="tools">What Summon can do</h2>
+      <h2 id=”mode”>Choosing a mode</h2>
+      <p>The mode selector sits at the top of the Summon panel. Pick one before you send:</p>
+      <table>
+        <tr><th>Mode</th><th>What it does</th></tr>
+        <tr><td><strong>Auto</strong></td><td>Summon decides — it picks the depth appropriate for your question. Good default for most prompts.</td></tr>
+        <tr><td><strong>Quick</strong></td><td>Fewer tool rounds, faster answer. Best for simple look-ups (“what’s overdue?”, “when did I last mention @Sara?”).</td></tr>
+        <tr><td><strong>Deep Research</strong></td><td>Full multi-pass vault sweep before writing. Summon reads broadly, synthesises and cites passages. Use for “write a brief on everything I know about X” or “audit all my notes on the rebrand”.</td></tr>
+        <tr><td><strong>Create</strong></td><td>Focuses Summon on drafting and editing rather than researching. Use when you already know what you want and just need it written.</td></tr>
+      </table>
+
+      <h2 id=”tools”>What Summon can do</h2>
       <p>Summon isn’t a generic chatbot with your note pasted in — it has tools to work with your vault directly:</p>
       <table>
         <tr><th>Capability</th><th>Example ask</th></tr>
-        <tr><td>Search your notes</td><td>“Find everything about the venue contract”</td></tr>
-        <tr><td>Read a note</td><td>“Summarize my Q3 planning notebook”</td></tr>
-        <tr><td>Query the Knowledge Graph</td><td>“What’s connected to @Sara?”</td></tr>
-        <tr><td>List tasks &amp; reminders</td><td>“What’s overdue?” · “What’s due this week?”</td></tr>
-        <tr><td>Create a notebook</td><td>“Draft a project brief for the rebrand”</td></tr>
-        <tr><td>Append &amp; add blocks</td><td>“Add a checklist of these action items to my meeting note” — it writes proper Nomima blocks, including callouts, tables and reminders</td></tr>
-        <tr><td>Answer from your vault</td><td>“What do I know about the venue contract?” — answers right in chat, no notebook created</td></tr>
-        <tr><td>Audit the open note</td><td>“What’s missing here?” · “Is this comprehensive?”</td></tr>
-        <tr><td>Edit a section in place</td><td>“Expand on the decision loop” · “Go deeper on the intro”</td></tr>
+        <tr><td>Search your notes</td><td>”Find everything about the venue contract”</td></tr>
+        <tr><td>Read a note</td><td>”Summarize my Q3 planning notebook”</td></tr>
+        <tr><td>Query the Knowledge Graph</td><td>”What’s connected to @Sara?”</td></tr>
+        <tr><td>List tasks &amp; reminders</td><td>”What’s overdue?” · “What’s due this week?”</td></tr>
+        <tr><td>Stats &amp; insights</td><td>”How many notes mention #research?” · “What’s my most-used mention?”</td></tr>
+        <tr><td>Create a notebook</td><td>”Draft a project brief for the rebrand”</td></tr>
+        <tr><td>Append &amp; add blocks</td><td>”Add a checklist of these action items to my meeting note” — it writes proper Nomima blocks, including callouts, tables and reminders</td></tr>
+        <tr><td>Answer from your vault</td><td>”What do I know about the venue contract?” — answers right in chat, no notebook created</td></tr>
+        <tr><td>Audit the open note</td><td>”What’s missing here?” · “Is this comprehensive?”</td></tr>
+        <tr><td>Edit a section in place</td><td>”Expand on the decision loop” · “Go deeper on the intro”</td></tr>
+        <tr><td>Mac system tools <em>(if enabled)</em></td><td>”What’s on my calendar this week?” · “Find a file named report.pdf” · “Who’s in my contacts named James?”</td></tr>
       </table>
-      <p>Quick-action chips above the input cover the common ones: <em>Brief of the day</em>, <em>What’s overdue?</em>, <em>Prep for tomorrow</em>, <em>Recap my week</em>, <em>Find in notes</em>, <em>Capture a note</em>.</p>
+      <p>Quick-action chips above the input cover the common ones: <em>Brief of the day</em>, <em>What’s overdue?</em>, <em>Prep for tomorrow</em>, <em>Recap my week</em>, <em>Find in notes</em>, <em>Capture a note</em>. After each reply, follow-up chips suggest logical next steps — click one to keep going without retyping.</p>
+
+      <h2 id=”composer-tags”>Composer Smart Tags</h2>
+      <p>Type <code>@</code> or <code>#</code> directly inside the Summon input to attach a Smart Tag to your prompt. The pill appears inline — and Summon automatically receives the entity’s full profile (attributes, linked notes) or the top matching vault passages as injected context. You can coin a brand-new tag on the spot if it doesn’t exist yet. This is the fastest way to scope a question: <em>”Summarise everything I know about <span class=”pill pill-mention”>@Priya</span> and <span class=”pill pill-hashtag”>#launch</span>”</em> — no need to mention them by name in plain text.</p>
 
       <h2 id="vault-qa">Asking about your vault</h2>
       <ul>
@@ -87,12 +102,17 @@
 
       <h2 id="permissions">Agent permissions</h2>
       <p>Summon’s reach beyond your vault is <strong>off by default</strong> and controlled in <strong>Settings → Summon Agent</strong>:</p>
-      <ul>
-        <li><strong>Web search</strong> — let Summon look things up online (via DuckDuckGo).</li>
-        <li><strong>Filesystem access</strong> — let it read files in Documents, Desktop and Downloads.</li>
-        <li><strong>Shell commands</strong> — strictly allowlist-based: you add the exact commands it may run, and chaining/piping is blocked.</li>
-      </ul>
-      <p class="note"><strong>Privacy reminder:</strong> when Summon answers a question about your notes, the relevant note content is sent to the AI provider you configured — that’s how the model reads it. Nothing is ever sent anywhere when you’re not actively using Summon.</p>
+      <table>
+        <tr><th>Permission</th><th>What it unlocks</th></tr>
+        <tr><td>Web search</td><td>Summon can search online (via DuckDuckGo or your configured Brave Search key) to supplement vault answers with current information.</td></tr>
+        <tr><td>Filesystem access</td><td>Read files in your Documents, Desktop and Downloads folders — useful for "import this report" or "summarise the PDF I just downloaded".</td></tr>
+        <tr><td>Shell commands</td><td>Strictly allowlist-based: you add the exact commands it may run; chaining and piping are blocked so it can’t do anything you haven’t approved.</td></tr>
+        <tr><td>Calendar &amp; Reminders</td><td>Read upcoming events and reminders from macOS Calendar and Reminders apps — "what’s on my calendar this week?"</td></tr>
+        <tr><td>Contacts</td><td>Look up people in macOS Contacts — "get me James’s email address".</td></tr>
+        <tr><td>Mail</td><td>Search and read recent messages from macOS Mail — "did anyone email me about the invoice?"</td></tr>
+        <tr><td>Spotlight</td><td>Search your whole Mac for files and folders by name or content — "find the latest version of the spec doc".</td></tr>
+      </table>
+      <p class="note"><strong>Privacy reminder:</strong> when Summon answers a question about your notes, the relevant note content is sent to the AI provider you configured — that’s how the model reads it. Mac system tools (Calendar, Contacts, Mail) only send the data relevant to your specific request. Nothing is ever sent anywhere when you’re not actively using Summon.</p>
 
       <nav class="docs-pager" id="docs-pager"></nav>
       <footer class="docs-foot" id="docs-foot"></footer>
