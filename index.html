@@ -147,58 +147,29 @@
       .summon-points li { text-align: left; }
     }
 
-    /* ---------- apple apps strip ---------- */
-    .apple-strip {
-      position: relative; overflow: hidden;
-      padding: 4.5rem 6vw;
-      background: linear-gradient(135deg, rgba(109,94,247,.12) 0%, rgba(0,0,0,0) 40%, rgba(240,72,168,.07) 100%);
-      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    /* ---------- release banner ---------- */
+    #release-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 70;
+      height: 38px; display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 0 42px 0 16px;
+      background: linear-gradient(90deg, rgba(109,94,247,.92), rgba(168,72,240,.8));
+      backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,.1);
+      font-size: 13px; line-height: 1; color: rgba(255,255,255,.92);
+      transition: transform .22s ease;
     }
-    .apple-strip::before {
-      content: ""; position: absolute; inset: 0; pointer-events: none;
-      background: radial-gradient(800px 400px at 60% 50%, rgba(109,94,247,.09), transparent 70%);
-    }
-    .apple-strip-inner {
-      max-width: 1020px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center;
-    }
-    .apple-strip-left {}
-    .as-new { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 700;
-      letter-spacing: .05em; text-transform: uppercase; color: var(--accent);
-      border: 1px solid rgba(108,108,255,.38); border-radius: 999px; padding: 4px 12px; margin-bottom: 18px; }
-    .as-new .as-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
-      box-shadow: 0 0 8px var(--accent); animation: as-pulse 1.8s ease-in-out infinite; }
-    @keyframes as-pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-    .apple-strip-left h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); line-height: 1.08; letter-spacing: -.025em; margin: 0 0 .9rem; }
-    .apple-strip-left h2 .grad { background: linear-gradient(100deg, var(--accent), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .apple-strip-left p { color: var(--muted); font-size: 1rem; line-height: 1.65; margin: 0 0 1.4rem; max-width: 44ch; }
-    .as-cta { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); text-decoration: none;
-      font-size: 14px; font-weight: 600; border-bottom: 1px solid rgba(108,108,255,.35); padding-bottom: 1px;
-      transition: border-color .15s, color .15s; }
-    .as-cta:hover { color: #fff; border-color: #fff; }
-    .apple-apps-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
-    }
-    .app-tile {
-      background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 16px;
-      padding: 18px 14px 14px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
-      transition: border-color .15s, background .15s;
-    }
-    .app-tile:hover { border-color: rgba(255,255,255,.16); background: rgba(255,255,255,.06); }
-    .app-icon {
-      width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; flex-shrink: 0;
-    }
-    .app-icon svg { width: 22px; height: 22px; }
-    .app-tile-name { font-size: 13px; font-weight: 700; color: var(--fg); }
-    .app-tile-desc { font-size: 12px; color: var(--muted); line-height: 1.5; margin: 0; }
-    .app-tile-example { font-size: 11.5px; color: #6c6c8a; font-style: italic; line-height: 1.45; margin: 0; border-top: 1px solid var(--border); padding-top: 8px; width: 100%; }
-    @media (max-width: 860px) {
-      .apple-strip-inner { grid-template-columns: 1fr; gap: 2.4rem; }
-      .apple-apps-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 500px) {
-      .apple-apps-grid { grid-template-columns: 1fr; }
-    }
+    #release-banner.rbn-hide { transform: translateY(-100%); pointer-events: none; }
+    #release-banner .rbn-ver { font-weight: 800; letter-spacing: -.01em; color: #fff; }
+    #release-banner .rbn-sep { opacity: .4; }
+    #release-banner a.rbn-link { color: #fff; font-weight: 600; text-decoration: underline;
+      text-underline-offset: 2px; text-decoration-color: rgba(255,255,255,.5);
+      white-space: nowrap; transition: text-decoration-color .15s; }
+    #release-banner a.rbn-link:hover { text-decoration-color: #fff; }
+    #release-banner .rbn-close { position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; color: rgba(255,255,255,.6); cursor: pointer;
+      font-size: 17px; line-height: 1; padding: 3px 6px; border-radius: 5px;
+      transition: color .12s, background .12s; }
+    #release-banner .rbn-close:hover { color: #fff; background: rgba(255,255,255,.12); }
+    body.rbn-visible nav { top: 38px; }
 
     /* ---------- download ---------- */
     .download { padding: 9rem 1.5rem 7rem; display: grid; place-items: center; text-align: center; }
@@ -240,6 +211,16 @@
   </style>
 </head>
 <body>
+
+  <!-- ✦ RELEASE BANNER — update rbn-ver + rbn-msg + BANNER_KEY each release -->
+  <div id="release-banner">
+    <span class="rbn-ver">v1.13.8</span>
+    <span class="rbn-sep">·</span>
+    <span class="rbn-msg">Summon now talks to Calendar, Mail, Contacts &amp; more on your Mac.</span>
+    <a class="rbn-link" href="/releases.html">See what's new →</a>
+    <button class="rbn-close" id="rbn-close" aria-label="Dismiss">×</button>
+  </div>
+
   <nav>
     <a class="brand" href="#top" aria-label="Nomima home">
       <img src="/logo.svg" alt="" />
@@ -298,87 +279,6 @@
         <li><b>›</b> “What did we decide about #pricing? Cite the notes.”</li>
       </ul>
       <p class="summon-foot">Bring your own key — a frontier model from Anthropic, Google or OpenAI. Your notes live on your Mac; only what you ask Summon about is sent to the provider you chose. No AI configured? Nomima never makes the call.</p>
-    </div>
-  </section>
-
-  <!-- APPLE APPS STRIP -->
-  <section class="apple-strip">
-    <div class="apple-strip-inner">
-      <div class="apple-strip-left">
-        <div class="as-new"><span class="as-dot"></span> New in Summon</div>
-        <h2>Your notes.<br><span class="grad">Your Mac apps. Together.</span></h2>
-        <p>Ask Summon what's on your calendar, look up a contact, search your mail, find a file on your Mac — without leaving your notes. Every bridge is opt-in, off by default.</p>
-        <a class="as-cta" href="/docs/summon.html#permissions">Enable in Settings → Summon Agent ↗</a>
-      </div>
-      <div class="apple-apps-grid">
-
-        <div class="app-tile">
-          <div class="app-icon" style="background:rgba(250,87,87,.15);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#FA5757" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-              <text x="12" y="18" text-anchor="middle" font-size="7" font-weight="700" fill="#FA5757" stroke="none">15</text>
-            </svg>
-          </div>
-          <div class="app-tile-name">Calendar</div>
-          <p class="app-tile-desc">Events and free/busy from macOS Calendar.</p>
-          <p class="app-tile-example">"What's on my calendar this week?"</p>
-        </div>
-
-        <div class="app-tile">
-          <div class="app-icon" style="background:rgba(59,130,246,.15);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/>
-            </svg>
-          </div>
-          <div class="app-tile-name">Mail</div>
-          <p class="app-tile-desc">Search and read recent messages in macOS Mail.</p>
-          <p class="app-tile-example">"Did anyone email me about the invoice?"</p>
-        </div>
-
-        <div class="app-tile">
-          <div class="app-icon" style="background:rgba(52,211,153,.15);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-            </svg>
-          </div>
-          <div class="app-tile-name">Contacts</div>
-          <p class="app-tile-desc">Look up people from your macOS Contacts.</p>
-          <p class="app-tile-example">"Get me James's email address."</p>
-        </div>
-
-        <div class="app-tile">
-          <div class="app-icon" style="background:rgba(249,115,22,.15);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/>
-            </svg>
-          </div>
-          <div class="app-tile-name">Reminders</div>
-          <p class="app-tile-desc">Upcoming reminders from the Reminders app.</p>
-          <p class="app-tile-example">"What reminders do I have today?"</p>
-        </div>
-
-        <div class="app-tile">
-          <div class="app-icon" style="background:rgba(139,92,246,.15);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-            </svg>
-          </div>
-          <div class="app-tile-name">Spotlight</div>
-          <p class="app-tile-desc">Find any file or folder on your Mac by name.</p>
-          <p class="app-tile-example">"Find the latest version of the spec doc."</p>
-        </div>
-
-        <div class="app-tile" style="border-style:dashed;opacity:.55;">
-          <div class="app-icon" style="background:rgba(255,255,255,.06);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
-            </svg>
-          </div>
-          <div class="app-tile-name" style="color:var(--muted);">More coming</div>
-          <p class="app-tile-desc">Slack, Teams and more are on the roadmap.</p>
-        </div>
-
-      </div>
     </div>
   </section>
 
@@ -519,6 +419,21 @@
         if (notice) notice.style.display = 'flex'; input.focus();
       }
     } catch (e) {}
+  })();
+  </script>
+  <script>
+  (function(){
+    var BANNER_KEY = 'rbn-v1.13.8'; /* ← bump this each release */
+    var el = document.getElementById('release-banner');
+    if (!el) return;
+    if (localStorage.getItem(BANNER_KEY) === '1') { el.style.display = 'none'; return; }
+    document.body.classList.add('rbn-visible');
+    document.getElementById('rbn-close').addEventListener('click', function(){
+      el.classList.add('rbn-hide');
+      document.body.classList.remove('rbn-visible');
+      setTimeout(function(){ el.style.display = 'none'; }, 240);
+      localStorage.setItem(BANNER_KEY, '1');
+    });
   })();
   </script>
 </body>
