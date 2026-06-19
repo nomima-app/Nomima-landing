@@ -225,8 +225,8 @@
           <g class="rail-stop" data-rver="v1.13.5"><circle cx="60" cy="696" r="6" fill="#6d5ef7"/><text x="60" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.13.5</text></g>
           <g class="rail-stop" data-rver="v1.13.6"><circle cx="149" cy="696" r="6" fill="#34d399"/><text x="149" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.13.6</text></g>
           <g class="rail-stop" data-rver="v1.13.7"><circle cx="238" cy="696" r="3.6" fill="#74748a" opacity="0.85"/><text x="238" y="712" text-anchor="middle" font-size="8.5" fill="var(--muted)">1.13.7</text></g>
-          <g class="rail-stop" data-rver="v1.13.8"><circle cx="327" cy="696" r="6" fill="#fbbf24" stroke="#fff" stroke-width="2"/><text x="327" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.13.8</text></g>
-          <g class="rail-stop" data-rver="next"><circle cx="416" cy="696" r="4.5" fill="none" stroke="#74748a" stroke-width="1.5" stroke-dasharray="2.5 2.5"/><text x="416" y="713" text-anchor="middle" font-size="8.5" font-style="italic" fill="var(--muted)">In flight</text></g>
+          <g class="rail-stop" data-rver="v1.13.8"><circle cx="327" cy="696" r="6" fill="#34d399"/><text x="327" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.13.8</text></g>
+          <g class="rail-stop" data-rver="v1.13.10"><circle cx="416" cy="696" r="6" fill="#fbbf24" stroke="#fff" stroke-width="2"/><text x="416" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.13.10</text></g>
         </svg>
       </div>
     </div>
@@ -241,23 +241,30 @@
 
         <div class="rel-card featured">
           <div class="rel-meta">
-            <div class="rel-ver">v1.13.8</div>
+            <div class="rel-ver">v1.13.10</div>
             <div class="rel-badge latest">Latest</div>
-            <div class="rel-badge platform">Platform</div>
+            <div class="rel-badge platform">Agents</div>
           </div>
           <div class="rel-body">
-            <h3>In-app bug reporter</h3>
-            <p>Hit a snag? Report it without leaving the app. Settings → Help &amp; diagnostics lets you capture a redacted snapshot of recent activity, review exactly what's being sent, and submit — even when you're offline. The report queues and sends when you reconnect. A public issues board is also available at <a href="/report.html" style="color:var(--accent)">nomima.io/report</a>.</p>
+            <h3>Background agents &amp; assign-to-Summon</h3>
+            <p>Hand work to Summon and keep writing. Type <code>/assign</code> in any note — take the whole line, type an instruction, or select text and hit <strong>Assign to Summon</strong> — and it runs as a background task with a live status pill that links straight to whatever it produced. A <strong>Summon Tasks</strong> queue tracks everything, with per-action approvals and an activity trail of what it did while you were away. Summon can now also <strong>draft email, add calendar events &amp; reminders, and write Apple Notes</strong>. Plus: RSS feeds page in as you scroll with automatic cleanup, and comments anchor to their block with a side popover.</p>
             <div class="rel-chips">
-              <span class="rel-chip">Settings → Help &amp; diagnostics</span>
-              <span class="rel-chip">Redacted snapshots</span>
-              <span class="rel-chip">Offline queue</span>
+              <span class="rel-chip">/assign · select → Assign</span>
+              <span class="rel-chip">Summon Tasks queue</span>
+              <span class="rel-chip">Mail · Calendar · Reminders · Notes</span>
+              <span class="rel-chip">RSS pagination + retention</span>
+              <span class="rel-chip">Block comments</span>
             </div>
           </div>
         </div>
 
         <!-- patches in this cluster -->
         <div class="patch-list">
+          <div class="patch-row">
+            <span class="patch-ver">v1.13.8</span>
+            <span class="patch-label">In-app bug reporter</span>
+            <span class="patch-desc">Report bugs from Settings → Help &amp; diagnostics with a redacted, reviewable snapshot; reports queue offline.</span>
+          </div>
           <div class="patch-row">
             <span class="patch-ver">v1.13.7</span>
             <span class="patch-label">Read-only published pages</span>
@@ -731,8 +738,8 @@
       "v1.13.5": {"cat":"AI & KG","catC":"#6d5ef7","label":"Composer Smart Tags","body":"Type @Name or #Topic in the Summon composer — pills appear inline with vault context"},
       "v1.13.6": {"cat":"Editor","catC":"#34d399","label":"Live completion sync","body":"Marking a block complete in the Query panel or Summon instantly updates the open editor"},
       "v1.13.7": {"cat":"Platform","catC":"#74748a","label":"Read-only published pages","body":"Published pages drop editor chrome; old notebooks render all block types again"},
-      "v1.13.8": {"cat":"Platform","catC":"#fbbf24","label":"In-app bug reporter","body":"Report bugs from Settings → Help & diagnostics with a redacted, reviewable snapshot"},
-      "next":    {"cat":"Unreleased","catC":"#74748a","label":"In flight","body":"Work merged to main but not yet in a numbered release — taking shape for the next version"}
+      "v1.13.8": {"cat":"Platform","catC":"#34d399","label":"In-app bug reporter","body":"Report bugs from Settings → Help & diagnostics with a redacted, reviewable snapshot"},
+      "v1.13.10": {"cat":"Agents","catC":"#fbbf24","label":"Background agents · assign-to-Summon","body":"Assign tasks to Summon from the editor (/assign or select → Assign); background queue with approvals; Mac actions; RSS pagination + retention; block comments"}
     };
 
     var card = document.getElementById('railCard');

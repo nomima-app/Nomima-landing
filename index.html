@@ -214,9 +214,9 @@
 
   <!-- ✦ RELEASE BANNER — update rbn-ver + rbn-msg + BANNER_KEY each release -->
   <div id="release-banner">
-    <span class="rbn-ver">v1.13.8</span>
+    <span class="rbn-ver">v1.13.10</span>
     <span class="rbn-sep">·</span>
-    <span class="rbn-msg">Summon now talks to Calendar, Mail, Contacts &amp; more on your Mac.</span>
+    <span class="rbn-msg">Assign tasks to Summon right from the editor — background agents, with Mac actions, comments &amp; smarter RSS.</span>
     <a class="rbn-link" href="/releases.html">See what's new →</a>
     <button class="rbn-close" id="rbn-close" aria-label="Dismiss">×</button>
   </div>
@@ -423,7 +423,7 @@
   </script>
   <script>
   (function(){
-    var BANNER_KEY = 'rbn-v1.13.8'; /* ← bump this each release */
+    var BANNER_KEY = 'rbn-v1.13.10'; /* ← bump this each release */
     var el = document.getElementById('release-banner');
     if (!el) return;
     if (localStorage.getItem(BANNER_KEY) === '1') { el.style.display = 'none'; return; }
