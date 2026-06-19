@@ -1,6 +1,6 @@
 {
-  "version": "1.13.8",
-  "notes": "v1.13.8: Report a bug right from Settings → Help & diagnostics. Describe one or more issues, attach screenshots, and send — the app attaches a redacted snapshot of recent activity (you review it first; your notes are never included). Reports queue offline and send on their own. Public board at nomima.io/report.",
-  "pub_date": "2026-06-15T00:00:00Z",
-  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.13.8/Nomima_1.13.8_aarch64.dmg"
+  "version": "1.13.10",
+  "notes": "v1.13.10: Background agents — assign tasks to Summon right from the editor (/assign, or select text → Assign) and offload research to a background queue with live status, per-action approvals and an activity trail. Plus Mac actions (draft email, calendar events, reminders, Apple Notes), RSS feed pagination + automatic retention, and block-anchored comments.",
+  "pub_date": "2026-06-19T13:37:37Z",
+  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.13.10/Nomima_1.13.10_aarch64.dmg"
 }
