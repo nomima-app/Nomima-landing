@@ -171,7 +171,7 @@
       <div class="rail-outer">
         <svg viewBox="0 0 920 740" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Nomima release journey" style="width:100%;height:auto">
           <!-- track path: snake across 4 rows -->
-          <path d="M60,96 H860 M860,96 C900,96 900,246 860,246 M860,246 H60 M60,246 C20,246 20,396 60,396 M60,396 H860 M860,396 C900,396 900,546 860,546 M860,546 H60 M60,546 C20,546 20,696 60,696 M60,696 H416" fill="none" stroke="var(--border)" stroke-width="2.5"/>
+          <path d="M60,96 H860 M860,96 C900,96 900,246 860,246 M860,246 H60 M60,246 C20,246 20,396 60,396 M60,396 H860 M860,396 C900,396 900,546 860,546 M860,546 H60 M60,546 C20,546 20,696 60,696 M60,696 H594" fill="none" stroke="var(--border)" stroke-width="2.5"/>
 
           <!-- row 1 — pre-1.0 early builds -->
           <g class="rail-stop" data-rver="v0.1.0"><circle cx="60" cy="96" r="3.6" fill="#fbbf24" opacity="0.85"/><text x="60" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.1.0</text></g>
@@ -227,7 +227,8 @@
           <g class="rail-stop" data-rver="v1.13.7"><circle cx="238" cy="696" r="3.6" fill="#74748a" opacity="0.85"/><text x="238" y="712" text-anchor="middle" font-size="8.5" fill="var(--muted)">1.13.7</text></g>
           <g class="rail-stop" data-rver="v1.13.8"><circle cx="327" cy="696" r="6" fill="#34d399"/><text x="327" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.13.8</text></g>
           <g class="rail-stop" data-rver="v1.13.10"><circle cx="416" cy="696" r="6" fill="#34d399"/><text x="416" y="712" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.13.10</text></g>
-          <g class="rail-stop" data-rver="v1.15.0"><circle cx="505" cy="696" r="6" fill="#fbbf24" stroke="#fff" stroke-width="2"/><text x="505" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.15.0</text></g>
+          <g class="rail-stop" data-rver="v1.14.0"><circle cx="505" cy="696" r="6" fill="#34d399"/><text x="505" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.14.0</text></g>
+          <g class="rail-stop" data-rver="v1.15.0"><circle cx="594" cy="696" r="6" fill="#34d399" stroke="#fff" stroke-width="2"/><text x="594" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.15.0</text></g>
         </svg>
       </div>
     </div>
@@ -775,7 +776,9 @@
       "v1.13.6": {"cat":"Editor","catC":"#34d399","label":"Live completion sync","body":"Marking a block complete in the Query panel or Summon instantly updates the open editor"},
       "v1.13.7": {"cat":"Platform","catC":"#74748a","label":"Read-only published pages","body":"Published pages drop editor chrome; old notebooks render all block types again"},
       "v1.13.8": {"cat":"Platform","catC":"#34d399","label":"In-app bug reporter","body":"Report bugs from Settings → Help & diagnostics with a redacted, reviewable snapshot"},
-      "v1.13.10": {"cat":"Agents","catC":"#fbbf24","label":"Background agents · assign-to-Summon","body":"Assign tasks to Summon from the editor (/assign or select → Assign); background queue with approvals; Mac actions; RSS pagination + retention; block comments"}
+      "v1.13.10": {"cat":"Agents","catC":"#fbbf24","label":"Background agents · assign-to-Summon","body":"Assign tasks to Summon from the editor (/assign or select → Assign); background queue with approvals; Mac actions; RSS pagination + retention; block comments"},
+      "v1.14.0": {"cat":"Editor & Blocks","catC":"#34d399","label":"Smart Tags become entities","body":"Rename, merge and alias tags; typed attributes and authored relations on the knowledge graph; a block actions menu, whole-block colour and drop-target highlight"},
+      "v1.15.0": {"cat":"Editor & Blocks","catC":"#34d399","label":"Entity dashboards · follow-up log","body":"Expand any @mention or #tag into a full dashboard (usage, ranking, co-occurrence, trends); merge duplicates for real; finished tasks keep a timestamped, smart-tag follow-up log in the comments window"}
     };
 
     var card = document.getElementById('railCard');
