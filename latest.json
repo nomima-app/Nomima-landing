@@ -1,6 +1,6 @@
 {
-  "version": "1.14.0",
-  "notes": "v1.14.0: Smart Tags are now real entities — stable identity (rename propagates everywhere), merge, aliases, typed attributes you can query, profiles with stats, and authored relations on the Knowledge Graph. Plus a block actions menu on every block (drag to move with drop highlight; click for complete, whole-block colour, copy-link-as-reference, duplicate, move/copy to another notebook) and click-anywhere to add a line.",
-  "pub_date": "2026-06-20T06:50:43Z",
-  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.14.0/Nomima_1.14.0_aarch64.dmg"
+  "version": "1.15.0",
+  "notes": "v1.15.0: Expand any @mention or #hashtag into a full Entity view — usage, ranking, who it appears alongside, trends, and profile completeness. Merge now truly folds one entity into another (rewriting every mention to the survivor). Follow-ups become a timestamped log beside comments — with @mentions, #tags and dates as you type — instead of cluttering the note with blocks.",
+  "pub_date": "2026-06-20T16:23:09Z",
+  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.15.0/Nomima_1.15.0_aarch64.dmg"
 }
