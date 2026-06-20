@@ -1,6 +1,6 @@
 {
-  "version": "1.13.10",
-  "notes": "v1.13.10: Background agents — assign tasks to Summon right from the editor (/assign, or select text → Assign) and offload research to a background queue with live status, per-action approvals and an activity trail. Plus Mac actions (draft email, calendar events, reminders, Apple Notes), RSS feed pagination + automatic retention, and block-anchored comments.",
-  "pub_date": "2026-06-19T13:37:37Z",
-  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.13.10/Nomima_1.13.10_aarch64.dmg"
+  "version": "1.14.0",
+  "notes": "v1.14.0: Smart Tags are now real entities — stable identity (rename propagates everywhere), merge, aliases, typed attributes you can query, profiles with stats, and authored relations on the Knowledge Graph. Plus a block actions menu on every block (drag to move with drop highlight; click for complete, whole-block colour, copy-link-as-reference, duplicate, move/copy to another notebook) and click-anywhere to add a line.",
+  "pub_date": "2026-06-20T06:50:43Z",
+  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.14.0/Nomima_1.14.0_aarch64.dmg"
 }
