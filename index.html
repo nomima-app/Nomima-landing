@@ -214,9 +214,9 @@
 
   <!-- ✦ RELEASE BANNER — update rbn-ver + rbn-msg + BANNER_KEY each release -->
   <div id="release-banner">
-    <span class="rbn-ver">v1.14.0</span>
+    <span class="rbn-ver">v1.15.0</span>
     <span class="rbn-sep">·</span>
-    <span class="rbn-msg">Smart Tags are now real entities — rename, merge, typed attributes &amp; relations — plus a block actions menu on every block.</span>
+    <span class="rbn-msg">Expand any @mention or #tag into a full entity dashboard, actually merge duplicates, and give finished tasks a timestamped follow-up log.</span>
     <a class="rbn-link" href="/releases.html">See what's new →</a>
     <button class="rbn-close" id="rbn-close" aria-label="Dismiss">×</button>
   </div>
@@ -423,7 +423,7 @@
   </script>
   <script>
   (function(){
-    var BANNER_KEY = 'rbn-v1.14.0'; /* ← bump this each release */
+    var BANNER_KEY = 'rbn-v1.15.0'; /* ← bump this each release */
     var el = document.getElementById('release-banner');
     if (!el) return;
     if (localStorage.getItem(BANNER_KEY) === '1') { el.style.display = 'none'; return; }
