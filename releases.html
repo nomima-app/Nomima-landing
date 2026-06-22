@@ -228,7 +228,8 @@
           <g class="rail-stop" data-rver="v1.13.8"><circle cx="327" cy="696" r="6" fill="#34d399"/><text x="327" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.13.8</text></g>
           <g class="rail-stop" data-rver="v1.13.10"><circle cx="416" cy="696" r="6" fill="#34d399"/><text x="416" y="712" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.13.10</text></g>
           <g class="rail-stop" data-rver="v1.14.0"><circle cx="505" cy="696" r="6" fill="#34d399"/><text x="505" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.14.0</text></g>
-          <g class="rail-stop" data-rver="v1.15.0"><circle cx="594" cy="696" r="6" fill="#34d399" stroke="#fff" stroke-width="2"/><text x="594" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.15.0</text></g>
+          <g class="rail-stop" data-rver="v1.15.0"><circle cx="594" cy="696" r="6" fill="#34d399" opacity="0.85"/><text x="594" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.15.0</text></g>
+          <g class="rail-stop" data-rver="v1.16.0"><circle cx="683" cy="696" r="6" fill="#6d5ef7" stroke="#fff" stroke-width="2"/><text x="683" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.16.0</text></g>
         </svg>
       </div>
     </div>
@@ -243,8 +244,27 @@
 
         <div class="rel-card featured">
           <div class="rel-meta">
-            <div class="rel-ver">v1.15.0</div>
+            <div class="rel-ver">v1.16.0</div>
             <div class="rel-badge latest">Latest</div>
+            <div class="rel-badge ai">AI &amp; Platform</div>
+          </div>
+          <div class="rel-body">
+            <h3>Summon entity depth · vault clean-up</h3>
+            <p>Summon now reads your <strong>authored relationships</strong> — tag @Yanal as CTO once, and Summon knows it everywhere, not just from co-occurrence in the knowledge graph. Type <strong>@</strong> in the Summon composer and every suggestion shows its entity type chip: <strong>Person, Company, Project, Idea, Team</strong> — no more guessing. RSS feeds now <strong>deduplicate</strong>: two blocks pointing at the same URL share one cache, no duplicate downloads. Settings → Vault gained a new stepper row for <strong>Articles/feed</strong> and <strong>Retention days</strong> — changes apply instantly. And on first launch after upgrading, a <strong>128 MB dead embedding model</strong> is auto-removed; orphaned RSS images are swept daily and on Re-index.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">Summon reads authored relationships</span>
+              <span class="rel-chip">@/# suggestions show entity type</span>
+              <span class="rel-chip">RSS deduplication across blocks</span>
+              <span class="rel-chip">RSS cache controls in Settings</span>
+              <span class="rel-chip">128 MB dead model auto-removed</span>
+              <span class="rel-chip">Orphaned RSS images swept on Re-index</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.15.0</div>
             <div class="rel-badge platform">Entities</div>
           </div>
           <div class="rel-body">
@@ -778,7 +798,8 @@
       "v1.13.8": {"cat":"Platform","catC":"#34d399","label":"In-app bug reporter","body":"Report bugs from Settings → Help & diagnostics with a redacted, reviewable snapshot"},
       "v1.13.10": {"cat":"Agents","catC":"#fbbf24","label":"Background agents · assign-to-Summon","body":"Assign tasks to Summon from the editor (/assign or select → Assign); background queue with approvals; Mac actions; RSS pagination + retention; block comments"},
       "v1.14.0": {"cat":"Editor & Blocks","catC":"#34d399","label":"Smart Tags become entities","body":"Rename, merge and alias tags; typed attributes and authored relations on the knowledge graph; a block actions menu, whole-block colour and drop-target highlight"},
-      "v1.15.0": {"cat":"Editor & Blocks","catC":"#34d399","label":"Entity dashboards · follow-up log","body":"Expand any @mention or #tag into a full dashboard (usage, ranking, co-occurrence, trends); merge duplicates for real; finished tasks keep a timestamped, smart-tag follow-up log in the comments window"}
+      "v1.15.0": {"cat":"Editor & Blocks","catC":"#34d399","label":"Entity dashboards · follow-up log","body":"Expand any @mention or #tag into a full dashboard (usage, ranking, co-occurrence, trends); merge duplicates for real; finished tasks keep a timestamped, smart-tag follow-up log in the comments window"},
+      "v1.16.0": {"cat":"AI & Platform","catC":"#6d5ef7","label":"Summon entity depth · vault clean-up","body":"Summon sees your authored relationships; @/# suggestions show entity type (Person, Company, Project); RSS cache deduplicates and is now configurable; 128 MB dead model freed on launch"}
     };
 
     var card = document.getElementById('railCard');
