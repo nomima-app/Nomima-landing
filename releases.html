@@ -830,11 +830,23 @@
 
     function hide() { t = setTimeout(function(){ card.style.display = 'none'; }, 120); }
 
+    var relMap = {};
+    document.querySelectorAll('.rel-ver, .patch-ver').forEach(function(el) {
+      var ver = el.textContent.trim();
+      if (!ver.startsWith('v')) ver = 'v' + ver;
+      relMap[ver] = el.closest('.rel-card') || el.closest('.patch-row');
+    });
+
     document.querySelectorAll('.rail-stop').forEach(function(g) {
       var v = g.dataset.rver;
       g.addEventListener('mouseenter', function() { show(g, v); });
       g.addEventListener('mouseleave', hide);
-      g.addEventListener('click', function(e) { e.stopPropagation(); show(g, v); });
+      g.addEventListener('click', function(e) {
+        e.stopPropagation();
+        show(g, v);
+        var target = relMap[v];
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
     });
   })();
   </script>
