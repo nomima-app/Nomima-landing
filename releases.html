@@ -229,7 +229,8 @@
           <g class="rail-stop" data-rver="v1.13.10"><circle cx="416" cy="696" r="6" fill="#fbbf24"/><text x="416" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.13.10</text></g>
           <g class="rail-stop" data-rver="v1.14.0"><circle cx="505" cy="696" r="6" fill="#34d399"/><text x="505" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.14.0</text></g>
           <g class="rail-stop" data-rver="v1.15.0"><circle cx="594" cy="696" r="6" fill="#34d399" opacity="0.85"/><text x="594" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.15.0</text></g>
-          <g class="rail-stop" data-rver="v1.16.0"><circle cx="683" cy="696" r="6" fill="#6d5ef7" stroke="#fff" stroke-width="2"/><text x="683" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.16.0</text></g>
+          <g class="rail-stop" data-rver="v1.16.0"><circle cx="683" cy="696" r="6" fill="#6d5ef7"/><text x="683" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.16.0</text></g>
+          <g class="rail-stop" data-rver="v1.16.1"><circle cx="772" cy="696" r="6" fill="#f87171" stroke="#fff" stroke-width="2"/><text x="772" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.16.1</text></g>
         </svg>
       </div>
     </div>
@@ -244,8 +245,23 @@
 
         <div class="rel-card featured">
           <div class="rel-meta">
-            <div class="rel-ver">v1.16.0</div>
+            <div class="rel-ver">v1.16.1</div>
             <div class="rel-badge latest">Latest</div>
+            <div class="rel-badge editor">Editor &amp; KG</div>
+          </div>
+          <div class="rel-body">
+            <h3>Section block gaps · KG phantom file fix</h3>
+            <p>Click anywhere inside a <strong>Section block</strong> — between the title row and the first content block, or below the last block in the section body — and a cursor appears immediately. Previously these gaps were dead zones that required keyboard workarounds. The <strong>Knowledge Graph</strong> no longer shows a phantom &ldquo;File&rdquo; cluster on notebooks that have Section blocks with NLP-matched entities; the fix tightens how synthetic block IDs are resolved so only real file attachments produce file cluster nodes.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">Section gap-click to insert</span>
+              <span class="rel-chip">KG phantom file node suppressed</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.16.0</div>
             <div class="rel-badge ai">AI &amp; Platform</div>
           </div>
           <div class="rel-body">
@@ -799,6 +815,7 @@
       "v1.13.10": {"cat":"Agents","catC":"#fbbf24","label":"Background agents · assign-to-Summon","body":"Assign tasks to Summon from the editor (/assign or select → Assign); background queue with approvals; Mac actions; RSS pagination + retention; block comments"},
       "v1.14.0": {"cat":"Editor & Blocks","catC":"#34d399","label":"Smart Tags become entities","body":"Rename, merge and alias tags; typed attributes and authored relations on the knowledge graph; a block actions menu, whole-block colour and drop-target highlight"},
       "v1.15.0": {"cat":"Editor & Blocks","catC":"#34d399","label":"Entity dashboards · follow-up log","body":"Expand any @mention or #tag into a full dashboard (usage, ranking, co-occurrence, trends); merge duplicates for real; finished tasks keep a timestamped, smart-tag follow-up log in the comments window"},
+      "v1.16.1": {"cat":"Editor & KG","catC":"#f87171","label":"Section gap-click · phantom file fix","body":"Click in any Section block gap to insert; KG phantom File cluster suppressed for notebooks with Section blocks"},
       "v1.16.0": {"cat":"AI & Platform","catC":"#6d5ef7","label":"Summon entity depth · vault clean-up","body":"Summon sees your authored relationships; @/# suggestions show entity type (Person, Company, Project); RSS cache deduplicates and is now configurable; 128 MB dead model freed on launch"}
     };
 

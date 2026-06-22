@@ -1,6 +1,6 @@
 {
-  "version": "1.16.0",
-  "notes": "v1.16.0: Summon now sees your authored relationships (@Yanal is CTO). Type @ in Summon and see Person/Company/Project labels on every suggestion. RSS feeds deduplicate across blocks, cache bounds are now configurable in Settings. 128 MB dead model cleaned up on launch.",
-  "pub_date": "2026-06-22T00:00:00Z",
-  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.16.0/Nomima_1.16.0_aarch64.dmg"
+  "version": "1.16.1",
+  "notes": "v1.16.1: Click-to-insert now works in all Section block gaps (between section title and first content block, and below the last block). KG no longer shows a phantom \"File\" cluster on notebooks with Section blocks.",
+  "pub_date": "2026-06-22T07:17:00Z",
+  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.16.1/Nomima_1.16.1_aarch64.dmg"
 }
