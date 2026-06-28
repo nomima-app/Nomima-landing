@@ -1,6 +1,6 @@
 {
-  "version": "1.16.1",
-  "notes": "v1.16.1: Click-to-insert now works in all Section block gaps (between section title and first content block, and below the last block). KG no longer shows a phantom \"File\" cluster on notebooks with Section blocks.",
-  "pub_date": "2026-06-22T07:17:00Z",
-  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.16.1/Nomima_1.16.1_aarch64.dmg"
+  "version": "1.17.0",
+  "notes": "v1.17.0: AI inline edit with accept/reject/regenerate, export (Markdown/HTML/JSON/vault zip), import, 12 curated themes, back/forward navigation, rich block ToC, Entity Detail View bento grid, notebook icons, tray live graphs, block drag-drop.",
+  "pub_date": "2026-06-28T09:00:00Z",
+  "url": "https://nomima.io/download"
 }
