@@ -52,5 +52,41 @@ over a heavy `.gif` (swap the extension in both the file and the `src`). Target
 
 ---
 
+---
+
+## Priority D — deep reference pages (Track B)
+
+Every slot below carries an in-page label in the form **"Set up: … / In frame: …"** —
+open the page, read the placeholder, and shoot exactly that.
+
+### Advanced blocks (`advanced-blocks.html`)
+| Slot | Shows |
+|---|---|
+| `advanced-blocks/authored-database.png` | An authored `/table` with typed columns and cell pills. |
+| `advanced-blocks/query-table-bound.png` | A `/query-table` filtered to a pill (e.g. #launch) with its filter bar + matching rows. |
+| `advanced-blocks/dashboard-grid.png` | A dashboard block with several widgets laid out. |
+| `advanced-blocks/widget-editor.png` | The widget config (metric + chart type picker). |
+| `advanced-blocks/kanban-drag-to-done.gif` | **Clip:** dragging a card into the Done column → it marks complete. |
+| `advanced-blocks/gantt-edit-mode.png` | A Gantt block in edit mode (name/start/end/assignee fields). |
+| `advanced-blocks/mermaid-live.png` | A Mermaid block with source + rendered diagram side by side. |
+| `advanced-blocks/drawing-canvas.png` | The drawing/whiteboard block with a simple sketch. |
+
+### Entity relationships (`smart-tags.html`)
+| Slot | Shows |
+|---|---|
+| `smart-tags/relation-field-how-it-reads.png` | The "How it reads" relation editor (verb chips, Links-to, container checkbox). |
+| `smart-tags/entity-card-relationships-grouped.png` | An entity card's Relationships section, incl. a muted inherited row. |
+
+### Import, export & publishing (`sharing-and-data.html`)
+| Slot | Shows |
+|---|---|
+| `sharing-and-data/export-dialog.png` | The export format dialog (Markdown/HTML/JSON). |
+| `sharing-and-data/import-entry-settings.png` | The Import row in Settings. |
+| `sharing-and-data/publish-dialog.png` | The publish dialog in published state (link + view-code fields). |
+| `sharing-and-data/published-page.png` | The live read.nomima.io reader page for a published note. |
+
+---
+
 _The `getting-started` "interface at a glance" visual is a hand-built annotated
-SVG diagram — no capture needed. Everything else above is a real screenshot/clip._
+SVG diagram — no capture needed. Everything else above is a real screenshot/clip.
+**27 slots total.**_

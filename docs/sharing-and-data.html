@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Import, export &amp; publishing — Nomima Guide</title>
+  <meta name="description" content="Export a notebook or your whole vault to Markdown, HTML or JSON, import it back in, and publish a read-only note to the web with a private view code." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#get">Get it free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Everything else</div>
+        <h1 class="docs-title">Import, export &amp; publishing</h1>
+        <p class="docs-sub">Your notes are yours. Take a single notebook or your whole vault out to open files, bring them back in, or publish a read-only copy of one note to the web behind a private code.</p>
+      </header>
+
+      <h2 id="export">Export</h2>
+      <p>You can export <strong>a single notebook</strong> or your <strong>entire vault</strong>, in any of three formats.</p>
+      <ul>
+        <li><strong>One notebook</strong> — hover the notebook in the sidebar, open its <strong>⋯</strong> menu and choose <strong>Export…</strong>. Pick a format and choose where to save the file.</li>
+        <li><strong>Whole vault</strong> — open <strong>Settings</strong> and use <strong>Export vault</strong>. Every notebook plus its attachments is bundled into a single <code>.zip</code>, with folders that mirror how your notebooks are nested.</li>
+      </ul>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="sharing-and-data/export-dialog.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The export dialog.</strong> Set up: open a notebook's ⋯ menu → Export… (or Settings → Export vault). In frame: the dialog with the three format cards — Markdown, HTML, JSON — one selected.</span>
+        </div>
+        <figcaption>Choose Markdown, HTML or JSON — for a notebook or the whole vault.</figcaption>
+      </figure>
+
+      <table>
+        <tr><th>Format</th><th>What you get</th></tr>
+        <tr><td>Markdown <code>.md</code></td><td>Portable plain text that opens in any editor. A vault export becomes a folder tree of <code>.md</code> files.</td></tr>
+        <tr><td>HTML <code>.html</code></td><td>A self-contained web page you can open in any browser — good for reading and sharing, but read-only (see the note below).</td></tr>
+        <tr><td>JSON <code>.json</code></td><td>A lossless backup that keeps everything and can be imported straight back into Nomima. The recommended choice for a backup.</td></tr>
+      </table>
+
+      <p><strong>What's included.</strong> Your blocks and their text, and the Smart Tags (@mentions, #hashtags) inside them, are all serialized. A whole-vault export also copies in every <strong>attached file</strong> under an <code>assets/</code> folder, and writes a <code>manifest.json</code> index so Nomima can rebuild your notebook hierarchy on import. A single-notebook export contains just that notebook's document.</p>
+      <p class="note"><strong>Note:</strong> HTML is a one-way format — it's meant for reading, not re-importing. For a backup you can restore, export as <strong>JSON</strong> (or a JSON/Markdown vault <code>.zip</code>).</p>
+
+      <h2 id="import">Import</h2>
+      <p>Import lives in <strong>Settings → Import…</strong>. It opens a file picker; choose what to bring in and Nomima recreates the notebooks in your vault.</p>
+      <ul>
+        <li><strong>A Nomima export</strong> — a single notebook as <code>.json</code> (lossless) or <code>.md</code> (best-effort from Markdown).</li>
+        <li><strong>A whole vault</strong> — a vault export <code>.zip</code>. Every notebook in the archive is restored, and its nesting (which notebook lives inside which) is rebuilt from the manifest.</li>
+      </ul>
+      <p>A single file lands at the top level of your vault. What round-trips cleanly is your <strong>structure, content and hierarchy</strong> — from JSON and Markdown sources. Two honest limits: a JSON or Markdown-format vault <code>.zip</code> re-imports, but an <strong>HTML</strong> export does not (Nomima will tell you to re-export as JSON or Markdown), and <strong>attached files are not yet re-imported</strong> — only the notebook documents come back for now.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="sharing-and-data/import-entry-settings.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Import in Settings.</strong> Set up: open Settings and scroll to the data row. In frame: the "Import — a Nomima export (JSON / Markdown), or a whole-vault .zip" row with its Import… button, sitting just below the Export vault row.</span>
+        </div>
+        <figcaption>Import a notebook or a whole vault from Settings.</figcaption>
+      </figure>
+
+      <p class="note"><strong>Coming later:</strong> importing directly from <strong>Obsidian</strong> or <strong>Notion</strong> is not supported yet — it's a planned addition. For now, bring notes in as Markdown or as a Nomima export.</p>
+
+      <h2 id="publishing">Publishing a note to the web</h2>
+      <p>Publishing puts a <strong>read-only copy</strong> of one notebook online at <code>read.nomima.io</code>, behind a private code, so you can share a page without giving anyone access to your vault. It's opt-in per notebook — nothing goes online until you publish it, and it's <strong>free</strong>.</p>
+      <p>Open a notebook, use its header menu and choose <strong>Publish notebook…</strong>, then press <strong>Publish</strong> in the dialog. You get back a shareable link and a <strong>view code</strong> — a page opens only for someone who has both.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="sharing-and-data/publish-dialog.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The publish dialog (published state).</strong> Set up: publish a notebook, then reopen Publish notebook…. In frame: the "read.nomima.io/p/…" address, the "Link with code", "Link (prompts for the code)" and "View code" copy fields, the downloads checklist, and the Update now / Unpublish buttons.</span>
+        </div>
+        <figcaption>After publishing: the link, the view code, and controls to update or take it down.</figcaption>
+      </figure>
+
+      <h3>The shareable link &amp; view code</h3>
+      <p>You'll see three things to copy:</p>
+      <ul>
+        <li><strong>Link with code</strong> — a one-click link that opens the page directly (the code rides in the URL fragment, so it stays out of server logs).</li>
+        <li><strong>Link (prompts for the code)</strong> — the plain link; whoever opens it is asked to type the view code.</li>
+        <li><strong>View code</strong> — the code itself, to share separately (over a different channel) when you want the extra layer.</li>
+      </ul>
+      <p>Optionally, tick any of the notebook's <strong>attached files</strong> in the downloads checklist to make them downloadable on the published page. They're off by default.</p>
+
+      <h3>Updating, unpublishing &amp; the offline outbox</h3>
+      <ul>
+        <li><strong>Updating</strong> — once a notebook is published, your edits keep the public page in sync automatically. You can also press <strong>Update now</strong> in the dialog to push the latest version immediately.</li>
+        <li><strong>Unpublishing</strong> — press <strong>Unpublish</strong> to take the page offline. The link stops working.</li>
+        <li><strong>Offline outbox</strong> — if you publish or update while offline, the change is <strong>queued</strong> and sent automatically the moment you reconnect. You don't have to retry by hand; the dialog shows the queued state until it goes through.</li>
+      </ul>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="sharing-and-data/published-page.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The published page.</strong> Set up: open the "Link with code" in a browser. In frame: the read.nomima.io reader showing the note exactly as it looks in the app — headings, pills and thumbnails intact — in the publisher's theme.</span>
+        </div>
+        <figcaption>The reader shows a faithful, self-contained snapshot of your note.</figcaption>
+      </figure>
+
+      <p class="tip"><strong>What gets captured:</strong> publishing takes a <strong>self-contained snapshot</strong> of the note exactly as it appears on your screen — rendered diagrams, dashboard numbers, pills and image thumbnails, in your current theme — with all editing controls removed. The reader sees that snapshot, not your live vault, and only the one notebook you chose to publish.</p>
+      <p class="warn"><strong>Keep in mind:</strong> anyone with both the link and the view code can read the page. Share the code through a separate channel from the link when a note is sensitive, and <strong>unpublish</strong> when you're done.</p>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>

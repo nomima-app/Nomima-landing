@@ -90,6 +90,51 @@
       <p><strong>Auto-photo from email.</strong> Type a person’s email and Nomima quietly fetches their Gravatar photo if they have one. The address is hashed before any lookup and never sent in the clear; if there’s no match, nothing is stored — and it never overwrites a photo you uploaded yourself.</p>
       <p><strong>Profile tab.</strong> When an entity has an email, its card gains a <strong>Profile</strong> tab with public info looked up on demand by hash — name, location, bio, the organization inferred from the email domain, and any public social accounts. It’s fetched only when you open the tab.</p>
 
+      <h2 id="relationships">Entity relationships</h2>
+      <p>Attributes describe an entity on its own. A <strong>relationship</strong> is a durable, typed link <em>between two entities</em> — <span class="pill pill-mention">@Sara</span> <em>member of</em> <span class="pill pill-mention">@Design team</span>, or <span class="pill pill-hashtag">#Launch</span> <em>owned by</em> <span class="pill pill-mention">@Sara</span>. Because it’s stored against each entity’s stable identity, a relationship survives graph rebuilds and shows up from <em>both</em> sides automatically.</p>
+
+      <h3>Creating a relationship</h3>
+      <p>You don’t draw links by hand — you add a <strong>relation field</strong> to an entity, and every value you put in it becomes a link:</p>
+      <ol>
+        <li>Open an entity card and choose <strong>Add field → Relationship</strong>.</li>
+        <li>Under <strong>Links to</strong>, optionally restrict the field to one type (a Person, a Team…) so the picker only offers the right kind of entity.</li>
+        <li>Nomima shows a live <strong>“How it reads”</strong> sentence spelling the link out from each side. Two chips (this entity and the other) sit around an editable <strong>verb</strong> — type your own forward wording (<em>manages</em>, <em>owned by</em>) and the reverse wording for the other side. Leave them blank to accept the sensible defaults (<em>contains</em> / <em>belongs to</em>).</li>
+        <li>Save the field, then pick the target entities. Each one you add creates the link and mirrors it onto the other entity’s card.</li>
+      </ol>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="smart-tags/relation-field-how-it-reads.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The “How it reads” editor.</strong> Set up: on a Team entity card, click Add field → Relationship, set Links to → Person. In frame: the two-row “How it reads” sentence with the entity chip, the editable verb inputs (forward + reverse), the “Links to” type dropdown, and the “…is the container (members inherit it)” checkbox.</span>
+        </div>
+        <figcaption>A relationship is authored as a field: name the verb on each side, then pick who it links to.</figcaption>
+      </figure>
+
+      <h3>Direction, cardinality &amp; the container</h3>
+      <ul>
+        <li><strong>Direction</strong> — the forward verb reads from this entity outward; the reverse verb is what the <em>other</em> entity shows. A <em>symmetric</em> link (like <em>colleague of</em>) reads the same both ways.</li>
+        <li><strong>Cardinality</strong> — set the field to hold <strong>Just one</strong> target or <strong>Multiple</strong>. A person’s Team is usually one; a team’s Members are many.</li>
+        <li><strong>The container</strong> — a checkbox, <em>“…is the container (members inherit it)”</em>, marks which side <em>contains</em> the other. This is what powers inheritance below.</li>
+      </ul>
+
+      <h3>Inherited relationships</h3>
+      <p>Containers chain. If <span class="pill pill-mention">@Sara</span> is in <span class="pill pill-mention">@Design</span>, and <span class="pill pill-mention">@Design</span> is in <span class="pill pill-mention">@Acme</span>, then Sara’s card also shows <span class="pill pill-mention">@Acme</span> as an <strong>inherited</strong> relationship — rendered muted, labelled <em>via @Design</em>. Nomima walks the containment chain up at <em>query time</em>, so inherited links are never stored: delete the Design → Acme link and Sara’s inherited Acme quietly disappears. Only container (membership) links propagate — an ordinary link like <em>partners with</em> stays put.</p>
+
+      <h3>Where relationships show up</h3>
+      <p>On an entity card, relationships are <strong>read-only</strong> and grouped one row per label and direction — a team shows <em>Members: <span class="pill pill-mention">@Sara</span>, <span class="pill pill-mention">@Moe</span></em> on a single row rather than one row each. Each target is a real pill in its own type colour, and clicking it jumps to that entity. The <a href="knowledge-graph.html">Knowledge Graph</a> folds these authored links straight in as labelled edges between nodes.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="smart-tags/entity-card-relationships-grouped.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Grouped relationships on a card.</strong> Set up: open a Person who is in a team that sits inside a company. In frame: the Relationships section with a direct row (e.g. “member of → @L2”) and a muted <em>inherited · @L2</em> row showing the company, demonstrating one-row-per-label grouping.</span>
+        </div>
+        <figcaption>Relationships read as sentences on the card; inherited ones appear muted with their “via” path.</figcaption>
+      </figure>
+
+      <p class="tip"><strong>Read it like a sentence.</strong> The verbs you type are the whole point — pick wording that reads naturally out loud (“@Sara <em>reports to</em> @Moe”, “@Moe <em>manages</em> @Sara”) and every card and graph edge stays legible.</p>
+
       <h2 id="behavior">Pill behavior in the editor</h2>
       <ul>
         <li>Pills are single units: <kbd>←</kbd>/<kbd>→</kbd> step across a pill in one keystroke, and <kbd>Backspace</kbd> removes it in one keystroke.</li>

@@ -13,6 +13,7 @@ const PAGES = [
 
   { section: "Writing" },
   { file: "blocks.html",           title: "Blocks" },
+  { file: "advanced-blocks.html",  title: "Advanced blocks" },
   { file: "capture-and-reading.html", title: "Capture & reading" },
   { file: "smart-tags.html",       title: "Mentions & hashtags" },
   { file: "dates-and-reminders.html", title: "Dates & reminders" },
@@ -28,6 +29,7 @@ const PAGES = [
   { file: "mcp.html",              title: "MCP server" },
 
   { section: "Everything else" },
+  { file: "sharing-and-data.html", title: "Import, export & publishing" },
   { file: "power-tools.html",      title: "Paste, templates & shortcuts" },
   { file: "settings-privacy.html", title: "Settings & privacy" },
 ];
