@@ -32,6 +32,15 @@
         <p class="docs-sub">Type <code>/</code> anywhere in a note to open the block menu, then keep typing to filter it. Press <kbd>Enter</kbd> to insert the highlighted block, <kbd>Esc</kbd> to dismiss.</p>
       </header>
 
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="blocks/slash-menu.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The “/” menu.</strong> The slash menu open in the editor, filtered as the user types.</span>
+        </div>
+        <figcaption>Type “/” anywhere to insert any block.</figcaption>
+      </figure>
+
       <p class="tip"><strong>Tip:</strong> blocks that have a title (Task List, Section, Database, Kanban, Gantt, Dashboard, Widget) drop the caret straight into the title when created — name it, press <kbd>Enter</kbd>, and keep writing. Mentions, hashtags and dates work inside those titles too.</p>
 
       <h2 id="handle">Moving &amp; styling a block</h2>
@@ -120,9 +129,12 @@
       <table>
         <tr><th>Block</th><th>What it does</th></tr>
         <tr><td>File</td><td>Attach any file from disk (you can also just drag &amp; drop one onto the note). The file is copied into your vault and appears as a pill with its name and size. Click to preview, or open it in its default app. Text is extracted and indexed so the file’s contents join your Knowledge Graph and search.</td></tr>
-        <tr><td>Embed / Bookmark / Video</td><td>Paste a link. <strong>Vimeo, Loom, Figma, CodePen, Spotify and Google Maps</strong> play or render right inside the note as a live frame. <strong>YouTube</strong> shows a thumbnail you click to watch in your browser. Any other link becomes a rich preview card (image, title, description, favicon), fetched and cached so it works offline — click it to open the page.</td></tr>
+        <tr><td>Files (<code>/files</code>)</td><td>A drop zone and folder listing in one block: drop files onto it or point it at a folder and it lists them, each with per-file actions — open in its default app, or extract the text to knowledge so it joins your search and Knowledge Graph. See <a href="capture-and-reading.html#files">Capture &amp; reading</a>.</td></tr>
+        <tr><td>Subpages (<code>/subpages</code>)</td><td>An auto-updating index of a notebook’s child pages. Add a child page and it appears here on its own — no manual linking.</td></tr>
+        <tr><td>Embed / Bookmark / Video</td><td>Paste a link. <strong>YouTube</strong> plays inline right in the note, remembers your watch progress so you resume where you left off, drops into a picture-in-picture corner player when you scroll away, and can pop out to a native floating mini-player that stays on top even when you leave Nomima. <strong>Vimeo</strong> plays inline as a simpler player (no resume or float); <strong>Loom, Figma, CodePen, Spotify and Google Maps</strong> render inline as a live frame. Any other link becomes a rich preview card (image, title, description, favicon), fetched and cached so it works offline — click it to open the page or pop it out to a live web-view window. See <a href="capture-and-reading.html#video">Capture &amp; reading</a>.</td></tr>
         <tr><td>RSS Feed</td><td>Subscribe to a feed inside a note — incoming articles flow into your Knowledge Graph.</td></tr>
         <tr><td>Block Reference</td><td>Link to another notebook or to a specific block inside one.</td></tr>
+        <tr><td>Backlinks</td><td>A panel that lists every note referencing the current one — the reverse side of block references and @mentions. It updates itself as other notes link here.</td></tr>
         <tr><td>Reminder</td><td>A countdown with a desktop alert — covered in depth in <a href="dates-and-reminders.html">Dates &amp; reminders</a>.</td></tr>
       </table>
 

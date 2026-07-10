@@ -36,6 +36,14 @@
       <p>Every time you save or leave a note, Nomima indexes just that note: its tags, dates, tasks, files and links become entities and connections in the graph. There is no “sync” or “generate” button — by the time you open the graph, it already reflects your latest edit. Entities mentioned in the same block get connected, and attached files and RSS articles contribute entities from their text too.</p>
 
       <h2 id="reading">Reading the graph</h2>
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="knowledge-graph/graph-view.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The graph.</strong> The full Knowledge Graph with glowing type-colored nodes, the legend, and a selected node's connections.</span>
+        </div>
+        <figcaption>Your vault as a living map — built automatically.</figcaption>
+      </figure>
       <ul>
         <li><strong>Nodes are entities</strong> — glowing orbs colored by type, using the exact same colors as the pills in your notes (including your custom types). The legend in the corner lists every type present with its count.</li>
         <li><strong>Size means connectedness</strong> — the more an entity appears across your vault, the bigger its node.</li>
@@ -57,9 +65,6 @@
 
       <h2 id="panel">The entity panel</h2>
       <p>Clicking a node opens a panel showing the entity’s name, type and connection count, plus its relationships grouped by kind — <em>Appears in</em>, <em>Assigned to</em>, <em>Due</em>, <em>Related</em> and so on. Every related item is clickable: hop from a person to a project to the note where they intersect. This is the same <strong>entity card</strong> you get by clicking a pill in the editor — including its custom attributes (see <a href="smart-tags.html#entity-cards">Mentions &amp; hashtags</a>).</p>
-
-      <h2 id="semantic">Semantic mode</h2>
-      <p>Flip the <strong>Semantic</strong> toggle and the graph re-forms as an interactive 3D constellation where notes cluster by <em>meaning</em> rather than by shared tags — related ideas drift together even when they never used the same words. Hover a node to preview it, click to jump straight to the note, and switch between a vault-wide view and a per-note view. It’s computed locally over the embeddings already cached on your Mac, so there’s no network call — it works fully offline.</p>
 
       <h2 id="cover">The in-note cover graph</h2>
       <p>Each notebook can show a compact graph above the page — just that note’s entities and their immediate connections. It’s fully interactive (drag to pan, drag nodes, click to inspect, <kbd>⌘</kbd>+scroll to zoom), and when you scroll down to write, it parks itself to keep the editor fast.</p>

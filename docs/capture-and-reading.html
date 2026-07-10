@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capture &amp; reading — Nomima Guide</title>
+  <meta name="description" content="Bring files, web pages and videos into Nomima — fold them into your searchable knowledge or keep them as attachments, read articles in a clean in-app reader, and watch videos inline with picture-in-picture." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#get">Get it free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Writing</div>
+        <h1 class="docs-title">Capture &amp; reading</h1>
+        <p class="docs-sub">Bring the outside world into your vault — files, web pages, videos — and read or watch it right inside Nomima, without a browser in the way.</p>
+      </header>
+
+      <p>Everything you drag, paste or drop into a note can do one of two things. It can become part of your <strong>knowledge</strong> — its text extracted, searchable, and woven into your Knowledge Graph so the people, projects and ideas inside it connect to the rest of your vault. Or it can simply <strong>live as an attachment</strong>: there when you need it, but out of the way of your thinking. You decide per item with a small <strong>brain</strong> toggle, and you can change your mind at any time.</p>
+
+      <h2 id="files">Files as knowledge</h2>
+      <p>Drop a file straight onto a note, or use the <code>/files</code> block and its folder dropzone to pull in a whole folder at once. Nomima copies each file into your vault, then reads the text inside it — PDFs, documents, slides, spreadsheets, and more.</p>
+      <p>By default, that extracted text is <strong>folded into your knowledge</strong>: the file shows up in full-text search, its entities light up in the Knowledge Graph, and it connects to related notes automatically. If you'd rather a file just sit there as a plain attachment, flip its <strong>brain</strong> toggle off — it stays fully usable, but its contents stop feeding search and the graph. Toggle it back on whenever you want it to rejoin the conversation.</p>
+      <ul>
+        <li><strong>Attached vs. part of knowledge</strong> — every file carries this state on its pill, so you always know at a glance whether it's contributing to your vault or simply parked there.</li>
+        <li><strong>Open it in place</strong> — PDFs open in a clean in-app viewer, so you can read without launching another app. Any file can also be opened in its default app in one click.</li>
+      </ul>
+      <p class="tip"><strong>Tip:</strong> the brain toggle is per file, so you can keep the signed contract as a quiet attachment while letting the research report you dropped next to it enrich your whole vault.</p>
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="capture-and-reading/file-brain-toggle.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>A file pill with its brain toggle.</strong> Show a file block in a note — the pill with the file name and size, its open/preview control, and the brain toggle called out (one file on, its state reading "part of knowledge").</span>
+        </div>
+        <figcaption>Each file decides for itself: part of your knowledge, or just an attachment.</figcaption>
+      </figure>
+
+      <h2 id="bookmarks">Bookmark a web page</h2>
+      <p>Paste a link into a note and it turns into a <strong>bookmark card</strong> right away — you don't wait around. The card appears instantly with the URL, and Nomima fetches the page in the background, filling in the title, description and details as they arrive.</p>
+      <p>While it's at it, Nomima pulls the page's readable <strong>article text</strong> and, by default, folds it into your knowledge — same brain toggle as files, so you can opt any bookmark out and keep it as a plain link. This is where Nomima shines for research: the actual words of every page you save sit together in one searchable place, connected to everything else you're thinking about.</p>
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="capture-and-reading/bookmark-card.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>A finished bookmark card.</strong> Show a bookmark card with its thumbnail, title and description, plus the three action buttons visible: the brain toggle, the <em>Read</em> button, and the <em>Pop out</em> button.</span>
+        </div>
+        <figcaption>Paste a URL, get a card immediately — text and details fill in behind it.</figcaption>
+      </figure>
+
+      <h2 id="reader">Read it here</h2>
+      <p>Any bookmark whose article Nomima could parse gets a <strong>Read</strong> button. Click it and the page opens in a clean, distraction-free reader right inside the app — real structure preserved (headings, links, lists, quotes), none of the ads, popups or clutter of the open web. It's <strong>private</strong>, too: images are stripped, so nothing phones home while you read. If a page can't be parsed into an article, the reader falls back gracefully rather than showing you a broken view.</p>
+      <p>Some pages you want to see live and whole — a dashboard, an interactive tool, a site that refuses to be simplified. That's what <strong>Pop out</strong> is for: it opens the real page in a floating web-view window that works for <em>any</em> site, even ones that normally refuse to be embedded. Keep it on top beside your notes while you write.</p>
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="capture-and-reading/inline-reader.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The in-app reader.</strong> Show an article open in the clean reader view — a headline, body paragraphs, a subheading and a bulleted or quoted passage — clearly inside Nomima, no browser chrome, no images.</span>
+        </div>
+        <figcaption>The Read button opens a calm, private reader — structure kept, distractions gone.</figcaption>
+      </figure>
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="capture-and-reading/pop-out-window.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The pop-out live web-view window.</strong> Show the floating web-view window sitting on top of a Nomima note, displaying a live interactive page (something that would normally block embedding).</span>
+        </div>
+        <figcaption>Pop out opens the real, live page in a floating window — for any site.</figcaption>
+      </figure>
+
+      <h2 id="video">Watch videos inline</h2>
+      <p>Paste a YouTube link and it plays <strong>inside Nomima</strong>, not off in your browser. Nomima remembers where you stopped, so a progress bar sits under each video with <strong>Resume</strong> and <strong>Start over</strong> — pick up exactly where you left off, days later.</p>
+      <p>The best part is that the video follows you. Keep it playing while you scroll down the note or move to another view, and it tucks itself into a small <strong>picture-in-picture</strong> corner player so you never lose your place. Leave the app entirely and it becomes a <strong>native floating mini-player</strong> that stays on top of your other apps — with play/pause, volume, and a <strong>Back to the note</strong> button to jump straight home. A paused video politely stays put and won't pop out.</p>
+      <div class="figure-slot slot-gif" data-shot="capture-and-reading/video-pip-float.gif">
+        <span class="figure-slot-icon">►</span>
+        <span class="figure-slot-kind">Short clip</span>
+        <span class="figure-slot-label"><strong>Video that follows you.</strong> Play a YouTube video inline in a note → scroll away → it shrinks into a corner picture-in-picture player → switch out of Nomima entirely → it becomes a native floating mini-player on top of another app, showing the play/pause, volume and "Back to the note" controls.</span>
+      </div>
+      <p class="note"><strong>Note:</strong> Vimeo links play inline too, as a simple player — resume and the floating pop-out are YouTube-only for now.</p>
+
+      <p class="note"><strong>Your privacy stays intact.</strong> Text extraction and reading all happen on your Mac; the only thing Nomima ever fetches from the web is the exact page you chose to bookmark. Nothing else is sent anywhere. For the full picture, see <a href="settings-privacy.html">Settings &amp; privacy</a>.</p>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>

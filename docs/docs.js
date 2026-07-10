@@ -3,8 +3,8 @@
    if features changed. The sidebar, prev/next pager, and footer stamp on
    every page are generated from this file — edit nothing else for nav. */
 
-const GUIDE_VERSION = "1.15.0";
-const GUIDE_UPDATED = "June 20, 2026";
+const GUIDE_VERSION = "1.17.0";
+const GUIDE_UPDATED = "July 10, 2026";
 
 const PAGES = [
   { section: "Start here" },
@@ -13,6 +13,7 @@ const PAGES = [
 
   { section: "Writing" },
   { file: "blocks.html",           title: "Blocks" },
+  { file: "capture-and-reading.html", title: "Capture & reading" },
   { file: "smart-tags.html",       title: "Mentions & hashtags" },
   { file: "dates-and-reminders.html", title: "Dates & reminders" },
   { file: "tracking.html",         title: "Complete & incomplete" },
@@ -71,4 +72,19 @@ const PAGES = [
       `<span>Written for Nomima v${GUIDE_VERSION} · last updated ${GUIDE_UPDATED}</span>` +
       `<span><a href="../index.html">nomima.io</a> · <a href="../contact.html">Something wrong or missing? Tell us</a></span>`;
   }
+
+  /* Lightbox — click any figure image to zoom it full-screen. Delegated so it
+     works for images added later; no-ops on pages that only have slots. */
+  const box = document.createElement("div");
+  box.className = "lightbox";
+  box.innerHTML = '<img alt="" />';
+  const boxImg = box.querySelector("img");
+  document.body.appendChild(box);
+  const closeBox = () => box.classList.remove("open");
+  document.addEventListener("click", (e) => {
+    const img = e.target.closest(".figure-img");
+    if (img) { boxImg.src = img.currentSrc || img.src; boxImg.alt = img.alt || ""; box.classList.add("open"); }
+  });
+  box.addEventListener("click", closeBox);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeBox(); });
 })();
