@@ -57,6 +57,7 @@
         </li>
       </ul>
       <p class="tip"><strong>Tip:</strong> click any empty space — between blocks, or inside a Section, Callout, Column or task list — to drop a new line right there (inside a task list it adds a new task).</p>
+      <p class="note"><strong>Changed while you were away:</strong> when you reopen a notebook, any top-level block that was edited since your last visit by something other than you at the keyboard — a connected app over MCP, an agent, a background task — gets a small accent dot in the left margin. Hover the dot for a label (“Edited while you were away” or “Edited by a connected app”). The dots clear themselves the next time you open the note.</p>
 
       <h2 id="basic">Text basics</h2>
       <table>
@@ -68,6 +69,7 @@
         <tr><td>Horizontal Line</td><td>A visual divider between sections.</td></tr>
         <tr><td>Table / Database</td><td>Inserts a <strong>Database</strong> — see <a href="#database">Database</a> below. (Plain tables have been replaced by the Database; pasting a table from the web also becomes one.)</td></tr>
       </table>
+      <p class="note"><strong>Automatic links:</strong> finish typing a web address or an email — <code>https://…</code>, a <code>www.</code> host, a common domain like <code>github.com</code>, or <code>name@example.com</code> — then press <kbd>Space</kbd> and it turns into a clickable link pill on its own. It’s deliberately conservative: bare words like <code>node.js</code>, <code>README.md</code> or <code>e.g.</code> are left as plain text.</p>
 
       <h2 id="tasklist">Task List</h2>
       <p>A titled checklist card. Create it from the <code>/</code> menu or by typing <code>[]</code> + space at the start of a line.</p>
@@ -131,15 +133,26 @@
         <tr><td>File</td><td>Attach any file from disk (you can also just drag &amp; drop one onto the note). The file is copied into your vault and appears as a pill with its name and size. Click to preview, or open it in its default app. Text is extracted and indexed so the file’s contents join your Knowledge Graph and search.</td></tr>
         <tr><td>Files (<code>/files</code>)</td><td>A drop zone and folder listing in one block: drop files onto it or point it at a folder and it lists them, each with per-file actions — open in its default app, or extract the text to knowledge so it joins your search and Knowledge Graph. See <a href="capture-and-reading.html#files">Capture &amp; reading</a>.</td></tr>
         <tr><td>Subpages (<code>/subpages</code>)</td><td>An auto-updating index of a notebook’s child pages. Add a child page and it appears here on its own — no manual linking.</td></tr>
+        <tr><td>Image</td><td>Paste an image from the clipboard or drag &amp; drop one onto the note and it lands inline. The file is copied into your vault (pasted web images are downloaded too, so they stay available offline). Drag the corner handle to <strong>resize</strong>, align it left / centre / right, reset the size, and add a caption underneath.</td></tr>
         <tr><td>Embed / Bookmark / Video</td><td>Paste a link. <strong>YouTube</strong> plays inline right in the note, remembers your watch progress so you resume where you left off, drops into a picture-in-picture corner player when you scroll away, and can pop out to a native floating mini-player that stays on top even when you leave Nomima. <strong>Vimeo</strong> plays inline as a simpler player (no resume or float); <strong>Loom, Figma, CodePen, Spotify and Google Maps</strong> render inline as a live frame. Any other link becomes a rich preview card (image, title, description, favicon), fetched and cached so it works offline — click it to open the page or pop it out to a live web-view window. See <a href="capture-and-reading.html#video">Capture &amp; reading</a>.</td></tr>
-        <tr><td>RSS Feed</td><td>Subscribe to a feed inside a note — incoming articles flow into your Knowledge Graph.</td></tr>
+        <tr><td>RSS Feed</td><td>Subscribe to news feeds inside a note, read articles in place, and pin the ones worth keeping. See <a href="#rss">RSS Feed</a> below.</td></tr>
         <tr><td>Block Reference</td><td>Link to another notebook or to a specific block inside one.</td></tr>
         <tr><td>Backlinks</td><td>A panel that lists every note referencing the current one — the reverse side of block references and @mentions. It updates itself as other notes link here.</td></tr>
         <tr><td>Reminder</td><td>A countdown with a desktop alert — covered in depth in <a href="dates-and-reminders.html">Dates &amp; reminders</a>.</td></tr>
       </table>
 
+      <h3 id="rss">RSS Feed</h3>
+      <p>Type <code>/rss</code> to drop a news reader straight into a note. Every feed is fetched privately in the background and cached in your vault, so articles stay readable offline.</p>
+      <ul>
+        <li><strong>Adding a feed</strong> — open <em>Edit feeds</em> and follow up to five topics from a searchable, tabbed catalogue, or paste any site address (<code>theverge.com</code>) and Nomima auto-discovers its feed for you — no need to hunt down the feed URL.</li>
+        <li><strong>Three views</strong> — switch between <strong>List</strong> (compact email-style rows), <strong>Grid</strong> (visual cards with cover images) and <strong>Reader</strong> (a magazine river with excerpts). Unread items carry a dot and a “N new” badge; <em>Mark all as read</em> clears it, and there’s a search box to filter the current articles.</li>
+        <li><strong>Read in place</strong> — click an article to open it right inside the block. The feed’s own text shows instantly, then a clean, readable full-text extraction replaces it (a chip reads <em>Summary</em> or <em>Full article</em>), cached after the first fetch. Expand the block to a full-height reader, or open the original in your browser.</li>
+        <li><strong>RSS Memories</strong> — hit <strong>Pin</strong> on any article to fold it into a standalone <strong>RSS Memory</strong> block: the headline, image and snippet are captured read-only, with an editable field below (seeded with <span class="pill pill-hashtag">#rss_memory</span> <span class="pill pill-hashtag">#read_later</span>) for your own tags and notes. The article’s text joins your search and Knowledge Graph. <em>Add as block</em> instead drops the full article in as a Section.</li>
+      </ul>
+
       <h2 id="ai">AI</h2>
       <p><strong>Summon</strong> — opens the AI assistant with your cursor’s context (current block, selection) already attached. See <a href="summon.html">Summon assistant</a>.</p>
+      <p><strong>Assign to Summon</strong> (<code>/assign</code>) — hand a task to Summon to run in the background. Type it inline (<code>/assign research the EV market</code>), select text first, or use the whole current block; a task pill drops in at your cursor and the work runs in <a href="summon.html#assign">Summon</a>’s task queue. When the task came from a block, that block is stamped <span class="pill pill-status">#complete</span> once it finishes.</p>
 
       <h2 id="style">Just for fun</h2>
       <table>

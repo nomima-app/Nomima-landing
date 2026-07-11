@@ -118,6 +118,43 @@
       <p class="tip"><strong>What gets captured:</strong> publishing takes a <strong>self-contained snapshot</strong> of the note exactly as it appears on your screen — rendered diagrams, dashboard numbers, pills and image thumbnails, in your current theme — with all editing controls removed. The reader sees that snapshot, not your live vault, and only the one notebook you chose to publish.</p>
       <p class="warn"><strong>Keep in mind:</strong> anyone with both the link and the view code can read the page. Share the code through a separate channel from the link when a note is sensitive, and <strong>unpublish</strong> when you're done.</p>
 
+      <h3 id="publish-analytics">See who's reading</h3>
+      <p>Once a note is published, Nomima shows you how it's doing — right in the app, without leaving the notebook.</p>
+
+      <h4>The status badge</h4>
+      <p>A small pill in the notebook header always shows the note's <strong>publication state</strong>. It tracks the live status and clicking it opens the publish dialog:</p>
+      <ul>
+        <li><strong>Draft</strong> — nothing is online yet.</li>
+        <li><strong>Publishing…</strong> / <strong>Unpublishing…</strong> — a change is in flight.</li>
+        <li><strong>Queued</strong> or <strong>Update queued</strong> — you published or updated while offline; it'll send when you reconnect.</li>
+        <li><strong>Published</strong> — the page is live.</li>
+        <li><strong>Publish failed</strong> — something went wrong; open the dialog to try again.</li>
+      </ul>
+
+      <h4>The view count</h4>
+      <p>Next to the notebook's <strong>⋯</strong> menu, a small <strong>eye</strong> with a number appears once the page is live <em>and</em> at least one person has opened it. It's quiet by design — no views, no pill. The count keeps itself current on its own (it refreshes about every half-minute while you're online), so you don't need to reload anything. Click it to open the full breakdown.</p>
+
+      <h4>Views &amp; visitors</h4>
+      <p>The <strong>Views &amp; visitors</strong> panel — reached from the eye pill, or from <strong>View analytics &amp; visitors</strong> inside the publish dialog — is a little more than a raw counter. At the top, a compact stat strip shows four numbers, with a small bar sparkline of recent daily views beside them:</p>
+      <ul>
+        <li><strong>Total</strong> — every view counted.</li>
+        <li><strong>Unique</strong> — distinct visitors.</li>
+        <li><strong>Returning</strong> — visitors who've come back.</li>
+        <li><strong>Avg time</strong> — the average time spent on the page.</li>
+      </ul>
+      <p>Below that, a row of <strong>flag chips</strong> ranks the top countries your readers came from, each with its own count. Then a <strong>Visitors</strong> list gives one line per view, showing what the reader's browser reports: a name (or <strong>Anonymous</strong> if they didn't give one), a <strong>Returning</strong> tag for repeat readers, when they arrived, their approximate location (city and country), their device as <em>OS · browser</em>, and how long they stayed. A <strong>Refresh</strong> button pulls the latest.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="sharing-and-data/publish-analytics.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Views &amp; visitors.</strong> Set up: publish a note, open it in a browser once or twice, then click the eye pill by the notebook's ⋯ menu. In frame: the Views &amp; visitors panel — the Total / Unique / Returning / Avg&nbsp;time stat strip with its sparkline, the country flag chips, and the per-visitor list showing name, location, device and time on page.</span>
+        </div>
+        <figcaption>What the publisher sees: counts, top countries, and a line per visit.</figcaption>
+      </figure>
+
+      <p class="note"><strong>Note:</strong> these stats live online, so the panel needs a connection — offline it simply says to reconnect to load them. What's shown is only what a visitor's browser reveals (rough location, device type, time on page); readers stay <strong>Anonymous</strong> unless they choose to enter a name, and there's no cross-site tracking.</p>
+
       <nav class="docs-pager" id="docs-pager"></nav>
       <footer class="docs-foot" id="docs-foot"></footer>
     </main>

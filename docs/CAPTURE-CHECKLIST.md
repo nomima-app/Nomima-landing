@@ -87,6 +87,25 @@ open the page, read the placeholder, and shoot exactly that.
 
 ---
 
+## Priority E — coverage-census fills (menu bar, float, completion, agents, stats)
+
+| Slot | Page | Shows |
+|---|---|---|
+| `menu-bar/tray-popup.png` | Menu bar & tray | The open menu-bar popup — footprint RAM/CPU graphs, status chips, overdue + recent lists. |
+| `menu-bar/tray-icon-badge.png` | Menu bar & tray | The tray icon in the macOS menu bar, with the update badge. |
+| `menu-bar/about-window.png` | Menu bar & tray | The native About Nomima window. |
+| `capture-and-reading/native-float-over-app.png` | Capture & reading | The floating mini-player sitting on top of another app (browser/editor behind it). |
+| `capture-and-reading/native-float-handback.gif` | Capture & reading | **Clip:** hand-off out to the float, then Back-to-note re-docking inline, no double audio. |
+| `tracking/section-cascade-down.png` | Complete & incomplete | A Section marked `#complete` greying its whole subtree. |
+| `tracking/tasklist-rollup-up.png` | Complete & incomplete | A task list rolled up to 5/5 with the title auto-stamped `#complete`. |
+| `summon/assign-flow.png` | Summon | The `/assign` form + the resulting agent-task pill. |
+| `summon/tasks-view.png` | Summon | The Summon Tasks view with mixed statuses (incl. a Needs-Approval card). |
+| `smart-views/stats-dashboard.png` | Smart Views | The Stats dashboard — the default four-column bento grid. |
+| `smart-views/widget-editor.png` | Smart Views | The widget builder with a live preview. |
+| `sharing-and-data/publish-analytics.png` | Import/export & publishing | The Views & visitors panel for a published note. |
+
+---
+
 _The `getting-started` "interface at a glance" visual is a hand-built annotated
 SVG diagram — no capture needed. Everything else above is a real screenshot/clip.
-**27 slots total.**_
+**39 slots total.**_

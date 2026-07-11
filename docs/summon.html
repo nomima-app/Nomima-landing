@@ -100,6 +100,40 @@
         <li><strong>Proactive nudges</strong> — Summon can surface cold notes you might want to revisit.</li>
       </ul>
 
+      <h2 id="assign">Assign work to Summon (background tasks)</h2>
+      <p>Not every ask needs you to sit and watch. When a job can run on its own — draft a brief, chase something down, write a section — hand it off and keep working. Summon picks it up in the <strong>background</strong> instead of taking a live chat turn.</p>
+      <p>Three ways to assign, whichever feels natural in the moment:</p>
+      <ul>
+        <li><strong>Type it inline</strong> — <code>/assign draft a project brief for the rebrand</code>. Everything after the command becomes the task.</li>
+        <li><strong>Select text, then <code>/assign</code></strong> — highlight something you already wrote and delegate exactly that. Summon also gets the surrounding line for context.</li>
+        <li><strong>Just the block</strong> — run <code>/assign</code> on a line with no argument or selection, and the whole block becomes the instruction.</li>
+      </ul>
+      <p>Summon drops an <strong>agent-task pill</strong> right where your cursor was — an inline chip that shows the task’s live status (<em>queued → running → done</em>, or <em>failed</em>) without you leaving the note. While the task is in flight, that block is <strong>locked</strong> so you can’t accidentally edit the instruction out from under the agent; deleting the pill cancels the task.</p>
+      <p>When a task assigned from a block finishes successfully, Summon stamps that source block <span class="pill pill-status">#complete</span> — so the line you delegated reflects its done state, and a native notification lets you know it’s ready.</p>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="summon/assign-flow.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>Assigning a task.</strong> Set up: a note line reading “Draft a project brief for the rebrand” with the slash menu open on <code>/assign</code>. In frame: the “Assign to Summon” slash item highlighted, and — inset — the resulting agent-task pill sitting inline in the block with a “running” status dot.</span></div><figcaption>Type <code>/assign do X</code>, select text, or assign a whole block — Summon drops a live-status pill and works in the background.</figcaption></figure>
+
+      <h2 id="tasks-view">The Summon Tasks view</h2>
+      <p>Everything you’ve handed off lives in one place. Open it from the <strong>Summon Tasks</strong> row in the sidebar — it carries a small <strong>count badge</strong> of in-flight tasks and its background <strong>pulses gently</strong> while any task is running, so you always know something’s cooking without opening it.</p>
+      <p>The view leads with a one-line summary (e.g. <em>“2 active · 1 needs approval · 12 done”</em>), then an <strong>Active</strong> section and a windowed <strong>Recent</strong> list. Each task shows one of these statuses:</p>
+      <table>
+        <tr><th>Status</th><th>Meaning</th></tr>
+        <tr><td><strong>Queued</strong></td><td>Waiting its turn — Summon runs a few tasks at a time.</td></tr>
+        <tr><td><strong>Running</strong></td><td>Working right now; its live “thinking” step and streaming text show inline.</td></tr>
+        <tr><td><strong>Awaiting Clarification</strong></td><td>Summon needs a detail to continue and has asked you — the Summon panel opens so you can answer.</td></tr>
+        <tr><td><strong>Needs Approval</strong></td><td>Paused on a gated action (see below), waiting for your yes or no.</td></tr>
+        <tr><td><strong>Paused</strong></td><td>Held, not currently progressing.</td></tr>
+        <tr><td><strong>Done</strong></td><td>Finished — often with a contextual <em>Open →</em> to the notebook, block, file or draft it produced.</td></tr>
+        <tr><td><strong>Failed</strong></td><td>Something went wrong; the error is shown, and you can regenerate to try again.</td></tr>
+      </table>
+      <p>Done and cancelled tasks tidy themselves up automatically after 30 days, so the list stays manageable over time.</p>
+
+      <p class="note"><strong>Gated actions pause for your approval.</strong> A background task can’t pop a dialog in your face, so when one wants to do something sensitive — write a file, run a shell command, or use a Mac bridge like sending mail or creating a calendar event — it stops and posts a <strong>Needs Approval</strong> card at the top of the Tasks view: <em>“A background task wants to: …”</em> with the concrete detail and inline <strong>Approve</strong> / <strong>Reject</strong> buttons. Nothing sensitive happens until you say so, and every decision is recorded. You choose which categories are even eligible in <strong>Settings → Summon Agent → Permissions</strong> (below).</p>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="summon/tasks-view.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The Summon Tasks view.</strong> Set up: several assigned tasks in mixed states. In frame: the header summary line, a “Needs Approval” card with Approve / Reject at the top, an Active section with a running task showing its live thinking step, and a Recent list with Done and Failed rows — plus the pulsing “Summon Tasks” sidebar row with its in-flight count badge.</span></div><figcaption>One place for every background task — active, awaiting approval, and recently finished — with a live badge on the sidebar row.</figcaption></figure>
+
+      <p class="tip"><strong>Tip:</strong> assigning is the natural next step after Summon writes something for you. Turn a checklist of action items into real work — <code>/assign</code> each line and let them run while you move on.</p>
+
       <h2 id="permissions">Agent permissions</h2>
       <p>Summon’s reach beyond your vault is <strong>off by default</strong> and controlled in <strong>Settings → Summon Agent</strong>:</p>
       <table>

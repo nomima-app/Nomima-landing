@@ -30,6 +30,7 @@ const PAGES = [
 
   { section: "Everything else" },
   { file: "sharing-and-data.html", title: "Import, export & publishing" },
+  { file: "menu-bar-and-tray.html", title: "Menu bar & tray" },
   { file: "power-tools.html",      title: "Paste, templates & shortcuts" },
   { file: "settings-privacy.html", title: "Settings & privacy" },
 ];

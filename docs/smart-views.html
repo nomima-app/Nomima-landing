@@ -90,6 +90,60 @@
       <h2 id="palette">The command palette</h2>
       <p><kbd>⌘K</kbd> opens search across everything: notebooks, blocks, hashtags, mentions, dates (try “tomorrow” or a weekday name), files, and app commands. Pressing <kbd>Enter</kbd> on a tag opens its lens and flashes it. You can <strong>stack multiple tags</strong> and toggle between matching <em>all</em> or <em>any</em> of them — instant ad-hoc filtered views.</p>
 
+      <h2 id="stats">The Stats dashboard</h2>
+      <p>Nomima keeps a full-page <strong>Stats</strong> board — a <strong>bento grid</strong> of small live widgets that report on your whole vault. It’s the same widget engine as the in-note Dashboard block (<a href="advanced-blocks.html#dashboard">Dashboard &amp; widgets</a>), just at full-view size: every tile reads straight from the index of everything you’ve written — your tasks, dates, pills, notebooks — and the whole board recomputes on its own whenever you write, complete or import. There’s no refresh button.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="smart-views/stats-dashboard.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The Stats dashboard.</strong> Set up: a vault that already has some tasks, dated items and #tags/@mentions so no widget reads zero. In frame: the default four-column bento — the Overdue / Due today / Open tasks / Open actions number tiles across the top, then the completion ring, a 7-day upcoming trend and a hashtag word cloud, with the “+” add tile in the first empty cell.</span>
+        </div>
+        <figcaption>A live bento of vault stats — it grows downward and scrolls as you add widgets.</figcaption>
+      </figure>
+
+      <p>Widgets come in eight shapes, each suited to what it’s measuring:</p>
+      <table>
+        <tr><th>Widget</th><th>Shows</th></tr>
+        <tr><td>Number</td><td>A single big count — open tasks, overdue items, total blocks.</td></tr>
+        <tr><td>Completion ring</td><td>A ratio drawn as a ring — “matching out of total”, e.g. task completion or the dated share of your blocks.</td></tr>
+        <tr><td>Bars</td><td>A ranked breakdown — top mentions, tasks by status, overdue by notebook.</td></tr>
+        <tr><td>Donut</td><td>A share of a whole — content broken down by block type.</td></tr>
+        <tr><td>Trend line</td><td>A value per day — items upcoming over the next week, or notes edited over 30 days.</td></tr>
+        <tr><td>Heatmap</td><td>A calendar of activity — edits over the last 90 days.</td></tr>
+        <tr><td>Word cloud</td><td>Your most-used #tags or @people, sized by how often they appear.</td></tr>
+        <tr><td>List</td><td>The top few rows of something — the 5 most overdue, the soonest due.</td></tr>
+      </table>
+
+      <p>A fresh board opens curated: <strong>Overdue</strong>, <strong>Due today</strong>, <strong>Open tasks</strong> and <strong>Open actions</strong> across the top; a <strong>Task completion</strong> ring, a 7-day <strong>Upcoming</strong> trend and a <strong>Hashtags</strong> cloud; then <strong>Top mentions</strong>, a 30-day <strong>Activity</strong> trend and <strong>Tasks by status</strong>. Every one of them is live from the moment you open it.</p>
+
+      <p>Build your own from the dashed <strong>“+” tile</strong> in the first empty cell:</p>
+      <ul>
+        <li><strong>Quick add gallery.</strong> The builder opens on a gallery of ready-made widgets, each rendered as a <em>live preview</em> using your real data — Numbers up top, Charts &amp; lists below. Click one to drop it straight onto the board.</li>
+        <li><strong>Build custom.</strong> “Build custom →” opens the full builder. In <strong>Quick</strong> mode you pick from four dimensions — <em>When</em> (Any time, Overdue, Due today, Due this week / this month, Upcoming, Complete, No due date), <em>Who</em> (@mentions), <em>Topics</em> (#tags) and which <em>notebooks</em> to count. <strong>Advanced</strong> mode swaps in a raw condition builder — block type, contains-or-lacks a date / mention / hashtag / status, count thresholds — combined with <em>all</em> / <em>any</em> logic.</li>
+        <li><strong>Shape &amp; style.</strong> Choose the viz, an accent colour, a <strong>1×1</strong> or <strong>2×1</strong> size and a title. A live preview of the finished tile sits beside you the whole time; hit <strong>Add widget</strong> (or <strong>Save changes</strong> when editing).</li>
+      </ul>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="smart-views/widget-editor.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The widget builder.</strong> Set up: “+” → “Build custom →”, in Quick mode with a When and a Topic chosen so the preview shows real numbers. In frame: the live tile preview on the left, the Quick / Advanced toggle, the When / Who / Topics / Notebooks pickers, the viz + accent + size row, and the Add widget button.</span>
+        </div>
+        <figcaption>Every choice repaints the live preview; the pencil on an existing widget re-opens this on its exact recipe.</figcaption>
+      </figure>
+
+      <p>On the board itself: <strong>drag a widget’s header</strong> to move it, <strong>drag its bottom-right corner</strong> to resize, and hover for the <strong>pencil</strong> (re-opens the builder on that widget’s exact recipe) or the <strong>×</strong> to remove it. The board is content-sized — it grows downward and scrolls rather than clipping, so a widget you added on a big screen stays reachable on a small one.</p>
+
+      <p class="tip"><strong>Same widgets, two homes.</strong> Anything you build here you can also embed inside a note: <code>/dashboard</code> drops in a whole grid, <code>/widget</code> a single tile. It’s one shared engine — see <a href="advanced-blocks.html#dashboard">Dashboard &amp; widgets</a>.</p>
+
+      <h2 id="next-actions">Next Actions</h2>
+      <p>The <strong>Next Actions</strong> view gathers the actionable items the AI extracts from your notes as you write — the “someone needs to do something” lines — and groups them by the notebook they came from. Each notebook card leads with a <strong>“Suggested next”</strong> shortlist: the top five open actions, ranked by priority then recency and de-duplicated, with an open-count badge. <strong>“Show all”</strong> expands the rest plus anything already done. Tick an item to mark it done — it writes back and every count re-tallies live — or click its text to jump to the source block.</p>
+      <p class="note"><strong>How it differs from Home and the Tasks lens.</strong> <a href="#home">Home</a> is your dated agenda — reminders and blocks that carry a due date, bucketed by day. The <a href="#lenses">Tasks lens</a> lists every literal checkbox in the vault, done or not. <strong>Next Actions</strong> is neither: it’s the AI’s reading of what to <em>do next</em> — surfaced as short per-notebook shortlists, whether or not you ever wrote the item as a checkbox.</p>
+
+      <h2 id="brief">The Brief view</h2>
+      <p>Distinct from Home, the standalone <strong>Brief</strong> view is a single grid of cards — one per <strong>#tag</strong> and <strong>@mention</strong> in the vault, busiest first (most open work, then most notes). Each card carries the coloured chip, an <strong>open-work badge</strong>, a <strong>progress bar</strong> (done vs. total), the note count and the tag’s knowledge-graph topic. Click a card to drop into that tag’s lens in Smart View. Where <a href="#home">Home</a> answers “what’s due today,” Brief answers “where does my open work sit, by person and by project.”</p>
+
       <p class="note"><strong>Nothing here is manual.</strong> There are no refresh buttons in Nomima — lenses, Home, the graph and the briefs all update on the fly as you write, complete and import. The only manual action that exists is the deep “Re-index” in Settings → Vault, and you should rarely need it.</p>
 
       <nav class="docs-pager" id="docs-pager"></nav>
