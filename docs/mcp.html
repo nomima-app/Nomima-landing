@@ -60,8 +60,10 @@
       <table>
         <tr><th>Tool</th><th>What it returns</th></tr>
         <tr><td>search_notes</td><td>Full-text search across the vault</td></tr>
+        <tr><td>semantic_search</td><td>A backward-compat alias of <code>search_notes</code> — the same keyword (full-text) search, <em>not</em> vector/embedding search</td></tr>
         <tr><td>list_notebooks</td><td>All notes with previews</td></tr>
         <tr><td>get_note</td><td>A complete note’s content</td></tr>
+        <tr><td>get_note_blocks</td><td>A note’s structured block tree (with block ids) — inspect before editing or deleting blocks</td></tr>
         <tr><td>knowledge_graph</td><td>Entities, relations and clusters</td></tr>
         <tr><td>list_tasks</td><td>Open and dated checkboxes, chronologically</td></tr>
         <tr><td>list_reminders</td><td>Tracked reminders with due times</td></tr>
@@ -73,7 +75,13 @@
         <tr><td>create_note</td><td>Creates a new notebook from a title and Markdown body</td></tr>
         <tr><td>append_to_note</td><td>Appends Markdown to an existing note</td></tr>
         <tr><td>add_blocks</td><td>Inserts structured Nomima blocks — checklists, callouts, columns, <strong>databases</strong> (typed columns whose cells become Smart Tags), <strong>terminals</strong>, <strong>embeds / video</strong>, code, reminders, Kanban/Gantt/widgets and more, with a layout guide for composing complex notebooks</td></tr>
+        <tr><td>rename_note</td><td>Changes an existing note’s title</td></tr>
+        <tr><td>update_block</td><td>Replaces a single block in place, by block id</td></tr>
+        <tr><td>replace_note_content</td><td>Discards a note’s existing blocks and rewrites it from scratch</td></tr>
+        <tr><td>delete_block</td><td>Permanently removes a single block from a note</td></tr>
+        <tr><td>delete_note</td><td>Permanently deletes a whole note and all its blocks — cannot be undone</td></tr>
       </table>
+      <p class="note"><strong>Writes are powerful — connect only trusted clients:</strong> with “Allow writes” on, a connected tool can not only create and append, but also rename, overwrite (<code>replace_note_content</code>) and <strong>permanently delete</strong> notes and blocks. Those deletions can’t be undone, so leave writes off unless you trust the client, and watch the activity log below.</p>
       <p class="note"><strong>Discoverable schema:</strong> a connected tool can call <code>get_editor_schema</code> (or read the <code>nomima://schema/editor</code> resource) to fetch the exact shape of every block it can author — fields, examples, and how to nest them — so what it sends always renders correctly.</p>
 
       <h2 id="log">Watching the activity log</h2>

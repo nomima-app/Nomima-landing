@@ -52,8 +52,8 @@
       <p>Open a notebook’s <code>⋯</code> menu and pick <strong>Version history…</strong> to scrub back through how a note grew, version by version. Drag the slider (or arrow-key it) and watch any past version replay as the real, rendered notebook — blocks that were added show tinted green, blocks that were deleted stay in place struck through in red — so you can see exactly what changed at each step.</p>
       <ul>
         <li><strong>One snapshot per session</strong> — Nomima captures a version once per editing session, not on every keystroke, so the timeline stays meaningful.</li>
-        <li><strong>Restore, never lose</strong> — hit <strong>Restore</strong> to bring a past version back. Restoring first saves your current state as its own point, so nothing is ever thrown away.</li>
-        <li><strong>Pin checkpoints</strong> — pin any version as a gold-starred checkpoint that’s kept forever.</li>
+        <li><strong>Restore, never lose</strong> — hit <strong>Restore</strong> to bring a past version back. It writes that version in as the live note and drops a restore-point marker on the timeline; your pre-restore work is already the newest auto-saved snapshot, so nothing is ever thrown away.</li>
+        <li><strong>Pin checkpoints</strong> — pin any version (the Pin icon) as a checkpoint that’s kept forever.</li>
         <li><strong>Tidy by design</strong> — history is compressed and thinned as it ages. <strong>Settings → Vault</strong> shows the space it uses with a one-click Clear-all.</li>
       </ul>
       <p class="note"><strong>On-device:</strong> your version history stays on your Mac like the rest of your notes.</p>
@@ -87,7 +87,7 @@
         <tr><td><kbd>←</kbd> <kbd>→</kbd></td><td>Step across a pill as a single unit</td></tr>
         <tr><td><kbd>↑</kbd> <kbd>↓</kbd></td><td>Move between lines normally — pills, blocks and lists never trap the caret</td></tr>
         <tr><td><kbd>Backspace</kbd></td><td>Delete a whole pill in one keystroke; on an empty task list, delete the list</td></tr>
-        <tr><td><kbd>⌘Enter</kbd></td><td>Exit a code block</td></tr>
+        <tr><td>Triple-<kbd>Enter</kbd> / <kbd>↓</kbd></td><td>Exit a code block — press Enter on two empty trailing lines, or arrow down past the end</td></tr>
         <tr><td><kbd>⇧Tab</kbd></td><td>Outdent in lists and code</td></tr>
       </table>
 

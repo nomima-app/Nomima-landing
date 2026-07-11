@@ -56,7 +56,7 @@
         <li><strong>Home</strong> — your daily agenda buckets everything into Overdue, Today, the next few days, and Later.</li>
         <li><strong>Dates lens</strong> in Smart View — a full day-by-day agenda merging dated tasks and dates mentioned in prose, deduplicated, each with a completion checkbox.</li>
         <li><strong>Smart Scrollbar</strong> — dated blocks get a calendar icon on the note’s minimap; overdue ones are red with a count.</li>
-        <li><strong>Notifications</strong> — overdue dated tasks appear in the Alerts view and the sidebar bell badge.</li>
+        <li><strong>Home &amp; Alerts</strong> — overdue and upcoming dated tasks surface on the <strong>Home</strong> sidebar item’s badges (a red count for overdue, an accent dot for upcoming) and in the <strong>Alerts</strong> lens of the Smart View switcher.</li>
       </ul>
 
       <h2 id="reminders">Reminders</h2>
@@ -72,23 +72,23 @@
         <tr><th>State</th><th>What you see</th></tr>
         <tr><td>Idle</td><td>No due time yet — the label is fully editable and shows a “Remind me to…” placeholder.</td></tr>
         <tr><td>Running</td><td>A live countdown ticking down to the due moment.</td></tr>
-        <tr><td>Overdue</td><td>Red, showing how long ago it fired (“overdue by 2h”). It stays visible until you act — reminders never silently complete themselves.</td></tr>
-        <tr><td>Done</td><td>Green border, “Completed at …”. Clearing a reminder stamps the block with <span class="pill pill-status">#complete</span>.</td></tr>
-        <tr><td>Cancelled</td><td>Red border — dismissed without completing. Its date pills grey out.</td></tr>
+        <tr><td>Overdue</td><td>Red, showing how long ago it fired (“2h overdue”). It stays visible until you act — reminders never silently complete themselves.</td></tr>
+        <tr><td>Done</td><td>The label greys out and is struck through, and the block gets a <span class="pill pill-status">#complete</span> pill carrying an “Incomplete?” toggle to reopen it. (Reminders are dismissed by completing or deleting them — there’s no separate cancelled state.)</td></tr>
       </table>
       <h3>Controls</h3>
       <ul>
-        <li><strong>Clear / Done</strong> — marks the reminder complete.</li>
-        <li><strong>Snooze</strong> — quick presets (5, 15, 30 minutes, 1 hour, tomorrow morning…). Snoozing updates the date pill and the alert fires again at the new time.</li>
-        <li><strong>Set again</strong> — reopens a completed reminder back to editable.</li>
+        <li><strong>Done</strong> — marks the reminder complete (stamping the block with <span class="pill pill-status">#complete</span>). To dismiss a reminder you complete it or delete the block — there’s no separate “clear”.</li>
+        <li><strong>Snooze</strong> — quick presets (30 minutes, 1 hour, 3 hours, 1 day). Snoozing updates the date pill and the alert fires again at the new time.</li>
+        <li><strong>Reopen</strong> — a completed reminder goes back to editable via the “Incomplete?” toggle on its <span class="pill pill-status">#complete</span> pill.</li>
       </ul>
 
       <h2 id="notifications">Desktop notifications</h2>
       <p>Reminders fire <strong>real macOS notifications</strong> — and they work even when the note is closed. Nomima checks every 20 seconds in the background, fires each alert exactly once per due time, and clicking the notification brings the app to the front.</p>
-      <h3>The bell &amp; the Alerts view</h3>
+      <h3>Where overdue items surface</h3>
+      <p class="note">Nomima has no separate notifications bell. Anything due or overdue surfaces in two places you already use — the badges on <strong>Home</strong> and the <strong>Alerts</strong> lens in Smart View.</p>
       <ul>
-        <li>The <strong>bell</strong> in the sidebar shows a red badge with the count of overdue reminders and tasks, or a subtle dot when only upcoming items exist.</li>
-        <li>Opening it (or the <strong>Alerts</strong> lens in Smart View) shows everything in two sections — <strong>Overdue</strong> and <strong>Upcoming</strong> — each row with a one-click ✓ complete, a snooze (for overdue reminders) or dismiss (for upcoming ones), and a link to the source note.</li>
+        <li>The <strong>Home</strong> sidebar item shows a red badge with the count of overdue reminders and tasks, or a subtle accent dot when only upcoming items exist.</li>
+        <li>The <strong>Alerts</strong> lens in the Smart View switcher carries the same red count (or accent dot), and opening it shows everything in two sections — <strong>Overdue</strong> and <strong>Upcoming</strong> — each row with a one-click ✓ complete, a snooze (for overdue reminders) or dismiss (for upcoming ones), and a link to the source note.</li>
       </ul>
 
       <p class="tip"><strong>Date pill vs. reminder — which one?</strong> Use a plain date pill when you want something <em>tracked</em> (it shows in agendas and turns red when missed). Use a reminder when you want to be <em>interrupted</em> at that moment with a notification.</p>
