@@ -168,6 +168,11 @@ kbd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11
 .figure-slot.slot-gif .figure-slot-icon { background: rgba(240,72,168,0.12); color: var(--accent-2); }
 .figure-slot.slot-gif .figure-slot-kind { color: var(--accent-2); }
 
+.figure-slot-ref { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 2px; }
+.figure-slot-ref .ref-num { font-size: 12px; font-weight: 800; letter-spacing: 0.06em; color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-2)); border-radius: 999px; padding: 3px 10px; }
+.figure-slot-ref code { font-size: 11.5px; color: var(--fg-dim); opacity: 0.85; word-break: break-all; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.figure-slot.slot-gif .figure-slot-ref .ref-num { background: linear-gradient(135deg, var(--accent-2), var(--accent)); }
+
 /* Numbered walkthrough: a guided sequence, each step paired with a figure. */
 .walk { list-style: none; margin: 26px 0 0; padding: 0; counter-reset: walk; display: flex; flex-direction: column; gap: 30px; }
 .walk > li { counter-increment: walk; position: relative; padding-left: 52px; }
