@@ -44,9 +44,11 @@
       <ol>
         <li>Type <code>@</code> or <code>#</code> followed by a name. A suggestion menu appears with matching entities you’ve used before.</li>
         <li>Press <kbd>Enter</kbd> or <kbd>Tab</kbd> to accept the highlighted suggestion — <kbd>Tab</kbd> always accepts the <em>suggested</em> tag, so you can type two letters and let Nomima finish the name.</li>
-        <li>If the name is new, choose <strong>Add</strong> from the menu to create a fresh entity.</li>
+        <li>If the name is new, the menu offers a <strong>Create new</strong> row for each type — pick the type right there and press <kbd>Enter</kbd>. That’s the whole decision: there’s no follow-up “which one did you mean?” picker afterwards.</li>
         <li>Press <kbd>Esc</kbd> to dismiss the menu and keep the text plain.</li>
       </ol>
+      <p class="note"><strong>The menu suggests the type for you.</strong> For a brand-new <span class="pill pill-mention">@mention</span> whose name Nomima’s offline gazetteer recognizes, the <strong>Create new</strong> rows lead with the predicted type as the <kbd>Enter</kbd> default — <span class="pill pill-mention">@Microsoft</span> → <em>Company</em>, <span class="pill pill-mention">@London</span> → <em>Location</em>, <span class="pill pill-mention">@Sarah</span> → <em>Person</em>. A name it doesn’t recognize leads with <em>No type</em>, and <em>No type</em> plus every other type always follow so you can override in one keystroke. Hashtags get no predicted type — they lead with <em>No type</em>.</p>
+      <p class="tip"><strong>Identity is name + type.</strong> An entity is unique per <em>name and type</em>, so <span class="pill pill-mention">@Apple</span> the <em>Company</em> and <span class="pill pill-mention">@Apple</span> the <em>Product</em> happily coexist as two entities — but you can’t pile up two Companies both called Apple. Got the type wrong? Change it from the pill’s <a href="#entity-cards">entity card</a> and just that pill re-points to the right entity.</p>
       <p class="tip"><strong>Ghost suggestions:</strong> as you type ordinary text, Nomima may show a faint dashed preview of a tag it recognizes (type “Mo” and see <em>@Moe</em> ghosted ahead) with a small <kbd>⇥</kbd> hint. Press <kbd>Tab</kbd> or click it to convert; <kbd>Esc</kbd> dismisses it for that spot. You can turn this off with <strong>Settings → Smart Tag Types → “Suggest Smart Tags as I type”</strong>.</p>
 
       <h2 id="types">Built-in types</h2>

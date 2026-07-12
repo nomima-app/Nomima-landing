@@ -35,17 +35,39 @@
       <h2 id="settings">Settings map</h2>
       <table>
         <tr><th>Panel</th><th>What’s in it</th></tr>
-        <tr><td>Appearance</td><td>Theme presets and light/dark mode.</td></tr>
+        <tr><td>Appearance</td><td>The full theme catalog and light/dark mode — see <a href="#appearance">Appearance &amp; themes</a> below.</td></tr>
         <tr><td>Smart Tag Types</td><td>Add and edit mention/hashtag types — label, icon, color, attribute fields — and the “Suggest Smart Tags as I type” toggle. See <a href="smart-tags.html#custom">Mentions &amp; hashtags</a>.</td></tr>
+        <tr><td>Highlights</td><td>Edit the highlight categories used in the reader — the colour-coded research buckets that drive the References library and each citation’s lineage. See <a href="references-and-citations.html">References &amp; citations</a>.</td></tr>
         <tr><td>Sound</td><td>Keyboard sound packs for ASMR blocks and the smart-tag recognition chime.</td></tr>
         <tr><td>Vault</td><td>Storage stats (size, notebooks, files, entities), the full <strong>Re-index</strong> button, cleanup utilities, and your vault’s metadata.</td></tr>
         <tr><td>AI Models</td><td>Provider keys, model choice, test connection. See <a href="ai-models.html">AI models</a>.</td></tr>
-        <tr><td>Summon Agent</td><td>Permissions for web search, filesystem and shell. See <a href="summon.html">Summon</a>.</td></tr>
+        <tr><td>Summon → Capabilities</td><td>What Summon can read and do — web, files, Mac apps, library docs, and the gated actions. See <a href="summon.html#permissions">Summon</a>.</td></tr>
         <tr><td>Memory</td><td>The agent memories Summon keeps about you and your work — review and clear what it has remembered.</td></tr>
         <tr><td>MCP Server</td><td>Enable the server, manage the token, allow writes, watch the activity log. See <a href="mcp.html">MCP server</a>.</td></tr>
+        <tr><td>Connectors</td><td>Personal tokens for Atlassian (Confluence/Jira), Notion and GitHub, so private pages can be read, highlighted and cited. Tokens are stored in your macOS Keychain; requests go straight from your device to the service. See <a href="references-and-citations.html">References &amp; citations</a>.</td></tr>
         <tr><td>Help &amp; diagnostics</td><td>The in-app bug reporter. Captures a redacted snapshot of recent activity, lets you review exactly what’s included, and submits it to the public issues board — queues offline if you’re not connected. See also <a href="../report.html">nomima.io/report</a> for the open issues board.</td></tr>
         <tr><td>About</td><td>Version, the <strong>Check for updates</strong> button, a “What’s new” card, and the Nomima tagline.</td></tr>
       </table>
+
+      <h2 id="appearance">Appearance &amp; themes</h2>
+      <p>Nomima ships <strong>27 built-in themes</strong> in the Appearance panel, organised into five groups. Pick one and the whole app re-skins instantly — editor, sidebar, graph and all.</p>
+
+      <h3>Signature</h3>
+      <p>The three brand looks. <strong>Nomima Glass</strong> is the default — a translucent, frosted shell. <strong>Nomima Dark</strong> and <strong>Nomima Light</strong> are its solid siblings.</p>
+
+      <h3>Scenes</h3>
+      <p>Nine themes that paint a scenic backdrop behind the translucent app, drifting slowly (and honouring your system’s reduced-motion setting): <strong>Aurora</strong>, <strong>Nightfall</strong>, <strong>Space</strong>, <strong>Forest</strong>, <strong>Ocean</strong>, <strong>Desert</strong>, <strong>Sunset</strong>, <strong>Highlands</strong> and <strong>Daybreak</strong>.</p>
+
+      <h3>Dark</h3>
+      <p>Six solid dark hue families: <strong>Midnight</strong>, <strong>Focus</strong>, <strong>Evergreen</strong>, <strong>Copper</strong>, <strong>Nova</strong> and <strong>Mono</strong>.</p>
+
+      <h3>Light</h3>
+      <p>Seven solid light hue families: <strong>Paper</strong>, <strong>Frost</strong>, <strong>Blush</strong>, <strong>Lavender</strong>, <strong>Slate</strong>, <strong>Bloom</strong> and <strong>Mono Light</strong>.</p>
+
+      <h3>Accessibility</h3>
+      <p>Two high-contrast themes tuned to <strong>WCAG AAA</strong>: <strong>High Contrast Dark</strong> and <strong>High Contrast Light</strong>.</p>
+
+      <p class="note"><strong>A couple of quirks worth knowing:</strong> <strong>Mono</strong> and <strong>Mono Light</strong> desaturate the entire app to strict black, white and grey. <strong>Nova</strong>, <strong>Bloom</strong> and every Scene use gradient accent buttons rather than a flat colour.</p>
 
       <h2 id="privacy">Privacy: what stays, what leaves</h2>
       <p>Nomima is local-first in the literal sense. Your vault — every note, file, comment and graph relationship — lives in a folder on your Mac (under <code>~/Library/Application Support</code>), stored in an ordinary SQLite database. No account exists, no telemetry is collected, nothing syncs anywhere.</p>

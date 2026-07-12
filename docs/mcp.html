@@ -94,6 +94,28 @@
         <li>Query open tasks from any MCP-capable workflow tool.</li>
       </ul>
 
+      <h2 id="outbound">The other direction: Nomima as an MCP client</h2>
+      <p>Everything above is the <strong>inbound</strong> server — <em>other</em> tools reaching <em>into</em> your vault. Nomima also works the opposite way, as an MCP <strong>client</strong>: it can reach <strong>out</strong> to remote MCP servers and bridge their tools into <a href="summon.html">Summon</a>. Same protocol, opposite direction — they share the “MCP” name but point at each other, so it’s worth keeping them straight:</p>
+      <table>
+        <tr><th></th><th>Inbound (the rest of this page)</th><th>Outbound (this section)</th></tr>
+        <tr><td>Direction</td><td>Your editors → your vault</td><td>Summon → a remote server</td></tr>
+        <tr><td>Who hosts it</td><td>Nomima runs the server on <code>127.0.0.1</code></td><td>Nomima connects to someone else’s server</td></tr>
+        <tr><td>Configured in</td><td>Settings → MCP Server</td><td>Settings → Summon → Capabilities</td></tr>
+      </table>
+
+      <h3 id="context7">Context7 — up-to-date library docs</h3>
+      <p>Nomima ships one outbound server built in: <strong>Context7</strong>, a source of <strong>up-to-date library &amp; framework documentation</strong>. It appears as the Summon capability <strong>“Look up library docs”</strong> under <strong>Settings → Summon → Capabilities</strong>, where you’ll find:</p>
+      <ul>
+        <li><strong>A toggle</strong> to turn it on — it’s off by default.</li>
+        <li>An <strong>optional API key</strong> (a <code>ctx7sk-…</code> token). Context7 works without one at lower rate limits; a free key from your Context7 dashboard raises them.</li>
+        <li>A <strong>Test connection</strong> button that runs the handshake and reports how many tools the server offers.</li>
+      </ul>
+      <p>Once it’s on, ask Summon things like “what’s the current API for &lt;library&gt;?” and it can pull live documentation instead of leaning on the model’s training cut-off.</p>
+
+      <h3 id="custom-outbound">Custom outbound servers</h3>
+      <p>The client isn’t limited to Context7 — under the hood it can connect to <strong>any Streamable-HTTP MCP endpoint</strong> (an <code>https://…/mcp</code> URL, with an optional auth header), turning that server’s tools into things Summon can call. Built-in servers like Context7 can be disabled but not removed.</p>
+      <p class="note"><strong>Treated as untrusted:</strong> whatever an outbound MCP tool returns is handled as <strong>untrusted web content</strong> — Summon never follows instructions hidden inside it, exactly as it treats any page it fetches from the web.</p>
+
       <nav class="docs-pager" id="docs-pager"></nav>
       <footer class="docs-foot" id="docs-foot"></footer>
     </main>

@@ -185,6 +185,24 @@
         <figcaption>A full sketch canvas that saves inside the note.</figcaption>
       </figure>
 
+      <h2 id="github">GitHub repo</h2>
+      <p>A <strong>live status card</strong> for a code repository (<code>/github</code>). Insert it and drop in a repo — as <code>owner/name</code> or a GitHub URL — and Nomima keeps a compact dashboard of that repo up to date inside your note.</p>
+      <ul>
+        <li><strong>What it shows.</strong> A stat strip of <em>stars</em>, <em>forks</em>, <em>open issues</em> and <em>open PRs</em>; a facts row with the <em>latest release</em>, default branch, primary language, license and when it was last pushed; a <em>CI</em> badge in the header carrying the latest GitHub Actions result (passing / failing / running); and a graph of recent commits below.</li>
+        <li><strong>Live &amp; self-refreshing.</strong> The card loads its numbers on its own and re-fetches when you reopen the note; a refresh button in the header forces an update on demand. The stat strip and the commit graph are fetched independently, so the stats still show even if the graph can't be read.</li>
+        <li><strong>Needs a connected GitHub account.</strong> The block reads GitHub through the token from your connected account — set one up in <strong>Settings → Connectors</strong> (see <a href="references-and-citations.html#connectors">References &amp; citations</a>). Until then it prompts you to connect.</li>
+      </ul>
+      <p class="note"><strong>Note:</strong> the header title and the “Open on GitHub” action link straight to the repo; collapse the block from its chevron to keep just the title row when you don't need the full card.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="advanced-blocks/github-repo-card.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>A GitHub repo status card.</strong> Set up: a <code>/github</code> block pointed at a real repo (with a GitHub account connected), so the card shows the stat strip (stars · forks · issues · PRs), the facts row (latest release, default branch, language, license, "updated Nd ago"), a "CI passing" badge in the header, and the recent-commits graph below. In frame: the whole card, title row included.</span>
+        </div>
+        <figcaption>Live repo vitals in a note — stats, release, CI and a commit graph, all self-refreshing.</figcaption>
+      </figure>
+
       <nav class="docs-pager" id="docs-pager"></nav>
       <footer class="docs-foot" id="docs-foot"></footer>
     </main>

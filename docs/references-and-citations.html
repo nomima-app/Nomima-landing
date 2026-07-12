@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>References &amp; citations — Nomima Guide</title>
+  <meta name="description" content="Read your sources in a distraction-free reader, highlight and cite them, and keep every reference — files, web pages, articles, books — in one searchable References library. Add references by URL, DOI, arXiv id or a Slack/Confluence/GitHub/Notion/Jira permalink." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#get">Get it free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Writing</div>
+        <h1 class="docs-title">References &amp; citations</h1>
+        <p class="docs-sub">Read your sources without a browser in the way, highlight and cite them by hand, and keep every reference you've ever quoted in one searchable library — files, web pages, articles, books and more.</p>
+      </header>
+
+      <p>The pieces you dropped or bookmarked into Nomima aren't just there to read — you can <strong>work</strong> with them. Open any source in a calm in-app reader, highlight the passages that matter, and turn a highlight into a proper <strong>citation</strong> in one of your notes: a verbatim quote with real bibliographic attribution and a live link back to where it came from. Every source you cite gathers in a top-level <strong>References</strong> library, so your reading and your writing stay joined up.</p>
+
+      <h2 id="reader">The reader with highlights</h2>
+      <p>Open a knowledge source — a <strong>file</strong>, an <strong>RSS article</strong>, or any <strong>web page</strong> you've bookmarked — and it opens in a distraction-free in-app reader: real structure kept, none of the clutter of the open web. Select a run of text and a small menu appears with your highlight categories. Pick a <strong>colour</strong> to drop a highlight, or hit the <strong>cite</strong> action (the quote mark) to highlight <em>and</em> send that passage straight into a notebook as a citation — Nomima asks which notebook to put it in.</p>
+      <p>Highlights are persistent — they're saved against the source and come back every time you open it — and you can recolour or remove any of them later, or send an existing highlight to a note whenever you like.</p>
+      <ul>
+        <li><strong>Colour = meaning.</strong> Each colour is a research category (Method, Key findings, Conclusion…), so the way you'd colour-code a printed paper carries through the reader, the library and your citations. You set the categories up yourself — see <a href="#categories">Highlight categories</a>.</li>
+        <li><strong>Cite in one step.</strong> The cite action does two things at once: it saves the highlight and drops a verbatim citation block into the notebook you choose, carrying the source's attribution with it.</li>
+      </ul>
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="references/reader-highlight-cite.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Highlighting in the reader.</strong> Set up: an article open in the in-app reader with a sentence selected, so the selection menu is showing its coloured category rows (each a dot + label) and the small quote-mark "cite" button beside one of them. In frame: the selected passage, the category menu floating just below it, and one or two existing coloured highlights already on the page.</span>
+        </div>
+        <figcaption>Select text, pick a colour to highlight — or hit the quote mark to highlight and cite in one move.</figcaption>
+      </figure>
+
+      <h2 id="citations">Citations in your notes</h2>
+      <p>A citation lands in your note as its own block — a <strong>verbatim, non-editable quotation</strong>. That's deliberate: a citation must never quietly drift from what the source actually said, so the quote text is read-only (you can select and copy it, or delete the whole block, but not retype it). Its words are still folded into search, so citations stay findable by keyword.</p>
+      <ul>
+        <li><strong>A "Source:" pill.</strong> Every citation carries an atomic <strong>Source</strong> reference chip. Click it and the in-app reader re-opens on that exact source. If the source is later removed from your vault, the pill greys out to a struck-through <em>"source removed"</em> tombstone rather than dead-ending.</li>
+        <li><strong>Research-grade metadata.</strong> Alongside the quote sit the details that make it a real citation — document type, author, publisher, the published date and the <em>accessed</em> date (when you captured it) — plus a clickable identifier for arXiv ids and DOIs.</li>
+        <li><strong>A lineage chip.</strong> A small coloured chip shows which highlight category the quote came from (e.g. <em>Method</em>), so a citation remembers <em>why</em> you flagged it. It snapshots the category name at capture time, so it survives later renaming.</li>
+        <li><strong>One-click copy.</strong> A copy button lifts a formatted citation — every author, the quote, publisher, dates and URL — onto your clipboard.</li>
+      </ul>
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="references/citation-block.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>A citation block in a note.</strong> Set up: a note containing one citation — a quotation with the meta row beneath it showing the coloured lineage chip (e.g. "Method"), the <strong>Source:</strong> label followed by the source pill, author · publisher · date, and the copy button. In frame: the whole citation block, with the Source pill clearly readable.</span>
+        </div>
+        <figcaption>A verbatim quote, a clickable Source pill, full attribution, and the colour it was highlighted in.</figcaption>
+      </figure>
+
+      <h2 id="library">The References library</h2>
+      <p>Everything you cite gathers in <strong>References</strong> — a new top-level item in the sidebar (the bookmark icon at the bottom). It's a two-panel library: a searchable list of every source down the side, and a detail view for whichever one you select. Filter the list with the chips along the top: <strong>All</strong>, <strong>Files</strong>, <strong>Web</strong>, <strong>Articles</strong>, <strong>Manual</strong>.</p>
+      <p>Add a reference from the <strong>+</strong> menu at the top of the list:</p>
+      <ul>
+        <li><strong>By URL or DOI</strong> — paste a link, a DOI or an arXiv id and Nomima resolves the title, authors and date for you (DOIs via Crossref, arXiv ids via arXiv).</li>
+        <li><strong>Upload a file</strong> — pull in a PDF or document as a reference. It's stored privately for citing, without cluttering any notebook.</li>
+        <li><strong>Enter manually</strong> — type in a source that isn't a file or link: a book, a paper, an email, a message, a report. Per-type fields keep the form sensible (an email asks <em>From</em> and <em>Mailbox</em>, a journal article asks <em>Authors</em> and <em>Journal</em>).</li>
+        <li><strong>Connect an account…</strong> — jump to <a href="#connectors">Connectors</a> to hook up a private workspace so its pages resolve too.</li>
+      </ul>
+      <p>Select any reference and its detail view gives you the full picture:</p>
+      <ul>
+        <li><strong>Highlights.</strong> Every highlight you've made on that source, each with its category colour. Send any one to a notebook as a citation, or — if it's already been cited — jump straight to where it's <strong>Cited</strong> in your notes.</li>
+        <li><strong>A formatted citation</strong> you can copy, plus quick actions to open it in the reader, in a live web view, or in your browser.</li>
+        <li><strong>"Cited in" backlinks</strong> — a list of every note that quotes this source; click one to land on the exact block.</li>
+        <li><strong>Edit or Remove.</strong> Edit fixes up the title, authors, publisher or date. Remove is a clean reset — it clears the reference's highlights so you can start fresh, while any citations you already dropped into notes keep their text.</li>
+      </ul>
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="references/references-library.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The References library.</strong> Set up: the References view open with a handful of sources of different kinds in the list (a file, a couple of web pages, an article), the filter chips (All / Files / Web / Articles / Manual) visible above the list with "All" active, and one source selected so the detail panel shows its title, a formatted citation, a Highlights section and a "Cited in" section. In frame: both panels — the list on the left, the detail on the right.</span>
+        </div>
+        <figcaption>Every source you've cited, in one place — filter by kind, then dive into its highlights and backlinks.</figcaption>
+      </figure>
+
+      <h2 id="smart-add">Smart Add</h2>
+      <p>The <em>By URL or DOI</em> field is smarter than it looks — it takes more than plain web links. Paste any of these and Nomima resolves it into a typed, populated reference:</p>
+      <ul>
+        <li>a <strong>URL</strong> — the page is read for its title, byline and article text;</li>
+        <li>a <strong>DOI</strong> — full metadata comes back via Crossref;</li>
+        <li>an <strong>arXiv id</strong> — resolved against arXiv;</li>
+        <li>a <strong>Slack, Confluence, GitHub, Notion or Jira permalink</strong> — recognised by its host and typed accordingly (a Slack message, a Confluence page, a Notion page…), so it files itself under the right kind.</li>
+      </ul>
+      <p class="tip"><strong>Tip:</strong> for private workspace links — a Confluence page or a Notion doc only your account can see — connect that account first (below) so Nomima can actually read the page rather than just recognising the link.</p>
+
+      <h2 id="connectors">Connectors</h2>
+      <p>Some of the things you'll want to cite live behind a login — a private Confluence page, a Notion doc, a GitHub issue or PR. <strong>Connectors</strong> (in <strong>Settings → Connectors</strong>) let you paste a personal access token for each so those links resolve properly. Nomima supports:</p>
+      <ul>
+        <li><strong>Atlassian</strong> — Confluence and Jira (needs your site URL and account email alongside the token);</li>
+        <li><strong>Notion</strong>;</li>
+        <li><strong>GitHub</strong> — also what powers the <a href="advanced-blocks.html">GitHub repo block</a> below.</li>
+      </ul>
+      <p class="note"><strong>Your tokens stay on your Mac.</strong> Each token is stored in your macOS <strong>Keychain</strong>, never in Nomima's database, and requests go straight from your machine to that service — nothing routes through any Nomima server. Disconnect an account and its token is wiped from the Keychain.</p>
+
+      <h2 id="categories">Highlight categories</h2>
+      <p>The colours you highlight with aren't arbitrary — each one is a <strong>research category</strong>, the way you'd colour-code a paper by section. You manage the set in <strong>Settings → Highlights</strong>, and it's shared everywhere colour carries meaning: the reader's picker, the References library, and each citation's lineage chip.</p>
+      <p>Nomima ships with a sensible section-based scheme you can keep or reshape: <strong>Introduction</strong>, <strong>Method</strong>, <strong>Key findings</strong>, <strong>Results</strong>, <strong>Discussion</strong>, <strong>Conclusion</strong> and <strong>Future research</strong>. From the panel you can:</p>
+      <ul>
+        <li><strong>Rename</strong> any category;</li>
+        <li><strong>Recolour</strong> it from a fixed <strong>eight-colour palette</strong> (each colour is used by at most one category, so meanings never collide);</li>
+        <li><strong>Reorder</strong> them, so your most-used categories sit at the top of the reader's menu;</li>
+        <li><strong>Add</strong> or <strong>remove</strong> categories (up to the eight palette colours);</li>
+        <li><strong>Reset to defaults</strong> at any time.</li>
+      </ul>
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="references/highlight-categories.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The Highlights category editor.</strong> Set up: Settings open on the Highlights panel, showing the list of categories — each a row with its colour swatch, an editable name, the reorder arrows and a remove button — plus the "Add category" and "Reset to defaults" controls. In frame: several default categories (Introduction, Method, Key findings…) with their distinct colours.</span>
+        </div>
+        <figcaption>Rename, recolour, reorder — the same categories drive the reader, the library and every citation.</figcaption>
+      </figure>
+      <p class="note"><strong>Note:</strong> a highlight stores only its colour; its label is read from the current category list. Rename a category and every existing highlight of that colour re-labels with it — but citations already in your notes keep the label they were captured under, so their lineage stays true.</p>
+
+      <h2 id="github">The <code>/github</code> block</h2>
+      <p>A related trick for anyone tracking code: type <code>/github</code>, drop in a repo (as <code>owner/name</code> or a GitHub URL), and Nomima renders a <strong>live status card</strong> for it — stars, forks, open issues and PRs, the latest release, default branch, language and license, the latest CI result from GitHub Actions, and a graph of recent commits. It refreshes on its own, with a manual refresh button in the header.</p>
+      <p class="warn"><strong>Heads up:</strong> the card reads GitHub through your <a href="#connectors">connected GitHub account</a>, so connect one in Settings → Connectors first. There's a fuller entry for this block on the <a href="advanced-blocks.html">Advanced blocks</a> page.</p>
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="references/github-block.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>A GitHub repo status card.</strong> Set up: a <code>/github</code> block in a note pointed at a real repo, so the card shows the stat strip (stars · forks · issues · PRs), the facts row (latest release tag, default branch, language, license, "updated Nd ago"), a "CI passing" badge in the header, and the recent-commits graph below. In frame: the whole card with its title row and body.</span>
+        </div>
+        <figcaption>Live repo vitals inside a note — stats, release, CI and a commit graph, all self-refreshing.</figcaption>
+      </figure>
+
+      <p class="note"><strong>Where to go next.</strong> To get sources <em>into</em> the reader in the first place — dropping files, bookmarking pages, folding articles into your knowledge — see <a href="capture-and-reading.html">Capture &amp; reading</a>. For how tokens and reading stay on your machine, see <a href="settings-privacy.html">Settings &amp; privacy</a>.</p>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>

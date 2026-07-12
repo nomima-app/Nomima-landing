@@ -32,7 +32,7 @@
         <p class="docs-sub">An assistant that actually knows your notes. Summon searches your vault, answers questions, creates notebooks and streams writing straight into your editor — with whatever AI model you chose.</p>
       </header>
 
-      <p class="pro-box"><strong>Before you start:</strong> Summon is free — it just needs at least one configured <a href="ai-models.html">AI model</a> with your own API key for Anthropic, OpenAI or Google. Summon connects only to each provider’s current frontier models.</p>
+      <p class="pro-box"><strong>Before you start:</strong> Summon is free — it just needs at least one configured <a href="ai-models.html">AI model</a> — run a local model (Ollama, LM Studio) with no key at all, or bring your own API key for a cloud provider (Anthropic, OpenAI, Google, AWS Bedrock, or an OpenAI-compatible cloud like Groq, OpenRouter, Mistral, DeepSeek, xAI or Together).</p>
 
       <h2 id="opening">Opening Summon</h2>
       <ul>
@@ -122,22 +122,41 @@
       </table>
       <p>Done and cancelled tasks tidy themselves up automatically after 30 days, so the list stays manageable over time.</p>
 
-      <p class="note"><strong>Gated actions pause for your approval.</strong> A background task can’t pop a dialog in your face, so when one wants to do something sensitive — write a file, run a shell command, or use a Mac bridge like sending mail or creating a calendar event — it stops and posts a <strong>Needs Approval</strong> card at the top of the Tasks view: <em>“A background task wants to: …”</em> with the concrete detail and inline <strong>Approve</strong> / <strong>Reject</strong> buttons. Nothing sensitive happens until you say so, and every decision is recorded. You choose which categories are even eligible in <strong>Settings → Summon Agent → Permissions</strong> (below).</p>
+      <p class="note"><strong>Gated actions pause for your approval.</strong> A background task can’t pop a dialog in your face, so when one wants to do something sensitive — write a file, run a shell command, or use a Mac bridge like sending mail or creating a calendar event — it stops and posts a <strong>Needs Approval</strong> card at the top of the Tasks view: <em>“A background task wants to: …”</em> with the concrete detail and inline <strong>Approve</strong> / <strong>Reject</strong> buttons. Nothing sensitive happens until you say so, and every decision is recorded. You choose which categories are even eligible — and how freely they run — in <strong>Settings → Summon → Capabilities</strong> (below).</p>
 
       <figure class="guide-figure"><div class="figure-slot" data-shot="summon/tasks-view.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The Summon Tasks view.</strong> Set up: several assigned tasks in mixed states. In frame: the header summary line, a “Needs Approval” card with Approve / Reject at the top, an Active section with a running task showing its live thinking step, and a Recent list with Done and Failed rows — plus the pulsing “Summon Tasks” sidebar row with its in-flight count badge.</span></div><figcaption>One place for every background task — active, awaiting approval, and recently finished — with a live badge on the sidebar row.</figcaption></figure>
 
       <p class="tip"><strong>Tip:</strong> assigning is the natural next step after Summon writes something for you. Turn a checklist of action items into real work — <code>/assign</code> each line and let them run while you move on.</p>
 
-      <h2 id="permissions">Agent permissions</h2>
-      <p>Summon’s reach is controlled by <strong>four</strong> toggles in <strong>Settings → Summon Agent</strong>. <strong>Web search is on by default</strong>; the other three — filesystem, shell and Mac access — are <strong>off by default</strong>, so nothing touches your machine until you switch it on:</p>
+      <h2 id="permissions">Capabilities &amp; permissions</h2>
+      <p>Everything Summon can do beyond your notes lives in <strong>Settings → Summon → Capabilities</strong> — a two-pane page. Pick a capability in the left rail (grouped <strong>Access</strong>, <strong>Actions</strong> and <strong>Advanced</strong>) and configure it on the right. The guiding idea: <strong>reads are safe to leave on, and actions default to safe</strong> — nothing runs on your machine without the permission you grant.</p>
+
+      <h3>Access — what Summon can read</h3>
+      <p>Each is a plain on/off <strong>switch</strong>:</p>
       <table>
-        <tr><th>Permission</th><th>What it unlocks</th></tr>
-        <tr><td>Web search <em>(on by default)</em></td><td>Summon can search online (via DuckDuckGo or your configured Brave Search key) to supplement vault answers with current information.</td></tr>
-        <tr><td>Filesystem access</td><td>Read files in your Documents, Desktop and Downloads folders — useful for "import this report" or "summarise the PDF I just downloaded".</td></tr>
-        <tr><td>Shell commands</td><td>Strictly allowlist-based: you add the exact commands it may run; chaining and piping are blocked so it can’t do anything you haven’t approved.</td></tr>
-        <tr><td>Mac access</td><td>One switch for every macOS bridge — Calendar and Reminders (“what’s on my calendar this week?”), Contacts (“get me James’s email address”), Mail (“did anyone email me about the invoice?”), Spotlight (“find the latest version of the spec doc”), plus Apple Notes and the clipboard. They all turn on and off together under this single Mac toggle.</td></tr>
+        <tr><th>Capability</th><th>What it reads</th></tr>
+        <tr><td>Search the web</td><td>Search online and read public pages — via your Brave Search key, or the free DuckDuckGo fallback. Fetched pages are treated as untrusted.</td></tr>
+        <tr><td>Read your files</td><td>List and read files in your Documents, Desktop and Downloads folders.</td></tr>
+        <tr><td>Read your Mac apps</td><td>Read Calendar, Reminders, Contacts, Mail and Apple Notes (covers Outlook/Exchange &amp; Google), search with Spotlight, and use the clipboard. macOS asks per app the first time.</td></tr>
+        <tr><td>Look up library docs</td><td>Up-to-date library &amp; framework docs via <strong>Context7</strong> over MCP. See <a href="mcp.html#context7">the MCP page</a>.</td></tr>
       </table>
-      <p class="note"><strong>Privacy reminder:</strong> when Summon answers a question about your notes, the relevant note content is sent to the AI provider you configured — that’s how the model reads it. Mac system tools (Calendar, Contacts, Mail) only send the data relevant to your specific request. Nothing is ever sent anywhere when you’re not actively using Summon.</p>
+
+      <h3>Actions — what Summon can do</h3>
+      <p>Every action carries a single <strong>Never / Ask first / Allow</strong> control that is <em>both</em> its on/off and its permission level. “Never” blocks it, “Ask first” pauses for your OK each time, “Allow” runs it silently. Two of them add a <strong>Draft only</strong> setting. Turning an action on <strong>auto-enables the read domain it needs</strong> (switch that read domain off and its actions snap back to Never).</p>
+      <table>
+        <tr><th>Action</th><th>What it does</th></tr>
+        <tr><td>Write and edit files</td><td>Create and edit plain-text files in Documents, Desktop &amp; Downloads.</td></tr>
+        <tr><td>Run terminal commands</td><td>Run only the commands you add to its allowlist, in your Documents folder — arguments passed separately, no piping or chaining.</td></tr>
+        <tr><td>Send email</td><td>Compose and send through Mail. <strong>Draft only</strong> opens a draft you send yourself.</td></tr>
+        <tr><td>Create events &amp; reminders</td><td>Add items to Calendar and Reminders.</td></tr>
+        <tr><td>Write Apple Notes</td><td>Create and edit notes in the Apple Notes app.</td></tr>
+      </table>
+      <p class="note"><strong>Terminal has a floor you can’t override:</strong> a built-in safety <strong>denylist</strong> — <code>rm</code>, <code>curl</code>, <code>sudo</code>, <code>ssh</code> and other destructive or exfiltration commands — is <em>always</em> blocked, even if you try to add one to the allowlist.</p>
+
+      <h3>Advanced</h3>
+      <p><strong>Background tasks</strong> sets how many queued <a href="#assign">assigned tasks</a> Summon runs in parallel. Higher clears a backlog faster but uses more of your AI provider’s rate limit; 2 is recommended.</p>
+
+      <p class="note"><strong>Privacy reminder:</strong> when Summon answers a question about your notes, the relevant note content is sent to the AI provider you configured — that’s how the model reads it. Mac system tools (Calendar, Contacts, Mail) only send the data relevant to your specific request. Summon treats web pages, files and app content as untrusted and never follows instructions hidden in them. Nothing is ever sent anywhere when you’re not actively using Summon.</p>
 
       <nav class="docs-pager" id="docs-pager"></nav>
       <footer class="docs-foot" id="docs-foot"></footer>

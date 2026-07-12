@@ -4,7 +4,7 @@
    every page are generated from this file — edit nothing else for nav. */
 
 const GUIDE_VERSION = "1.17.0";
-const GUIDE_UPDATED = "July 10, 2026";
+const GUIDE_UPDATED = "July 12, 2026";
 
 const PAGES = [
   { section: "Start here" },
@@ -15,6 +15,7 @@ const PAGES = [
   { file: "blocks.html",           title: "Blocks" },
   { file: "advanced-blocks.html",  title: "Advanced blocks" },
   { file: "capture-and-reading.html", title: "Capture & reading" },
+  { file: "references-and-citations.html", title: "References & citations" },
   { file: "smart-tags.html",       title: "Mentions & hashtags" },
   { file: "dates-and-reminders.html", title: "Dates & reminders" },
   { file: "tracking.html",         title: "Complete & incomplete" },
