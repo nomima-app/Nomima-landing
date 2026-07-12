@@ -100,6 +100,15 @@
         <li>an <strong>arXiv id</strong> — resolved against arXiv;</li>
         <li>a <strong>Slack, Confluence, GitHub, Notion or Jira permalink</strong> — recognised by its host and typed accordingly (a Slack message, a Confluence page, a Notion page…), so it files itself under the right kind.</li>
       </ul>
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="references/smart-add.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Add by link, DOI or ID.</strong> Set up: in References, open the <strong>+</strong> menu and choose “By URL or DOI”. In frame: the “Add by link, DOI, or ID” dialog with the single paste field (placeholder <code>https://…&nbsp;·&nbsp;10.1145/…&nbsp;·&nbsp;arXiv:2401.01234</code>) and the helper line noting Slack / Confluence / GitHub / Notion links are recognised and typed automatically.</span>
+        </div>
+        <figcaption>Paste a URL, DOI, arXiv id or a workspace permalink — Nomima resolves and types it.</figcaption>
+      </figure>
+
       <p class="tip"><strong>Tip:</strong> for private workspace links — a Confluence page or a Notion doc only your account can see — connect that account first (below) so Nomima can actually read the page rather than just recognising the link.</p>
 
       <h2 id="connectors">Connectors</h2>
@@ -109,6 +118,15 @@
         <li><strong>Notion</strong>;</li>
         <li><strong>GitHub</strong> — also what powers the <a href="advanced-blocks.html">GitHub repo block</a> below.</li>
       </ul>
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="references/connectors-settings.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The Connectors panel.</strong> Set up: open Settings → Connectors, with one account connected. In frame: the Connected list showing a connected account with its Disconnect button, and the provider rows for Atlassian (Confluence &amp; Jira), Notion and GitHub — one expanded to show its token field (plus site URL and account email for Atlassian).</span>
+        </div>
+        <figcaption>Paste a personal token per service so private pages resolve — tokens live in your Keychain.</figcaption>
+      </figure>
+
       <p class="note"><strong>Your tokens stay on your Mac.</strong> Each token is stored in your macOS <strong>Keychain</strong>, never in Nomima's database, and requests go straight from your machine to that service — nothing routes through any Nomima server. Disconnect an account and its token is wiped from the Keychain.</p>
 
       <h2 id="categories">Highlight categories</h2>

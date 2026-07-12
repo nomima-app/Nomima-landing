@@ -69,6 +69,16 @@
         <tr><td>Horizontal Line</td><td>A visual divider between sections.</td></tr>
         <tr><td>Table / Database</td><td>Inserts a <strong>Database</strong> — see <a href="#database">Database</a> below. (Plain tables have been replaced by the Database; pasting a table from the web also becomes one.)</td></tr>
       </table>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="blocks/text-basics.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The text hierarchy in one note.</strong> Set up: a note stacking a Title, a Subtitle beneath it, a paragraph of body text, a Quote block, and a Horizontal Line divider. In frame: all five together so the size step between Title, Subtitle and body, the quote's accent bar, and the divider are each visible.</span>
+        </div>
+        <figcaption>Titles, subtitles, quotes and dividers — the text foundation.</figcaption>
+      </figure>
+
       <p class="note"><strong>Automatic links:</strong> finish typing a web address or an email — <code>https://…</code>, a <code>www.</code> host, a common domain like <code>github.com</code>, or <code>name@example.com</code> — then press <kbd>Space</kbd> and it turns into a clickable link pill on its own. It’s deliberately conservative: bare words like <code>node.js</code>, <code>README.md</code> or <code>e.g.</code> are left as plain text.</p>
 
       <h2 id="tasklist">Task List</h2>
@@ -80,6 +90,16 @@
         <li><strong>Auto-complete</strong> — when every task is checked, the whole list turns green and counts as complete. Add a new task and it flips back automatically.</li>
         <li><strong>Backspace on an empty list</strong> deletes the whole list cleanly; arrow keys escape out of it in every direction.</li>
       </ul>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="blocks/task-list.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>A Task List card.</strong> Set up: a titled task list (e.g. “Q3 planning”) with five items, three of them checked, so the header shows a 3/5 progress badge. In frame: the editable title row, the progress badge, the checked and unchecked items, and the collapse chevron.</span>
+        </div>
+        <figcaption>A titled checklist with a live progress badge.</figcaption>
+      </figure>
+
       <p class="note"><strong>Note:</strong> the <code>/</code> block menu is intentionally disabled inside checklist items — checklists stay checklists. Press <kbd>Enter</kbd> to leave the list first.</p>
 
       <h2 id="containers">Containers</h2>
@@ -91,6 +111,42 @@
         <tr><td>Columns</td><td>Side-by-side layout with two or three columns; each column holds normal blocks. Columns can't be nested — the Columns option isn't offered while you're inside a column.</td></tr>
         <tr><td>Carousel (<code>/carousel</code>)</td><td>A horizontal, scrollable track of columns — three in view at a time. Each card takes a <strong>S / M / L</strong> width and the whole row runs at auto height (or drag the bottom handle to pin a fixed height); <kbd>Tab</kbd> from the last card adds another. Like Columns, a Carousel can't be nested — it isn't offered inside a column or another carousel.</td></tr>
       </table>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="blocks/callout-types.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>A Callout with the type picker open.</strong> Set up: a Tip or Warning callout holding a line of text, then click its icon badge so the type menu (Note, Info, Tip, Idea, Important, Success, Warning…) is showing. In frame: the tinted callout box, its icon badge, and the open type picker.</span>
+        </div>
+        <figcaption>Callouts are tinted boxes; click the badge to change type.</figcaption>
+      </figure>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="blocks/toggle-list.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>A Toggle List, expanded.</strong> Set up: a toggle with a one-line summary and a couple of nested blocks revealed beneath it (chevron pointing down). In frame: the chevron, the summary line, and the indented content — no card chrome around it.</span>
+        </div>
+        <figcaption>A lightweight inline disclosure — just a chevron and content.</figcaption>
+      </figure>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="blocks/columns.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>A three-column layout.</strong> Set up: a Columns block split into three, each column holding a short heading and a couple of blocks. In frame: the three columns side by side so the equal-width split and the per-column content are clear.</span>
+        </div>
+        <figcaption>Side-by-side columns, each holding normal blocks.</figcaption>
+      </figure>
+
+      <figure class="guide-figure">
+        <div class="figure-slot slot-gif" data-shot="blocks/carousel.gif">
+          <span class="figure-slot-icon">►</span>
+          <span class="figure-slot-kind">Short clip</span>
+          <span class="figure-slot-label"><strong>Building a Carousel by tabbing.</strong> Set up: a <code>/carousel</code> with two or three cards, three in view. Record: type in the last card and press <kbd>Tab</kbd> to spawn a new card, then scroll the track sideways so the horizontal overflow is visible.</span>
+        </div>
+        <figcaption>Tab past the last card to add another; scroll the row sideways.</figcaption>
+      </figure>
 
       <h2 id="followups">Follow-up chains</h2>
       <p>Spin a follow-up section off any block to continue a thread of work. Chained sections inherit the source block’s title with a locked prefix, and a connector line draws between them so you can see the whole chain at a glance — handy for turning a single block into an ongoing series of next steps.</p>
@@ -106,6 +162,15 @@
       <p class="note"><strong>Pasting a table</strong> from a web page, Google Docs, Notion or Markdown drops in as a Database automatically — the header row becomes your columns and each row a record.</p>
       <p class="tip"><strong>Derived tables:</strong> <code>/entity-table</code> builds a live table of every entity of a type (one row per Person, Project…, editable straight from the grid), and <code>/query-table</code> builds a filtered view of blocks across your notebooks. Both stay in sync as you edit elsewhere.</p>
 
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="blocks/database.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The Database block.</strong> Set up: a Database titled “Q3 planning” with a text column, a Person column holding <span class="pill pill-mention">@Sara</span>, a Date column, and a Status column where one row is marked <span class="pill pill-status">#complete</span>; a few rows filled in. In frame: the header row showing the column types and the calc strip along the bottom.</span>
+        </div>
+        <figcaption>Every row is a record; every column has a type.</figcaption>
+      </figure>
+
       <h2 id="technical">Code, math &amp; diagrams</h2>
       <table>
         <tr><th>Block</th><th>What it does</th></tr>
@@ -114,6 +179,16 @@
         <tr><td>Diagram</td><td>Mermaid diagrams — flowcharts, sequence diagrams, ER diagrams, mind maps, Gantt syntax and more.</td></tr>
         <tr><td>Drawing</td><td>A freeform whiteboard canvas (powered by Excalidraw) for sketches and doodles.</td></tr>
       </table>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="blocks/code-block.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>A syntax-highlighted Code Block.</strong> Set up: a Code Block with a short snippet (a few lines of JavaScript or Python) and the language picker set to that language. In frame: the highlighted code and the language picker control in the block's corner.</span>
+        </div>
+        <figcaption>Code with syntax highlighting and a language picker.</figcaption>
+      </figure>
+
       <h3>Terminal</h3>
       <p>Type <code>/terminal</code> to drop a real command-mode shell straight into a note. Run a command and its output streams in live — each line lands as it’s produced. Stop a command mid-run, and every command shows its duration and exit code when it finishes. Page back through what you ran with <kbd>↑</kbd>/<kbd>↓</kbd>, and watch the working-directory chip update as you <code>cd</code> around. Up to 200 commands are saved with the note.</p>
 
@@ -141,6 +216,15 @@
         <tr><td>Backlinks</td><td>A panel that lists every note referencing the current one — the reverse side of block references and @mentions. It updates itself as other notes link here.</td></tr>
         <tr><td>Reminder</td><td>A countdown with a desktop alert — covered in depth in <a href="dates-and-reminders.html">Dates &amp; reminders</a>.</td></tr>
       </table>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="blocks/embed-video.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>An embedded video and a bookmark card.</strong> Set up: paste a YouTube link (it plays inline) and, below it, a plain web link that renders as a rich preview card (image, title, description, favicon). In frame: the inline video player above the bookmark preview card.</span>
+        </div>
+        <figcaption>Paste a link — YouTube plays inline; other links become preview cards.</figcaption>
+      </figure>
 
       <h3 id="rss">RSS Feed</h3>
       <p>Type <code>/rss</code> to drop a news reader straight into a note. Every feed is fetched privately in the background and cached in your vault, so articles stay readable offline.</p>

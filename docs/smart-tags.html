@@ -40,6 +40,15 @@
       </ul>
       <p>Every tag becomes an <strong>entity</strong> in your Knowledge Graph. Tag <span class="pill pill-mention">@Sara</span> in five different notes and Nomima knows they’re all about the same person — her Smart View lens, graph node and entity card collect everything in one place.</p>
 
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="smart-tags/formed-pills.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Formed pills in a note.</strong> Set up: write a sentence carrying an @mention and a #hashtag of different types (e.g. “@Sara owns the #launch”). In frame: the two coloured pills inline in the running text — a person-coloured @Sara mention and a project-coloured #launch hashtag — each with its type icon.</span>
+        </div>
+        <figcaption>Every tag is a small coloured pill embedded right in your text.</figcaption>
+      </figure>
+
       <h2 id="create">Creating a tag</h2>
       <ol>
         <li>Type <code>@</code> or <code>#</code> followed by a name. A suggestion menu appears with matching entities you’ve used before.</li>
@@ -48,6 +57,15 @@
         <li>Press <kbd>Esc</kbd> to dismiss the menu and keep the text plain.</li>
       </ol>
       <p class="note"><strong>The menu suggests the type for you.</strong> For a brand-new <span class="pill pill-mention">@mention</span> whose name Nomima’s offline gazetteer recognizes, the <strong>Create new</strong> rows lead with the predicted type as the <kbd>Enter</kbd> default — <span class="pill pill-mention">@Microsoft</span> → <em>Company</em>, <span class="pill pill-mention">@London</span> → <em>Location</em>, <span class="pill pill-mention">@Sarah</span> → <em>Person</em>. A name it doesn’t recognize leads with <em>No type</em>, and <em>No type</em> plus every other type always follow so you can override in one keystroke. Hashtags get no predicted type — they lead with <em>No type</em>.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="smart-tags/create-type-menu.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The @ menu with Create-new type rows.</strong> Set up: type “@Microsoft” (a name the offline gazetteer recognises) so the suggestion menu shows the Create-new rows. In frame: the dropdown under the caret with the predicted type leading as the <kbd>Enter</kbd> default (Company for @Microsoft), each row showing its type icon, and the remaining type rows plus “No type” below it.</span>
+        </div>
+        <figcaption>Pick the type right in the menu — the predicted one is the <kbd>Enter</kbd> default.</figcaption>
+      </figure>
       <p class="tip"><strong>Identity is name + type.</strong> An entity is unique per <em>name and type</em>, so <span class="pill pill-mention">@Apple</span> the <em>Company</em> and <span class="pill pill-mention">@Apple</span> the <em>Product</em> happily coexist as two entities — but you can’t pile up two Companies both called Apple. Got the type wrong? Change it from the pill’s <a href="#entity-cards">entity card</a> and just that pill re-points to the right entity.</p>
       <p class="tip"><strong>Ghost suggestions:</strong> as you type ordinary text, Nomima may show a faint dashed preview of a tag it recognizes (type “Mo” and see <em>@Moe</em> ghosted ahead) with a small <kbd>⇥</kbd> hint. Press <kbd>Tab</kbd> or click it to convert; <kbd>Esc</kbd> dismisses it for that spot. You can turn this off with <strong>Settings → Smart Tag Types → “Suggest Smart Tags as I type”</strong>.</p>
 
@@ -84,6 +102,15 @@
       </ul>
       <p>Custom types get their own color in the Knowledge Graph legend and their own grouping in search — they’re first-class citizens.</p>
 
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="smart-tags/custom-type-editor.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The Smart Tag Types editor.</strong> Set up: open Settings → Smart Tag Types. In frame: the two families (@ mention and # hashtag) with their type rows, each showing its icon and colour swatch, the add-type control, and one custom type freshly added to a family.</span>
+        </div>
+        <figcaption>Add your own types or restyle the built-ins — each keeps its own colour and icon.</figcaption>
+      </figure>
+
       <h2 id="entity-cards">Entity cards &amp; attributes</h2>
       <p>Click any pill to open its <strong>entity card</strong> — the hub for that person, project or thing:</p>
       <ul>
@@ -93,6 +120,25 @@
         <li><strong>Essential fields</strong> — each type keeps the fields that define it: a Person always keeps Name and Email, a Company a Website. You can leave them blank, but they can’t be deleted by accident.</li>
         <li><strong>Type schema</strong> — in <strong>Settings → Smart Tag Types</strong> you can define which attribute fields a <em>type</em> should have, so every Person card offers the same fields by default.</li>
       </ul>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="smart-tags/entity-card.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>An entity card.</strong> Set up: click a Person pill that has a photo and a couple of attributes filled in. In frame: the popover with the entity’s photo avatar, its editable name, the type-selector icon row, the Edit · Profile · Appears in tab bar, the Expand button, and a couple of attribute fields (e.g. Email, Role) below.</span>
+        </div>
+        <figcaption>Click any pill to open its hub — attributes, a custom photo, and everywhere it appears.</figcaption>
+      </figure>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="smart-tags/entity-detail-page.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The full Entity view.</strong> Set up: on an entity card, click the Expand button to open the full-page view and stay on the Overview tab. In frame: the header with the entity’s avatar, name and type; the Overview · Mentions · Tasks · Profile tab bar; and the Overview bento — the stat cards, the “Appears with” panel and the “Connections by type” panel.</span>
+        </div>
+        <figcaption>Expand a card into a full page — computed stats, who it appears with, and its connections.</figcaption>
+      </figure>
+
       <p><strong>Auto-photo from email.</strong> Type a person’s email and Nomima quietly fetches their Gravatar photo if they have one. The address is hashed before any lookup and never sent in the clear; if there’s no match, nothing is stored — and it never overwrites a photo you uploaded yourself.</p>
       <p><strong>Profile tab.</strong> When an entity has an email, its card gains a <strong>Profile</strong> tab with public info looked up on demand by hash — name, location, bio, the organization inferred from the email domain, and any public social accounts. It’s fetched only when you open the tab.</p>
 

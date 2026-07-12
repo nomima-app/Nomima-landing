@@ -41,6 +41,8 @@
         <li>Summon opens as a <strong>compact dock</strong> on the right edge; the expand button promotes it to a <strong>full-screen view</strong>. Close with <kbd>Esc</kbd> — the conversation survives, even as you switch notebooks.</li>
       </ul>
 
+      <figure class="guide-figure"><div class="figure-slot" data-shot="summon/glowing-button-dock.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The Summon button and dock.</strong> Set up: a notebook open, Summon opened into its compact right-edge dock. In frame: the glowing Summon button in the bottom-right corner (with its in-flight count badge) and the docked panel beside it showing the four hero quick-action chips — <em>Brief of the day</em>, <em>Prep for tomorrow</em>, <em>Deep research a topic</em>, <em>Create a new note</em>.</span></div><figcaption>The glowing button lives bottom-right; click it to open Summon’s compact dock, expandable to full screen.</figcaption></figure>
+
       <h2 id="chat-note">Where Summon's answers go</h2>
       <p>A reply lives in the conversation by default. Two things move it into your notes:</p>
       <ul>
@@ -48,9 +50,13 @@
         <li><strong>Pin a reply.</strong> Any message has a <strong>Pin</strong> action that drops its content into a notebook — new or existing — as a Section, for keeping an answer you didn't explicitly ask it to write.</li>
       </ul>
 
+      <figure class="guide-figure"><div class="figure-slot slot-gif" data-shot="summon/live-write-into-editor.gif"><span class="figure-slot-icon">►</span><span class="figure-slot-kind">Short clip</span><span class="figure-slot-label"><strong>Writing live into the editor.</strong> Set up: ask Summon (from the dock) to build something in the open note — e.g. “Draft a project brief for the rebrand”. In frame: real blocks — a heading, bullets, a checklist — streaming into the editor block by block as Summon works, with each newly-added block briefly flashing so you can see what changed. Not a pasted wall of text.</span></div><figcaption>Ask Summon to build or edit something and you watch proper Nomima blocks stream into the editor live, each new block flashing as it lands.</figcaption></figure>
+
       <h2 id="mode">Quick answers vs. Deep Research</h2>
       <p>By default Summon answers <strong>concisely</strong> — it does just enough tool work to reply, which keeps most look-ups fast (“what’s overdue?”, “when did I last mention @Sara?”). You don’t set this; it’s how Summon works out of the box.</p>
       <p>When you want more, click the <strong>“Deep research a topic”</strong> quick-action chip. That arms <strong>Deep Research</strong> for your next question: a full multi-pass vault sweep before Summon writes, reading broadly and synthesising across many notes. Reach for it on prompts like “write a brief on everything I know about X” or “audit all my notes on the rebrand”.</p>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="summon/deep-research-chip.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>Arming Deep Research.</strong> Set up: an empty Summon panel, the <strong>“Deep research a topic”</strong> quick-action chip clicked so it reads as armed. In frame: the composer with the Deep Research chip active/highlighted above it, indicating the next question will trigger a full multi-pass vault sweep rather than a quick concise answer.</span></div><figcaption>Concise answers are the default; the “Deep research a topic” chip arms a full multi-pass vault sweep for your next question.</figcaption></figure>
 
       <h2 id="tools">What Summon can do</h2>
       <p>Summon isn’t a generic chatbot with your note pasted in — it has tools to work with your vault directly:</p>
@@ -72,6 +78,8 @@
 
       <h2 id="composer-tags">Composer Smart Tags</h2>
       <p>Type <code>@</code> or <code>#</code> directly inside the Summon input to attach a Smart Tag to your prompt. The pill appears inline — and Summon automatically receives the entity’s full profile (attributes, linked notes) or the top matching vault passages as injected context. You can coin a brand-new tag on the spot if it doesn’t exist yet. This is the fastest way to scope a question: <em>&ldquo;Summarise everything I know about <span class="pill pill-mention">@Priya</span> and <span class="pill pill-hashtag">#launch</span>&rdquo;</em> — no need to mention them by name in plain text.</p>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="summon/composer-smart-tags.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>Smart Tags in the composer.</strong> Set up: the Summon input focused, mid-typing a prompt with <code>@</code> just entered so the tag menu is open. In frame: the inline mention/hashtag suggestion menu below the composer, with a prompt that already contains an attached pill (e.g. a <span class="pill pill-mention">@mention</span> and a <span class="pill pill-hashtag">#hashtag</span>) rendered inline in the input.</span></div><figcaption>Type <code>@</code> or <code>#</code> right in the Summon input to attach a Smart Tag — Summon receives that entity’s full profile as context.</figcaption></figure>
 
       <h2 id="vault-qa">Asking about your vault</h2>
       <ul>
@@ -152,6 +160,8 @@
         <tr><td>Write Apple Notes</td><td>Create and edit notes in the Apple Notes app.</td></tr>
       </table>
       <p class="note"><strong>Terminal has a floor you can’t override:</strong> a built-in safety <strong>denylist</strong> — <code>rm</code>, <code>curl</code>, <code>sudo</code>, <code>ssh</code> and other destructive or exfiltration commands — is <em>always</em> blocked, even if you try to add one to the allowlist.</p>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="summon/capabilities-two-pane.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The Capabilities two-pane.</strong> Set up: Settings → Summon → Capabilities with an action selected (e.g. “Write and edit files”). In frame: the left rail listing capabilities under the <strong>Access</strong> / <strong>Actions</strong> / <strong>Advanced</strong> groups — Access rows showing plain on/off switches — and the right detail pane for the selected action showing its single <strong>Never / Ask first / Allow</strong> segmented control (plus a <strong>Draft only</strong> option where it applies).</span></div><figcaption>Access reads are simple switches; every Action carries one Never / Ask first / Allow control that is both its on/off and its permission level.</figcaption></figure>
 
       <h3>Advanced</h3>
       <p><strong>Background tasks</strong> sets how many queued <a href="#assign">assigned tasks</a> Summon runs in parallel. Higher clears a backlog faster but uses more of your AI provider’s rate limit; 2 is recommended.</p>

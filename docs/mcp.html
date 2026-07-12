@@ -44,6 +44,8 @@
         <li>Optionally toggle <strong>Allow writes</strong> if you want external tools to be able to create and edit notes — leave it off for read-only access.</li>
       </ol>
 
+      <figure class="guide-figure"><div class="figure-slot" data-shot="mcp/vault-server-panel.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The inbound Vault MCP server panel.</strong> Set up: Settings → MCP Server with <strong>Enable Server</strong> switched on. In frame: the local server URL <code>http://127.0.0.1:4123/mcp</code>, the masked <strong>bearer token</strong> with its reveal and <strong>Rotate Token</strong> controls, and the <strong>Allow writes</strong> toggle (shown off, read-only).</span></div><figcaption>Enable the server, copy the token, and decide whether external tools may write — all from one panel.</figcaption></figure>
+
       <h2 id="connect">Connecting a client</h2>
       <p>Point any MCP client at the URL with the token as a bearer credential. For Claude Code, for example:</p>
       <pre><code>claude mcp add --transport http nomima \
@@ -111,6 +113,8 @@
         <li>A <strong>Test connection</strong> button that runs the handshake and reports how many tools the server offers.</li>
       </ul>
       <p>Once it’s on, ask Summon things like “what’s the current API for &lt;library&gt;?” and it can pull live documentation instead of leaning on the model’s training cut-off.</p>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="mcp/context7-capability.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The “Look up library docs” outbound capability.</strong> Set up: Settings → Summon → Capabilities with <strong>Look up library docs</strong> selected under the Access group. In frame: the on/off toggle switched on, the optional <code>ctx7sk-…</code> API-key field, and the <strong>Test connection</strong> button showing its result (the count of tools the Context7 server offers).</span></div><figcaption>Context7 is the built-in outbound MCP server — toggle it on, optionally add a <code>ctx7sk-</code> key, and Test connection to verify the handshake.</figcaption></figure>
 
       <h3 id="custom-outbound">Custom outbound servers</h3>
       <p>The client isn’t limited to Context7 — under the hood it can connect to <strong>any Streamable-HTTP MCP endpoint</strong> (an <code>https://…/mcp</code> URL, with an optional auth header), turning that server’s tools into things Summon can call. Built-in servers like Context7 can be disabled but not removed.</p>

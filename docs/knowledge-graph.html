@@ -63,11 +63,38 @@
         <tr><td>Re-cluster</td><td>Change the clustering basis in the legend — group the graph around notebooks (default) or around any entity type.</td></tr>
       </table>
 
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="knowledge-graph/cluster-by-legend.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Clustering by type.</strong> Set up: in the full graph, open the legend’s <strong>“Cluster by”</strong> control and pick an entity type (e.g. Person). In frame: the nodes pulled apart into separated, labelled blobs — one cluster per group with its floating centroid label — and the “Cluster by” legend showing the active type highlighted alongside the other type swatches and their counts.</span>
+        </div>
+        <figcaption>The “Cluster by” legend regroups the whole graph around notebooks (default) or any entity type.</figcaption>
+      </figure>
+
       <h2 id="panel">The entity panel</h2>
       <p>Clicking a node opens a panel showing the entity’s name, type and connection count, plus its relationships grouped by kind — <em>Appears in</em>, <em>Assigned to</em>, <em>Due</em>, <em>Related</em> and so on. Every related item is clickable: hop from a person to a project to the note where they intersect. This is the same <strong>entity card</strong> you get by clicking a pill in the editor — including its custom attributes (see <a href="smart-tags.html#entity-cards">Mentions &amp; hashtags</a>).</p>
 
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="knowledge-graph/entity-panel.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>A selected node’s connections.</strong> Set up: click a well-connected node (e.g. a person tagged across several notes) so its detail panel opens. In frame: the entity card with the name, type-coloured icon and connection count at the top, then relationships grouped by kind — <em>Appears in</em>, <em>Assigned to</em>, <em>Related</em> — each a clickable row; behind it, that node’s edges highlighted with their flowing particles.</span>
+        </div>
+        <figcaption>The same entity card as clicking a pill — every related item clickable to hop across the vault.</figcaption>
+      </figure>
+
       <h2 id="cover">The in-note cover graph</h2>
       <p>Each notebook can show a compact graph above the page — just that note’s entities and their immediate connections. It’s fully interactive (drag to pan, drag nodes, click to inspect, <kbd>⌘</kbd>+scroll to zoom), and when you scroll down to write, it parks itself to keep the editor fast.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="knowledge-graph/cover-graph.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The in-note cover graph.</strong> Set up: open a notebook that mentions several entities, scrolled to the top so the cover graph sits above the title. In frame: the compact graph band spanning the top of the page — just this note’s glowing type-coloured nodes and their immediate links — with the editor title and first lines beginning right beneath it.</span>
+        </div>
+        <figcaption>A per-note mini-graph above the page — fully interactive, and it parks itself as you scroll to write.</figcaption>
+      </figure>
 
       <h2 id="maintenance">If something looks off</h2>
       <p><strong>Settings → Vault → Re-index</strong> rebuilds the entire graph from scratch, deterministically. It’s the only manual maintenance action in Nomima and exists as a safety net — day to day, the graph keeps itself current.</p>

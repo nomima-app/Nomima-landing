@@ -66,6 +66,15 @@
         <li><strong>Sort, group, filter.</strong> Sort by any field (or by name / mention-count); group rows under a field's value; and filter with attribute predicates — <em>is</em>, <em>is not</em>, <em>contains</em>, <em>&gt;</em>, <em>&lt;</em>, <em>is set</em>, <em>is empty</em> — combined with <em>match all</em> (AND) or <em>match any</em> (OR).</li>
       </ul>
 
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="advanced-blocks/entity-table.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>An entity table of a type.</strong> Set up: an <code>/entity-table</code> set to Person, so it lists several people one per row with their attribute columns filled (role, company…). In frame: the type dropdown in the header, the leading name cell showing each entity's avatar and mention-count, and a couple of attribute columns.</span>
+        </div>
+        <figcaption>A live grid of every entity of a type — edits write straight to the entity.</figcaption>
+      </figure>
+
       <h3>Query table (derived) — <code>/query-table</code></h3>
       <p>The most powerful of the three, and the least obvious: a <strong>saved search whose rows are blocks</strong>. Instead of rows you type, a query table shows <em>every block anywhere in your vault</em> that carries the pills you filter on — and it keeps itself current as you write.</p>
       <p><strong>Binding it to pills.</strong> A new query table is empty. Click <em>Add filter</em> and pick a pill from the list (it draws from the same @/# registry the editor uses, and shows how many blocks carry each). Each filter you add is one pill — a <span class="pill pill-mention">@mention</span> or a <span class="pill pill-hashtag">#hashtag</span>. That's the whole binding: the table is “every block that has these pills”.</p>
