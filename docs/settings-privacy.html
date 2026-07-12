@@ -35,28 +35,59 @@
       <h2 id="settings">Settings map</h2>
       <table>
         <tr><th>Panel</th><th>What’s in it</th></tr>
-        <tr><td>General</td><td>Update notifications and core preferences.</td></tr>
-        <tr><td>Appearance</td><td>Theme presets and light/dark mode.</td></tr>
+        <tr><td>Appearance</td><td>The full theme catalog and light/dark mode — see <a href="#appearance">Appearance &amp; themes</a> below.</td></tr>
         <tr><td>Smart Tag Types</td><td>Add and edit mention/hashtag types — label, icon, color, attribute fields — and the “Suggest Smart Tags as I type” toggle. See <a href="smart-tags.html#custom">Mentions &amp; hashtags</a>.</td></tr>
+        <tr><td>Highlights</td><td>Edit the highlight categories used in the reader — the colour-coded research buckets that drive the References library and each citation’s lineage. See <a href="references-and-citations.html">References &amp; citations</a>.</td></tr>
         <tr><td>Sound</td><td>Keyboard sound packs for ASMR blocks and the smart-tag recognition chime.</td></tr>
-        <tr><td>Vault</td><td>Storage stats (size, notebooks, files, index), the full <strong>Re-index</strong> button, cleanup utilities, and your vault’s metadata.</td></tr>
+        <tr><td>Vault</td><td>Storage stats (size, notebooks, files, entities), the full <strong>Re-index</strong> button, cleanup utilities, and your vault’s metadata.</td></tr>
         <tr><td>AI Models</td><td>Provider keys, model choice, test connection. See <a href="ai-models.html">AI models</a>.</td></tr>
-        <tr><td>Summon Agent</td><td>Permissions for web search, filesystem and shell. See <a href="summon.html">Summon</a>.</td></tr>
+        <tr><td>Summon → Capabilities</td><td>What Summon can read and do — web, files, Mac apps, library docs, and the gated actions. See <a href="summon.html#permissions">Summon</a>.</td></tr>
+        <tr><td>Memory</td><td>The agent memories Summon keeps about you and your work — review and clear what it has remembered.</td></tr>
         <tr><td>MCP Server</td><td>Enable the server, manage the token, allow writes, watch the activity log. See <a href="mcp.html">MCP server</a>.</td></tr>
-        <tr><td>About &amp; Updates</td><td>Version, <strong>Check for updates</strong> button, and Nomima’s privacy guarantees.</td></tr>
+        <tr><td>Connectors</td><td>Personal tokens for Atlassian (Confluence/Jira), Notion and GitHub, so private pages can be read, highlighted and cited. Tokens are stored in your macOS Keychain; requests go straight from your device to the service. See <a href="references-and-citations.html">References &amp; citations</a>.</td></tr>
         <tr><td>Help &amp; diagnostics</td><td>The in-app bug reporter. Captures a redacted snapshot of recent activity, lets you review exactly what’s included, and submits it to the public issues board — queues offline if you’re not connected. See also <a href="../report.html">nomima.io/report</a> for the open issues board.</td></tr>
+        <tr><td>About</td><td>Version, the <strong>Check for updates</strong> button, a “What’s new” card, and the Nomima tagline.</td></tr>
       </table>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="settings-privacy/connectors-panel.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The Connectors panel.</strong> Set up: Settings → Connectors. In frame: the rows for <strong>Atlassian (Confluence/Jira)</strong>, <strong>Notion</strong> and <strong>GitHub</strong>, each with a personal-token field (masked once saved) and a note that tokens live in the macOS Keychain and requests go straight from your device to the service.</span></div><figcaption>Add personal tokens for Confluence/Jira, Notion and GitHub so private pages can be read, highlighted and cited — tokens stay in your Keychain.</figcaption></figure>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="settings-privacy/highlights-panel.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The Highlights panel.</strong> Set up: Settings → Highlights. In frame: the editable list of colour-coded highlight categories used in the reader — each row showing its colour swatch and label — which drive the References library and each citation’s lineage.</span></div><figcaption>Edit the colour-coded research buckets you highlight with while reading — they flow through to the References library and citations.</figcaption></figure>
+
+      <h2 id="appearance">Appearance &amp; themes</h2>
+      <p>Nomima ships <strong>27 built-in themes</strong> in the Appearance panel, organised into five groups. Pick one and the whole app re-skins instantly — editor, sidebar, graph and all.</p>
+
+      <h3>Signature</h3>
+      <p>The three brand looks. <strong>Nomima Glass</strong> is the default — a translucent, frosted shell. <strong>Nomima Dark</strong> and <strong>Nomima Light</strong> are its solid siblings.</p>
+
+      <h3>Scenes</h3>
+      <p>Nine themes that paint a scenic backdrop behind the translucent app, drifting slowly (and honouring your system’s reduced-motion setting): <strong>Aurora</strong>, <strong>Nightfall</strong>, <strong>Space</strong>, <strong>Forest</strong>, <strong>Ocean</strong>, <strong>Desert</strong>, <strong>Sunset</strong>, <strong>Highlands</strong> and <strong>Daybreak</strong>.</p>
+
+      <h3>Dark</h3>
+      <p>Six solid dark hue families: <strong>Midnight</strong>, <strong>Focus</strong>, <strong>Evergreen</strong>, <strong>Copper</strong>, <strong>Nova</strong> and <strong>Mono</strong>.</p>
+
+      <h3>Light</h3>
+      <p>Seven solid light hue families: <strong>Paper</strong>, <strong>Frost</strong>, <strong>Blush</strong>, <strong>Lavender</strong>, <strong>Slate</strong>, <strong>Bloom</strong> and <strong>Mono Light</strong>.</p>
+
+      <h3>Accessibility</h3>
+      <p>Two high-contrast themes tuned to <strong>WCAG AAA</strong>: <strong>High Contrast Dark</strong> and <strong>High Contrast Light</strong>.</p>
+
+      <p class="note"><strong>A couple of quirks worth knowing:</strong> <strong>Mono</strong> and <strong>Mono Light</strong> desaturate the entire app to strict black, white and grey. <strong>Nova</strong>, <strong>Bloom</strong> and every Scene use gradient accent buttons rather than a flat colour.</p>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="settings-privacy/theme-gallery-scene.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The Appearance theme gallery.</strong> Set up: Settings → Appearance with a <strong>Scene</strong> theme applied (e.g. Aurora or Nightfall) so the scenic backdrop shows behind the translucent app. In frame: the theme swatches organised under their group headers (<strong>Signature</strong>, <strong>Scenes</strong>, <strong>Dark</strong>, <strong>Light</strong>, <strong>Accessibility</strong>) with the active Scene swatch selected, and the drifting background visible behind the panel.</span></div><figcaption>27 themes in five groups — here a Scene theme paints a slowly drifting backdrop behind the frosted app.</figcaption></figure>
 
       <h2 id="privacy">Privacy: what stays, what leaves</h2>
       <p>Nomima is local-first in the literal sense. Your vault — every note, file, comment and graph relationship — lives in a folder on your Mac (under <code>~/Library/Application Support</code>), stored in an ordinary SQLite database. No account exists, no telemetry is collected, nothing syncs anywhere.</p>
-      <h3>The complete list of network calls</h3>
+      <h3>Every network call, and what triggers it</h3>
       <table>
         <tr><th>Call</th><th>When</th><th>What’s sent</th></tr>
         <tr><td>Update check</td><td>On launch / when you click “Check for updates”</td><td>A request for a version file — nothing about you or your notes</td></tr>
         <tr><td>AI provider calls</td><td>Only when <em>you</em> use Summon, with a provider <em>you</em> configured</td><td>The conversation and relevant note context, to the provider you chose</td></tr>
         <tr><td>Summon web search</td><td>Only if you enabled it in Settings</td><td>The search query</td></tr>
+        <tr><td>Publishing</td><td>Only when <em>you</em> publish a note</td><td>A snapshot of that note, uploaded to read.nomima.io so it can be viewed on the web, plus a small usage/analytics ping for the published page</td></tr>
+        <tr><td>Bookmark &amp; article fetch</td><td>Only when <em>you</em> paste a URL as a bookmark or pop out its web view</td><td>A request to the page you’re bookmarking, to fetch its content</td></tr>
+        <tr><td>Bug report</td><td>Only when <em>you</em> send a report from Help &amp; diagnostics</td><td>The redacted snapshot you reviewed, to the public issues board</td></tr>
       </table>
-      <p>That’s the whole list. Offline, with no AI configured, Nomima makes <strong>zero</strong> network requests that involve your data — and every feature outside the AI section works exactly the same.</p>
+      <p>That’s the whole list — and outside of AI calls, everything here is triggered only when <em>you</em> publish a note, bookmark a page, or send a bug report. Offline, with no AI configured and none of those actions taken, Nomima makes <strong>zero</strong> network requests that involve your data, and every feature outside the AI section works exactly the same.</p>
 
       <h2 id="pro">Pricing — it's all free</h2>
       <p>Nomima is completely free. Every feature — the full editor and every block, Smart Tags, the Knowledge Graph, Smart Views and Home, search, files, the Summon assistant, the MCP server, and creating your own templates — is included at no cost. There is no paid tier, no license key, and no subscription.</p>

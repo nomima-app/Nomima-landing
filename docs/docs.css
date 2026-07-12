@@ -135,3 +135,89 @@ kbd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11
 .docs-foot { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border-soft); font-size: 12px; color: var(--fg-faint); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .docs-foot a { color: var(--fg-dim); text-decoration: none; }
 .docs-foot a:hover { color: var(--accent); }
+
+/* ─────────────────────────────────────────────────────────────
+   Walkthrough & visual layer (v1.17 guide overhaul)
+   ───────────────────────────────────────────────────────────── */
+
+/* Figures: a framed screenshot / diagram with an optional caption. Until a real
+   screenshot is dropped in, a .figure-slot renders a labelled placeholder that
+   doubles as the capture spec (see CAPTURE-CHECKLIST.md). */
+.guide-figure { margin: 6px 0 22px; }
+.guide-figure .figure-img {
+  display: block; width: 100%; height: auto; border-radius: 12px;
+  border: 1px solid var(--border); background: var(--bg-soft); cursor: zoom-in;
+}
+.guide-figure figcaption { margin-top: 9px; font-size: 12.5px; color: var(--fg-faint); text-align: center; }
+.figure-slot {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; aspect-ratio: 16 / 10; padding: 20px; text-align: center;
+  border: 1.5px dashed rgba(99,102,241,0.38); border-radius: 12px;
+  background:
+    radial-gradient(120% 100% at 50% 0%, rgba(99,102,241,0.07), transparent 70%),
+    var(--bg-soft);
+}
+.figure-slot-icon {
+  width: 40px; height: 40px; display: grid; place-items: center; border-radius: 10px;
+  background: rgba(99,102,241,0.12); color: var(--accent); font-size: 20px; line-height: 1;
+}
+.figure-slot-kind { font-size: 10.5px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.figure-slot-label { font-size: 13px; color: var(--fg-dim); max-width: 44ch; line-height: 1.5; }
+.figure-slot-label strong { color: var(--fg); }
+.figure-slot.slot-gif { border-color: rgba(240,72,168,0.40); }
+.figure-slot.slot-gif .figure-slot-icon { background: rgba(240,72,168,0.12); color: var(--accent-2); }
+.figure-slot.slot-gif .figure-slot-kind { color: var(--accent-2); }
+
+.figure-slot-ref { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 2px; }
+.figure-slot-ref .ref-num { font-size: 12px; font-weight: 800; letter-spacing: 0.06em; color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-2)); border-radius: 999px; padding: 3px 10px; }
+.figure-slot-ref code { font-size: 11.5px; color: var(--fg-dim); opacity: 0.85; word-break: break-all; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.figure-slot.slot-gif .figure-slot-ref .ref-num { background: linear-gradient(135deg, var(--accent-2), var(--accent)); }
+
+/* Numbered walkthrough: a guided sequence, each step paired with a figure. */
+.walk { list-style: none; margin: 26px 0 0; padding: 0; counter-reset: walk; display: flex; flex-direction: column; gap: 30px; }
+.walk > li { counter-increment: walk; position: relative; padding-left: 52px; }
+.walk > li::before {
+  content: counter(walk); position: absolute; left: 0; top: 0;
+  width: 34px; height: 34px; display: grid; place-items: center;
+  font-size: 15px; font-weight: 800; color: #fff; border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 2px 12px rgba(99,102,241,0.35);
+}
+.walk > li::after {
+  content: ""; position: absolute; left: 16px; top: 40px; bottom: -30px; width: 2px;
+  background: linear-gradient(var(--border), transparent);
+}
+.walk > li:last-child::after { display: none; }
+.walk h3 { margin: 4px 0 6px; font-size: 16.5px; font-weight: 700; color: var(--fg); }
+.walk p { margin-bottom: 10px; }
+
+/* Task-based "How do I…?" cards for the guide home. */
+.howto-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); gap: 13px; margin: 22px 0 8px; }
+.howto-card {
+  display: block; text-decoration: none; border-radius: 14px; padding: 16px 18px;
+  background: var(--bg-card); border: 1px solid var(--border-soft);
+  transition: border-color 0.15s, transform 0.15s;
+}
+.howto-card:hover { border-color: rgba(99,102,241,0.45); transform: translateY(-1px); }
+.howto-verb { font-size: 10.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+.howto-card h3 { margin: 5px 0 4px; font-size: 14.5px; font-weight: 700; color: var(--fg); }
+.howto-card p { margin: 0; font-size: 12.5px; color: var(--fg-dim); line-height: 1.5; }
+
+/* Recap / milestone card — closes a walkthrough. */
+.recap { display: flex; gap: 14px; align-items: flex-start; margin: 30px 0 8px; padding: 18px 20px; border-radius: 14px; background: linear-gradient(130deg, rgba(99,102,241,0.12), rgba(240,72,168,0.08)); border: 1px solid rgba(99,102,241,0.28); }
+.recap-badge { flex: 0 0 auto; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; background: var(--green); color: #04120b; font-size: 18px; font-weight: 900; }
+.recap h3 { margin: 2px 0 5px; font-size: 15px; color: var(--fg); }
+.recap p { margin: 0; font-size: 13.5px; }
+
+/* Annotated interface diagram (inline SVG, no screenshot needed). */
+.iface-diagram { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-soft); margin: 6px 0 8px; }
+.iface-legend { list-style: none; margin: 14px 0 16px; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 24px; }
+.iface-legend li { font-size: 13px; color: var(--fg-dim); margin: 0; padding: 3px 0; }
+.iface-legend strong { color: var(--fg); }
+@media (max-width: 640px) { .iface-legend { grid-template-columns: 1fr; } }
+
+/* Lightbox for click-to-zoom figures. */
+.lightbox { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 40px; background: rgba(4,4,10,0.86); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); cursor: zoom-out; }
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 12px; box-shadow: 0 20px 80px rgba(0,0,0,0.6); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .howto-card, .guide-figure .figure-img { transition: none; } }

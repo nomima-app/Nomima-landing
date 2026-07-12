@@ -44,6 +44,8 @@
         <li>Optionally toggle <strong>Allow writes</strong> if you want external tools to be able to create and edit notes — leave it off for read-only access.</li>
       </ol>
 
+      <figure class="guide-figure"><div class="figure-slot" data-shot="mcp/vault-server-panel.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The inbound Vault MCP server panel.</strong> Set up: Settings → MCP Server with <strong>Enable Server</strong> switched on. In frame: the local server URL <code>http://127.0.0.1:4123/mcp</code>, the masked <strong>bearer token</strong> with its reveal and <strong>Rotate Token</strong> controls, and the <strong>Allow writes</strong> toggle (shown off, read-only).</span></div><figcaption>Enable the server, copy the token, and decide whether external tools may write — all from one panel.</figcaption></figure>
+
       <h2 id="connect">Connecting a client</h2>
       <p>Point any MCP client at the URL with the token as a bearer credential. For Claude Code, for example:</p>
       <pre><code>claude mcp add --transport http nomima \
@@ -60,8 +62,10 @@
       <table>
         <tr><th>Tool</th><th>What it returns</th></tr>
         <tr><td>search_notes</td><td>Full-text search across the vault</td></tr>
+        <tr><td>semantic_search</td><td>A backward-compat alias of <code>search_notes</code> — the same keyword (full-text) search, <em>not</em> vector/embedding search</td></tr>
         <tr><td>list_notebooks</td><td>All notes with previews</td></tr>
         <tr><td>get_note</td><td>A complete note’s content</td></tr>
+        <tr><td>get_note_blocks</td><td>A note’s structured block tree (with block ids) — inspect before editing or deleting blocks</td></tr>
         <tr><td>knowledge_graph</td><td>Entities, relations and clusters</td></tr>
         <tr><td>list_tasks</td><td>Open and dated checkboxes, chronologically</td></tr>
         <tr><td>list_reminders</td><td>Tracked reminders with due times</td></tr>
@@ -73,7 +77,13 @@
         <tr><td>create_note</td><td>Creates a new notebook from a title and Markdown body</td></tr>
         <tr><td>append_to_note</td><td>Appends Markdown to an existing note</td></tr>
         <tr><td>add_blocks</td><td>Inserts structured Nomima blocks — checklists, callouts, columns, <strong>databases</strong> (typed columns whose cells become Smart Tags), <strong>terminals</strong>, <strong>embeds / video</strong>, code, reminders, Kanban/Gantt/widgets and more, with a layout guide for composing complex notebooks</td></tr>
+        <tr><td>rename_note</td><td>Changes an existing note’s title</td></tr>
+        <tr><td>update_block</td><td>Replaces a single block in place, by block id</td></tr>
+        <tr><td>replace_note_content</td><td>Discards a note’s existing blocks and rewrites it from scratch</td></tr>
+        <tr><td>delete_block</td><td>Permanently removes a single block from a note</td></tr>
+        <tr><td>delete_note</td><td>Permanently deletes a whole note and all its blocks — cannot be undone</td></tr>
       </table>
+      <p class="note"><strong>Writes are powerful — connect only trusted clients:</strong> with “Allow writes” on, a connected tool can not only create and append, but also rename, overwrite (<code>replace_note_content</code>) and <strong>permanently delete</strong> notes and blocks. Those deletions can’t be undone, so leave writes off unless you trust the client, and watch the activity log below.</p>
       <p class="note"><strong>Discoverable schema:</strong> a connected tool can call <code>get_editor_schema</code> (or read the <code>nomima://schema/editor</code> resource) to fetch the exact shape of every block it can author — fields, examples, and how to nest them — so what it sends always renders correctly.</p>
 
       <h2 id="log">Watching the activity log</h2>
@@ -85,6 +95,30 @@
         <li>Have an agent file <strong>meeting summaries</strong> or research results directly into the vault as proper notes.</li>
         <li>Query open tasks from any MCP-capable workflow tool.</li>
       </ul>
+
+      <h2 id="outbound">The other direction: Nomima as an MCP client</h2>
+      <p>Everything above is the <strong>inbound</strong> server — <em>other</em> tools reaching <em>into</em> your vault. Nomima also works the opposite way, as an MCP <strong>client</strong>: it can reach <strong>out</strong> to remote MCP servers and bridge their tools into <a href="summon.html">Summon</a>. Same protocol, opposite direction — they share the “MCP” name but point at each other, so it’s worth keeping them straight:</p>
+      <table>
+        <tr><th></th><th>Inbound (the rest of this page)</th><th>Outbound (this section)</th></tr>
+        <tr><td>Direction</td><td>Your editors → your vault</td><td>Summon → a remote server</td></tr>
+        <tr><td>Who hosts it</td><td>Nomima runs the server on <code>127.0.0.1</code></td><td>Nomima connects to someone else’s server</td></tr>
+        <tr><td>Configured in</td><td>Settings → MCP Server</td><td>Settings → Summon → Capabilities</td></tr>
+      </table>
+
+      <h3 id="context7">Context7 — up-to-date library docs</h3>
+      <p>Nomima ships one outbound server built in: <strong>Context7</strong>, a source of <strong>up-to-date library &amp; framework documentation</strong>. It appears as the Summon capability <strong>“Look up library docs”</strong> under <strong>Settings → Summon → Capabilities</strong>, where you’ll find:</p>
+      <ul>
+        <li><strong>A toggle</strong> to turn it on — it’s off by default.</li>
+        <li>An <strong>optional API key</strong> (a <code>ctx7sk-…</code> token). Context7 works without one at lower rate limits; a free key from your Context7 dashboard raises them.</li>
+        <li>A <strong>Test connection</strong> button that runs the handshake and reports how many tools the server offers.</li>
+      </ul>
+      <p>Once it’s on, ask Summon things like “what’s the current API for &lt;library&gt;?” and it can pull live documentation instead of leaning on the model’s training cut-off.</p>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="mcp/context7-capability.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The “Look up library docs” outbound capability.</strong> Set up: Settings → Summon → Capabilities with <strong>Look up library docs</strong> selected under the Access group. In frame: the on/off toggle switched on, the optional <code>ctx7sk-…</code> API-key field, and the <strong>Test connection</strong> button showing its result (the count of tools the Context7 server offers).</span></div><figcaption>Context7 is the built-in outbound MCP server — toggle it on, optionally add a <code>ctx7sk-</code> key, and Test connection to verify the handshake.</figcaption></figure>
+
+      <h3 id="custom-outbound">Custom outbound servers</h3>
+      <p>The client isn’t limited to Context7 — under the hood it can connect to <strong>any Streamable-HTTP MCP endpoint</strong> (an <code>https://…/mcp</code> URL, with an optional auth header), turning that server’s tools into things Summon can call. Built-in servers like Context7 can be disabled but not removed.</p>
+      <p class="note"><strong>Treated as untrusted:</strong> whatever an outbound MCP tool returns is handled as <strong>untrusted web content</strong> — Summon never follows instructions hidden inside it, exactly as it treats any page it fetches from the web.</p>
 
       <nav class="docs-pager" id="docs-pager"></nav>
       <footer class="docs-foot" id="docs-foot"></footer>

@@ -42,28 +42,73 @@
       </ul>
       <p class="tip"><strong>Want it raw?</strong> <kbd>⌘⇧V</kbd> pastes plain text with no interpretation at all.</p>
 
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="power-tools/smartcopy-paste.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>A SmartCopy paste result.</strong> Set up: copy an AI chat answer that has a heading, a bullet list, a checkbox and a code block, then paste it into a note with <kbd>⌘V</kbd>. In frame: the pasted content rendered as real blocks — heading, list, checkbox and a language-tagged code block — not flat text.</span>
+        </div>
+        <figcaption>Paste unpacks into real blocks, not a wall of text.</figcaption>
+      </figure>
+
       <h2 id="templates">Templates</h2>
       <ul>
         <li><strong>Use a template</strong> (free): when creating a notebook, pick a template and it starts with that structure — meeting notes, weekly review, whatever you’ve saved.</li>
         <li><strong>Save as template</strong>: open the <code>⋯</code> menu on any notebook and choose <strong>Save as template…</strong> — its block structure becomes reusable. Rename or delete templates from the same picker.</li>
       </ul>
 
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="power-tools/templates-picker.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The template picker.</strong> Set up: start creating a new notebook so the template picker appears, with a couple of saved templates (e.g. “Meeting notes”, “Weekly review”) listed alongside the blank option. In frame: the picker with the template choices visible.</span>
+        </div>
+        <figcaption>Pick a template when creating a notebook — it starts with that structure.</figcaption>
+      </figure>
+
       <h2 id="history">Version history — time travel</h2>
       <p>Open a notebook’s <code>⋯</code> menu and pick <strong>Version history…</strong> to scrub back through how a note grew, version by version. Drag the slider (or arrow-key it) and watch any past version replay as the real, rendered notebook — blocks that were added show tinted green, blocks that were deleted stay in place struck through in red — so you can see exactly what changed at each step.</p>
       <ul>
         <li><strong>One snapshot per session</strong> — Nomima captures a version once per editing session, not on every keystroke, so the timeline stays meaningful.</li>
-        <li><strong>Restore, never lose</strong> — hit <strong>Restore</strong> to bring a past version back. Restoring first saves your current state as its own point, so nothing is ever thrown away.</li>
-        <li><strong>Pin checkpoints</strong> — pin any version as a gold-starred checkpoint that’s kept forever.</li>
+        <li><strong>Restore, never lose</strong> — hit <strong>Restore</strong> to bring a past version back. It writes that version in as the live note and drops a restore-point marker on the timeline; your pre-restore work is already the newest auto-saved snapshot, so nothing is ever thrown away.</li>
+        <li><strong>Pin checkpoints</strong> — pin any version (the Pin icon) as a checkpoint that’s kept forever.</li>
         <li><strong>Tidy by design</strong> — history is compressed and thinned as it ages. <strong>Settings → Vault</strong> shows the space it uses with a one-click Clear-all.</li>
       </ul>
       <p class="note"><strong>On-device:</strong> your version history stays on your Mac like the rest of your notes.</p>
 
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="power-tools/version-history.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The version-history slider.</strong> Set up: open a notebook's Version history and drag the slider to a past version, so the replay shows added blocks tinted green and deleted blocks struck through in red. In frame: the timeline slider along the bottom and the diff-coloured note above it.</span>
+        </div>
+        <figcaption>Scrub the slider to replay any past version, changes colour-coded.</figcaption>
+      </figure>
+
       <h2 id="comments">Comments &amp; follow-ups</h2>
       <p>Select any text and add a comment. Threads support replies and a resolved state. Comment locations show as accent-colored dashes on the <strong>Smart Scrollbar</strong> — hover to peek, click to jump to the thread. Resolved threads fade out of the way.</p>
-      <p><strong>Follow-ups</strong> give a completed item a running log. When you finish a checklist or section, click its <strong>↳</strong> button to open the side window on a <strong>Follow-ups</strong> tab — a timestamped trail of what you did next (&ldquo;emailed @Asal&rdquo;, &ldquo;moved to tomorrow&rdquo;) instead of cluttering the note with extra blocks. The entry box is a real editor: <code>@</code> mentions, <code>#</code> tags and dates (&ldquo;tomorrow&rdquo;) all turn into Smart Tags as you type. A small <strong>↳</strong> marker stays in the margin so you can reopen the log anytime.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="power-tools/comment-scrollbar.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Comments on the Smart Scrollbar.</strong> Set up: a note with two or three comment threads, so accent-coloured dashes appear on the Smart Scrollbar at the right edge; hover one so its thread preview shows. In frame: the scrollbar dashes and an open comment thread beside the commented text.</span>
+        </div>
+        <figcaption>Comment locations show as dashes on the Smart Scrollbar.</figcaption>
+      </figure>
+      <p><strong>Follow-ups</strong> give a completed item a running log. When you finish a checklist or section, click its <strong>↳</strong> button to open the side window on a <strong>Follow-ups</strong> tab — a timestamped trail of what you did next (&ldquo;emailed @Sara&rdquo;, &ldquo;moved to tomorrow&rdquo;) instead of cluttering the note with extra blocks. The entry box is a real editor: <code>@</code> mentions, <code>#</code> tags and dates (&ldquo;tomorrow&rdquo;) all turn into Smart Tags as you type. A small <strong>↳</strong> marker stays in the margin so you can reopen the log anytime.</p>
 
       <h2 id="entity-view">The Entity view</h2>
       <p>Click any <strong>@mention</strong> or <strong>#hashtag</strong> to open its card, then hit <strong>Expand</strong> for a full page about that person, company or tag: how often and where you've used it, how it <strong>ranks</strong> among your other tags, what it most often <strong>appears alongside</strong> (click to hop between entities), usage trends over time and by notebook, and how complete its profile is. If you've recorded the same thing two ways, <strong>Merge</strong> (in the card's Manage panel) folds one into the other — every mention is rewritten to the survivor (only within the same kind, so <code>#</code> tags and <code>@</code> mentions stay separate).</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="power-tools/entity-view.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The expanded Entity view.</strong> Set up: click a well-used <span class="pill pill-mention">@mention</span> or <span class="pill pill-hashtag">#hashtag</span>, then hit <strong>Expand</strong> to open its full page. In frame: the entity's header, its rank among other tags, the “appears alongside” co-occurrence list, and a usage-over-time trend.</span>
+        </div>
+        <figcaption>A full page about any person, company or tag — usage, rank and co-occurrence.</figcaption>
+      </figure>
 
       <h2 id="export">Sharing &amp; publishing</h2>
       <p>Publish any notebook to the web from its <code>⋯</code> menu — Nomima creates a pixel-exact, read-only page at <strong>read.nomima.io</strong> gated by a view-code. Edits auto-update the published page, and the raw note JSON never leaves your device. Free, like the rest of Nomima.</p>
@@ -82,14 +127,24 @@
         <tr><th>Keys</th><th>Action</th></tr>
         <tr><td><kbd>⌘K</kbd></td><td>Command palette — search everything, run commands</td></tr>
         <tr><td><kbd>Tab</kbd></td><td>Accept the suggested tag / ghost suggestion; indent in lists and code</td></tr>
+        <tr><td><kbd>Tab</kbd> <em>(in a Carousel)</em></td><td>Hop to the next card — and <strong>add a card</strong> when you Tab past the last one, so you build a strip by typing then tabbing. <kbd>⇧Tab</kbd> steps back a card.</td></tr>
         <tr><td><kbd>Enter</kbd></td><td>Accept tag suggestion; arm a reminder; jump from a block title into its body</td></tr>
         <tr><td><kbd>Esc</kbd></td><td>Dismiss menus and ghosts; close Summon</td></tr>
         <tr><td><kbd>←</kbd> <kbd>→</kbd></td><td>Step across a pill as a single unit</td></tr>
         <tr><td><kbd>↑</kbd> <kbd>↓</kbd></td><td>Move between lines normally — pills, blocks and lists never trap the caret</td></tr>
         <tr><td><kbd>Backspace</kbd></td><td>Delete a whole pill in one keystroke; on an empty task list, delete the list</td></tr>
-        <tr><td><kbd>⌘Enter</kbd></td><td>Exit a code block</td></tr>
+        <tr><td>Triple-<kbd>Enter</kbd> / <kbd>↓</kbd></td><td>Exit a code block — press Enter on two empty trailing lines, or arrow down past the end</td></tr>
         <tr><td><kbd>⇧Tab</kbd></td><td>Outdent in lists and code</td></tr>
       </table>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="power-tools/command-palette.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The command palette.</strong> Set up: press <kbd>⌘K</kbd> to open the command palette and type a few letters so it shows matching notes and commands. In frame: the palette overlay with its search field and a list of results — notes and runnable commands.</span>
+        </div>
+        <figcaption><kbd>⌘K</kbd> opens the command palette — search everything, run commands.</figcaption>
+      </figure>
 
       <h2 id="updates">Staying up to date</h2>
       <p>Nomima checks for new versions quietly (it never auto-installs anything). When an update exists you’ll see a dismissible banner, and <strong>Settings → About</strong> always has a <strong>Check for updates</strong> button with a download link to the latest release.</p>

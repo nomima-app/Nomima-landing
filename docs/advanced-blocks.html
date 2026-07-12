@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanced blocks — Nomima Guide</title>
+  <meta name="description" content="The deep reference for Nomima's configurable blocks — authored, entity and query databases, dashboards and widgets, Kanban boards, Gantt timelines, Mermaid diagrams and the drawing canvas." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#get">Get it free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Writing</div>
+        <h1 class="docs-title">Advanced blocks</h1>
+        <p class="docs-sub">The blocks that do more than hold text: databases, dashboards, boards, timelines, diagrams and the drawing canvas. Each one is configurable — this page is the deep reference for setting them up and the details that aren't obvious at a glance.</p>
+      </header>
+
+      <p class="note"><strong>Note:</strong> every block here is inserted from the <code>/</code> menu (type <code>/</code>, keep typing to filter, <kbd>Enter</kbd> to insert). The <a href="blocks.html">Blocks</a> page lists all of them in one line each; this page picks up where that leaves off.</p>
+
+      <h2 id="tables">Databases &amp; tables</h2>
+      <p>Nomima has <strong>three</strong> table-shaped blocks. They look similar but come from opposite directions: one you fill in by hand, two that build themselves from data you already have.</p>
+
+      <h3>Authored database — <code>/table</code></h3>
+      <p>The everyday table, where <strong>every row is a record</strong> and <strong>every column has a type</strong>. Insert it (“Table / Database”), name it in the title row, then <kbd>Enter</kbd> drops into the first cell. A fresh table starts with four columns — <em>Item</em> (text), <em>Owner</em> (person), <em>Due</em> (date), <em>Status</em> (status) — and three empty rows.</p>
+      <ul>
+        <li><strong>Typed columns.</strong> Click a column header to set its type: plain <em>Text</em>, <em>Date</em>, <em>Number</em>, or any Smart Tag type (Person, Status, Project, a custom type…). In a typed column, what you type becomes a real Smart Tag pill — start typing a name and the same @/# suggestions you get in prose appear, scoped to that column's type. A column can also allow <em>multiple</em> entries per cell, or stay single (suggestions stop once the cell holds one pill).</li>
+        <li><strong>Pills index per row.</strong> Each row is its own block with its own identity, so a <span class="pill pill-mention">@person</span> or <span class="pill pill-hashtag">#project</span> in a cell is indexed against <em>that row</em> — it shows up in search, the Knowledge Graph and Smart Views exactly like a pill written in a task. This is the non-obvious part: a database isn't a spreadsheet island, its cells are first-class content.</li>
+        <li><strong>Status &amp; completion.</strong> A row's checkbox stamps a <span class="pill pill-status">#complete</span> pill into its Status column (or the first cell if there's no status column) and clears any other status; unchecking strips it. Put <span class="pill pill-status">#complete</span> on the <em>table title</em> and every row completes at once.</li>
+        <li><strong>Totals.</strong> The calc strip under each column offers type-aware footers: <em>Sum / Average / Min / Max</em> on number columns, a <em>done-count</em> on status columns, and <em>filled/total</em> count on anything. A second per-row total (sum / average / filled) can run down the right edge with a grand total in the corner.</li>
+        <li><strong>Sorting &amp; layout.</strong> The column menu sorts the rows in place (select-type columns sort by their <em>defined</em> option order — High › Normal › Low — not alphabetically). Drag a header's edge to resize a column; blanks always sort last, either direction.</li>
+        <li><strong>Keyboard.</strong> <kbd>Tab</kbd>/<kbd>Shift Tab</kbd> walk the cells in reading order, <kbd>Enter</kbd> adds a row below (pressing it on a wholly empty last row steps out under the table instead, so blanks never pile up), and <kbd>↑</kbd>/<kbd>↓</kbd> hop between rows and out to the title.</li>
+      </ul>
+      <p class="note"><strong>Pasting a table</strong> from a web page, Google Docs, Notion or Markdown drops in as an authored database automatically — the header row becomes your columns, each row a record.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="advanced-blocks/authored-database.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Authored database with typed columns.</strong> Set up: a <code>/table</code> named “Launch tasks” with an Owner column holding real <span class="pill pill-mention">@person</span> pills, a Due date column, and a Status column where one row shows <span class="pill pill-status">#complete</span>. In frame: the header row (showing the column types), 3–4 filled rows, and the calc strip along the bottom.</span>
+        </div>
+        <figcaption>Every column is typed; every row is an indexed record.</figcaption>
+      </figure>
+
+      <h3>Entity table (derived) — <code>/entity-table</code></h3>
+      <p>Not authored rows — a <strong>live view</strong> of your entities. An entity table lists every entity of one chosen type, one row per entity, and shows their attributes as an editable grid. Pick the type from the header dropdown; any Smart Tag type qualifies — Person, Company, Project, or any custom @/# type you've defined (it defaults to Person).</p>
+      <ul>
+        <li><strong>Columns come from the type.</strong> The grid's columns are that type's field schema (the fields you set up for it in Settings), followed by any ad-hoc attributes that turn up in the data — so an attribute you added from an Entity card always surfaces here too. The leading name cell shows each entity's avatar (photo, favicon, or type icon) plus how many notes mention it.</li>
+        <li><strong>Edits round-trip.</strong> Editing a cell writes straight through to that entity's durable attribute store — the same one the Entity card and the Knowledge Graph read. Change a person's role here and the change shows on their card and everywhere else; nothing is copied into this note.</li>
+        <li><strong>Sort, group, filter.</strong> Sort by any field (or by name / mention-count); group rows under a field's value; and filter with attribute predicates — <em>is</em>, <em>is not</em>, <em>contains</em>, <em>&gt;</em>, <em>&lt;</em>, <em>is set</em>, <em>is empty</em> — combined with <em>match all</em> (AND) or <em>match any</em> (OR).</li>
+      </ul>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="advanced-blocks/entity-table.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>An entity table of a type.</strong> Set up: an <code>/entity-table</code> set to Person, so it lists several people one per row with their attribute columns filled (role, company…). In frame: the type dropdown in the header, the leading name cell showing each entity's avatar and mention-count, and a couple of attribute columns.</span>
+        </div>
+        <figcaption>A live grid of every entity of a type — edits write straight to the entity.</figcaption>
+      </figure>
+
+      <h3>Query table (derived) — <code>/query-table</code></h3>
+      <p>The most powerful of the three, and the least obvious: a <strong>saved search whose rows are blocks</strong>. Instead of rows you type, a query table shows <em>every block anywhere in your vault</em> that carries the pills you filter on — and it keeps itself current as you write.</p>
+      <p><strong>Binding it to pills.</strong> A new query table is empty. Click <em>Add filter</em> and pick a pill from the list (it draws from the same @/# registry the editor uses, and shows how many blocks carry each). Each filter you add is one pill — a <span class="pill pill-mention">@mention</span> or a <span class="pill pill-hashtag">#hashtag</span>. That's the whole binding: the table is “every block that has these pills”.</p>
+      <ul>
+        <li><strong>All vs. Any.</strong> With two or more filters, an <em>All / Any</em> toggle appears. <em>All</em> means a block must carry every filter (AND); <em>Any</em> means at least one (OR). One filter needs no toggle.</li>
+        <li><strong>What a row is.</strong> Each row is a single matching <em>block</em> — a task, a paragraph, a callout, a database row, anything. It's shown with its own inline pills rendered as coloured chips, plus a glyph and name for its source notebook. Click a row to jump straight to that block in its note; tick its checkbox to mark it complete (in place, wherever it lives).</li>
+        <li><strong>It's live.</strong> The query re-runs whenever the vault changes and whenever you return to the window, so the table always reflects reality — add <span class="pill pill-hashtag">#launch</span> to a note across the vault and it appears here on its own.</li>
+        <li><strong>Refinements.</strong> Scope a filter to a specific database column (“<span class="pill pill-mention">@Dana</span> <em>in</em> the Owner column”) instead of anywhere in the block; add a live date window (Today, This week, Next 7 days, Overdue, This month, or a fixed range); sort (query order, newest, oldest, recently edited, open first, by notebook); hide completed blocks; or group results by notebook.</li>
+      </ul>
+      <p class="tip"><strong>Tip:</strong> a query table filtered to <span class="pill pill-hashtag">#launch</span> with <em>hide completed</em> on becomes a live “still open for the launch” list that never needs manual upkeep.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="advanced-blocks/query-table-bound.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Query table bound to a pill.</strong> Set up: a <code>/query-table</code> filtered to <span class="pill pill-hashtag">#launch</span> with at least three matching blocks from different notebooks. In frame: the filter bar (the <span class="pill pill-hashtag">#launch</span> chip and the <em>+ Add filter</em> button) directly above the result rows, with each row showing its notebook glyph on the right.</span>
+        </div>
+        <figcaption>Rows are blocks that match the filter — updated live as the vault changes.</figcaption>
+      </figure>
+
+      <h2 id="dashboard">Dashboard &amp; widgets</h2>
+      <p>A <strong>Dashboard</strong> (<code>/dashboard</code>) is a live grid of small widgets that report on your whole vault; a <strong>Widget</strong> (<code>/widget</code>) is a single one of those you can drop anywhere in a note. Both read from the same place — the index of every block you've written (its tasks, dates, pills, notebooks) — and both refresh on their own as you work.</p>
+      <ul>
+        <li><strong>What a widget can show.</strong> Each widget is one small query rendered as a visual: a big <em>number</em>, a <em>ring</em> (a share out of a total), <em>bars</em>, a <em>donut</em>, a <em>trend</em> line, a <em>heatmap</em>, a <em>word cloud</em>, or a <em>list</em>. It can count tasks, reminders, dated items, pills, notes, actions, or any block, and slice them by status, notebook, day, entity type and more.</li>
+        <li><strong>Adding one.</strong> On a dashboard, click a <em>+</em> tile in the grid; on a standalone widget, click the pencil. Either opens the widget editor in a docked panel on the right. Build it the quick way — pick <em>when / who / topics / which notebooks</em> — or drop into the conditions builder for exact filters, then choose a visual. A gallery of one-click presets (Overdue, Due today, Content by type, Activity heatmap, Top people, Hashtag cloud…) is there too.</li>
+        <li><strong>A fresh dashboard starts empty.</strong> The <code>/dashboard</code> block inserts with no widgets — add your first from the <em>+</em> tile in the grid (build it by hand, or drop in a one-click preset). If you want a ready-made set of vault stats without configuring anything, the standalone <a href="smart-views.html#stats">Stats view</a> arrives pre-filled with a curated dashboard instead.</li>
+        <li><strong>Sizing.</strong> The dashboard is a four-column grid of square cells; widgets are 1×1 or 2×1. Drag widgets to rearrange them, and drag the dashboard's bottom edge to add rows (up to six). A standalone widget resizes freely from its corner, and shrinks to fit if you drop it into a narrow column.</li>
+        <li><strong>Title &amp; completion.</strong> Both blocks have an editable title that accepts Smart Tags; a <span class="pill pill-status">#complete</span> in the title marks the block done like any other.</li>
+      </ul>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="advanced-blocks/dashboard-grid.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Dashboard with a few widgets added.</strong> Set up: a <code>/dashboard</code> in a note with some tasks and dated items, then add several widgets from the <em>+</em> tile (a couple of number tiles, a completion ring, a trend or word cloud) so the numbers aren't zero. In frame: the full four-column grid — number tiles on top, the completion ring and a trend/word-cloud row below — with the block's title visible above it.</span>
+        </div>
+        <figcaption>A live bento of vault stats; drag the bottom edge to grow it.</figcaption>
+      </figure>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="advanced-blocks/widget-editor.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Configuring a widget.</strong> Set up: click a dashboard's <em>+</em> tile (or a widget's pencil) so the editor panel opens on the right, with a visual type chosen and at least one condition set. In frame: the docked editor panel beside the note, showing the condition rows and the visual-type picker.</span>
+        </div>
+        <figcaption>The widget editor docks to the right and previews as you build.</figcaption>
+      </figure>
+
+      <h2 id="kanban">Kanban</h2>
+      <p>A board of draggable cards (<code>/kanban</code>). The thing to know up front: the columns are <strong>fixed</strong> — <em>To Do</em>, <em>In Progress</em>, <em>Done</em>, in that order. You don't create or reorder columns, and a card's freeform tags don't decide where it sits.</p>
+      <ul>
+        <li><strong>The one automation.</strong> A card is in the <em>Done</em> column <em>if and only if</em> it carries a <span class="pill pill-status">#complete</span> pill. Drag a card into Done and Nomima adds that pill for you; drag it back out and the pill is removed, but the card <em>stays in whatever column you dropped it in</em>. Equally, type <span class="pill pill-status">#complete</span> onto a card anywhere and it flies to Done on its own — and if you instead delete <span class="pill pill-status">#complete</span> from a card sitting in Done, it flies back to the column it came from. The board and your notes can therefore never disagree about what's done.</li>
+        <li><strong>Other tags do nothing to placement.</strong> Any other status you write on a card (<span class="pill pill-hashtag">#blocked</span>, <span class="pill pill-hashtag">#pending</span>…) is just a visible tag — it stays put, it doesn't move the card.</li>
+        <li><strong>Counts &amp; completion.</strong> The header shows an active-of-total count. A card's checkbox marks it complete the same way the pill does. Put <span class="pill pill-status">#complete</span> on the <em>board title</em> and every card sweeps into Done at once; remove it and they all come back.</li>
+        <li><strong>Adding cards.</strong> Type into an empty card and press <kbd>Enter</kbd> (or <kbd>Tab</kbd>) to move on to the next authorable column — Done is never a typing target, since cards only reach it by being completed.</li>
+      </ul>
+
+      <figure class="guide-figure">
+        <div class="figure-slot slot-gif" data-shot="advanced-blocks/kanban-drag-to-done.gif">
+          <span class="figure-slot-icon">►</span>
+          <span class="figure-slot-kind">Short clip</span>
+          <span class="figure-slot-label"><strong>Dragging a card to Done adds #complete.</strong> Set up: a <code>/kanban</code> with a couple of cards in <em>To&nbsp;Do</em> / <em>In&nbsp;Progress</em>. Record: drag one card into the <em>Done</em> column and pause so the newly-added <span class="pill pill-status">#complete</span> pill and the header count updating are both visible.</span>
+        </div>
+        <figcaption>Placement and the <span class="pill pill-status">#complete</span> pill are always in lock-step.</figcaption>
+      </figure>
+
+      <h2 id="gantt">Gantt</h2>
+      <p>A timeline of tasks with start and end dates (<code>/gantt</code>). The rows are <strong>authored by hand</strong>, not pulled from your tasks — a new chart arrives with three sample rows you edit or replace. There are <strong>no dependencies</strong> between tasks: each bar is simply the span between its own two dates, and moving one never shifts another.</p>
+      <ul>
+        <li><strong>Two ways to set dates, always in sync.</strong> Flip the chart to <em>Edit</em> to get a row of fields per task — name, start, end, assignees. Or work on the <em>bar</em> directly in the preview: drag it to move the task, drag an edge to resize, or click an edge to pick a date from a calendar. The bar is always exactly the gap between start and end.</li>
+        <li><strong>Zoom.</strong> The chart rests at <em>Fit</em> (the whole timeline in one view). Tap <em>Day</em>, <em>Week</em> or <em>Month</em> for a fixed scale while you make precise edits — this zoom is transient and snaps back to Fit when your pointer leaves the chart.</li>
+        <li><strong>Assignees are @mentions.</strong> The assignee field uses the same people registry as the editor's <code>@</code> menu: type a name and a matching, colour-coded dropdown appears; <kbd>Enter</kbd> or a comma adds another (the <code>@</code> is optional). They render as coloured mention chips on the task. Note they live as the task's own field rather than as pills in the note body.</li>
+        <li><strong>Completion.</strong> A task is done via its checkbox or a <span class="pill pill-status">#complete</span> tag in its name; the header shows “<em>done of total</em>”. <span class="pill pill-status">#complete</span> on the chart title completes every task at once.</li>
+      </ul>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="advanced-blocks/gantt-edit-mode.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Gantt in Edit mode with assignees.</strong> Set up: a <code>/gantt</code> switched to <em>Edit</em>, with at least one task showing a start date, an end date, and one or two <span class="pill pill-mention">@person</span> assignee chips. In frame: the per-task field row (name · start · end · assignees) on the left and the bars on the timeline to the right, with the date axis visible on top.</span>
+        </div>
+        <figcaption>Edit mode exposes every field; the bars stay in sync with the dates.</figcaption>
+      </figure>
+
+      <h2 id="mermaid">Mermaid diagrams</h2>
+      <p>The <em>Diagram</em> block (<code>/mermaid</code>) renders <a href="https://mermaid.js.org/" target="_blank" rel="noopener">Mermaid</a> — you write the diagram in text and Nomima draws it. Mermaid covers flowcharts, sequence diagrams, class and state diagrams, entity-relationship diagrams, mind maps, its own Gantt syntax and more; whichever type you want, you write its standard Mermaid source.</p>
+      <ul>
+        <li><strong>Live edit.</strong> The block toggles between <em>Edit</em> (a source box that opens <em>empty</em>, showing a <code>graph TD; A[Start] --&gt; B[Done]</code> hint as ghost placeholder text until you start typing) and <em>Preview</em> (the rendered diagram). It redraws as the source changes and follows your light/dark theme.</li>
+        <li><strong>When it can't parse.</strong> Nomima first tries to quietly repair a couple of common slips (a literal <code>\n</code>, unquoted labels with parentheses) and re-render. If it still can't, you get a clear “Couldn't render this diagram” panel with the error message and an <em>Edit source</em> button — never a broken graphic.</li>
+        <li><strong>Also.</strong> A <em>Copy source</em> button lifts the text out; the title row accepts Smart Tags and <span class="pill pill-status">#complete</span>; <kbd>Shift</kbd>+<kbd>Enter</kbd> in the source box hops out to the note below.</li>
+      </ul>
+      <p class="warn"><strong>Heads up:</strong> this block assumes you know Mermaid syntax — it's a code block for diagrams, not a visual editor. If you're new to it, keep the <a href="https://mermaid.js.org/" target="_blank" rel="noopener">Mermaid docs</a> open while you write. For a drag-and-draw canvas instead, use <a href="#drawing">Drawing</a>.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="advanced-blocks/mermaid-live.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Mermaid source next to its rendered diagram.</strong> Set up: a <code>/mermaid</code> block with a short flowchart typed in (e.g. <code>graph TD; A--&gt;B; B--&gt;C</code>), shown in Edit mode so both the source box and the toolbar (Preview / Copy) are visible. In frame: the source text and, ideally, the rendered flowchart — take a second shot in Preview mode if both don't fit.</span>
+        </div>
+        <figcaption>Write standard Mermaid; it renders live and repairs common mistakes.</figcaption>
+      </figure>
+
+      <h2 id="drawing">Drawing</h2>
+      <p>A freeform sketch canvas (<code>/drawing</code>), powered by Excalidraw, for diagrams, annotations and doodles that don't fit any structured block.</p>
+      <ul>
+        <li><strong>Tools.</strong> The full Excalidraw drawing toolkit is here — rectangles, diamonds, ellipses, arrows and lines, a freehand pencil, text, and the style panel for colour, stroke, fill and font. It's pared down to <em>drawing</em>: the app-level file/export/theme menu is hidden and the separate image tool is off, because the canvas lives inside your note rather than as a file you manage.</li>
+        <li><strong>Persistence.</strong> Everything you draw is saved with the note automatically as you go — the scene rides along in the note itself, so it's there (and offline-ready) when you reopen it. There's no separate save step and no export/download action; to reuse a sketch, copy the drawing block.</li>
+        <li><strong>Resize &amp; theme.</strong> Drag the block's bottom edge to set its height. The canvas matches your light or dark theme. Its title row takes Smart Tags and a <span class="pill pill-status">#complete</span> like the other blocks.</li>
+      </ul>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="advanced-blocks/drawing-canvas.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The drawing canvas with a quick sketch.</strong> Set up: a <code>/drawing</code> block with a few shapes and an arrow or a handwritten label drawn on it, and the Excalidraw tool palette selected. In frame: the canvas showing the sketch, the left/top tool palette, and the block's title row above.</span>
+        </div>
+        <figcaption>A full sketch canvas that saves inside the note.</figcaption>
+      </figure>
+
+      <h2 id="github">GitHub repo</h2>
+      <p>A <strong>live status card</strong> for a code repository (<code>/github</code>). Insert it and drop in a repo — as <code>owner/name</code> or a GitHub URL — and Nomima keeps a compact dashboard of that repo up to date inside your note.</p>
+      <ul>
+        <li><strong>What it shows.</strong> A stat strip of <em>stars</em>, <em>forks</em>, <em>open issues</em> and <em>open PRs</em>; a facts row with the <em>latest release</em>, default branch, primary language, license and when it was last pushed; a <em>CI</em> badge in the header carrying the latest GitHub Actions result (passing / failing / running); and a graph of recent commits below.</li>
+        <li><strong>Live &amp; self-refreshing.</strong> The card loads its numbers on its own and re-fetches when you reopen the note; a refresh button in the header forces an update on demand. The stat strip and the commit graph are fetched independently, so the stats still show even if the graph can't be read.</li>
+        <li><strong>Needs a connected GitHub account.</strong> The block reads GitHub through the token from your connected account — set one up in <strong>Settings → Connectors</strong> (see <a href="references-and-citations.html#connectors">References &amp; citations</a>). Until then it prompts you to connect.</li>
+      </ul>
+      <p class="note"><strong>Note:</strong> the header title and the “Open on GitHub” action link straight to the repo; collapse the block from its chevron to keep just the title row when you don't need the full card.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="advanced-blocks/github-repo-card.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>A GitHub repo status card.</strong> Set up: a <code>/github</code> block pointed at a real repo (with a GitHub account connected), so the card shows the stat strip (stars · forks · issues · PRs), the facts row (latest release, default branch, language, license, "updated Nd ago"), a "CI passing" badge in the header, and the recent-commits graph below. In frame: the whole card, title row included.</span>
+        </div>
+        <figcaption>Live repo vitals in a note — stats, release, CI and a commit graph, all self-refreshing.</figcaption>
+      </figure>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>

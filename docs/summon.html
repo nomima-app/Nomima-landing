@@ -32,7 +32,7 @@
         <p class="docs-sub">An assistant that actually knows your notes. Summon searches your vault, answers questions, creates notebooks and streams writing straight into your editor — with whatever AI model you chose.</p>
       </header>
 
-      <p class="pro-box"><strong>Before you start:</strong> Summon is free — it just needs at least one configured <a href="ai-models.html">AI model</a> with your own API key for Anthropic, OpenAI or Google. Summon connects only to each provider’s current frontier models.</p>
+      <p class="pro-box"><strong>Before you start:</strong> Summon is free — it just needs at least one configured <a href="ai-models.html">AI model</a> — run a local model (Ollama, LM Studio) with no key at all, or bring your own API key for a cloud provider (Anthropic, OpenAI, Google, AWS Bedrock, or an OpenAI-compatible cloud like Groq, OpenRouter, Mistral, DeepSeek, xAI or Together).</p>
 
       <h2 id="opening">Opening Summon</h2>
       <ul>
@@ -41,24 +41,24 @@
         <li>Summon opens as a <strong>compact dock</strong> on the right edge; the expand button promotes it to a <strong>full-screen view</strong>. Close with <kbd>Esc</kbd> — the conversation survives, even as you switch notebooks.</li>
       </ul>
 
-      <h2 id="chat-note">Chat or Note — your choice, per message</h2>
-      <p>Every response has a toggle deciding where it lands:</p>
+      <figure class="guide-figure"><div class="figure-slot" data-shot="summon/glowing-button-dock.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The Summon button and dock.</strong> Set up: a notebook open, Summon opened into its compact right-edge dock. In frame: the glowing Summon button in the bottom-right corner (with its in-flight count badge) and the docked panel beside it showing the four hero quick-action chips — <em>Brief of the day</em>, <em>Prep for tomorrow</em>, <em>Deep research a topic</em>, <em>Create a new note</em>.</span></div><figcaption>The glowing button lives bottom-right; click it to open Summon’s compact dock, expandable to full screen.</figcaption></figure>
+
+      <h2 id="chat-note">Where Summon's answers go</h2>
+      <p>A reply lives in the conversation by default. Two things move it into your notes:</p>
       <ul>
-        <li><strong>Chat</strong> — stays in the conversation, ephemeral.</li>
-        <li><strong>Note</strong> — streams <em>live into your editor</em>, token by token, as a new notebook or appended to the current one. You watch the note write itself, as real blocks — headings, lists, checklists — not a pasted wall of text.</li>
+        <li><strong>It writes as it works.</strong> When you ask Summon to build or edit something, it uses its notebook tools <em>during the turn</em> — you watch real blocks (headings, lists, checklists, tables) stream <em>live into the editor</em>, not a pasted wall of text. It can create a new notebook or write into the one you have open, and the newly-added blocks briefly flash so you can see exactly what changed.</li>
+        <li><strong>Pin a reply.</strong> Any message has a <strong>Pin</strong> action that drops its content into a notebook — new or existing — as a Section, for keeping an answer you didn't explicitly ask it to write.</li>
       </ul>
 
-      <h2 id=”mode”>Choosing a mode</h2>
-      <p>The mode selector sits at the top of the Summon panel. Pick one before you send:</p>
-      <table>
-        <tr><th>Mode</th><th>What it does</th></tr>
-        <tr><td><strong>Auto</strong></td><td>Summon decides — it picks the depth appropriate for your question. Good default for most prompts.</td></tr>
-        <tr><td><strong>Quick</strong></td><td>Fewer tool rounds, faster answer. Best for simple look-ups (“what’s overdue?”, “when did I last mention @Sara?”).</td></tr>
-        <tr><td><strong>Deep Research</strong></td><td>Full multi-pass vault sweep before writing. Summon reads broadly, synthesises and cites passages. Use for “write a brief on everything I know about X” or “audit all my notes on the rebrand”.</td></tr>
-        <tr><td><strong>Create</strong></td><td>Focuses Summon on drafting and editing rather than researching. Use when you already know what you want and just need it written.</td></tr>
-      </table>
+      <figure class="guide-figure"><div class="figure-slot slot-gif" data-shot="summon/live-write-into-editor.gif"><span class="figure-slot-icon">►</span><span class="figure-slot-kind">Short clip</span><span class="figure-slot-label"><strong>Writing live into the editor.</strong> Set up: ask Summon (from the dock) to build something in the open note — e.g. “Draft a project brief for the rebrand”. In frame: real blocks — a heading, bullets, a checklist — streaming into the editor block by block as Summon works, with each newly-added block briefly flashing so you can see what changed. Not a pasted wall of text.</span></div><figcaption>Ask Summon to build or edit something and you watch proper Nomima blocks stream into the editor live, each new block flashing as it lands.</figcaption></figure>
 
-      <h2 id=”tools”>What Summon can do</h2>
+      <h2 id="mode">Quick answers vs. Deep Research</h2>
+      <p>By default Summon answers <strong>concisely</strong> — it does just enough tool work to reply, which keeps most look-ups fast (“what’s overdue?”, “when did I last mention @Sara?”). You don’t set this; it’s how Summon works out of the box.</p>
+      <p>When you want more, click the <strong>“Deep research a topic”</strong> quick-action chip. That arms <strong>Deep Research</strong> for your next question: a full multi-pass vault sweep before Summon writes, reading broadly and synthesising across many notes. Reach for it on prompts like “write a brief on everything I know about X” or “audit all my notes on the rebrand”.</p>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="summon/deep-research-chip.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>Arming Deep Research.</strong> Set up: an empty Summon panel, the <strong>“Deep research a topic”</strong> quick-action chip clicked so it reads as armed. In frame: the composer with the Deep Research chip active/highlighted above it, indicating the next question will trigger a full multi-pass vault sweep rather than a quick concise answer.</span></div><figcaption>Concise answers are the default; the “Deep research a topic” chip arms a full multi-pass vault sweep for your next question.</figcaption></figure>
+
+      <h2 id="tools">What Summon can do</h2>
       <p>Summon isn’t a generic chatbot with your note pasted in — it has tools to work with your vault directly:</p>
       <table>
         <tr><th>Capability</th><th>Example ask</th></tr>
@@ -74,14 +74,16 @@
         <tr><td>Edit a section in place</td><td>”Expand on the decision loop” · “Go deeper on the intro”</td></tr>
         <tr><td>Mac system tools <em>(if enabled)</em></td><td>”What’s on my calendar this week?” · “Find a file named report.pdf” · “Who’s in my contacts named James?”</td></tr>
       </table>
-      <p>Quick-action chips above the input cover the common ones: <em>Brief of the day</em>, <em>What’s overdue?</em>, <em>Prep for tomorrow</em>, <em>Recap my week</em>, <em>Find in notes</em>, <em>Capture a note</em>. After each reply, follow-up chips suggest logical next steps — click one to keep going without retyping.</p>
+      <p>When the panel is empty, four quick-action chips greet you in the hero: <em>Brief of the day</em>, <em>Prep for tomorrow</em>, <em>Deep research a topic</em>, <em>Create a new note</em>. After each reply, follow-up chips suggest logical next steps — click one to keep going without retyping.</p>
 
-      <h2 id=”composer-tags”>Composer Smart Tags</h2>
-      <p>Type <code>@</code> or <code>#</code> directly inside the Summon input to attach a Smart Tag to your prompt. The pill appears inline — and Summon automatically receives the entity’s full profile (attributes, linked notes) or the top matching vault passages as injected context. You can coin a brand-new tag on the spot if it doesn’t exist yet. This is the fastest way to scope a question: <em>”Summarise everything I know about <span class=”pill pill-mention”>@Priya</span> and <span class=”pill pill-hashtag”>#launch</span>”</em> — no need to mention them by name in plain text.</p>
+      <h2 id="composer-tags">Composer Smart Tags</h2>
+      <p>Type <code>@</code> or <code>#</code> directly inside the Summon input to attach a Smart Tag to your prompt. The pill appears inline — and Summon automatically receives the entity’s full profile (attributes, linked notes) or the top matching vault passages as injected context. You can coin a brand-new tag on the spot if it doesn’t exist yet. This is the fastest way to scope a question: <em>&ldquo;Summarise everything I know about <span class="pill pill-mention">@Priya</span> and <span class="pill pill-hashtag">#launch</span>&rdquo;</em> — no need to mention them by name in plain text.</p>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="summon/composer-smart-tags.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>Smart Tags in the composer.</strong> Set up: the Summon input focused, mid-typing a prompt with <code>@</code> just entered so the tag menu is open. In frame: the inline mention/hashtag suggestion menu below the composer, with a prompt that already contains an attached pill (e.g. a <span class="pill pill-mention">@mention</span> and a <span class="pill pill-hashtag">#hashtag</span>) rendered inline in the input.</span></div><figcaption>Type <code>@</code> or <code>#</code> right in the Summon input to attach a Smart Tag — Summon receives that entity’s full profile as context.</figcaption></figure>
 
       <h2 id="vault-qa">Asking about your vault</h2>
       <ul>
-        <li><strong>Vault Q&amp;A</strong> — ask “what do I know about X?” and Summon searches your notes from multiple angles, including by meaning (semantic retrieval), and synthesises the answer right in the conversation — without creating a notebook you didn’t ask for.</li>
+        <li><strong>Vault Q&amp;A</strong> — ask “what do I know about X?” and Summon runs keyword full-text searches over your notes from multiple angles, then synthesises the answer right in the conversation — without creating a notebook you didn’t ask for.</li>
         <li><strong>Scope cards</strong> — for open-ended research questions, Summon first shows a short scope card so you can pick the angle (or multi-select a few). It then researches exactly what you meant.</li>
         <li><strong>Grounding badge</strong> — answers drawn from your own notes carry a small <em>From your vault</em> badge (or a passage count), so you can tell vault-sourced answers apart from the model’s general knowledge.</li>
         <li><strong>RSS Memories are searchable too</strong> — articles you’ve pinned as RSS Memories (title, source and full text) are indexed when you save them, so Summon can pull from them as well.</li>
@@ -100,19 +102,71 @@
         <li><strong>Proactive nudges</strong> — Summon can surface cold notes you might want to revisit.</li>
       </ul>
 
-      <h2 id="permissions">Agent permissions</h2>
-      <p>Summon’s reach beyond your vault is <strong>off by default</strong> and controlled in <strong>Settings → Summon Agent</strong>:</p>
+      <h2 id="assign">Assign work to Summon (background tasks)</h2>
+      <p>Not every ask needs you to sit and watch. When a job can run on its own — draft a brief, chase something down, write a section — hand it off and keep working. Summon picks it up in the <strong>background</strong> instead of taking a live chat turn.</p>
+      <p>Three ways to assign, whichever feels natural in the moment:</p>
+      <ul>
+        <li><strong>Type it inline</strong> — <code>/assign draft a project brief for the rebrand</code>. Everything after the command becomes the task.</li>
+        <li><strong>Select text, then <code>/assign</code></strong> — highlight something you already wrote and delegate exactly that. Summon also gets the surrounding line for context.</li>
+        <li><strong>Just the block</strong> — run <code>/assign</code> on a line with no argument or selection, and the whole block becomes the instruction.</li>
+      </ul>
+      <p>Summon drops an <strong>agent-task pill</strong> right where your cursor was — an inline chip that shows the task’s live status (<em>queued → running → done</em>, or <em>failed</em>) without you leaving the note. While the task is in flight, that block is <strong>locked</strong> so you can’t accidentally edit the instruction out from under the agent; deleting the pill cancels the task.</p>
+      <p>When a task assigned from a block finishes successfully, Summon stamps that source block <span class="pill pill-status">#complete</span> — so the line you delegated reflects its done state, and a native notification lets you know it’s ready.</p>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="summon/assign-flow.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>Assigning a task.</strong> Set up: a note line reading “Draft a project brief for the rebrand” with the slash menu open on <code>/assign</code>. In frame: the “Assign to Summon” slash item highlighted, and — inset — the resulting agent-task pill sitting inline in the block with a “running” status dot.</span></div><figcaption>Type <code>/assign do X</code>, select text, or assign a whole block — Summon drops a live-status pill and works in the background.</figcaption></figure>
+
+      <h2 id="tasks-view">The Summon Tasks view</h2>
+      <p>Everything you’ve handed off lives in one place. Open it from the <strong>Summon Tasks</strong> row in the sidebar — it carries a small <strong>count badge</strong> of in-flight tasks and its background <strong>pulses gently</strong> while any task is running, so you always know something’s cooking without opening it.</p>
+      <p>The view leads with a one-line summary (e.g. <em>“2 active · 1 needs approval · 12 done”</em>), then an <strong>Active</strong> section and a windowed <strong>Recent</strong> list. Each task shows one of these statuses:</p>
       <table>
-        <tr><th>Permission</th><th>What it unlocks</th></tr>
-        <tr><td>Web search</td><td>Summon can search online (via DuckDuckGo or your configured Brave Search key) to supplement vault answers with current information.</td></tr>
-        <tr><td>Filesystem access</td><td>Read files in your Documents, Desktop and Downloads folders — useful for "import this report" or "summarise the PDF I just downloaded".</td></tr>
-        <tr><td>Shell commands</td><td>Strictly allowlist-based: you add the exact commands it may run; chaining and piping are blocked so it can’t do anything you haven’t approved.</td></tr>
-        <tr><td>Calendar &amp; Reminders</td><td>Read upcoming events and reminders from macOS Calendar and Reminders apps — "what’s on my calendar this week?"</td></tr>
-        <tr><td>Contacts</td><td>Look up people in macOS Contacts — "get me James’s email address".</td></tr>
-        <tr><td>Mail</td><td>Search and read recent messages from macOS Mail — "did anyone email me about the invoice?"</td></tr>
-        <tr><td>Spotlight</td><td>Search your whole Mac for files and folders by name or content — "find the latest version of the spec doc".</td></tr>
+        <tr><th>Status</th><th>Meaning</th></tr>
+        <tr><td><strong>Queued</strong></td><td>Waiting its turn — Summon runs a few tasks at a time.</td></tr>
+        <tr><td><strong>Running</strong></td><td>Working right now; its live “thinking” step and streaming text show inline.</td></tr>
+        <tr><td><strong>Awaiting Clarification</strong></td><td>Summon needs a detail to continue and has asked you — the Summon panel opens so you can answer.</td></tr>
+        <tr><td><strong>Needs Approval</strong></td><td>Paused on a gated action (see below), waiting for your yes or no.</td></tr>
+        <tr><td><strong>Paused</strong></td><td>Held, not currently progressing.</td></tr>
+        <tr><td><strong>Done</strong></td><td>Finished — often with a contextual <em>Open →</em> to the notebook, block, file or draft it produced.</td></tr>
+        <tr><td><strong>Failed</strong></td><td>Something went wrong; the error is shown, and you can regenerate to try again.</td></tr>
       </table>
-      <p class="note"><strong>Privacy reminder:</strong> when Summon answers a question about your notes, the relevant note content is sent to the AI provider you configured — that’s how the model reads it. Mac system tools (Calendar, Contacts, Mail) only send the data relevant to your specific request. Nothing is ever sent anywhere when you’re not actively using Summon.</p>
+      <p>Done and cancelled tasks tidy themselves up automatically after 30 days, so the list stays manageable over time.</p>
+
+      <p class="note"><strong>Gated actions pause for your approval.</strong> A background task can’t pop a dialog in your face, so when one wants to do something sensitive — write a file, run a shell command, or use a Mac bridge like sending mail or creating a calendar event — it stops and posts a <strong>Needs Approval</strong> card at the top of the Tasks view: <em>“A background task wants to: …”</em> with the concrete detail and inline <strong>Approve</strong> / <strong>Reject</strong> buttons. Nothing sensitive happens until you say so, and every decision is recorded. You choose which categories are even eligible — and how freely they run — in <strong>Settings → Summon → Capabilities</strong> (below).</p>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="summon/tasks-view.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The Summon Tasks view.</strong> Set up: several assigned tasks in mixed states. In frame: the header summary line, a “Needs Approval” card with Approve / Reject at the top, an Active section with a running task showing its live thinking step, and a Recent list with Done and Failed rows — plus the pulsing “Summon Tasks” sidebar row with its in-flight count badge.</span></div><figcaption>One place for every background task — active, awaiting approval, and recently finished — with a live badge on the sidebar row.</figcaption></figure>
+
+      <p class="tip"><strong>Tip:</strong> assigning is the natural next step after Summon writes something for you. Turn a checklist of action items into real work — <code>/assign</code> each line and let them run while you move on.</p>
+
+      <h2 id="permissions">Capabilities &amp; permissions</h2>
+      <p>Everything Summon can do beyond your notes lives in <strong>Settings → Summon → Capabilities</strong> — a two-pane page. Pick a capability in the left rail (grouped <strong>Access</strong>, <strong>Actions</strong> and <strong>Advanced</strong>) and configure it on the right. The guiding idea: <strong>reads are safe to leave on, and actions default to safe</strong> — nothing runs on your machine without the permission you grant.</p>
+
+      <h3>Access — what Summon can read</h3>
+      <p>Each is a plain on/off <strong>switch</strong>:</p>
+      <table>
+        <tr><th>Capability</th><th>What it reads</th></tr>
+        <tr><td>Search the web</td><td>Search online and read public pages — via your Brave Search key, or the free DuckDuckGo fallback. Fetched pages are treated as untrusted.</td></tr>
+        <tr><td>Read your files</td><td>List and read files in your Documents, Desktop and Downloads folders.</td></tr>
+        <tr><td>Read your Mac apps</td><td>Read Calendar, Reminders, Contacts, Mail and Apple Notes (covers Outlook/Exchange &amp; Google), search with Spotlight, and use the clipboard. macOS asks per app the first time.</td></tr>
+        <tr><td>Look up library docs</td><td>Up-to-date library &amp; framework docs via <strong>Context7</strong> over MCP. See <a href="mcp.html#context7">the MCP page</a>.</td></tr>
+      </table>
+
+      <h3>Actions — what Summon can do</h3>
+      <p>Every action carries a single <strong>Never / Ask first / Allow</strong> control that is <em>both</em> its on/off and its permission level. “Never” blocks it, “Ask first” pauses for your OK each time, “Allow” runs it silently. Two of them add a <strong>Draft only</strong> setting. Turning an action on <strong>auto-enables the read domain it needs</strong> (switch that read domain off and its actions snap back to Never).</p>
+      <table>
+        <tr><th>Action</th><th>What it does</th></tr>
+        <tr><td>Write and edit files</td><td>Create and edit plain-text files in Documents, Desktop &amp; Downloads.</td></tr>
+        <tr><td>Run terminal commands</td><td>Run only the commands you add to its allowlist, in your Documents folder — arguments passed separately, no piping or chaining.</td></tr>
+        <tr><td>Send email</td><td>Compose and send through Mail. <strong>Draft only</strong> opens a draft you send yourself.</td></tr>
+        <tr><td>Create events &amp; reminders</td><td>Add items to Calendar and Reminders.</td></tr>
+        <tr><td>Write Apple Notes</td><td>Create and edit notes in the Apple Notes app.</td></tr>
+      </table>
+      <p class="note"><strong>Terminal has a floor you can’t override:</strong> a built-in safety <strong>denylist</strong> — <code>rm</code>, <code>curl</code>, <code>sudo</code>, <code>ssh</code> and other destructive or exfiltration commands — is <em>always</em> blocked, even if you try to add one to the allowlist.</p>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="summon/capabilities-two-pane.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The Capabilities two-pane.</strong> Set up: Settings → Summon → Capabilities with an action selected (e.g. “Write and edit files”). In frame: the left rail listing capabilities under the <strong>Access</strong> / <strong>Actions</strong> / <strong>Advanced</strong> groups — Access rows showing plain on/off switches — and the right detail pane for the selected action showing its single <strong>Never / Ask first / Allow</strong> segmented control (plus a <strong>Draft only</strong> option where it applies).</span></div><figcaption>Access reads are simple switches; every Action carries one Never / Ask first / Allow control that is both its on/off and its permission level.</figcaption></figure>
+
+      <h3>Advanced</h3>
+      <p><strong>Background tasks</strong> sets how many queued <a href="#assign">assigned tasks</a> Summon runs in parallel. Higher clears a backlog faster but uses more of your AI provider’s rate limit; 2 is recommended.</p>
+
+      <p class="note"><strong>Privacy reminder:</strong> when Summon answers a question about your notes, the relevant note content is sent to the AI provider you configured — that’s how the model reads it. Mac system tools (Calendar, Contacts, Mail) only send the data relevant to your specific request. Summon treats web pages, files and app content as untrusted and never follows instructions hidden in them. Nothing is ever sent anywhere when you’re not actively using Summon.</p>
 
       <nav class="docs-pager" id="docs-pager"></nav>
       <footer class="docs-foot" id="docs-foot"></footer>

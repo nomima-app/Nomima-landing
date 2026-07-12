@@ -40,6 +40,15 @@
       </ul>
       <p>That’s it. There’s no hidden “done” database that can drift out of sync with what you see — completion is always visible right in the note, either as a tick or as a tag.</p>
 
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="tracking/complete-tag-on-block.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The <code>#complete</code> tag on an ordinary block.</strong> Set up: on a plain paragraph (not a task), type <code>#complete</code> and accept it so the block is marked done. In frame: the paragraph greyed out and struck through with its <span class="pill pill-status">#complete</span> pill sitting inline — completion shown right in the note, no checkbox required. Optionally pair it with a checked task line above to show the two equivalent ways.</span>
+        </div>
+        <figcaption>Any block — not just a checkbox — is “done” once it carries the <span class="pill pill-status">#complete</span> status tag.</figcaption>
+      </figure>
+
       <h2 id="ways">Every way to mark something done</h2>
       <table>
         <tr><th>Where</th><th>How</th></tr>
@@ -49,7 +58,7 @@
         <tr><td>Smart View lenses</td><td>Every block listed under a tag’s card has a checkbox — checking it completes the block back in the source note.</td></tr>
         <tr><td>Home agenda</td><td>Every overdue/today/upcoming row has a checkbox too.</td></tr>
         <tr><td>Dates lens</td><td>Both dated tasks and dates mentioned in prose get checkboxes.</td></tr>
-        <tr><td>Alerts view / bell</td><td>The ✓ button completes a reminder or task without leaving the list.</td></tr>
+        <tr><td>Alerts lens</td><td>The ✓ button completes a reminder or task without leaving the list.</td></tr>
         <tr><td>Reminder</td><td>The <strong>Clear</strong> button completes it (and stamps <span class="pill pill-status">#complete</span>).</td></tr>
       </table>
       <p class="note"><strong>Two-way sync:</strong> these are all the <em>same</em> action. Checking a row in a Smart View edits the actual note; un-checking in the note updates every view. Progress bars, briefs and badges recompute immediately.</p>
@@ -59,9 +68,55 @@
         <li><strong>Task List</strong> — shows a live <code>3/5</code> progress badge and auto-completes (turns green) when every item is checked. Adding a new item reopens it.</li>
         <li><strong>Section</strong> — stamp <span class="pill pill-status">#complete</span> on the summary line and the whole section greys out, contents included.</li>
         <li><strong>Callout</strong> — a completed callout swaps its icon for a green checkmark.</li>
-        <li><strong>Kanban</strong> — a card completes via its checkbox or tag; the whole board completes when everything reaches Done.</li>
+        <li><strong>Kanban</strong> — a card completes by being dragged to the Done column or by carrying a <span class="pill pill-status">#complete</span> tag (cards have no checkbox); the whole board completes when everything reaches Done.</li>
         <li><strong>Gantt</strong> — rows complete individually; the chart completes when all rows are done.</li>
       </ul>
+
+      <h2 id="containers-down">Complete a whole container</h2>
+      <p>Container blocks — a task list, a Section/Toggle, a Kanban board, a Gantt chart — have a <strong>title line of their own</strong>. Completing that title is a bulk action: it cascades <em>down</em> to every child at once. And most containers roll the other way too: finish every child and the title completes <em>itself</em>. These are two separate mechanisms, and it’s worth keeping them straight.</p>
+
+      <h3 id="down">Down-cascade: header → children</h3>
+      <p>Mark the <strong>container’s title</strong> done and Nomima immediately marks everything inside it. How you “mark the title” and what happens to the children depends on the block:</p>
+      <table>
+        <tr><th>Container</th><th>Complete its header by…</th><th>…and every child</th></tr>
+        <tr>
+          <td><strong>Task list</strong></td>
+          <td>Ticking the list <strong>title’s</strong> checkbox, or typing <span class="pill pill-status">#complete</span> on the title line.</td>
+          <td>Every row is checked — top-level rows <em>and</em> every Tab-indented subtask, at any depth. Each row also gets its <span class="pill pill-status">#complete</span> pill so it reads done everywhere else.</td>
+        </tr>
+        <tr>
+          <td><strong>Section / Toggle</strong></td>
+          <td>Adding <span class="pill pill-status">#complete</span> to the section’s <strong>summary line</strong>.</td>
+          <td>The whole collapsible subtree greys out and strikes through — prose, bullets, and any nested containers. Nested task lists, boards, charts and sub-sections have <em>their</em> titles stamped too, so their own down-cascade runs and their rows/cards/tasks complete in the same pass.</td>
+        </tr>
+        <tr>
+          <td><strong>Kanban board</strong></td>
+          <td>Typing <span class="pill pill-status">#complete</span> on the <strong>board title</strong>.</td>
+          <td>Every card is stamped <span class="pill pill-status">#complete</span> and <strong>flies to the Done column</strong> (each card remembers where it came from, so un-completing sends it back).</td>
+        </tr>
+        <tr>
+          <td><strong>Gantt chart</strong></td>
+          <td>Typing <span class="pill pill-status">#complete</span> on the <strong>chart title</strong>.</td>
+          <td>Every task is stamped <span class="pill pill-status">#complete</span> and greys/strikes in place (Gantt tasks don’t move — there’s no Done lane).</td>
+        </tr>
+      </table>
+      <p class="note"><strong>Section greying is clean, not litter.</strong> When a Section is complete, its plain paragraphs and bullet lists are greyed and struck by the section itself — they don’t each sprout a visible <span class="pill pill-status">#complete</span> pill. Only the section’s own summary keeps a visible tag (and its un-complete toggle). Child <em>containers</em> inside it still stamp their own titles, because that’s what drives their rows to complete.</p>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="tracking/section-cascade-down.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>Section header completes its subtree.</strong> Set up: an expanded Section titled “Launch checklist” containing a paragraph, a two-item bullet list, and a nested task list with two rows. Stamp <code>#complete</code> on the section summary. In frame: the summary line showing its <code>#complete</code> pill, and the whole subtree beneath it greyed + struck through — including the nested task list’s rows now checked.</span></div><figcaption>Marking a Section’s summary <span class="pill pill-status">#complete</span> greys and completes everything nested under it in one step.</figcaption></figure>
+
+      <h3 id="up">Up-rollup: all children done → header</h3>
+      <p>The reverse happens automatically, and it’s a <em>different</em> path. As you check off children one at a time, Nomima watches each container: the moment <strong>every</strong> child is complete, it stamps <span class="pill pill-status">#complete</span> on the container’s title for you; if any child later reopens, it strips that tag right back off. You never have to complete the header by hand — finishing the work does it.</p>
+      <ul>
+        <li><strong>Task list:</strong> the header shows a live <code>N/M</code> progress badge (top-level rows) plus a percentage bar; a subtask badge like <code>4/6</code> tallies indented rows separately. When the last row is checked the title turns green and gains its check; adding a fresh (unchecked) row flips it straight back to open.</li>
+        <li><strong>Kanban &amp; Gantt:</strong> once every card sits in Done (board) or every task is <span class="pill pill-status">#complete</span> (chart), the title auto-completes; move one card out of Done, or reopen one task, and the title re-opens.</li>
+        <li><strong>Section / Toggle:</strong> a section rolls up from its child <em>containers</em> only — when every task list, board, chart and sub-section inside it is complete, the summary auto-stamps. Plain prose and bullets don’t gate the roll-up (they carry no independent state of their own), so a section of notes never gets stuck “incomplete.”</li>
+      </ul>
+      <p class="tip"><strong>Rule of thumb.</strong> <strong>Down</strong> = you complete the header, children follow. <strong>Up</strong> = children complete themselves, the header follows. Down is a deliberate bulk action; up is bookkeeping Nomima does so a container’s title always tells the truth about what’s inside.</p>
+      <p class="note"><strong>Empty containers never auto-complete.</strong> A list, board, chart or section with no completable children stays open — an empty to-do is a to-do, not a finished one. Roll-up only fires once there’s something inside to finish.</p>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="tracking/tasklist-rollup-up.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>Task list rolls up from its rows.</strong> Set up: a task list titled “Release steps” with five rows; check all five. In frame: the header’s progress badge reading <code>5/5</code> with the green check and full progress bar, and the title line now carrying an auto-added <code>#complete</code> pill (greyed/struck). Optionally a second shot at <code>3/5</code> for the mid-progress state.</span></div><figcaption>Check every row and the title completes itself — the <code>N/M</code> badge and the auto-stamped <span class="pill pill-status">#complete</span> both reflect the roll-up.</figcaption></figure>
+
+      <p class="warn"><strong>Dashboard blocks are the exception.</strong> A Dashboard can be marked done — <span class="pill pill-status">#complete</span> on its caption — but it does <em>not</em> cascade. Completing it won’t touch its widgets, and completing widgets won’t roll it up; it’s a single completable block, not a roll-up container.</p>
 
       <h2 id="effects">What changes when something is done</h2>
       <ul>
