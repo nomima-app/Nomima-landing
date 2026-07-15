@@ -1,7 +1,7 @@
 {
   "name": "Nomima",
   "short_name": "Nomima",
-  "description": "Free, AI-native personal knowledge management app for macOS. Your notes form a living knowledge graph, worked by a built-in AI agent.",
+  "description": "Private, local-first personal knowledge management app for macOS. Write and tag as you go, and your notes self-organize into a living knowledge graph, with an optional built-in AI agent.",
   "id": "/",
   "start_url": "/",
   "scope": "/",

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nomima — type it, tag it, complete it</title>
   <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-  <meta name="description" content="Nomima is a free, AI-native personal knowledge base for macOS. Your notes form a living knowledge graph, and a built-in AI agent reasons across everything you know." />
+  <meta name="description" content="Nomima is a private, local-first knowledge base for macOS. Write and tag as you go, and your notes self-organize into a living knowledge graph — with an optional, bring-your-own-key AI agent." />
   <link rel="canonical" href="https://nomima.io/" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="author" content="Nomima" />
@@ -22,7 +22,7 @@
   <meta property="og:site_name" content="Nomima" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="Nomima — type it, tag it, complete it" />
-  <meta property="og:description" content="Nomima is a free, AI-native personal knowledge base for macOS. Your notes form a living knowledge graph, and a built-in AI agent reasons across everything you know." />
+  <meta property="og:description" content="Nomima is a private, local-first knowledge base for macOS. Write and tag as you go, and your notes self-organize into a living knowledge graph — with an optional, bring-your-own-key AI agent." />
   <meta property="og:url" content="https://nomima.io/" />
   <meta property="og:image" content="https://nomima.io/og.png" />
   <meta property="og:image:type" content="image/png" />
@@ -32,7 +32,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Nomima — type it, tag it, complete it" />
-  <meta name="twitter:description" content="Nomima is a free, AI-native personal knowledge base for macOS. Your notes form a living knowledge graph, and a built-in AI agent reasons across everything you know." />
+  <meta name="twitter:description" content="Nomima is a private, local-first knowledge base for macOS. Write and tag as you go, and your notes self-organize into a living knowledge graph — with an optional, bring-your-own-key AI agent." />
   <meta name="twitter:image" content="https://nomima.io/og.png" />
   <meta name="twitter:image:alt" content="Nomima — type it, tag it, complete it" />
   <style>
@@ -247,7 +247,7 @@
       "@type": "Organization",
       "@id": "https://nomima.io/#org",
       "name": "Nomima",
-      "slogan": "AI-native personal knowledge management for macOS.",
+      "slogan": "Private, local-first personal knowledge management for macOS.",
       "url": "https://nomima.io/",
       "logo": {
         "@type": "ImageObject",
@@ -269,7 +269,7 @@
       "publisher": {
         "@id": "https://nomima.io/#org"
       },
-      "description": "Free, AI-native personal knowledge management (PKM) app for macOS — a private knowledge base with a live knowledge graph and a built-in AI agent."
+      "description": "A private, local-first personal knowledge base for macOS — write and tag naturally and your notes self-organize into a living knowledge graph, with an optional bring-your-own-key AI agent."
     },
     {
       "@type": "SoftwareApplication",
@@ -298,20 +298,21 @@
         "@id": "https://nomima.io/#org"
       },
       "isAccessibleForFree": true,
-      "keywords": "personal knowledge management, PKM, knowledge base, second brain, AI notes, knowledge graph, AI agent, note-taking, macOS, Apple Silicon",
-      "description": "Nomima is a free, AI-native personal knowledge management (PKM) app for macOS — a private second brain. Every word you write becomes structured, searchable knowledge: type / for blocks, # for tags, @ to mention. Your notes automatically form a living Knowledge Graph, and Summon — a built-in AI agent — reads, reasons over and writes across your entire knowledge base using your own API key. Your knowledge stays on your Mac; AI and publishing are opt-in.",
+      "keywords": "personal knowledge management, PKM, knowledge base, second brain, local-first, private notebook, offline-first, knowledge graph, note-taking, macOS, Apple Silicon, AI notes agent",
+      "description": "Nomima is a private, local-first personal knowledge management (PKM) app for macOS — a knowledge base that builds itself. Write naturally and tag as you go: type / for blocks, # for topics and projects, @ for people and companies. Your notes, tasks, people and dates self-organize into Smart Views, a live agenda and a Knowledge Graph that builds itself — no AI required, all on your Mac in a local file with no account or cloud. When you want AI, Summon is an optional built-in agent that reads, reasons over and writes across your vault using your own Anthropic, Google or OpenAI key.",
       "featureList": [
-        "Summon — a built-in AI agent that reads, reasons over and writes across your whole knowledge base (bring your own Anthropic, Google or OpenAI key)",
+        "Write-and-tag-as-you-go: type / for blocks, # for topics and projects, @ for people and companies",
+        "A living Knowledge Graph that builds itself automatically from your tags and mentions — no AI required",
+        "Smart Views and a Home agenda that reorganize your vault by person, project, date, task or file",
+        "One universal completion system — a checkbox or #complete marks anything done everywhere, with two-way sync",
+        "Natural-language dates and reminders with real macOS notifications",
+        "Private and local-first — your vault is a plain SQLite file on your Mac; no account, no telemetry, nothing syncs",
+        "Summon — an optional built-in AI agent that reads, reasons over and writes across your vault (bring your own Anthropic, Google or OpenAI key)",
         "AI inline edit with accept / reject / regenerate",
-        "MCP server — connect external AI tools and assistants to your knowledge base",
-        "A live Knowledge Graph built automatically from #tags and @mentions",
-        "Personal knowledge management: link notes, people and ideas into a searchable second brain",
-        "Markdown editor with a slash (/) block menu",
+        "Built-in MCP server so external AI tools (Claude Code, Cursor) can securely read and write your vault, locally",
         "Blocks: task lists, sections, callouts, code, equations, diagrams, Kanban boards, Gantt charts",
-        "Smart Views and a Home dashboard",
-        "Dates, reminders and complete / incomplete tracking",
-        "Export & import (Markdown, HTML, JSON, vault zip) and 12 curated themes",
-        "Offline-first and private — your knowledge stays on your Mac"
+        "SmartCopy paste, templates, on-device version history, and publishing to read.nomima.io",
+        "Completely free — no account, no subscription; AI uses your own API key"
       ],
       "offers": {
         "@type": "Offer",
@@ -330,7 +331,7 @@
           "name": "What is Nomima?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Nomima is a free, AI-native personal knowledge management (PKM) app for macOS — a private second brain. Every word you write becomes structured, searchable knowledge, and your notes automatically form a live Knowledge Graph. Summon, a built-in AI agent, reads and reasons across everything you know, and can write back."
+            "text": "Nomima is a free, private, local-first personal knowledge management (PKM) app for macOS. Write and tag as you go, and your notes, tasks, people and dates automatically form a live Knowledge Graph — no AI required, all in a local file on your Mac with no account or cloud. When you want it, Summon is an optional built-in AI agent that reads and reasons across everything you know."
           }
         },
         {
@@ -338,15 +339,15 @@
           "name": "How is Nomima different from a notes app?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Unlike a plain notes app, Nomima is built for personal knowledge management. Your notes automatically link into a living Knowledge Graph, and a built-in AI agent (Summon) reasons across your entire knowledge base — summarizing, answering questions and drafting straight from your own notes."
+            "text": "Unlike a plain notes app, Nomima is built for personal knowledge management. Your notes automatically link into a living Knowledge Graph and reorganize themselves into Smart Views and a live agenda — deterministically, on your Mac, with no AI required. When you want AI, an optional built-in agent (Summon) reasons across your entire knowledge base and can write back."
           }
         },
         {
           "@type": "Question",
-          "name": "Is Nomima free?",
+          "name": "Is Nomima private?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Nomima is completely free, including publishing. There is no account and no subscription — you enter your email on nomima.io and we send a private download link that is valid for 30 days."
+            "text": "Yes. Nomima is local-first in the literal sense: your vault is a plain SQLite file on your Mac, with no account, no telemetry and nothing syncing anywhere. Offline with no AI configured it makes zero network requests that involve your data. AI (Summon) and publishing are opt-in; only then is any note content sent out, to the provider you chose."
           }
         },
         {
@@ -359,18 +360,18 @@
         },
         {
           "@type": "Question",
-          "name": "Is my knowledge private in Nomima?",
+          "name": "Does Nomima have AI?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Nomima is offline-first and your knowledge base lives on your Mac. Nothing is uploaded unless you explicitly use an opt-in feature. When you ask its AI agent (Summon) a question, only what you ask about is sent to the AI provider you chose."
+            "text": "Yes — but it's optional and off by default; Nomima is fully functional as a private, offline knowledge base without it. Summon is a built-in AI agent that reads and reasons across your vault and can write back, using your own API key from a frontier model by Anthropic, Google or OpenAI. Nomima also ships a built-in MCP server so external AI tools like Claude Code and Cursor can securely connect to your notes."
           }
         },
         {
           "@type": "Question",
-          "name": "Does Nomima have AI?",
+          "name": "Is Nomima free?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes — AI is core to Nomima. Summon is a built-in AI agent that reads and reasons across your knowledge base and can write back. You bring your own API key from a frontier model by Anthropic, Google or OpenAI. If no AI is configured, Nomima never makes a call. Nomima also ships an MCP server so external AI tools can connect to your notes."
+            "text": "Yes. Nomima is completely free, including publishing — no account and no subscription. You enter your email on nomima.io and we send a private download link valid for 30 days. If you use the optional AI, you bring your own API key and pay your provider directly, never Nomima."
           }
         },
         {
@@ -415,7 +416,7 @@
   <header class="hero" id="top">
     <div class="badge"><span class="dot"></span> macOS · Apple Silicon</div>
     <h1>Type it. Tag it. <span class="grad">Complete it.</span></h1>
-    <p class="sub">Every word you write becomes structured, searchable knowledge — automatically. Meet the editor below.</p>
+    <p class="sub">The private, local-first knowledge base for macOS — write and tag as you go, and everything organizes itself. Meet the editor below.</p>
     <div class="ctas">
       <a class="btn-primary" href="#stage">Try it live ↓</a>
       <a class="btn-ghost" href="#get">Download Now</a>
