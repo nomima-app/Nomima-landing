@@ -4,111 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI models — Nomima Guide</title>
-  <meta name="description" content="Connect the latest Claude, GPT and Gemini frontier models to Nomima. Your keys, stored in your Keychain — AI is optional and off by default." />
+  <meta name="description" content="Run models locally with Ollama or LM Studio, or bring your own key for Claude, GPT, Gemini, Bedrock and more. Keys stored in your Keychain — AI is optional and off by default." />
   <link rel="icon" type="image/svg+xml" href="../logo.svg" />
-  <link rel="canonical" href="https://nomima.io/docs/ai-models.html" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="author" content="Nomima" />
-  <meta name="publisher" content="Nomima" />
-  <meta name="theme-color" content="#0a0b10" />
-  <meta name="color-scheme" content="dark light" />
-  <meta name="application-name" content="Nomima" />
-  <meta name="apple-mobile-web-app-title" content="Nomima" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <!-- Open Graph -->
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Nomima" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="AI models — Nomima Guide" />
-  <meta property="og:description" content="Connect the latest Claude, GPT and Gemini frontier models to Nomima. Your keys, stored in your Keychain — AI is optional and off by default." />
-  <meta property="og:url" content="https://nomima.io/docs/ai-models.html" />
-  <meta property="og:image" content="https://nomima.io/og.png" />
-  <meta property="og:image:type" content="image/png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Nomima — type it, tag it, complete it" />
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="AI models — Nomima Guide" />
-  <meta name="twitter:description" content="Connect the latest Claude, GPT and Gemini frontier models to Nomima. Your keys, stored in your Keychain — AI is optional and off by default." />
-  <meta name="twitter:image" content="https://nomima.io/og.png" />
-  <meta name="twitter:image:alt" content="Nomima — type it, tag it, complete it" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="docs.css" />
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "TechArticle",
-      "headline": "AI models",
-      "name": "AI models — Nomima Guide",
-      "description": "Connect the latest Claude, GPT and Gemini frontier models to Nomima. Your keys, stored in your Keychain — AI is optional and off by default.",
-      "inLanguage": "en",
-      "url": "https://nomima.io/docs/ai-models.html",
-      "image": "https://nomima.io/og.png",
-      "author": {
-        "@type": "Organization",
-        "name": "Nomima"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "@id": "https://nomima.io/#org",
-        "name": "Nomima",
-        "url": "https://nomima.io/",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://nomima.io/icon-512.png",
-          "width": 512,
-          "height": 512
-        },
-        "email": "support@nomima.io",
-        "sameAs": [
-          "https://github.com/nomima-app"
-        ]
-      },
-      "isPartOf": {
-        "@type": "WebSite",
-        "name": "Nomima",
-        "url": "https://nomima.io/"
-      },
-      "about": {
-        "@type": "SoftwareApplication",
-        "name": "Nomima",
-        "applicationCategory": "ProductivityApplication",
-        "operatingSystem": "macOS"
-      }
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://nomima.io/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "User Guide",
-          "item": "https://nomima.io/docs/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "AI models",
-          "item": "https://nomima.io/docs/ai-models.html"
-        }
-      ]
-    }
-  ]
-}
-  </script>
 </head>
 <body>
   <div class="glow glow-a"></div>
@@ -128,32 +29,62 @@
       <header class="docs-header">
         <div class="docs-label">AI &amp; integrations</div>
         <h1 class="docs-title">AI models</h1>
-        <p class="docs-sub">Nomima doesn’t lock you into anyone’s AI. Bring your own key for Claude, GPT or Gemini. Summon connects only to current frontier models, so you always get each provider’s strongest reasoning.</p>
+        <p class="docs-sub">Nomima doesn’t lock you into anyone’s AI. Run open models locally with no key at all, or bring your own key for Claude, GPT, Gemini and a dozen more clouds. You pick the provider; Nomima just talks to it.</p>
       </header>
 
-      <p class="pro-box"><strong>Bring your own key.</strong> AI in Nomima (the Summon assistant) is free — you just supply an API key from one of the supported providers. Everything else in Nomima — including the Knowledge Graph, Smart Views and search — works without any AI at all.</p>
+      <p class="pro-box"><strong>Your models, your choice.</strong> AI in Nomima (the Summon assistant) is free — run a model locally for fully offline use, or supply an API key from any supported cloud. Everything else in Nomima — including the Knowledge Graph, Smart Views and search — works without any AI at all.</p>
 
       <h2 id="providers">Supported providers</h2>
+      <p>Providers come in three groups — the same grouping you’ll see in the picker. <strong>Local</strong> providers run on your own machine and need no key; the <strong>Cloud</strong> and <strong>OpenAI-compatible</strong> groups are bring-your-own-key.</p>
+
+      <h3>Local — offline, no key</h3>
       <table>
-        <tr><th>Provider</th><th>Frontier models</th><th>Needs internet?</th></tr>
-        <tr><td>Anthropic</td><td>Claude Opus 4.8, Claude Sonnet 4.6</td><td>Yes — calls Anthropic with your API key</td></tr>
-        <tr><td>OpenAI</td><td>GPT-5.1</td><td>Yes — calls OpenAI with your API key</td></tr>
-        <tr><td>Google</td><td>Gemini 3</td><td>Yes — calls Google with your API key</td></tr>
+        <tr><th>Provider</th><th>What it is</th><th>Needs internet?</th></tr>
+        <tr><td>Ollama</td><td>Run open models locally. Stays offline — no key, no cloud.</td><td>No — runs on your machine</td></tr>
+        <tr><td>LM Studio</td><td>Local models via LM Studio’s server. Offline, no key.</td><td>No — runs on your machine</td></tr>
       </table>
-      <p class="tip"><strong>Frontier models only.</strong> Summon connects exclusively to each provider’s current frontier tier so you always get the strongest reasoning, tool-use and writing. Older and self-hosted/local models are no longer offered.</p>
+      <p class="tip"><strong>Fully offline AI.</strong> Point Summon at Ollama or LM Studio and no note ever leaves your Mac — the model runs locally. Summon needs a tool-capable model; the “Check” button confirms a local one qualifies.</p>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="ai-models/local-provider-no-key.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>A local provider needs no key.</strong> Set up: Settings → Summon → AI model with <strong>Ollama</strong> selected in the left rail. In frame: the detail pane on the right showing no API-key field — just the list of locally installed models, each with a <strong>Check</strong> / <strong>Re-check</strong> button confirming it’s tool-capable, and a “Make default” control.</span></div><figcaption>Local providers (Ollama, LM Studio) run offline with no API key — just pick an installed model and confirm it qualifies.</figcaption></figure>
+
+      <p class="note"><strong>Live status &amp; capability check.</strong> For a local provider Nomima shows a green/red <strong>server status pill</strong> — in Settings and in the Summon header — and lists the models you actually have installed. Picking one runs a one-time capability probe and shows an honest badge: <strong>Summon-ready</strong>, <strong>Summon · basic</strong> (a small model), <strong>AI blocks only</strong> (too weak to drive Summon), or <strong>Not checked</strong>. If the server is down or the model can’t drive tools, Summon’s composer is disabled with a clear nudge — and even a weak model can still answer from your notes through a grounded, no-tools fallback.</p>
+
+      <h3>Cloud — bring your own key</h3>
+      <table>
+        <tr><th>Provider</th><th>Models</th><th>Needs internet?</th></tr>
+        <tr><td>Anthropic</td><td>Claude — Opus, Sonnet, Haiku</td><td>Yes — calls Anthropic with your API key</td></tr>
+        <tr><td>OpenAI</td><td>GPT-5.1, GPT-4o and the o-series</td><td>Yes — calls OpenAI with your API key</td></tr>
+        <tr><td>Google Gemini</td><td>Gemini 3 Pro and the Flash tiers</td><td>Yes — calls Google with your API key</td></tr>
+        <tr><td>AWS Bedrock</td><td>Foundation models on AWS, via your IAM credentials</td><td>Yes — calls Bedrock with your AWS credentials</td></tr>
+      </table>
+
+      <h3>OpenAI-compatible clouds — bring your own key</h3>
+      <p>These share one OpenAI-compatible adapter, so any of them is just a key away.</p>
+      <table>
+        <tr><th>Provider</th><th>What it is</th><th>Needs internet?</th></tr>
+        <tr><td>Groq</td><td>Very fast inference for open models.</td><td>Yes — calls Groq with your API key</td></tr>
+        <tr><td>OpenRouter</td><td>One key, hundreds of models across providers.</td><td>Yes — calls OpenRouter with your API key</td></tr>
+        <tr><td>Mistral</td><td>Mistral’s open + premier models.</td><td>Yes — calls Mistral with your API key</td></tr>
+        <tr><td>DeepSeek</td><td>DeepSeek’s chat + reasoning models.</td><td>Yes — calls DeepSeek with your API key</td></tr>
+        <tr><td>xAI (Grok)</td><td>Grok models from xAI.</td><td>Yes — calls xAI with your API key</td></tr>
+        <tr><td>Together AI</td><td>Open models hosted on Together AI.</td><td>Yes — calls Together with your API key</td></tr>
+      </table>
 
       <h2 id="setup">Setting up a provider</h2>
       <ol>
-        <li>Open <strong>Settings → AI Models</strong>.</li>
-        <li>Pick a provider card and paste your API key.</li>
-        <li>Choose a model — Nomima lists the current frontier models available for that provider.</li>
-        <li>Click <strong>Test</strong> — Nomima makes one small call to confirm the credentials work.</li>
+        <li>Open <strong>Settings → Summon → AI model</strong>. It’s a two-pane view: the provider list (grouped <strong>Local / Cloud / OpenAI-compatible</strong>) on the left, the selected provider’s detail on the right.</li>
+        <li>Pick a provider. For a <strong>local</strong> one (Ollama, LM Studio) there’s no key — Nomima probes for the models you have installed. For a <strong>cloud</strong> one, paste your API key.</li>
+        <li>Choose a model. For local providers this is whatever you’ve pulled; for clouds it’s the models that provider offers.</li>
+        <li>Confirm it works — a small test call checks the credentials, and <strong>Check</strong> verifies a local model is tool-capable enough for Summon.</li>
         <li>Set your <strong>default provider</strong>; that’s what Summon uses unless told otherwise.</li>
       </ol>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="ai-models/provider-picker-two-pane.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The two-pane provider picker.</strong> Set up: Settings → Summon → AI model with a cloud provider (e.g. Anthropic) selected. In frame: the left rail listing providers under the three group headers <strong>Local</strong> / <strong>Cloud</strong> / <strong>OpenAI-compatible</strong>, and the right detail pane showing the API-key field (masked to the last few characters), the model list, and the <strong>Test connection</strong> button with its “Connected” confirmation.</span></div><figcaption>One page for every provider: pick from the grouped left rail, then paste a key, choose a model and test the connection on the right.</figcaption></figure>
 
       <h2 id="keys">How your keys are protected</h2>
       <ul>
         <li>Keys are stored in the <strong>macOS Keychain</strong>, not in a config file. In the UI you’ll only ever see the last few characters.</li>
+        <li>Local providers need no key at all — nothing to store, nothing to leak.</li>
         <li>Keys are used for exactly one thing: calling the provider <em>you</em> configured, <em>when you</em> invoke AI. Nomima has no server of its own and never proxies your traffic.</li>
         <li>Delete a key any time from the same panel.</li>
       </ul>

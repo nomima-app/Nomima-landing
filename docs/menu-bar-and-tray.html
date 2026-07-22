@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu bar &amp; tray — Nomima Guide</title>
+  <meta name="description" content="Nomima's menu-bar tray popup — live RAM/CPU footprint graphs, status chips, quick actions and overdue lists — plus the macOS app menu and the About window." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#get">Get it free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Everything else</div>
+        <h1 class="docs-title">Menu bar &amp; tray</h1>
+        <p class="docs-sub">Nomima lives in your macOS menu bar even when its window is closed. Click the icon for a live glance at the app; use the native app menu and the About window for the rest.</p>
+      </header>
+
+      <h2 id="tray">The menu-bar tray</h2>
+      <p>Nomima puts a full-colour <strong>“N”</strong> mark in your menu bar. <strong>Left-click</strong> it to open the popup — a small card that drops down just beneath the icon and closes itself the moment you click anywhere else or switch apps, exactly like a native menu-bar panel.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="menu-bar/tray-popup.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The tray popup.</strong> Set up: click the Nomima menu-bar icon with a couple of overdue items and a few recent notebooks in the vault. In frame: the open popup showing the App-footprint Memory/CPU sparklines, the MCP · vault · index status row, the search box, the Quick note editor and Add-a-reference field, the New note / New note from template buttons, and the Overdue + Upcoming agenda.</span>
+        </div>
+        <figcaption>One click gives you the app’s vitals without opening the window.</figcaption>
+      </figure>
+
+      <p>The popup is organised top to bottom:</p>
+      <ul>
+        <li><strong>Header</strong> — the Nomima mark, the running version, and (when one is waiting) an <strong>Update</strong> pill. Click anywhere in the header to bring the main window forward.</li>
+        <li><strong>App footprint</strong> — two live sparklines, <strong>Memory</strong> and <strong>CPU</strong>, in the style of Activity Monitor. A background sampler measures Nomima’s <em>whole process tree</em> once a second — the core app plus its WebView helpers and the MCP server — so the numbers reflect what Nomima actually costs your Mac, not just one process. Memory tracks the same “phys footprint” figure Activity Monitor shows; CPU is per-core percent. Each card also shows a running <em>peak</em>. The graph holds roughly the last 90 seconds and is seeded the instant the popup opens, so it’s never blank.</li>
+        <li><strong>Status chips</strong> — a compact row showing the <strong>MCP</strong> server (its port when running, “starting”, or “off”), the current <strong>vault size</strong>, and the <strong>index</strong> state (“indexing…”, or the clock time it last finished).</li>
+        <li><strong>Search</strong> — a jump-to box at the top: start typing to find a notebook and open it in the main window without hunting through the sidebar.</li>
+        <li><strong>Quick note</strong> — a little editor for a passing thought. It takes <strong>@mentions</strong> and <strong>#hashtags</strong> just like the real editor; press <strong>Enter</strong> and the note is saved to your <a href="smart-views.html">Inbox</a> to triage later (a check confirms). This is the fastest way to get an idea out of your head without opening the app.</li>
+        <li><strong>Add a reference</strong> — paste a link here and Nomima saves it as a citable <a href="references-and-citations.html">reference</a> in your library, ready to cite later.</li>
+        <li><strong>New note</strong> / <strong>New note from template</strong> — two buttons: one creates a blank notebook, the other opens the template picker in the main window (the main window owns creation, so its sidebar updates and the new title auto-focuses).</li>
+        <li><strong>Agenda</strong> — <strong>Overdue</strong> lists up to five most-overdue reminders and tasks (earliest first) with a compact “how late” badge like <code>3h</code> or <code>2d</code>, and <strong>Upcoming</strong> shows what’s due next; click any item to jump straight to its notebook. The count on the right is the true total, even when the list is truncated.</li>
+      </ul>
+
+      <h2 id="inbox">The Inbox — triage your quick captures</h2>
+      <p>Everything you jot from the tray’s <strong>Quick note</strong> collects in one place: the <strong>Inbox</strong>, which sits in the sidebar just under Home. It looks and works like Home — a clean list, not the editor — and it’s where you turn loose thoughts into notes that live in the right place.</p>
+      <ul>
+        <li><strong>Add from anywhere.</strong> Capture from the tray, or type straight into the Inbox’s own <strong>composer</strong> at the bottom of the view — the same mini editor with <strong>@mention</strong> and <strong>#hashtag</strong> support. Each note becomes a row to triage.</li>
+        <li><strong>File it.</strong> On any row, <strong>File</strong> lets you choose a notebook — and then, optionally, exactly where in it. You can drop the note at the end, after a specific block, or <strong>into an existing task list</strong> as a new checklist item. Nomima then opens that notebook and <strong>flashes the exact spot</strong> where the note landed, so you always see where it went.</li>
+        <li><strong>Or dismiss it.</strong> <strong>Dismiss</strong> removes a capture you don’t need. Filing also moves the note out of the Inbox, so the list stays a clean set of things still to sort — inbox zero is the goal.</li>
+      </ul>
+      <p class="note"><strong>Note:</strong> the Inbox is a real notebook under the hood, so your captures are ordinary saved content — but it’s hidden from the Notebooks list (and from the “File to…” picker) so it only ever appears as the dedicated triage view.</p>
+
+      <p class="note"><strong>Note:</strong> the popup refreshes every time it’s revealed, so its chips and lists are current each time you open it — it just shows the last-known values for a moment if a read hiccups.</p>
+
+      <p><strong>Right-click</strong> the tray icon for a small menu instead: <strong>Show Nomima</strong>, <strong>Hide Nomima</strong>, and <strong>Quit Nomima</strong>. When an update is available the icon itself gains a small up-arrow badge, so you can tell at a glance from the menu bar.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="menu-bar/tray-icon-badge.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The tray icon with an update badge.</strong> Set up: a build where an update has been detected, so the badged icon variant is active. In frame: a close crop of the macOS menu bar showing the Nomima “N” mark with the up-arrow update badge overlay.</span>
+        </div>
+        <figcaption>The badge and the in-popup Update pill always agree.</figcaption>
+      </figure>
+
+      <h2 id="app-menu">The macOS app menu</h2>
+      <p>With the main window focused, Nomima installs a standard macOS menu bar at the top of the screen. Alongside the usual system <strong>Edit</strong> (undo/redo, cut/copy/paste, select all) and <strong>Window</strong> (minimize, zoom, close) submenus, two menus are Nomima’s own:</p>
+      <ul>
+        <li><strong>Nomima ▸</strong>
+          <ul>
+            <li><strong>About Nomima</strong> — opens the About window (below).</li>
+            <li><strong>Settings ▸</strong> — jumps straight to an in-app Settings pane: <em>Appearance</em> (on the standard <kbd>⌘,</kbd> shortcut), <em>Smart Tag Types</em>, <em>Sound</em>, <em>Vault</em>, and <em>Summon</em> (AI model, Capabilities &amp; Memory).</li>
+            <li><strong>Check for Updates…</strong> — surfaces the main window and runs a manual update check.</li>
+            <li><strong>Help &amp; Diagnostics</strong> — opens the diagnostics pane in Settings.</li>
+            <li>The system <em>Hide</em> / <em>Hide Others</em> / <em>Show All</em> and <strong>Quit</strong> items.</li>
+          </ul>
+        </li>
+        <li><strong>File ▸</strong> — <strong>New Notebook</strong> (<kbd>⌘N</kbd>) and <strong>Open Home</strong> (<kbd>⇧⌘H</kbd>), both routed into the main window.</li>
+      </ul>
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="menu-bar/app-menu.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The Nomima app menu.</strong> Set up: with the main window focused, open the <strong>Nomima ▸</strong> menu in the macOS menu bar, hovering <strong>Settings ▸</strong> so its submenu shows. In frame: the Nomima menu with About Nomima, the Settings submenu (Appearance ⌘, · Smart Tag Types · Sound · Vault · Summon), Check for Updates…, Help &amp; Diagnostics, and Quit.</span>
+        </div>
+        <figcaption>Nomima’s own menu bar: About, deep-links into Settings, updates and diagnostics.</figcaption>
+      </figure>
+
+      <p class="tip"><strong>Tip:</strong> every Settings entry here just deep-links into the same in-app Settings you can reach from the sidebar — the menu is a shortcut, not a separate window.</p>
+
+      <h2 id="about">The About window</h2>
+      <p>Choosing <strong>Nomima ▸ About Nomima</strong> opens a small, self-contained About window — distinct from <strong>Settings → About &amp; Updates</strong>, which is where update details and diagnostics live. The About window is a compact identity card: the Nomima mark on a white tile, the app name, the current <strong>version</strong>, and a one-line description of the app.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="menu-bar/about-window.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The About window.</strong> Set up: choose Nomima ▸ About Nomima from the menu bar. In frame: the dark About card with the white icon tile, the “Nomima” name, the “Version …” line, the tagline, and the Visit website / User Guide buttons.</span>
+        </div>
+        <figcaption>A simple identity card with links out to the site and this guide.</figcaption>
+      </figure>
+
+      <p>Two buttons sit below the description: <strong>Visit website</strong> opens <code>nomima.io</code> in your browser, and <strong>User Guide</strong> opens these docs. Closing the window (the red traffic light) simply hides it, so the next <em>About Nomima</em> re-shows the same window instantly.</p>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>

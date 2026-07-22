@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Import, export &amp; publishing — Nomima Guide</title>
+  <meta name="description" content="Export a notebook or your whole vault to Markdown, HTML or JSON, import it back in, and publish a read-only note to the web with a private view code." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#get">Get it free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Everything else</div>
+        <h1 class="docs-title">Import, export &amp; publishing</h1>
+        <p class="docs-sub">Your notes are yours. Take a single notebook or your whole vault out to open files, bring them back in, or publish a read-only copy of one note to the web behind a private code.</p>
+      </header>
+
+      <h2 id="export">Export</h2>
+      <p>You can export <strong>a single notebook</strong> or your <strong>entire vault</strong>, in any of three formats.</p>
+      <ul>
+        <li><strong>One notebook</strong> — hover the notebook in the sidebar, open its <strong>⋯</strong> menu and choose <strong>Export…</strong>. Pick a format and choose where to save the file.</li>
+        <li><strong>Whole vault</strong> — open <strong>Settings</strong> and use <strong>Export vault</strong>. Every notebook plus its attachments is bundled into a single <code>.zip</code>, with folders that mirror how your notebooks are nested.</li>
+      </ul>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="sharing-and-data/export-dialog.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The export dialog.</strong> Set up: open a notebook's ⋯ menu → Export… (or Settings → Export vault). In frame: the dialog with the three format cards — Markdown, HTML, JSON — one selected.</span>
+        </div>
+        <figcaption>Choose Markdown, HTML or JSON — for a notebook or the whole vault.</figcaption>
+      </figure>
+
+      <table>
+        <tr><th>Format</th><th>What you get</th></tr>
+        <tr><td>Markdown <code>.md</code></td><td>Portable plain text that opens in any editor. A vault export becomes a folder tree of <code>.md</code> files.</td></tr>
+        <tr><td>HTML <code>.html</code></td><td>A self-contained web page you can open in any browser — good for reading and sharing, but read-only (see the note below).</td></tr>
+        <tr><td>JSON <code>.json</code></td><td>A lossless backup that keeps everything and can be imported straight back into Nomima. The recommended choice for a backup.</td></tr>
+      </table>
+
+      <p><strong>What's included.</strong> Your blocks and their text, and the Smart Tags (@mentions, #hashtags) inside them, are all serialized. A whole-vault export also copies in every <strong>attached file</strong> under an <code>assets/</code> folder, and writes a <code>manifest.json</code> index so Nomima can rebuild your notebook hierarchy on import. A single-notebook export contains just that notebook's document.</p>
+      <p class="note"><strong>Note:</strong> HTML is a one-way format — it's meant for reading, not re-importing. For a backup you can restore, export as <strong>JSON</strong> (or a JSON/Markdown vault <code>.zip</code>).</p>
+
+      <h2 id="import">Import</h2>
+      <p>Import lives in <strong>Settings → Import…</strong>. It opens a file picker; choose what to bring in and Nomima recreates the notebooks in your vault.</p>
+      <ul>
+        <li><strong>A Nomima export</strong> — a single notebook as <code>.json</code> (lossless) or <code>.md</code> (best-effort from Markdown).</li>
+        <li><strong>A whole vault</strong> — a vault export <code>.zip</code>. Every notebook in the archive is restored, and its nesting (which notebook lives inside which) is rebuilt from the manifest.</li>
+      </ul>
+      <p>A single file lands at the top level of your vault. What round-trips cleanly is your <strong>structure, content and hierarchy</strong> — from JSON and Markdown sources. Two honest limits: a JSON or Markdown-format vault <code>.zip</code> re-imports, but an <strong>HTML</strong> export does not (Nomima will tell you to re-export as JSON or Markdown), and <strong>attached files are not yet re-imported</strong> — only the notebook documents come back for now.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="sharing-and-data/import-entry-settings.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Import in Settings.</strong> Set up: open Settings and scroll to the data row. In frame: the "Import — a Nomima export (JSON / Markdown), or a whole-vault .zip" row with its Import… button, sitting just below the Export vault row.</span>
+        </div>
+        <figcaption>Import a notebook or a whole vault from Settings.</figcaption>
+      </figure>
+
+      <p class="note"><strong>Coming later:</strong> importing directly from <strong>Obsidian</strong> or <strong>Notion</strong> is not supported yet — it's a planned addition. For now, bring notes in as Markdown or as a Nomima export.</p>
+
+      <h2 id="publishing">Publishing a note to the web</h2>
+      <p>Publishing puts a <strong>read-only copy</strong> of one notebook online at <code>read.nomima.io</code>, behind a private code, so you can share a page without giving anyone access to your vault. It's opt-in per notebook — nothing goes online until you publish it, and it's <strong>free</strong>.</p>
+      <p>Open a notebook, use its header menu and choose <strong>Publish notebook…</strong>, then press <strong>Publish</strong> in the dialog. You get back a shareable link and a <strong>view code</strong> — a page opens only for someone who has both.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="sharing-and-data/publish-dialog.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The publish dialog (published state).</strong> Set up: publish a notebook, then reopen Publish notebook…. In frame: the "read.nomima.io/p/…" address, the "Link with code", "Link (prompts for the code)" and "View code" copy fields, the downloads checklist, and the Update now / Unpublish buttons.</span>
+        </div>
+        <figcaption>After publishing: the link, the view code, and controls to update or take it down.</figcaption>
+      </figure>
+
+      <h3>The shareable link &amp; view code</h3>
+      <p>You'll see three things to copy:</p>
+      <ul>
+        <li><strong>Link with code</strong> — a one-click link that opens the page directly (the code rides in the URL fragment, so it stays out of server logs).</li>
+        <li><strong>Link (prompts for the code)</strong> — the plain link; whoever opens it is asked to type the view code.</li>
+        <li><strong>View code</strong> — the code itself, to share separately (over a different channel) when you want the extra layer.</li>
+      </ul>
+      <p>Optionally, tick any of the notebook's <strong>attached files</strong> in the downloads checklist to make them downloadable on the published page. They're off by default.</p>
+
+      <h3>Updating, unpublishing &amp; the offline outbox</h3>
+      <ul>
+        <li><strong>Updating</strong> — once a notebook is published, your edits keep the public page in sync automatically. You can also press <strong>Update now</strong> in the dialog to push the latest version immediately.</li>
+        <li><strong>Unpublishing</strong> — press <strong>Unpublish</strong> to take the page offline. The link stops working.</li>
+        <li><strong>Offline outbox</strong> — if you publish or update while offline, the change is <strong>queued</strong> and sent automatically the moment you reconnect. You don't have to retry by hand; the dialog shows the queued state until it goes through.</li>
+      </ul>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="sharing-and-data/published-page.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The published page.</strong> Set up: open the "Link with code" in a browser. In frame: the read.nomima.io reader showing the note exactly as it looks in the app — headings, pills and thumbnails intact — in the publisher's theme.</span>
+        </div>
+        <figcaption>The reader shows a faithful, self-contained snapshot of your note.</figcaption>
+      </figure>
+
+      <p class="tip"><strong>What gets captured:</strong> publishing takes a <strong>self-contained snapshot</strong> of the note exactly as it appears on your screen — rendered diagrams, dashboard numbers, pills and image thumbnails, in your current theme — with all editing controls removed. The reader sees that snapshot, not your live vault, and only the one notebook you chose to publish.</p>
+      <p class="warn"><strong>Keep in mind:</strong> anyone with both the link and the view code can read the page. Share the code through a separate channel from the link when a note is sensitive, and <strong>unpublish</strong> when you're done.</p>
+
+      <h3>What readers can do on the page</h3>
+      <p>The published page is a faithful, <strong>read-only</strong> copy — a reader can explore it, but never change it:</p>
+      <ul>
+        <li><strong>Every block shows.</strong> Carousels, GitHub-repo cards, calendars, kanban and gantt boards, drawings and collapsible sections render just as they do in the app, in your theme.</li>
+        <li><strong>It's interactive.</strong> A reader can collapse and expand any section or block, page a carousel with its arrows or dots, and click an image to open it full-size.</li>
+        <li><strong>Links go to the source.</strong> A YouTube card opens YouTube, an RSS memory opens its article, a bookmark opens its source, and a GitHub card's tabs — down to each commit — open on GitHub. (The Docs and DeepWiki tabs note that they live in the desktop app, with a link out.)</li>
+        <li><strong>Tasks are look-only.</strong> Checklists show what's done and what isn't, but a reader can't tick or untick them.</li>
+        <li><strong>References are included.</strong> If the notebook has citations, the page ends with a formatted <strong>References</strong> list in your chosen citation style.</li>
+        <li><strong>Downloads, if you opt in.</strong> Any attached files you ticked in the downloads checklist appear as real downloads on the page.</li>
+      </ul>
+
+      <h3 id="publish-analytics">See who's reading</h3>
+      <p>Once a note is published, Nomima shows you how it's doing — right in the app, without leaving the notebook.</p>
+
+      <h4>The publish menu label</h4>
+      <p>There's no separate badge in the header — the notebook's <strong>⋯ menu</strong> tells you where publishing stands. The wording of that one menu item tracks the live state, and choosing it opens the publish dialog:</p>
+      <ul>
+        <li><strong>Publish notebook…</strong> — nothing is online yet.</li>
+        <li><strong>Manage publication…</strong> — the page is live; open the dialog to update or take it down.</li>
+        <li><strong>Publishing… — manage</strong> — a publish is in flight.</li>
+        <li><strong>Update queued — manage…</strong> — you published or updated while offline; it'll send when you reconnect.</li>
+        <li><strong>Publish failed — manage…</strong> — something went wrong; open the dialog to try again.</li>
+      </ul>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="sharing-and-data/publish-menu-label.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The publish menu label.</strong> Set up: on a notebook that’s already live, open its ⋯ header menu. In frame: the open menu with the state-tracking item reading <strong>Manage publication…</strong> (rather than “Publish notebook…”), showing how the wording reflects the live state.</span>
+        </div>
+        <figcaption>No separate badge — the ⋯ menu item’s wording tracks the publish state.</figcaption>
+      </figure>
+
+      <h4>The view count</h4>
+      <p>Next to the notebook's <strong>⋯</strong> menu, a small <strong>eye</strong> with a number appears once the page is live <em>and</em> at least one person has opened it. It's quiet by design — no views, no pill. The count keeps itself current on its own (it refreshes about every half-minute while you're online), so you don't need to reload anything. Click it to open the full breakdown.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="sharing-and-data/view-count-eye.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The view-count eye.</strong> Set up: publish a note and open it in a browser a few times so the counter appears. In frame: a close crop of the notebook header showing the small eye icon with its view count sitting next to the ⋯ menu.</span>
+        </div>
+        <figcaption>A quiet eye + number by the ⋯ menu — click it for the full breakdown.</figcaption>
+      </figure>
+
+      <h4>Views &amp; visitors</h4>
+      <p>The <strong>Views &amp; visitors</strong> panel — reached from the eye pill, or from <strong>View analytics &amp; visitors</strong> inside the publish dialog — is a little more than a raw counter. At the top, a compact stat strip shows four numbers, with a small bar sparkline of recent daily views beside them:</p>
+      <ul>
+        <li><strong>Total</strong> — every view counted.</li>
+        <li><strong>Unique</strong> — distinct visitors.</li>
+        <li><strong>Returning</strong> — visitors who've come back.</li>
+        <li><strong>Avg time</strong> — the average time spent on the page.</li>
+      </ul>
+      <p>Below that, a row of <strong>flag chips</strong> ranks the top countries your readers came from, each with its own count. Then a <strong>Visitors</strong> list gives one line per view, showing what the reader's browser reports: a name (or <strong>Anonymous</strong> if they didn't give one), a <strong>Returning</strong> tag for repeat readers, when they arrived, their approximate location (city and country), their device as <em>OS · browser</em>, and how long they stayed. A <strong>Refresh</strong> button pulls the latest.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="sharing-and-data/publish-analytics.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Views &amp; visitors.</strong> Set up: publish a note, open it in a browser once or twice, then click the eye pill by the notebook's ⋯ menu. In frame: the Views &amp; visitors panel — the Total / Unique / Returning / Avg&nbsp;time stat strip with its sparkline, the country flag chips, and the per-visitor list showing name, location, device and time on page.</span>
+        </div>
+        <figcaption>What the publisher sees: counts, top countries, and a line per visit.</figcaption>
+      </figure>
+
+      <p class="note"><strong>Note:</strong> these stats live online, so the panel needs a connection — offline it simply says to reconnect to load them. What's shown is only what a visitor's browser reveals (rough location, device type, time on page); readers stay <strong>Anonymous</strong> unless they choose to enter a name, and there's no cross-site tracking.</p>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>

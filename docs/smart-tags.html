@@ -6,109 +6,10 @@
   <title>Mentions &amp; hashtags — Nomima Guide</title>
   <meta name="description" content="How Nomima smart tags work — @mentions, #hashtags, their types, custom types, entity cards and attributes." />
   <link rel="icon" type="image/svg+xml" href="../logo.svg" />
-  <link rel="canonical" href="https://nomima.io/docs/smart-tags.html" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="author" content="Nomima" />
-  <meta name="publisher" content="Nomima" />
-  <meta name="theme-color" content="#0a0b10" />
-  <meta name="color-scheme" content="dark light" />
-  <meta name="application-name" content="Nomima" />
-  <meta name="apple-mobile-web-app-title" content="Nomima" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <!-- Open Graph -->
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Nomima" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="Mentions &amp; hashtags — Nomima Guide" />
-  <meta property="og:description" content="How Nomima smart tags work — @mentions, #hashtags, their types, custom types, entity cards and attributes." />
-  <meta property="og:url" content="https://nomima.io/docs/smart-tags.html" />
-  <meta property="og:image" content="https://nomima.io/og.png" />
-  <meta property="og:image:type" content="image/png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Nomima — type it, tag it, complete it" />
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Mentions &amp; hashtags — Nomima Guide" />
-  <meta name="twitter:description" content="How Nomima smart tags work — @mentions, #hashtags, their types, custom types, entity cards and attributes." />
-  <meta name="twitter:image" content="https://nomima.io/og.png" />
-  <meta name="twitter:image:alt" content="Nomima — type it, tag it, complete it" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="docs.css" />
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "TechArticle",
-      "headline": "Mentions &amp; hashtags",
-      "name": "Mentions &amp; hashtags — Nomima Guide",
-      "description": "How Nomima smart tags work — @mentions, #hashtags, their types, custom types, entity cards and attributes.",
-      "inLanguage": "en",
-      "url": "https://nomima.io/docs/smart-tags.html",
-      "image": "https://nomima.io/og.png",
-      "author": {
-        "@type": "Organization",
-        "name": "Nomima"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "@id": "https://nomima.io/#org",
-        "name": "Nomima",
-        "url": "https://nomima.io/",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://nomima.io/icon-512.png",
-          "width": 512,
-          "height": 512
-        },
-        "email": "support@nomima.io",
-        "sameAs": [
-          "https://github.com/nomima-app"
-        ]
-      },
-      "isPartOf": {
-        "@type": "WebSite",
-        "name": "Nomima",
-        "url": "https://nomima.io/"
-      },
-      "about": {
-        "@type": "SoftwareApplication",
-        "name": "Nomima",
-        "applicationCategory": "ProductivityApplication",
-        "operatingSystem": "macOS"
-      }
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://nomima.io/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "User Guide",
-          "item": "https://nomima.io/docs/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Mentions &amp; hashtags",
-          "item": "https://nomima.io/docs/smart-tags.html"
-        }
-      ]
-    }
-  ]
-}
-  </script>
 </head>
 <body>
   <div class="glow glow-a"></div>
@@ -139,13 +40,33 @@
       </ul>
       <p>Every tag becomes an <strong>entity</strong> in your Knowledge Graph. Tag <span class="pill pill-mention">@Sara</span> in five different notes and Nomima knows they’re all about the same person — her Smart View lens, graph node and entity card collect everything in one place.</p>
 
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="smart-tags/formed-pills.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Formed pills in a note.</strong> Set up: write a sentence carrying an @mention and a #hashtag of different types (e.g. “@Sara owns the #launch”). In frame: the two coloured pills inline in the running text — a person-coloured @Sara mention and a project-coloured #launch hashtag — each with its type icon.</span>
+        </div>
+        <figcaption>Every tag is a small coloured pill embedded right in your text.</figcaption>
+      </figure>
+
       <h2 id="create">Creating a tag</h2>
       <ol>
         <li>Type <code>@</code> or <code>#</code> followed by a name. A suggestion menu appears with matching entities you’ve used before.</li>
         <li>Press <kbd>Enter</kbd> or <kbd>Tab</kbd> to accept the highlighted suggestion — <kbd>Tab</kbd> always accepts the <em>suggested</em> tag, so you can type two letters and let Nomima finish the name.</li>
-        <li>If the name is new, choose <strong>Add</strong> from the menu to create a fresh entity.</li>
+        <li>If the name is new, the menu offers a <strong>Create new</strong> row for each type — pick the type right there and press <kbd>Enter</kbd>. That’s the whole decision: there’s no follow-up “which one did you mean?” picker afterwards.</li>
         <li>Press <kbd>Esc</kbd> to dismiss the menu and keep the text plain.</li>
       </ol>
+      <p class="note"><strong>The menu suggests the type for you.</strong> For a brand-new <span class="pill pill-mention">@mention</span> whose name Nomima’s offline gazetteer recognizes, the <strong>Create new</strong> rows lead with the predicted type as the <kbd>Enter</kbd> default — <span class="pill pill-mention">@Microsoft</span> → <em>Company</em>, <span class="pill pill-mention">@London</span> → <em>Location</em>, <span class="pill pill-mention">@Sarah</span> → <em>Person</em>. A name it doesn’t recognize leads with <em>No type</em>, and <em>No type</em> plus every other type always follow so you can override in one keystroke. Hashtags get no predicted type — they lead with <em>No type</em>.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="smart-tags/create-type-menu.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The @ menu with Create-new type rows.</strong> Set up: type “@Microsoft” (a name the offline gazetteer recognises) so the suggestion menu shows the Create-new rows. In frame: the dropdown under the caret with the predicted type leading as the <kbd>Enter</kbd> default (Company for @Microsoft), each row showing its type icon, and the remaining type rows plus “No type” below it.</span>
+        </div>
+        <figcaption>Pick the type right in the menu — the predicted one is the <kbd>Enter</kbd> default.</figcaption>
+      </figure>
+      <p class="tip"><strong>Identity is name + type.</strong> An entity is unique per <em>name and type</em>, so <span class="pill pill-mention">@Apple</span> the <em>Company</em> and <span class="pill pill-mention">@Apple</span> the <em>Product</em> happily coexist as two entities — but you can’t pile up two Companies both called Apple. Got the type wrong? Change it from the pill’s <a href="#entity-cards">entity card</a> and just that pill re-points to the right entity.</p>
       <p class="tip"><strong>Ghost suggestions:</strong> as you type ordinary text, Nomima may show a faint dashed preview of a tag it recognizes (type “Mo” and see <em>@Moe</em> ghosted ahead) with a small <kbd>⇥</kbd> hint. Press <kbd>Tab</kbd> or click it to convert; <kbd>Esc</kbd> dismisses it for that spot. You can turn this off with <strong>Settings → Smart Tag Types → “Suggest Smart Tags as I type”</strong>.</p>
 
       <h2 id="types">Built-in types</h2>
@@ -158,9 +79,13 @@
         <tr><td>@ mention</td><td>Location</td><td>map pin</td><td>Places, offices, cities</td></tr>
         <tr><td>@ mention</td><td>Product</td><td>package</td><td>Products and services</td></tr>
         <tr><td>@ mention</td><td>Technology</td><td>cpu</td><td>Tools, languages, platforms</td></tr>
+        <tr><td>@ mention</td><td>Event</td><td>star</td><td>Conferences, launches, occasions</td></tr>
+        <tr><td>@ mention</td><td>Document</td><td>book</td><td>Papers, specs, reports, files</td></tr>
         <tr><td># hashtag</td><td>Project</td><td>briefcase</td><td>Initiatives with a beginning and end</td></tr>
         <tr><td># hashtag</td><td>Idea</td><td>lightbulb</td><td>Things you might do someday</td></tr>
         <tr><td># hashtag</td><td>Topic</td><td>book</td><td>Subjects and themes</td></tr>
+        <tr><td># hashtag</td><td>Area</td><td>folder</td><td>Ongoing areas of responsibility</td></tr>
+        <tr><td># hashtag</td><td>Meeting</td><td>users</td><td>Standups, 1:1s, reviews</td></tr>
         <tr><td># hashtag</td><td>Status</td><td>flag</td><td>States like <span class="pill pill-status">#complete</span>, #blocked, #in-review</td></tr>
       </table>
       <p class="note"><strong>Status is special:</strong> the Status type powers Nomima’s universal completion system. Stamping <span class="pill pill-status">#complete</span> on any block marks it done everywhere — see <a href="tracking.html">Complete &amp; incomplete</a>. Status tags also drive Kanban columns.</p>
@@ -177,6 +102,15 @@
       </ul>
       <p>Custom types get their own color in the Knowledge Graph legend and their own grouping in search — they’re first-class citizens.</p>
 
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="smart-tags/custom-type-editor.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The Smart Tag Types editor.</strong> Set up: open Settings → Smart Tag Types. In frame: the two families (@ mention and # hashtag) with their type rows, each showing its icon and colour swatch, the add-type control, and one custom type freshly added to a family.</span>
+        </div>
+        <figcaption>Add your own types or restyle the built-ins — each keeps its own colour and icon.</figcaption>
+      </figure>
+
       <h2 id="entity-cards">Entity cards &amp; attributes</h2>
       <p>Click any pill to open its <strong>entity card</strong> — the hub for that person, project or thing:</p>
       <ul>
@@ -186,8 +120,72 @@
         <li><strong>Essential fields</strong> — each type keeps the fields that define it: a Person always keeps Name and Email, a Company a Website. You can leave them blank, but they can’t be deleted by accident.</li>
         <li><strong>Type schema</strong> — in <strong>Settings → Smart Tag Types</strong> you can define which attribute fields a <em>type</em> should have, so every Person card offers the same fields by default.</li>
       </ul>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="smart-tags/entity-card.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>An entity card.</strong> Set up: click a Person pill that has a photo and a couple of attributes filled in. In frame: the popover with the entity’s photo avatar, its editable name, the type-selector icon row, the Edit · Profile · Appears in tab bar, the Expand button, and a couple of attribute fields (e.g. Email, Role) below.</span>
+        </div>
+        <figcaption>Click any pill to open its hub — attributes, a custom photo, and everywhere it appears.</figcaption>
+      </figure>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="smart-tags/entity-detail-page.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The full Entity view.</strong> Set up: on an entity card, click the Expand button to open the full-page view and stay on the Overview tab. In frame: the header with the entity’s avatar, name and type; the Overview · Mentions · Tasks · Profile tab bar; and the Overview bento — the stat cards, the “Appears with” panel and the “Connections by type” panel.</span>
+        </div>
+        <figcaption>Expand a card into a full page — computed stats, who it appears with, and its connections.</figcaption>
+      </figure>
+
       <p><strong>Auto-photo from email.</strong> Type a person’s email and Nomima quietly fetches their Gravatar photo if they have one. The address is hashed before any lookup and never sent in the clear; if there’s no match, nothing is stored — and it never overwrites a photo you uploaded yourself.</p>
       <p><strong>Profile tab.</strong> When an entity has an email, its card gains a <strong>Profile</strong> tab with public info looked up on demand by hash — name, location, bio, the organization inferred from the email domain, and any public social accounts. It’s fetched only when you open the tab.</p>
+
+      <h2 id="relationships">Entity relationships</h2>
+      <p>Attributes describe an entity on its own. A <strong>relationship</strong> is a durable, typed link <em>between two entities</em> — <span class="pill pill-mention">@Sara</span> <em>member of</em> <span class="pill pill-mention">@Design team</span>, or <span class="pill pill-hashtag">#Launch</span> <em>owned by</em> <span class="pill pill-mention">@Sara</span>. Because it’s stored against each entity’s stable identity, a relationship survives graph rebuilds and shows up from <em>both</em> sides automatically.</p>
+
+      <h3>Creating a relationship</h3>
+      <p>You don’t draw links by hand — you add a <strong>relation field</strong> to an entity, and every value you put in it becomes a link:</p>
+      <ol>
+        <li>Open an entity card and choose <strong>Add field → Relationship</strong>.</li>
+        <li>Under <strong>Links to</strong>, optionally restrict the field to one type (a Person, a Team…) so the picker only offers the right kind of entity.</li>
+        <li>Nomima shows a live <strong>“How it reads”</strong> sentence spelling the link out from each side. Two chips (this entity and the other) sit around an editable <strong>verb</strong> — type your own forward wording (<em>manages</em>, <em>owned by</em>) and the reverse wording for the other side. Leave them blank to accept the sensible defaults (<em>contains</em> / <em>belongs to</em>).</li>
+        <li>Save the field, then pick the target entities. Each one you add creates the link and mirrors it onto the other entity’s card.</li>
+      </ol>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="smart-tags/relation-field-how-it-reads.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The “How it reads” editor.</strong> Set up: on a Team entity card, click Add field → Relationship, set Links to → Person. In frame: the two-row “How it reads” sentence with the entity chip, the editable verb inputs (forward + reverse), the “Links to” type dropdown, and the “…is the container (members inherit it)” checkbox.</span>
+        </div>
+        <figcaption>A relationship is authored as a field: name the verb on each side, then pick who it links to.</figcaption>
+      </figure>
+
+      <h3>Direction, cardinality &amp; the container</h3>
+      <ul>
+        <li><strong>Direction</strong> — the forward verb reads from this entity outward; the reverse verb is what the <em>other</em> entity shows. A <em>symmetric</em> link (like <em>colleague of</em>) reads the same both ways.</li>
+        <li><strong>Cardinality</strong> — set the field to hold <strong>Just one</strong> target or <strong>Multiple</strong>. A person’s Team is usually one; a team’s Members are many.</li>
+        <li><strong>The container</strong> — a checkbox, <em>“…is the container (members inherit it)”</em>, marks which side <em>contains</em> the other. This is what powers inheritance below.</li>
+      </ul>
+
+      <h3>Inherited relationships</h3>
+      <p>Containers chain. If <span class="pill pill-mention">@Sara</span> is in <span class="pill pill-mention">@Design</span>, and <span class="pill pill-mention">@Design</span> is in <span class="pill pill-mention">@Acme</span>, then Sara’s card also shows <span class="pill pill-mention">@Acme</span> as an <strong>inherited</strong> relationship — rendered muted, labelled <em>via @Design</em>. Nomima walks the containment chain up at <em>query time</em>, so inherited links are never stored: delete the Design → Acme link and Sara’s inherited Acme quietly disappears. Only container (membership) links propagate — an ordinary link like <em>partners with</em> stays put.</p>
+
+      <h3>Where relationships show up</h3>
+      <p>On an entity card, relationships are <strong>read-only</strong> and grouped one row per label and direction — a team shows <em>Members: <span class="pill pill-mention">@Sara</span>, <span class="pill pill-mention">@Moe</span></em> on a single row rather than one row each. Each target is a real pill in its own type colour, and clicking it jumps to that entity. The <a href="knowledge-graph.html">Knowledge Graph</a> folds these authored links straight in as labelled edges between nodes.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="smart-tags/entity-card-relationships-grouped.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Grouped relationships on a card.</strong> Set up: open a Person who is in a team that sits inside a company. In frame: the Relationships section with a direct row (e.g. “member of → @L2”) and a muted <em>inherited · @L2</em> row showing the company, demonstrating one-row-per-label grouping.</span>
+        </div>
+        <figcaption>Relationships read as sentences on the card; inherited ones appear muted with their “via” path.</figcaption>
+      </figure>
+
+      <p class="tip"><strong>Read it like a sentence.</strong> The verbs you type are the whole point — pick wording that reads naturally out loud (“@Sara <em>reports to</em> @Moe”, “@Moe <em>manages</em> @Sara”) and every card and graph edge stays legible.</p>
 
       <h2 id="behavior">Pill behavior in the editor</h2>
       <ul>

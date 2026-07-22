@@ -198,9 +198,9 @@
       </div>
 
       <div class="rail-outer">
-        <svg viewBox="0 0 920 740" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Nomima release journey" style="width:100%;height:auto">
-          <!-- track path: snake across 4 rows -->
-          <path d="M60,96 H860 M860,96 C900,96 900,246 860,246 M860,246 H60 M60,246 C20,246 20,396 60,396 M60,396 H860 M860,396 C900,396 900,546 860,546 M860,546 H60 M60,546 C20,546 20,696 60,696 M60,696 H860" fill="none" stroke="var(--border)" stroke-width="2.5"/>
+        <svg viewBox="0 0 920 890" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Nomima release journey" style="width:100%;height:auto">
+          <!-- track path: snake across the release rows -->
+          <path d="M60,96 H860 M860,96 C900,96 900,246 860,246 M860,246 H60 M60,246 C20,246 20,396 60,396 M60,396 H860 M860,396 C900,396 900,546 860,546 M860,546 H60 M60,546 C20,546 20,696 60,696 M60,696 H860 M860,696 C900,696 900,846 860,846" fill="none" stroke="var(--border)" stroke-width="2.5"/>
 
           <!-- row 1 — pre-1.0 early builds -->
           <g class="rail-stop" data-rver="v0.1.0"><circle cx="60" cy="96" r="3.6" fill="#fbbf24" opacity="0.85"/><text x="60" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.1.0</text></g>
@@ -260,7 +260,10 @@
           <g class="rail-stop" data-rver="v1.15.0"><circle cx="594" cy="696" r="6" fill="#34d399" opacity="0.85"/><text x="594" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.15.0</text></g>
           <g class="rail-stop" data-rver="v1.16.0"><circle cx="683" cy="696" r="6" fill="#6d5ef7"/><text x="683" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.16.0</text></g>
           <g class="rail-stop" data-rver="v1.16.1"><circle cx="772" cy="696" r="3.6" fill="#74748a" opacity="0.85"/><text x="772" y="712" text-anchor="middle" font-size="8.5" fill="var(--muted)">1.16.1</text></g>
-          <g class="rail-stop" data-rver="v1.17.0"><circle cx="860" cy="696" r="6" fill="#34d399" stroke="#fff" stroke-width="2"/><text x="860" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.17.0</text></g>
+          <g class="rail-stop" data-rver="v1.17.0"><circle cx="860" cy="696" r="6" fill="#34d399"/><text x="860" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.17.0</text></g>
+
+          <!-- row 6 — v1.21.0 (current) -->
+          <g class="rail-stop" data-rver="v1.21.0"><circle cx="860" cy="846" r="6" fill="#34d399" stroke="#fff" stroke-width="2"/><text x="860" y="833" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.21.0</text></g>
         </svg>
       </div>
     </div>
@@ -275,8 +278,30 @@
 
         <div class="rel-card featured">
           <div class="rel-meta">
-            <div class="rel-ver">v1.17.0</div>
+            <div class="rel-ver">v1.21.0</div>
             <div class="rel-badge latest">Latest</div>
+            <div class="rel-badge editor">Summon &amp; research</div>
+          </div>
+          <div class="rel-body">
+            <h3>Summon goes native &amp; headless · References library · in-app model switcher</h3>
+            <p><strong>Summon</strong> now runs entirely on Nomima's Rust backend — <strong>background research tasks</strong> keep working while you do, with <strong>macOS bridges</strong> (calendar, reminders, mail, notes), file/memory/stats tools, and approval gates for anything that writes. A new <strong>in-Summon model switcher</strong> changes provider and model without leaving the chat. The <strong>References library</strong> lands: read a source in a structure-preserving <strong>reader</strong>, <strong>highlight</strong> passages, <strong>cite</strong> them, and collect everything in a Library. <strong>Insights</strong> adds a behavioral-analytics layer (event log, Insights view, drill-through). <strong>Sidebar folders</strong> and a full-page <strong>folder overview</strong> with content search sit above your notebooks, with drag-to-arrange ordering. Plus a dedicated <strong>to-do block</strong>, truer section completion, and <strong>faithful, clickable publishing replicas</strong>.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">Summon on the Rust backend</span>
+              <span class="rel-chip">Background research tasks</span>
+              <span class="rel-chip">macOS bridges · calendar/reminders/mail/notes</span>
+              <span class="rel-chip">In-Summon model switcher</span>
+              <span class="rel-chip">References library · read → highlight → cite</span>
+              <span class="rel-chip">Insights analytics</span>
+              <span class="rel-chip">Sidebar folders + folder overview</span>
+              <span class="rel-chip">To-do block</span>
+              <span class="rel-chip">Publishing fidelity</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.17.0</div>
             <div class="rel-badge editor">Editor &amp; AI</div>
           </div>
           <div class="rel-body">

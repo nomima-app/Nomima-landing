@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insights — Nomima Guide</title>
+  <meta name="description" content="Insights turns your vault's own task activity into personal productivity trends — KPIs, an insight ribbon, a completion calendar, heatmaps and drill-through — 100% on-device." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#get">Get it free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Finding &amp; seeing</div>
+        <h1 class="docs-title">Insights</h1>
+        <p class="docs-sub">Where Stats shows the current shape of your vault, Insights shows how you work <em>over time</em> — a private log of your own task activity, turned into personal productivity trends. 100% on-device.</p>
+      </header>
+
+      <h2 id="open">Opening Insights</h2>
+      <p>Click <strong>Insights</strong> in the sidebar footer to open the view. Pick a range — <strong>7 days, 30 days, 90 days, or all time</strong> — and everything on the page updates to match.</p>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="insights/kpi-strip.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The Insights KPI strip.</strong> Set up: the Insights view open with a 30-day range selected on a vault with real task history. In frame: the range selector and the four KPI tiles (Completed, Created, Avg. time to complete, Streak), each with its sparkline and a small delta vs. the previous period.</span></div><figcaption>The top strip: what changed, and by how much since last period.</figcaption></figure>
+
+      <h2 id="kpis">The KPI strip &amp; insight ribbon</h2>
+      <ul>
+        <li><strong>Completed / Created</strong> — how many tasks you finished and added in the selected range.</li>
+        <li><strong>Avg. time to complete</strong> — the average span from when a task was created to when it was checked off.</li>
+        <li><strong>Streak</strong> — your current run of consecutive active days.</li>
+        <li><strong>Period deltas &amp; sparklines</strong> — each tile shows how it's moved since the previous period of the same length.</li>
+        <li><strong>Insight ribbon</strong> — a plain-English readout under the KPIs: your momentum vs. last period, your most productive weekday and hour, active streaks, which tag takes you longest to close out, and how often you reopen work you'd marked done.</li>
+      </ul>
+
+      <h2 id="charts">Trend, calendar &amp; heatmap</h2>
+      <ul>
+        <li><strong>Throughput trend</strong> — completed vs. created over time, with a 7-day moving average and a cumulative-flow toggle.</li>
+        <li><strong>Completion calendar</strong> — a year-long, GitHub-style grid of green squares, one per day, darker where you completed more.</li>
+        <li><strong>Productive-hours heatmap</strong> — day-of-week × hour, switchable between completion counts and time spent.</li>
+        <li><strong>Breakdown bars</strong> — by hashtag, mention, notebook or block type, switchable between count and average time.</li>
+        <li><strong>Time-to-complete distribution</strong> — how long tasks typically take from creation to done.</li>
+      </ul>
+
+      <figure class="guide-figure"><div class="figure-slot" data-shot="insights/calendar-heatmap.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>Completion calendar and productive-hours heatmap.</strong> Set up: Insights on the "all time" range with several months of history. In frame: the 12-month GitHub-style completion calendar and, beside or below it, the day-of-week × hour productive-hours heatmap with its completions/time-spent toggle.</span></div><figcaption>A year of activity at a glance, plus when in the week you actually get things done.</figcaption></figure>
+
+      <h2 id="drill">Drill-through</h2>
+      <p>Click any breakdown bar or calendar day and a panel slides in from the right, listing the actual tasks behind it — icon, preview, notebook and time-to-complete for each. Click one to jump straight to that block in its note.</p>
+
+      <h2 id="capture">What counts as a completion</h2>
+      <p>A completion is captured however it happens — ticking a checkbox, marking something done from a Smart View, or an edit made through a connected tool like an MCP client. Task <strong>creation</strong> history is backfilled once from your existing vault so the view isn't empty the first time you open it; from then on, everything accrues live.</p>
+
+      <h2 id="privacy">Privacy — Settings → Insights</h2>
+      <ul>
+        <li><strong>100% on-device.</strong> Nothing about how you work ever leaves your vault.</li>
+        <li><strong>Turn it off</strong> — an opt-out toggle stops capture entirely; existing history stays until you clear it.</li>
+        <li><strong>Retention window</strong> — keep history forever, or auto-prune it after 90 days, 6 months, or a year.</li>
+        <li><strong>Clear analytics history</strong> — wipe everything Insights has recorded, any time.</li>
+      </ul>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>

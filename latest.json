@@ -1,6 +1,6 @@
 {
-  "version": "1.17.0",
-  "notes": "v1.17.0: AI inline edit with accept/reject/regenerate, export (Markdown/HTML/JSON/vault zip), import, 12 curated themes, back/forward navigation, rich block ToC, Entity Detail View bento grid, notebook icons, tray live graphs, block drag-drop.",
-  "pub_date": "2026-06-28T09:00:00Z",
-  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.17.0/Nomima_1.17.0_aarch64.dmg"
+  "version": "1.21.0",
+  "notes": "v1.21.0: Summon now runs natively & headless — background research tasks, macOS bridges (calendar, reminders, mail, notes) and an in-Summon model switcher. References library (read → highlight → cite → collect), Insights analytics, sidebar folders + folder overview with content search, a to-do block, and faithful clickable publishing replicas.",
+  "pub_date": "2026-07-22T05:09:08Z",
+  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.21.0/Nomima_1.21.0_aarch64.dmg"
 }

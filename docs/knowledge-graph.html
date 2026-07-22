@@ -6,109 +6,10 @@
   <title>Knowledge Graph — Nomima Guide</title>
   <meta name="description" content="Nomima's Knowledge Graph — how it's built automatically from your notes, how to navigate the 3D view, and the in-note cover graph." />
   <link rel="icon" type="image/svg+xml" href="../logo.svg" />
-  <link rel="canonical" href="https://nomima.io/docs/knowledge-graph.html" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="author" content="Nomima" />
-  <meta name="publisher" content="Nomima" />
-  <meta name="theme-color" content="#0a0b10" />
-  <meta name="color-scheme" content="dark light" />
-  <meta name="application-name" content="Nomima" />
-  <meta name="apple-mobile-web-app-title" content="Nomima" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <!-- Open Graph -->
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Nomima" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="Knowledge Graph — Nomima Guide" />
-  <meta property="og:description" content="Nomima's Knowledge Graph — how it's built automatically from your notes, how to navigate the 3D view, and the in-note cover graph." />
-  <meta property="og:url" content="https://nomima.io/docs/knowledge-graph.html" />
-  <meta property="og:image" content="https://nomima.io/og.png" />
-  <meta property="og:image:type" content="image/png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Nomima — type it, tag it, complete it" />
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Knowledge Graph — Nomima Guide" />
-  <meta name="twitter:description" content="Nomima's Knowledge Graph — how it's built automatically from your notes, how to navigate the 3D view, and the in-note cover graph." />
-  <meta name="twitter:image" content="https://nomima.io/og.png" />
-  <meta name="twitter:image:alt" content="Nomima — type it, tag it, complete it" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="docs.css" />
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "TechArticle",
-      "headline": "Knowledge Graph",
-      "name": "Knowledge Graph — Nomima Guide",
-      "description": "Nomima's Knowledge Graph — how it's built automatically from your notes, how to navigate the 3D view, and the in-note cover graph.",
-      "inLanguage": "en",
-      "url": "https://nomima.io/docs/knowledge-graph.html",
-      "image": "https://nomima.io/og.png",
-      "author": {
-        "@type": "Organization",
-        "name": "Nomima"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "@id": "https://nomima.io/#org",
-        "name": "Nomima",
-        "url": "https://nomima.io/",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://nomima.io/icon-512.png",
-          "width": 512,
-          "height": 512
-        },
-        "email": "support@nomima.io",
-        "sameAs": [
-          "https://github.com/nomima-app"
-        ]
-      },
-      "isPartOf": {
-        "@type": "WebSite",
-        "name": "Nomima",
-        "url": "https://nomima.io/"
-      },
-      "about": {
-        "@type": "SoftwareApplication",
-        "name": "Nomima",
-        "applicationCategory": "ProductivityApplication",
-        "operatingSystem": "macOS"
-      }
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://nomima.io/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "User Guide",
-          "item": "https://nomima.io/docs/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Knowledge Graph",
-          "item": "https://nomima.io/docs/knowledge-graph.html"
-        }
-      ]
-    }
-  ]
-}
-  </script>
 </head>
 <body>
   <div class="glow glow-a"></div>
@@ -135,6 +36,14 @@
       <p>Every time you save or leave a note, Nomima indexes just that note: its tags, dates, tasks, files and links become entities and connections in the graph. There is no “sync” or “generate” button — by the time you open the graph, it already reflects your latest edit. Entities mentioned in the same block get connected, and attached files and RSS articles contribute entities from their text too.</p>
 
       <h2 id="reading">Reading the graph</h2>
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="knowledge-graph/graph-view.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The graph.</strong> The full Knowledge Graph with glowing type-colored nodes, the legend, and a selected node's connections.</span>
+        </div>
+        <figcaption>Your vault as a living map — built automatically.</figcaption>
+      </figure>
       <ul>
         <li><strong>Nodes are entities</strong> — glowing orbs colored by type, using the exact same colors as the pills in your notes (including your custom types). The legend in the corner lists every type present with its count.</li>
         <li><strong>Size means connectedness</strong> — the more an entity appears across your vault, the bigger its node.</li>
@@ -154,14 +63,40 @@
         <tr><td>Re-cluster</td><td>Change the clustering basis in the legend — group the graph around notebooks (default) or around any entity type.</td></tr>
       </table>
 
-      <h2 id="panel">The entity panel</h2>
-      <p>Clicking a node opens a panel showing the entity’s name, type and connection count, plus its relationships grouped by kind — <em>Appears in</em>, <em>Assigned to</em>, <em>Due</em>, <em>Related</em> and so on. Every related item is clickable: hop from a person to a project to the note where they intersect. This is the same <strong>entity card</strong> you get by clicking a pill in the editor — including its custom attributes (see <a href="smart-tags.html#entity-cards">Mentions &amp; hashtags</a>).</p>
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="knowledge-graph/cluster-by-legend.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Clustering by type.</strong> Set up: in the full graph, open the legend’s <strong>“Cluster by”</strong> control and pick an entity type (e.g. Person). In frame: the nodes pulled apart into separated, labelled blobs — one cluster per group with its floating centroid label — and the “Cluster by” legend showing the active type highlighted alongside the other type swatches and their counts.</span>
+        </div>
+        <figcaption>The “Cluster by” legend regroups the whole graph around notebooks (default) or any entity type.</figcaption>
+      </figure>
 
-      <h2 id="semantic">Semantic mode</h2>
-      <p>Flip the <strong>Semantic</strong> toggle and the graph re-forms as an interactive 3D constellation where notes cluster by <em>meaning</em> rather than by shared tags — related ideas drift together even when they never used the same words. Hover a node to preview it, click to jump straight to the note, and switch between a vault-wide view and a per-note view. It’s computed locally over the embeddings already cached on your Mac, so there’s no network call — it works fully offline.</p>
+      <h2 id="panel">The entity sidebar</h2>
+      <p>Clicking a <strong>@mention or #hashtag</strong> node opens a docked sidebar showing a <strong>compact version of that entity’s full page</strong> — its Overview at a glance: occurrences, notebooks, first/last seen, who it <em>Appears with</em>, <em>Connections by type</em>, its hashtag rank and profile completeness, plus the <em>Overview / Mentions / Profile</em> tabs. It’s the same data as the full <a href="smart-tags.html#entity-cards">entity page</a>, just narrowed for the dock.</p>
+      <p>The header stays pinned as you scroll and carries two buttons: <strong>Maximize (⤢)</strong> opens the full entity page, and <strong>Close (✕)</strong> dismisses the sidebar. Click any pill inside — a person it appears with, a related entity — to <strong>re-target the sidebar to that entity in place</strong>, so you can hop across your vault without leaving the panel. (Clicking a plain <em>note</em>, <em>task</em> or <em>date</em> node — which has no entity page — still opens the lightweight relations panel.)</p>
+      <p>The sidebar shares one slot with the widget editor: opening either closes the other, and it tucks the minimap scrollbar away while it’s open.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="knowledge-graph/entity-panel.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The entity sidebar.</strong> Set up: click a well-connected @mention or #hashtag node so its sidebar opens. In frame: a docked right sidebar with a sticky header (type-coloured icon, name, and ⤢/✕ buttons), then the compact Overview — stat tiles (occurrences, notebooks, last/first seen), an <em>Appears with</em> panel and a <em>Connections by type</em> donut; behind it, that node’s edges highlighted with their flowing particles.</span>
+        </div>
+        <figcaption>The graph entity sidebar — a minified copy of the full entity page, with expand-to-full-page and in-place pill navigation.</figcaption>
+      </figure>
 
       <h2 id="cover">The in-note cover graph</h2>
       <p>Each notebook can show a compact graph above the page — just that note’s entities and their immediate connections. It’s fully interactive (drag to pan, drag nodes, click to inspect, <kbd>⌘</kbd>+scroll to zoom), and when you scroll down to write, it parks itself to keep the editor fast.</p>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="knowledge-graph/cover-graph.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>The in-note cover graph.</strong> Set up: open a notebook that mentions several entities, scrolled to the top so the cover graph sits above the title. In frame: the compact graph band spanning the top of the page — just this note’s glowing type-coloured nodes and their immediate links — with the editor title and first lines beginning right beneath it.</span>
+        </div>
+        <figcaption>A per-note mini-graph above the page — fully interactive, and it parks itself as you scroll to write.</figcaption>
+      </figure>
 
       <h2 id="maintenance">If something looks off</h2>
       <p><strong>Settings → Vault → Re-index</strong> rebuilds the entire graph from scratch, deterministically. It’s the only manual maintenance action in Nomima and exists as a safety net — day to day, the graph keeps itself current.</p>
