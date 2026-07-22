@@ -200,7 +200,7 @@
       <div class="rail-outer">
         <svg viewBox="0 0 920 890" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Nomima release journey" style="width:100%;height:auto">
           <!-- track path: snake across the release rows -->
-          <path d="M60,96 H860 M860,96 C900,96 900,246 860,246 M860,246 H60 M60,246 C20,246 20,396 60,396 M60,396 H860 M860,396 C900,396 900,546 860,546 M860,546 H60 M60,546 C20,546 20,696 60,696 M60,696 H860 M860,696 C900,696 900,846 860,846" fill="none" stroke="var(--border)" stroke-width="2.5"/>
+          <path d="M60,96 H860 M860,96 C900,96 900,246 860,246 M860,246 H60 M60,246 C20,246 20,396 60,396 M60,396 H860 M860,396 C900,396 900,546 860,546 M860,546 H60 M60,546 C20,546 20,696 60,696 M60,696 H860 M860,696 C900,696 900,846 860,846 M860,846 H60" fill="none" stroke="var(--border)" stroke-width="2.5"/>
 
           <!-- row 1 — pre-1.0 early builds -->
           <g class="rail-stop" data-rver="v0.1.0"><circle cx="60" cy="96" r="3.6" fill="#fbbf24" opacity="0.85"/><text x="60" y="112" text-anchor="middle" font-size="8.5" fill="var(--muted)">0.1.0</text></g>
@@ -262,8 +262,9 @@
           <g class="rail-stop" data-rver="v1.16.1"><circle cx="772" cy="696" r="3.6" fill="#74748a" opacity="0.85"/><text x="772" y="712" text-anchor="middle" font-size="8.5" fill="var(--muted)">1.16.1</text></g>
           <g class="rail-stop" data-rver="v1.17.0"><circle cx="860" cy="696" r="6" fill="#34d399"/><text x="860" y="683" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.17.0</text></g>
 
-          <!-- row 6 — v1.21.0 (current) -->
-          <g class="rail-stop" data-rver="v1.21.0"><circle cx="860" cy="846" r="6" fill="#34d399" stroke="#fff" stroke-width="2"/><text x="860" y="833" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.21.0</text></g>
+          <!-- row 6 — v1.21.0 · v1.22.0 (current) -->
+          <g class="rail-stop" data-rver="v1.21.0"><circle cx="860" cy="846" r="6" fill="#34d399"/><text x="860" y="833" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.21.0</text></g>
+          <g class="rail-stop" data-rver="v1.22.0"><circle cx="771" cy="846" r="6" fill="#34d399" stroke="#fff" stroke-width="2"/><text x="771" y="833" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.22.0</text></g>
         </svg>
       </div>
     </div>
@@ -278,8 +279,27 @@
 
         <div class="rel-card featured">
           <div class="rel-meta">
-            <div class="rel-ver">v1.21.0</div>
+            <div class="rel-ver">v1.22.0</div>
             <div class="rel-badge latest">Latest</div>
+            <div class="rel-badge editor">Updates &amp; editor</div>
+          </div>
+          <div class="rel-body">
+            <h3>Nomima updates itself now · smart-tag fixes · pinnable toolbar · per-notebook zoom</h3>
+            <p><strong>In-app updates.</strong> No more downloading a new disk image and dragging it over — Nomima now <strong>updates itself</strong>: when a new version is out it downloads in the background, verifies it, and offers <strong>&ldquo;Restart to update&rdquo;</strong>. One tap and you&rsquo;re on the latest. (This is the first version with it, so it takes over from here on.) <strong>Smart-tag pills:</strong> removing a tag now <strong>keeps the words</strong> (it un-tags instead of deleting the text), and selecting a mix of a pill and plain text and hitting <strong>#</strong>/<strong>@</strong> folds the whole selection into one tag. <strong>Pinnable toolbar:</strong> pin the floating formatting bar so it becomes a <strong>sticky header</strong> that stays put as you scroll. <strong>Per-notebook zoom:</strong> <strong>&#8984; +/&#8722;/0</strong> (or the status-bar control) scales a notebook&rsquo;s text, remembered per notebook.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">In-app auto-update</span>
+              <span class="rel-chip">&ldquo;Restart to update&rdquo;</span>
+              <span class="rel-chip">Remove tag keeps the text</span>
+              <span class="rel-chip">Mixed selection &rarr; one tag</span>
+              <span class="rel-chip">Pinnable sticky toolbar</span>
+              <span class="rel-chip">Per-notebook zoom</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.21.0</div>
             <div class="rel-badge editor">Summon &amp; research</div>
           </div>
           <div class="rel-body">
