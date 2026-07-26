@@ -5,7 +5,13 @@
   "compatibility_date": "2025-05-01",
   "assets": {
     "directory": ".",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
+    // TEMPORARY (coming-soon takeover): static assets are normally served BEFORE the
+    // Worker runs, so `/` would go straight to index.html and never reach our code.
+    // These two patterns hand the homepage to cf/worker.js, which serves
+    // coming-soon.html instead. index.html is left untouched on disk.
+    // Revert: delete this key + the COMING_SOON block in cf/worker.js.
+    "run_worker_first": ["/", "/index.html"]
   },
   "d1_databases": [
     {
