@@ -89,10 +89,43 @@ function modelMarketingName(model) {
   return model ? (MODEL_NAMES[model] || null) : null;
 }
 
+// ── TEMPORARY: coming-soon takeover of the homepage ─────────────────────────────
+// While the real landing page is being reworked, `/` serves coming-soon.html. Only
+// the homepage is affected — download.html, releases.html, /docs, the legal pages,
+// latest.json (the app's self-updater), /access and /admin all stay live and
+// unchanged, so shipped installs keep auto-updating.
+//
+// Reaching this code at all requires `assets.run_worker_first` in wrangler.jsonc:
+// static assets are otherwise served before the Worker and `/` would hit index.html.
+//
+// To restore the real landing page:
+//   1. delete this block and the COMING_SOON call below
+//   2. remove "run_worker_first" from wrangler.jsonc
+//   3. wrangler deploy   (or merge to main)
+const COMING_SOON = true;
+
+async function serveComingSoon(env, url) {
+  const res = await env.ASSETS.fetch(new Request(`${url.origin}/coming-soon.html`));
+  // 200, not 503: this is a real page we want indexed and linkable, and a 503 would
+  // make monitors/uptime checks report nomima.io as down.
+  return new Response(res.body, {
+    status: 200,
+    headers: {
+      "content-type": "text/html; charset=utf-8",
+      // No caching, so flipping COMING_SOON back off takes effect immediately.
+      "cache-control": "no-store",
+    },
+  });
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const path = url.pathname;
+
+    if (COMING_SOON && (path === "/" || path === "/index.html")) {
+      return serveComingSoon(env, url);
+    }
 
     if (path === "/api/request-download" && request.method === "POST") {
       return handleRequest(request, env, url, ctx);

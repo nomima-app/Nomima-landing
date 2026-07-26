@@ -1,5 +1,23 @@
 # Releasing nomima.io
 
+> 🚧 **ACTIVE: the homepage is currently a coming-soon page.**
+> `nomima.io/` and `/index.html` serve **`coming-soon.html`** while the real landing
+> page is being reworked. `index.html` itself is untouched on disk — nothing was
+> rebuilt or deleted. Everything else is live and unchanged: `download.html`,
+> `releases.html`, `/docs`, the legal pages, `latest.json` (the in-app self-updater),
+> `POST /access`, `/admin` and the `/api/*` backend.
+>
+> **To restore the real landing page** (3 steps, then deploy):
+> 1. `cf/worker.js` — delete the `COMING_SOON` block and the `if (COMING_SOON …)` branch
+>    at the top of `fetch()`.
+> 2. `wrangler.jsonc` — remove `"run_worker_first"` from the `assets` block.
+> 3. `wrangler deploy` (or merge to `main`).
+>
+> Deleting `coming-soon.html` is optional — it is inert once step 1 is done.
+> Note: reaching the Worker for `/` **requires** `run_worker_first`, because Workers
+> serves a matching static asset *before* invoking the script. Without it, `/` goes
+> straight to `index.html` and the takeover silently does nothing.
+
 **The live site is a Cloudflare Worker** (`cf/worker.js`). It serves the static
 marketing site (the `ASSETS` binding, `directory: "."`) **and** the backend:
 
