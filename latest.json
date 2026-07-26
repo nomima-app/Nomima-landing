@@ -1,12 +1,12 @@
 {
-  "version": "1.22.0",
-  "notes": "v1.22.0: Nomima now updates itself — it downloads a new version in the background, verifies it, and offers 'Restart to update' (no more downloading a disk image and dragging it over). Plus smart-tag pill fixes (removing a tag keeps the words; selecting a pill + text and hitting #/@ folds it into one tag), a pinnable sticky toolbar, and per-notebook zoom.",
-  "pub_date": "2026-07-22T21:27:20Z",
-  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.22.0/Nomima_1.22.0_aarch64.dmg",
+  "version": "1.23.0",
+  "notes": "v1.23.0: Back up your vault to your own iCloud, encrypted — turn it on in Settings → Backup and restore on a new Mac (with an optional recovery passphrase). Plus: AirDrop a notebook to the Mac next to you (right-click → Share…), with its attached files and smart tags intact. Summon's memory recall is now ranked by relevance.",
+  "pub_date": "2026-07-26T13:00:00Z",
+  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.23.0/Nomima_1.23.0_aarch64.dmg",
   "platforms": {
     "darwin-aarch64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVElFYUZxVlFhOC9Ba3ZudENHR2RXUnhZK0FHMUZZNG54ak9yay9ieXBrR1k5NHRrMUkybkdkb1A1SnFsa0lWdWgvKzVka01qRWZGTWpmNitZRTFSR1NRK1FTWWdnNmdjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg0NzU1NTU0CWZpbGU6Tm9taW1hXzEuMjIuMF9hYXJjaDY0LmFwcC50YXIuZ3oKT2MrS0pNRUE4MjJ6K1MrZzY2blpkN1pRUHR2bGZ1cnhibW9wVHkxYzRUVEVzQSs5YU9LWHBzbnZLTGVVM25lY0RsY3p6UGcrcFRzVzNUdWtNblErRFE9PQo=",
-      "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.22.0/Nomima_1.22.0_aarch64.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVElFYUZxVlFhOHhmM3dDWWpibHQ4Tll3bDNhSUNnelpoT01jYmF3ZFhNVm1FenNsOG90OFUzZUtOdDNqNVBiQ045S05uZTJsSDVYVFNrNG1ZUmtSeEZSYW5jMUF6ZFFnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg1MDU5MTkwCWZpbGU6Tm9taW1hLmFwcC50YXIuZ3oKRG5hMUswNE92cWdCc21VTE5EYnZHbG5pWXlwY2JURytITWt6b2wwUkZwNCtYTGhZUVR1dEE2RjFNUlBKK2tvdzBJN0d1cFBYYXY3QllSdkFIMlF4REE9PQo=",
+      "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.23.0/Nomima_1.23.0_aarch64.app.tar.gz"
     }
   }
 }
