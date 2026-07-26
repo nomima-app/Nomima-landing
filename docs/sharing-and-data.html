@@ -28,8 +28,8 @@
     <main class="docs-main">
       <header class="docs-header">
         <div class="docs-label">Everything else</div>
-        <h1 class="docs-title">Import, export &amp; publishing</h1>
-        <p class="docs-sub">Your notes are yours. Take a single notebook or your whole vault out to open files, bring them back in, or publish a read-only copy of one note to the web behind a private code.</p>
+        <h1 class="docs-title">Backup, sharing &amp; publishing</h1>
+        <p class="docs-sub">Your notes are yours. Keep an encrypted backup in your own iCloud, AirDrop a notebook to the Mac next to you, take everything out to open files and bring it back in — or publish a read-only copy of one note to the web behind a private code.</p>
       </header>
 
       <h2 id="export">Export</h2>
@@ -81,6 +81,99 @@
 
       <p><strong>What's included.</strong> Your blocks and their text, and the Smart Tags (@mentions, #hashtags) inside them, are all serialized. A whole-vault export also copies in every <strong>attached file</strong> under an <code>assets/</code> folder, and writes a <code>manifest.json</code> index so Nomima can rebuild your notebook hierarchy on import. A single-notebook export contains just that notebook's document.</p>
       <p class="note"><strong>Note:</strong> HTML is a one-way format — it's meant for reading, not re-importing. For a backup you can restore, export as <strong>JSON</strong> (or a JSON/Markdown vault <code>.zip</code>).</p>
+
+      <h2 id="backup">Back up to iCloud</h2>
+      <p>An export is something you do; a <strong>backup</strong> is something Nomima does for you. Turn it on in <strong>Settings&nbsp;→&nbsp;Backup</strong> and Nomima keeps an <strong>encrypted snapshot</strong> of your whole vault — notes, attached files and settings — in <em>your own</em> iCloud Drive, on the schedule you pick.</p>
+      <p>It is <strong>off until you switch it on</strong>. The snapshot is encrypted <em>before</em> it leaves your Mac and lands in your iCloud account, not ours — nobody at Nomima can read it, and there is no server in the middle.</p>
+      <ul>
+        <li><strong>Turn it on</strong> — flip <strong>Back up to iCloud</strong>. The folder it writes to is shown right under the switch. If iCloud Drive isn't set up on your Mac, Nomima tells you instead of failing silently.</li>
+        <li><strong>How often</strong> — set the interval in hours. <strong>Back up now</strong> runs one immediately; a progress bar shows it archiving, encrypting and writing.</li>
+        <li><strong>How many are kept</strong> — the latest <strong>two</strong> snapshots. Each one is a full copy of your vault, so older ones are pruned automatically rather than filling your iCloud storage.</li>
+      </ul>
+
+      <figure class="guide-figure">
+        <div class="mock shr-bk" style="max-width: 480px; margin: 0 auto;">
+          <style>
+            .shr-bk .bk-h { font-size: 13px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 12px; display: flex; align-items: center; gap: 7px; }
+            .shr-bk .bk-row { display: flex; align-items: center; gap: 10px; padding: 11px 0; border-top: 1px solid var(--border-soft); font-size: 12.5px; color: var(--fg-dim); }
+            .shr-bk .bk-row .lab { color: var(--fg); font-weight: 600; }
+            .shr-bk .bk-row .sub { font-size: 10.5px; color: var(--fg-faint); }
+            .shr-bk .bk-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+            .shr-bk .bk-sw { width: 34px; height: 20px; border-radius: 999px; background: var(--accent); position: relative; flex: none; }
+            .shr-bk .bk-sw::after { content: ""; position: absolute; top: 2px; right: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; }
+            .shr-bk .bk-path { font-family: ui-monospace, Menlo, monospace; font-size: 10.5px; color: var(--fg-faint); }
+            .shr-bk .bk-step { border: 1px solid var(--border); border-radius: 7px; padding: 3px 10px; font-size: 11px; color: var(--fg-dim); }
+            .shr-bk .bk-snap { display: flex; align-items: center; gap: 8px; padding: 9px 11px; border: 1px solid var(--border-soft); border-radius: 9px; background: rgba(255,255,255,0.02); font-size: 12px; margin-top: 8px; }
+            .shr-bk .bk-snap .rest { margin-left: auto; font-size: 11px; font-weight: 600; color: var(--accent); border: 1px solid rgba(99,102,241,0.4); border-radius: 7px; padding: 3px 10px; }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">Settings · Backup</span></div>
+          <div class="mock-pad">
+            <div class="bk-h">☁️ Back up to iCloud</div>
+            <div class="bk-row"><span class="lab">Back up to iCloud</span><span class="bk-right"><span class="bk-sw"></span></span></div>
+            <div class="bk-row"><span>Destination<div class="bk-path">~/…/Mobile Documents/NomimaBackups</div></span></div>
+            <div class="bk-row"><span class="lab">Every</span><span class="bk-right"><span class="bk-step">6 hours</span><span class="bk-step" style="color:var(--fg); border-color:rgba(99,102,241,0.4);">Back up now</span></span></div>
+            <div class="bk-row"><span class="lab">Recovery passphrase<div class="sub">Reveal to check what you set</div></span><span class="bk-right"><span class="bk-path">••••••••</span></span></div>
+            <div class="bk-snap">🗄 Today 2:14 PM <span style="color:var(--fg-faint);">· full vault</span><span class="rest">Restore…</span></div>
+            <div class="bk-snap">🗄 Yesterday 9:02 AM <span style="color:var(--fg-faint);">· full vault</span><span class="rest">Restore…</span></div>
+          </div>
+        </div>
+        <figcaption>Backup is opt-in, encrypted, and keeps the latest two snapshots.</figcaption>
+      </figure>
+
+      <h3 id="restore">Restoring — including on a new Mac</h3>
+      <p>Every snapshot is listed with how long ago it was taken. Choose <strong>Restore…</strong> and Nomima rebuilds your vault from it and relaunches. Your previous vault isn't thrown away — it's kept beside the new one as a safety copy (a folder ending <code>.old-</code> and a timestamp) so a restore is never a one-way door.</p>
+      <p>On a <strong>brand-new Mac</strong>: install Nomima, sign into the same iCloud account, and the backup folder syncs down. Open <strong>Settings&nbsp;→&nbsp;Backup&nbsp;→&nbsp;Restore from file…</strong> and pick the snapshot.</p>
+      <p class="note"><strong>Set a recovery passphrase.</strong> It's what lets you restore on a Mac that <em>isn't</em> signed into your iCloud. You can reveal it later from the same screen to check what you set — but it can't be recovered <em>for</em> you, and without it a backup from another account can't be opened. Keep it somewhere safe (and not only inside Nomima).</p>
+
+      <h2 id="nearby-share">Share a notebook with a Mac nearby</h2>
+      <p>To hand a notebook to someone sitting next to you, you don't need an account, a link, or even a network. Right-click a notebook in the sidebar — or open the <strong>⋯</strong> menu while you're reading one — and choose <strong>Share…</strong></p>
+      <p>The standard macOS share sheet opens, so <strong>AirDrop</strong> is right there, along with Messages, Mail and Save&nbsp;to&nbsp;Files. Pick the nearby Mac and it's sent. On the other side the file opens straight into Nomima as a new notebook — nothing to import by hand.</p>
+      <ul>
+        <li><strong>Attachments come too.</strong> Files attached to the notebook travel inside it and open normally on the other Mac, keeping whether you'd added them to your knowledge base.</li>
+        <li><strong>Smart Tags reconnect.</strong> A shared note about <strong>@Priya</strong> joins up with the recipient's own Priya — their notes, attributes and Knowledge Graph — instead of arriving as a stranger. Anyone they don't already have is created.</li>
+        <li><strong>It arrives as a copy.</strong> Sharing sends a snapshot, not a live link: later edits on either Mac stay separate. (Two people editing one notebook together is a different feature, and isn't here yet.)</li>
+      </ul>
+      <figure class="guide-figure">
+        <div class="mock shr-sh" style="max-width: 480px; margin: 0 auto;">
+          <style>
+            .shr-sh .sh-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+            .shr-sh .sh-menu { border: 1px solid var(--border); border-radius: 10px; background: rgba(255,255,255,0.03); padding: 5px; }
+            .shr-sh .sh-mi { font-size: 12.5px; color: var(--fg-dim); padding: 6px 10px; border-radius: 6px; }
+            .shr-sh .sh-mi.on { background: rgba(99,102,241,0.16); color: var(--fg); font-weight: 600; }
+            .shr-sh .sh-mi.del { color: var(--red); }
+            .shr-sh .sheet { border: 1px solid var(--border); border-radius: 12px; background: rgba(255,255,255,0.03); padding: 12px 13px; }
+            .shr-sh .sheet-h { font-size: 10px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 12px; }
+            .shr-sh .drop { display: flex; align-items: center; gap: 11px; margin-bottom: 13px; }
+            .shr-sh .ad { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 40% 34%, #6fb3ff, #2b6fd6); flex: none; }
+            .shr-sh .ad-nm { font-size: 12px; color: var(--fg); font-weight: 600; }
+            .shr-sh .ad-sub { font-size: 10.5px; color: var(--fg-faint); }
+            .shr-sh .apps { display: flex; gap: 15px; font-size: 19px; }
+          </style>
+          <div class="mock-pad">
+            <div class="sh-wrap">
+              <div class="sh-menu">
+                <div class="sh-mi">Open in New Window</div>
+                <div class="sh-mi">Rename…</div>
+                <div class="sh-mi on">Share…</div>
+                <div class="sh-mi">Export…</div>
+                <div class="sh-mi">Duplicate</div>
+                <div class="sh-mi del">Delete</div>
+              </div>
+              <div class="sheet">
+                <div class="sheet-h">Share “Launch plan”</div>
+                <div class="drop">
+                  <span class="ad"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M5.5 11a6 6 0 0 1 9 0"/><path d="M7.5 13.4a3 3 0 0 1 5 0"/><circle cx="10" cy="16" r="1" fill="#fff" stroke="none"/></svg></span>
+                  <span><div class="ad-nm">AirDrop · Dana's MacBook Pro</div><div class="ad-sub">Ready</div></span>
+                </div>
+                <div class="apps"><span>💬</span><span>✉️</span><span>📁</span><span style="color:var(--fg-faint);">⋯</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <figcaption>Share… opens the standard macOS share sheet — AirDrop included.</figcaption>
+      </figure>
+
+      <p class="note"><strong>The file is a <code>.nomima</code> document.</strong> Any Mac with Nomima installed recognises it — double-click it in Finder and it opens in the app. On a Mac <em>without</em> Nomima it's still readable plain text rather than a dead file, so what you send never becomes unopenable.</p>
 
       <h2 id="import">Import</h2>
       <p>Import lives in <strong>Settings → Import…</strong>. It opens a file picker; choose what to bring in and Nomima recreates the notebooks in your vault.</p>

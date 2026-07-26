@@ -100,8 +100,18 @@
         <tr><td>Anthropic</td><td>Claude — Opus, Sonnet, Haiku</td><td>Yes — calls Anthropic with your API key</td></tr>
         <tr><td>OpenAI</td><td>GPT-5.1, GPT-4o and the o-series</td><td>Yes — calls OpenAI with your API key</td></tr>
         <tr><td>Google Gemini</td><td>Gemini 3 Pro and the Flash tiers</td><td>Yes — calls Google with your API key</td></tr>
-        <tr><td>AWS Bedrock</td><td>Foundation models on AWS, via your IAM credentials</td><td>Yes — calls Bedrock with your AWS credentials</td></tr>
+        <tr><td>AWS Bedrock</td><td>Dozens of models on AWS — Claude, GPT-OSS, DeepSeek, Qwen, Mistral and more — from a single Bedrock API key</td><td>Yes — calls AWS with your Bedrock API key</td></tr>
       </table>
+
+      <h4>AWS Bedrock — just paste the key</h4>
+      <p>Bedrock needs a <strong>Bedrock API key</strong>, not an AWS access key and secret. Create one in the AWS console under <strong>Amazon Bedrock → API keys</strong> (a long-term key is easiest), then paste it into the single field in <em>Settings → Summon → AI model → AWS Bedrock</em>.</p>
+      <p>That’s the whole setup — there’s no region to choose. Nomima works out which AWS region your key belongs to on its own and remembers it, then fills the model list live from your own account, so you only ever see models you actually have access to. Pick one and Summon uses it like any other provider.</p>
+      <p>Two things worth knowing:</p>
+      <ul>
+        <li><strong>Enable the models you want in AWS first.</strong> The list only shows models your account has access to, so if something you expected is missing, grant it model access in the Bedrock console and reopen the page.</li>
+        <li><strong>If you replace the key, paste the new one.</strong> An old or revoked key is the usual reason Bedrock suddenly stops working — pasting the current key and saving fixes it.</li>
+      </ul>
+      <p>If you need Bedrock pinned to a specific region (for data-residency reasons, say), use the <strong>change</strong> link next to the detected region and enter it yourself.</p>
 
       <h3>OpenAI-compatible clouds — bring your own key</h3>
       <p>These share one OpenAI-compatible adapter, so any of them is just a key away.</p>

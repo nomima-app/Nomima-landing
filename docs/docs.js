@@ -3,8 +3,8 @@
    if features changed. The sidebar, prev/next pager, and footer stamp on
    every page are generated from this file — edit nothing else for nav. */
 
-const GUIDE_VERSION = "1.21.0";
-const GUIDE_UPDATED = "July 22, 2026";
+const GUIDE_VERSION = "1.23.0";
+const GUIDE_UPDATED = "July 26, 2026";
 
 const PAGES = [
   { section: "Start here" },
@@ -31,7 +31,7 @@ const PAGES = [
   { file: "mcp.html",              title: "MCP server" },
 
   { section: "Everything else" },
-  { file: "sharing-and-data.html", title: "Import, export & publishing" },
+  { file: "sharing-and-data.html", title: "Backup, sharing & publishing" },
   { file: "menu-bar-and-tray.html", title: "Menu bar & tray" },
   { file: "power-tools.html",      title: "Paste, templates & shortcuts" },
   { file: "settings-privacy.html", title: "Settings & privacy" },
