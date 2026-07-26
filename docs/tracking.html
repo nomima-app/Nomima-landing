@@ -41,10 +41,21 @@
       <p>That’s it. There’s no hidden “done” database that can drift out of sync with what you see — completion is always visible right in the note, either as a tick or as a tag.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="tracking/complete-tag-on-block.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The <code>#complete</code> tag on an ordinary block.</strong> Set up: on a plain paragraph (not a task), type <code>#complete</code> and accept it so the block is marked done. In frame: the paragraph greyed out and struck through with its <span class="pill pill-status">#complete</span> pill sitting inline — completion shown right in the note, no checkbox required. Optionally pair it with a checked task line above to show the two equivalent ways.</span>
+        <div class="mock trk-1" style="max-width: 460px; margin: 0 auto;">
+          <style>
+            .trk-1 .trk-1-eq { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); margin: 0 0 9px; }
+            .trk-1 .trk-1-eq:not(:first-child) { margin-top: 20px; }
+            .trk-1 .trk-1-para { font-size: 13.5px; color: var(--fg-faint); text-decoration: line-through; text-decoration-color: var(--fg-faint); }
+            .trk-1 .trk-1-para .pill { text-decoration: none; margin-left: 4px; }
+          </style>
+          <div class="mock-pad">
+            <div class="trk-1-eq">A checked task</div>
+            <div class="mock-tasks">
+              <div class="mock-task done"><span class="mock-check">✓</span><span>Book the venue for <span class="pill pill-mention" style="text-decoration:none;">@Sara Chen</span></span></div>
+            </div>
+            <div class="trk-1-eq">Any other block</div>
+            <div class="trk-1-para">Sponsor logos signed off<span class="pill pill-status">#complete</span></div>
+          </div>
         </div>
         <figcaption>Any block — not just a checkbox — is “done” once it carries the <span class="pill pill-status">#complete</span> status tag.</figcaption>
       </figure>
@@ -102,7 +113,48 @@
       </table>
       <p class="note"><strong>Section greying is clean, not litter.</strong> When a Section is complete, its plain paragraphs and bullet lists are greyed and struck by the section itself — they don’t each sprout a visible <span class="pill pill-status">#complete</span> pill. Only the section’s own summary keeps a visible tag (and its un-complete toggle). Child <em>containers</em> inside it still stamp their own titles, because that’s what drives their rows to complete.</p>
 
-      <figure class="guide-figure"><div class="figure-slot" data-shot="tracking/section-cascade-down.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>Section header completes its subtree.</strong> Set up: an expanded Section titled “Launch checklist” containing a paragraph, a two-item bullet list, and a nested task list with two rows. Stamp <code>#complete</code> on the section summary. In frame: the summary line showing its <code>#complete</code> pill, and the whole subtree beneath it greyed + struck through — including the nested task list’s rows now checked.</span></div><figcaption>Marking a Section’s summary <span class="pill pill-status">#complete</span> greys and completes everything nested under it in one step.</figcaption></figure>
+      <figure class="guide-figure">
+        <div class="mock is-live trk-2" style="max-width: 480px; margin: 0 auto;">
+          <style>
+            .trk-2 .trk-2-sum { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; color: var(--fg); margin-bottom: 12px; }
+            .trk-2 .trk-2-tri { color: var(--fg-faint); font-size: 11px; }
+            .trk-2 .trk-2-pill { opacity: 0; animation: trk2-pill 5s ease-in-out infinite; }
+            .trk-2 .trk-2-sub { margin-left: 16px; border-left: 1.5px solid var(--border-soft); padding-left: 14px; display: flex; flex-direction: column; gap: 9px; }
+            .trk-2 .trk-2-txt { font-size: 13.5px; color: var(--fg-dim); text-decoration: line-through; text-decoration-color: transparent; animation: trk2-strike 5s ease-in-out infinite; }
+            .trk-2 .trk-2-bul { display: flex; align-items: flex-start; gap: 9px; }
+            .trk-2 .trk-2-bul::before { content: "•"; color: var(--fg-faint); }
+            .trk-2 .trk-2-nest { margin-top: 3px; }
+            .trk-2 .trk-2-nesth { display: flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; color: var(--fg-dim); margin-bottom: 8px; text-decoration: line-through; text-decoration-color: transparent; animation: trk2-strike 5s ease-in-out infinite; }
+            .trk-2 .mock-check { background: transparent; border-color: var(--fg-faint); color: #04120b; font-weight: 900; animation: trk2-fill 5s ease-in-out infinite; }
+            .trk-2 .trk-2-tick { opacity: 0; animation: trk2-tick 5s ease-in-out infinite; }
+            @keyframes trk2-pill { 0%,24% { opacity: 0; transform: translateY(-2px); } 40%,92% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-2px); } }
+            @keyframes trk2-strike { 0%,26% { color: var(--fg-dim); text-decoration-color: transparent; } 44%,92% { color: var(--fg-faint); text-decoration-color: var(--fg-faint); } 100% { color: var(--fg-dim); text-decoration-color: transparent; } }
+            @keyframes trk2-fill { 0%,28% { background: transparent; border-color: var(--fg-faint); } 46%,92% { background: var(--green); border-color: var(--green); } 100% { background: transparent; border-color: var(--fg-faint); } }
+            @keyframes trk2-tick { 0%,32% { opacity: 0; } 48%,92% { opacity: 1; } 100% { opacity: 0; } }
+            @media (prefers-reduced-motion: reduce) {
+              .trk-2 .trk-2-pill { animation: none; opacity: 1; transform: none; }
+              .trk-2 .trk-2-txt, .trk-2 .trk-2-nesth { animation: none; color: var(--fg-faint); text-decoration-color: var(--fg-faint); }
+              .trk-2 .mock-check { animation: none; background: var(--green); border-color: var(--green); }
+              .trk-2 .trk-2-tick { animation: none; opacity: 1; }
+            }
+          </style>
+          <div class="mock-pad">
+            <div class="trk-2-sum"><span class="trk-2-tri">▾</span> Launch checklist <span class="trk-2-pill"><span class="pill pill-status">#complete</span></span></div>
+            <div class="trk-2-sub">
+              <div class="trk-2-txt">Everything below ships together for the <span class="pill pill-hashtag" style="text-decoration:none;">#launch</span>.</div>
+              <div class="trk-2-txt trk-2-bul">Press kit approved</div>
+              <div class="trk-2-txt trk-2-bul">Pricing page live</div>
+              <div class="trk-2-nest">
+                <div class="trk-2-nesth">▤ Pre-flight</div>
+                <div class="mock-tasks">
+                  <div class="mock-task"><span class="mock-check"><span class="trk-2-tick">✓</span></span><span class="trk-2-txt">Final QA pass</span></div>
+                  <div class="mock-task"><span class="mock-check"><span class="trk-2-tick">✓</span></span><span class="trk-2-txt">Tag the release</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <figcaption>Marking a Section’s summary <span class="pill pill-status">#complete</span> greys and completes everything nested under it in one step.</figcaption></figure>
 
       <h3 id="up">Up-rollup: all children done → header</h3>
       <p>The reverse happens automatically, and it’s a <em>different</em> path. As you check off children one at a time, Nomima watches each container: the moment <strong>every</strong> child is complete, it stamps <span class="pill pill-status">#complete</span> on the container’s title for you; if any child later reopens, it strips that tag right back off. You never have to complete the header by hand — finishing the work does it.</p>
@@ -114,7 +166,29 @@
       <p class="tip"><strong>Rule of thumb.</strong> <strong>Down</strong> = you complete the header, children follow. <strong>Up</strong> = children complete themselves, the header follows. Down is a deliberate bulk action; up is bookkeeping Nomima does so a container’s title always tells the truth about what’s inside.</p>
       <p class="note"><strong>Empty containers never auto-complete.</strong> A list, board, chart or section with no completable children stays open — an empty to-do is a to-do, not a finished one. Roll-up only fires once there’s something inside to finish.</p>
 
-      <figure class="guide-figure"><div class="figure-slot" data-shot="tracking/tasklist-rollup-up.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>Task list rolls up from its rows.</strong> Set up: a task list titled “Release steps” with five rows; check all five. In frame: the header’s progress badge reading <code>5/5</code> with the green check and full progress bar, and the title line now carrying an auto-added <code>#complete</code> pill (greyed/struck). Optionally a second shot at <code>3/5</code> for the mid-progress state.</span></div><figcaption>Check every row and the title completes itself — the <code>N/M</code> badge and the auto-stamped <span class="pill pill-status">#complete</span> both reflect the roll-up.</figcaption></figure>
+      <figure class="guide-figure">
+        <div class="mock trk-3" style="max-width: 440px; margin: 0 auto;">
+          <style>
+            .trk-3 .trk-3-head { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; color: var(--fg-faint); margin-bottom: 10px; }
+            .trk-3 .trk-3-head .trk-3-ttl { text-decoration: line-through; }
+            .trk-3 .trk-3-chk { width: 17px; height: 17px; border-radius: 5px; background: var(--green); color: #04120b; font-weight: 900; display: grid; place-items: center; font-size: 11px; flex: none; }
+            .trk-3 .trk-3-badge { margin-left: auto; font-size: 11px; font-weight: 800; letter-spacing: 0.02em; color: var(--green); border: 1px solid rgba(52,211,153,0.35); background: rgba(52,211,153,0.10); border-radius: 6px; padding: 1px 7px; }
+            .trk-3 .trk-3-bar { height: 6px; border-radius: 999px; background: rgba(255,255,255,0.06); overflow: hidden; margin-bottom: 14px; }
+            .trk-3 .trk-3-fill { height: 100%; width: 100%; background: var(--green); }
+          </style>
+          <div class="mock-pad">
+            <div class="trk-3-head"><span class="trk-3-chk">✓</span> <span class="trk-3-ttl">Release steps</span> <span class="pill pill-status" style="text-decoration:none;">#complete</span> <span class="trk-3-badge">5 / 5</span></div>
+            <div class="trk-3-bar"><div class="trk-3-fill"></div></div>
+            <div class="mock-tasks">
+              <div class="mock-task done"><span class="mock-check">✓</span><span>Tag the release</span></div>
+              <div class="mock-task done"><span class="mock-check">✓</span><span>Build &amp; notarize the DMG</span></div>
+              <div class="mock-task done"><span class="mock-check">✓</span><span>Upload to GitHub</span></div>
+              <div class="mock-task done"><span class="mock-check">✓</span><span>Update <span class="pill pill-hashtag" style="text-decoration:none;">#launch</span> latest.json</span></div>
+              <div class="mock-task done"><span class="mock-check">✓</span><span>Post the changelog</span></div>
+            </div>
+          </div>
+        </div>
+        <figcaption>Check every row and the title completes itself — the <code>N/M</code> badge and the auto-stamped <span class="pill pill-status">#complete</span> both reflect the roll-up.</figcaption></figure>
 
       <p class="warn"><strong>Dashboard blocks are the exception.</strong> A Dashboard can be marked done — <span class="pill pill-status">#complete</span> on its caption — but it does <em>not</em> cascade. Completing it won’t touch its widgets, and completing widgets won’t roll it up; it’s a single completable block, not a roll-up container.</p>
 

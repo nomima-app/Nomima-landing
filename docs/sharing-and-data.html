@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Backup, sharing &amp; publishing — Nomima Guide</title>
-  <meta name="description" content="Back up your vault to iCloud encrypted, AirDrop a notebook to a nearby Mac, export or import your notes, and publish a read-only note to the web with a private view code." />
+  <title>Import, export &amp; publishing — Nomima Guide</title>
+  <meta name="description" content="Export a notebook or your whole vault to Markdown, HTML or JSON, import it back in, and publish a read-only note to the web with a private view code." />
   <link rel="icon" type="image/svg+xml" href="../logo.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,8 +28,8 @@
     <main class="docs-main">
       <header class="docs-header">
         <div class="docs-label">Everything else</div>
-        <h1 class="docs-title">Backup, sharing &amp; publishing</h1>
-        <p class="docs-sub">Your notes are yours. Keep an encrypted backup in your own iCloud, AirDrop a notebook to the Mac next to you, take everything out to open files and bring it back in — or publish a read-only copy of one note to the web behind a private code.</p>
+        <h1 class="docs-title">Import, export &amp; publishing</h1>
+        <p class="docs-sub">Your notes are yours. Take a single notebook or your whole vault out to open files, bring them back in, or publish a read-only copy of one note to the web behind a private code.</p>
       </header>
 
       <h2 id="export">Export</h2>
@@ -40,10 +40,34 @@
       </ul>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="sharing-and-data/export-dialog.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The export dialog.</strong> Set up: open a notebook's ⋯ menu → Export… (or Settings → Export vault). In frame: the dialog with the three format cards — Markdown, HTML, JSON — one selected.</span>
+        <div class="mock shr-1" style="max-width: 440px; margin: 0 auto;">
+          <style>
+            .shr-1 .shr-1-h { font-size: 15px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 2px; }
+            .shr-1 .shr-1-sub { font-size: 11.5px; color: var(--fg-faint); margin-bottom: 15px; }
+            .shr-1 .shr-1-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+            .shr-1 .shr-1-card { border: 1px solid var(--border-soft); border-radius: 10px; padding: 12px 10px; background: rgba(255,255,255,0.02); text-align: center; }
+            .shr-1 .shr-1-card.on { border-color: rgba(99,102,241,0.55); background: rgba(99,102,241,0.10); }
+            .shr-1 .shr-1-ic { font-size: 19px; }
+            .shr-1 .shr-1-fmt { font-size: 12.5px; font-weight: 700; color: var(--fg); margin-top: 6px; }
+            .shr-1 .shr-1-ext { font-size: 10.5px; color: var(--fg-faint); margin-top: 1px; }
+            .shr-1 .shr-1-card.on .shr-1-ext { color: var(--accent-2); }
+            .shr-1 .shr-1-hint { font-size: 11px; color: var(--fg-faint); margin: 4px 2px 16px; }
+            .shr-1 .shr-1-foot { display: flex; justify-content: flex-end; gap: 9px; }
+          </style>
+          <div class="mock-pad">
+            <div class="shr-1-h">Export notebook</div>
+            <div class="shr-1-sub">Launch plan · choose a format</div>
+            <div class="shr-1-cards">
+              <div class="shr-1-card on"><div class="shr-1-ic">📝</div><div class="shr-1-fmt">Markdown</div><div class="shr-1-ext">.md</div></div>
+              <div class="shr-1-card"><div class="shr-1-ic">🌐</div><div class="shr-1-fmt">HTML</div><div class="shr-1-ext">.html</div></div>
+              <div class="shr-1-card"><div class="shr-1-ic">🧩</div><div class="shr-1-fmt">JSON</div><div class="shr-1-ext">.json</div></div>
+            </div>
+            <div class="shr-1-hint">Portable plain text that opens in any editor.</div>
+            <div class="shr-1-foot">
+              <button style="padding:8px 16px; border-radius:9px; background:rgba(255,255,255,0.04); border:1px solid var(--border); color:var(--fg-dim); font-weight:600; font-size:13px; cursor:pointer;">Cancel</button>
+              <button style="padding:8px 18px; border-radius:9px; background:linear-gradient(180deg,#6d6ff5,#5457e0); border:1px solid rgba(99,102,241,0.5); color:#fff; font-weight:700; font-size:13px; cursor:pointer;">Export</button>
+            </div>
+          </div>
         </div>
         <figcaption>Choose Markdown, HTML or JSON — for a notebook or the whole vault.</figcaption>
       </figure>
@@ -58,48 +82,6 @@
       <p><strong>What's included.</strong> Your blocks and their text, and the Smart Tags (@mentions, #hashtags) inside them, are all serialized. A whole-vault export also copies in every <strong>attached file</strong> under an <code>assets/</code> folder, and writes a <code>manifest.json</code> index so Nomima can rebuild your notebook hierarchy on import. A single-notebook export contains just that notebook's document.</p>
       <p class="note"><strong>Note:</strong> HTML is a one-way format — it's meant for reading, not re-importing. For a backup you can restore, export as <strong>JSON</strong> (or a JSON/Markdown vault <code>.zip</code>).</p>
 
-      <h2 id="backup">Back up to iCloud</h2>
-      <p>An export is something you do; a <strong>backup</strong> is something Nomima does for you. Turn it on in <strong>Settings&nbsp;→&nbsp;Backup</strong> and Nomima keeps an <strong>encrypted snapshot</strong> of your whole vault — notes, attached files and settings — in <em>your own</em> iCloud Drive, on the schedule you pick.</p>
-      <p>It is <strong>off until you switch it on</strong>. The snapshot is encrypted <em>before</em> it leaves your Mac and lands in your iCloud account, not ours — nobody at Nomima can read it, and there is no server in the middle.</p>
-      <ul>
-        <li><strong>Turn it on</strong> — flip <strong>Back up to iCloud</strong>. The folder it writes to is shown right under the switch. If iCloud Drive isn't set up on your Mac, Nomima tells you instead of failing silently.</li>
-        <li><strong>How often</strong> — set the interval in hours. <strong>Back up now</strong> runs one immediately; a progress bar shows it archiving, encrypting and writing.</li>
-        <li><strong>How many are kept</strong> — the latest <strong>two</strong> snapshots. Each one is a full copy of your vault, so older ones are pruned automatically rather than filling your iCloud storage.</li>
-      </ul>
-
-      <figure class="guide-figure">
-        <div class="figure-slot" data-shot="sharing-and-data/backup-settings.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Settings → Backup.</strong> Set up: enable the switch and run one backup so a snapshot is listed. In frame: the &ldquo;Back up to iCloud&rdquo; switch with its destination path, the interval row, the recovery-passphrase row, and one or two snapshots with their Restore buttons.</span>
-        </div>
-        <figcaption>Backup is opt-in, encrypted, and keeps the latest two snapshots.</figcaption>
-      </figure>
-
-      <h3 id="restore">Restoring — including on a new Mac</h3>
-      <p>Every snapshot is listed with how long ago it was taken. Choose <strong>Restore…</strong> and Nomima rebuilds your vault from it and relaunches. Your previous vault isn't thrown away — it's kept beside the new one as a safety copy (a folder ending <code>.old-</code> and a timestamp) so a restore is never a one-way door.</p>
-      <p>On a <strong>brand-new Mac</strong>: install Nomima, sign into the same iCloud account, and the backup folder syncs down. Open <strong>Settings&nbsp;→&nbsp;Backup&nbsp;→&nbsp;Restore from file…</strong> and pick the snapshot.</p>
-      <p class="note"><strong>Set a recovery passphrase.</strong> It's what lets you restore on a Mac that <em>isn't</em> signed into your iCloud. You can reveal it later from the same screen to check what you set — but it can't be recovered <em>for</em> you, and without it a backup from another account can't be opened. Keep it somewhere safe (and not only inside Nomima).</p>
-
-      <h2 id="nearby-share">Share a notebook with a Mac nearby</h2>
-      <p>To hand a notebook to someone sitting next to you, you don't need an account, a link, or even a network. Right-click a notebook in the sidebar — or open the <strong>⋯</strong> menu while you're reading one — and choose <strong>Share…</strong></p>
-      <p>The standard macOS share sheet opens, so <strong>AirDrop</strong> is right there, along with Messages, Mail and Save&nbsp;to&nbsp;Files. Pick the nearby Mac and it's sent. On the other side the file opens straight into Nomima as a new notebook — nothing to import by hand.</p>
-      <ul>
-        <li><strong>Attachments come too.</strong> Files attached to the notebook travel inside it and open normally on the other Mac, keeping whether you'd added them to your knowledge base.</li>
-        <li><strong>Smart Tags reconnect.</strong> A shared note about <strong>@Priya</strong> joins up with the recipient's own Priya — their notes, attributes and Knowledge Graph — instead of arriving as a stranger. Anyone they don't already have is created.</li>
-        <li><strong>It arrives as a copy.</strong> Sharing sends a snapshot, not a live link: later edits on either Mac stay separate. (Two people editing one notebook together is a different feature, and isn't here yet.)</li>
-      </ul>
-      <figure class="guide-figure">
-        <div class="figure-slot" data-shot="sharing-and-data/share-menu.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Share… and the macOS share sheet.</strong> Set up: right-click a notebook in the sidebar. In frame: the context menu with <em>Share…</em> above <em>Export…</em>, and the macOS share sheet open beside it with AirDrop listed.</span>
-        </div>
-        <figcaption>Share… opens the standard macOS share sheet — AirDrop included.</figcaption>
-      </figure>
-
-      <p class="note"><strong>The file is a <code>.nomima</code> document.</strong> Any Mac with Nomima installed recognises it — double-click it in Finder and it opens in the app. On a Mac <em>without</em> Nomima it's still readable plain text rather than a dead file, so what you send never becomes unopenable.</p>
-
       <h2 id="import">Import</h2>
       <p>Import lives in <strong>Settings → Import…</strong>. It opens a file picker; choose what to bring in and Nomima recreates the notebooks in your vault.</p>
       <ul>
@@ -109,10 +91,32 @@
       <p>A single file lands at the top level of your vault. What round-trips cleanly is your <strong>structure, content and hierarchy</strong> — from JSON and Markdown sources. Two honest limits: a JSON or Markdown-format vault <code>.zip</code> re-imports, but an <strong>HTML</strong> export does not (Nomima will tell you to re-export as JSON or Markdown), and <strong>attached files are not yet re-imported</strong> — only the notebook documents come back for now.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="sharing-and-data/import-entry-settings.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Import in Settings.</strong> Set up: open Settings and scroll to the data row. In frame: the "Import — a Nomima export (JSON / Markdown), or a whole-vault .zip" row with its Import… button, sitting just below the Export vault row.</span>
+        <div class="mock shr-2" style="max-width: 520px; margin: 0 auto;">
+          <style>
+            .shr-2 .shr-2-sec { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); margin: 2px 0 10px; }
+            .shr-2 .shr-2-row { display: flex; align-items: center; gap: 12px; padding: 13px 0; border-top: 1px solid var(--border-soft); }
+            .shr-2 .shr-2-row:first-of-type { border-top: none; }
+            .shr-2 .shr-2-ic { width: 30px; height: 30px; border-radius: 8px; flex: none; display: grid; place-items: center; font-size: 15px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-soft); }
+            .shr-2 .shr-2-txt { flex: 1; min-width: 0; }
+            .shr-2 .shr-2-name { font-size: 13px; font-weight: 700; color: var(--fg); }
+            .shr-2 .shr-2-desc { font-size: 11.5px; color: var(--fg-faint); margin-top: 2px; }
+            .shr-2 .shr-2-btn { flex: none; padding: 7px 13px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--fg); font-weight: 600; font-size: 12.5px; cursor: pointer; }
+            .shr-2 .shr-2-btn.hl { background: rgba(99,102,241,0.14); border-color: rgba(99,102,241,0.4); color: var(--fg); }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">Settings · Data</span></div>
+          <div class="mock-pad">
+            <div class="shr-2-sec">Import &amp; export</div>
+            <div class="shr-2-row">
+              <span class="shr-2-ic">📦</span>
+              <div class="shr-2-txt"><div class="shr-2-name">Export vault</div><div class="shr-2-desc">Every notebook + attachments, bundled into a single .zip</div></div>
+              <button class="shr-2-btn">Export vault…</button>
+            </div>
+            <div class="shr-2-row">
+              <span class="shr-2-ic">📥</span>
+              <div class="shr-2-txt"><div class="shr-2-name">Import</div><div class="shr-2-desc">A Nomima export (JSON / Markdown), or a whole-vault .zip</div></div>
+              <button class="shr-2-btn hl">Choose files…</button>
+            </div>
+          </div>
         </div>
         <figcaption>Import a notebook or a whole vault from Settings.</figcaption>
       </figure>
@@ -124,10 +128,46 @@
       <p>Open a notebook, use its header menu and choose <strong>Publish notebook…</strong>, then press <strong>Publish</strong> in the dialog. You get back a shareable link and a <strong>view code</strong> — a page opens only for someone who has both.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="sharing-and-data/publish-dialog.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The publish dialog (published state).</strong> Set up: publish a notebook, then reopen Publish notebook…. In frame: the "read.nomima.io/p/…" address, the "Link with code", "Link (prompts for the code)" and "View code" copy fields, the downloads checklist, and the Update now / Unpublish buttons.</span>
+        <div class="mock shr-3" style="max-width: 460px; margin: 0 auto;">
+          <style>
+            .shr-3 .shr-3-h { font-size: 15px; font-weight: 800; letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+            .shr-3 .shr-3-live { font-size: 9px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--green); border: 1px solid rgba(52,211,153,0.4); background: rgba(52,211,153,0.08); border-radius: 6px; padding: 2px 6px; }
+            .shr-3 .shr-3-sub { font-size: 11.5px; color: var(--fg-faint); margin-bottom: 15px; }
+            .shr-3 .shr-3-lbl { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin: 13px 0 6px; }
+            .shr-3 .shr-3-field { display: flex; align-items: center; gap: 9px; padding: 9px 11px; border-radius: 9px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); }
+            .shr-3 .shr-3-url { flex: 1; min-width: 0; font-size: 12.5px; color: var(--fg); font-family: ui-monospace, "SF Mono", Menlo, monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            .shr-3 .shr-3-copy { flex: none; font-size: 11px; font-weight: 700; color: var(--accent); }
+            .shr-3 .shr-3-two { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+            .shr-3 .shr-3-select { display: flex; align-items: center; justify-content: space-between; gap: 9px; padding: 9px 11px; border-radius: 9px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); font-size: 12.5px; color: var(--fg); font-weight: 600; }
+            .shr-3 .shr-3-code { letter-spacing: 0.18em; font-weight: 700; }
+            .shr-3 .shr-3-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; }
+          </style>
+          <div class="mock-pad">
+            <div class="shr-3-h">Manage publication <span class="shr-3-live">● Live</span></div>
+            <div class="shr-3-sub">Launch plan · read-only on read.nomima.io</div>
+
+            <div class="shr-3-lbl">Visibility</div>
+            <div class="shr-3-select">🔒 Anyone with the link + code <span style="color:var(--fg-faint);">▾</span></div>
+
+            <div class="shr-3-lbl">Link with code</div>
+            <div class="shr-3-field"><span class="shr-3-url">read.nomima.io/p/8fk2q#v=3RA9</span><span class="shr-3-copy">Copy</span></div>
+
+            <div class="shr-3-two" style="margin-top: 13px;">
+              <div>
+                <div class="shr-3-lbl" style="margin-top:0;">Link (prompts)</div>
+                <div class="shr-3-field"><span class="shr-3-url">read.nomima.io/p/8fk2q</span><span class="shr-3-copy">Copy</span></div>
+              </div>
+              <div>
+                <div class="shr-3-lbl" style="margin-top:0;">View code</div>
+                <div class="shr-3-field"><span class="shr-3-url shr-3-code">3RA9</span><span class="shr-3-copy">Copy</span></div>
+              </div>
+            </div>
+
+            <div class="shr-3-foot">
+              <button style="padding:8px 14px; border-radius:9px; background:rgba(248,113,113,0.08); border:1px solid rgba(248,113,113,0.35); color:var(--red); font-weight:600; font-size:13px; cursor:pointer;">Unpublish</button>
+              <button style="padding:8px 18px; border-radius:9px; background:linear-gradient(180deg,#6d6ff5,#5457e0); border:1px solid rgba(99,102,241,0.5); color:#fff; font-weight:700; font-size:13px; cursor:pointer;">Update now</button>
+            </div>
+          </div>
         </div>
         <figcaption>After publishing: the link, the view code, and controls to update or take it down.</figcaption>
       </figure>
@@ -149,10 +189,36 @@
       </ul>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="sharing-and-data/published-page.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The published page.</strong> Set up: open the "Link with code" in a browser. In frame: the read.nomima.io reader showing the note exactly as it looks in the app — headings, pills and thumbnails intact — in the publisher's theme.</span>
+        <div class="mock shr-4" style="max-width: 520px; margin: 0 auto;">
+          <style>
+            .shr-4 .shr-4-omni { display: flex; align-items: center; gap: 9px; padding: 8px 13px; border-bottom: 1px solid var(--border-soft); background: rgba(255,255,255,0.015); }
+            .shr-4 .shr-4-addr { flex: 1; display: flex; align-items: center; gap: 7px; padding: 5px 11px; border-radius: 999px; background: rgba(255,255,255,0.04); border: 1px solid var(--border-soft); font-size: 11.5px; color: var(--fg-dim); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+            .shr-4 .shr-4-lock { color: var(--green); font-size: 10px; }
+            .shr-4 .shr-4-article { max-width: 380px; margin: 0 auto; padding: 26px 20px 8px; }
+            .shr-4 .shr-4-title { font-size: 21px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4px; }
+            .shr-4 .shr-4-meta { font-size: 11px; color: var(--fg-faint); margin-bottom: 18px; }
+            .shr-4 .shr-4-h { font-size: 13.5px; font-weight: 700; color: var(--fg); margin: 16px 0 8px; }
+            .shr-4 .shr-4-p { font-size: 13px; line-height: 1.6; color: var(--fg-dim); margin: 0 0 8px; }
+            .shr-4 .shr-4-task { display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--fg); margin: 6px 0; }
+            .shr-4 .shr-4-box { width: 15px; height: 15px; border-radius: 4px; border: 1.5px solid var(--fg-faint); flex: none; display: grid; place-items: center; font-size: 10px; }
+            .shr-4 .shr-4-task.done .shr-4-box { background: var(--green); border-color: var(--green); color: #04120b; font-weight: 900; }
+            .shr-4 .shr-4-task.done span { color: var(--fg-faint); text-decoration: line-through; }
+            .shr-4 .shr-4-foot { text-align: center; padding: 16px 0 20px; border-top: 1px solid var(--border-soft); margin-top: 18px; font-size: 10.5px; color: var(--fg-faint); }
+            .shr-4 .shr-4-foot b { color: var(--fg-dim); font-weight: 700; }
+          </style>
+          <div class="shr-4-omni">
+            <div class="shr-4-addr"><span class="shr-4-lock">🔒</span> read.nomima.io/p/8fk2q</div>
+          </div>
+          <div class="shr-4-article">
+            <div class="shr-4-title">Launch plan</div>
+            <div class="shr-4-meta">Published · updated 2 days ago</div>
+            <p class="shr-4-p"><span class="pill pill-mention">👤 @Sara Chen</span> owns the <span class="pill pill-hashtag">💼 #launch</span>. Kickoff review lands <span class="pill pill-date">📅 Fri 5pm</span>.</p>
+            <div class="shr-4-h">Checklist</div>
+            <div class="shr-4-task done"><span class="shr-4-box">✓</span><span>Draft the announcement</span></div>
+            <div class="shr-4-task"><span class="shr-4-box"></span><span>Line up review with the team</span></div>
+            <div class="shr-4-task"><span class="shr-4-box"></span><span>Ship the page</span></div>
+            <div class="shr-4-foot">Published with <b>Nomima</b></div>
+          </div>
         </div>
         <figcaption>The reader shows a faithful, self-contained snapshot of your note.</figcaption>
       </figure>
@@ -185,10 +251,29 @@
       </ul>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="sharing-and-data/publish-menu-label.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The publish menu label.</strong> Set up: on a notebook that’s already live, open its ⋯ header menu. In frame: the open menu with the state-tracking item reading <strong>Manage publication…</strong> (rather than “Publish notebook…”), showing how the wording reflects the live state.</span>
+        <div class="mock shr-5" style="max-width: 440px; margin: 0 auto;">
+          <style>
+            .shr-5 .shr-5-head { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--border-soft); }
+            .shr-5 .shr-5-nbtitle { font-size: 15px; font-weight: 800; letter-spacing: -0.01em; flex: 1; }
+            .shr-5 .shr-5-eye { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: var(--fg-dim); padding: 3px 8px; border-radius: 999px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-soft); }
+            .shr-5 .shr-5-dots { font-size: 17px; color: var(--fg); line-height: 1; padding: 0 3px; }
+            .shr-5 .shr-5-wrap { position: relative; padding: 12px 16px 20px; min-height: 176px; }
+            .shr-5 .shr-5-menu { position: absolute; right: 16px; top: 6px; min-width: 226px; }
+          </style>
+          <div class="shr-5-head">
+            <span class="shr-5-nbtitle">Launch plan</span>
+            <span class="shr-5-eye">👁 128</span>
+            <span class="shr-5-dots">⋯</span>
+          </div>
+          <div class="shr-5-wrap">
+            <div class="mock-menu shr-5-menu">
+              <div class="mock-mi"><span class="ic">✎</span> Rename</div>
+              <div class="mock-mi"><span class="ic">🎨</span> Change icon</div>
+              <div class="mock-mi active"><span class="ic">🌐</span> Manage publication…</div>
+              <div class="mock-mi"><span class="ic">⤓</span> Export…</div>
+              <div class="mock-mi" style="color: var(--red);"><span class="ic">🗑</span> Delete</div>
+            </div>
+          </div>
         </div>
         <figcaption>No separate badge — the ⋯ menu item’s wording tracks the publish state.</figcaption>
       </figure>
@@ -197,10 +282,19 @@
       <p>Next to the notebook's <strong>⋯</strong> menu, a small <strong>eye</strong> with a number appears once the page is live <em>and</em> at least one person has opened it. It's quiet by design — no views, no pill. The count keeps itself current on its own (it refreshes about every half-minute while you're online), so you don't need to reload anything. Click it to open the full breakdown.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="sharing-and-data/view-count-eye.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The view-count eye.</strong> Set up: publish a note and open it in a browser a few times so the counter appears. In frame: a close crop of the notebook header showing the small eye icon with its view count sitting next to the ⋯ menu.</span>
+        <div class="mock shr-6" style="max-width: 440px; margin: 0 auto;">
+          <style>
+            .shr-6 .shr-6-head { display: flex; align-items: center; gap: 10px; padding: 18px 18px; }
+            .shr-6 .shr-6-title { font-size: 17px; font-weight: 800; letter-spacing: -0.01em; flex: 1; }
+            .shr-6 .shr-6-eye { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600; color: var(--fg-dim); padding: 4px 10px; border-radius: 999px; background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.25); }
+            .shr-6 .shr-6-eye .n { color: var(--fg); }
+            .shr-6 .shr-6-dots { font-size: 18px; color: var(--fg-dim); line-height: 1; padding: 0 4px; }
+          </style>
+          <div class="shr-6-head">
+            <span class="shr-6-title">Launch plan</span>
+            <span class="shr-6-eye">👁 <span class="n">128 views</span></span>
+            <span class="shr-6-dots">⋯</span>
+          </div>
         </div>
         <figcaption>A quiet eye + number by the ⋯ menu — click it for the full breakdown.</figcaption>
       </figure>
@@ -216,10 +310,65 @@
       <p>Below that, a row of <strong>flag chips</strong> ranks the top countries your readers came from, each with its own count. Then a <strong>Visitors</strong> list gives one line per view, showing what the reader's browser reports: a name (or <strong>Anonymous</strong> if they didn't give one), a <strong>Returning</strong> tag for repeat readers, when they arrived, their approximate location (city and country), their device as <em>OS · browser</em>, and how long they stayed. A <strong>Refresh</strong> button pulls the latest.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="sharing-and-data/publish-analytics.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Views &amp; visitors.</strong> Set up: publish a note, open it in a browser once or twice, then click the eye pill by the notebook's ⋯ menu. In frame: the Views &amp; visitors panel — the Total / Unique / Returning / Avg&nbsp;time stat strip with its sparkline, the country flag chips, and the per-visitor list showing name, location, device and time on page.</span>
+        <div class="mock shr-7" style="max-width: 560px; margin: 0 auto;">
+          <style>
+            .shr-7 .shr-7-top { display: flex; align-items: flex-end; gap: 14px; margin-bottom: 14px; }
+            .shr-7 .shr-7-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; flex: 1; }
+            .shr-7 .shr-7-stat { border: 1px solid var(--border-soft); border-radius: 9px; padding: 9px 10px; background: rgba(255,255,255,0.02); }
+            .shr-7 .shr-7-num { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
+            .shr-7 .shr-7-lab { font-size: 9.5px; color: var(--fg-faint); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+            .shr-7 .shr-7-spark { display: flex; align-items: flex-end; gap: 3px; height: 46px; flex: none; padding-bottom: 2px; }
+            .shr-7 .shr-7-spark i { width: 6px; border-radius: 2px 2px 0 0; background: linear-gradient(180deg, var(--accent), rgba(99,102,241,0.35)); }
+            .shr-7 .shr-7-flags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+            .shr-7 .shr-7-flag { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--fg-dim); padding: 3px 9px; border-radius: 999px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-soft); }
+            .shr-7 .shr-7-flag b { color: var(--fg); font-weight: 700; }
+            .shr-7 .shr-7-lh { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+            .shr-7 .shr-7-lh .h { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); }
+            .shr-7 .shr-7-refresh { font-size: 11px; font-weight: 600; color: var(--accent); }
+            .shr-7 .shr-7-v { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--border-soft); font-size: 12px; }
+            .shr-7 .shr-7-av { width: 26px; height: 26px; border-radius: 50%; flex: none; display: grid; place-items: center; font-size: 11px; font-weight: 700; color: #fff; background: linear-gradient(150deg, #6d6ff5, #5457e0); }
+            .shr-7 .shr-7-av.anon { background: rgba(255,255,255,0.06); color: var(--fg-faint); }
+            .shr-7 .shr-7-vname { color: var(--fg); font-weight: 600; }
+            .shr-7 .shr-7-tag { font-size: 8.5px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--teal); border: 1px solid rgba(45,212,191,0.4); border-radius: 5px; padding: 1px 5px; margin-left: 6px; }
+            .shr-7 .shr-7-meta { color: var(--fg-faint); font-size: 11px; margin-top: 1px; }
+            .shr-7 .shr-7-when { margin-left: auto; color: var(--fg-faint); font-size: 11px; text-align: right; flex: none; }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">Views &amp; visitors · Launch plan</span></div>
+          <div class="mock-pad">
+            <div class="shr-7-top">
+              <div class="shr-7-stats">
+                <div class="shr-7-stat"><div class="shr-7-num">128</div><div class="shr-7-lab">Total</div></div>
+                <div class="shr-7-stat"><div class="shr-7-num">94</div><div class="shr-7-lab">Unique</div></div>
+                <div class="shr-7-stat"><div class="shr-7-num">21</div><div class="shr-7-lab">Returning</div></div>
+                <div class="shr-7-stat"><div class="shr-7-num">1:48</div><div class="shr-7-lab">Avg time</div></div>
+              </div>
+              <div class="shr-7-spark">
+                <i style="height:32%"></i><i style="height:54%"></i><i style="height:40%"></i><i style="height:70%"></i><i style="height:60%"></i><i style="height:88%"></i><i style="height:100%"></i>
+              </div>
+            </div>
+            <div class="shr-7-flags">
+              <span class="shr-7-flag">🇺🇸 United States <b>61</b></span>
+              <span class="shr-7-flag">🇬🇧 UK <b>28</b></span>
+              <span class="shr-7-flag">🇩🇪 Germany <b>19</b></span>
+              <span class="shr-7-flag">🇯🇵 Japan <b>11</b></span>
+            </div>
+            <div class="shr-7-lh"><span class="h">Visitors</span><span class="shr-7-refresh">↻ Refresh</span></div>
+            <div class="shr-7-v">
+              <span class="shr-7-av">JM</span>
+              <div><div class="shr-7-vname">Jordan M.<span class="shr-7-tag">Returning</span></div><div class="shr-7-meta">Berlin, DE · macOS · Safari</div></div>
+              <div class="shr-7-when">2h ago<br>2:14</div>
+            </div>
+            <div class="shr-7-v">
+              <span class="shr-7-av anon">?</span>
+              <div><div class="shr-7-vname">Anonymous</div><div class="shr-7-meta">London, UK · Windows · Chrome</div></div>
+              <div class="shr-7-when">5h ago<br>0:47</div>
+            </div>
+            <div class="shr-7-v">
+              <span class="shr-7-av anon">?</span>
+              <div><div class="shr-7-vname">Anonymous</div><div class="shr-7-meta">Austin, US · iOS · Safari</div></div>
+              <div class="shr-7-when">yesterday<br>3:05</div>
+            </div>
+          </div>
         </div>
         <figcaption>What the publisher sees: counts, top countries, and a line per visit.</figcaption>
       </figure>

@@ -35,7 +35,73 @@
       <h2 id="open">Opening Insights</h2>
       <p>Click <strong>Insights</strong> in the sidebar footer to open the view. Pick a range — <strong>7 days, 30 days, 90 days, or all time</strong> — and everything on the page updates to match.</p>
 
-      <figure class="guide-figure"><div class="figure-slot" data-shot="insights/kpi-strip.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The Insights KPI strip.</strong> Set up: the Insights view open with a 30-day range selected on a vault with real task history. In frame: the range selector and the four KPI tiles (Completed, Created, Avg. time to complete, Streak), each with its sparkline and a small delta vs. the previous period.</span></div><figcaption>The top strip: what changed, and by how much since last period.</figcaption></figure>
+      <figure class="guide-figure">
+        <div class="mock ins-1" style="max-width: 560px; margin: 0 auto;">
+          <style>
+            .ins-1 .ins-1-top { display: flex; align-items: center; margin-bottom: 15px; }
+            .ins-1 .ins-1-title { font-size: 15px; font-weight: 700; }
+            .ins-1 .ins-1-range { display: flex; gap: 5px; margin-left: auto; }
+            .ins-1 .ins-1-seg { font-size: 11px; font-weight: 600; color: var(--fg-dim); padding: 4px 10px; border-radius: 7px; border: 1px solid var(--border-soft); }
+            .ins-1 .ins-1-seg.active { color: var(--fg); background: rgba(99,102,241,0.14); border-color: rgba(99,102,241,0.4); }
+            .ins-1 .ins-1-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
+            .ins-1 .ins-1-tile { border: 1px solid var(--border-soft); border-radius: 11px; padding: 11px 12px; background: rgba(255,255,255,0.02); }
+            .ins-1 .ins-1-lab { font-size: 9.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 8px; line-height: 1.3; min-height: 2.1em; }
+            .ins-1 .ins-1-num { font-size: 25px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+            .ins-1 .ins-1-num small { font-size: 13px; font-weight: 700; color: var(--fg-dim); letter-spacing: 0; }
+            .ins-1 .ins-1-foot { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 9px; }
+            .ins-1 .ins-1-delta { font-size: 10.5px; font-weight: 800; }
+            .ins-1 .ins-1-delta.up { color: var(--green); }
+            .ins-1 .ins-1-delta.down { color: var(--red); }
+            .ins-1 .ins-1-delta.good { color: var(--green); }
+            .ins-1 .ins-1-spark { width: 44px; height: 16px; display: block; overflow: visible; }
+            .ins-1 .ins-1-ribbon { display: flex; align-items: center; gap: 8px; margin-top: 13px; padding: 9px 12px; border-radius: 9px; background: rgba(99,102,241,0.06); border: 1px solid rgba(99,102,241,0.18); font-size: 12px; color: var(--fg-dim); }
+            .ins-1 .ins-1-ribbon b { color: var(--fg); font-weight: 600; }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">📈 Insights</span></div>
+          <div class="mock-pad">
+            <div class="ins-1-top">
+              <span class="ins-1-title">Insights</span>
+              <span class="ins-1-range"><span class="ins-1-seg">7d</span><span class="ins-1-seg active">30d</span><span class="ins-1-seg">90d</span><span class="ins-1-seg">All</span></span>
+            </div>
+            <div class="ins-1-grid">
+              <div class="ins-1-tile">
+                <div class="ins-1-lab">Completed</div>
+                <div class="ins-1-num">47</div>
+                <div class="ins-1-foot">
+                  <span class="ins-1-delta up">↑ 18%</span>
+                  <svg class="ins-1-spark" viewBox="0 0 44 16" fill="none" style="color: var(--green);"><polyline points="0,13 7,11 14,12 21,8 28,6 35,4 44,2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+              <div class="ins-1-tile">
+                <div class="ins-1-lab">Created</div>
+                <div class="ins-1-num">39</div>
+                <div class="ins-1-foot">
+                  <span class="ins-1-delta up">↑ 6%</span>
+                  <svg class="ins-1-spark" viewBox="0 0 44 16" fill="none" style="color: var(--blue);"><polyline points="0,9 7,11 14,7 21,9 28,6 35,8 44,5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+              <div class="ins-1-tile">
+                <div class="ins-1-lab">Avg. time to complete</div>
+                <div class="ins-1-num">1.8<small>d</small></div>
+                <div class="ins-1-foot">
+                  <span class="ins-1-delta good">↓ 0.4d</span>
+                  <svg class="ins-1-spark" viewBox="0 0 44 16" fill="none" style="color: var(--teal);"><polyline points="0,4 7,6 14,5 21,8 28,7 35,10 44,12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+              <div class="ins-1-tile">
+                <div class="ins-1-lab">Current streak</div>
+                <div class="ins-1-num">6<small>d</small></div>
+                <div class="ins-1-foot">
+                  <span class="ins-1-delta up">🔥 best</span>
+                  <svg class="ins-1-spark" viewBox="0 0 44 16" fill="none" style="color: var(--amber);"><polyline points="0,12 7,12 14,9 21,9 28,6 35,6 44,2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="ins-1-ribbon">💡 <span>You're up on last month. Most productive <b>Wed mornings</b> — and <span class="pill pill-hashtag">#billing</span> takes you longest to close.</span></div>
+          </div>
+        </div>
+        <figcaption>The top strip: what changed, and by how much since last period.</figcaption>
+      </figure>
 
       <h2 id="kpis">The KPI strip &amp; insight ribbon</h2>
       <ul>
@@ -55,7 +121,62 @@
         <li><strong>Time-to-complete distribution</strong> — how long tasks typically take from creation to done.</li>
       </ul>
 
-      <figure class="guide-figure"><div class="figure-slot" data-shot="insights/calendar-heatmap.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>Completion calendar and productive-hours heatmap.</strong> Set up: Insights on the "all time" range with several months of history. In frame: the 12-month GitHub-style completion calendar and, beside or below it, the day-of-week × hour productive-hours heatmap with its completions/time-spent toggle.</span></div><figcaption>A year of activity at a glance, plus when in the week you actually get things done.</figcaption></figure>
+      <figure class="guide-figure">
+        <div class="mock ins-2" style="max-width: 600px; margin: 0 auto;">
+          <style>
+            .ins-2 .ins-2-ph { display: flex; align-items: center; margin-bottom: 11px; }
+            .ins-2 .ins-2-pt { font-size: 12.5px; font-weight: 700; }
+            .ins-2 .ins-2-months { display: flex; justify-content: space-between; width: 530px; margin: 0 0 5px 24px; font-size: 8.5px; color: var(--fg-faint); }
+            .ins-2 .ins-2-calwrap { display: flex; }
+            .ins-2 .ins-2-days { display: grid; grid-template-rows: repeat(7, 8px); gap: 2px; margin-right: 6px; }
+            .ins-2 .ins-2-days span { font-size: 8px; line-height: 8px; color: var(--fg-faint); }
+            .ins-2 .ins-2-cal { display: grid; grid-template-rows: repeat(7, 8px); grid-auto-flow: column; grid-auto-columns: 8px; gap: 2px; }
+            .ins-2 .ins-2-cal i.c { width: 8px; height: 8px; border-radius: 2px; }
+            .ins-2 .c.l0 { background: rgba(255,255,255,0.05); }
+            .ins-2 .c.l1 { background: rgba(52,211,153,0.24); }
+            .ins-2 .c.l2 { background: rgba(52,211,153,0.46); }
+            .ins-2 .c.l3 { background: rgba(52,211,153,0.68); }
+            .ins-2 .c.l4 { background: rgba(52,211,153,0.95); }
+            .ins-2 .ins-2-legend { display: flex; align-items: center; gap: 5px; justify-content: flex-end; margin-top: 8px; font-size: 9px; color: var(--fg-faint); }
+            .ins-2 .ins-2-legend i { width: 8px; height: 8px; border-radius: 2px; }
+            .ins-2 hr.ins-2-div { border: none; height: 1px; background: var(--border-soft); margin: 18px 0; }
+            .ins-2 .ins-2-toggle { display: flex; gap: 4px; margin-left: auto; }
+            .ins-2 .ins-2-tg { font-size: 10px; font-weight: 600; color: var(--fg-dim); padding: 3px 9px; border-radius: 6px; border: 1px solid var(--border-soft); }
+            .ins-2 .ins-2-tg.active { color: var(--fg); background: rgba(99,102,241,0.14); border-color: rgba(99,102,241,0.4); }
+            .ins-2 .ins-2-hrow { display: flex; align-items: center; gap: 3px; margin-bottom: 3px; }
+            .ins-2 .ins-2-hd { width: 26px; font-size: 10px; color: var(--fg-faint); flex: none; }
+            .ins-2 .ins-2-hrow i.h { flex: 1; height: 13px; border-radius: 3px; }
+            .ins-2 .h.l0 { background: rgba(255,255,255,0.05); }
+            .ins-2 .h.l1 { background: rgba(99,102,241,0.26); }
+            .ins-2 .h.l2 { background: rgba(99,102,241,0.48); }
+            .ins-2 .h.l3 { background: rgba(99,102,241,0.70); }
+            .ins-2 .h.l4 { background: rgba(99,102,241,0.96); }
+            .ins-2 .ins-2-hours { display: flex; gap: 3px; margin: 5px 0 0 29px; font-size: 9px; color: var(--fg-faint); }
+            .ins-2 .ins-2-hours span { flex: 1; }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">📈 Insights · All time</span></div>
+          <div class="mock-pad">
+            <div class="ins-2-ph"><span class="ins-2-pt">Completion calendar</span></div>
+            <div class="ins-2-months"><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span></div>
+            <div class="ins-2-calwrap">
+              <div class="ins-2-days"><span></span><span>Mon</span><span></span><span>Wed</span><span></span><span>Fri</span><span></span></div>
+              <div class="ins-2-cal"><i class="c l0"></i><i class="c l0"></i><i class="c l1"></i><i class="c l0"></i><i class="c l1"></i><i class="c l0"></i><i class="c l0"></i><i class="c l1"></i><i class="c l0"></i><i class="c l1"></i><i class="c l0"></i><i class="c l0"></i><i class="c l0"></i><i class="c l0"></i><i class="c l0"></i><i class="c l0"></i><i class="c l1"></i><i class="c l2"></i><i class="c l1"></i><i class="c l0"></i><i class="c l1"></i><i class="c l0"></i><i class="c l2"></i><i class="c l1"></i><i class="c l0"></i><i class="c l0"></i><i class="c l0"></i><i class="c l0"></i><i class="c l0"></i><i class="c l1"></i><i class="c l1"></i><i class="c l1"></i><i class="c l1"></i><i class="c l0"></i><i class="c l0"></i><i class="c l0"></i><i class="c l2"></i><i class="c l1"></i><i class="c l1"></i><i class="c l1"></i><i class="c l0"></i><i class="c l0"></i><i class="c l2"></i><i class="c l2"></i><i class="c l1"></i><i class="c l1"></i><i class="c l1"></i><i class="c l1"></i><i class="c l0"></i><i class="c l1"></i><i class="c l2"></i><i class="c l0"></i><i class="c l1"></i><i class="c l2"></i><i class="c l0"></i><i class="c l0"></i><i class="c l0"></i><i class="c l2"></i><i class="c l2"></i><i class="c l1"></i><i class="c l2"></i><i class="c l0"></i><i class="c l0"></i><i class="c l2"></i><i class="c l2"></i><i class="c l1"></i><i class="c l2"></i><i class="c l2"></i><i class="c l0"></i><i class="c l0"></i><i class="c l0"></i><i class="c l2"></i><i class="c l2"></i><i class="c l3"></i><i class="c l2"></i><i class="c l0"></i><i class="c l0"></i><i class="c l2"></i><i class="c l0"></i><i class="c l1"></i><i class="c l1"></i><i class="c l1"></i><i class="c l0"></i><i class="c l1"></i><i class="c l1"></i><i class="c l1"></i><i class="c l1"></i><i class="c l2"></i><i class="c l0"></i><i class="c l0"></i><i class="c l0"></i><i class="c l2"></i><i class="c l2"></i><i class="c l2"></i><i class="c l1"></i><i class="c l1"></i><i class="c l0"></i><i class="c l1"></i><i class="c l3"></i><i class="c l1"></i><i class="c l1"></i><i class="c l1"></i><i class="c l1"></i><i class="c l0"></i><i class="c l0"></i><i class="c l1"></i><i class="c l0"></i><i class="c l1"></i><i class="c l1"></i><i class="c l2"></i><i class="c l1"></i><i class="c l1"></i><i class="c l2"></i><i class="c l2"></i><i class="c l2"></i><i class="c l1"></i><i class="c l3"></i><i class="c l1"></i><i class="c l1"></i><i class="c l2"></i><i class="c l1"></i><i class="c l1"></i><i class="c l1"></i><i class="c l2"></i><i class="c l0"></i><i class="c l0"></i><i class="c l1"></i><i class="c l1"></i><i class="c l1"></i><i class="c l1"></i><i class="c l1"></i><i class="c l0"></i><i class="c l0"></i><i class="c l2"></i><i class="c l1"></i><i class="c l3"></i><i class="c l2"></i><i class="c l1"></i><i class="c l0"></i><i class="c l0"></i><i class="c l2"></i><i class="c l1"></i><i class="c l3"></i><i class="c l3"></i><i class="c l2"></i><i class="c l0"></i><i class="c l0"></i><i class="c l1"></i><i class="c l2"></i><i class="c l1"></i><i class="c l3"></i><i class="c l1"></i><i class="c l0"></i><i class="c l1"></i><i class="c l2"></i><i class="c l1"></i><i class="c l2"></i><i class="c l1"></i><i class="c l2"></i><i class="c l2"></i><i class="c l1"></i><i class="c l2"></i><i class="c l1"></i><i class="c l2"></i><i class="c l1"></i><i class="c l3"></i><i class="c l1"></i><i class="c l1"></i><i class="c l2"></i><i class="c l1"></i><i class="c l3"></i><i class="c l3"></i><i class="c l3"></i><i class="c l1"></i><i class="c l1"></i><i class="c l3"></i><i class="c l1"></i><i class="c l2"></i><i class="c l2"></i><i class="c l1"></i><i class="c l0"></i><i class="c l0"></i><i class="c l2"></i><i class="c l3"></i><i class="c l3"></i><i class="c l2"></i><i class="c l3"></i><i class="c l2"></i><i class="c l2"></i><i class="c l2"></i><i class="c l2"></i><i class="c l2"></i><i class="c l1"></i><i class="c l1"></i><i class="c l1"></i><i class="c l2"></i><i class="c l3"></i><i class="c l2"></i><i class="c l3"></i><i class="c l3"></i><i class="c l1"></i><i class="c l1"></i><i class="c l2"></i><i class="c l3"></i><i class="c l3"></i><i class="c l2"></i><i class="c l2"></i><i class="c l3"></i><i class="c l0"></i><i class="c l1"></i><i class="c l3"></i><i class="c l2"></i><i class="c l2"></i><i class="c l3"></i><i class="c l3"></i><i class="c l0"></i><i class="c l0"></i><i class="c l2"></i><i class="c l3"></i><i class="c l3"></i><i class="c l2"></i><i class="c l3"></i><i class="c l2"></i><i class="c l1"></i><i class="c l2"></i><i class="c l2"></i><i class="c l2"></i><i class="c l1"></i><i class="c l3"></i><i class="c l1"></i><i class="c l1"></i><i class="c l3"></i><i class="c l2"></i><i class="c l3"></i><i class="c l3"></i><i class="c l2"></i><i class="c l0"></i><i class="c l0"></i><i class="c l2"></i><i class="c l3"></i><i class="c l2"></i><i class="c l2"></i><i class="c l2"></i><i class="c l2"></i><i class="c l1"></i><i class="c l2"></i><i class="c l3"></i><i class="c l3"></i><i class="c l2"></i><i class="c l3"></i><i class="c l1"></i><i class="c l1"></i><i class="c l3"></i><i class="c l1"></i><i class="c l2"></i><i class="c l2"></i><i class="c l1"></i><i class="c l2"></i><i class="c l0"></i><i class="c l3"></i><i class="c l3"></i><i class="c l3"></i><i class="c l2"></i><i class="c l3"></i><i class="c l1"></i><i class="c l2"></i><i class="c l2"></i><i class="c l3"></i><i class="c l2"></i><i class="c l2"></i><i class="c l3"></i><i class="c l1"></i><i class="c l1"></i><i class="c l3"></i><i class="c l4"></i><i class="c l3"></i><i class="c l3"></i><i class="c l3"></i><i class="c l1"></i><i class="c l2"></i><i class="c l3"></i><i class="c l3"></i><i class="c l3"></i><i class="c l4"></i><i class="c l3"></i><i class="c l2"></i><i class="c l2"></i><i class="c l2"></i><i class="c l3"></i><i class="c l4"></i><i class="c l3"></i><i class="c l2"></i><i class="c l0"></i><i class="c l1"></i><i class="c l2"></i><i class="c l2"></i><i class="c l2"></i><i class="c l3"></i><i class="c l3"></i><i class="c l2"></i><i class="c l0"></i><i class="c l3"></i><i class="c l3"></i><i class="c l2"></i><i class="c l4"></i><i class="c l4"></i><i class="c l1"></i><i class="c l2"></i><i class="c l3"></i><i class="c l3"></i><i class="c l4"></i><i class="c l4"></i><i class="c l2"></i><i class="c l1"></i><i class="c l1"></i><i class="c l3"></i><i class="c l2"></i><i class="c l3"></i><i class="c l3"></i><i class="c l2"></i><i class="c l2"></i><i class="c l1"></i><i class="c l2"></i><i class="c l3"></i><i class="c l3"></i><i class="c l3"></i><i class="c l2"></i><i class="c l3"></i><i class="c l2"></i><i class="c l4"></i><i class="c l2"></i><i class="c l2"></i><i class="c l2"></i><i class="c l4"></i><i class="c l1"></i><i class="c l1"></i><i class="c l3"></i><i class="c l4"></i><i class="c l4"></i><i class="c l2"></i><i class="c l2"></i><i class="c l3"></i><i class="c l2"></i><i class="c l4"></i><i class="c l2"></i><i class="c l2"></i><i class="c l3"></i><i class="c l3"></i><i class="c l1"></i><i class="c l3"></i><i class="c l3"></i><i class="c l4"></i><i class="c l2"></i><i class="c l4"></i><i class="c l2"></i><i class="c l3"></i><i class="c l2"></i><i class="c l3"></i><i class="c l3"></i><i class="c l4"></i><i class="c l3"></i><i class="c l2"></i><i class="c l2"></i><i class="c l1"></i><i class="c l2"></i><i class="c l2"></i><i class="c l2"></i><i class="c l3"></i><i class="c l3"></i><i class="c l1"></i><i class="c l2"></i></div>
+            </div>
+            <div class="ins-2-legend">Less <i class="c l0" style="background:rgba(255,255,255,0.05)"></i><i class="c l1" style="background:rgba(52,211,153,0.24)"></i><i class="c l2" style="background:rgba(52,211,153,0.46)"></i><i class="c l3" style="background:rgba(52,211,153,0.68)"></i><i class="c l4" style="background:rgba(52,211,153,0.95)"></i> More</div>
+            <hr class="ins-2-div">
+            <div class="ins-2-ph"><span class="ins-2-pt">Productive hours</span><span class="ins-2-toggle"><span class="ins-2-tg active">Completions</span><span class="ins-2-tg">Time spent</span></span></div>
+            <div class="ins-2-hrow"><span class="ins-2-hd">Mon</span><i class="h l1"></i><i class="h l2"></i><i class="h l3"></i><i class="h l4"></i><i class="h l3"></i><i class="h l2"></i><i class="h l1"></i><i class="h l2"></i><i class="h l3"></i><i class="h l3"></i><i class="h l3"></i><i class="h l2"></i><i class="h l0"></i><i class="h l1"></i><i class="h l0"></i></div>
+            <div class="ins-2-hrow"><span class="ins-2-hd">Tue</span><i class="h l1"></i><i class="h l2"></i><i class="h l3"></i><i class="h l4"></i><i class="h l4"></i><i class="h l3"></i><i class="h l2"></i><i class="h l2"></i><i class="h l3"></i><i class="h l3"></i><i class="h l3"></i><i class="h l2"></i><i class="h l0"></i><i class="h l0"></i><i class="h l0"></i></div>
+            <div class="ins-2-hrow"><span class="ins-2-hd">Wed</span><i class="h l1"></i><i class="h l2"></i><i class="h l3"></i><i class="h l4"></i><i class="h l4"></i><i class="h l3"></i><i class="h l2"></i><i class="h l2"></i><i class="h l2"></i><i class="h l3"></i><i class="h l3"></i><i class="h l1"></i><i class="h l1"></i><i class="h l0"></i><i class="h l1"></i></div>
+            <div class="ins-2-hrow"><span class="ins-2-hd">Thu</span><i class="h l2"></i><i class="h l2"></i><i class="h l3"></i><i class="h l4"></i><i class="h l3"></i><i class="h l2"></i><i class="h l1"></i><i class="h l2"></i><i class="h l3"></i><i class="h l3"></i><i class="h l2"></i><i class="h l2"></i><i class="h l0"></i><i class="h l0"></i><i class="h l0"></i></div>
+            <div class="ins-2-hrow"><span class="ins-2-hd">Fri</span><i class="h l1"></i><i class="h l2"></i><i class="h l3"></i><i class="h l4"></i><i class="h l3"></i><i class="h l2"></i><i class="h l2"></i><i class="h l2"></i><i class="h l3"></i><i class="h l3"></i><i class="h l3"></i><i class="h l2"></i><i class="h l1"></i><i class="h l1"></i><i class="h l0"></i></div>
+            <div class="ins-2-hrow"><span class="ins-2-hd">Sat</span><i class="h l1"></i><i class="h l1"></i><i class="h l1"></i><i class="h l2"></i><i class="h l2"></i><i class="h l1"></i><i class="h l1"></i><i class="h l1"></i><i class="h l1"></i><i class="h l1"></i><i class="h l1"></i><i class="h l1"></i><i class="h l1"></i><i class="h l0"></i><i class="h l0"></i></div>
+            <div class="ins-2-hrow"><span class="ins-2-hd">Sun</span><i class="h l1"></i><i class="h l1"></i><i class="h l2"></i><i class="h l1"></i><i class="h l1"></i><i class="h l0"></i><i class="h l0"></i><i class="h l0"></i><i class="h l1"></i><i class="h l1"></i><i class="h l1"></i><i class="h l1"></i><i class="h l0"></i><i class="h l0"></i><i class="h l0"></i></div>
+            <div class="ins-2-hours"><span>6a</span><span>9a</span><span>12p</span><span>3p</span><span>6p</span></div>
+          </div>
+        </div>
+        <figcaption>A year of activity at a glance, plus when in the week you actually get things done.</figcaption>
+      </figure>
 
       <h2 id="drill">Drill-through</h2>
       <p>Click any breakdown bar or calendar day and a panel slides in from the right, listing the actual tasks behind it — icon, preview, notebook and time-to-complete for each. Click one to jump straight to that block in its note.</p>

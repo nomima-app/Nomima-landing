@@ -50,10 +50,47 @@
       <p class="note"><strong>Pasting a table</strong> from a web page, Google Docs, Notion or Markdown drops in as an authored database automatically — the header row becomes your columns, each row a record.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="advanced-blocks/authored-database.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Authored database with typed columns.</strong> Set up: a <code>/table</code> named “Launch tasks” with an Owner column holding real <span class="pill pill-mention">@person</span> pills, a Due date column, and a Status column where one row shows <span class="pill pill-status">#complete</span>. In frame: the header row (showing the column types), 3–4 filled rows, and the calc strip along the bottom.</span>
+        <div class="mock adv-1" style="max-width: 580px; margin: 0 auto;">
+          <style>
+            .adv-1 .a1-head { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-bottom: 1px solid var(--border-soft); }
+            .adv-1 .a1-head .lbl { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); }
+            .adv-1 .a1-head .rows { margin-left: auto; font-size: 10.5px; color: var(--fg-dim); background: rgba(255,255,255,0.05); border-radius: 999px; padding: 2px 9px; }
+            .adv-1 .a1-head .sig { color: var(--fg-dim); font-size: 12px; }
+            .adv-1 .a1-head .x { color: var(--fg-faint); font-size: 12px; }
+            .adv-1 .a1-grid { display: grid; grid-template-columns: 1.7fr 1.15fr 0.85fr 1fr; }
+            .adv-1 .a1-c { padding: 9px 11px; border-bottom: 1px solid var(--border-soft); font-size: 12.5px; color: var(--fg); display: flex; align-items: center; gap: 7px; }
+            .adv-1 .a1-hc { font-size: 11.5px; color: var(--fg-dim); background: rgba(255,255,255,0.02); }
+            .adv-1 .a1-hc .ic { opacity: 0.65; font-weight: 800; }
+            .adv-1 .a1-chk { width: 15px; height: 15px; border-radius: 4px; border: 1.6px solid var(--fg-faint); flex: none; display: grid; place-items: center; font-size: 10px; }
+            .adv-1 .a1-chk.on { background: var(--green); border-color: var(--green); color: #04120b; font-weight: 900; }
+            .adv-1 .a1-stat { font-size: 12px; font-weight: 600; border-radius: 999px; padding: 1.5px 10px; border: 1px solid; }
+            .adv-1 .a1-sum { display: flex; align-items: center; gap: 7px; padding: 8px 12px; font-size: 11px; font-weight: 600; color: var(--fg-faint); border-top: 1px solid var(--border-soft); }
+            .adv-1 .a1-new { font-size: 11.5px; color: var(--fg-faint); padding: 9px 12px; border-top: 1px solid var(--border-soft); }
+          </style>
+          <div class="a1-head"><span class="lbl">▤ Launch tasks</span><span class="rows">3 rows</span><span class="sig">Σ</span><span class="x">✕</span></div>
+          <div class="a1-grid">
+            <div class="a1-c a1-hc"><span class="ic">T</span> Item</div>
+            <div class="a1-c a1-hc"><span class="ic">👤</span> Owner</div>
+            <div class="a1-c a1-hc"><span class="ic">📅</span> Due</div>
+            <div class="a1-c a1-hc"><span class="ic">🚩</span> Status</div>
+
+            <div class="a1-c"><span class="a1-chk on">✓</span> Draft the announcement</div>
+            <div class="a1-c"><span class="pill pill-mention">@Sara Chen</span></div>
+            <div class="a1-c"><span class="pill pill-date">Fri 5pm</span></div>
+            <div class="a1-c"><span class="pill pill-status">#complete</span></div>
+
+            <div class="a1-c"><span class="a1-chk"></span> Book the venue</div>
+            <div class="a1-c"><span class="pill pill-mention">@Sam Ortiz</span></div>
+            <div class="a1-c"><span class="pill pill-date">Jul 28</span></div>
+            <div class="a1-c"><span class="a1-stat" style="color:var(--amber);border-color:rgba(251,191,36,0.35);background:rgba(251,191,36,0.10);">🚩 In&nbsp;progress</span></div>
+
+            <div class="a1-c" style="border-bottom:none;"><span class="a1-chk"></span> Record the demo</div>
+            <div class="a1-c" style="border-bottom:none;"><span class="pill pill-mention">@Dana Wu</span></div>
+            <div class="a1-c" style="border-bottom:none;"><span class="pill pill-date">Jul 30</span></div>
+            <div class="a1-c" style="border-bottom:none;"><span class="a1-stat" style="color:var(--fg-faint);border-color:var(--border);background:rgba(255,255,255,0.04);">🚩 Planned</span></div>
+          </div>
+          <div class="a1-sum"><span class="sig" style="opacity:0.6;">Σ</span> 1 of 3 done</div>
+          <div class="a1-new">＋ New row</div>
         </div>
         <figcaption>Every column is typed; every row is an indexed record.</figcaption>
       </figure>
@@ -67,10 +104,46 @@
       </ul>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="advanced-blocks/entity-table.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>An entity table of a type.</strong> Set up: an <code>/entity-table</code> set to Person, so it lists several people one per row with their attribute columns filled (role, company…). In frame: the type dropdown in the header, the leading name cell showing each entity's avatar and mention-count, and a couple of attribute columns.</span>
+        <div class="mock adv-2" style="max-width: 580px; margin: 0 auto;">
+          <style>
+            .adv-2 .a2-bar { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
+            .adv-2 .a2-chrome { font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-dim); }
+            .adv-2 .a2-drop { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 700; color: var(--fg); border: 1px solid var(--border); border-radius: 8px; padding: 5px 11px; background: rgba(255,255,255,0.03); }
+            .adv-2 .a2-drop .cv { color: var(--fg-faint); font-size: 11px; }
+            .adv-2 .a2-count { margin-left: auto; font-size: 11px; color: var(--fg-faint); }
+            .adv-2 .a2-grid { display: grid; grid-template-columns: 1.7fr 1.3fr 1.2fr; border: 1px solid var(--border-soft); border-radius: 10px; overflow: hidden; }
+            .adv-2 .a2-c { padding: 9px 11px; border-bottom: 1px solid var(--border-soft); border-right: 1px solid var(--border-soft); font-size: 12.5px; color: var(--fg); display: flex; align-items: center; gap: 9px; }
+            .adv-2 .a2-grid > .a2-c:nth-child(3n) { border-right: none; }
+            .adv-2 .a2-grid > .a2-c:nth-last-child(-n+3) { border-bottom: none; }
+            .adv-2 .a2-head { background: rgba(255,255,255,0.03); font-weight: 700; color: var(--fg-dim); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; }
+            .adv-2 .a2-av { width: 26px; height: 26px; border-radius: 50%; flex: none; display: grid; place-items: center; font-size: 10px; font-weight: 800; color: #fff; }
+            .adv-2 .a2-nm { display: flex; flex-direction: column; gap: 1px; }
+            .adv-2 .a2-mc { font-size: 10px; color: var(--fg-faint); }
+          </style>
+          <div class="mock-pad">
+            <div class="a2-bar">
+              <span class="a2-chrome">⧉ Entities</span>
+              <span class="a2-drop">👤 Person <span class="cv">▾</span></span>
+              <span class="a2-count">3 rows · edits write to each entity · ✕</span>
+            </div>
+            <div class="a2-grid">
+              <div class="a2-c a2-head">Name</div>
+              <div class="a2-c a2-head">Role</div>
+              <div class="a2-c a2-head">Company</div>
+
+              <div class="a2-c"><span class="a2-av" style="background:linear-gradient(150deg,#2dd4bf,#0f766e);">SC</span><span class="a2-nm">Sara Chen<span class="a2-mc">12 mentions</span></span></div>
+              <div class="a2-c">Head of Design</div>
+              <div class="a2-c"><span class="pill pill-mention">🏢 @Acme Co</span></div>
+
+              <div class="a2-c"><span class="a2-av" style="background:linear-gradient(150deg,#6366f1,#3730a3);">SO</span><span class="a2-nm">Sam Ortiz<span class="a2-mc">8 mentions</span></span></div>
+              <div class="a2-c">Product Manager</div>
+              <div class="a2-c"><span class="pill pill-mention">🏢 @Acme Co</span></div>
+
+              <div class="a2-c"><span class="a2-av" style="background:linear-gradient(150deg,#f048a8,#9d174d);">DW</span><span class="a2-nm">Dana Wu<span class="a2-mc">5 mentions</span></span></div>
+              <div class="a2-c">Engineer</div>
+              <div class="a2-c"><span class="pill pill-mention">🏢 @Northwind</span></div>
+            </div>
+          </div>
         </div>
         <figcaption>A live grid of every entity of a type — edits write straight to the entity.</figcaption>
       </figure>
@@ -87,10 +160,49 @@
       <p class="tip"><strong>Tip:</strong> a query table filtered to <span class="pill pill-hashtag">#launch</span> with <em>hide completed</em> on becomes a live “still open for the launch” list that never needs manual upkeep.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="advanced-blocks/query-table-bound.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Query table bound to a pill.</strong> Set up: a <code>/query-table</code> filtered to <span class="pill pill-hashtag">#launch</span> with at least three matching blocks from different notebooks. In frame: the filter bar (the <span class="pill pill-hashtag">#launch</span> chip and the <em>+ Add filter</em> button) directly above the result rows, with each row showing its notebook glyph on the right.</span>
+        <div class="mock adv-3" style="max-width: 560px; margin: 0 auto;">
+          <style>
+            .adv-3 .a3-hd { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-bottom: 1px solid var(--border-soft); }
+            .adv-3 .a3-icon { color: var(--fg-faint); font-size: 12px; }
+            .adv-3 .a3-ttl { font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-dim); }
+            .adv-3 .a3-plus { color: var(--fg-faint); font-size: 13px; }
+            .adv-3 .a3-meta { margin-left: auto; font-size: 10.5px; color: var(--fg-faint); }
+            .adv-3 .a3-ctl { color: var(--fg-faint); font-size: 12px; }
+            .adv-3 .a3-x { color: var(--fg-faint); font-size: 12px; }
+            .adv-3 .a3-rows { display: flex; flex-direction: column; gap: 7px; padding: 12px; }
+            .adv-3 .a3-row { display: flex; align-items: center; gap: 10px; padding: 9px 11px; border: 1px solid var(--border-soft); border-radius: 9px; background: rgba(255,255,255,0.02); font-size: 13px; color: var(--fg); }
+            .adv-3 .a3-chk { width: 15px; height: 15px; border-radius: 4px; border: 1.6px solid var(--fg-faint); flex: none; }
+            .adv-3 .a3-body { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+            .adv-3 .a3-nb { margin-left: auto; display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: var(--fg-faint); flex: none; }
+            .adv-3 .a3-nb .go { opacity: 0.7; }
+            .adv-3 .a3-pill-x { opacity: 0.6; font-size: 0.85em; margin-left: 2px; }
+          </style>
+          <div class="a3-hd">
+            <span class="a3-icon">⧉</span>
+            <span class="a3-ttl">Query</span>
+            <span class="pill pill-hashtag">#launch<span class="a3-pill-x">×</span></span>
+            <span class="a3-plus">＋</span>
+            <span class="a3-meta">3 blocks</span>
+            <span class="a3-ctl">⟐</span><span class="a3-ctl">⇅</span><span class="a3-ctl">👁</span>
+            <span class="a3-x">✕</span>
+          </div>
+          <div class="a3-rows">
+            <div class="a3-row">
+              <span class="a3-chk"></span>
+              <span class="a3-body">Ship the deck by <span class="pill pill-date">Fri 5pm</span> <span class="pill pill-hashtag">#launch</span></span>
+              <span class="a3-nb">👋 Launch plan <span class="go">↗</span></span>
+            </div>
+            <div class="a3-row">
+              <span class="a3-chk"></span>
+              <span class="a3-body">Line up <span class="pill pill-mention">@Sara Chen</span> to review <span class="pill pill-hashtag">#launch</span></span>
+              <span class="a3-nb">📣 Marketing <span class="go">↗</span></span>
+            </div>
+            <div class="a3-row">
+              <span class="a3-chk"></span>
+              <span class="a3-body">Finalize pricing tiers <span class="pill pill-hashtag">#launch</span></span>
+              <span class="a3-nb">🔬 Research <span class="go">↗</span></span>
+            </div>
+          </div>
         </div>
         <figcaption>Rows are blocks that match the filter — updated live as the vault changes.</figcaption>
       </figure>
@@ -107,28 +219,145 @@
       </ul>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="advanced-blocks/dashboard-grid.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Dashboard with a few widgets added.</strong> Set up: a <code>/dashboard</code> in a note with some tasks and dated items, then add several widgets from the <em>+</em> tile (a couple of number tiles, a completion ring, a trend or word cloud) so the numbers aren't zero. In frame: the full four-column grid — number tiles on top, the completion ring and a trend/word-cloud row below — with the block's title visible above it.</span>
+        <div class="mock adv-4" style="max-width: 600px; margin: 0 auto;">
+          <style>
+            .adv-4 .a4-hd { display: flex; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--border-soft); }
+            .adv-4 .a4-hd .g { color: var(--fg-faint); font-size: 13px; }
+            .adv-4 .a4-hd .x { margin-left: auto; color: var(--fg-faint); font-size: 12px; }
+            .adv-4 .a4-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; padding: 13px; }
+            .adv-4 .a4-w { border: 1px solid var(--border-soft); border-radius: 11px; padding: 12px 13px; background: rgba(255,255,255,0.02); min-height: 98px; }
+            .adv-4 .a4-lab { font-size: 9.5px; color: var(--fg-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+            .adv-4 .a4-num { font-size: 32px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--accent); }
+            .adv-4 .a4-span2 { grid-column: span 2; }
+            .adv-4 .a4-bars { display: flex; flex-direction: column; gap: 6px; }
+            .adv-4 .a4-bar { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--fg-dim); }
+            .adv-4 .a4-bar .track { flex: 1; height: 9px; border-radius: 5px; background: rgba(255,255,255,0.06); overflow: hidden; }
+            .adv-4 .a4-bar .fill { display: block; height: 100%; border-radius: 5px; }
+            .adv-4 .a4-bar .n { font-weight: 700; color: var(--fg); font-variant-numeric: tabular-nums; }
+            .adv-4 .a4-cloud { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 8px; }
+            .adv-4 .a4-cloud span { line-height: 1.15; color: var(--accent); }
+            .adv-4 .a4-foot { padding: 8px 12px; border-top: 1px solid var(--border-soft); font-size: 10.5px; color: var(--fg-faint); text-align: center; }
+          </style>
+          <div class="a4-hd"><span class="g">▦</span><span class="x">✕</span></div>
+          <div class="a4-grid">
+            <div class="a4-w"><div class="a4-lab">Open tasks</div><div class="a4-num">6</div></div>
+            <div class="a4-w"><div class="a4-lab">Completion</div>
+              <div style="display:grid;place-items:center;margin-top:2px;">
+                <svg width="52" height="52" viewBox="0 0 52 52">
+                  <circle cx="26" cy="26" r="21" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="7"></circle>
+                  <circle cx="26" cy="26" r="21" fill="none" stroke="var(--green)" stroke-width="7" stroke-linecap="round" stroke-dasharray="131.9" stroke-dashoffset="113.4" transform="rotate(-90 26 26)"></circle>
+                  <text x="26" y="25" text-anchor="middle" font-size="13" font-weight="800" fill="var(--fg)">14%</text>
+                  <text x="26" y="37" text-anchor="middle" font-size="7.5" fill="var(--fg-faint)">1/7 done</text>
+                </svg>
+              </div>
+            </div>
+            <div class="a4-w"><div class="a4-lab">Due soon</div><div class="a4-num">9</div></div>
+            <div class="a4-w"><div class="a4-lab">By status</div>
+              <div class="a4-bars">
+                <div class="a4-bar"><span class="track"><span class="fill" style="width:100%;background:var(--gold);"></span></span><span class="n">4</span></div>
+                <div class="a4-bar"><span class="track"><span class="fill" style="width:30%;background:rgba(234,179,8,0.55);"></span></span><span class="n">1</span></div>
+                <div class="a4-bar"><span class="track"><span class="fill" style="width:30%;background:rgba(234,179,8,0.55);"></span></span><span class="n">1</span></div>
+                <div class="a4-bar"><span class="track"><span class="fill" style="width:30%;background:var(--gold);"></span></span><span class="n">1</span></div>
+              </div>
+            </div>
+
+            <div class="a4-w a4-span2"><div class="a4-lab">Top people</div>
+              <div class="a4-bars">
+                <div class="a4-bar" style="gap:10px;"><span style="width:56px;color:var(--fg);">Acme</span><span class="track"><span class="fill" style="width:100%;background:var(--accent);"></span></span><span class="n">1</span></div>
+                <div class="a4-bar" style="gap:10px;"><span style="width:56px;color:var(--fg);">Claude</span><span class="track"><span class="fill" style="width:100%;background:var(--accent);"></span></span><span class="n">1</span></div>
+                <div class="a4-bar" style="gap:10px;"><span style="width:56px;color:var(--fg);">Cursor</span><span class="track"><span class="fill" style="width:100%;background:var(--accent);"></span></span><span class="n">1</span></div>
+                <div class="a4-bar" style="gap:10px;"><span style="width:56px;color:var(--fg);">Gemini</span><span class="track"><span class="fill" style="width:100%;background:var(--accent);"></span></span><span class="n">1</span></div>
+              </div>
+            </div>
+            <div class="a4-w a4-span2"><div class="a4-lab">Hashtags</div>
+              <div class="a4-cloud">
+                <span style="font-size:19px;font-weight:800;">supply-chain</span>
+                <span style="font-size:16px;font-weight:800;opacity:0.95;">design-systems</span>
+                <span style="font-size:15px;font-weight:700;opacity:0.9;">in-progress</span>
+                <span style="font-size:13px;font-weight:600;opacity:0.75;">performance</span>
+                <span style="font-size:14px;font-weight:700;opacity:0.8;">planned</span>
+                <span style="font-size:12px;font-weight:600;opacity:0.68;">northstar</span>
+                <span style="font-size:13px;font-weight:600;opacity:0.72;">launch</span>
+                <span style="font-size:11px;font-weight:600;opacity:0.6;">async-first</span>
+              </div>
+            </div>
+          </div>
+          <div class="a4-foot">Full — drag the bottom edge to add a row</div>
         </div>
         <figcaption>A live bento of vault stats; drag the bottom edge to grow it.</figcaption>
       </figure>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="advanced-blocks/widget-editor.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Configuring a widget.</strong> Set up: click a dashboard's <em>+</em> tile (or a widget's pencil) so the editor panel opens on the right, with a visual type chosen and at least one condition set. In frame: the docked editor panel beside the note, showing the condition rows and the visual-type picker.</span>
+        <div class="mock adv-5" style="max-width: 600px; margin: 0 auto;">
+          <style>
+            .adv-5 .a5-wrap { display: grid; grid-template-columns: 1fr 246px; }
+            .adv-5 .a5-note { padding: 18px; opacity: 0.5; }
+            .adv-5 .a5-panel { border-left: 1px solid var(--border-soft); background: rgba(255,255,255,0.02); padding: 15px 15px 17px; }
+            .adv-5 .a5-ph { font-size: 13px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 3px; }
+            .adv-5 .a5-psub { font-size: 10.5px; color: var(--fg-faint); margin-bottom: 14px; }
+            .adv-5 .a5-sec { font-size: 9.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin: 0 0 8px; }
+            .adv-5 .a5-cond { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; padding: 7px 9px; border: 1px solid var(--border-soft); border-radius: 8px; background: rgba(255,255,255,0.02); font-size: 11.5px; color: var(--fg); margin-bottom: 6px; }
+            .adv-5 .a5-tok { border: 1px solid var(--border); border-radius: 6px; padding: 1.5px 7px; color: var(--fg-dim); }
+            .adv-5 .a5-tok.k { color: var(--accent); border-color: rgba(99,102,241,0.4); background: rgba(99,102,241,0.10); }
+            .adv-5 .a5-addc { font-size: 11.5px; font-weight: 600; color: var(--accent); border: 1px dashed rgba(99,102,241,0.4); border-radius: 7px; padding: 5px 9px; margin-bottom: 16px; display: inline-block; }
+            .adv-5 .a5-vis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+            .adv-5 .a5-v { aspect-ratio: 1; border: 1px solid var(--border-soft); border-radius: 8px; display: grid; place-items: center; font-size: 15px; color: var(--fg-dim); background: rgba(255,255,255,0.02); }
+            .adv-5 .a5-v.on { border-color: rgba(99,102,241,0.55); background: rgba(99,102,241,0.16); color: var(--fg); }
+          </style>
+          <div class="a5-wrap">
+            <div class="a5-note">
+              <div class="mock-title" style="font-size:16px;">▦ Launch dashboard</div>
+              <div class="mock-meta">Editing a widget</div>
+              <div class="mock-line tight">Open tasks</div>
+              <div class="mock-line" style="opacity:0.6;">Overdue · Due this week…</div>
+            </div>
+            <div class="a5-panel">
+              <div class="a5-ph">Edit widget</div>
+              <div class="a5-psub">Count · Tasks · previews live</div>
+              <div class="a5-sec">Conditions</div>
+              <div class="a5-cond"><span class="a5-tok k">Count</span><span class="a5-tok">Tasks</span></div>
+              <div class="a5-cond"><span>where</span><span class="a5-tok">Status</span><span>is</span><span class="a5-tok">Open</span></div>
+              <div class="a5-cond"><span>and</span><span class="a5-tok">Topic</span><span>is</span><span class="pill pill-hashtag" style="font-size:11px;">#launch</span></div>
+              <span class="a5-addc">＋ Add condition</span>
+              <div class="a5-sec">Visual</div>
+              <div class="a5-vis">
+                <span class="a5-v on">＃</span>
+                <span class="a5-v">◔</span>
+                <span class="a5-v">▮</span>
+                <span class="a5-v">◕</span>
+                <span class="a5-v">📈</span>
+                <span class="a5-v">▦</span>
+                <span class="a5-v">☁</span>
+                <span class="a5-v">≣</span>
+              </div>
+            </div>
+          </div>
         </div>
         <figcaption>The widget editor docks to the right and previews as you build.</figcaption>
       </figure>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="advanced-blocks/widget-smart-tag-type.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>An entity-type-aware Smart Tag condition.</strong> Set up: in the widget editor's conditions builder, add a <em>Smart Tag</em> condition (or use the Quick builder's <em>who</em>/<em>topics</em> picker) and open its value dropdown, in a vault where at least one @mention name exists as more than one entity type. In frame: the open dropdown with each option carrying its type icon and label — a shared name split into its per-type entries plus an <em>“Any type”</em> catch-all, and the <em>“Any Person / Any Project…”</em> whole-type options.</span>
+        <div class="mock adv-6" style="max-width: 440px; margin: 0 auto;">
+          <style>
+            .adv-6 .a6-cond { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--fg); margin-bottom: 9px; }
+            .adv-6 .a6-tok { border: 1px solid var(--border); border-radius: 6px; padding: 2px 8px; color: var(--fg-dim); }
+            .adv-6 .a6-val { border: 1px solid rgba(99,102,241,0.5); border-radius: 6px; padding: 2px 9px; color: var(--fg); background: rgba(99,102,241,0.12); display: inline-flex; align-items: center; gap: 6px; }
+            .adv-6 .a6-div { height: 1px; background: var(--border-soft); margin: 5px 6px; }
+            .adv-6 .mock-mi .ty { margin-left: auto; font-size: 10.5px; color: var(--fg-faint); }
+          </style>
+          <div class="mock-pad">
+            <div class="a6-cond"><span class="a6-tok">Smart Tag</span><span>is</span><span class="a6-val">@Alex <span style="color:var(--fg-faint);">▾</span></span></div>
+            <div class="mock-menu" style="box-shadow:none;">
+              <div class="mock-menu-h">@Alex — 2 types</div>
+              <div class="mock-mi active"><span class="ic">◎</span> Alex <span class="ty">Any type</span></div>
+              <div class="mock-mi"><span class="ic" style="color:var(--teal);">👤</span> Alex <span class="ty">Person</span></div>
+              <div class="mock-mi"><span class="ic" style="color:var(--gold);">💼</span> Alex <span class="ty">Project</span></div>
+              <div class="a6-div"></div>
+              <div class="mock-menu-h">Whole type</div>
+              <div class="mock-mi"><span class="ic" style="color:var(--teal);">👤</span> Any Person</div>
+              <div class="mock-mi"><span class="ic" style="color:var(--gold);">💼</span> Any Project</div>
+            </div>
+          </div>
         </div>
         <figcaption>Smart Tag filters carry their entity type — pick one person, or every Person.</figcaption>
       </figure>
@@ -143,10 +372,45 @@
       </ul>
 
       <figure class="guide-figure">
-        <div class="figure-slot slot-gif" data-shot="advanced-blocks/kanban-drag-to-done.gif">
-          <span class="figure-slot-icon">►</span>
-          <span class="figure-slot-kind">Short clip</span>
-          <span class="figure-slot-label"><strong>Dragging a card to Done adds #complete.</strong> Set up: a <code>/kanban</code> with a couple of cards in <em>To&nbsp;Do</em> / <em>In&nbsp;Progress</em>. Record: drag one card into the <em>Done</em> column and pause so the newly-added <span class="pill pill-status">#complete</span> pill and the header count updating are both visible.</span>
+        <div class="mock adv-7 is-live" style="max-width: 580px; margin: 0 auto;">
+          <style>
+            .adv-7 .a7-head { display: flex; align-items: center; gap: 8px; padding: 9px 13px; border-bottom: 1px solid var(--border-soft); }
+            .adv-7 .a7-head .lbl { display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); }
+            .adv-7 .a7-head .act { margin-left: auto; font-size: 10.5px; color: var(--fg-dim); background: rgba(255,255,255,0.05); border-radius: 999px; padding: 2px 9px; }
+            .adv-7 .a7-head .x { color: var(--fg-faint); font-size: 12px; }
+            .adv-7 .a7-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; padding: 14px 13px; }
+            .adv-7 .a7-colh { font-size: 12.5px; font-weight: 600; color: var(--fg); margin-bottom: 10px; }
+            .adv-7 .a7-card { border: 1px solid var(--border-soft); border-radius: 9px; background: rgba(255,255,255,0.035); padding: 9px 10px; font-size: 12.5px; color: var(--fg); margin-bottom: 8px; }
+            .adv-7 .a7-add { font-size: 11.5px; color: var(--fg-faint); padding: 5px 2px; }
+            .adv-7 .a7-move { position: relative; z-index: 5; box-shadow: 0 10px 26px rgba(0,0,0,0.45); border-color: rgba(99,102,241,0.5); animation: adv7-move 5.6s ease-in-out infinite, adv7-fade 5.6s ease-in-out infinite; }
+            .adv-7 .a7-pill { display: inline-block; transform-origin: left center; animation: adv7-pill 5.6s ease-in-out infinite; }
+            @keyframes adv7-move { 0%,14% { transform: translate(0,0); } 40%,100% { transform: translate(calc(100% + 11px), 0); } }
+            @keyframes adv7-fade { 0%,7% { opacity: 0; } 14%,88% { opacity: 1; } 96%,100% { opacity: 0; } }
+            @keyframes adv7-pill { 0%,42% { opacity: 0; transform: scale(0.6); } 54%,90% { opacity: 1; transform: scale(1); } 96%,100% { opacity: 0; } }
+            @media (prefers-reduced-motion: reduce) {
+              .adv-7 .a7-move { animation: none; transform: translate(calc(100% + 11px), 0); }
+              .adv-7 .a7-pill { animation: none; opacity: 1; }
+            }
+          </style>
+          <div class="a7-head"><span class="lbl">▤ Kanban</span><span class="act">4 of 5 active</span><span class="x">✕</span></div>
+          <div class="a7-cols">
+            <div>
+              <div class="a7-colh">To Do</div>
+              <div class="a7-card">Write launch email</div>
+              <div class="a7-card">Prep the FAQ</div>
+              <div class="a7-add">＋ Add card</div>
+            </div>
+            <div>
+              <div class="a7-colh">In Progress</div>
+              <div class="a7-card a7-move">Record the demo <span class="pill pill-status a7-pill">#complete</span></div>
+              <div class="a7-card">Design hero image</div>
+              <div class="a7-add">＋ Add card</div>
+            </div>
+            <div>
+              <div class="a7-colh">Done</div>
+              <div class="a7-card">Set up landing page <span class="pill pill-status" style="display:inline-block;">#complete</span></div>
+            </div>
+          </div>
         </div>
         <figcaption>Placement and the <span class="pill pill-status">#complete</span> pill are always in lock-step.</figcaption>
       </figure>
@@ -161,12 +425,58 @@
       </ul>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="advanced-blocks/gantt-edit-mode.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Gantt in Edit mode with assignees.</strong> Set up: a <code>/gantt</code> switched to <em>Edit</em>, with at least one task showing a start date, an end date, and one or two <span class="pill pill-mention">@person</span> assignee chips. In frame: the per-task field row (name · start · end · assignees) on the left and the bars on the timeline to the right, with the date axis visible on top.</span>
+        <div class="mock adv-8" style="max-width: 620px; margin: 0 auto;">
+          <style>
+            .adv-8 .a8-head { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-bottom: 1px solid var(--border-soft); }
+            .adv-8 .a8-head .lbl { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); }
+            .adv-8 .a8-head .done { margin-left: auto; font-size: 10.5px; color: var(--fg-dim); background: rgba(255,255,255,0.05); border-radius: 999px; padding: 2px 9px; }
+            .adv-8 .a8-head .edit { font-size: 11px; color: var(--fg-dim); }
+            .adv-8 .a8-head .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 7px; overflow: hidden; font-size: 10.5px; }
+            .adv-8 .a8-head .seg span { padding: 2px 8px; color: var(--fg-faint); }
+            .adv-8 .a8-head .seg span.on { background: rgba(99,102,241,0.2); color: var(--fg); font-weight: 700; }
+            .adv-8 .a8-head .x { color: var(--fg-faint); font-size: 12px; }
+            .adv-8 .a8-grid { display: grid; grid-template-columns: 158px 1fr; }
+            .adv-8 .a8-th { box-sizing: border-box; height: 34px; display: flex; align-items: center; font-size: 11px; color: var(--fg-faint); padding: 0 12px; border-bottom: 1px solid var(--border-soft); }
+            .adv-8 .a8-tn { box-sizing: border-box; height: 36px; display: flex; align-items: center; font-size: 12.5px; color: var(--fg); padding: 0 12px; }
+            .adv-8 .a8-tn + .a8-tn { border-top: 1px solid var(--border-soft); }
+            .adv-8 .a8-time { position: relative; border-left: 1px solid var(--border-soft); }
+            .adv-8 .a8-axis { position: relative; height: 34px; border-bottom: 1px solid var(--border-soft); }
+            .adv-8 .a8-tick { position: absolute; top: 10px; font-size: 10px; color: var(--fg-faint); transform: translateX(-50%); }
+            .adv-8 .a8-lane { position: relative; height: 36px; }
+            .adv-8 .a8-lane + .a8-lane { border-top: 1px solid var(--border-soft); }
+            .adv-8 .a8-bar { position: absolute; top: 9px; height: 18px; border-radius: 6px; background: linear-gradient(90deg, #6366f1, #7c3aed); display: flex; align-items: center; justify-content: center; font-size: 9.5px; color: #fff; font-weight: 600; white-space: nowrap; overflow: hidden; box-shadow: 0 2px 8px rgba(124,58,237,0.35); }
+            .adv-8 .a8-add { font-size: 11.5px; color: var(--fg-faint); padding: 8px 12px; border-top: 1px solid var(--border-soft); }
+          </style>
+          <div class="a8-head"><span class="lbl">▤ Road to launch</span><span class="done">0 of 6 done</span><span class="edit">✎ Edit</span><span class="seg"><span>Fit</span><span>Day</span><span>Week</span><span class="on">Month</span></span><span class="x">✕</span></div>
+          <div class="a8-grid">
+            <div>
+              <div class="a8-th">Tasks</div>
+              <div class="a8-tn">Discovery &amp; specs</div>
+              <div class="a8-tn">Design system</div>
+              <div class="a8-tn">Build &amp; test</div>
+              <div class="a8-tn">Supply-chain sign-off</div>
+              <div class="a8-tn">Beta with partners</div>
+              <div class="a8-tn">Launch 🚀</div>
+            </div>
+            <div class="a8-time">
+              <div class="a8-axis">
+                <span class="a8-tick" style="left:3%;">Jul 15</span>
+                <span class="a8-tick" style="left:19.4%;">Jul 21</span>
+                <span class="a8-tick" style="left:38.7%;">Jul 27</span>
+                <span class="a8-tick" style="left:61.3%;">Aug 3</span>
+                <span class="a8-tick" style="left:80.6%;">Aug 9</span>
+              </div>
+              <div class="a8-lane"><span class="a8-bar" style="left:1%; width:21%;">07-15&nbsp;–&nbsp;07-22</span></div>
+              <div class="a8-lane"><span class="a8-bar" style="left:12.9%; width:28%;">07-19&nbsp;–&nbsp;07-28</span></div>
+              <div class="a8-lane"><span class="a8-bar" style="left:35.5%; width:31%;">07-26&nbsp;–&nbsp;08-05</span></div>
+              <div class="a8-lane"><span class="a8-bar" style="left:22.6%; width:31%;">07-22&nbsp;–&nbsp;08-01</span></div>
+              <div class="a8-lane"><span class="a8-bar" style="left:61.3%; width:21%;">08-03&nbsp;–&nbsp;08-10</span></div>
+              <div class="a8-lane"><span class="a8-bar" style="left:95%; width:4%;"></span></div>
+            </div>
+          </div>
+          <div class="a8-add">＋ Add task</div>
         </div>
-        <figcaption>Edit mode exposes every field; the bars stay in sync with the dates.</figcaption>
+        <figcaption>Task names on the left, one date-range bar per row on the right — drag a bar to move it, an edge to resize; the header tracks done-of-total and the zoom.</figcaption>
       </figure>
 
       <h2 id="mermaid">Mermaid diagrams</h2>
@@ -179,10 +489,52 @@
       <p class="warn"><strong>Heads up:</strong> this block assumes you know Mermaid syntax — it's a code block for diagrams, not a visual editor. If you're new to it, keep the <a href="https://mermaid.js.org/" target="_blank" rel="noopener">Mermaid docs</a> open while you write. For a drag-and-draw canvas instead, use <a href="#drawing">Drawing</a>.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="advanced-blocks/mermaid-live.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Mermaid source next to its rendered diagram.</strong> Set up: a <code>/mermaid</code> block with a short flowchart typed in (e.g. <code>graph TD; A--&gt;B; B--&gt;C</code>), shown in Edit mode so both the source box and the toolbar (Preview / Copy) are visible. In frame: the source text and, ideally, the rendered flowchart — take a second shot in Preview mode if both don't fit.</span>
+        <div class="mock adv-9" style="max-width: 560px; margin: 0 auto;">
+          <style>
+            .adv-9 .a9-hd { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-bottom: 1px solid var(--border-soft); }
+            .adv-9 .a9-hd .lbl { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); }
+            .adv-9 .a9-hd .b { margin-left: auto; font-size: 11px; color: var(--fg-dim); }
+            .adv-9 .a9-hd .b2 { font-size: 11px; color: var(--fg-dim); }
+            .adv-9 .a9-hd .x { color: var(--fg-faint); font-size: 12px; }
+            .adv-9 .a9-render { padding: 16px; display: grid; place-items: center; }
+            .adv-9 .a9-node { fill: rgba(255,255,255,0.06); stroke: rgba(255,255,255,0.3); }
+            .adv-9 .a9-sub { fill: rgba(255,255,255,0.028); stroke: rgba(255,255,255,0.11); }
+            .adv-9 .a9-edge { fill: none; stroke: rgba(255,255,255,0.3); stroke-width: 1.3; }
+          </style>
+          <div class="a9-hd"><span class="lbl">⋔ Your week as a knowledge graph</span><span class="b">✎ Edit</span><span class="b2">⧉ Copy</span><span class="x">✕</span></div>
+          <div class="a9-render">
+            <svg viewBox="0 0 560 330" width="100%" style="max-width: 512px;" font-family="Inter, sans-serif">
+              <defs><marker id="a9arw" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(255,255,255,0.4)"></path></marker></defs>
+              <rect class="a9-sub" x="24" y="18" width="512" height="92" rx="8"></rect>
+              <text x="280" y="37" text-anchor="middle" font-size="12" fill="var(--fg-dim)">Team</text>
+              <g font-size="12" fill="var(--fg)" text-anchor="middle">
+                <rect class="a9-node" x="38" y="50" width="112" height="34" rx="6"></rect><text x="94" y="72">@MaraVelez</text>
+                <rect class="a9-node" x="164" y="50" width="114" height="34" rx="6"></rect><text x="221" y="72">@TheoOkafor</text>
+                <rect class="a9-node" x="292" y="50" width="104" height="34" rx="6"></rect><text x="344" y="72">@PriyaNair</text>
+                <rect class="a9-node" x="410" y="50" width="116" height="34" rx="6"></rect><text x="468" y="72">@SofiaRomano</text>
+              </g>
+              <g class="a9-edge" marker-end="url(#a9arw)">
+                <path d="M94 84 C 120 140, 232 152, 258 168"></path>
+                <path d="M221 84 C 236 122, 258 142, 268 160"></path>
+                <path d="M344 84 C 330 122, 300 142, 292 160"></path>
+                <path d="M468 84 C 432 140, 322 152, 302 168"></path>
+              </g>
+              <circle class="a9-node" cx="280" cy="186" r="32"></circle>
+              <text x="280" y="190" text-anchor="middle" font-size="12" fill="var(--fg)">#northstar</text>
+              <rect class="a9-sub" x="96" y="250" width="368" height="70" rx="8"></rect>
+              <text x="280" y="269" text-anchor="middle" font-size="12" fill="var(--fg-dim)">Topics</text>
+              <g font-size="12" fill="var(--fg)" text-anchor="middle">
+                <rect class="a9-node" x="110" y="280" width="92" height="32" rx="6"></rect><text x="156" y="301">#latency</text>
+                <rect class="a9-node" x="214" y="280" width="132" height="32" rx="6"></rect><text x="280" y="301">#design-systems</text>
+                <rect class="a9-node" x="358" y="280" width="98" height="32" rx="6"></rect><text x="407" y="301">#supply-chain</text>
+              </g>
+              <g class="a9-edge" marker-end="url(#a9arw)">
+                <path d="M262 210 C 220 242, 182 252, 162 276"></path>
+                <path d="M280 218 L 279 276"></path>
+                <path d="M298 210 C 340 242, 378 252, 398 276"></path>
+              </g>
+            </svg>
+          </div>
         </div>
         <figcaption>Write standard Mermaid; it renders live and repairs common mistakes.</figcaption>
       </figure>
@@ -196,10 +548,36 @@
       </ul>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="advanced-blocks/drawing-canvas.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The drawing canvas with a quick sketch.</strong> Set up: a <code>/drawing</code> block with a few shapes and an arrow or a handwritten label drawn on it, and the Excalidraw tool palette selected. In frame: the canvas showing the sketch, the left/top tool palette, and the block's title row above.</span>
+        <div class="mock adv-10" style="max-width: 560px; margin: 0 auto;">
+          <style>
+            .adv-10 .a10-hd { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-bottom: 1px solid var(--border-soft); font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); }
+            .adv-10 .a10-hd .x { margin-left: auto; color: var(--fg-faint); font-size: 12px; }
+            .adv-10 .a10-stage { position: relative; background: #0c0c15; overflow: hidden; height: 230px; }
+            .adv-10 .a10-tools { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); z-index: 3; display: flex; gap: 2px; padding: 4px; border-radius: 10px; background: #191926; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+            .adv-10 .a10-t { width: 26px; height: 26px; border-radius: 7px; display: grid; place-items: center; font-size: 13px; color: var(--fg-dim); }
+            .adv-10 .a10-t.on { background: rgba(99,102,241,0.22); color: var(--fg); }
+            .adv-10 .a10-side { position: absolute; top: 12px; right: 12px; z-index: 3; display: flex; flex-direction: column; gap: 6px; }
+            .adv-10 .a10-side span { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; background: #191926; border: 1px solid rgba(255,255,255,0.1); color: var(--fg-dim); font-size: 12px; }
+            .adv-10 .a10-bot { position: absolute; bottom: 12px; left: 12px; right: 12px; z-index: 3; display: flex; align-items: center; gap: 16px; padding: 7px 12px; border-radius: 10px; background: #191926; border: 1px solid rgba(255,255,255,0.1); color: var(--fg-dim); font-size: 13px; }
+            .adv-10 .a10-bot .sp { margin-left: auto; }
+          </style>
+          <div class="a10-hd">✎ Launch architecture — whiteboard <span class="x">✕</span></div>
+          <div class="a10-stage">
+            <div class="a10-tools">
+              <span class="a10-t">↖</span><span class="a10-t on">▢</span><span class="a10-t">◇</span><span class="a10-t">◯</span><span class="a10-t">→</span><span class="a10-t">—</span><span class="a10-t">✎</span><span class="a10-t">A</span><span class="a10-t">⌫</span>
+            </div>
+            <div class="a10-side"><span>▤</span><span>🔒</span><span>✋</span></div>
+            <svg width="100%" height="230" viewBox="0 0 500 230" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;">
+              <rect x="46" y="86" width="120" height="58" rx="6" fill="none" stroke="var(--teal)" stroke-width="2.5" transform="rotate(-0.8 106 115)"></rect>
+              <text x="106" y="120" text-anchor="middle" font-size="14" fill="var(--teal)" font-family="Comic Sans MS, cursive">Editor</text>
+              <rect x="330" y="86" width="120" height="58" rx="6" fill="none" stroke="var(--accent-2)" stroke-width="2.5" transform="rotate(0.6 390 115)"></rect>
+              <text x="390" y="120" text-anchor="middle" font-size="14" fill="var(--accent-2)" font-family="Comic Sans MS, cursive">Vault</text>
+              <path d="M168 114 C 230 102, 270 126, 326 114" fill="none" stroke="var(--fg-dim)" stroke-width="2.5"></path>
+              <path d="M326 114 l -13 -6 M326 114 l -12 7" fill="none" stroke="var(--fg-dim)" stroke-width="2.5"></path>
+              <text x="248" y="92" text-anchor="middle" font-size="13" fill="var(--gold)" font-family="Comic Sans MS, cursive">saves →</text>
+            </svg>
+            <div class="a10-bot"><span>☰</span><span>🎨</span><span>⧉</span><span>🗑</span><span class="sp">↶</span><span>↷</span></div>
+          </div>
         </div>
         <figcaption>A full sketch canvas that saves inside the note.</figcaption>
       </figure>
@@ -216,19 +594,97 @@
       <p class="note"><strong>Note:</strong> the header title and the “Open on GitHub” action open the repo in Nomima's in-app web view, and links inside the README and doc tabs open there too. Collapse the block from its chevron to keep just the title row when you don't need the full card.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="advanced-blocks/github-repo-card.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>A GitHub repo status card.</strong> Set up: a <code>/github</code> block pointed at a real repo (with a GitHub account connected), so the card shows the stat strip (stars · forks · issues · PRs), the facts row (latest release, default branch, language, license, "updated Nd ago"), a "CI passing" badge in the header, and the Commits tab's graph below. In frame: the whole card, title row included, with the tab row (Commits · Docs · DeepWiki · README · Languages) beneath the facts.</span>
+        <div class="mock adv-11" style="max-width: 560px; margin: 0 auto;">
+          <style>
+            .adv-11 .a11-head { display: flex; align-items: center; gap: 9px; margin-bottom: 13px; }
+            .adv-11 .a11-repo { font-size: 15px; font-weight: 800; letter-spacing: -0.01em; }
+            .adv-11 .a11-repo b { color: var(--fg); } .adv-11 .a11-repo .o { color: var(--fg-dim); font-weight: 700; }
+            .adv-11 .a11-ci { display: inline-flex; align-items: center; gap: 5px; font-size: 10.5px; font-weight: 800; color: var(--green); border: 1px solid rgba(52,211,153,0.35); background: rgba(52,211,153,0.10); border-radius: 6px; padding: 2px 7px; }
+            .adv-11 .a11-refresh { margin-left: auto; color: var(--fg-faint); font-size: 14px; }
+            .adv-11 .a11-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 11px; }
+            .adv-11 .a11-stat { border: 1px solid var(--border-soft); border-radius: 9px; padding: 9px 11px; background: rgba(255,255,255,0.02); }
+            .adv-11 .a11-sn { font-size: 17px; font-weight: 800; letter-spacing: -0.02em; }
+            .adv-11 .a11-sl { font-size: 10px; color: var(--fg-faint); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+            .adv-11 .a11-facts { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 11.5px; color: var(--fg-dim); padding: 10px 2px; border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
+            .adv-11 .a11-facts b { color: var(--fg); font-weight: 600; }
+            .adv-11 .a11-tabs { display: flex; gap: 4px; margin: 11px 0; border-bottom: 1px solid var(--border-soft); }
+            .adv-11 .a11-tab { font-size: 12px; font-weight: 600; color: var(--fg-dim); padding: 6px 9px; }
+            .adv-11 .a11-tab.on { color: var(--fg); border-bottom: 2px solid var(--accent); }
+            .adv-11 .a11-graph { display: flex; align-items: flex-end; gap: 5px; height: 54px; padding: 0 2px; }
+            .adv-11 .a11-graph i { flex: 1; border-radius: 3px 3px 0 0; background: linear-gradient(180deg, var(--accent), rgba(99,102,241,0.35)); }
+          </style>
+          <div class="mock-pad">
+            <div class="a11-head">
+              <span style="font-size:16px;">▽</span>
+              <span class="a11-repo"><span class="o">nomima-app /</span> <b>nomima</b></span>
+              <span class="a11-ci">● CI passing</span>
+              <span class="a11-refresh">↻</span>
+            </div>
+            <div class="a11-stats">
+              <div class="a11-stat"><div class="a11-sn">1.4k</div><div class="a11-sl">★ Stars</div></div>
+              <div class="a11-stat"><div class="a11-sn">86</div><div class="a11-sl">⑂ Forks</div></div>
+              <div class="a11-stat"><div class="a11-sn">23</div><div class="a11-sl">Issues</div></div>
+              <div class="a11-stat"><div class="a11-sn">4</div><div class="a11-sl">Open PRs</div></div>
+            </div>
+            <div class="a11-facts">
+              <span>Release <b>v1.21.0</b></span>
+              <span>Branch <b>main</b></span>
+              <span>Lang <b>Rust</b></span>
+              <span>License <b>MIT</b></span>
+              <span>Updated <b>2d ago</b></span>
+            </div>
+            <div class="a11-tabs">
+              <span class="a11-tab on">Commits</span>
+              <span class="a11-tab">Docs</span>
+              <span class="a11-tab">DeepWiki</span>
+              <span class="a11-tab">README</span>
+              <span class="a11-tab">Languages</span>
+            </div>
+            <div class="a11-graph">
+              <i style="height:40%;"></i><i style="height:70%;"></i><i style="height:55%;"></i><i style="height:88%;"></i><i style="height:62%;"></i><i style="height:100%;"></i><i style="height:48%;"></i><i style="height:76%;"></i><i style="height:34%;"></i><i style="height:66%;"></i><i style="height:90%;"></i><i style="height:52%;"></i>
+            </div>
+          </div>
         </div>
         <figcaption>Live repo vitals in a note — stats, release, CI and a tabbed body, all self-refreshing and cached offline.</figcaption>
       </figure>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="advanced-blocks/github-repo-tabs.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The GitHub block's doc tabs.</strong> Set up: a <code>/github</code> card with the <em>Docs</em> or <em>DeepWiki</em> tab selected and its service enabled, so rendered documentation shows in the tab body. In frame: the tab row (Commits · Docs · DeepWiki · README · Languages) with a doc tab active and its rendered markdown below — or, if you want to show the opt-in state instead, the tab's "Enable Context7 / DeepWiki" prompt.</span>
+        <div class="mock adv-12" style="max-width: 560px; margin: 0 auto;">
+          <style>
+            .adv-12 .a12-head { display: flex; align-items: center; gap: 9px; margin-bottom: 11px; }
+            .adv-12 .a12-repo { font-size: 14px; font-weight: 800; letter-spacing: -0.01em; }
+            .adv-12 .a12-repo .o { color: var(--fg-dim); font-weight: 700; }
+            .adv-12 .a12-src { margin-left: auto; font-size: 10px; font-weight: 800; color: var(--accent-2); border: 1px solid rgba(240,72,168,0.4); border-radius: 6px; padding: 2px 7px; }
+            .adv-12 .a12-tabs { display: flex; gap: 4px; margin-bottom: 13px; border-bottom: 1px solid var(--border-soft); }
+            .adv-12 .a12-tab { font-size: 12px; font-weight: 600; color: var(--fg-dim); padding: 6px 9px; }
+            .adv-12 .a12-tab.on { color: var(--fg); border-bottom: 2px solid var(--accent); }
+            .adv-12 .a12-doc h4 { font-size: 15px; font-weight: 800; margin: 0 0 6px; color: var(--fg); }
+            .adv-12 .a12-doc p { font-size: 12.5px; color: var(--fg-dim); margin: 0 0 10px; line-height: 1.55; }
+            .adv-12 .a12-doc h5 { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fg-faint); margin: 0 0 6px; }
+            .adv-12 .a12-code { border: 1px solid var(--border-soft); border-radius: 8px; background: #0a0a12; padding: 10px 12px; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11.5px; color: var(--fg-dim); white-space: pre; overflow-x: auto; }
+            .adv-12 .a12-code .fn { color: var(--teal); } .adv-12 .a12-code .st { color: var(--green); }
+          </style>
+          <div class="mock-pad">
+            <div class="a12-head">
+              <span style="font-size:15px;">▽</span>
+              <span class="a12-repo"><span class="o">nomima-app /</span> nomima</span>
+              <span class="a12-src">via DeepWiki</span>
+            </div>
+            <div class="a12-tabs">
+              <span class="a12-tab">Commits</span>
+              <span class="a12-tab on">Docs</span>
+              <span class="a12-tab">DeepWiki</span>
+              <span class="a12-tab">README</span>
+              <span class="a12-tab">Languages</span>
+            </div>
+            <div class="a12-doc">
+              <h4>Getting started</h4>
+              <p>Nomima is a local-first notes app built on Tauri. Install dependencies and launch the desktop shell to begin.</p>
+              <h5>Quick start</h5>
+              <div class="a12-code"><span class="fn">npm</span> install
+<span class="fn">npm</span> run tauri <span class="st">dev</span></div>
+            </div>
+          </div>
         </div>
         <figcaption>Beyond commits: pull a repo's docs, AI wiki, README and language mix into the same card.</figcaption>
       </figure>

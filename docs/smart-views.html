@@ -36,12 +36,39 @@
       <p>Open <strong>Smart View</strong> from the sidebar. A floating bar of round lens buttons sits over the content — hover one to see its label, click to switch. One lens is active at a time.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="smart-views/lens-switcher.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The lens switcher.</strong> Set up: open Smart View and hover one lens button so its name is revealed. In frame: the floating pill bar centered over the content — most lenses as bare round circles, the active one accent-filled and expanded, and the hovered one showing its text label (e.g. “Hashtags”); the lens’s content visible underneath.</span>
+        <div class="mock sv-1" style="max-width: 540px; margin: 0 auto;">
+          <style>
+            .sv-1 .sv-1-stage { position: relative; padding: 22px 22px 66px; }
+            .sv-1 .sv-1-ln { height: 9px; border-radius: 5px; background: rgba(255,255,255,0.05); margin: 0 0 12px; }
+            .sv-1 .sv-1-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 0; }
+            .sv-1 .sv-1-bar { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 999px; background: #191926; border: 1px solid rgba(255,255,255,0.14); box-shadow: 0 18px 50px rgba(0,0,0,0.5); }
+            .sv-1 .sv-1-lens { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-size: 14px; color: var(--fg-dim); border: 1px solid var(--border-soft); background: rgba(255,255,255,0.03); position: relative; }
+            .sv-1 .sv-1-lens.hover { color: var(--fg); background: rgba(255,255,255,0.09); border-color: var(--border); }
+            .sv-1 .sv-1-active { width: auto; height: 32px; padding: 0 15px; gap: 6px; display: flex; align-items: center; border-radius: 999px; color: #fff; font-size: 12.5px; font-weight: 700; white-space: nowrap; background: linear-gradient(135deg, var(--accent), var(--accent-2)); border: none; flex: none; }
+            .sv-1 .sv-1-tip { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 11px; font-weight: 600; color: var(--fg); background: #23233b; border: 1px solid var(--border); border-radius: 7px; padding: 4px 9px; box-shadow: 0 8px 20px rgba(0,0,0,0.45); }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">Smart View · Hashtags</span></div>
+          <div class="sv-1-stage">
+            <div class="sv-1-ln" style="width: 62%;"></div>
+            <div class="sv-1-ln" style="width: 88%;"></div>
+            <div class="sv-1-chips">
+              <span class="pill pill-hashtag">#launch</span>
+              <span class="pill pill-hashtag">#research</span>
+              <span class="pill pill-hashtag">#roadmap</span>
+            </div>
+            <div class="sv-1-ln" style="width: 74%; margin-top: 14px;"></div>
+            <div class="sv-1-bar">
+              <span class="sv-1-lens">👤</span>
+              <span class="sv-1-active">＃ Hashtags</span>
+              <span class="sv-1-lens">＠</span>
+              <span class="sv-1-lens hover">◷<span class="sv-1-tip">Dates</span></span>
+              <span class="sv-1-lens">▤</span>
+              <span class="sv-1-lens">📎</span>
+              <span class="sv-1-lens">⚠</span>
+            </div>
+          </div>
         </div>
-        <figcaption>One expandable-pill bar, one active lens at a time — bare circles until hovered or selected.</figcaption>
+        <figcaption>One expandable-pill bar floats over the content — bare circles until you hover for a label or click to make one the active lens.</figcaption>
       </figure>
 
       <table>
@@ -58,12 +85,37 @@
       </table>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="smart-views/entities-directory.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The Entities directory.</strong> Set up: a vault with several tagged people, teams and projects, then open the <strong>Entities</strong> lens. In frame: the row of type tabs across the top (Person, Team, Company, Product, Project…) with one active, and the grid of avatar tiles below — each tile an entity’s avatar/icon, its name, and a note count.</span>
+        <div class="mock sv-2" style="max-width: 560px; margin: 0 auto;">
+          <style>
+            .sv-2 .sv-2-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 15px; }
+            .sv-2 .sv-2-tab { font-size: 12px; font-weight: 600; color: var(--fg-dim); padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border-soft); }
+            .sv-2 .sv-2-tab.active { color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-2)); border: none; }
+            .sv-2 .sv-2-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+            .sv-2 .sv-2-tile { display: flex; flex-direction: column; align-items: center; gap: 7px; padding: 15px 10px; border-radius: 12px; border: 1px solid var(--border-soft); background: rgba(255,255,255,0.02); text-align: center; }
+            .sv-2 .sv-2-av { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-size: 15px; font-weight: 800; color: #fff; }
+            .sv-2 .sv-2-nm { font-size: 12.5px; font-weight: 600; color: var(--fg); }
+            .sv-2 .sv-2-ct { font-size: 10.5px; color: var(--fg-faint); }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">Smart View · Entities</span></div>
+          <div class="mock-pad">
+            <div class="sv-2-tabs">
+              <span class="sv-2-tab active">Person</span>
+              <span class="sv-2-tab">Team</span>
+              <span class="sv-2-tab">Company</span>
+              <span class="sv-2-tab">Product</span>
+              <span class="sv-2-tab">Project</span>
+            </div>
+            <div class="sv-2-grid">
+              <div class="sv-2-tile"><div class="sv-2-av" style="background: linear-gradient(150deg,#2dd4bf,#0f766e);">SC</div><div class="sv-2-nm">Sara Chen</div><div class="sv-2-ct">12 notes</div></div>
+              <div class="sv-2-tile"><div class="sv-2-av" style="background: linear-gradient(150deg,#60a5fa,#1e40af);">SO</div><div class="sv-2-nm">Sam Ortiz</div><div class="sv-2-ct">9 notes</div></div>
+              <div class="sv-2-tile"><div class="sv-2-av" style="background: linear-gradient(150deg,#f048a8,#7e1d52);">PN</div><div class="sv-2-nm">Priya Nair</div><div class="sv-2-ct">6 notes</div></div>
+              <div class="sv-2-tile"><div class="sv-2-av" style="background: linear-gradient(150deg,#fbbf24,#92610a);">MD</div><div class="sv-2-nm">Marco Diaz</div><div class="sv-2-ct">5 notes</div></div>
+              <div class="sv-2-tile"><div class="sv-2-av" style="background: linear-gradient(150deg,#34d399,#065f46);">LK</div><div class="sv-2-nm">Lena Koch</div><div class="sv-2-ct">4 notes</div></div>
+              <div class="sv-2-tile"><div class="sv-2-av" style="background: linear-gradient(150deg,#a78bfa,#5b21b6);">TW</div><div class="sv-2-nm">Tom Wu</div><div class="sv-2-ct">2 notes</div></div>
+            </div>
+          </div>
         </div>
-        <figcaption>Everyone and everything you’ve tagged, grouped into type tabs as an avatar directory.</figcaption>
+        <figcaption>Everyone and everything you’ve tagged, grouped into type tabs as an avatar directory — open a tile for its profile.</figcaption>
       </figure>
 
       <h2 id="cards">Tag cards</h2>
@@ -77,24 +129,68 @@
       </ul>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="smart-views/tag-card.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>A tag card.</strong> Set up: open the <strong>Hashtags</strong> (or <strong>Mentions</strong>) lens and pick a tag that has several blocks, some done. In frame: one card — its coloured chip with name/type/note count, an “N open” badge, the done-vs-total progress bar, a few checkable block rows (checkbox + snippet + source notebook), and the collapsed “N completed” toggle at the bottom.</span>
+        <div class="mock sv-3" style="max-width: 460px; margin: 0 auto;">
+          <style>
+            .sv-3 .sv-3-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+            .sv-3 .sv-3-meta { font-size: 11px; color: var(--fg-faint); }
+            .sv-3 .sv-3-open { margin-left: auto; font-size: 10px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--amber); border: 1px solid rgba(251,191,36,0.4); border-radius: 6px; padding: 2px 7px; }
+            .sv-3 .sv-3-track { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.06); overflow: hidden; margin-bottom: 14px; }
+            .sv-3 .sv-3-fill { height: 100%; width: 62%; border-radius: 3px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+            .sv-3 .sv-3-src { margin-left: auto; font-size: 10.5px; color: var(--fg-faint); white-space: nowrap; padding-left: 8px; }
+            .sv-3 .sv-3-more { margin-top: 10px; font-size: 11.5px; color: var(--fg-faint); }
+          </style>
+          <div class="mock-pad">
+            <div class="sv-3-head">
+              <span class="pill pill-hashtag">#launch</span>
+              <span class="sv-3-meta">project · 8 notes</span>
+              <span class="sv-3-open">3 open</span>
+            </div>
+            <div class="sv-3-track"><div class="sv-3-fill"></div></div>
+            <div class="mock-tasks">
+              <div class="mock-task"><span class="mock-check"></span><span>Draft the announcement post</span><span class="sv-3-src">Launch plan</span></div>
+              <div class="mock-task"><span class="mock-check"></span><span>Brief <span class="pill pill-mention">@Sara Chen</span> on the deck</span><span class="sv-3-src">Marketing</span></div>
+              <div class="mock-task"><span class="mock-check"></span><span>Book the venue by <span class="pill pill-date">Fri 5pm</span></span><span class="sv-3-src">Launch plan</span></div>
+            </div>
+            <div class="sv-3-more">▸ 2 completed</div>
+          </div>
         </div>
-        <figcaption>Every tag becomes a card of its own blocks — checkable in place, with live open-work badges.</figcaption>
+        <figcaption>Every tag becomes a card of its own blocks — checkable in place, with a live open-work badge and progress bar.</figcaption>
       </figure>
 
       <h2 id="dates-lens">The Dates lens</h2>
       <p>A single agenda merging <strong>dated tasks</strong> (checkboxes with due dates) and <strong>dates mentioned in prose</strong> (“meet Sara friday”) — deduplicated so nothing appears twice. Items group into sticky buckets: <strong>Overdue</strong> (red), <strong>Today</strong>, <strong>Tomorrow</strong>, <strong>This week</strong>, <strong>This month</strong>, <strong>Later</strong>. Every row has a checkbox and a link back to its source note.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="smart-views/dates-agenda.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The Dates agenda.</strong> Set up: a vault holding both overdue and future dated items, then open the <strong>Dates</strong> lens. In frame: the day-by-day list with its sticky bucket headers — <strong>Overdue</strong> (red) at the top, then <strong>Today</strong>, <strong>Tomorrow</strong>, <strong>This week</strong> — each row carrying a checkbox and a link back to its note.</span>
+        <div class="mock sv-4" style="max-width: 480px; margin: 0 auto;">
+          <style>
+            .sv-4 .sv-4-b { font-size: 10px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: var(--fg-faint); margin: 0 0 8px; display: flex; align-items: center; gap: 7px; }
+            .sv-4 .sv-4-b.over { color: var(--red); }
+            .sv-4 .sv-4-b:not(:first-child) { margin-top: 16px; }
+            .sv-4 .sv-4-cnt { font-weight: 700; color: var(--fg-faint); }
+            .sv-4 .sv-4-when { margin-left: auto; }
+            .sv-4 .sv-4-src { font-size: 10.5px; color: var(--fg-faint); white-space: nowrap; padding-left: 8px; }
+          </style>
+          <div class="mock-pad">
+            <div class="sv-4-b over">● Overdue <span class="sv-4-cnt">2</span></div>
+            <div class="mock-tasks">
+              <div class="mock-task"><span class="mock-check"></span><span>Send contract to <span class="pill pill-mention">@Acme Co</span></span><span class="pill pill-overdue sv-4-when">Mon</span><span class="sv-4-src">Deals</span></div>
+              <div class="mock-task"><span class="mock-check"></span><span>Confirm venue deposit</span><span class="pill pill-overdue sv-4-when">Tue</span><span class="sv-4-src">Launch plan</span></div>
+            </div>
+            <div class="sv-4-b">Today</div>
+            <div class="mock-tasks">
+              <div class="mock-task"><span class="mock-check"></span><span>Review deck with <span class="pill pill-mention">@Sara Chen</span></span><span class="pill pill-date sv-4-when">2pm</span><span class="sv-4-src">Marketing</span></div>
+            </div>
+            <div class="sv-4-b">Tomorrow</div>
+            <div class="mock-tasks">
+              <div class="mock-task"><span class="mock-check"></span><span>Ship the announcement</span><span class="pill pill-date sv-4-when">Fri 5pm</span><span class="sv-4-src">Launch plan</span></div>
+            </div>
+            <div class="sv-4-b">This week</div>
+            <div class="mock-tasks">
+              <div class="mock-task"><span class="mock-check"></span><span>Meet <span class="pill pill-mention">@Sam Ortiz</span> on roadmap</span><span class="pill pill-date sv-4-when">Thu</span><span class="sv-4-src">1:1s</span></div>
+            </div>
+          </div>
         </div>
-        <figcaption>Dated tasks and prose dates merged into one deduplicated agenda, bucketed by day.</figcaption>
+        <figcaption>Dated tasks and prose dates merged into one deduplicated agenda, bucketed by day with overdue in red.</figcaption>
       </figure>
 
       <h2 id="files-lens">The Files lens</h2>
@@ -106,12 +202,31 @@
       </ul>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="smart-views/files-lens.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The Files lens.</strong> Set up: import a handful of files across two notebooks, then open the <strong>Files</strong> lens. In frame: files grouped under their notebook headings, each row showing name, size and type plus its indexing state — an <em>Embedded</em> row, a <em>Processing</em> row and a <em>No text</em> row if possible — with the hover trash icon visible on one.</span>
+        <div class="mock sv-5" style="max-width: 500px; margin: 0 auto;">
+          <style>
+            .sv-5 .sv-5-nb { font-size: 10px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: var(--fg-faint); margin: 0 0 8px; }
+            .sv-5 .sv-5-nb:not(:first-child) { margin-top: 16px; }
+            .sv-5 .sv-5-row { display: flex; align-items: center; gap: 11px; padding: 9px 0; border-top: 1px solid var(--border-soft); }
+            .sv-5 .sv-5-ic { width: 26px; height: 30px; border-radius: 5px; display: grid; place-items: center; font-size: 13px; flex: none; background: rgba(255,255,255,0.05); border: 1px solid var(--border-soft); }
+            .sv-5 .sv-5-nm { font-size: 13px; color: var(--fg); font-weight: 500; }
+            .sv-5 .sv-5-sub { font-size: 10.5px; color: var(--fg-faint); margin-top: 1px; }
+            .sv-5 .sv-5-state { margin-left: auto; font-size: 10px; font-weight: 700; border-radius: 6px; padding: 2px 8px; white-space: nowrap; }
+            .sv-5 .sv-5-state.ok { color: var(--green); border: 1px solid rgba(52,211,153,0.35); background: rgba(52,211,153,0.08); }
+            .sv-5 .sv-5-state.busy { color: var(--amber); border: 1px solid rgba(251,191,36,0.35); background: rgba(251,191,36,0.08); }
+            .sv-5 .sv-5-state.none { color: var(--fg-faint); border: 1px solid var(--border-soft); }
+            .sv-5 .sv-5-trash { color: var(--red); font-size: 12px; margin-left: 10px; opacity: 0.85; }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">Smart View · Files</span></div>
+          <div class="mock-pad">
+            <div class="sv-5-nb">📓 Launch plan</div>
+            <div class="sv-5-row"><span class="sv-5-ic">📄</span><div><div class="sv-5-nm">Launch-brief.pdf</div><div class="sv-5-sub">248 KB · PDF</div></div><span class="sv-5-state ok">Embedded</span><span class="sv-5-trash">🗑</span></div>
+            <div class="sv-5-row"><span class="sv-5-ic">📊</span><div><div class="sv-5-nm">Q3-metrics.xlsx</div><div class="sv-5-sub">1.2 MB · Spreadsheet</div></div><span class="sv-5-state busy">Processing</span></div>
+            <div class="sv-5-nb">📓 Research</div>
+            <div class="sv-5-row"><span class="sv-5-ic">🖼</span><div><div class="sv-5-nm">whiteboard.png</div><div class="sv-5-sub">860 KB · Image</div></div><span class="sv-5-state none">No text</span></div>
+            <div class="sv-5-row"><span class="sv-5-ic">📄</span><div><div class="sv-5-nm">interview-notes.md</div><div class="sv-5-sub">14 KB · Markdown</div></div><span class="sv-5-state ok">Embedded</span></div>
+          </div>
         </div>
-        <figcaption>Every imported file, grouped by notebook, with its extraction state and a one-click open.</figcaption>
+        <figcaption>Every imported file, grouped by notebook, with its extraction state and a one-click open — hover for the trash to purge it everywhere.</figcaption>
       </figure>
 
       <h2 id="home">Home — your daily agenda</h2>
@@ -141,12 +256,54 @@
       <p>Nomima keeps a full-page <strong>Stats</strong> board — a <strong>bento grid</strong> of small live widgets that report on your whole vault. It’s the same widget engine as the in-note Dashboard block (<a href="advanced-blocks.html#dashboard">Dashboard &amp; widgets</a>), just at full-view size: every tile reads straight from the index of everything you’ve written — your tasks, dates, pills, notebooks — and the whole board recomputes on its own whenever you write, complete or import. There’s no refresh button.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="smart-views/stats-dashboard.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The Stats dashboard.</strong> Set up: a vault that already has some tasks, dated items and #tags/@mentions so no widget reads zero. In frame: the default four-column bento — the Overdue / Due today / Open tasks / Open actions number tiles across the top, then the completion ring, a 7-day upcoming trend and a hashtag word cloud, with the “+” add tile in the first empty cell.</span>
+        <div class="mock sv-6" style="max-width: 600px; margin: 0 auto;">
+          <style>
+            .sv-6 .sv-6-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+            .sv-6 .sv-6-tile { border: 1px solid var(--border-soft); border-radius: 12px; padding: 13px; background: rgba(255,255,255,0.02); }
+            .sv-6 .sv-6-lab { font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--fg-faint); }
+            .sv-6 .sv-6-num { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; margin-top: 4px; }
+            .sv-6 .sv-6-ph { font-size: 10px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 10px; }
+            .sv-6 .sv-6-ring { display: flex; align-items: center; gap: 10px; }
+            .sv-6 .sv-6-bars { display: flex; align-items: flex-end; gap: 6px; height: 54px; }
+            .sv-6 .sv-6-bar { flex: 1; border-radius: 3px 3px 0 0; background: linear-gradient(180deg, var(--accent), var(--accent-2)); opacity: 0.85; }
+            .sv-6 .sv-6-cloud { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+            .sv-6 .sv-6-add { border: 1px dashed rgba(99,102,241,0.45); background: none; display: grid; place-items: center; color: var(--accent); font-size: 22px; font-weight: 300; min-height: 60px; }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">Stats</span></div>
+          <div class="mock-pad">
+            <div class="sv-6-grid">
+              <div class="sv-6-tile"><div class="sv-6-lab">Overdue</div><div class="sv-6-num" style="color: var(--red);">3</div></div>
+              <div class="sv-6-tile"><div class="sv-6-lab">Due today</div><div class="sv-6-num" style="color: var(--blue);">5</div></div>
+              <div class="sv-6-tile"><div class="sv-6-lab">Open tasks</div><div class="sv-6-num">24</div></div>
+              <div class="sv-6-tile"><div class="sv-6-lab">Open actions</div><div class="sv-6-num">9</div></div>
+              <div class="sv-6-tile"><div class="sv-6-ph">Completion</div>
+                <div class="sv-6-ring">
+                  <svg width="46" height="46" viewBox="0 0 46 46" aria-hidden="true">
+                    <circle cx="23" cy="23" r="19" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="6"/>
+                    <circle cx="23" cy="23" r="19" fill="none" stroke="var(--green)" stroke-width="6" stroke-linecap="round" stroke-dasharray="119" stroke-dashoffset="43" transform="rotate(-90 23 23)"/>
+                  </svg>
+                  <div><div style="font-size:18px;font-weight:800;">64%</div><div style="font-size:10px;color:var(--fg-faint);">done</div></div>
+                </div>
+              </div>
+              <div class="sv-6-tile" style="grid-column: span 2;"><div class="sv-6-ph">Upcoming · 7 days</div>
+                <svg width="100%" height="54" viewBox="0 0 240 54" preserveAspectRatio="none" style="display:block;" aria-hidden="true">
+                  <polyline points="0,32 40,16 80,38 120,5 160,24 200,41 240,19" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+                  <polyline points="0,32 40,16 80,38 120,5 160,24 200,41 240,19 240,54 0,54" fill="rgba(99,102,241,0.12)" stroke="none"/>
+                </svg>
+              </div>
+              <div class="sv-6-tile"><div class="sv-6-ph">Hashtags</div>
+                <div class="sv-6-cloud">
+                  <span class="pill pill-hashtag" style="font-size:14px;">#launch</span>
+                  <span class="pill pill-hashtag" style="font-size:11px;">#research</span>
+                  <span class="pill pill-hashtag" style="font-size:12.5px;">#roadmap</span>
+                  <span class="pill pill-hashtag" style="font-size:10px;">#hiring</span>
+                </div>
+              </div>
+              <div class="sv-6-tile sv-6-add">＋</div>
+            </div>
+          </div>
         </div>
-        <figcaption>A live bento of vault stats — it grows downward and scrolls as you add widgets.</figcaption>
+        <figcaption>A live bento of vault stats — number tiles, a completion ring, an upcoming trend and a tag cloud, all recomputed as you write.</figcaption>
       </figure>
 
       <p>Widgets come in eight shapes, each suited to what it’s measuring:</p>
@@ -172,10 +329,41 @@
       </ul>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="smart-views/widget-editor.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The widget builder.</strong> Set up: “+” → “Build custom →”, in Quick mode with a When and a Topic chosen so the preview shows real numbers. In frame: the live tile preview on the left, the Quick / Advanced toggle, the When / Who / Topics / Notebooks pickers, the viz + accent + size row, and the Add widget button.</span>
+        <div class="mock sv-7" style="max-width: 560px; margin: 0 auto;">
+          <style>
+            .sv-7 .sv-7-split { display: grid; grid-template-columns: 176px 1fr; gap: 16px; }
+            .sv-7 .sv-7-prev { border: 1px solid var(--border-soft); border-radius: 12px; padding: 15px; background: rgba(255,255,255,0.02); display: flex; flex-direction: column; min-height: 128px; }
+            .sv-7 .sv-7-plab { font-size: 9.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); }
+            .sv-7 .sv-7-pnum { font-size: 40px; font-weight: 800; letter-spacing: -0.03em; margin-top: auto; }
+            .sv-7 .sv-7-pcap { font-size: 11px; color: var(--fg-dim); }
+            .sv-7 .sv-7-seg { display: inline-flex; padding: 3px; gap: 3px; border-radius: 9px; background: rgba(255,255,255,0.04); border: 1px solid var(--border-soft); margin-bottom: 13px; }
+            .sv-7 .sv-7-segb { font-size: 11.5px; font-weight: 600; color: var(--fg-dim); padding: 4px 12px; border-radius: 6px; }
+            .sv-7 .sv-7-segb.on { color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+            .sv-7 .sv-7-fld { margin-bottom: 11px; }
+            .sv-7 .sv-7-flab { font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 5px; }
+            .sv-7 .sv-7-opts { display: flex; flex-wrap: wrap; gap: 5px; }
+            .sv-7 .sv-7-opt { font-size: 11.5px; color: var(--fg-dim); padding: 3px 9px; border-radius: 999px; border: 1px solid var(--border-soft); }
+            .sv-7 .sv-7-opt.on { color: var(--fg); background: rgba(99,102,241,0.14); border-color: rgba(99,102,241,0.4); }
+            .sv-7 .sv-7-sw { display: inline-block; width: 12px; height: 12px; border-radius: 4px; vertical-align: -1px; margin-right: 5px; }
+            .sv-7 .sv-7-btn { margin-top: 4px; text-align: center; font-size: 12.5px; font-weight: 700; color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-2)); border-radius: 9px; padding: 9px; }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">Add widget</span></div>
+          <div class="mock-pad">
+            <div class="sv-7-split">
+              <div class="sv-7-prev">
+                <div class="sv-7-plab">Preview · Number</div>
+                <div class="sv-7-pnum" style="color: var(--red);">3</div>
+                <div class="sv-7-pcap">Overdue · #launch</div>
+              </div>
+              <div>
+                <div class="sv-7-seg"><span class="sv-7-segb on">Quick</span><span class="sv-7-segb">Advanced</span></div>
+                <div class="sv-7-fld"><div class="sv-7-flab">When</div><div class="sv-7-opts"><span class="sv-7-opt">Any time</span><span class="sv-7-opt on">Overdue</span><span class="sv-7-opt">Due today</span><span class="sv-7-opt">Upcoming</span></div></div>
+                <div class="sv-7-fld"><div class="sv-7-flab">Topics</div><div class="sv-7-opts"><span class="sv-7-opt on">#launch</span><span class="sv-7-opt">#research</span></div></div>
+                <div class="sv-7-fld"><div class="sv-7-flab">Viz · Accent · Size</div><div class="sv-7-opts"><span class="sv-7-opt on">Number</span><span class="sv-7-opt">Ring</span><span class="sv-7-opt"><span class="sv-7-sw" style="background: var(--red);"></span>Red</span><span class="sv-7-opt on">1×1</span></div></div>
+                <div class="sv-7-btn">Add widget</div>
+              </div>
+            </div>
+          </div>
         </div>
         <figcaption>Every choice repaints the live preview; the pencil on an existing widget re-opens this on its exact recipe.</figcaption>
       </figure>

@@ -41,7 +41,44 @@
         <li>Summon opens as a <strong>compact dock</strong> on the right edge; the expand button promotes it to a <strong>full-screen view</strong>. Close with <kbd>Esc</kbd> — the conversation survives, even as you switch notebooks.</li>
       </ul>
 
-      <figure class="guide-figure"><div class="figure-slot" data-shot="summon/glowing-button-dock.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The Summon button and dock.</strong> Set up: a notebook open, Summon opened into its compact right-edge dock. In frame: the glowing Summon button in the bottom-right corner (with its in-flight count badge) and the docked panel beside it showing the four hero quick-action chips — <em>Brief of the day</em>, <em>Prep for tomorrow</em>, <em>Deep research a topic</em>, <em>Create a new note</em>.</span></div><figcaption>The glowing button lives bottom-right; click it to open Summon’s compact dock, expandable to full screen.</figcaption></figure>
+      <figure class="guide-figure">
+        <div class="mock sm-1" style="max-width: 520px; margin: 0 auto;">
+          <style>
+            .sm-1 { display: flex; }
+            .sm-1 .sm-1-doc { flex: 1; min-width: 0; padding: 16px 18px 34px; }
+            .sm-1 .sm-1-dock { width: 214px; flex: none; border-left: 1px solid var(--border-soft); background: rgba(255,255,255,0.015); padding: 13px 13px 15px; display: flex; flex-direction: column; }
+            .sm-1 .sm-1-dh { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 700; color: var(--fg); }
+            .sm-1 .sm-1-spark { font-size: 14px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+            .sm-1 .sm-1-sub { font-size: 10.5px; color: var(--fg-faint); margin: 3px 0 12px; }
+            .sm-1 .sm-1-chip { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 9px; border: 1px solid var(--border-soft); background: rgba(255,255,255,0.025); font-size: 11.5px; color: var(--fg-dim); margin-bottom: 7px; }
+            .sm-1 .sm-1-chip .ic { flex: none; opacity: 0.9; }
+            .sm-1 .sm-1-composer { margin-top: auto; display: flex; align-items: center; gap: 7px; padding: 9px 11px; border-radius: 10px; border: 1px solid var(--border); background: rgba(255,255,255,0.03); font-size: 11.5px; color: var(--fg-faint); }
+            .sm-1 .sm-1-orb { position: absolute; right: 15px; bottom: 15px; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-size: 14px; color: rgba(255,255,255,0.82); background: radial-gradient(circle at 34% 28%, #b79cff 0%, #7c3aed 24%, #6d28d9 44%, #4c1d95 70%, #2e1065 100%), radial-gradient(circle at 72% 76%, rgba(240,72,168,0.55), transparent 46%); box-shadow: 0 6px 22px rgba(124,58,237,0.5), inset -4px -6px 12px rgba(0,0,0,0.5), inset 3px 4px 10px rgba(255,255,255,0.28); animation: sm-1-pulse 2.8s ease-in-out infinite; }
+            .sm-1 .sm-1-orb::after { content: ""; position: absolute; left: 20%; top: 14%; width: 34%; height: 30%; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.6), transparent 70%); filter: blur(1px); pointer-events: none; }
+            .sm-1 .sm-1-badge { position: absolute; right: 10px; bottom: 50px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: var(--accent-2); color: #fff; font-size: 10px; font-weight: 800; display: grid; place-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.45); z-index: 4; }
+            @keyframes sm-1-pulse { 0%,100% { box-shadow: 0 6px 20px rgba(124,58,237,0.45), inset -4px -6px 12px rgba(0,0,0,0.5), inset 3px 4px 10px rgba(255,255,255,0.28); } 50% { box-shadow: 0 8px 32px rgba(240,72,168,0.6), inset -4px -6px 12px rgba(0,0,0,0.5), inset 3px 4px 10px rgba(255,255,255,0.28); } }
+            @media (prefers-reduced-motion: reduce) { .sm-1 .sm-1-orb { animation: none; } }
+          </style>
+          <div class="sm-1-doc">
+            <div class="mock-title" style="font-size: 18px;">Launch plan</div>
+            <div class="mock-meta">Edited just now</div>
+            <div class="mock-line">Kicking off the rebrand with <span class="pill pill-mention">@Sara Chen</span>.</div>
+            <div class="mock-line" style="opacity:.5;">Notes and open questions below…</div>
+          </div>
+          <div class="sm-1-dock">
+            <div class="sm-1-dh"><span class="sm-1-spark">✦</span> Summon <span style="margin-left:auto; display:inline-flex; align-items:center; gap:5px; font-size:10px; font-weight:600; color:var(--fg-dim); border:1px solid var(--border-soft); border-radius:999px; padding:2px 8px;"><span style="width:6px; height:6px; border-radius:50%; background:var(--green); display:inline-block;"></span> AI ▾</span> <span style="color:var(--fg-faint); font-size:12px; margin-left:8px;">✕</span></div>
+            <div class="sm-1-sub">Ask about your notes, or hand off a job.</div>
+            <div class="sm-1-chip"><span class="ic">☀️</span> Brief of the day</div>
+            <div class="sm-1-chip"><span class="ic">📅</span> Prep for tomorrow</div>
+            <div class="sm-1-chip"><span class="ic">🔬</span> Deep research a topic</div>
+            <div class="sm-1-chip"><span class="ic">＋</span> Create a new note</div>
+            <div class="sm-1-composer"><span style="opacity:.7;">✦</span> Message Summon…</div>
+          </div>
+          <div class="sm-1-badge">2</div>
+          <div class="sm-1-orb">✦</div>
+        </div>
+        <figcaption>The glowing button lives bottom-right; click it to open Summon’s compact dock, expandable to full screen.</figcaption>
+      </figure>
 
       <h2 id="chat-note">Where Summon's answers go</h2>
       <p>A reply lives in the conversation by default. Two things move it into your notes:</p>
@@ -50,14 +87,71 @@
         <li><strong>Pin a reply.</strong> Any message has a <strong>Pin</strong> action that drops its content into a notebook — new or existing — as a Section, for keeping an answer you didn't explicitly ask it to write.</li>
       </ul>
 
-      <figure class="guide-figure"><div class="figure-slot slot-gif" data-shot="summon/live-write-into-editor.gif"><span class="figure-slot-icon">►</span><span class="figure-slot-kind">Short clip</span><span class="figure-slot-label"><strong>Writing live into the editor.</strong> Set up: ask Summon (from the dock) to build something in the open note — e.g. “Draft a project brief for the rebrand”. In frame: real blocks — a heading, bullets, a checklist — streaming into the editor block by block as Summon works, with each newly-added block briefly flashing so you can see what changed. Not a pasted wall of text.</span></div><figcaption>Ask Summon to build or edit something and you watch proper Nomima blocks stream into the editor live, each new block flashing as it lands.</figcaption></figure>
+      <figure class="guide-figure">
+        <div class="mock is-live sm-2" style="max-width: 480px; margin: 0 auto;">
+          <style>
+            .sm-2 .sm-2-status { display: flex; align-items: center; gap: 7px; font-size: 11px; color: var(--accent-2); font-weight: 600; margin-bottom: 13px; }
+            .sm-2 .sm-2-status .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-2); animation: sm-2-blip 1s ease-in-out infinite; }
+            .sm-2 .sm-2-blk { border-radius: 7px; padding: 2px 6px; margin: 0 -6px; animation: sm-2-flash 4.4s ease-in-out infinite; }
+            .sm-2 .sm-2-blk.b2 { animation-delay: 0.9s; }
+            .sm-2 .sm-2-blk.b3 { animation-delay: 1.8s; }
+            .sm-2 .sm-2-word { opacity: 0; animation: sm-2-word 4.4s steps(1) infinite; }
+            @keyframes sm-2-word { 0%,58% { opacity: 0; } 64%,94% { opacity: 1; } 100% { opacity: 0; } }
+            @keyframes sm-2-flash { 0%,4% { background: rgba(240,72,168,0.16); } 22%,100% { background: transparent; } }
+            @keyframes sm-2-blip { 50% { opacity: 0.3; } }
+            @media (prefers-reduced-motion: reduce) {
+              .sm-2 .sm-2-blk { animation: none; }
+              .sm-2 .sm-2-word { animation: none; opacity: 1; }
+              .sm-2 .sm-2-status .dot { animation: none; }
+            }
+          </style>
+          <div class="mock-pad">
+            <div class="sm-2-status"><span class="dot"></span> Summon is writing into this note…</div>
+            <div class="mock-h sm-2-blk" style="margin-top: 0;">Rebrand project brief</div>
+            <div class="mock-line sm-2-blk b2">Positioning the launch around privacy and speed, owned by <span class="pill pill-mention">@Sara Chen</span>.</div>
+            <div class="mock-h" style="font-size: 13px;">Next steps</div>
+            <div class="mock-tasks">
+              <div class="mock-task"><span class="mock-check"></span><span>Lock the messaging pillars</span></div>
+              <div class="mock-task sm-2-blk b3"><span class="mock-check"></span><span>Draft the announcement post <span class="sm-2-word">by</span> <span class="sm-2-word" style="animation-delay: 2.05s;"><span class="pill pill-date">Fri 5pm</span></span><span class="mock-caret"></span></span></div>
+            </div>
+          </div>
+        </div>
+        <figcaption>Ask Summon to build or edit something and you watch proper Nomima blocks stream into the editor live, each new block flashing as it lands.</figcaption>
+      </figure>
 
       <h2 id="mode">Quick answers vs. Deep Research</h2>
       <p>By default Summon answers <strong>concisely</strong> — it does just enough tool work to reply, which keeps most look-ups fast (“what’s overdue?”, “when did I last mention @Sara?”). You don’t set this; it’s how Summon works out of the box.</p>
       <p>When you want more, click the <strong>“Deep research a topic”</strong> quick-action chip. That arms <strong>Deep Research</strong> for your next question: a full multi-pass vault sweep before Summon writes, reading broadly and synthesising across many notes. Reach for it on prompts like “write a brief on everything I know about X” or “audit all my notes on the rebrand”.</p>
       <p><strong>Parallel research.</strong> For a broad ask, Summon can split the topic into several specific angles and research them <strong>simultaneously</strong> instead of one search at a time — you’ll see a status line like <em>“Researching N angles in parallel…”</em> while it works — then write the notebook from the combined findings. This is what makes Deep Research fast on genuinely broad questions.</p>
 
-      <figure class="guide-figure"><div class="figure-slot" data-shot="summon/deep-research-chip.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>Arming Deep Research.</strong> Set up: an empty Summon panel, the <strong>“Deep research a topic”</strong> quick-action chip clicked so it reads as armed. In frame: the composer with the Deep Research chip active/highlighted above it, indicating the next question will trigger a full multi-pass vault sweep rather than a quick concise answer.</span></div><figcaption>Concise answers are the default; the “Deep research a topic” chip arms a full multi-pass vault sweep for your next question.</figcaption></figure>
+      <figure class="guide-figure">
+        <div class="mock sm-3" style="max-width: 460px; margin: 0 auto;">
+          <style>
+            .sm-3 .sm-3-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 15px; }
+            .sm-3 .sm-3-chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border-radius: 999px; border: 1px solid var(--border-soft); background: rgba(255,255,255,0.025); font-size: 12px; color: var(--fg-dim); }
+            .sm-3 .sm-3-chip.armed { border-color: rgba(240,72,168,0.5); background: rgba(240,72,168,0.12); color: var(--fg); box-shadow: 0 0 0 1px rgba(240,72,168,0.25); }
+            .sm-3 .sm-3-composer { display: flex; align-items: center; gap: 9px; padding: 11px 13px; border-radius: 11px; border: 1px solid rgba(240,72,168,0.4); background: rgba(255,255,255,0.03); }
+            .sm-3 .sm-3-arm { display: inline-flex; align-items: center; gap: 5px; padding: 2px 9px; border-radius: 999px; background: rgba(240,72,168,0.14); border: 1px solid rgba(240,72,168,0.4); color: var(--accent-2); font-size: 10.5px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; flex: none; }
+            .sm-3 .sm-3-ph { font-size: 13px; color: var(--fg-faint); }
+            .sm-3 .sm-3-send { margin-left: auto; width: 26px; height: 26px; border-radius: 7px; display: grid; place-items: center; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; font-size: 13px; flex: none; }
+          </style>
+          <div class="mock-pad">
+            <div class="mock-res-h" style="padding: 0 0 9px;">Quick actions</div>
+            <div class="sm-3-chips">
+              <span class="sm-3-chip">☀️ Brief of the day</span>
+              <span class="sm-3-chip">📅 Prep for tomorrow</span>
+              <span class="sm-3-chip armed">🔬 Deep research a topic</span>
+              <span class="sm-3-chip">＋ Create a new note</span>
+            </div>
+            <div class="sm-3-composer">
+              <span class="sm-3-arm">🔬 Deep Research armed</span>
+              <span class="sm-3-ph">Ask a broad question…</span>
+              <span class="sm-3-send">↑</span>
+            </div>
+          </div>
+        </div>
+        <figcaption>Concise answers are the default; the “Deep research a topic” chip arms a full multi-pass vault sweep for your next question.</figcaption>
+      </figure>
 
       <h2 id="tools">What Summon can do</h2>
       <p>Summon isn’t a generic chatbot with your note pasted in — it has tools to work with your vault directly:</p>
@@ -80,7 +174,26 @@
       <h2 id="composer-tags">Composer Smart Tags</h2>
       <p>Type <code>@</code> or <code>#</code> directly inside the Summon input to attach a Smart Tag to your prompt. The pill appears inline — and Summon automatically receives the entity’s full profile (attributes, linked notes) or the top matching vault passages as injected context. You can coin a brand-new tag on the spot if it doesn’t exist yet. This is the fastest way to scope a question: <em>&ldquo;Summarise everything I know about <span class="pill pill-mention">@Priya</span> and <span class="pill pill-hashtag">#launch</span>&rdquo;</em> — no need to mention them by name in plain text.</p>
 
-      <figure class="guide-figure"><div class="figure-slot" data-shot="summon/composer-smart-tags.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>Smart Tags in the composer.</strong> Set up: the Summon input focused, mid-typing a prompt with <code>@</code> just entered so the tag menu is open. In frame: the inline mention/hashtag suggestion menu below the composer, with a prompt that already contains an attached pill (e.g. a <span class="pill pill-mention">@mention</span> and a <span class="pill pill-hashtag">#hashtag</span>) rendered inline in the input.</span></div><figcaption>Type <code>@</code> or <code>#</code> right in the Summon input to attach a Smart Tag — Summon receives that entity’s full profile as context.</figcaption></figure>
+      <figure class="guide-figure">
+        <div class="mock sm-4" style="max-width: 460px; margin: 0 auto;">
+          <style>
+            .sm-4 .sm-4-composer { padding: 11px 13px; border-radius: 11px; border: 1px solid var(--accent); background: rgba(255,255,255,0.03); font-size: 13.5px; color: var(--fg); line-height: 1.9; }
+            .sm-4 .sm-4-menu { margin-top: 9px; }
+          </style>
+          <div class="mock-pad mock-anchor" style="min-height: 232px;">
+            <div class="sm-4-composer">Summarise everything on <span class="pill pill-mention">@Sara Chen</span> and <span class="pill pill-hashtag">#lau</span><span class="mock-caret"></span></div>
+            <div class="mock-menu sm-4-menu">
+              <div class="mock-menu-h">Topics</div>
+              <div class="mock-mi active"><span class="ic" style="color:var(--gold)">#</span> <span class="pill pill-hashtag">#launch</span> <span class="sub">project · 6 notes</span></div>
+              <div class="mock-mi"><span class="ic" style="color:var(--gold)">#</span> <span class="pill pill-hashtag">#launch-plan</span> <span class="sub">2 notes</span></div>
+              <div class="mock-mi"><span class="ic" style="color:var(--amber)">💡</span> <span class="pill pill-hashtag">#launch-ideas</span> <span class="sub">idea</span></div>
+              <div class="mock-menu-h">Create</div>
+              <div class="mock-mi"><span class="ic" style="color:var(--accent)">＋</span> New topic “lau…” <kbd>⏎</kbd></div>
+            </div>
+          </div>
+        </div>
+        <figcaption>Type <code>@</code> or <code>#</code> right in the Summon input to attach a Smart Tag — Summon receives that entity’s full profile as context.</figcaption>
+      </figure>
 
       <h2 id="vault-qa">Asking about your vault</h2>
       <ul>
@@ -124,7 +237,32 @@
       <p>Summon drops an <strong>agent-task pill</strong> right where your cursor was — an inline chip that shows the task’s live status (<em>queued → running → done</em>, or <em>failed</em>) without you leaving the note. While the task is in flight, that block is <strong>locked</strong> so you can’t accidentally edit the instruction out from under the agent; deleting the pill cancels the task.</p>
       <p>When a task assigned from a block finishes successfully, Summon stamps that source block <span class="pill pill-status">#complete</span> — so the line you delegated reflects its done state, and a native notification lets you know it’s ready.</p>
 
-      <figure class="guide-figure"><div class="figure-slot" data-shot="summon/assign-flow.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>Assigning a task.</strong> Set up: a note line reading “Draft a project brief for the rebrand” with the slash menu open on <code>/assign</code>. In frame: the “Assign to Summon” slash item highlighted, and — inset — the resulting agent-task pill sitting inline in the block with a “running” status dot.</span></div><figcaption>Type <code>/assign do X</code>, select text, or assign a whole block — Summon drops a live-status pill and works in the background.</figcaption></figure>
+      <figure class="guide-figure">
+        <div class="mock sm-5" style="max-width: 460px; margin: 0 auto;">
+          <style>
+            .sm-5 .sm-5-taskpill { display: inline-flex; align-items: center; gap: 7px; padding: 2px 10px 2px 8px; border-radius: 999px; border: 1px solid rgba(99,102,241,0.4); background: rgba(99,102,241,0.12); color: var(--fg); font-size: 12.5px; font-weight: 600; }
+            .sm-5 .sm-5-run { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 0 rgba(99,102,241,0.5); animation: sm-5-pulse 1.6s ease-out infinite; }
+            .sm-5 .sm-5-taskpill .sub { color: var(--accent); font-weight: 700; font-size: 11px; }
+            @keyframes sm-5-pulse { 0% { box-shadow: 0 0 0 0 rgba(99,102,241,0.5); } 70%,100% { box-shadow: 0 0 0 6px rgba(99,102,241,0); } }
+            @media (prefers-reduced-motion: reduce) { .sm-5 .sm-5-run { animation: none; } }
+          </style>
+          <div class="mock-pad mock-anchor" style="min-height: 250px;">
+            <div class="mock-line" style="color: var(--fg); font-size: 14px; margin-bottom: 4px;"><span style="color:var(--fg-dim)">/</span>assign draft a project brief for the rebrand<span class="mock-caret"></span></div>
+            <div class="mock-menu" style="position: absolute; left: 22px; top: 44px; min-width: 252px;">
+              <div class="mock-menu-h">Actions</div>
+              <div class="mock-mi active"><span class="ic">✦</span> Assign to Summon <span class="sub">background task</span></div>
+              <div class="mock-mi"><span class="ic">▦</span> Table</div>
+              <div class="mock-mi"><span class="ic">☑</span> To-do list</div>
+              <div class="mock-mi"><span class="ic">💬</span> Callout</div>
+            </div>
+            <div style="position: absolute; left: 22px; bottom: 20px; right: 22px;">
+              <div class="mock-res-h" style="padding: 0 0 6px;">Result — inline in the block</div>
+              <div class="mock-line" style="color: var(--fg); font-size: 14px; margin: 0;">Rebrand brief <span class="sm-5-taskpill"><span class="sm-5-run"></span> Summon <span class="sub">running</span></span></div>
+            </div>
+          </div>
+        </div>
+        <figcaption>Type <code>/assign do X</code>, select text, or assign a whole block — Summon drops a live-status pill and works in the background.</figcaption>
+      </figure>
 
       <h2 id="tasks-view">The Summon Tasks view</h2>
       <p>Everything you’ve handed off lives in one place. Open it from the <strong>Summon Tasks</strong> row in the sidebar — it carries a small <strong>count badge</strong> of in-flight tasks and its background <strong>pulses gently</strong> while any task is running, so you always know something’s cooking without opening it.</p>
@@ -143,7 +281,66 @@
 
       <p class="note"><strong>Gated actions pause for your approval.</strong> A background task can’t pop a dialog in your face, so when one wants to do something sensitive — write a file, run a shell command, or use a Mac bridge like sending mail or creating a calendar event — it stops and posts a <strong>Needs Approval</strong> card at the top of the Tasks view: <em>“A background task wants to: …”</em> with the concrete detail and inline <strong>Approve</strong> / <strong>Reject</strong> buttons. Nothing sensitive happens until you say so, and every decision is recorded. You choose which categories are even eligible — and how freely they run — in <strong>Settings → Summon → Capabilities</strong> (below).</p>
 
-      <figure class="guide-figure"><div class="figure-slot" data-shot="summon/tasks-view.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The Summon Tasks view.</strong> Set up: several assigned tasks in mixed states. In frame: the header summary line, a “Needs Approval” card with Approve / Reject at the top, an Active section with a running task showing its live thinking step, and a Recent list with Done and Failed rows — plus the pulsing “Summon Tasks” sidebar row with its in-flight count badge.</span></div><figcaption>One place for every background task — active, awaiting approval, and recently finished — with a live badge on the sidebar row.</figcaption></figure>
+      <figure class="guide-figure">
+        <div class="mock sm-6" style="max-width: 600px; margin: 0 auto;">
+          <style>
+            .sm-6 .sm-6-badge { margin-left: auto; min-width: 17px; height: 17px; padding: 0 5px; border-radius: 999px; background: var(--accent-2); color: #fff; font-size: 9.5px; font-weight: 800; display: grid; place-items: center; }
+            .sm-6 .sm-6-tasks-nav { position: relative; overflow: hidden; }
+            .sm-6 .sm-6-tasks-nav::before { content: ""; position: absolute; inset: 0; background: rgba(240,72,168,0.14); border-radius: 7px; animation: sm-6-pulse 2.6s ease-in-out infinite; }
+            .sm-6 .sm-6-tasks-nav > * { position: relative; }
+            @keyframes sm-6-pulse { 0%,100% { opacity: 0.35; } 50% { opacity: 1; } }
+            .sm-6 .sm-6-sum { font-size: 12px; color: var(--fg-dim); margin-bottom: 14px; }
+            .sm-6 .sm-6-sum b { color: var(--fg); }
+            .sm-6 .sm-6-sec { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); margin: 15px 0 8px; }
+            .sm-6 .sm-6-sec:first-child { margin-top: 0; }
+            .sm-6 .sm-6-card { border-radius: 10px; border: 1px solid var(--border-soft); background: rgba(255,255,255,0.02); padding: 10px 12px; margin-bottom: 8px; }
+            .sm-6 .sm-6-approve { border-color: rgba(251,191,36,0.4); background: rgba(251,191,36,0.07); }
+            .sm-6 .sm-6-row { display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--fg); }
+            .sm-6 .sm-6-step { font-size: 11px; color: var(--fg-faint); margin-top: 6px; display: flex; align-items: center; gap: 6px; }
+            .sm-6 .sm-6-actions { display: flex; gap: 7px; margin-top: 9px; }
+            .sm-6 .sm-6-btn { font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 7px; }
+            .sm-6 .sm-6-btn.ok { background: var(--green); color: #04120b; }
+            .sm-6 .sm-6-btn.no { border: 1px solid var(--border); color: var(--fg-dim); }
+            .sm-6 .sp { display: inline-flex; align-items: center; gap: 5px; margin-left: auto; font-size: 10.5px; font-weight: 700; padding: 2px 9px; border-radius: 999px; border: 1px solid; }
+            .sm-6 .sp .d { width: 6px; height: 6px; border-radius: 50%; }
+            .sm-6 .sp.run { color: var(--blue); border-color: rgba(96,165,250,0.4); background: rgba(96,165,250,0.1); }
+            .sm-6 .sp.run .d { background: var(--blue); animation: sm-6-blip 1.1s ease-in-out infinite; }
+            .sm-6 .sp.wait { color: var(--amber); border-color: rgba(251,191,36,0.4); background: rgba(251,191,36,0.1); }
+            .sm-6 .sp.wait .d { background: var(--amber); }
+            .sm-6 .sp.done { color: var(--green); border-color: rgba(52,211,153,0.4); background: rgba(52,211,153,0.1); }
+            .sm-6 .sp.done .d { background: var(--green); }
+            .sm-6 .sp.fail { color: var(--red); border-color: rgba(248,113,113,0.4); background: rgba(248,113,113,0.1); }
+            .sm-6 .sp.fail .d { background: var(--red); }
+            @keyframes sm-6-blip { 50% { opacity: 0.3; } }
+            @media (prefers-reduced-motion: reduce) { .sm-6 .sm-6-tasks-nav::before, .sm-6 .sp.run .d { animation: none; } }
+          </style>
+          <div class="mock-split" style="grid-template-columns: 168px 1fr;">
+            <div class="mock-side">
+              <div class="mock-nav"><span class="ic">⌂</span> Home</div>
+              <div class="mock-nav sm-6-tasks-nav active"><span class="ic">▤</span> Summon Tasks <span class="sm-6-badge">3</span></div>
+              <div class="mock-side-h" style="margin-top: 10px;">Notebooks</div>
+              <div class="mock-nav"><span class="ic">📄</span> Launch plan</div>
+            </div>
+            <div class="mock-pad">
+              <div class="sm-6-sum"><b>2 active</b> · 1 needs approval · 12 done</div>
+              <div class="sm-6-sec">Needs approval</div>
+              <div class="sm-6-card sm-6-approve">
+                <div class="sm-6-row">A background task wants to: <em style="color:var(--fg-dim); font-style:normal;">send mail to Sara</em> <span class="sp wait"><span class="d"></span> Needs approval</span></div>
+                <div class="sm-6-actions"><span class="sm-6-btn ok">Approve</span><span class="sm-6-btn no">Reject</span></div>
+              </div>
+              <div class="sm-6-sec">Active</div>
+              <div class="sm-6-card">
+                <div class="sm-6-row">Draft the rebrand brief <span class="sp run"><span class="d"></span> Running</span></div>
+                <div class="sm-6-step">✦ Searching vault — 7 notes on <span class="pill pill-hashtag">#launch</span>…</div>
+              </div>
+              <div class="sm-6-sec">Recent</div>
+              <div class="sm-6-card"><div class="sm-6-row">Summary of Q3 planning <span class="sp done"><span class="d"></span> Done</span></div></div>
+              <div class="sm-6-card"><div class="sm-6-row">Chase the venue contract <span class="sp fail"><span class="d"></span> Failed</span></div></div>
+            </div>
+          </div>
+        </div>
+        <figcaption>One place for every background task — active, awaiting approval, and recently finished — with a live badge on the sidebar row.</figcaption>
+      </figure>
 
       <p class="tip"><strong>Tip:</strong> assigning is the natural next step after Summon writes something for you. Turn a checklist of action items into real work — <code>/assign</code> each line and let them run while you move on.</p>
 
@@ -172,7 +369,57 @@
       </table>
       <p class="note"><strong>Terminal has a floor you can’t override:</strong> a built-in safety <strong>denylist</strong> — <code>rm</code>, <code>curl</code>, <code>sudo</code>, <code>ssh</code> and other destructive or exfiltration commands — is <em>always</em> blocked, even if you try to add one to the allowlist.</p>
 
-      <figure class="guide-figure"><div class="figure-slot" data-shot="summon/capabilities-two-pane.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The Capabilities two-pane.</strong> Set up: Settings → Summon → Capabilities with an action selected (e.g. “Write and edit files”). In frame: the left rail listing capabilities under the <strong>Access</strong> / <strong>Actions</strong> / <strong>Advanced</strong> groups — Access rows showing plain on/off switches — and the right detail pane for the selected action showing its single <strong>Never / Ask first / Allow</strong> segmented control (plus a <strong>Draft only</strong> option where it applies).</span></div><figcaption>Access reads are simple switches; every Action carries one Never / Ask first / Allow control that is both its on/off and its permission level.</figcaption></figure>
+      <figure class="guide-figure">
+        <div class="mock sm-7" style="max-width: 600px; margin: 0 auto;">
+          <style>
+            .sm-7 .sm-7-grid { display: grid; grid-template-columns: 216px 1fr; }
+            .sm-7 .sm-7-rail { border-right: 1px solid var(--border-soft); background: rgba(255,255,255,0.012); padding: 13px 11px; }
+            .sm-7 .sm-7-gh { font-size: 9.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); margin: 4px 6px 6px; }
+            .sm-7 .sm-7-gh:not(:first-child) { margin-top: 14px; }
+            .sm-7 .sm-7-row { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 7px; font-size: 12px; color: var(--fg-dim); }
+            .sm-7 .sm-7-row.active { background: rgba(99,102,241,0.14); color: var(--fg); }
+            .sm-7 .sm-7-row .ic { width: 15px; text-align: center; opacity: 0.85; flex: none; }
+            .sm-7 .sm-7-sw { margin-left: auto; width: 26px; height: 15px; border-radius: 999px; background: rgba(255,255,255,0.12); position: relative; flex: none; }
+            .sm-7 .sm-7-sw.on { background: var(--green); }
+            .sm-7 .sm-7-sw::after { content: ""; position: absolute; top: 2px; left: 2px; width: 11px; height: 11px; border-radius: 50%; background: #fff; }
+            .sm-7 .sm-7-sw.on::after { left: 13px; }
+            .sm-7 .sm-7-lvl { margin-left: auto; font-size: 10px; font-weight: 700; color: var(--amber); flex: none; }
+            .sm-7 .sm-7-detail { padding: 16px 18px; }
+            .sm-7 .sm-7-dt { font-size: 15px; font-weight: 800; letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; }
+            .sm-7 .sm-7-dd { font-size: 12px; color: var(--fg-dim); line-height: 1.55; margin: 7px 0 15px; }
+            .sm-7 .sm-7-lbl { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 7px; }
+            .sm-7 .sm-7-seg { display: inline-flex; border-radius: 9px; border: 1px solid var(--border); overflow: hidden; }
+            .sm-7 .sm-7-seg span { padding: 7px 15px; font-size: 12px; font-weight: 600; color: var(--fg-dim); border-right: 1px solid var(--border-soft); }
+            .sm-7 .sm-7-seg span:last-child { border-right: none; }
+            .sm-7 .sm-7-seg span.sel { background: rgba(99,102,241,0.18); color: var(--fg); }
+            .sm-7 .sm-7-draft { display: flex; align-items: center; gap: 9px; margin-top: 16px; font-size: 12.5px; color: var(--fg-dim); }
+          </style>
+          <div class="sm-7-grid">
+            <div class="sm-7-rail">
+              <div class="sm-7-gh">Access</div>
+              <div class="sm-7-row"><span class="ic">🌐</span> Search the web <span class="sm-7-sw on"></span></div>
+              <div class="sm-7-row"><span class="ic">📄</span> Read your files <span class="sm-7-sw on"></span></div>
+              <div class="sm-7-row"><span class="ic">🖥️</span> Read your Mac apps <span class="sm-7-sw"></span></div>
+              <div class="sm-7-row"><span class="ic">📚</span> Look up library docs <span class="sm-7-sw on"></span></div>
+              <div class="sm-7-gh">Actions</div>
+              <div class="sm-7-row active"><span class="ic">✎</span> Write and edit files <span class="sm-7-lvl">Ask first</span></div>
+              <div class="sm-7-row"><span class="ic">⌘</span> Run terminal commands <span class="sm-7-lvl" style="color:var(--fg-faint)">Never</span></div>
+              <div class="sm-7-row"><span class="ic">✉️</span> Send email <span class="sm-7-lvl" style="color:var(--fg-faint)">Never</span></div>
+              <div class="sm-7-row"><span class="ic">📅</span> Create events <span class="sm-7-lvl" style="color:var(--fg-faint)">Never</span></div>
+              <div class="sm-7-gh">Advanced</div>
+              <div class="sm-7-row"><span class="ic">⚙️</span> Background tasks <span class="sub" style="margin-left:auto; font-size:11px; color:var(--fg-faint);">2</span></div>
+            </div>
+            <div class="sm-7-detail">
+              <div class="sm-7-dt">✎ Write and edit files</div>
+              <div class="sm-7-dd">Create and edit plain-text files in your Documents, Desktop &amp; Downloads folders.</div>
+              <div class="sm-7-lbl">Permission</div>
+              <div class="sm-7-seg"><span>Never</span><span class="sel">Ask first</span><span>Allow</span></div>
+              <div class="sm-7-draft"><span class="sm-7-sw" style="margin:0;"></span> Draft only — save changes for you to review</div>
+            </div>
+          </div>
+        </div>
+        <figcaption>Access reads are simple switches; every Action carries one Never / Ask first / Allow control that is both its on/off and its permission level.</figcaption>
+      </figure>
 
       <h3>Advanced</h3>
       <p><strong>Background tasks</strong> sets how many queued <a href="#assign">assigned tasks</a> Summon runs in parallel. Higher clears a backlog faster but uses more of your AI provider’s rate limit; 2 is recommended.</p>

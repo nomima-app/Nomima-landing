@@ -42,10 +42,40 @@
         <li><strong>Cite in one step.</strong> The cite action does two things at once: it saves the highlight and drops a verbatim citation block into the notebook you choose, carrying the source's attribution with it.</li>
       </ul>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="references/reader-highlight-cite.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Highlighting in the reader.</strong> Set up: an article open in the in-app reader with a sentence selected, so the selection menu is showing its coloured category rows (each a dot + label) and the small quote-mark "cite" button beside one of them. In frame: the selected passage, the category menu floating just below it, and one or two existing coloured highlights already on the page.</span>
+        <div class="mock is-live ref-1" style="max-width: 540px; margin: 0 auto;">
+          <style>
+            .ref-1 .ref-1-body { max-width: 340px; }
+            .ref-1 .ref-1-p { font-size: 13px; color: var(--fg-dim); margin: 0 0 10px; }
+            .ref-1 .ref-1-hl { border-radius: 3px; padding: 0 2px; }
+            .ref-1 .ref-1-hl.method { background: rgba(251,191,36,0.24); color: var(--fg); }
+            .ref-1 .ref-1-hl.intro  { background: rgba(96,165,250,0.22); color: var(--fg); }
+            .ref-1 .ref-1-sel { border-radius: 3px; padding: 0 2px; color: var(--fg); animation: ref-1-sel 5s ease-in-out infinite; }
+            @keyframes ref-1-sel {
+              0%, 30%  { background: rgba(99,102,241,0.34); }
+              52%, 94% { background: rgba(52,211,153,0.28); }
+              100%     { background: rgba(99,102,241,0.34); }
+            }
+            .ref-1 .ref-1-cat { display: flex; align-items: center; gap: 8px; padding: 6px 9px; border-radius: 7px; font-size: 12.5px; color: var(--fg-dim); }
+            .ref-1 .ref-1-cat.active { background: rgba(52,211,153,0.14); color: var(--fg); }
+            .ref-1 .ref-1-cat .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+            .ref-1 .ref-1-cite { margin-left: auto; font-size: 12px; color: var(--green); font-weight: 700; }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">📄 Reader · Attention Is All You Need</span></div>
+          <div class="mock-pad mock-anchor" style="min-height: 250px;">
+            <div class="ref-1-body">
+              <div class="mock-title" style="font-size: 16px; margin-bottom: 2px;">Attention Is All You Need</div>
+              <div class="mock-meta">Vaswani, Shazeer, Parmar et al. · NeurIPS 2017</div>
+              <p class="ref-1-p"><span class="ref-1-hl intro">The dominant sequence transduction models are based on complex recurrent networks.</span> We propose a new simple network architecture, the Transformer.</p>
+              <p class="ref-1-p"><span class="ref-1-sel">The Transformer relies entirely on an attention mechanism to draw global dependencies between input and output.</span> <span class="ref-1-hl method">Experiments show these models to be superior in quality.</span></p>
+            </div>
+            <div class="mock-menu pop" style="left: 150px; top: 150px; min-width: 214px;">
+              <div class="mock-menu-h">Highlight as</div>
+              <div class="ref-1-cat"><span class="dot" style="background: var(--blue);"></span> Introduction</div>
+              <div class="ref-1-cat"><span class="dot" style="background: var(--amber);"></span> Method</div>
+              <div class="ref-1-cat active"><span class="dot" style="background: var(--green);"></span> Key findings <span class="ref-1-cite">❝ Cite</span></div>
+              <div class="ref-1-cat"><span class="dot" style="background: var(--teal);"></span> Conclusion</div>
+            </div>
+          </div>
         </div>
         <figcaption>Select text, pick a colour to highlight — or hit the quote mark to highlight and cite in one move.</figcaption>
       </figure>
@@ -59,10 +89,29 @@
         <li><strong>One-click copy.</strong> A copy button lifts a formatted citation — every author, the quote, publisher, dates and URL — onto your clipboard.</li>
       </ul>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="references/citation-block.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>A citation block in a note.</strong> Set up: a note containing one citation — a quotation with the meta row beneath it showing the coloured lineage chip (e.g. "Method"), the <strong>Source:</strong> label followed by the source pill, author · publisher · date, and the copy button. In frame: the whole citation block, with the Source pill clearly readable.</span>
+        <div class="mock ref-2" style="max-width: 540px; margin: 0 auto;">
+          <style>
+            .ref-2 .ref-2-cite { border: 1px solid var(--border-soft); border-left: 3px solid var(--green); border-radius: 10px; background: rgba(255,255,255,0.02); padding: 13px 15px; }
+            .ref-2 .ref-2-quote { display: flex; gap: 9px; font-size: 13.5px; color: var(--fg); line-height: 1.55; }
+            .ref-2 .ref-2-qm { color: var(--green); font-size: 18px; line-height: 1; flex: none; }
+            .ref-2 .ref-2-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 11px; padding-top: 10px; border-top: 1px solid var(--border-soft); font-size: 11.5px; color: var(--fg-faint); }
+            .ref-2 .ref-2-lin { font-size: 10px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--green); border: 1px solid rgba(52,211,153,0.4); border-radius: 5px; padding: 1.5px 6px; }
+            .ref-2 .ref-2-src { color: var(--fg-faint); }
+            .ref-2 .ref-2-copy { margin-left: auto; color: var(--fg-faint); font-size: 12px; }
+          </style>
+          <div class="mock-pad">
+            <div class="mock-line" style="color: var(--fg-dim); margin-bottom: 11px;">From my transformer lit review:</div>
+            <div class="ref-2-cite">
+              <div class="ref-2-quote"><span class="ref-2-qm">❝</span><span>The Transformer relies entirely on an attention mechanism to draw global dependencies between input and output.</span></div>
+              <div class="ref-2-meta">
+                <span class="ref-2-lin">Key findings</span>
+                <span class="ref-2-src">Source:</span>
+                <span class="pill pill-mention">🔗 Attention Is All You Need</span>
+                <span>Vaswani et al. · NeurIPS · 2017</span>
+                <span class="ref-2-copy">⧉ Copy</span>
+              </div>
+            </div>
+          </div>
         </div>
         <figcaption>A verbatim quote, a clickable Source pill, full attribution, and the colour it was highlighted in.</figcaption>
       </figure>
@@ -95,10 +144,65 @@
         <li><strong>Edit, Refresh or Remove.</strong> Edit fixes up the title, authors, publisher or date; <strong>Refresh</strong> re-pulls metadata from the web for a link or DOI. Remove is a clean reset — it clears the reference's highlights so you can start fresh, while any citations you already dropped into notes keep their text.</li>
       </ul>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="references/references-library.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The References library.</strong> Set up: the References view open with a handful of sources of different kinds in the list (a file, a couple of web pages, an article), the filter chips (All / Files / Web / Articles / Manual) visible above the list with "All" active, and one source selected so the detail panel shows its title, a formatted citation, a Highlights section and a "Cited in" section. In frame: both panels — the list on the left, the detail on the right.</span>
+        <div class="mock ref-3" style="max-width: 620px; margin: 0 auto;">
+          <style>
+            .ref-3 .ref-3-split { display: grid; grid-template-columns: 196px 1fr; }
+            .ref-3 .ref-3-rail { border-right: 1px solid var(--border-soft); padding: 11px 9px; background: rgba(255,255,255,0.012); }
+            .ref-3 .ref-3-row { display: flex; align-items: center; gap: 9px; padding: 5px 9px; border-radius: 7px; font-size: 12.5px; color: var(--fg-dim); }
+            .ref-3 .ref-3-row .ic { width: 15px; text-align: center; opacity: 0.85; flex: none; }
+            .ref-3 .ref-3-row .ct { margin-left: auto; font-size: 11px; color: var(--fg-faint); }
+            .ref-3 .ref-3-row.active { background: rgba(99,102,241,0.14); color: var(--fg); }
+            .ref-3 .ref-3-row.active .ct { color: var(--fg-dim); }
+            .ref-3 .ref-3-grp { display: flex; align-items: center; gap: 5px; font-size: 9.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); margin: 13px 6px 5px; }
+            .ref-3 .ref-3-detail { padding: 16px 18px; }
+            .ref-3 .ref-3-byl { font-size: 11.5px; color: var(--fg-faint); margin: 3px 0 12px; }
+            .ref-3 .ref-3-acts { display: flex; gap: 7px; margin-bottom: 14px; flex-wrap: wrap; }
+            .ref-3 .ref-3-btn { font-size: 11.5px; font-weight: 600; color: var(--fg-dim); border: 1px solid var(--border); border-radius: 7px; padding: 4px 10px; }
+            .ref-3 .ref-3-btn.pri { color: var(--accent); border-color: rgba(99,102,241,0.4); background: rgba(99,102,241,0.10); }
+            .ref-3 .ref-3-seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 9px; }
+            .ref-3 .ref-3-seg span { font-size: 11px; font-weight: 600; color: var(--fg-dim); padding: 4px 11px; border-right: 1px solid var(--border-soft); }
+            .ref-3 .ref-3-seg span:last-child { border-right: none; }
+            .ref-3 .ref-3-seg span.on { background: rgba(99,102,241,0.16); color: var(--fg); }
+            .ref-3 .ref-3-fmt { font-size: 12px; color: var(--fg-dim); line-height: 1.5; margin-bottom: 16px; }
+            .ref-3 .ref-3-fmt a { color: var(--blue); }
+            .ref-3 .ref-3-ph { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin: 0 0 8px; }
+            .ref-3 .ref-3-hl { display: flex; gap: 8px; font-size: 12px; color: var(--fg-dim); margin-bottom: 8px; }
+            .ref-3 .ref-3-hl .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; margin-top: 3px; }
+            .ref-3 .ref-3-back { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--fg-dim); margin-bottom: 6px; }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">🔖 References</span></div>
+          <div class="ref-3-split">
+            <div class="ref-3-rail">
+              <div class="ref-3-row active"><span class="ic">▥</span> All references <span class="ct">24</span></div>
+              <div class="ref-3-row"><span class="ic">▤</span> Files <span class="ct">8</span></div>
+              <div class="ref-3-row"><span class="ic">🌐</span> Web <span class="ct">9</span></div>
+              <div class="ref-3-row"><span class="ic">▤</span> Articles <span class="ct">5</span></div>
+              <div class="ref-3-row"><span class="ic">▤</span> Manual <span class="ct">2</span></div>
+              <div class="ref-3-grp"><span>▾</span> Collections</div>
+              <div class="ref-3-row"><span class="ic">🗂</span> Transformer papers <span class="ct">6</span></div>
+              <div class="ref-3-row"><span class="ic">🗂</span> Lit review <span class="ct">11</span></div>
+              <div class="ref-3-grp"><span>▾</span> Saved searches</div>
+              <div class="ref-3-row"><span class="ic">⌕</span> arXiv 2024 <span class="ct">4</span></div>
+            </div>
+            <div class="ref-3-detail">
+              <div class="mock-title" style="font-size: 16px;">Attention Is All You Need</div>
+              <div class="ref-3-byl">Vaswani, Shazeer, Parmar et al. · NeurIPS · 2017</div>
+              <div class="ref-3-acts">
+                <span class="ref-3-btn pri">Open in reader</span>
+                <span class="ref-3-btn">Read PDF</span>
+                <span class="ref-3-btn">Edit</span>
+              </div>
+              <div class="ref-3-ph">Citation</div>
+              <div class="ref-3-seg"><span class="on">APA</span><span>MLA</span><span>Chicago</span><span>IEEE</span></div>
+              <div class="ref-3-fmt">Vaswani, A., Shazeer, N., Parmar, N., et al. (2017). Attention is all you need. <em>NeurIPS</em>. <a>arXiv:1706.03762</a></div>
+              <div class="ref-3-ph">Highlights · 2</div>
+              <div class="ref-3-hl"><span class="dot" style="background: var(--green);"></span> “relies entirely on an attention mechanism…”</div>
+              <div class="ref-3-hl" style="margin-bottom: 15px;"><span class="dot" style="background: var(--amber);"></span> “Experiments show these models to be superior…”</div>
+              <div class="ref-3-ph">Cited in · 2</div>
+              <div class="ref-3-back"><span style="opacity:.6;">📓</span> Transformer lit review</div>
+              <div class="ref-3-back"><span style="opacity:.6;">📓</span> Model architecture notes</div>
+            </div>
+          </div>
         </div>
         <figcaption>Every source you've cited, in one place — filter by kind, then dive into its highlights and backlinks.</figcaption>
       </figure>
@@ -109,10 +213,31 @@
       <h3>Tags</h3>
       <p>Give any reference free-form <strong>tags</strong>. In its detail view, the <strong>Tags</strong> section shows the tags it already carries as removable pills; hit <strong>＋ Add tag</strong> to type a new one. Nomima also offers a <strong>Suggested</strong> row of tags it derived from that reference's own title and abstract — the same local engine that suggests <code>#hashtags</code> in the editor — so click one to add it, or <strong>Add all</strong>. Tags read as <code>#hashtag</code> pills, and when you quote a tagged reference into a note its tags fold into that note too: the reference's tags make the notes that cite it findable and graph-linked, exactly like a hashtag you typed yourself. The library search box also matches tags, so typing a tag name filters the list to the references that carry it.</p>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="references/reference-tags.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Tags on a reference.</strong> Set up: a reference's detail view scrolled to its <strong>Tags</strong> section, showing a few existing tag pills with their × removers, the ＋ Add tag button, and a <strong>Suggested</strong> row of dashed <code>#hashtag</code> pills with an "Add all" control. In frame: the current tags and the suggested row beneath them.</span>
+        <div class="mock ref-4" style="max-width: 460px; margin: 0 auto;">
+          <style>
+            .ref-4 .ref-4-ph { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin: 0 0 9px; }
+            .ref-4 .ref-4-row { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+            .ref-4 .ref-4-x { margin-left: 2px; opacity: 0.5; }
+            .ref-4 .ref-4-add { font-size: 12px; font-weight: 600; color: var(--accent); border: 1px dashed rgba(99,102,241,0.4); border-radius: 999px; padding: 1.5px 10px; }
+            .ref-4 .ref-4-sug { border-color: rgba(234,179,8,0.4); border-style: dashed; opacity: 0.85; }
+            .ref-4 .ref-4-all { font-size: 11px; font-weight: 700; color: var(--gold); margin-left: 4px; }
+            .ref-4 .ref-4-sub { display: flex; align-items: center; gap: 8px; margin: 16px 0 9px; }
+            .ref-4 .ref-4-sub .lbl { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); }
+          </style>
+          <div class="mock-pad">
+            <div class="ref-4-ph">Tags</div>
+            <div class="ref-4-row">
+              <span class="pill pill-hashtag">#research<span class="ref-4-x">×</span></span>
+              <span class="pill pill-hashtag">#transformers<span class="ref-4-x">×</span></span>
+              <span class="ref-4-add">＋ Add tag</span>
+            </div>
+            <div class="ref-4-sub"><span class="lbl">Suggested</span><span class="ref-4-all">Add all</span></div>
+            <div class="ref-4-row">
+              <span class="pill pill-hashtag ref-4-sug">#attention</span>
+              <span class="pill pill-hashtag ref-4-sug">#nlp</span>
+              <span class="pill pill-hashtag ref-4-sug">#deep-learning</span>
+            </div>
+          </div>
         </div>
         <figcaption>Tag a reference by hand or from Nomima's suggestions — its tags follow it into every note that cites it.</figcaption>
       </figure>
@@ -120,10 +245,47 @@
       <h3>Collections</h3>
       <p><strong>Collections</strong> are named folders of references — a reading list, a project's sources, a literature review. They live in the <strong>Collections</strong> section of the left rail: click <strong>＋</strong> and type a name to create one, and each row shows how many references it holds. Click a collection to filter the list to it; hover a row to <strong>rename</strong> or <strong>delete</strong> it. On a reference, its own <strong>Collections</strong> section lists the collections it's in as chips, and an <strong>Add to collection</strong> menu lets you toggle membership or spin up a new collection on the spot. Collections are pure organisation: delete one and its references stay in your library.</p>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="references/collections.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Collections.</strong> Set up: the References view with the left rail's <strong>Collections</strong> section showing two or three folder rows and their counts (one active/filtering the list), and the selected reference's detail showing its <strong>Collections</strong> chips with the "Add to collection" menu open. In frame: the rail's collection list on the left and the reference's collection membership on the right.</span>
+        <div class="mock ref-5" style="max-width: 560px; margin: 0 auto;">
+          <style>
+            .ref-5 .ref-5-split { display: grid; grid-template-columns: 188px 1fr; }
+            .ref-5 .ref-5-rail { border-right: 1px solid var(--border-soft); padding: 11px 9px; background: rgba(255,255,255,0.012); }
+            .ref-5 .ref-5-grp { display: flex; align-items: center; gap: 5px; font-size: 9.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); margin: 3px 6px 6px; }
+            .ref-5 .ref-5-grp .add { margin-left: auto; color: var(--accent); font-size: 12px; }
+            .ref-5 .ref-5-row { display: flex; align-items: center; gap: 9px; padding: 5px 9px; border-radius: 7px; font-size: 12.5px; color: var(--fg-dim); }
+            .ref-5 .ref-5-row .ic { width: 15px; text-align: center; opacity: 0.85; }
+            .ref-5 .ref-5-row .ct { margin-left: auto; font-size: 11px; color: var(--fg-faint); }
+            .ref-5 .ref-5-row.active { background: rgba(99,102,241,0.14); color: var(--fg); }
+            .ref-5 .ref-5-detail { padding: 15px 16px; position: relative; }
+            .ref-5 .ref-5-ph { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin: 0 0 9px; }
+            .ref-5 .ref-5-chips { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+            .ref-5 .ref-5-chip { font-size: 12px; color: var(--fg-dim); border: 1px solid var(--border); border-radius: 999px; padding: 2px 10px; }
+            .ref-5 .ref-5-addc { font-size: 12px; font-weight: 600; color: var(--accent); border: 1px dashed rgba(99,102,241,0.4); border-radius: 999px; padding: 1.5px 10px; }
+            .ref-5 .ref-5-menu { margin-top: 10px; width: 210px; }
+            .ref-5 .ref-5-mi { display: flex; align-items: center; gap: 9px; padding: 6px 9px; border-radius: 7px; font-size: 12.5px; color: var(--fg-dim); }
+            .ref-5 .ref-5-mi .ck { margin-left: auto; color: var(--green); }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">🔖 References</span></div>
+          <div class="ref-5-split">
+            <div class="ref-5-rail">
+              <div class="ref-5-grp"><span>▾</span> Collections <span class="add">＋</span></div>
+              <div class="ref-5-row active"><span class="ic">🗂</span> Transformer papers <span class="ct">6</span></div>
+              <div class="ref-5-row"><span class="ic">🗂</span> Lit review <span class="ct">11</span></div>
+              <div class="ref-5-row"><span class="ic">🗂</span> To read <span class="ct">3</span></div>
+            </div>
+            <div class="ref-5-detail">
+              <div class="ref-5-ph">Collections</div>
+              <div class="ref-5-chips">
+                <span class="ref-5-chip">🗂 Transformer papers</span>
+                <span class="ref-5-addc">＋ Add to collection</span>
+              </div>
+              <div class="mock-menu ref-5-menu">
+                <div class="mock-menu-h">Add to collection</div>
+                <div class="ref-5-mi"><span>🗂</span> Transformer papers <span class="ck">✓</span></div>
+                <div class="ref-5-mi"><span>🗂</span> Lit review</div>
+                <div class="ref-5-mi" style="color: var(--accent);"><span>＋</span> New collection…</div>
+              </div>
+            </div>
+          </div>
         </div>
         <figcaption>Group references into named folders — from the rail, or per-reference via "Add to collection".</figcaption>
       </figure>
@@ -131,10 +293,31 @@
       <h3>Saved searches</h3>
       <p>Filtered the library down to just what you want? Save that view. Whenever a filter is active — search text, a kind chip, or a collection — a <strong>Save search</strong> chip appears; name it and it's pinned as a chip under the filters. Click a saved search to re-apply its whole filter in one go, or <strong>×</strong> to remove it. Saved searches are stored on your Mac.</p>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="references/saved-searches.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Saved searches.</strong> Set up: the References rail with a filter active (say a kind chip plus some search text) so the <strong>Save search</strong> button is visible, and one or two already-saved searches pinned as chips beneath the filter row. In frame: the filter chips, the saved-search chips (each with its × remover) and the Save search button.</span>
+        <div class="mock ref-6" style="max-width: 440px; margin: 0 auto;">
+          <style>
+            .ref-6 .ref-6-chips { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+            .ref-6 .ref-6-kind { font-size: 12px; font-weight: 600; color: var(--fg-dim); border: 1px solid var(--border); border-radius: 999px; padding: 2px 11px; }
+            .ref-6 .ref-6-kind.on { color: var(--fg); background: rgba(99,102,241,0.16); border-color: rgba(99,102,241,0.4); }
+            .ref-6 .ref-6-save { margin-left: auto; font-size: 11.5px; font-weight: 700; color: var(--accent); border: 1px solid rgba(99,102,241,0.4); border-radius: 8px; padding: 3px 10px; }
+            .ref-6 .ref-6-sub { display: flex; align-items: center; gap: 8px; margin: 15px 0 8px; }
+            .ref-6 .ref-6-sub .lbl { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); }
+            .ref-6 .ref-6-pin { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--fg-dim); border: 1px solid rgba(45,212,191,0.35); background: rgba(45,212,191,0.08); border-radius: 999px; padding: 2px 10px; }
+            .ref-6 .ref-6-pin .x { opacity: 0.5; }
+          </style>
+          <div class="mock-pad">
+            <div class="mock-input" style="margin-bottom: 11px;"><span style="opacity:.6;">⌕</span> transformer<span class="mock-caret"></span></div>
+            <div class="ref-6-chips">
+              <span class="ref-6-kind">All</span>
+              <span class="ref-6-kind on">Web</span>
+              <span class="ref-6-kind">Articles</span>
+              <span class="ref-6-save">☆ Save search</span>
+            </div>
+            <div class="ref-6-sub"><span class="lbl">Saved searches</span></div>
+            <div class="ref-6-chips">
+              <span class="ref-6-pin">⌕ arXiv 2024 <span class="x">×</span></span>
+              <span class="ref-6-pin">⌕ To read <span class="x">×</span></span>
+            </div>
+          </div>
         </div>
         <figcaption>Pin a filtered view of the library and re-apply it in one click.</figcaption>
       </figure>
@@ -148,10 +331,43 @@
       <h3>Pick a citation style</h3>
       <p>Every reference's detail view has a <strong>Citation</strong> block with a style switcher — <strong>APA</strong>, <strong>MLA</strong>, <strong>Chicago</strong> and <strong>IEEE</strong>. Pick one and the formatted reference re-renders in it, with the DOI or link shown as a clickable in-place link. Below it, quick actions copy the reference in that style: <strong>Copy</strong> (the full reference), <strong>In-text</strong> (a short parenthetical like <code>(Vaswani et al., 2017)</code>), <strong>BibTeX</strong> and <strong>RIS</strong> (for LaTeX or a reference manager). Your style choice is remembered and shared everywhere citations are formatted.</p>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="references/citation-styles.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The citation style switcher.</strong> Set up: a reference selected in the References library, scrolled to its <strong>Citation</strong> block, with the APA / MLA / Chicago / IEEE switcher showing and one style active. In frame: the switcher row, the formatted reference beneath it (its DOI/URL a clickable link), and the Copy · In-text · BibTeX · RIS actions below.</span>
+        <div class="mock is-live ref-7" style="max-width: 480px; margin: 0 auto;">
+          <style>
+            .ref-7 .ref-7-ph { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin: 0 0 9px; }
+            .ref-7 .ref-7-seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 11px; }
+            .ref-7 .ref-7-seg span { position: relative; font-size: 11.5px; font-weight: 600; color: var(--fg-dim); padding: 5px 13px; border-right: 1px solid var(--border-soft); }
+            .ref-7 .ref-7-seg span:last-child { border-right: none; }
+            .ref-7 .ref-7-seg span.apa, .ref-7 .ref-7-seg span.mla { color: var(--fg); }
+            .ref-7 .ref-7-seg span.apa { background: rgba(99,102,241,0.16); animation: ref-7-apa 5s ease-in-out infinite; }
+            .ref-7 .ref-7-seg span.mla { animation: ref-7-mla 5s ease-in-out infinite; }
+            .ref-7 .ref-7-fmtwrap { position: relative; min-height: 54px; margin-bottom: 13px; }
+            .ref-7 .ref-7-fmt { position: absolute; inset: 0; font-size: 12.5px; color: var(--fg-dim); line-height: 1.55; }
+            .ref-7 .ref-7-fmt a { color: var(--blue); }
+            .ref-7 .ref-7-apa { animation: ref-7-apa 5s ease-in-out infinite; }
+            .ref-7 .ref-7-mla { animation: ref-7-mla 5s ease-in-out infinite; }
+            @keyframes ref-7-apa { 0%, 42% { opacity: 1; } 50%, 92% { opacity: 0; } 100% { opacity: 1; } }
+            @keyframes ref-7-mla { 0%, 42% { opacity: 0; } 50%, 92% { opacity: 1; } 100% { opacity: 0; } }
+            .ref-7 .ref-7-acts { display: flex; gap: 7px; flex-wrap: wrap; }
+            .ref-7 .ref-7-btn { font-size: 11.5px; font-weight: 600; color: var(--fg-dim); border: 1px solid var(--border); border-radius: 7px; padding: 4px 11px; }
+            @media (prefers-reduced-motion: reduce) {
+              .ref-7 .ref-7-seg span.mla, .ref-7 .ref-7-mla { animation: none; opacity: 0; }
+              .ref-7 .ref-7-seg span.apa, .ref-7 .ref-7-apa { animation: none; opacity: 1; }
+            }
+          </style>
+          <div class="mock-pad">
+            <div class="ref-7-ph">Citation</div>
+            <div class="ref-7-seg"><span class="apa">APA</span><span class="mla">MLA</span><span>Chicago</span><span>IEEE</span></div>
+            <div class="ref-7-fmtwrap">
+              <div class="ref-7-fmt ref-7-apa">Vaswani, A., Shazeer, N., Parmar, N., et al. (2017). Attention is all you need. <em>Advances in Neural Information Processing Systems</em>. <a>arXiv:1706.03762</a></div>
+              <div class="ref-7-fmt ref-7-mla">Vaswani, Ashish, et al. “Attention Is All You Need.” <em>Advances in Neural Information Processing Systems</em>, 2017, <a>arXiv:1706.03762</a>.</div>
+            </div>
+            <div class="ref-7-acts">
+              <span class="ref-7-btn">⧉ Copy</span>
+              <span class="ref-7-btn">In-text</span>
+              <span class="ref-7-btn">BibTeX</span>
+              <span class="ref-7-btn">RIS</span>
+            </div>
+          </div>
         </div>
         <figcaption>Format a reference in APA, MLA, Chicago or IEEE — then copy it, or export BibTeX/RIS.</figcaption>
       </figure>
@@ -159,10 +375,36 @@
       <h3>A notebook's bibliography</h3>
       <p>Any notebook that cites sources can produce a bibliography of them. Open the notebook's header menu and choose <strong>Bibliography…</strong>. Nomima gathers every source you've quoted in that notebook, sorts them by author, and lists them formatted in your chosen style (the same APA/MLA/Chicago/IEEE switcher sits in the modal's header). Copy a single entry, <strong>Copy all</strong> as plain text, or export the whole list as <strong>BibTeX</strong> or <strong>RIS</strong>. The list stays live — add or erase a quote in the notebook and the bibliography updates with it.</p>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="references/bibliography.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>A notebook bibliography.</strong> Set up: the Bibliography modal open over a notebook, its header showing the notebook title and the APA / MLA / Chicago / IEEE switcher, the body listing several numbered references sorted by author. In frame: the numbered reference list with a per-entry copy button, and the footer's reference count beside the BibTeX · RIS · Copy all actions.</span>
+        <div class="mock ref-8" style="max-width: 520px; margin: 0 auto;">
+          <style>
+            .ref-8 .ref-8-head { display: flex; align-items: center; gap: 10px; padding: 13px 16px; border-bottom: 1px solid var(--border-soft); }
+            .ref-8 .ref-8-title { font-size: 14px; font-weight: 700; }
+            .ref-8 .ref-8-seg { margin-left: auto; display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+            .ref-8 .ref-8-seg span { font-size: 10.5px; font-weight: 600; color: var(--fg-dim); padding: 3px 9px; border-right: 1px solid var(--border-soft); }
+            .ref-8 .ref-8-seg span:last-child { border-right: none; }
+            .ref-8 .ref-8-seg span.on { background: rgba(99,102,241,0.16); color: var(--fg); }
+            .ref-8 .ref-8-item { display: flex; gap: 10px; padding: 11px 16px; border-bottom: 1px solid var(--border-soft); font-size: 12.5px; color: var(--fg-dim); line-height: 1.5; }
+            .ref-8 .ref-8-num { color: var(--fg-faint); font-weight: 700; flex: none; }
+            .ref-8 .ref-8-item a { color: var(--blue); }
+            .ref-8 .ref-8-copy { margin-left: auto; color: var(--fg-faint); flex: none; }
+            .ref-8 .ref-8-foot { display: flex; align-items: center; gap: 8px; padding: 11px 16px; }
+            .ref-8 .ref-8-ct { font-size: 11.5px; color: var(--fg-faint); }
+            .ref-8 .ref-8-btn { font-size: 11.5px; font-weight: 600; color: var(--fg-dim); border: 1px solid var(--border); border-radius: 7px; padding: 4px 10px; }
+            .ref-8 .ref-8-btn.pri { color: var(--accent); border-color: rgba(99,102,241,0.4); background: rgba(99,102,241,0.10); }
+          </style>
+          <div class="ref-8-head">
+            <span class="ref-8-title">📓 Transformer lit review · Bibliography</span>
+            <span class="ref-8-seg"><span class="on">APA</span><span>MLA</span><span>Chicago</span><span>IEEE</span></span>
+          </div>
+          <div class="ref-8-item"><span class="ref-8-num">1.</span><span>Devlin, J., Chang, M.-W., Lee, K., &amp; Toutanova, K. (2019). BERT: Pre-training of deep bidirectional transformers. <em>NAACL</em>.</span><span class="ref-8-copy">⧉</span></div>
+          <div class="ref-8-item"><span class="ref-8-num">2.</span><span>Vaswani, A., Shazeer, N., Parmar, N., et al. (2017). Attention is all you need. <em>NeurIPS</em>. <a>arXiv:1706.03762</a></span><span class="ref-8-copy">⧉</span></div>
+          <div class="ref-8-item"><span class="ref-8-num">3.</span><span>Wolf, T., Debut, L., Sanh, V., et al. (2020). Transformers: State-of-the-art NLP. <em>EMNLP</em>.</span><span class="ref-8-copy">⧉</span></div>
+          <div class="ref-8-foot">
+            <span class="ref-8-ct">3 references</span>
+            <span class="ref-8-btn" style="margin-left:auto;">BibTeX</span>
+            <span class="ref-8-btn">RIS</span>
+            <span class="ref-8-btn pri">Copy all</span>
+          </div>
         </div>
         <figcaption>Every source a notebook cites, formatted and numbered — copy the lot or export it.</figcaption>
       </figure>
@@ -175,10 +417,23 @@
         <li><strong>Summon.</strong> When the assistant searches your vault to answer a question it now reads your references alongside your notes — a relevant passage is folded in tagged <code>· reference</code>, with a share of the results reserved for references so a saved-but-never-quoted paper still reaches the assistant.</li>
       </ul>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="references/library-search.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>A reference in command-palette search.</strong> Set up: the command palette (⌘K) open with a query typed, showing a note-matches group and, below it, a <strong>References</strong> group with a couple of reference hits — each a title with a short snippet. In frame: the References group clearly labelled beneath the note results.</span>
+        <div class="mock ref-9" style="max-width: 460px; margin: 0 auto;">
+          <style>
+            .ref-9 .ref-9-hit { display: flex; align-items: flex-start; gap: 9px; padding: 7px 9px; border-radius: 7px; font-size: 13px; color: var(--fg-dim); }
+            .ref-9 .ref-9-hit.active { background: rgba(99,102,241,0.14); }
+            .ref-9 .ref-9-hit .ic { width: 16px; text-align: center; opacity: 0.8; flex: none; margin-top: 1px; }
+            .ref-9 .ref-9-hit .t { color: var(--fg); }
+            .ref-9 .ref-9-hit .s { display: block; font-size: 11px; color: var(--fg-faint); margin-top: 1px; }
+          </style>
+          <div class="mock-pad" style="padding: 14px;">
+            <div class="mock-input"><span style="opacity:.6;">⌕</span> transformer<span class="mock-caret"></span><span class="k"><kbd>⌘K</kbd></span></div>
+            <div class="mock-res-h">Notes</div>
+            <div class="ref-9-hit"><span class="ic">📓</span><span><span class="t">Transformer lit review</span></span></div>
+            <div class="ref-9-hit"><span class="ic">📄</span><span><span class="t">Model architecture notes</span></span></div>
+            <div class="mock-res-h">References</div>
+            <div class="ref-9-hit active"><span class="ic">📰</span><span><span class="t">Attention Is All You Need</span><span class="s">…relies entirely on an attention mechanism…</span></span></div>
+            <div class="ref-9-hit"><span class="ic">📄</span><span><span class="t">BERT: Pre-training of deep bidirectional transformers</span><span class="s">…a new language representation model…</span></span></div>
+          </div>
         </div>
         <figcaption>Your whole library is searchable from ⌘K — reference hits sit in their own group below your notes.</figcaption>
       </figure>
@@ -192,10 +447,29 @@
         <li>a <strong>Slack, Confluence, GitHub, Notion or Jira permalink</strong> — recognised by its host and typed accordingly (a Slack message, a Confluence page, a Notion page…), so it files itself under the right kind.</li>
       </ul>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="references/smart-add.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Add by link, DOI or ID.</strong> Set up: in References, open the <strong>+</strong> menu and choose “By URL or DOI”. In frame: the “Add by link, DOI, or ID” dialog with the single paste field (placeholder <code>https://…&nbsp;·&nbsp;10.1145/…&nbsp;·&nbsp;arXiv:2401.01234</code>) and the helper line noting Slack / Confluence / GitHub / Notion links are recognised and typed automatically.</span>
+        <div class="mock ref-10" style="max-width: 460px; margin: 0 auto;">
+          <style>
+            .ref-10 .ref-10-t { font-size: 14px; font-weight: 700; margin-bottom: 11px; }
+            .ref-10 .ref-10-help { font-size: 11px; color: var(--fg-faint); margin: 8px 0 0; line-height: 1.5; }
+            .ref-10 .ref-10-card { display: flex; gap: 11px; margin-top: 13px; padding: 12px 13px; border: 1px solid rgba(52,211,153,0.3); border-radius: 10px; background: rgba(52,211,153,0.05); }
+            .ref-10 .ref-10-ic { font-size: 20px; flex: none; }
+            .ref-10 .ref-10-name { font-size: 13px; font-weight: 600; color: var(--fg); }
+            .ref-10 .ref-10-sub { font-size: 11.5px; color: var(--fg-faint); margin-top: 2px; }
+            .ref-10 .ref-10-ok { margin-left: auto; align-self: flex-start; font-size: 10px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--green); }
+          </style>
+          <div class="mock-pad">
+            <div class="ref-10-t">Add by link, DOI, or ID</div>
+            <div class="mock-input" style="margin-bottom: 0;"><span style="opacity:.6;">🔗</span> arXiv:1706.03762<span class="mock-caret"></span></div>
+            <div class="ref-10-help">Also recognises <strong>Slack</strong>, <strong>Confluence</strong>, <strong>GitHub</strong>, <strong>Notion</strong> and <strong>Jira</strong> permalinks — typed automatically.</div>
+            <div class="ref-10-card">
+              <span class="ref-10-ic">📰</span>
+              <div>
+                <div class="ref-10-name">Attention Is All You Need</div>
+                <div class="ref-10-sub">Vaswani, Shazeer, Parmar et al. · arXiv · 2017</div>
+              </div>
+              <span class="ref-10-ok">✓ Resolved</span>
+            </div>
+          </div>
         </div>
         <figcaption>Paste a URL, DOI, arXiv id or a workspace permalink — Nomima resolves and types it.</figcaption>
       </figure>
@@ -210,10 +484,36 @@
         <li><strong>GitHub</strong> — also what powers the <a href="advanced-blocks.html">GitHub repo block</a> below.</li>
       </ul>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="references/connectors-settings.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The Connectors panel.</strong> Set up: open Settings → Connectors, with one account connected. In frame: the Connected list showing a connected account with its Disconnect button, and the provider rows for Atlassian (Confluence &amp; Jira), Notion and GitHub — one expanded to show its token field (plus site URL and account email for Atlassian).</span>
+        <div class="mock ref-11" style="max-width: 480px; margin: 0 auto;">
+          <style>
+            .ref-11 .ref-11-sec { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); margin: 0 0 9px; }
+            .ref-11 .ref-11-sec:not(:first-child) { margin-top: 18px; }
+            .ref-11 .ref-11-prov { border: 1px solid var(--border-soft); border-radius: 9px; margin-bottom: 8px; overflow: hidden; }
+            .ref-11 .ref-11-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; font-size: 13px; color: var(--fg); }
+            .ref-11 .ref-11-row .ic { font-size: 15px; }
+            .ref-11 .ref-11-sub { font-size: 11px; color: var(--fg-faint); font-weight: 400; }
+            .ref-11 .ref-11-conn { margin-left: auto; font-size: 11px; font-weight: 700; color: var(--green); display: inline-flex; align-items: center; gap: 5px; }
+            .ref-11 .ref-11-dis { margin-left: auto; font-size: 11px; font-weight: 600; color: var(--red); border: 1px solid rgba(248,113,113,0.35); border-radius: 7px; padding: 3px 9px; }
+            .ref-11 .ref-11-exp { border-top: 1px solid var(--border-soft); padding: 11px 12px; background: rgba(255,255,255,0.015); }
+            .ref-11 .ref-11-fld { display: flex; align-items: center; gap: 9px; font-size: 12px; color: var(--fg-dim); border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; margin-bottom: 7px; }
+            .ref-11 .ref-11-fld .lab { color: var(--fg-faint); width: 68px; flex: none; }
+            .ref-11 .ref-11-fld:last-child { margin-bottom: 0; }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">Settings · Connectors</span></div>
+          <div class="mock-pad">
+            <div class="ref-11-sec">Connected</div>
+            <div class="ref-11-prov">
+              <div class="ref-11-row"><span class="ic">🔷</span> Atlassian <span class="ref-11-sub">acme.atlassian.net</span> <span class="ref-11-dis">Disconnect</span></div>
+              <div class="ref-11-exp">
+                <div class="ref-11-fld"><span class="lab">Token</span> ••••••••••••••••3f9a</div>
+                <div class="ref-11-fld"><span class="lab">Site URL</span> acme.atlassian.net</div>
+                <div class="ref-11-fld"><span class="lab">Email</span> sara@acme.co</div>
+              </div>
+            </div>
+            <div class="ref-11-sec">Available</div>
+            <div class="ref-11-prov"><div class="ref-11-row"><span class="ic">⬛</span> Notion <span class="ref-11-conn" style="color: var(--fg-faint);">Connect →</span></div></div>
+            <div class="ref-11-prov"><div class="ref-11-row"><span class="ic">🐙</span> GitHub <span class="ref-11-sub">also powers /github</span> <span class="ref-11-conn" style="color: var(--fg-faint);">Connect →</span></div></div>
+          </div>
         </div>
         <figcaption>Paste a personal token per service so private pages resolve — tokens live in your Keychain.</figcaption>
       </figure>
@@ -231,10 +531,29 @@
         <li><strong>Reset to defaults</strong> at any time.</li>
       </ul>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="references/highlight-categories.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The Highlights category editor.</strong> Set up: Settings open on the Highlights panel, showing the list of categories — each a row with its colour swatch, an editable name, the reorder arrows and a remove button — plus the "Add category" and "Reset to defaults" controls. In frame: several default categories (Introduction, Method, Key findings…) with their distinct colours.</span>
+        <div class="mock ref-12" style="max-width: 460px; margin: 0 auto;">
+          <style>
+            .ref-12 .ref-12-row { display: flex; align-items: center; gap: 11px; padding: 8px 11px; border: 1px solid var(--border-soft); border-radius: 8px; background: rgba(255,255,255,0.02); font-size: 13px; color: var(--fg); margin-bottom: 7px; }
+            .ref-12 .ref-12-sw { width: 14px; height: 14px; border-radius: 4px; flex: none; }
+            .ref-12 .ref-12-ord { margin-left: auto; color: var(--fg-faint); font-size: 12px; letter-spacing: 2px; }
+            .ref-12 .ref-12-rm { color: var(--fg-faint); font-size: 13px; }
+            .ref-12 .ref-12-foot { display: flex; gap: 8px; margin-top: 12px; }
+            .ref-12 .ref-12-add { font-size: 12px; font-weight: 600; color: var(--accent); border: 1px dashed rgba(99,102,241,0.4); border-radius: 8px; padding: 5px 12px; }
+            .ref-12 .ref-12-reset { font-size: 12px; font-weight: 600; color: var(--fg-dim); border: 1px solid var(--border); border-radius: 8px; padding: 5px 12px; }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">Settings · Highlights</span></div>
+          <div class="mock-pad">
+            <div class="ref-12-row"><span class="ref-12-sw" style="background: var(--blue);"></span> Introduction <span class="ref-12-ord">↑↓</span><span class="ref-12-rm">×</span></div>
+            <div class="ref-12-row"><span class="ref-12-sw" style="background: var(--amber);"></span> Method <span class="ref-12-ord">↑↓</span><span class="ref-12-rm">×</span></div>
+            <div class="ref-12-row"><span class="ref-12-sw" style="background: var(--green);"></span> Key findings <span class="ref-12-ord">↑↓</span><span class="ref-12-rm">×</span></div>
+            <div class="ref-12-row"><span class="ref-12-sw" style="background: var(--teal);"></span> Results <span class="ref-12-ord">↑↓</span><span class="ref-12-rm">×</span></div>
+            <div class="ref-12-row"><span class="ref-12-sw" style="background: var(--accent-2);"></span> Discussion <span class="ref-12-ord">↑↓</span><span class="ref-12-rm">×</span></div>
+            <div class="ref-12-row"><span class="ref-12-sw" style="background: var(--gold);"></span> Conclusion <span class="ref-12-ord">↑↓</span><span class="ref-12-rm">×</span></div>
+            <div class="ref-12-foot">
+              <span class="ref-12-add">＋ Add category</span>
+              <span class="ref-12-reset">Reset to defaults</span>
+            </div>
+          </div>
         </div>
         <figcaption>Rename, recolour, reorder — the same categories drive the reader, the library and every citation.</figcaption>
       </figure>
@@ -244,10 +563,43 @@
       <p>A related trick for anyone tracking code: type <code>/github</code>, drop in a repo (as <code>owner/name</code> or a GitHub URL), and Nomima renders a <strong>live status card</strong> for it — stars, forks, open issues and PRs, the latest release, default branch, language and license, the latest CI result from GitHub Actions, and a graph of recent commits. It refreshes on its own, with a manual refresh button in the header.</p>
       <p class="warn"><strong>Heads up:</strong> the card reads GitHub through your <a href="#connectors">connected GitHub account</a>, so connect one in Settings → Connectors first. There's a fuller entry for this block on the <a href="advanced-blocks.html">Advanced blocks</a> page.</p>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="references/github-block.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>A GitHub repo status card.</strong> Set up: a <code>/github</code> block in a note pointed at a real repo, so the card shows the stat strip (stars · forks · issues · PRs), the facts row (latest release tag, default branch, language, license, "updated Nd ago"), a "CI passing" badge in the header, and the recent-commits graph below. In frame: the whole card with its title row and body.</span>
+        <div class="mock ref-13" style="max-width: 480px; margin: 0 auto;">
+          <style>
+            .ref-13 .ref-13-head { display: flex; align-items: center; gap: 9px; margin-bottom: 13px; }
+            .ref-13 .ref-13-name { font-size: 14px; font-weight: 700; color: var(--fg); }
+            .ref-13 .ref-13-ci { font-size: 10px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--green); border: 1px solid rgba(52,211,153,0.4); border-radius: 5px; padding: 1.5px 7px; }
+            .ref-13 .ref-13-refresh { margin-left: auto; color: var(--fg-faint); font-size: 13px; }
+            .ref-13 .ref-13-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+            .ref-13 .ref-13-stat { border: 1px solid var(--border-soft); border-radius: 9px; padding: 9px 10px; background: rgba(255,255,255,0.02); }
+            .ref-13 .ref-13-num { font-size: 17px; font-weight: 800; letter-spacing: -0.02em; }
+            .ref-13 .ref-13-lab { font-size: 10px; color: var(--fg-faint); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 1px; }
+            .ref-13 .ref-13-facts { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 11.5px; color: var(--fg-dim); margin-bottom: 13px; }
+            .ref-13 .ref-13-facts b { color: var(--fg); font-weight: 600; }
+            .ref-13 .ref-13-ph { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin: 0 0 8px; }
+            .ref-13 .ref-13-graph { display: flex; align-items: flex-end; gap: 3px; height: 40px; }
+            .ref-13 .ref-13-graph i { flex: 1; background: var(--accent); border-radius: 2px 2px 0 0; opacity: 0.75; }
+          </style>
+          <div class="mock-pad">
+            <div class="ref-13-head">
+              <span style="font-size:15px;">🐙</span>
+              <span class="ref-13-name">huggingface/transformers</span>
+              <span class="ref-13-ci">CI passing</span>
+              <span class="ref-13-refresh">⟳</span>
+            </div>
+            <div class="ref-13-stats">
+              <div class="ref-13-stat"><div class="ref-13-num">134k</div><div class="ref-13-lab">★ Stars</div></div>
+              <div class="ref-13-stat"><div class="ref-13-num">26.8k</div><div class="ref-13-lab">Forks</div></div>
+              <div class="ref-13-stat"><div class="ref-13-num">1.4k</div><div class="ref-13-lab">Issues</div></div>
+              <div class="ref-13-stat"><div class="ref-13-num">312</div><div class="ref-13-lab">PRs</div></div>
+            </div>
+            <div class="ref-13-facts">
+              <span><b>v4.44.0</b> release</span><span><b>main</b> branch</span><span><b>Python</b></span><span><b>Apache-2.0</b></span><span>updated <b>3d ago</b></span>
+            </div>
+            <div class="ref-13-ph">Recent commits</div>
+            <div class="ref-13-graph">
+              <i style="height:40%;"></i><i style="height:65%;"></i><i style="height:30%;"></i><i style="height:80%;"></i><i style="height:55%;"></i><i style="height:95%;"></i><i style="height:45%;"></i><i style="height:70%;"></i><i style="height:35%;"></i><i style="height:60%;"></i><i style="height:85%;"></i><i style="height:50%;"></i>
+            </div>
+          </div>
         </div>
         <figcaption>Live repo vitals inside a note — stats, release, CI and a commit graph, all self-refreshing.</figcaption>
       </figure>

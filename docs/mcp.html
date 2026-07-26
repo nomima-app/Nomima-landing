@@ -44,7 +44,66 @@
         <li>Optionally toggle <strong>Allow writes</strong> if you want external tools to be able to create and edit notes — leave it off for read-only access.</li>
       </ol>
 
-      <figure class="guide-figure"><div class="figure-slot" data-shot="mcp/vault-server-panel.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The inbound Vault MCP server panel.</strong> Set up: Settings → MCP Server with <strong>Enable Server</strong> switched on. In frame: the local server URL <code>http://127.0.0.1:4123/mcp</code>, the masked <strong>bearer token</strong> with its reveal and <strong>Rotate Token</strong> controls, and the <strong>Allow writes</strong> toggle (shown off, read-only).</span></div><figcaption>Enable the server, copy the token, and decide whether external tools may write — all from one panel.</figcaption></figure>
+      <figure class="guide-figure">
+        <div class="mock mcp-1" style="max-width: 520px; margin: 0 auto;">
+          <style>
+            .mcp-1 .mcp-1-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; }
+            .mcp-1 .mcp-1-row.brd { border-top: 1px solid var(--border-soft); }
+            .mcp-1 .mcp-1-rl { font-size: 13.5px; font-weight: 600; }
+            .mcp-1 .mcp-1-rd { font-size: 11.5px; color: var(--fg-faint); margin-top: 2px; }
+            .mcp-1 .mcp-1-sw { margin-left: auto; width: 38px; height: 22px; border-radius: 999px; position: relative; flex: none; background: rgba(255,255,255,0.10); border: 1px solid var(--border); }
+            .mcp-1 .mcp-1-sw.on { background: var(--green); border-color: transparent; }
+            .mcp-1 .mcp-1-sw::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; }
+            .mcp-1 .mcp-1-sw.on::after { left: auto; right: 2px; }
+            .mcp-1 .mcp-1-lab { font-size: 10px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: var(--fg-faint); margin: 14px 0 6px; }
+            .mcp-1 .mcp-1-field { display: flex; align-items: center; gap: 9px; padding: 9px 12px; border-radius: 9px; border: 1px solid var(--border); background: rgba(255,255,255,0.04); font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--fg); }
+            .mcp-1 .mcp-1-field .grn { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(52,211,153,0.16); flex: none; }
+            .mcp-1 .mcp-1-btn { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 7px; border: 1px solid var(--border); color: var(--fg-dim); font-family: inherit; }
+            .mcp-1 .mcp-1-btn.rot { color: var(--accent); border-color: rgba(99,102,241,0.4); }
+            .mcp-1 .mcp-1-tools { display: flex; flex-wrap: wrap; gap: 5px; }
+            .mcp-1 .mcp-1-tool { font-family: ui-monospace, Menlo, monospace; font-size: 11px; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--border-soft); background: rgba(255,255,255,0.04); color: var(--fg-dim); }
+            .mcp-1 .mcp-1-log { border: 1px solid var(--border-soft); border-radius: 10px; overflow: hidden; }
+            .mcp-1 .mcp-1-lrow { display: flex; align-items: center; gap: 9px; padding: 8px 12px; font-size: 11.5px; }
+            .mcp-1 .mcp-1-lrow + .mcp-1-lrow { border-top: 1px solid var(--border-soft); }
+            .mcp-1 .mcp-1-client { font-weight: 600; color: var(--fg); }
+            .mcp-1 .mcp-1-call { font-family: ui-monospace, Menlo, monospace; color: var(--fg-dim); }
+            .mcp-1 .mcp-1-ok { color: var(--green); }
+            .mcp-1 .mcp-1-ms { margin-left: auto; color: var(--fg-faint); }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">Settings · MCP Server</span></div>
+          <div class="mock-pad">
+            <div class="mcp-1-row">
+              <div>
+                <div class="mcp-1-rl">Enable Server</div>
+                <div class="mcp-1-rd">Let MCP-capable tools reach into your vault</div>
+              </div>
+              <span class="mcp-1-sw on"></span>
+            </div>
+            <div class="mcp-1-lab">Endpoint</div>
+            <div class="mcp-1-field"><span class="grn"></span>http://127.0.0.1:4123/mcp<span class="mcp-1-btn" style="margin-left:auto;">Copy</span></div>
+            <div class="mcp-1-lab">Bearer token</div>
+            <div class="mcp-1-field">nmk_••••••••••••••••••••8f3a<span class="mcp-1-btn" style="margin-left:auto;">Copy</span><span class="mcp-1-btn rot">Rotate</span></div>
+            <div class="mcp-1-row brd" style="margin-top: 4px;">
+              <div>
+                <div class="mcp-1-rl">Allow writes</div>
+                <div class="mcp-1-rd">Off — connected tools have read-only access</div>
+              </div>
+              <span class="mcp-1-sw"></span>
+            </div>
+            <div class="mcp-1-lab">Exposed tools</div>
+            <div class="mcp-1-tools">
+              <span class="mcp-1-tool">search_notes</span><span class="mcp-1-tool">list_notebooks</span><span class="mcp-1-tool">get_note</span><span class="mcp-1-tool">list_tasks</span><span class="mcp-1-tool">knowledge_graph</span><span class="mcp-1-tool">+4</span>
+            </div>
+            <div class="mcp-1-lab">Request log</div>
+            <div class="mcp-1-log">
+              <div class="mcp-1-lrow"><span class="mcp-1-ok">●</span><span class="mcp-1-client">Claude Code</span><span class="mcp-1-call">search_notes</span><span class="mcp-1-ms">18ms</span></div>
+              <div class="mcp-1-lrow"><span class="mcp-1-ok">●</span><span class="mcp-1-client">Cursor</span><span class="mcp-1-call">list_tasks</span><span class="mcp-1-ms">6ms</span></div>
+              <div class="mcp-1-lrow"><span class="mcp-1-ok">●</span><span class="mcp-1-client">Claude Code</span><span class="mcp-1-call">get_note</span><span class="mcp-1-ms">11ms</span></div>
+            </div>
+          </div>
+        </div>
+        <figcaption>Enable the server, copy the token, and decide whether external tools may write — all from one panel.</figcaption>
+      </figure>
 
       <h2 id="connect">Connecting a client</h2>
       <p>Point any MCP client at the URL with the token as a bearer credential. For Claude Code, for example:</p>
@@ -114,7 +173,46 @@
       </ul>
       <p>Once it’s on, ask Summon things like “what’s the current API for &lt;library&gt;?” and it can pull live documentation instead of leaning on the model’s training cut-off.</p>
 
-      <figure class="guide-figure"><div class="figure-slot" data-shot="mcp/context7-capability.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The “Look up library docs” outbound capability.</strong> Set up: Settings → Summon → Capabilities with <strong>Look up library docs</strong> selected under the Access group. In frame: the on/off toggle switched on, the optional <code>ctx7sk-…</code> API-key field, and the <strong>Test connection</strong> button showing its result (the count of tools the Context7 server offers).</span></div><figcaption>Context7 is the built-in outbound MCP server — toggle it on, optionally add a <code>ctx7sk-</code> key, and Test connection to verify the handshake.</figcaption></figure>
+      <figure class="guide-figure">
+        <div class="mock mcp-2" style="max-width: 480px; margin: 0 auto;">
+          <style>
+            .mcp-2 .mcp-2-head { display: flex; align-items: center; gap: 12px; }
+            .mcp-2 .mcp-2-ic { width: 36px; height: 36px; border-radius: 10px; flex: none; display: grid; place-items: center; font-size: 18px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.28); }
+            .mcp-2 .mcp-2-name { font-size: 14.5px; font-weight: 700; }
+            .mcp-2 .mcp-2-desc { font-size: 11.5px; color: var(--fg-faint); margin-top: 2px; }
+            .mcp-2 .mcp-2-sw { margin-left: auto; width: 38px; height: 22px; border-radius: 999px; position: relative; flex: none; background: var(--green); border: 1px solid transparent; }
+            .mcp-2 .mcp-2-sw::after { content: ""; position: absolute; top: 2px; right: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; }
+            .mcp-2 .mcp-2-body { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border-soft); }
+            .mcp-2 .mcp-2-lab { font-size: 10px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: var(--fg-faint); margin: 0 0 6px; }
+            .mcp-2 .mcp-2-labopt { font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--fg-faint); }
+            .mcp-2 .mcp-2-field { display: flex; align-items: center; padding: 9px 12px; border-radius: 9px; border: 1px solid var(--border); background: rgba(255,255,255,0.04); font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--fg); margin-bottom: 15px; }
+            .mcp-2 .mcp-2-field .eye { margin-left: auto; color: var(--fg-faint); }
+            .mcp-2 .mcp-2-actions { display: flex; align-items: center; gap: 11px; }
+            .mcp-2 .mcp-2-test { font-size: 12.5px; font-weight: 700; padding: 8px 15px; border-radius: 9px; border: 1px solid var(--border); background: rgba(255,255,255,0.05); color: var(--fg); }
+            .mcp-2 .mcp-2-ok { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--green); }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">Settings · Summon · Capabilities</span></div>
+          <div class="mock-pad">
+            <div class="mcp-2-head">
+              <div class="mcp-2-ic">📚</div>
+              <div>
+                <div class="mcp-2-name">Look up library docs</div>
+                <div class="mcp-2-desc">Context7 · up-to-date library &amp; framework docs</div>
+              </div>
+              <span class="mcp-2-sw"></span>
+            </div>
+            <div class="mcp-2-body">
+              <div class="mcp-2-lab">API key <span class="mcp-2-labopt">— optional</span></div>
+              <div class="mcp-2-field">ctx7sk-••••••••••••••••2b9d<span class="eye">👁</span></div>
+              <div class="mcp-2-actions">
+                <span class="mcp-2-test">Test connection</span>
+                <span class="mcp-2-ok">✓ Connected · 2 tools available</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <figcaption>Context7 is the built-in outbound MCP server — toggle it on, optionally add a <code>ctx7sk-</code> key, and Test connection to verify the handshake.</figcaption>
+      </figure>
 
       <h3 id="custom-outbound">Custom outbound servers</h3>
       <p>The client isn’t limited to Context7 — under the hood it can connect to <strong>any Streamable-HTTP MCP endpoint</strong> (an <code>https://…/mcp</code> URL, with an optional auth header), turning that server’s tools into things Summon can call. Built-in servers like Context7 can be disabled but not removed.</p>

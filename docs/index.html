@@ -34,7 +34,75 @@
 
       <p>New here? Start with <a href="getting-started.html"><strong>Getting started</strong></a> — a guided walkthrough of your first ten minutes. Or pick the thing you want to do:</p>
 
-      <figure class="guide-figure"><div class="figure-slot" data-shot="index/app-overview.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>Nomima at a glance.</strong> Set up: the app open on a real-looking notebook (the Welcome notebook is ideal) with the sidebar showing a few notebooks, some @mention/#hashtag pills and a task in the note body, and the knowledge-graph cover band lit at the top. In frame: the full window — sidebar, editor and cover graph — as a hero overview of the product.</span></div><figcaption>Nomima: a private, offline notebook where plain writing becomes a connected knowledge graph.</figcaption></figure>
+      <figure class="guide-figure">
+        <style>
+          /* Home page — scoped mockup helpers (prefix .idx-) */
+          .idx-main { position: relative; padding: 0; }
+          .idx-cover { padding: 12px 20px 4px; border-bottom: 1px solid var(--border-soft); background: rgba(99,102,241,0.04); }
+          .idx-cover .mock-graph { height: 96px; }
+          .idx-editor { padding: 16px 22px 30px; }
+          .idx-orb { position: absolute; right: 18px; bottom: 18px; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-size: 15px; color: rgba(255,255,255,0.82); background: radial-gradient(circle at 34% 28%, #b79cff 0%, #7c3aed 24%, #6d28d9 44%, #4c1d95 70%, #2e1065 100%), radial-gradient(circle at 72% 76%, rgba(240,72,168,0.55), transparent 46%); box-shadow: 0 0 0 6px rgba(99,102,241,0.16), 0 10px 26px rgba(124,58,237,0.4), inset -4px -6px 12px rgba(0,0,0,0.5), inset 3px 4px 10px rgba(255,255,255,0.28); }
+          .idx-orb::after { content: ""; position: absolute; left: 20%; top: 14%; width: 34%; height: 30%; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.6), transparent 70%); filter: blur(1px); pointer-events: none; }
+        </style>
+        <div class="mock is-live" style="max-width: 640px; margin: 0 auto;">
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title"><span class="nm-logo" style="width:12px; height:12px; vertical-align:-1px;"></span> Nomima</span></div>
+          <div class="mock-split">
+            <div class="mock-side">
+              <div class="mock-nav" style="background: rgba(255,255,255,0.04);"><span class="ic">⌕</span> Search…</div>
+              <div class="mock-nav"><span class="ic">⌂</span> Home</div>
+              <div class="mock-nav"><span class="ic">▤</span> Inbox</div>
+              <div class="mock-nav"><span class="ic">▤</span> Summon Tasks</div>
+              <div class="mock-side-h" style="margin-top: 10px;">Notebooks</div>
+              <div class="mock-nav active"><span class="ic">👋</span> Welcome to Nomima</div>
+              <div class="mock-nav"><span class="ic">🚀</span> Launch plan</div>
+              <div class="mock-nav" style="margin-top: 10px;"><span class="ic">⋔</span> Knowledge Graph</div>
+              <div class="mock-nav"><span class="ic">⌾</span> Insights</div>
+              <div class="mock-nav"><span class="ic">▤</span> References</div>
+              <div class="mock-nav"><span class="ic">⚙</span> Settings</div>
+            </div>
+            <div class="idx-main">
+              <div class="idx-cover">
+                <svg class="mock-graph" viewBox="0 0 470 96" role="img" aria-label="A knowledge graph strip: a central note linking to @Sara, #launch, a date and a company.">
+                  <defs>
+                    <radialGradient id="idxBlobAccent" cx="0.35" cy="0.30" r="0.78"><stop offset="0" stop-color="#d0d6ff"/><stop offset="0.42" stop-color="#6366f1"/><stop offset="1" stop-color="#26246a"/></radialGradient>
+                    <radialGradient id="idxBlobTeal" cx="0.35" cy="0.30" r="0.78"><stop offset="0" stop-color="#cffcf3"/><stop offset="0.42" stop-color="#2dd4bf"/><stop offset="1" stop-color="#0b4f48"/></radialGradient>
+                    <radialGradient id="idxBlobGold" cx="0.35" cy="0.30" r="0.78"><stop offset="0" stop-color="#fdedb4"/><stop offset="0.42" stop-color="#eab308"/><stop offset="1" stop-color="#6e4304"/></radialGradient>
+                    <radialGradient id="idxBlobBlue" cx="0.35" cy="0.30" r="0.78"><stop offset="0" stop-color="#bcd9ff"/><stop offset="0.42" stop-color="#60a5fa"/><stop offset="1" stop-color="#152c73"/></radialGradient>
+                  </defs>
+                  <g stroke-linecap="round">
+                    <line class="edge" style="animation-delay:.25s" x1="235" y1="52" x2="120" y2="26"/>
+                    <line class="edge" style="animation-delay:.4s"  x1="235" y1="52" x2="350" y2="24"/>
+                    <line class="edge" style="animation-delay:.55s" x1="235" y1="52" x2="380" y2="70"/>
+                    <line class="edge" style="animation-delay:.7s"  x1="235" y1="52" x2="110" y2="74"/>
+                  </g>
+                  <circle class="node" style="animation-delay:0s"   cx="235" cy="52" r="9"  fill="url(#idxBlobAccent)"/>
+                  <ellipse class="node" style="animation-delay:0s" cx="231" cy="48" rx="2.9" ry="2.2" fill="#fff" opacity="0.45"/>
+                  <circle class="node" style="animation-delay:.2s"  cx="120" cy="26" r="6"  fill="url(#idxBlobTeal)"/>
+                  <circle class="node" style="animation-delay:.35s" cx="350" cy="24" r="6"  fill="url(#idxBlobGold)"/>
+                  <circle class="node" style="animation-delay:.5s"  cx="380" cy="70" r="5"  fill="url(#idxBlobBlue)"/>
+                  <circle class="node" style="animation-delay:.65s" cx="110" cy="74" r="5"  fill="url(#idxBlobTeal)"/>
+                  <g font-family="Inter,sans-serif" font-size="10" font-weight="600">
+                    <text class="node" style="animation-delay:.2s"  x="120" y="14" fill="var(--teal)" text-anchor="middle">@Sara</text>
+                    <text class="node" style="animation-delay:.35s" x="350" y="12" fill="var(--gold)" text-anchor="middle">#launch</text>
+                    <text class="node" style="animation-delay:.5s"  x="380" y="88" fill="var(--blue)" text-anchor="middle">Fri 5pm</text>
+                  </g>
+                </svg>
+              </div>
+              <div class="idx-editor">
+                <div class="mock-title">👋 Welcome to Nomima</div>
+                <div class="mock-meta">Created Jul 22 · Edited just now</div>
+                <div class="mock-line" style="color: var(--fg); font-size: 14px;">Kicking off the plan with <span class="pill pill-mention">@Sara Chen</span> under <span class="pill pill-hashtag">#launch</span> — first sync <span class="pill pill-date">tomorrow 3pm</span>.</div>
+                <div class="mock-tasks" style="margin-top: 10px;">
+                  <div class="mock-task done"><span class="mock-check">✓</span><span>Draft the announcement</span></div>
+                  <div class="mock-task"><span class="mock-check"></span><span>Ship the deck by <span class="pill pill-date">Fri 5pm</span></span></div>
+                </div>
+              </div>
+              <div class="idx-orb">✦</div>
+            </div>
+          </div>
+        </div>
+        <figcaption>Nomima: a private, offline notebook where plain writing becomes a connected knowledge graph.</figcaption>
+      </figure>
 
       <h2 id="tasks">Start with a task</h2>
       <div class="howto-grid">

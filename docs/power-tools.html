@@ -43,10 +43,33 @@
       <p class="tip"><strong>Want it raw?</strong> <kbd>⌘⇧V</kbd> pastes plain text with no interpretation at all.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="power-tools/smartcopy-paste.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>A SmartCopy paste result.</strong> Set up: copy an AI chat answer that has a heading, a bullet list, a checkbox and a code block, then paste it into a note with <kbd>⌘V</kbd>. In frame: the pasted content rendered as real blocks — heading, list, checkbox and a language-tagged code block — not flat text.</span>
+        <div class="mock pt-1" style="max-width: 520px; margin: 0 auto;">
+          <style>
+            .pt-1 .pt-1-clip { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+            .pt-1 .pt-1-raw { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; color: var(--fg-dim); background: rgba(255,255,255,0.03); border: 1px solid var(--border-soft); border-radius: 9px; padding: 11px 13px; white-space: pre; overflow-x: auto; line-height: 1.75; }
+            .pt-1 .pt-1-arrow { text-align: center; color: var(--accent); font-size: 16px; margin: 11px 0; }
+            .pt-1 .pt-1-db { border: 1px solid var(--border-soft); border-radius: 10px; overflow: hidden; }
+            .pt-1 .pt-1-dbh { display: flex; align-items: center; gap: 7px; padding: 8px 11px; border-bottom: 1px solid var(--border-soft); font-size: 12px; font-weight: 700; color: var(--fg); background: rgba(255,255,255,0.02); }
+            .pt-1 .pt-1-hint { margin-left: auto; font-size: 9px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(99,102,241,0.4); border-radius: 5px; padding: 2px 7px; }
+            .pt-1 .pt-1-tr { display: grid; grid-template-columns: 1.5fr 1.2fr 0.8fr; font-size: 12.5px; }
+            .pt-1 .pt-1-tr > div { padding: 8px 11px; border-bottom: 1px solid var(--border-soft); color: var(--fg-dim); }
+            .pt-1 .pt-1-tr:last-child > div { border-bottom: none; }
+            .pt-1 .pt-1-th > div { font-size: 10px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-faint); }
+          </style>
+          <div class="mock-pad">
+            <div class="pt-1-clip">📋 Pasted from clipboard</div>
+            <div class="pt-1-raw">| Owner | Task          | Due |
+| ----- | ------------- | --- |
+| Sara  | Draft copy    | Fri |
+| Moe   | Design review | Mon |</div>
+            <div class="pt-1-arrow">↓</div>
+            <div class="pt-1-db">
+              <div class="pt-1-dbh">▤ Launch tasks <span style="color:var(--fg-faint); font-weight:400; font-size:0.85em;">· 2 rows · Σ · ✕</span> <span class="pt-1-hint">Pasted as Database</span></div>
+              <div class="pt-1-tr pt-1-th"><div>👤 Owner</div><div>Aa Task</div><div>📅 Due</div></div>
+              <div class="pt-1-tr"><div><span class="pill pill-mention">@Sara Chen</span></div><div>Draft copy</div><div><span class="pill pill-date">📅 Fri</span></div></div>
+              <div class="pt-1-tr"><div><span class="pill pill-mention">@Moe Diaz</span></div><div>Design review</div><div><span class="pill pill-date">📅 Mon</span></div></div>
+            </div>
+          </div>
         </div>
         <figcaption>Paste unpacks into real blocks, not a wall of text.</figcaption>
       </figure>
@@ -58,10 +81,33 @@
       </ul>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="power-tools/templates-picker.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The template picker.</strong> Set up: start creating a new notebook so the template picker appears, with a couple of saved templates (e.g. “Meeting notes”, “Weekly review”) listed alongside the blank option. In frame: the picker with the template choices visible.</span>
+        <div class="mock pt-2" style="max-width: 540px; margin: 0 auto;">
+          <style>
+            .pt-2 .pt-2-h { font-size: 14px; font-weight: 800; margin-bottom: 3px; }
+            .pt-2 .pt-2-sub { font-size: 11.5px; color: var(--fg-faint); margin-bottom: 14px; }
+            .pt-2 .pt-2-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+            .pt-2 .pt-2-card { position: relative; border: 1px solid var(--border-soft); border-radius: 11px; padding: 12px 13px; background: rgba(255,255,255,0.02); }
+            .pt-2 .pt-2-card.sel { border-color: rgba(99,102,241,0.6); background: rgba(99,102,241,0.08); }
+            .pt-2 .pt-2-ic { font-size: 18px; margin-bottom: 8px; }
+            .pt-2 .pt-2-name { font-size: 13px; font-weight: 700; color: var(--fg); margin-bottom: 3px; }
+            .pt-2 .pt-2-desc { font-size: 11px; color: var(--fg-dim); line-height: 1.45; }
+            .pt-2 .pt-2-saved { position: absolute; top: 11px; right: 11px; font-size: 8.5px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-2); border: 1px solid rgba(240,72,168,0.4); border-radius: 5px; padding: 1px 5px; }
+            .pt-2 .pt-2-foot { display: flex; align-items: center; gap: 9px; margin-top: 15px; }
+            .pt-2 .pt-2-note { font-size: 11px; color: var(--fg-faint); }
+            .pt-2 .pt-2-btn { margin-left: auto; padding: 7px 15px; font-size: 12px; font-weight: 700; color: #fff; border-radius: 8px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">New notebook</span></div>
+          <div class="mock-pad">
+            <div class="pt-2-h">Start from a template</div>
+            <div class="pt-2-sub">Pick a structure — or start blank.</div>
+            <div class="pt-2-grid">
+              <div class="pt-2-card"><div class="pt-2-ic">📄</div><div class="pt-2-name">Blank</div><div class="pt-2-desc">An empty page.</div></div>
+              <div class="pt-2-card sel"><span class="pt-2-saved">Saved</span><div class="pt-2-ic">🗓️</div><div class="pt-2-name">Meeting notes</div><div class="pt-2-desc">Attendees, agenda, action items.</div></div>
+              <div class="pt-2-card"><span class="pt-2-saved">Saved</span><div class="pt-2-ic">🔁</div><div class="pt-2-name">Weekly review</div><div class="pt-2-desc">Wins, blockers, next week.</div></div>
+              <div class="pt-2-card"><span class="pt-2-saved">Saved</span><div class="pt-2-ic">🚀</div><div class="pt-2-name">Launch plan</div><div class="pt-2-desc">Milestones, owners, checklist.</div></div>
+            </div>
+            <div class="pt-2-foot"><span class="pt-2-note">Saved from any notebook’s <strong style="color:var(--fg-dim)">⋯</strong> menu.</span><span class="pt-2-btn">Create →</span></div>
+          </div>
         </div>
         <figcaption>Pick a template when creating a notebook — it starts with that structure.</figcaption>
       </figure>
@@ -77,22 +123,88 @@
       <p class="note"><strong>On-device:</strong> your version history stays on your Mac like the rest of your notes.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="power-tools/version-history.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The version-history slider.</strong> Set up: open a notebook's Version history and drag the slider to a past version, so the replay shows added blocks tinted green and deleted blocks struck through in red. In frame: the timeline slider along the bottom and the diff-coloured note above it.</span>
+        <div class="mock pt-3" style="max-width: 580px; margin: 0 auto;">
+          <style>
+            .pt-3 .pt-3-wrap { display: grid; grid-template-columns: 1fr 176px; }
+            .pt-3 .pt-3-note { padding: 15px 18px; }
+            .pt-3 .pt-3-add { background: rgba(52,211,153,0.14); border-radius: 4px; padding: 1px 4px; }
+            .pt-3 .pt-3-del { color: var(--fg-faint); text-decoration: line-through; }
+            .pt-3 .pt-3-rail { border-left: 1px solid var(--border-soft); background: rgba(255,255,255,0.012); padding: 12px 10px; }
+            .pt-3 .pt-3-rh { font-size: 9.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); margin: 2px 5px 9px; }
+            .pt-3 .pt-3-rev { display: flex; align-items: center; gap: 8px; padding: 7px 9px; border-radius: 8px; margin-bottom: 2px; }
+            .pt-3 .pt-3-rev.cur { background: rgba(99,102,241,0.16); }
+            .pt-3 .pt-3-when { font-size: 12px; color: var(--fg-dim); }
+            .pt-3 .pt-3-rev.cur .pt-3-when { color: var(--fg); font-weight: 600; }
+            .pt-3 .pt-3-ago { font-size: 10px; color: var(--fg-faint); }
+            .pt-3 .pt-3-pin { margin-left: auto; font-size: 11px; opacity: 0.5; }
+            .pt-3 .pt-3-restore { display: block; text-align: center; margin-top: 12px; padding: 8px; border-radius: 8px; font-size: 12px; font-weight: 700; color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">⏱ Version history · Launch plan</span></div>
+          <div class="pt-3-wrap">
+            <div class="pt-3-note">
+              <div class="mock-title" style="font-size: 16px;">Launch plan</div>
+              <div class="mock-meta">Version from Jul 18 · 2:14 PM</div>
+              <div class="mock-line tight"><span class="pt-3-add">Ship the beta by <span class="pill pill-date">Fri 5pm</span></span></div>
+              <div class="mock-line tight"><span class="pt-3-del">Wait on legal sign-off</span></div>
+              <div class="mock-line tight">Loop in <span class="pill pill-mention">@Sara Chen</span> for review</div>
+            </div>
+            <div class="pt-3-rail">
+              <div class="pt-3-rh">Revisions</div>
+              <div class="pt-3-rev"><div><div class="pt-3-when">Today</div><div class="pt-3-ago">latest</div></div></div>
+              <div class="pt-3-rev cur"><div><div class="pt-3-when">Jul 18</div><div class="pt-3-ago">2:14 PM</div></div><span class="pt-3-pin">📌</span></div>
+              <div class="pt-3-rev"><div><div class="pt-3-when">Jul 15</div><div class="pt-3-ago">9:02 AM</div></div></div>
+              <div class="pt-3-rev"><div><div class="pt-3-when">Jul 12</div><div class="pt-3-ago">restore point</div></div></div>
+              <div class="pt-3-restore">↺ Restore this version</div>
+            </div>
+          </div>
         </div>
-        <figcaption>Scrub the slider to replay any past version, changes colour-coded.</figcaption>
+        <figcaption>A revisions panel lists every version — select one to replay it, changes colour-coded, then Restore.</figcaption>
       </figure>
 
       <h2 id="comments">Comments &amp; follow-ups</h2>
       <p>Select any text and add a comment. Threads support replies and a resolved state. Comment locations show as accent-colored dashes on the <strong>Smart Scrollbar</strong> — hover to peek, click to jump to the thread. Resolved threads fade out of the way.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="power-tools/comment-scrollbar.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Comments on the Smart Scrollbar.</strong> Set up: a note with two or three comment threads, so accent-coloured dashes appear on the Smart Scrollbar at the right edge; hover one so its thread preview shows. In frame: the scrollbar dashes and an open comment thread beside the commented text.</span>
+        <div class="mock pt-4" style="max-width: 500px; margin: 0 auto;">
+          <style>
+            .pt-4 .pt-4-body { position: relative; padding: 16px 42px 18px 18px; }
+            .pt-4 .pt-4-hl { background: rgba(99,102,241,0.18); border-bottom: 1.5px solid var(--accent); border-radius: 2px; padding: 0 2px; }
+            .pt-4 .pt-4-rail { position: absolute; top: 14px; bottom: 14px; right: 15px; width: 7px; border-radius: 4px; background: rgba(255,255,255,0.05); }
+            .pt-4 .pt-4-dash { position: absolute; right: 0; width: 7px; height: 15px; border-radius: 3px; background: var(--accent); }
+            .pt-4 .pt-4-dash.done { background: var(--fg-faint); opacity: 0.5; }
+            .pt-4 .pt-4-pop { position: absolute; right: 34px; top: 56px; width: 220px; z-index: 2; border-radius: 11px; border: 1px solid rgba(255,255,255,0.14); background: #191926; box-shadow: 0 18px 50px rgba(0,0,0,0.5); padding: 11px 12px; }
+            .pt-4 .pt-4-cmt { display: flex; gap: 9px; }
+            .pt-4 .pt-4-av { width: 26px; height: 26px; border-radius: 50%; flex: none; display: grid; place-items: center; font-size: 10px; font-weight: 800; color: #fff; background: linear-gradient(150deg, #2dd4bf, #0f766e); }
+            .pt-4 .pt-4-cname { font-size: 12px; font-weight: 700; color: var(--fg); }
+            .pt-4 .pt-4-time { font-size: 10.5px; color: var(--fg-faint); font-weight: 500; margin-left: 5px; }
+            .pt-4 .pt-4-ctext { font-size: 12px; color: var(--fg-dim); line-height: 1.5; margin-top: 3px; }
+            .pt-4 .pt-4-foot { display: flex; align-items: center; gap: 9px; margin-top: 11px; }
+            .pt-4 .pt-4-reply { flex: 1; font-size: 11px; color: var(--fg-faint); padding: 5px 9px; border-radius: 7px; border: 1px solid var(--border-soft); }
+            .pt-4 .pt-4-resolve { font-size: 11px; font-weight: 700; color: var(--green); }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">Launch plan</span></div>
+          <div class="pt-4-body">
+            <div class="mock-title" style="font-size: 16px;">Launch plan</div>
+            <div class="mock-meta">Edited just now</div>
+            <div class="mock-line tight">Kickoff review lands <span class="pill pill-date">Fri 5pm</span> with <span class="pill pill-mention">@Sara Chen</span>.</div>
+            <div class="mock-line tight">Announcement copy is <span class="pt-4-hl">still in draft</span> — needs a second pass.</div>
+            <div class="mock-line tight">Ship the beta once QA signs off.</div>
+            <div class="pt-4-rail">
+              <span class="pt-4-dash" style="top: 22%;"></span>
+              <span class="pt-4-dash" style="top: 46%;"></span>
+              <span class="pt-4-dash done" style="top: 70%;"></span>
+            </div>
+            <div class="pt-4-pop">
+              <div class="pt-4-cmt">
+                <div class="pt-4-av">SC</div>
+                <div>
+                  <div class="pt-4-cname">Sara Chen<span class="pt-4-time">2h</span></div>
+                  <div class="pt-4-ctext">Can we pull this before Friday?</div>
+                </div>
+              </div>
+              <div class="pt-4-foot"><span class="pt-4-reply">Reply…</span><span class="pt-4-resolve">✓ Resolve</span></div>
+            </div>
+          </div>
         </div>
         <figcaption>Comment locations show as dashes on the Smart Scrollbar.</figcaption>
       </figure>
@@ -102,10 +214,66 @@
       <p>Click any <strong>@mention</strong> or <strong>#hashtag</strong> to open its card, then hit <strong>Expand</strong> for a full page about that person, company or tag: how often and where you've used it, how it <strong>ranks</strong> among your other tags, what it most often <strong>appears alongside</strong> (click to hop between entities), usage trends over time and by notebook, and how complete its profile is. If you've recorded the same thing two ways, <strong>Merge</strong> (in the card's Manage panel) folds one into the other — every mention is rewritten to the survivor (only within the same kind, so <code>#</code> tags and <code>@</code> mentions stay separate).</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="power-tools/entity-view.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The expanded Entity view.</strong> Set up: click a well-used <span class="pill pill-mention">@mention</span> or <span class="pill pill-hashtag">#hashtag</span>, then hit <strong>Expand</strong> to open its full page. In frame: the entity's header, its rank among other tags, the “appears alongside” co-occurrence list, and a usage-over-time trend.</span>
+        <div class="mock pt-5" style="max-width: 560px; margin: 0 auto;">
+          <style>
+            .pt-5 .pt-5-head { display: flex; align-items: center; gap: 13px; margin-bottom: 14px; }
+            .pt-5 .pt-5-av { width: 44px; height: 44px; border-radius: 12px; flex: none; display: grid; place-items: center; font-size: 19px; color: #fff; background: linear-gradient(150deg, var(--gold), #a16207); }
+            .pt-5 .pt-5-name { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
+            .pt-5 .pt-5-type { font-size: 11.5px; color: var(--gold); }
+            .pt-5 .pt-5-rank { margin-left: auto; text-align: right; }
+            .pt-5 .pt-5-rankn { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; background: linear-gradient(130deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+            .pt-5 .pt-5-rankl { font-size: 10px; color: var(--fg-faint); text-transform: uppercase; letter-spacing: 0.06em; }
+            .pt-5 .pt-5-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-bottom: 11px; }
+            .pt-5 .pt-5-stat { border: 1px solid var(--border-soft); border-radius: 10px; padding: 10px 12px; background: rgba(255,255,255,0.02); }
+            .pt-5 .pt-5-num { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; }
+            .pt-5 .pt-5-lab { font-size: 10px; color: var(--fg-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+            .pt-5 .pt-5-bento { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+            .pt-5 .pt-5-panel { border: 1px solid var(--border-soft); border-radius: 10px; padding: 12px; background: rgba(255,255,255,0.02); }
+            .pt-5 .pt-5-ph { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 11px; }
+            .pt-5 .pt-5-co { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+            .pt-5 .pt-5-co:last-child { margin-bottom: 0; }
+            .pt-5 .pt-5-bar { height: 6px; border-radius: 3px; flex: 1; }
+            .pt-5 .pt-5-cn { color: var(--fg); font-weight: 600; width: 15px; text-align: right; font-size: 12px; }
+            .pt-5 .pt-5-spark { width: 100%; height: 74px; display: block; }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">Entity · #launch</span></div>
+          <div class="mock-pad">
+            <div class="pt-5-head">
+              <div class="pt-5-av">💼</div>
+              <div>
+                <div class="pt-5-name">#launch</div>
+                <div class="pt-5-type">💼 Project</div>
+              </div>
+              <div class="pt-5-rank"><div class="pt-5-rankn">#3</div><div class="pt-5-rankl">of 214 tags</div></div>
+            </div>
+            <div class="pt-5-stats">
+              <div class="pt-5-stat"><div class="pt-5-num">28</div><div class="pt-5-lab">Mentions</div></div>
+              <div class="pt-5-stat"><div class="pt-5-num">9</div><div class="pt-5-lab">Notebooks</div></div>
+              <div class="pt-5-stat"><div class="pt-5-num" style="color: var(--green);">↑ 40%</div><div class="pt-5-lab">This month</div></div>
+            </div>
+            <div class="pt-5-bento">
+              <div class="pt-5-panel">
+                <div class="pt-5-ph">Appears alongside</div>
+                <div class="pt-5-co"><span class="pill pill-mention">@Sara Chen</span><span class="pt-5-bar" style="background: var(--teal); max-width: 60%;"></span><span class="pt-5-cn">9</span></div>
+                <div class="pt-5-co"><span class="pill pill-mention">@Acme Co</span><span class="pt-5-bar" style="background: var(--blue); max-width: 40%;"></span><span class="pt-5-cn">6</span></div>
+                <div class="pt-5-co"><span class="pill pill-hashtag">#research</span><span class="pt-5-bar" style="background: var(--gold); max-width: 26%;"></span><span class="pt-5-cn">4</span></div>
+              </div>
+              <div class="pt-5-panel">
+                <div class="pt-5-ph">Usage over time</div>
+                <svg class="pt-5-spark" viewBox="0 0 240 74" role="img" aria-label="A usage trend rising over recent months.">
+                  <defs>
+                    <linearGradient id="pt5-fill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="var(--gold)" stop-opacity="0.28"/>
+                      <stop offset="1" stop-color="var(--gold)" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0,58 L40,52 L80,56 L120,40 L160,30 L200,20 L240,10 L240,74 L0,74 Z" fill="url(#pt5-fill)"/>
+                  <polyline points="0,58 40,52 80,56 120,40 160,30 200,20 240,10" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="240" cy="10" r="3.4" fill="var(--gold)"/>
+                </svg>
+              </div>
+            </div>
+          </div>
         </div>
         <figcaption>A full page about any person, company or tag — usage, rank and co-occurrence.</figcaption>
       </figure>
@@ -138,10 +306,22 @@
       </table>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="power-tools/command-palette.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The command palette.</strong> Set up: press <kbd>⌘K</kbd> to open the command palette and type a few letters so it shows matching notes and commands. In frame: the palette overlay with its search field and a list of results — notes and runnable commands.</span>
+        <div class="mock" style="max-width: 470px; margin: 0 auto;">
+          <div class="mock-pad" style="padding: 14px;">
+            <div class="mock-input"><span style="opacity:.6">⌕</span> launch<span class="mock-caret"></span><span class="k"><kbd>⌘K</kbd></span></div>
+            <div class="mock-menu" style="box-shadow: none; border: none; background: none; padding: 0;">
+              <div class="mock-res-h">Notebooks</div>
+              <div class="mock-mi active"><span class="ic">📄</span> Launch plan <span class="sub">notebook</span></div>
+              <div class="mock-mi"><span class="ic">📄</span> Launch checklist <span class="sub">notebook</span></div>
+              <div class="mock-res-h">Tags &amp; dates</div>
+              <div class="mock-mi"><span class="ic" style="color:var(--gold)">#</span> <span class="pill pill-hashtag">#launch</span> <span class="sub">6 notes</span></div>
+              <div class="mock-mi"><span class="ic" style="color:var(--teal)">＠</span> <span class="pill pill-mention">@Sara Chen</span> <span class="sub">3 notes</span></div>
+              <div class="mock-res-h">References</div>
+              <div class="mock-mi"><span class="ic">📚</span> Launch retrospective, 2024 <span class="sub">reference</span></div>
+              <div class="mock-res-h">Commands</div>
+              <div class="mock-mi"><span class="ic">⚡</span> New notebook <span class="k"><kbd>⌘N</kbd></span></div>
+            </div>
+          </div>
         </div>
         <figcaption><kbd>⌘K</kbd> opens the command palette — search everything, run commands.</figcaption>
       </figure>

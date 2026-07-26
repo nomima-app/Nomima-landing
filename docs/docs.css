@@ -221,3 +221,148 @@ kbd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11
 .lightbox.open { display: flex; }
 .lightbox img { max-width: 100%; max-height: 100%; border-radius: 12px; box-shadow: 0 20px 80px rgba(0,0,0,0.6); }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .howto-card, .guide-figure .figure-img { transition: none; } }
+
+/* ─────────────────────────────────────────────────────────────
+   UI mockups — HTML/CSS recreations of the app, used in place of
+   screenshots: theme-matched, crisp at any zoom, tiny + fast, and
+   able to loop a micro-interaction where a GIF was planned. Every
+   piece below is self-contained (no app assets). Reuses .pill*.
+   ───────────────────────────────────────────────────────────── */
+.mock {
+  position: relative; border-radius: 14px; border: 1px solid var(--border);
+  background: linear-gradient(180deg, #10101d, #0b0b14);
+  box-shadow: 0 14px 44px rgba(0,0,0,0.38); overflow: hidden;
+  font-size: 13px; line-height: 1.5; color: var(--fg);
+}
+.mock-pad { padding: 20px 22px; }
+.mock.is-live::after {
+  content: "◉ interactive"; position: absolute; top: 10px; right: 12px; z-index: 3;
+  font-size: 9px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent-2); opacity: 0.72;
+}
+
+/* Window chrome (full-app shots) */
+.mock-bar { display: flex; align-items: center; gap: 7px; padding: 9px 13px; border-bottom: 1px solid var(--border-soft); background: rgba(255,255,255,0.015); }
+.mock-dot { width: 11px; height: 11px; border-radius: 50%; flex: none; }
+.mock-dot.r { background: #ff5f57; } .mock-dot.y { background: #febc2e; } .mock-dot.g { background: #28c840; }
+.mock-bar-title { margin-left: 6px; font-size: 12px; color: var(--fg-dim); display: flex; align-items: center; gap: 6px; }
+
+/* Document fragment */
+.mock-title { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 3px; display: flex; align-items: center; gap: 8px; }
+.mock-meta { font-size: 11px; color: var(--fg-faint); margin-bottom: 15px; }
+.mock-h { font-size: 15px; font-weight: 700; margin: 15px 0 7px; }
+.mock-line { font-size: 13.5px; color: var(--fg-dim); margin: 0 0 9px; }
+.mock-line.tight { margin-bottom: 4px; }
+
+/* Task rows */
+.mock-tasks { display: flex; flex-direction: column; gap: 9px; }
+.mock-task { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--fg); }
+.mock-check { width: 17px; height: 17px; border-radius: 5px; border: 1.6px solid var(--fg-faint); flex: none; display: grid; place-items: center; font-size: 11px; }
+.mock-task.done .mock-check { background: var(--green); border-color: var(--green); color: #04120b; font-weight: 900; }
+.mock-task.done span { color: var(--fg-faint); text-decoration: line-through; }
+
+/* Floating menu / palette */
+.mock-menu { border-radius: 11px; border: 1px solid rgba(255,255,255,0.14); background: #191926; box-shadow: 0 18px 50px rgba(0,0,0,0.5); padding: 5px; }
+.mock-menu-h { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); padding: 7px 9px 4px; }
+.mock-mi { display: flex; align-items: center; gap: 9px; padding: 7px 9px; border-radius: 7px; font-size: 13px; color: var(--fg-dim); }
+.mock-mi .ic { width: 17px; text-align: center; opacity: 0.85; flex: none; }
+.mock-mi.active { background: rgba(99,102,241,0.16); color: var(--fg); }
+.mock-mi .sub { margin-left: auto; font-size: 11px; color: var(--fg-faint); }
+.mock-mi kbd { margin-left: auto; }
+
+/* Blinking caret */
+.mock-caret { display: inline-block; width: 1.5px; height: 1.05em; background: var(--accent); vertical-align: -2px; margin: 0 1px; animation: mock-blink 1.05s steps(1) infinite; }
+@keyframes mock-blink { 50% { opacity: 0; } }
+
+/* Looping interaction: a suggestion menu rises in, then a pill "lands" as it
+   closes — the HTML stand-in for a short capture clip. */
+.mock-anchor { position: relative; }
+.mock-menu.pop { position: absolute; z-index: 2; min-width: 232px; animation: mock-pop 5s ease-in-out infinite; transform-origin: top left; }
+@keyframes mock-pop {
+  0%, 6%    { opacity: 0; transform: translateY(-5px) scale(0.98); }
+  16%, 66%  { opacity: 1; transform: translateY(0) scale(1); }
+  78%, 100% { opacity: 0; transform: translateY(-5px) scale(0.98); }
+}
+/* The typed text and the formed pill share ONE inline slot so neither reserves
+   the other's width (the pill, in flow, sets the slot width; the typed text
+   overlays it) — no gap, no shove. */
+.mock-slot { position: relative; display: inline-block; vertical-align: baseline; }
+.mock-slot .mock-landed { display: inline-block; }
+.mock-slot .mock-typed { position: absolute; left: 0; top: 50%; transform: translateY(-50%); white-space: nowrap; }
+.mock-typed { animation: mock-typed 5s ease-in-out infinite; }
+@keyframes mock-typed { 0%, 70% { opacity: 1; } 76%, 100% { opacity: 0; } }
+.mock-landed { opacity: 0; animation: mock-landed 5s ease-in-out infinite; }
+@keyframes mock-landed { 0%, 72% { opacity: 0; } 80%, 96% { opacity: 1; } 100% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mock-menu.pop { animation: none; opacity: 1; transform: none; }
+  .mock-typed { animation: none; }
+  .mock-landed { animation: none; opacity: 0; }
+  .mock-caret { animation: none; }
+}
+
+/* The real Nomima logo (twin gradient bars + violet diagonal), inline via data-URI
+   so every mockup uses the genuine mark — size it with width/height or font-size. */
+.nm-logo {
+  display: inline-block; width: 1em; height: 1em; vertical-align: -0.16em; flex: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'%3E%3Cdefs%3E%3ClinearGradient id='nl' x1='312' y1='97' x2='312' y2='927' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23351F96'/%3E%3Cstop offset='1' stop-color='%234256EC'/%3E%3C/linearGradient%3E%3ClinearGradient id='nr' x1='712' y1='97' x2='712' y2='927' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23FF2A94'/%3E%3Cstop offset='1' stop-color='%237E1DB4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cline x1='312' y1='200' x2='312' y2='824' stroke='url(%23nl)' stroke-width='205' stroke-linecap='round'/%3E%3Cline x1='712' y1='200' x2='712' y2='824' stroke='url(%23nr)' stroke-width='205' stroke-linecap='round'/%3E%3Cline x1='312' y1='200' x2='712' y2='824' stroke='%235A29B6' stroke-width='205' stroke-linecap='round' opacity='0.5'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+/* App-icon tile (dmg / About / dock): the mark on a soft dark rounded square. */
+.nm-appicon-real { display: grid; place-items: center; border-radius: 22%; background: linear-gradient(160deg, #ffffff, #eef0f6); box-shadow: 0 8px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.8); }
+.nm-appicon-real .nm-logo { width: 62%; height: 62%; }
+
+/* Summon orb — a glossy 3-D violet blob with a magenta undertone + glow (the real
+   app's Summon button / graph-node look), not a flat gradient circle. */
+.nm-orb {
+  position: relative; border-radius: 50%; flex: none;
+  background:
+    radial-gradient(circle at 34% 28%, #b79cff 0%, #7c3aed 24%, #6d28d9 44%, #4c1d95 70%, #2e1065 100%),
+    radial-gradient(circle at 72% 76%, rgba(240,72,168,0.55), transparent 46%);
+  box-shadow: 0 0 20px 5px rgba(124,58,237,0.5), inset -4px -6px 12px rgba(0,0,0,0.5), inset 3px 4px 10px rgba(255,255,255,0.28);
+}
+.nm-orb::after {
+  content: ""; position: absolute; left: 20%; top: 15%; width: 34%; height: 30%;
+  border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.6), transparent 70%); filter: blur(1px);
+}
+.nm-orb.spark::before {
+  content: "✦"; position: absolute; inset: 0; display: grid; place-items: center;
+  color: #fff; font-size: 0.5em; text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+/* Install (.dmg) drag-to-Applications layout */
+.mock-dmg { display: flex; align-items: center; justify-content: center; gap: 30px; padding: 34px 22px; }
+.mock-icon-col { display: flex; flex-direction: column; align-items: center; gap: 9px; }
+.mock-appicon { width: 72px; height: 72px; border-radius: 17px; display: grid; place-items: center; font-size: 32px; background: linear-gradient(150deg, #23233b, #13131e); border: 1px solid var(--border); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+.mock-appicon.brand { background: linear-gradient(150deg, var(--accent), var(--accent-2)); border: none; color: #fff; }
+.mock-iclabel { font-size: 11.5px; color: var(--fg-dim); }
+.mock-arrow { font-size: 26px; color: var(--fg-faint); }
+
+/* Palette / search field */
+.mock-input { display: flex; align-items: center; gap: 9px; padding: 11px 13px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); font-size: 14px; color: var(--fg); margin-bottom: 5px; }
+.mock-input .k { margin-left: auto; }
+.mock-res-h { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); padding: 9px 9px 3px; }
+
+/* Reminder countdown row */
+.mock-remind { display: inline-flex; align-items: center; gap: 9px; margin-top: 10px; padding: 8px 12px; border-radius: 9px; background: rgba(96,165,250,0.07); border: 1px solid rgba(96,165,250,0.22); font-size: 12.5px; color: var(--fg-dim); }
+.mock-remind .bell { color: var(--blue); }
+.mock-remind b { color: var(--fg); font-weight: 600; }
+
+/* Cover graph — nodes pop in, edges draw, on a loop ("watch it connect") */
+.mock-graph { width: 100%; height: 152px; display: block; }
+.mock-graph .edge { stroke: rgba(255,255,255,0.18); stroke-width: 1.4; stroke-dasharray: 130; stroke-dashoffset: 130; animation: mock-draw 5.2s ease-in-out infinite; }
+.mock-graph .node { transform-box: fill-box; transform-origin: center; opacity: 0; animation: mock-node 5.2s ease-in-out infinite; }
+@keyframes mock-draw { 0%, 20% { stroke-dashoffset: 130; } 48%, 88% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 130; } }
+@keyframes mock-node { 0%, 6% { opacity: 0; transform: scale(0.2); } 30%, 88% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(0.2); } }
+@media (prefers-reduced-motion: reduce) { .mock-graph .edge { animation: none; stroke-dashoffset: 0; } .mock-graph .node { animation: none; opacity: 1; transform: none; } }
+
+/* Mini sidebar for two-pane vignettes */
+.mock-split { display: grid; grid-template-columns: 154px 1fr; }
+.mock-side { border-right: 1px solid var(--border-soft); padding: 13px 10px; background: rgba(255,255,255,0.012); }
+.mock-side-h { font-size: 9.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); margin: 4px 6px 7px; }
+.mock-nav { display: flex; align-items: center; gap: 8px; padding: 5px 8px; border-radius: 7px; font-size: 12.5px; color: var(--fg-dim); }
+.mock-nav .ic { width: 15px; text-align: center; opacity: 0.8; }
+.mock-nav.active { background: rgba(99,102,241,0.14); color: var(--fg); }
+.mock-nav.add { color: var(--accent); }
+.mock-callout { border-radius: 10px; padding: 11px 14px; margin: 10px 0 0; display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.mock-callout.ok { background: rgba(52,211,153,0.07); border: 1px solid rgba(52,211,153,0.3); color: var(--green); }
+.mock-callout.wait { background: rgba(251,191,36,0.07); border: 1px solid rgba(251,191,36,0.3); color: var(--amber); }

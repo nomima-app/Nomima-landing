@@ -43,54 +43,204 @@
       </ul>
       <p class="tip"><strong>Tip:</strong> the brain toggle is per file, so you can keep the signed contract as a quiet attachment while letting the research report you dropped next to it enrich your whole vault.</p>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="capture-and-reading/file-brain-toggle.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>A file pill with its brain toggle.</strong> Show a file block in a note — the pill with the file name and size, its open/preview control, and the brain toggle called out (one file on, its state reading "part of knowledge").</span>
+        <div class="mock cap-1" style="max-width: 500px; margin: 0 auto;">
+          <style>
+            .cap-1 .cap-1-file { display: flex; align-items: center; gap: 11px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border-soft); background: rgba(255,255,255,0.02); margin-bottom: 9px; }
+            .cap-1 .cap-1-file:last-child { margin-bottom: 0; }
+            .cap-1 .cap-1-ic { width: 30px; height: 37px; border-radius: 6px; flex: none; display: grid; place-items: center; font-size: 10px; font-weight: 800; color: #fff; letter-spacing: 0.02em; }
+            .cap-1 .cap-1-ic.pdf { background: linear-gradient(150deg, #f0568a, #b91c5c); }
+            .cap-1 .cap-1-ic.doc { background: linear-gradient(150deg, #60a5fa, #2563eb); }
+            .cap-1 .cap-1-name { font-size: 13px; font-weight: 600; color: var(--fg); }
+            .cap-1 .cap-1-sz { font-size: 11px; color: var(--fg-faint); margin-top: 1px; }
+            .cap-1 .cap-1-actions { margin-left: auto; display: flex; align-items: center; gap: 6px; flex: none; }
+            .cap-1 .cap-1-open { font-size: 11px; color: var(--fg-dim); border: 1px solid var(--border-soft); border-radius: 7px; padding: 4px 9px; }
+            .cap-1 .cap-1-brain { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; padding: 4px 9px; border-radius: 7px; white-space: nowrap; }
+            .cap-1 .cap-1-brain.on { color: var(--accent); background: rgba(99,102,241,0.14); border: 1px solid rgba(99,102,241,0.4); box-shadow: 0 0 0 3px rgba(99,102,241,0.10); }
+            .cap-1 .cap-1-brain.off { color: var(--fg-faint); background: rgba(255,255,255,0.02); border: 1px solid var(--border-soft); }
+          </style>
+          <div class="mock-pad">
+            <div class="mock-h" style="margin: 0 0 12px; display: flex; align-items: center; gap: 8px;">🗂 Files</div>
+            <div class="cap-1-file">
+              <div class="cap-1-ic pdf">PDF</div>
+              <div>
+                <div class="cap-1-name">Market research report</div>
+                <div class="cap-1-sz">2.4 MB · added just now</div>
+              </div>
+              <div class="cap-1-actions">
+                <span class="cap-1-open">Open</span>
+                <span class="cap-1-brain on">🧠 Part of knowledge</span>
+              </div>
+            </div>
+            <div class="cap-1-file">
+              <div class="cap-1-ic doc">DOC</div>
+              <div>
+                <div class="cap-1-name">Signed contract</div>
+                <div class="cap-1-sz">180 KB · quiet attachment</div>
+              </div>
+              <div class="cap-1-actions">
+                <span class="cap-1-open">Open</span>
+                <span class="cap-1-brain off">🧠 Attachment</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <figcaption>Each file decides for itself: part of your knowledge, or just an attachment.</figcaption>
+        <figcaption>Each file decides for itself: part of your knowledge, or just an attachment — flip the brain toggle on its pill.</figcaption>
       </figure>
 
       <h2 id="bookmarks">Bookmark a web page</h2>
       <p>To save a web page, add a <strong>bookmark block</strong> — type <code>/bookmark</code> (it's the “Embed / Bookmark / Video” block) and paste or type the URL into it. The <strong>bookmark card</strong> appears right away — you don't wait around. It shows the URL immediately, and Nomima fetches the page in the background, filling in the title, description and details as they arrive.</p>
       <p>While it's at it, Nomima pulls the page's readable <strong>article text</strong> and, by default, folds it into your knowledge — same brain toggle as files, so you can opt any bookmark out and keep it as a plain link. This is where Nomima shines for research: the actual words of every page you save sit together in one searchable place, connected to everything else you're thinking about.</p>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="capture-and-reading/bookmark-card.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>A finished bookmark card.</strong> Show a bookmark card with its thumbnail, title and description, plus the three action buttons visible: the brain toggle, the <em>Read</em> button, and the <em>Pop out</em> button.</span>
+        <div class="mock cap-2" style="max-width: 500px; margin: 0 auto;">
+          <style>
+            .cap-2 .cap-2-card { display: flex; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-soft); background: rgba(255,255,255,0.02); }
+            .cap-2 .cap-2-body { padding: 13px 15px; flex: 1; min-width: 0; }
+            .cap-2 .cap-2-dom { display: flex; align-items: center; gap: 7px; font-size: 11px; color: var(--fg-faint); margin-bottom: 7px; }
+            .cap-2 .cap-2-fav { width: 15px; height: 15px; border-radius: 4px; flex: none; background: linear-gradient(150deg, #34d399, #0f766e); display: grid; place-items: center; font-size: 9px; color: #fff; font-weight: 800; }
+            .cap-2 .cap-2-title { font-size: 14.5px; font-weight: 700; color: var(--fg); letter-spacing: -0.01em; line-height: 1.35; margin-bottom: 5px; }
+            .cap-2 .cap-2-desc { font-size: 12px; color: var(--fg-dim); line-height: 1.5; }
+            .cap-2 .cap-2-thumb { width: 122px; flex: none; background: linear-gradient(150deg, #24406e, #0f1830); border-left: 1px solid var(--border-soft); display: grid; place-items: center; }
+            .cap-2 .cap-2-actions { display: flex; gap: 7px; padding: 11px 15px 13px; }
+            .cap-2 .cap-2-btn { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 600; padding: 5px 11px; border-radius: 8px; border: 1px solid var(--border-soft); color: var(--fg-dim); }
+            .cap-2 .cap-2-btn.on { color: var(--accent); background: rgba(99,102,241,0.14); border-color: rgba(99,102,241,0.4); }
+            .cap-2 .cap-2-btn.read { color: var(--fg); background: rgba(255,255,255,0.06); }
+          </style>
+          <div class="mock-pad">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:11px;">
+              <span style="font-size:13px;">🌐</span>
+              <span style="margin-left:auto; display:inline-flex; align-items:center; gap:13px; color:var(--fg-faint); font-size:12px;"><span title="Highlight">✎</span><span title="Refresh">⟳</span><span title="Open">↗</span><span title="Close">✕</span></span>
+            </div>
+            <div class="cap-2-card">
+              <div class="cap-2-body">
+                <div class="cap-2-dom"><span class="cap-2-fav">V</span> theverge.com</div>
+                <div class="cap-2-title">How focus became the internet's scarcest resource</div>
+                <div class="cap-2-desc">The economics of attention have quietly reshaped every product you touch — and what it takes to think clearly now.</div>
+              </div>
+              <div class="cap-2-thumb">
+                <svg width="46" height="40" viewBox="0 0 46 40" aria-hidden="true">
+                  <circle cx="33" cy="12" r="6" fill="rgba(255,255,255,0.35)"/>
+                  <path d="M2 38 L16 18 L26 30 L34 22 L44 38 Z" fill="rgba(255,255,255,0.22)"/>
+                </svg>
+              </div>
+            </div>
+            <div class="cap-2-actions">
+              <span class="cap-2-btn on">🧠 Knowledge</span>
+              <span class="cap-2-btn read">📖 Read</span>
+              <span class="cap-2-btn">⧉ Pop out</span>
+            </div>
+          </div>
         </div>
-        <figcaption>Add a bookmark block, drop in a URL — the card appears immediately as text and details fill in behind it.</figcaption>
+        <figcaption>Add a bookmark block, drop in a URL — the card appears immediately, then title, description and thumbnail fill in behind it.</figcaption>
       </figure>
 
       <h2 id="reader">Read it here</h2>
       <p>Any bookmark whose article Nomima could parse gets a <strong>Read</strong> button. Click it and the page opens in a clean, distraction-free reader right inside the app — real structure preserved (headings, links, lists, quotes), none of the ads, popups or clutter of the open web. It's <strong>private</strong>, too: images are stripped, so nothing phones home while you read. If a page can't be parsed into an article, the reader falls back gracefully rather than showing you a broken view.</p>
       <p>Some pages you want to see live and whole — a dashboard, an interactive tool, a site that refuses to be simplified. That's what <strong>Pop out</strong> is for: it opens the real page in a floating web-view window that works for <em>any</em> site, even ones that normally refuse to be embedded. Keep it on top beside your notes while you write.</p>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="capture-and-reading/inline-reader.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The in-app reader.</strong> Show an article open in the clean reader view — a headline, body paragraphs, a subheading and a bulleted or quoted passage — clearly inside Nomima, no browser chrome, no images.</span>
+        <div class="mock cap-3" style="max-width: 540px; margin: 0 auto;">
+          <style>
+            .cap-3 .cap-3-col { max-width: 360px; margin: 0 auto; padding: 8px 0 4px; }
+            .cap-3 .cap-3-title { font-size: 19px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.25; color: var(--fg); margin-bottom: 9px; }
+            .cap-3 .cap-3-by { font-size: 11.5px; color: var(--fg-faint); margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-soft); }
+            .cap-3 .cap-3-p { font-size: 13px; line-height: 1.65; color: var(--fg-dim); margin: 0 0 13px; }
+            .cap-3 .cap-3-sub { font-size: 14px; font-weight: 700; color: var(--fg); margin: 20px 0 9px; }
+            .cap-3 mark { background: rgba(234,179,8,0.18); color: var(--fg); border-radius: 3px; padding: 1px 2px; box-decoration-break: clone; }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">📖 Reader</span></div>
+          <div class="mock-pad">
+            <article class="cap-3-col">
+              <div class="cap-3-title">How focus became the internet's scarcest resource</div>
+              <div class="cap-3-by">By Elena Ruiz · The Verge · 8 min read</div>
+              <p class="cap-3-p">For two decades the web optimized for one thing: keeping you here a little longer. Every feed, every autoplay, every red badge was a small bet against your attention — and the house usually won.</p>
+              <div class="cap-3-sub">The cost of a wandering mind</div>
+              <p class="cap-3-p">The research is unambiguous. <mark>It takes an average of twenty-three minutes to fully return to a task after a single interruption</mark> — and most knowledge workers are interrupted every few minutes.</p>
+              <p class="cap-3-p">What changed isn't willpower. It's that the tools around us were quietly rebuilt to compete for the very thing we need to do our best work.</p>
+            </article>
+          </div>
         </div>
-        <figcaption>The Read button opens a calm, private reader — structure kept, distractions gone.</figcaption>
+        <figcaption>The Read button opens a calm, private reader — structure kept, images stripped, distractions gone.</figcaption>
       </figure>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="capture-and-reading/pop-out-window.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The pop-out live web-view window.</strong> Show the floating web-view window sitting on top of a Nomima note, displaying a live interactive page (something that would normally block embedding).</span>
+        <div class="mock cap-4" style="max-width: 540px; margin: 0 auto;">
+          <style>
+            .cap-4 .cap-4-stage { position: relative; min-height: 236px; }
+            .cap-4 .cap-4-note { opacity: 0.4; }
+            .cap-4 .cap-4-win { position: absolute; top: 34px; left: 40px; right: 24px; border-radius: 11px; overflow: hidden; border: 1px solid rgba(255,255,255,0.16); background: #12121d; box-shadow: 0 22px 54px rgba(0,0,0,0.55); }
+            .cap-4 .cap-4-chrome { display: flex; align-items: center; gap: 8px; padding: 8px 11px; border-bottom: 1px solid var(--border-soft); background: rgba(255,255,255,0.02); }
+            .cap-4 .cap-4-addr { flex: 1; font-size: 10.5px; color: var(--fg-dim); background: rgba(255,255,255,0.05); border: 1px solid var(--border-soft); border-radius: 6px; padding: 3px 9px; }
+            .cap-4 .cap-4-page { padding: 13px 15px; }
+            .cap-4 .cap-4-ph { font-size: 12px; font-weight: 700; color: var(--fg); margin-bottom: 11px; display: flex; align-items: center; gap: 7px; }
+            .cap-4 .cap-4-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+            .cap-4 .cap-4-kpi { border: 1px solid var(--border-soft); border-radius: 8px; padding: 8px 9px; background: rgba(255,255,255,0.02); }
+            .cap-4 .cap-4-kn { font-size: 16px; font-weight: 800; letter-spacing: -0.02em; }
+            .cap-4 .cap-4-kl { font-size: 9px; color: var(--fg-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+            .cap-4 .cap-4-bars { display: flex; align-items: flex-end; gap: 7px; height: 46px; padding: 0 2px; }
+            .cap-4 .cap-4-bar { flex: 1; border-radius: 3px 3px 0 0; background: linear-gradient(180deg, var(--accent), rgba(99,102,241,0.25)); }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">Launch plan</span></div>
+          <div class="mock-pad cap-4-stage">
+            <div class="cap-4-note">
+              <div class="mock-line">Watching the live traffic dashboard while we draft the announcement.</div>
+              <div class="mock-line" style="margin: 0;">Numbers looking healthy ahead of <span class="pill pill-date">📅 Fri 5pm</span>.</div>
+            </div>
+            <div class="cap-4-win">
+              <div class="cap-4-chrome">
+                <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
+                <span class="cap-4-addr">🔒 app.analytics.io/live</span>
+              </div>
+              <div class="cap-4-page">
+                <div class="cap-4-ph">📊 Live traffic · last 24h</div>
+                <div class="cap-4-kpis">
+                  <div class="cap-4-kpi"><div class="cap-4-kn" style="color:var(--green)">2,481</div><div class="cap-4-kl">Active now</div></div>
+                  <div class="cap-4-kpi"><div class="cap-4-kn" style="color:var(--blue)">18.4k</div><div class="cap-4-kl">Sessions</div></div>
+                  <div class="cap-4-kpi"><div class="cap-4-kn" style="color:var(--teal)">4:02</div><div class="cap-4-kl">Avg time</div></div>
+                </div>
+                <div class="cap-4-bars">
+                  <div class="cap-4-bar" style="height:38%"></div><div class="cap-4-bar" style="height:62%"></div><div class="cap-4-bar" style="height:48%"></div><div class="cap-4-bar" style="height:82%"></div><div class="cap-4-bar" style="height:70%"></div><div class="cap-4-bar" style="height:96%"></div><div class="cap-4-bar" style="height:74%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <figcaption>Pop out opens the real, live page in a floating window — for any site.</figcaption>
+        <figcaption>Pop out opens the real, live page in a floating window that stays on top of your note — for any site.</figcaption>
       </figure>
 
       <h2 id="video">Watch videos inline</h2>
       <p>Paste a YouTube link and it plays <strong>inside Nomima</strong>, not off in your browser. Nomima remembers where you stopped, so a progress bar sits under each video with <strong>Resume</strong> and <strong>Start over</strong> — pick up exactly where you left off, days later.</p>
       <p>The best part is that the video follows you. Keep it playing while you scroll down the note or move to another view, and it tucks itself into a small <strong>picture-in-picture</strong> corner player so you never lose your place. Leave the app entirely and it becomes a <strong>native floating mini-player</strong> that stays on top of your other apps — with play/pause, volume, and a <strong>Back to video</strong> button to jump straight home. A paused video politely stays put and won't pop out.</p>
-      <div class="figure-slot slot-gif" data-shot="capture-and-reading/video-pip-float.gif">
-        <span class="figure-slot-icon">►</span>
-        <span class="figure-slot-kind">Short clip</span>
-        <span class="figure-slot-label"><strong>Video that follows you.</strong> Play a YouTube video inline in a note → scroll away → it shrinks into a corner picture-in-picture player → switch out of Nomima entirely → it becomes a native floating mini-player on top of another app, showing the play/pause, volume and "Back to video" controls.</span>
-      </div>
+      <figure class="guide-figure">
+        <div class="mock cap-5 is-live" style="max-width: 500px; margin: 0 auto;">
+          <style>
+            .cap-5 .cap-5-stage { position: relative; min-height: 232px; }
+            .cap-5 .cap-5-video { border-radius: 10px; overflow: hidden; border: 1px solid var(--border-soft); background: linear-gradient(150deg, #1a1330, #0c0c16); height: 128px; display: grid; place-items: center; margin-bottom: 12px; }
+            .cap-5 .cap-5-play { width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.28); display: grid; place-items: center; font-size: 15px; color: #fff; padding-left: 3px; }
+            .cap-5 .cap-5-inline { animation: cap-5-inline 5s ease-in-out infinite; }
+            @keyframes cap-5-inline { 0%, 40% { opacity: 1; } 54%, 94% { opacity: 0.26; } 100% { opacity: 1; } }
+            .cap-5 .cap-5-pip { position: absolute; right: 14px; bottom: 14px; width: 154px; border-radius: 9px; overflow: hidden; border: 1px solid rgba(255,255,255,0.18); background: linear-gradient(150deg, #1a1330, #0c0c16); box-shadow: 0 14px 34px rgba(0,0,0,0.5); opacity: 0; transform: translateY(10px) scale(0.85); transform-origin: bottom right; animation: cap-5-pip 5s ease-in-out infinite; }
+            @keyframes cap-5-pip { 0%, 44% { opacity: 0; transform: translateY(10px) scale(0.85); } 58%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(10px) scale(0.85); } }
+            .cap-5 .cap-5-pip-body { height: 74px; display: grid; place-items: center; }
+            .cap-5 .cap-5-pip-play { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.16); display: grid; place-items: center; font-size: 11px; color: #fff; padding-left: 2px; }
+            .cap-5 .cap-5-pip-bar { height: 3px; background: rgba(255,255,255,0.12); }
+            .cap-5 .cap-5-pip-bar i { display: block; height: 100%; width: 46%; background: var(--red); }
+            @media (prefers-reduced-motion: reduce) {
+              .cap-5 .cap-5-inline { animation: none; opacity: 1; }
+              .cap-5 .cap-5-pip { animation: none; opacity: 1; transform: none; }
+            }
+          </style>
+          <div class="mock-pad cap-5-stage">
+            <div class="cap-5-inline">
+              <div class="cap-5-video"><div class="cap-5-play">▶</div></div>
+              <div class="mock-line">Reviewing the keynote before we cut the announcement — timestamps in <span class="pill pill-hashtag">#launch</span>.</div>
+              <div class="mock-line" style="margin: 0;">Scroll on and the video tucks itself into the corner so you never lose your place.</div>
+            </div>
+            <div class="cap-5-pip">
+              <div class="cap-5-pip-body"><div class="cap-5-pip-play">▶</div></div>
+              <div class="cap-5-pip-bar"><i></i></div>
+            </div>
+          </div>
+        </div>
+        <figcaption>Scroll away and a playing video shrinks into a corner picture-in-picture player, riding along inside Nomima.</figcaption>
+      </figure>
 
       <h3 id="float-player">Audio that outlives the app</h3>
       <p>Those two ways of following you aren't the same thing, and the difference is the whole trick. The corner <strong>picture-in-picture</strong> lives <em>inside</em> Nomima — it rides along as you scroll a note or hop between views, but it belongs to the app, so it's gone the moment Nomima isn't the window you're looking at. So when you genuinely leave — click into your browser, your terminal, a meeting — a playing video hands off to something sturdier: its own <strong>always-on-top window</strong> that floats above whatever you do next.</p>
@@ -98,20 +248,92 @@
       <p>The handoff is seamless both directions. The float picks up at the <strong>exact second</strong> the in-app player reached, and stepping back into Nomima hands it straight back — the docked or corner player resumes from wherever the float got to. Only ever <strong>one player holds the audio</strong>, so the two never talk over each other. And <strong>Back to video</strong> does more than raise Nomima: it jumps to the very block the video lives in and re-docks the player right there in the page, still playing, rather than dropping you at a corner window.</p>
       <p class="tip"><strong>Tip:</strong> two followers, on purpose. The corner <strong>picture-in-picture</strong> keeps a video with you <em>inside</em> Nomima as you scroll and navigate; the native <strong>floating mini-player</strong> keeps its <em>audio</em> going once you've stepped out of the app entirely.</p>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="capture-and-reading/native-float-over-app.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The native floating mini-player over another app.</strong> Show the compact always-on-top bar — video thumbnail on the left, title, then the volume slider, play/pause, "Back to video" and close (✕) controls — sitting on top of a different app (a browser or code editor in the background), clearly outside any Nomima window.</span>
+        <div class="mock cap-6" style="max-width: 520px; margin: 0 auto;">
+          <style>
+            .cap-6 .cap-6-stage { position: relative; min-height: 188px; padding: 0; background: linear-gradient(160deg, #0f1524, #0a0d16); }
+            .cap-6 .cap-6-editor { padding: 16px 18px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; line-height: 1.9; opacity: 0.5; }
+            .cap-6 .cap-6-editor .ln { color: var(--fg-faint); }
+            .cap-6 .cap-6-editor .kw { color: var(--accent-2); }
+            .cap-6 .cap-6-editor .fn { color: var(--blue); }
+            .cap-6 .cap-6-editor .st { color: var(--green); }
+            .cap-6 .cap-6-float { position: absolute; right: 20px; bottom: 18px; display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 11px; border: 1px solid rgba(255,255,255,0.16); background: rgba(20,20,32,0.94); box-shadow: 0 16px 40px rgba(0,0,0,0.6); backdrop-filter: blur(6px); }
+            .cap-6 .cap-6-thumb { width: 40px; height: 26px; border-radius: 5px; flex: none; background: linear-gradient(150deg, #1a1330, #0c0c16); display: grid; place-items: center; font-size: 9px; color: rgba(255,255,255,0.7); }
+            .cap-6 .cap-6-vtitle { font-size: 11.5px; font-weight: 600; color: var(--fg); max-width: 108px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            .cap-6 .cap-6-vol { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--fg-dim); }
+            .cap-6 .cap-6-slider { width: 42px; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.16); position: relative; }
+            .cap-6 .cap-6-slider i { position: absolute; left: 0; top: 0; height: 100%; width: 60%; border-radius: 2px; background: var(--fg-dim); }
+            .cap-6 .cap-6-slider i::after { content: ""; position: absolute; right: -3px; top: 50%; transform: translateY(-50%); width: 7px; height: 7px; border-radius: 50%; background: var(--fg); }
+            .cap-6 .cap-6-btn { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 7px; background: rgba(255,255,255,0.08); color: var(--fg); font-size: 11px; }
+            .cap-6 .cap-6-back { font-size: 11px; font-weight: 600; color: var(--accent); padding: 5px 9px; border-radius: 7px; background: rgba(99,102,241,0.16); border: 1px solid rgba(99,102,241,0.35); white-space: nowrap; }
+            .cap-6 .cap-6-x { color: var(--fg-faint); font-size: 12px; padding: 0 2px; }
+          </style>
+          <div class="cap-6-stage">
+            <div class="cap-6-editor">
+              <div><span class="ln">12</span>&nbsp;&nbsp;<span class="kw">export function</span> <span class="fn">renderFloat</span>(state) {</div>
+              <div><span class="ln">13</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">const</span> win = <span class="fn">createWebview</span>(<span class="st">'float'</span>);</div>
+              <div><span class="ln">14</span>&nbsp;&nbsp;&nbsp;&nbsp;win.<span class="fn">setAlwaysOnTop</span>(<span class="kw">true</span>);</div>
+              <div><span class="ln">15</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> win;</div>
+              <div><span class="ln">16</span>&nbsp;&nbsp;}</div>
+            </div>
+            <div class="cap-6-float">
+              <div class="cap-6-thumb">▶</div>
+              <div class="cap-6-vtitle">Keynote — final cut</div>
+              <div class="cap-6-vol">🔊<span class="cap-6-slider"><i></i></span></div>
+              <div class="cap-6-btn">⏸</div>
+              <div class="cap-6-back">↩ Back to video</div>
+              <span class="cap-6-x">✕</span>
+            </div>
+          </div>
         </div>
-        <figcaption>Leave Nomima and the audio keeps going in its own little window, above everything else.</figcaption>
+        <figcaption>Leave Nomima and the audio keeps going in its own always-on-top window, above whatever you do next.</figcaption>
       </figure>
       <figure class="guide-figure">
-        <div class="figure-slot slot-gif" data-shot="capture-and-reading/native-float-handback.gif">
-          <span class="figure-slot-icon">►</span>
-          <span class="figure-slot-kind">Short clip</span>
-          <span class="figure-slot-label"><strong>Handoff and back, no double audio.</strong> Set up: a YouTube video playing inline in a note. In frame: switch to another app → the compact float window appears on top and keeps playing at the same spot → click <em>Back to video</em> → Nomima comes forward, scrolls to the exact video block, and the player re-docks inline still playing, while the float disappears.</span>
+        <div class="mock cap-7 is-live" style="max-width: 500px; margin: 0 auto;">
+          <style>
+            .cap-7 .cap-7-stage { position: relative; min-height: 210px; }
+            .cap-7 .cap-7-layer { position: absolute; inset: 0; }
+            /* State A — float over another app */
+            .cap-7 .cap-7-a { animation: cap-7-a 6s ease-in-out infinite; }
+            @keyframes cap-7-a { 0%, 40% { opacity: 1; } 52%, 92% { opacity: 0; } 100% { opacity: 1; } }
+            .cap-7 .cap-7-app { position: absolute; inset: 0; border-radius: 8px; background: linear-gradient(160deg, #0f1524, #0a0d16); font-family: ui-monospace, Menlo, monospace; font-size: 10.5px; line-height: 1.9; color: var(--fg-faint); padding: 14px 16px; opacity: 0.55; }
+            .cap-7 .cap-7-float { position: absolute; right: 16px; bottom: 16px; display: flex; align-items: center; gap: 9px; padding: 7px 10px; border-radius: 11px; border: 1px solid rgba(255,255,255,0.16); background: rgba(20,20,32,0.95); box-shadow: 0 16px 40px rgba(0,0,0,0.6); }
+            .cap-7 .cap-7-fthumb { width: 34px; height: 22px; border-radius: 5px; background: linear-gradient(150deg, #1a1330, #0c0c16); display: grid; place-items: center; font-size: 8px; color: rgba(255,255,255,0.7); }
+            .cap-7 .cap-7-ftitle { font-size: 11px; font-weight: 600; color: var(--fg); }
+            .cap-7 .cap-7-back { font-size: 10.5px; font-weight: 600; color: var(--accent); padding: 4px 8px; border-radius: 7px; background: rgba(99,102,241,0.16); border: 1px solid rgba(99,102,241,0.4); animation: cap-7-click 6s ease-in-out infinite; }
+            @keyframes cap-7-click { 0%, 30% { box-shadow: 0 0 0 0 rgba(99,102,241,0); } 40% { box-shadow: 0 0 0 5px rgba(99,102,241,0.28); } 48%, 100% { box-shadow: 0 0 0 0 rgba(99,102,241,0); } }
+            /* State B — re-docked inline in Nomima */
+            .cap-7 .cap-7-b { opacity: 0; animation: cap-7-b 6s ease-in-out infinite; }
+            @keyframes cap-7-b { 0%, 44% { opacity: 0; } 56%, 88% { opacity: 1; } 100% { opacity: 0; } }
+            .cap-7 .cap-7-dock { border-radius: 10px; overflow: hidden; border: 1px solid rgba(99,102,241,0.4); box-shadow: 0 0 0 3px rgba(99,102,241,0.12); background: linear-gradient(150deg, #1a1330, #0c0c16); height: 116px; display: grid; place-items: center; margin-bottom: 11px; }
+            .cap-7 .cap-7-dplay { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.28); display: grid; place-items: center; font-size: 13px; color: #fff; padding-left: 2px; }
+            @media (prefers-reduced-motion: reduce) {
+              .cap-7 .cap-7-a { animation: none; opacity: 0; }
+              .cap-7 .cap-7-b { animation: none; opacity: 1; }
+              .cap-7 .cap-7-back { animation: none; }
+            }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">Launch plan</span></div>
+          <div class="mock-pad cap-7-stage">
+            <div class="cap-7-layer cap-7-a">
+              <div class="cap-7-app">
+                <div>// switched out of Nomima —</div>
+                <div>// the float keeps playing on top</div>
+                <div>$ npm run build</div>
+                <div>&nbsp;&nbsp;▸ compiling…</div>
+              </div>
+              <div class="cap-7-float">
+                <div class="cap-7-fthumb">▶</div>
+                <div class="cap-7-ftitle">Keynote — final cut</div>
+                <div class="cap-7-back">↩ Back to video</div>
+              </div>
+            </div>
+            <div class="cap-7-layer cap-7-b">
+              <div class="cap-7-dock"><div class="cap-7-dplay">▶</div></div>
+              <div class="mock-line" style="margin: 0;">Re-docked to the exact block in <span class="pill pill-hashtag">#launch</span> — still playing, right where it left off.</div>
+            </div>
+          </div>
         </div>
-        <figcaption>One player, one audio stream — the float hands the video back to the exact block it came from.</figcaption>
+        <figcaption>One player, one audio stream — Back to video hands it to the exact block it came from and re-docks inline.</figcaption>
       </figure>
       <p class="note"><strong>Note:</strong> only a <em>playing</em> video floats. Pause it before you switch away and it simply waits in the note — nothing pops out over your other apps.</p>
 

@@ -37,12 +37,130 @@
 
       <h2 id="reading">Reading the graph</h2>
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="knowledge-graph/graph-view.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The graph.</strong> The full Knowledge Graph with glowing type-colored nodes, the legend, and a selected node's connections.</span>
+        <div class="mock kg-1 is-live" style="max-width: 600px; margin: 0 auto;">
+          <style>
+            .kg-1 .kg-1-stage { position: relative; }
+            .kg-1 svg { display: block; width: 100%; height: auto; }
+            .kg-1 .halo { opacity: 0.20; }
+            .kg-1 .dim { opacity: 0.34; }
+            .kg-1 .lbl { font-family: "Inter", sans-serif; font-size: 10.5px; font-weight: 600; }
+            .kg-1 .e { stroke: rgba(255,255,255,0.12); stroke-width: 1.2; }
+            .kg-1 .e-sel { stroke: rgba(45,212,191,0.55); stroke-width: 1.8; }
+            .kg-1 .sel-ring { fill: none; stroke: var(--teal); stroke-width: 1.5; opacity: 0.55; animation: kg1-pulse 3.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+            @keyframes kg1-pulse { 0%, 100% { opacity: 0.55; transform: scale(1); } 50% { opacity: 0.15; transform: scale(1.28); } }
+            .kg-1 .flow { animation: kg1-flow 2.4s linear infinite; }
+            @keyframes kg1-flow {
+              0%   { transform: translate(0,0); opacity: 0; }
+              12%  { opacity: 1; }
+              80%  { opacity: 1; }
+              100% { transform: translate(var(--dx), var(--dy)); opacity: 0; }
+            }
+            .kg-1 .kg-1-legend { position: absolute; top: 12px; right: 12px; background: rgba(16,16,29,0.82); border: 1px solid var(--border); border-radius: 10px; padding: 9px 11px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+            .kg-1 .kg-1-lh { font-size: 9px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 7px; }
+            .kg-1 .kg-1-lrow { display: flex; align-items: center; gap: 7px; font-size: 11.5px; color: var(--fg-dim); margin-bottom: 4px; }
+            .kg-1 .kg-1-lrow:last-child { margin-bottom: 0; }
+            .kg-1 .kg-1-dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+            .kg-1 .kg-1-lrow .n { margin-left: auto; color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; }
+            @media (prefers-reduced-motion: reduce) {
+              .kg-1 .sel-ring { animation: none; }
+              .kg-1 .flow { animation: none; opacity: 0; }
+            }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">◈ Knowledge Graph</span></div>
+          <div class="kg-1-stage">
+            <svg viewBox="0 0 600 380" role="img" aria-label="The full Knowledge Graph: about a dozen type-coloured nodes joined by edges, with @Sara Chen selected and her connections highlighted with flowing particles.">
+              <defs>
+                <radialGradient id="blobTeal" cx="0.35" cy="0.30" r="0.78">
+                  <stop offset="0" stop-color="#cffcf3"/><stop offset="0.42" stop-color="#2dd4bf"/><stop offset="1" stop-color="#0b4f48"/>
+                </radialGradient>
+                <radialGradient id="blobGold" cx="0.35" cy="0.30" r="0.78">
+                  <stop offset="0" stop-color="#fdedb4"/><stop offset="0.42" stop-color="#f5b21f"/><stop offset="1" stop-color="#6e4304"/>
+                </radialGradient>
+                <radialGradient id="blobBlue" cx="0.35" cy="0.30" r="0.78">
+                  <stop offset="0" stop-color="#bcd9ff"/><stop offset="0.42" stop-color="#3b82f6"/><stop offset="1" stop-color="#152c73"/>
+                </radialGradient>
+                <radialGradient id="blobAccent" cx="0.35" cy="0.30" r="0.78">
+                  <stop offset="0" stop-color="#d0d6ff"/><stop offset="0.42" stop-color="#6366f1"/><stop offset="1" stop-color="#26246a"/>
+                </radialGradient>
+                <radialGradient id="blobDim" cx="0.35" cy="0.30" r="0.78">
+                  <stop offset="0" stop-color="#aab0bc"/><stop offset="0.42" stop-color="#5b6270"/><stop offset="1" stop-color="#222732"/>
+                </radialGradient>
+              </defs>
+              <!-- faint background edges -->
+              <g stroke-linecap="round">
+                <line class="e" x1="400" y1="110" x2="500" y2="110"/>
+                <line class="e" x1="400" y1="110" x2="470" y2="190"/>
+                <line class="e" x1="470" y1="190" x2="540" y2="230"/>
+                <line class="e" x1="500" y1="110" x2="470" y2="190"/>
+                <line class="e" x1="390" y1="230" x2="470" y2="190"/>
+                <line class="e" x1="390" y1="230" x2="480" y2="290"/>
+                <line class="e" x1="110" y1="190" x2="140" y2="90"/>
+                <line class="e" x1="110" y1="190" x2="150" y2="280"/>
+                <line class="e" x1="200" y1="290" x2="330" y2="320"/>
+                <line class="e" x1="330" y1="320" x2="480" y2="290"/>
+                <!-- Sara's highlighted edges -->
+                <line class="e-sel" x1="250" y1="180" x2="140" y2="90"/>
+                <line class="e-sel" x1="250" y1="180" x2="400" y2="110"/>
+                <line class="e-sel" x1="250" y1="180" x2="390" y2="230"/>
+                <line class="e-sel" x1="250" y1="180" x2="150" y2="280"/>
+                <line class="e-sel" x1="250" y1="180" x2="200" y2="290"/>
+                <line class="e-sel" x1="250" y1="180" x2="110" y2="190"/>
+              </g>
+              <!-- flowing particles along Sara's edges -->
+              <g>
+                <circle class="flow" cx="250" cy="180" r="2.6" fill="var(--teal)" style="--dx:-110px; --dy:-90px;"/>
+                <circle class="flow" cx="250" cy="180" r="2.6" fill="var(--teal)" style="--dx:-110px; --dy:-90px; animation-delay:1.2s;"/>
+                <circle class="flow" cx="250" cy="180" r="2.6" fill="var(--gold)" style="--dx:150px; --dy:-70px; animation-delay:0.5s;"/>
+                <circle class="flow" cx="250" cy="180" r="2.6" fill="var(--accent)" style="--dx:140px; --dy:50px; animation-delay:0.9s;"/>
+                <circle class="flow" cx="250" cy="180" r="2.6" fill="var(--blue)" style="--dx:-100px; --dy:100px; animation-delay:1.6s;"/>
+              </g>
+              <!-- haloes -->
+              <g>
+                <circle class="halo" cx="250" cy="180" r="26" fill="var(--teal)"/>
+                <circle class="halo" cx="400" cy="110" r="20" fill="var(--gold)"/>
+                <circle class="halo" cx="140" cy="90"  r="16" fill="var(--teal)"/>
+              </g>
+              <!-- nodes (glossy 3-D blobs) -->
+              <circle class="sel-ring" cx="250" cy="180" r="20"/>
+              <g class="nodes">
+                <circle cx="250" cy="180" r="14" fill="url(#blobTeal)"/>
+                <ellipse cx="245" cy="174" rx="4.6" ry="3.4" fill="#ffffff" opacity="0.5"/>
+                <circle cx="140" cy="90"  r="9"  fill="url(#blobTeal)"/>
+                <ellipse cx="137" cy="87" rx="2.9" ry="2.1" fill="#ffffff" opacity="0.45"/>
+                <circle cx="110" cy="190" r="8"  fill="url(#blobTeal)"/>
+                <circle cx="200" cy="290" r="9"  fill="url(#blobTeal)"/>
+                <circle cx="400" cy="110" r="11" fill="url(#blobGold)"/>
+                <ellipse cx="396" cy="106" rx="3.5" ry="2.6" fill="#ffffff" opacity="0.48"/>
+                <circle cx="470" cy="190" r="8"  fill="url(#blobGold)"/>
+                <circle cx="540" cy="230" r="6"  fill="url(#blobGold)"/>
+                <circle cx="500" cy="110" r="9"  fill="url(#blobBlue)"/>
+                <circle cx="390" cy="230" r="10" fill="url(#blobAccent)"/>
+                <ellipse cx="386" cy="226" rx="3.2" ry="2.4" fill="#ffffff" opacity="0.45"/>
+                <circle cx="480" cy="290" r="8"  fill="url(#blobAccent)"/>
+                <circle cx="150" cy="280" r="7"  fill="url(#blobBlue)"/>
+                <circle class="dim" cx="330" cy="320" r="7" fill="url(#blobDim)"/>
+              </g>
+              <!-- labels -->
+              <g fill="var(--fg)">
+                <text class="lbl" x="250" y="207" text-anchor="middle" fill="var(--teal)">Sara Chen</text>
+                <text class="lbl" x="140" y="74"  text-anchor="middle" fill="var(--teal)">Sam Ortiz</text>
+                <text class="lbl" x="400" y="93"  text-anchor="middle" fill="var(--gold)">#launch</text>
+                <text class="lbl" x="500" y="94"  text-anchor="middle" fill="var(--blue)">Acme Co</text>
+                <text class="lbl" x="390" y="253" text-anchor="middle" fill="var(--accent)">Launch plan</text>
+                <text class="lbl" x="150" y="299" text-anchor="middle" fill="var(--blue)">Fri 5pm</text>
+                <text class="lbl" x="470" y="209" text-anchor="middle" fill="var(--gold)">#research</text>
+              </g>
+            </svg>
+            <div class="kg-1-legend">
+              <div class="kg-1-lh">Cluster by · Notebook</div>
+              <div class="kg-1-lrow"><span class="kg-1-dot" style="background:var(--teal);"></span> Person <span class="n">4</span></div>
+              <div class="kg-1-lrow"><span class="kg-1-dot" style="background:var(--gold);"></span> Project <span class="n">3</span></div>
+              <div class="kg-1-lrow"><span class="kg-1-dot" style="background:var(--blue);"></span> Company <span class="n">2</span></div>
+              <div class="kg-1-lrow"><span class="kg-1-dot" style="background:var(--accent);"></span> Note <span class="n">2</span></div>
+            </div>
+          </div>
         </div>
-        <figcaption>Your vault as a living map — built automatically.</figcaption>
+        <figcaption>Your vault as a living map — glowing type-coloured nodes, a legend of every type present, and the selected node's connections lit up with flowing particles.</figcaption>
       </figure>
       <ul>
         <li><strong>Nodes are entities</strong> — glowing orbs colored by type, using the exact same colors as the pills in your notes (including your custom types). The legend in the corner lists every type present with its count.</li>
@@ -64,12 +182,68 @@
       </table>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="knowledge-graph/cluster-by-legend.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Clustering by type.</strong> Set up: in the full graph, open the legend’s <strong>“Cluster by”</strong> control and pick an entity type (e.g. Person). In frame: the nodes pulled apart into separated, labelled blobs — one cluster per group with its floating centroid label — and the “Cluster by” legend showing the active type highlighted alongside the other type swatches and their counts.</span>
+        <div class="mock kg-2" style="max-width: 600px; margin: 0 auto;">
+          <style>
+            .kg-2 .kg-2-ctrl { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 12px 16px; border-bottom: 1px solid var(--border-soft); }
+            .kg-2 .kg-2-ctrl .lead { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin-right: 2px; }
+            .kg-2 .kg-2-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--border); background: rgba(255,255,255,0.03); font-size: 12px; color: var(--fg-dim); }
+            .kg-2 .kg-2-chip .d { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+            .kg-2 .kg-2-chip .c { color: var(--fg-faint); font-variant-numeric: tabular-nums; }
+            .kg-2 .kg-2-chip.on { border-color: rgba(45,212,191,0.5); background: rgba(45,212,191,0.12); color: var(--fg); font-weight: 600; }
+            .kg-2 svg { display: block; width: 100%; height: auto; }
+            .kg-2 .blob { opacity: 0.9; }
+            .kg-2 .cen { font-family: "Inter", sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.02em; }
+            .kg-2 .lbl { font-family: "Inter", sans-serif; font-size: 9.5px; font-weight: 600; }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">◈ Knowledge Graph</span></div>
+          <div class="kg-2-ctrl">
+            <span class="lead">Cluster by</span>
+            <span class="kg-2-chip"><span class="d" style="background:var(--accent);"></span> Notebook</span>
+            <span class="kg-2-chip on"><span class="d" style="background:var(--teal);"></span> Person <span class="c">4</span></span>
+            <span class="kg-2-chip"><span class="d" style="background:var(--gold);"></span> Project <span class="c">3</span></span>
+            <span class="kg-2-chip"><span class="d" style="background:var(--blue);"></span> Company <span class="c">2</span></span>
+            <span class="kg-2-chip"><span class="d" style="background:var(--green);"></span> Date <span class="c">2</span></span>
+          </div>
+          <svg viewBox="0 0 600 320" role="img" aria-label="Nodes pulled apart into three labelled clusters — Person, Project and Company — each in its own coloured blob with a floating centroid label.">
+            <!-- Person blob -->
+            <ellipse class="blob" cx="150" cy="120" rx="96" ry="74" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.30)" stroke-dasharray="5 5"/>
+            <text class="cen" x="150" y="32" text-anchor="middle" fill="var(--teal)">Person</text>
+            <line x1="150" y1="120" x2="110" y2="90"  stroke="rgba(45,212,191,0.35)" stroke-width="1.2"/>
+            <line x1="150" y1="120" x2="200" y2="100" stroke="rgba(45,212,191,0.35)" stroke-width="1.2"/>
+            <line x1="150" y1="120" x2="120" y2="160" stroke="rgba(45,212,191,0.35)" stroke-width="1.2"/>
+            <line x1="150" y1="120" x2="190" y2="155" stroke="rgba(45,212,191,0.35)" stroke-width="1.2"/>
+            <circle cx="150" cy="120" r="12" fill="url(#blobTeal)"/>
+            <circle cx="110" cy="90"  r="8"  fill="url(#blobTeal)"/>
+            <circle cx="200" cy="100" r="8"  fill="url(#blobTeal)"/>
+            <circle cx="120" cy="160" r="7"  fill="url(#blobTeal)"/>
+            <circle cx="190" cy="155" r="7"  fill="url(#blobTeal)"/>
+            <ellipse cx="146" cy="115" rx="4" ry="3" fill="#ffffff" opacity="0.45"/>
+            <text class="lbl" x="150" y="123" text-anchor="middle" fill="#04120b">SC</text>
+
+            <!-- Project blob -->
+            <ellipse class="blob" cx="450" cy="115" rx="86" ry="64" fill="rgba(234,179,8,0.06)" stroke="rgba(234,179,8,0.30)" stroke-dasharray="5 5"/>
+            <text class="cen" x="450" y="34" text-anchor="middle" fill="var(--gold)">Project</text>
+            <line x1="450" y1="115" x2="410" y2="90"  stroke="rgba(234,179,8,0.35)" stroke-width="1.2"/>
+            <line x1="450" y1="115" x2="500" y2="100" stroke="rgba(234,179,8,0.35)" stroke-width="1.2"/>
+            <line x1="450" y1="115" x2="470" y2="150" stroke="rgba(234,179,8,0.35)" stroke-width="1.2"/>
+            <circle cx="450" cy="115" r="11" fill="url(#blobGold)"/>
+            <circle cx="410" cy="90"  r="7"  fill="url(#blobGold)"/>
+            <circle cx="500" cy="100" r="7"  fill="url(#blobGold)"/>
+            <circle cx="470" cy="150" r="6"  fill="url(#blobGold)"/>
+            <ellipse cx="446" cy="110" rx="3.6" ry="2.7" fill="#ffffff" opacity="0.45"/>
+
+            <!-- Company blob -->
+            <ellipse class="blob" cx="300" cy="255" rx="90" ry="52" fill="rgba(96,165,250,0.06)" stroke="rgba(96,165,250,0.30)" stroke-dasharray="5 5"/>
+            <text class="cen" x="300" y="220" text-anchor="middle" fill="var(--blue)">Company</text>
+            <line x1="300" y1="262" x2="255" y2="270" stroke="rgba(96,165,250,0.35)" stroke-width="1.2"/>
+            <line x1="300" y1="262" x2="350" y2="272" stroke="rgba(96,165,250,0.35)" stroke-width="1.2"/>
+            <circle cx="300" cy="262" r="10" fill="url(#blobBlue)"/>
+            <circle cx="255" cy="270" r="7"  fill="url(#blobBlue)"/>
+            <circle cx="350" cy="272" r="7"  fill="url(#blobBlue)"/>
+            <ellipse cx="296" cy="258" rx="3.3" ry="2.5" fill="#ffffff" opacity="0.45"/>
+          </svg>
         </div>
-        <figcaption>The “Cluster by” legend regroups the whole graph around notebooks (default) or any entity type.</figcaption>
+        <figcaption>The “Cluster by” legend regroups the whole graph around notebooks (default) or any entity type — here Person, pulling each group into its own labelled blob.</figcaption>
       </figure>
 
       <h2 id="panel">The entity sidebar</h2>
@@ -78,10 +252,112 @@
       <p>The sidebar shares one slot with the widget editor: opening either closes the other, and it tucks the minimap scrollbar away while it’s open.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="knowledge-graph/entity-panel.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The entity sidebar.</strong> Set up: click a well-connected @mention or #hashtag node so its sidebar opens. In frame: a docked right sidebar with a sticky header (type-coloured icon, name, and ⤢/✕ buttons), then the compact Overview — stat tiles (occurrences, notebooks, last/first seen), an <em>Appears with</em> panel and a <em>Connections by type</em> donut; behind it, that node’s edges highlighted with their flowing particles.</span>
+        <div class="mock kg-3 is-live" style="max-width: 600px; margin: 0 auto;">
+          <style>
+            .kg-3 .kg-3-body { position: relative; display: grid; grid-template-columns: 1fr 246px; min-height: 300px; }
+            .kg-3 .kg-3-graph { position: relative; overflow: hidden; }
+            .kg-3 .kg-3-graph svg { display: block; width: 100%; height: 100%; }
+            .kg-3 .flow { animation: kg3-flow 2.4s linear infinite; }
+            @keyframes kg3-flow {
+              0%   { transform: translate(0,0); opacity: 0; }
+              12%  { opacity: 1; }
+              80%  { opacity: 1; }
+              100% { transform: translate(var(--dx), var(--dy)); opacity: 0; }
+            }
+            .kg-3 .kg-3-side { border-left: 1px solid var(--border); background: #0c0c16; padding: 0 14px 14px; overflow: hidden; }
+            .kg-3 .kg-3-head { position: sticky; top: 0; display: flex; align-items: center; gap: 10px; padding: 13px 0 11px; border-bottom: 1px solid var(--border-soft); background: #0c0c16; }
+            .kg-3 .kg-3-av { width: 34px; height: 34px; border-radius: 50%; flex: none; display: grid; place-items: center; font-size: 12px; font-weight: 800; color: #04120b; background: linear-gradient(150deg, #2dd4bf, #0f766e); }
+            .kg-3 .kg-3-nm { font-size: 14px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.1; }
+            .kg-3 .kg-3-ty { font-size: 10.5px; color: var(--teal); }
+            .kg-3 .kg-3-btns { margin-left: auto; display: flex; gap: 4px; }
+            .kg-3 .kg-3-btn { width: 24px; height: 24px; border-radius: 7px; border: 1px solid var(--border-soft); display: grid; place-items: center; font-size: 12px; color: var(--fg-dim); }
+            .kg-3 .kg-3-tabs { display: flex; gap: 5px; margin: 11px 0 12px; border-bottom: 1px solid var(--border-soft); }
+            .kg-3 .kg-3-tab { font-size: 11px; font-weight: 600; color: var(--fg-dim); padding: 5px 3px; }
+            .kg-3 .kg-3-tab.on { color: var(--fg); border-bottom: 2px solid var(--accent); }
+            .kg-3 .kg-3-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 11px; }
+            .kg-3 .kg-3-stat { border: 1px solid var(--border-soft); border-radius: 9px; padding: 8px 10px; background: rgba(255,255,255,0.02); }
+            .kg-3 .kg-3-num { font-size: 17px; font-weight: 800; letter-spacing: -0.02em; }
+            .kg-3 .kg-3-lab { font-size: 9px; color: var(--fg-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 1px; }
+            .kg-3 .kg-3-panel { border: 1px solid var(--border-soft); border-radius: 9px; padding: 10px; background: rgba(255,255,255,0.02); margin-bottom: 9px; }
+            .kg-3 .kg-3-ph { font-size: 9px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 8px; }
+            .kg-3 .kg-3-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+            .kg-3 .kg-3-donut { display: flex; align-items: center; gap: 12px; }
+            .kg-3 .kg-3-ring { width: 62px; height: 62px; border-radius: 50%; flex: none; background: conic-gradient(var(--teal) 0 55%, var(--gold) 55% 82%, var(--blue) 82% 100%); -webkit-mask: radial-gradient(circle 17px at center, transparent 98%, #000 100%); mask: radial-gradient(circle 17px at center, transparent 98%, #000 100%); }
+            .kg-3 .kg-3-key { font-size: 11px; color: var(--fg-dim); }
+            .kg-3 .kg-3-kr { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+            .kg-3 .kg-3-kd { width: 8px; height: 8px; border-radius: 2px; flex: none; }
+            .kg-3 .kg-3-kr .kn { margin-left: auto; color: var(--fg); font-weight: 600; }
+            @media (prefers-reduced-motion: reduce) { .kg-3 .flow { animation: none; opacity: 0; } }
+            @media (max-width: 560px) { .kg-3 .kg-3-body { grid-template-columns: 1fr; } .kg-3 .kg-3-graph { display: none; } }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">◈ Knowledge Graph</span></div>
+          <div class="kg-3-body">
+            <div class="kg-3-graph">
+              <svg viewBox="0 0 320 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="The graph behind the sidebar, with Sara Chen's node and edges highlighted.">
+                <g stroke-linecap="round">
+                  <line x1="150" y1="150" x2="70"  y2="80"  stroke="rgba(45,212,191,0.5)" stroke-width="1.6"/>
+                  <line x1="150" y1="150" x2="250" y2="90"  stroke="rgba(45,212,191,0.5)" stroke-width="1.6"/>
+                  <line x1="150" y1="150" x2="230" y2="220" stroke="rgba(45,212,191,0.5)" stroke-width="1.6"/>
+                  <line x1="150" y1="150" x2="80"  y2="220" stroke="rgba(45,212,191,0.5)" stroke-width="1.6"/>
+                  <line x1="250" y1="90"  x2="250" y2="220" stroke="rgba(255,255,255,0.10)" stroke-width="1.1"/>
+                </g>
+                <circle class="flow" cx="150" cy="150" r="2.6" fill="var(--teal)" style="--dx:-80px; --dy:-70px;"/>
+                <circle class="flow" cx="150" cy="150" r="2.6" fill="var(--gold)" style="--dx:100px; --dy:-60px; animation-delay:0.7s;"/>
+                <circle class="flow" cx="150" cy="150" r="2.6" fill="var(--accent)" style="--dx:80px; --dy:70px; animation-delay:1.2s;"/>
+                <circle class="flow" cx="150" cy="150" r="2.6" fill="var(--blue)" style="--dx:-70px; --dy:70px; animation-delay:1.7s;"/>
+                <circle cx="150" cy="150" r="24" fill="var(--teal)" opacity="0.18"/>
+                <circle cx="150" cy="150" r="14" fill="url(#blobTeal)"/>
+                <ellipse cx="145" cy="144" rx="4.6" ry="3.4" fill="#ffffff" opacity="0.5"/>
+                <circle cx="70"  cy="80"  r="8" fill="url(#blobTeal)"/>
+                <circle cx="250" cy="90"  r="9" fill="url(#blobGold)"/>
+                <circle cx="230" cy="220" r="8" fill="url(#blobAccent)"/>
+                <circle cx="80"  cy="220" r="7" fill="url(#blobBlue)"/>
+              </svg>
+            </div>
+            <div class="kg-3-side">
+              <div class="kg-3-head">
+                <div class="kg-3-av">SC</div>
+                <div>
+                  <div class="kg-3-nm">Sara Chen</div>
+                  <div class="kg-3-ty">👤 Person</div>
+                </div>
+                <div class="kg-3-btns">
+                  <span class="kg-3-btn" title="Open full page">⤢</span>
+                  <span class="kg-3-btn" title="Close">✕</span>
+                </div>
+              </div>
+              <div class="kg-3-tabs">
+                <span class="kg-3-tab on">Overview</span>
+                <span class="kg-3-tab">Mentions</span>
+                <span class="kg-3-tab">Profile</span>
+              </div>
+              <div class="kg-3-stats">
+                <div class="kg-3-stat"><div class="kg-3-num">12</div><div class="kg-3-lab">Occurrences</div></div>
+                <div class="kg-3-stat"><div class="kg-3-num">5</div><div class="kg-3-lab">Notebooks</div></div>
+                <div class="kg-3-stat"><div class="kg-3-num">2d</div><div class="kg-3-lab">Last seen</div></div>
+                <div class="kg-3-stat"><div class="kg-3-num">Apr</div><div class="kg-3-lab">First seen</div></div>
+              </div>
+              <div class="kg-3-panel">
+                <div class="kg-3-ph">Appears with</div>
+                <div class="kg-3-chips">
+                  <span class="pill pill-mention">@Sam Ortiz</span>
+                  <span class="pill pill-hashtag">#launch</span>
+                  <span class="pill pill-mention">@Acme Co</span>
+                </div>
+              </div>
+              <div class="kg-3-panel">
+                <div class="kg-3-ph">Connections by type</div>
+                <div class="kg-3-donut">
+                  <div class="kg-3-ring"></div>
+                  <div class="kg-3-key">
+                    <div class="kg-3-kr"><span class="kg-3-kd" style="background:var(--teal);"></span> Person <span class="kn">7</span></div>
+                    <div class="kg-3-kr"><span class="kg-3-kd" style="background:var(--gold);"></span> Project <span class="kn">4</span></div>
+                    <div class="kg-3-kr"><span class="kg-3-kd" style="background:var(--blue);"></span> Company <span class="kn">2</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <figcaption>The graph entity sidebar — a minified copy of the full entity page, with expand-to-full-page and in-place pill navigation.</figcaption>
       </figure>
@@ -90,10 +366,38 @@
       <p>Each notebook can show a compact graph above the page — just that note’s entities and their immediate connections. It’s fully interactive (drag to pan, drag nodes, click to inspect, <kbd>⌘</kbd>+scroll to zoom), and when you scroll down to write, it parks itself to keep the editor fast.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="knowledge-graph/cover-graph.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The in-note cover graph.</strong> Set up: open a notebook that mentions several entities, scrolled to the top so the cover graph sits above the title. In frame: the compact graph band spanning the top of the page — just this note’s glowing type-coloured nodes and their immediate links — with the editor title and first lines beginning right beneath it.</span>
+        <div class="mock kg-4 is-live" style="max-width: 520px; margin: 0 auto;">
+          <style>
+            .kg-4 .kg-4-cover { padding: 6px 8px 2px; background: linear-gradient(180deg, rgba(99,102,241,0.06), transparent); border-bottom: 1px solid var(--border-soft); }
+            .kg-4 .kg-4-cover .mock-graph { height: 120px; }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">👋 Launch plan</span></div>
+          <div class="kg-4-cover">
+            <svg class="mock-graph" viewBox="0 0 500 120" role="img" aria-label="A compact cover graph above the note: this note linking to @Sara, #launch, @Acme Co and a date.">
+              <g stroke-linecap="round">
+                <line class="edge" style="animation-delay:.25s" x1="250" y1="66" x2="140" y2="34"/>
+                <line class="edge" style="animation-delay:.4s"  x1="250" y1="66" x2="360" y2="30"/>
+                <line class="edge" style="animation-delay:.55s" x1="250" y1="66" x2="380" y2="92"/>
+                <line class="edge" style="animation-delay:.7s"  x1="250" y1="66" x2="120" y2="94"/>
+              </g>
+              <circle class="node" style="animation-delay:0s"   cx="250" cy="66" r="10" fill="url(#blobAccent)"/>
+              <ellipse class="node" style="animation-delay:0s" cx="246" cy="62" rx="3.2" ry="2.4" fill="#ffffff" opacity="0.45"/>
+              <circle class="node" style="animation-delay:.2s"  cx="140" cy="34" r="7"  fill="url(#blobTeal)"/>
+              <circle class="node" style="animation-delay:.35s" cx="360" cy="30" r="7"  fill="url(#blobGold)"/>
+              <circle class="node" style="animation-delay:.5s"  cx="380" cy="92" r="6"  fill="url(#blobBlue)"/>
+              <circle class="node" style="animation-delay:.65s" cx="120" cy="94" r="6"  fill="url(#blobTeal)"/>
+              <g font-family="Inter,sans-serif" font-size="10.5" font-weight="600">
+                <text class="node" style="animation-delay:.2s"  x="140" y="20"  fill="var(--teal)" text-anchor="middle">@Sara</text>
+                <text class="node" style="animation-delay:.35s" x="360" y="16"  fill="var(--gold)" text-anchor="middle">#launch</text>
+                <text class="node" style="animation-delay:.5s"  x="380" y="112" fill="var(--blue)" text-anchor="middle">Fri 5pm</text>
+              </g>
+            </svg>
+          </div>
+          <div class="mock-pad" style="padding-top: 14px;">
+            <div class="mock-title" style="font-size: 19px;">Launch plan</div>
+            <div class="mock-meta">Edited just now · 4 connections</div>
+            <div class="mock-line" style="color: var(--fg);">Kickoff review with <span class="pill pill-mention">@Sara Chen</span> on the <span class="pill pill-hashtag">#launch</span> — ship by <span class="pill pill-date">Fri 5pm</span>.<span class="mock-caret"></span></div>
+          </div>
         </div>
         <figcaption>A per-note mini-graph above the page — fully interactive, and it parks itself as you scroll to write.</figcaption>
       </figure>

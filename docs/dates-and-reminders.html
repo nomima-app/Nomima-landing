@@ -51,12 +51,12 @@
       </ul>
 
       <figure class="guide-figure">
-        <div class="figure-slot slot-gif" data-shot="dates-and-reminders/date-pill-forming.gif">
-          <span class="figure-slot-icon">►</span>
-          <span class="figure-slot-kind">Short clip</span>
-          <span class="figure-slot-label"><strong>A date pill forms as you type.</strong> Set up: in a paragraph, type “meet Sara tomorrow 3pm” then press <kbd>Space</kbd> (or a comma) after “3pm”. In frame: the plain words “tomorrow 3pm” snapping into a single <span class="pill pill-date">date pill</span> the instant the trigger key lands, with the rest of the sentence untouched.</span>
+        <div class="mock is-live" style="max-width: 480px; margin: 0 auto;">
+          <div class="mock-pad">
+            <div class="mock-line" style="color: var(--fg); font-size: 14px; margin: 0;">Meet <span class="pill pill-mention">@Sara Chen</span> <span class="mock-slot"><span class="mock-landed"><span class="pill pill-date">📅 tomorrow 3pm</span></span><span class="mock-typed">tomorrow 3pm<span class="mock-caret"></span></span></span> at the studio</div>
+          </div>
         </div>
-        <figcaption>Type the date in plain words; the space/comma/period after it turns the phrase into a live pill.</figcaption>
+        <figcaption>Type the date in plain words; the space, comma or period after it turns the phrase into a live <span class="pill pill-date">date</span> pill.</figcaption>
       </figure>
 
       <h2 id="tracked">Where dates show up</h2>
@@ -86,10 +86,14 @@
       </table>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="dates-and-reminders/reminder-countdown.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>An armed reminder counting down.</strong> Set up: insert <code>/reminder</code>, type “call mom tomorrow 3pm” so the label holds a date pill, and press <kbd>Enter</kbd> to arm it. In frame: the single reminder row with its locked label on the left and the live countdown (e.g. “in 5h”) on the right — the running state, not yet overdue.</span>
+        <div class="mock" style="max-width: 460px; margin: 0 auto;">
+          <div class="mock-pad">
+            <div style="display: flex; align-items: center; gap: 12px; padding: 11px 13px; border-radius: 10px; background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.30);">
+              <span style="color: var(--accent); font-size: 15px;">🕐</span>
+              <div style="flex: 1; color: var(--fg); font-size: 13.5px;">Call the venue <span class="pill pill-date">📅 tomorrow 3pm</span></div>
+              <span class="mock-remind" style="margin-top: 0; padding: 5px 10px; color: var(--accent); background: rgba(124,58,237,0.14); border-color: rgba(124,58,237,0.4);"><span class="bell" style="color: var(--accent);">◷</span> <b>in 5h 12m</b></span>
+            </div>
+          </div>
         </div>
         <figcaption>Arming locks the label and starts the countdown ticking toward the due moment.</figcaption>
       </figure>
@@ -102,12 +106,30 @@
       </ul>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="dates-and-reminders/reminder-controls.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The Done and Snooze controls.</strong> Set up: on a running reminder row, click <strong>Snooze</strong> so its quick menu is open. In frame: the reminder row’s two action buttons — <strong>Done</strong> and <strong>Snooze</strong> — with the “Snooze for…” menu showing its four presets (30 minutes, 1 hour, 3 hours, 1 day).</span>
+        <div class="mock" style="max-width: 440px; margin: 0 auto;">
+          <style>
+            .dt-3-btn { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 8px; font-size: 12px; font-weight: 600; border: 1px solid var(--border); color: var(--fg-dim); }
+            .dt-3-btn.done { color: var(--green); border-color: rgba(52,211,153,0.35); background: rgba(52,211,153,0.08); }
+            .dt-3-btn.open { color: var(--fg); border-color: rgba(99,102,241,0.45); background: rgba(99,102,241,0.16); }
+          </style>
+          <div class="mock-pad mock-anchor" style="min-height: 250px;">
+            <div style="display: flex; align-items: center; gap: 9px; padding: 11px 13px; border-radius: 10px; background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.30);">
+              <span style="color: var(--accent); font-size: 15px;">🕐</span>
+              <div style="flex: 1; color: var(--fg); font-size: 13.5px;">Call the venue <span class="pill pill-date">📅 tomorrow 3pm</span></div>
+              <span class="dt-3-btn done">✓ Done</span>
+              <span class="dt-3-btn open">◷ Snooze</span>
+              <span class="dt-3-btn" style="padding: 5px 9px;">✕</span>
+            </div>
+            <div class="mock-menu" style="position: absolute; right: 22px; top: 76px; min-width: 168px;">
+              <div class="mock-menu-h">Snooze for…</div>
+              <div class="mock-mi"><span class="ic" style="color: var(--blue);">◷</span> 30 minutes</div>
+              <div class="mock-mi"><span class="ic" style="color: var(--blue);">◷</span> 1 hour</div>
+              <div class="mock-mi active"><span class="ic" style="color: var(--blue);">◷</span> 3 hours</div>
+              <div class="mock-mi"><span class="ic" style="color: var(--blue);">◷</span> 1 day</div>
+            </div>
+          </div>
         </div>
-        <figcaption>Every running reminder offers exactly two actions — Done, or Snooze with four quick presets.</figcaption>
+        <figcaption>A running reminder offers Done, Snooze (four quick presets), or dismiss with ✕.</figcaption>
       </figure>
 
       <h2 id="notifications">Desktop notifications</h2>
@@ -120,10 +142,48 @@
       </ul>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="dates-and-reminders/alerts-lens.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The Alerts lens.</strong> Set up: with a few overdue and a few upcoming reminders/dated tasks in the vault, open <strong>Smart View</strong> and pick the <strong>Alerts</strong> (bell) lens. In frame: the two stacked sections — <strong>Overdue</strong> then <strong>Upcoming</strong> — each row showing its ✓ complete button, a snooze/dismiss control, and the source-note link, with the red count on the lens’s bell pill.</span>
+        <div class="mock" style="max-width: 540px; margin: 0 auto;">
+          <style>
+            .dt-4-sec { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); margin: 14px 0 6px; }
+            .dt-4-sec:first-child { margin-top: 0; }
+            .dt-4-sec.od { color: var(--red); }
+            .dt-4-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-top: 1px solid var(--border-soft); }
+            .dt-4-lbl { flex: 1; color: var(--fg); font-size: 13.5px; display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+            .dt-4-ctl { font-size: 11.5px; color: var(--fg-dim); padding: 3px 9px; border-radius: 7px; border: 1px solid var(--border); }
+            .dt-4-src { font-size: 11.5px; color: var(--blue); white-space: nowrap; }
+          </style>
+          <div class="mock-bar">
+            <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
+            <span class="mock-bar-title">⚠ Alerts <span class="pill pill-overdue" style="padding: 0 7px;">2</span></span>
+          </div>
+          <div class="mock-pad" style="padding: 14px 18px;">
+            <div class="dt-4-sec od">Overdue</div>
+            <div class="dt-4-row">
+              <span class="mock-check"></span>
+              <span class="dt-4-lbl">Send the press draft <span class="pill pill-overdue">2h overdue</span></span>
+              <span class="dt-4-ctl">Snooze</span>
+              <span class="dt-4-src">↗ Launch plan</span>
+            </div>
+            <div class="dt-4-row">
+              <span class="mock-check"></span>
+              <span class="dt-4-lbl">Confirm the venue <span class="pill pill-overdue">yesterday</span></span>
+              <span class="dt-4-ctl">Snooze</span>
+              <span class="dt-4-src">↗ Launch plan</span>
+            </div>
+            <div class="dt-4-sec">Upcoming</div>
+            <div class="dt-4-row">
+              <span class="mock-check"></span>
+              <span class="dt-4-lbl">Review the deck with <span class="pill pill-mention">@Sara Chen</span> <span class="pill pill-date">📅 tomorrow 3pm</span></span>
+              <span class="dt-4-ctl">Dismiss</span>
+              <span class="dt-4-src">↗ Launch plan</span>
+            </div>
+            <div class="dt-4-row">
+              <span class="mock-check"></span>
+              <span class="dt-4-lbl">Ship the announcement <span class="pill pill-date">📅 Fri 5pm</span></span>
+              <span class="dt-4-ctl">Dismiss</span>
+              <span class="dt-4-src">↗ Launch plan</span>
+            </div>
+          </div>
         </div>
         <figcaption>Nomima has no notifications bell — due and overdue items live in the Alerts lens and on Home’s badges.</figcaption>
       </figure>

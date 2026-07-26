@@ -50,9 +50,71 @@
         <tr><td>About</td><td>Version, the <strong>Check for updates</strong> button, a “What’s new” card, and the Nomima tagline.</td></tr>
       </table>
 
-      <figure class="guide-figure"><div class="figure-slot" data-shot="settings-privacy/connectors-panel.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The Connectors panel.</strong> Set up: Settings → Connectors. In frame: the rows for <strong>Atlassian (Confluence/Jira)</strong>, <strong>Notion</strong> and <strong>GitHub</strong>, each with a personal-token field (masked once saved) and a note that tokens live in the macOS Keychain and requests go straight from your device to the service.</span></div><figcaption>Add personal tokens for Confluence/Jira, Notion and GitHub so private pages can be read, highlighted and cited — tokens stay in your Keychain.</figcaption></figure>
+      <figure class="guide-figure">
+        <style>
+          /* Settings &amp; privacy page — scoped mockup helpers (prefix .set-) */
+          .set-conn { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--border-soft); border-radius: 10px; background: rgba(255,255,255,0.02); }
+          .set-conn + .set-conn { margin-top: 9px; }
+          .set-cico { width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; font-size: 15px; font-weight: 800; flex: none; }
+          .set-cname { font-weight: 600; color: var(--fg); font-size: 13.5px; }
+          .set-csub { font-size: 11.5px; color: var(--fg-faint); margin-top: 1px; }
+          .set-connect { margin-left: auto; padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
+          .set-connected { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; font-size: 11.5px; font-weight: 700; color: var(--green); background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); }
+          /* Highlights categories */
+          .set-cat { display: flex; align-items: center; gap: 11px; padding: 9px 12px; border: 1px solid var(--border-soft); border-radius: 9px; background: rgba(255,255,255,0.02); }
+          .set-cat + .set-cat { margin-top: 8px; }
+          .set-sw { width: 15px; height: 15px; border-radius: 5px; flex: none; }
+          .set-catname { font-size: 13.5px; color: var(--fg); font-weight: 500; }
+          .set-catex { font-size: 11.5px; color: var(--fg-faint); }
+          .set-edit { margin-left: auto; font-size: 12px; color: var(--fg-faint); }
+          .set-add { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1px dashed var(--border); border-radius: 9px; color: var(--accent); font-size: 12.5px; font-weight: 600; margin-top: 8px; }
+          /* Theme gallery */
+          .set-tgroup { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); margin: 14px 0 8px; }
+          .set-tgroup:first-child { margin-top: 0; }
+          .set-tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+          .set-th { border-radius: 9px; overflow: hidden; border: 1.5px solid var(--border); }
+          .set-th.sel { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(99,102,241,0.35); }
+          .set-thumb { height: 46px; padding: 7px; position: relative; }
+          .set-thumb .bar { height: 5px; border-radius: 3px; background: rgba(255,255,255,0.5); margin-bottom: 4px; }
+          .set-thumb .bar.s { width: 55%; }
+          .set-thumb .dot { position: absolute; right: 7px; bottom: 7px; width: 12px; height: 12px; border-radius: 50%; }
+          .set-tlabel { display: flex; align-items: center; gap: 5px; padding: 5px 8px; font-size: 11px; color: var(--fg-dim); background: rgba(255,255,255,0.02); border-top: 1px solid var(--border-soft); }
+          .set-tlabel .ck { margin-left: auto; color: var(--accent); font-weight: 900; }
+        </style>
+        <div class="mock mock-pad" style="max-width: 480px; margin: 0 auto;">
+          <div class="mock-side-h" style="margin: 0 0 12px;">Connectors</div>
+          <div class="set-conn">
+            <span class="set-cico" style="color:#fff; background:linear-gradient(150deg,#2684ff,#0052cc);">A</span>
+            <div><div class="set-cname">Atlassian <span style="color:var(--fg-faint); font-weight:400;">· Confluence / Jira</span></div><div class="set-csub">Token ••••••••••3f9a · macOS Keychain</div></div>
+            <span class="set-connected">● Connected</span>
+          </div>
+          <div class="set-conn">
+            <span class="set-cico" style="color:#fff; background:#111;">N</span>
+            <div><div class="set-cname">Notion</div><div class="set-csub">Read private pages to cite</div></div>
+            <span class="set-connect">Connect</span>
+          </div>
+          <div class="set-conn">
+            <span class="set-cico" style="color:var(--fg); background:#24292f;">◐</span>
+            <div><div class="set-cname">GitHub</div><div class="set-csub">Read private repos &amp; issues</div></div>
+            <span class="set-connect">Connect</span>
+          </div>
+          <div class="mock-line" style="margin: 12px 0 0; font-size: 11.5px; color: var(--fg-faint);">🔒 Tokens are stored in your macOS Keychain; requests go straight from your device to the service.</div>
+        </div>
+        <figcaption>Add personal tokens for Confluence/Jira, Notion and GitHub so private pages can be read, highlighted and cited — tokens stay in your Keychain.</figcaption>
+      </figure>
 
-      <figure class="guide-figure"><div class="figure-slot" data-shot="settings-privacy/highlights-panel.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The Highlights panel.</strong> Set up: Settings → Highlights. In frame: the editable list of colour-coded highlight categories used in the reader — each row showing its colour swatch and label — which drive the References library and each citation’s lineage.</span></div><figcaption>Edit the colour-coded research buckets you highlight with while reading — they flow through to the References library and citations.</figcaption></figure>
+      <figure class="guide-figure">
+        <div class="mock mock-pad" style="max-width: 460px; margin: 0 auto;">
+          <div class="mock-side-h" style="margin: 0 0 12px;">Highlight categories</div>
+          <div class="set-cat"><span class="set-sw" style="background:var(--gold)"></span><span class="set-catname">Key claim</span><span class="set-catex">⌥1</span><span class="set-edit">✎</span></div>
+          <div class="set-cat"><span class="set-sw" style="background:var(--blue)"></span><span class="set-catname">Method</span><span class="set-catex">⌥2</span><span class="set-edit">✎</span></div>
+          <div class="set-cat"><span class="set-sw" style="background:var(--green)"></span><span class="set-catname">Result</span><span class="set-catex">⌥3</span><span class="set-edit">✎</span></div>
+          <div class="set-cat"><span class="set-sw" style="background:var(--accent-2)"></span><span class="set-catname">Question</span><span class="set-catex">⌥4</span><span class="set-edit">✎</span></div>
+          <div class="set-cat"><span class="set-sw" style="background:var(--teal)"></span><span class="set-catname">Quote</span><span class="set-catex">⌥5</span><span class="set-edit">✎</span></div>
+          <div class="set-add">＋ Add category</div>
+        </div>
+        <figcaption>Edit the colour-coded research buckets you highlight with while reading — they flow through to the References library and citations.</figcaption>
+      </figure>
 
       <h2 id="appearance">Appearance &amp; themes</h2>
       <p>Nomima ships <strong>27 built-in themes</strong> in the Appearance panel, organised into five groups. Pick one and the whole app re-skins instantly — editor, sidebar, graph and all.</p>
@@ -74,7 +136,30 @@
 
       <p class="note"><strong>A couple of quirks worth knowing:</strong> <strong>Mono</strong> and <strong>Mono Light</strong> desaturate the entire app to strict black, white and grey. <strong>Nova</strong>, <strong>Bloom</strong> and every Scene use gradient accent buttons rather than a flat colour.</p>
 
-      <figure class="guide-figure"><div class="figure-slot" data-shot="settings-privacy/theme-gallery-scene.png"><span class="figure-slot-icon">▣</span><span class="figure-slot-kind">Screenshot</span><span class="figure-slot-label"><strong>The Appearance theme gallery.</strong> Set up: Settings → Appearance with a <strong>Scene</strong> theme applied (e.g. Aurora or Nightfall) so the scenic backdrop shows behind the translucent app. In frame: the theme swatches organised under their group headers (<strong>Signature</strong>, <strong>Scenes</strong>, <strong>Dark</strong>, <strong>Light</strong>, <strong>Accessibility</strong>) with the active Scene swatch selected, and the drifting background visible behind the panel.</span></div><figcaption>27 themes in five groups — here a Scene theme paints a slowly drifting backdrop behind the frosted app.</figcaption></figure>
+      <figure class="guide-figure">
+        <div class="mock mock-pad" style="max-width: 480px; margin: 0 auto;">
+          <div class="mock-side-h" style="margin: 0 0 4px;">Appearance</div>
+          <div class="set-tgroup">Signature</div>
+          <div class="set-tgrid">
+            <div class="set-th"><div class="set-thumb" style="background:linear-gradient(150deg,rgba(99,102,241,0.28),rgba(240,72,168,0.18)),#0e0e19;"><div class="bar"></div><div class="bar s"></div><div class="dot" style="background:linear-gradient(135deg,var(--accent),var(--accent-2))"></div></div><div class="set-tlabel">Glass</div></div>
+            <div class="set-th"><div class="set-thumb" style="background:#0b0b12;"><div class="bar"></div><div class="bar s"></div><div class="dot" style="background:var(--accent)"></div></div><div class="set-tlabel">Dark</div></div>
+            <div class="set-th"><div class="set-thumb" style="background:#f4f4f7;"><div class="bar" style="background:rgba(0,0,0,0.35)"></div><div class="bar s" style="background:rgba(0,0,0,0.35)"></div><div class="dot" style="background:var(--accent)"></div></div><div class="set-tlabel">Light</div></div>
+          </div>
+          <div class="set-tgroup">Scenes</div>
+          <div class="set-tgrid">
+            <div class="set-th sel"><div class="set-thumb" style="background:linear-gradient(180deg,#0b1e3a,#123f5c 45%,#1f7a6d 78%,#2dd4bf);"><div class="bar"></div><div class="bar s"></div><div class="dot" style="background:linear-gradient(135deg,var(--accent),var(--accent-2))"></div></div><div class="set-tlabel">Aurora <span class="ck">✓</span></div></div>
+            <div class="set-th"><div class="set-thumb" style="background:linear-gradient(180deg,#1a1030,#3a1e5c 60%,#6d2f7a);"><div class="bar"></div><div class="bar s"></div><div class="dot" style="background:linear-gradient(135deg,var(--accent),var(--accent-2))"></div></div><div class="set-tlabel">Nightfall</div></div>
+            <div class="set-th"><div class="set-thumb" style="background:linear-gradient(180deg,#031326,#062a3f 60%,#0a4a5c);"><div class="bar"></div><div class="bar s"></div><div class="dot" style="background:linear-gradient(135deg,var(--accent),var(--accent-2))"></div></div><div class="set-tlabel">Ocean</div></div>
+          </div>
+          <div class="set-tgroup">Dark</div>
+          <div class="set-tgrid">
+            <div class="set-th"><div class="set-thumb" style="background:#0a0e1a;"><div class="bar"></div><div class="bar s"></div><div class="dot" style="background:var(--blue)"></div></div><div class="set-tlabel">Midnight</div></div>
+            <div class="set-th"><div class="set-thumb" style="background:#0c130f;"><div class="bar"></div><div class="bar s"></div><div class="dot" style="background:var(--green)"></div></div><div class="set-tlabel">Evergreen</div></div>
+            <div class="set-th"><div class="set-thumb" style="background:#141014;"><div class="bar"></div><div class="bar s"></div><div class="dot" style="background:var(--accent-2)"></div></div><div class="set-tlabel">Nova</div></div>
+          </div>
+        </div>
+        <figcaption>27 themes in five groups — here a Scene theme paints a slowly drifting backdrop behind the frosted app.</figcaption>
+      </figure>
 
       <h2 id="privacy">Privacy: what stays, what leaves</h2>
       <p>Nomima is local-first in the literal sense. Your vault — every note, file, comment and graph relationship — lives in a folder on your Mac (under <code>~/Library/Application Support</code>), stored in an ordinary SQLite database. No account exists, no telemetry is collected, nothing syncs anywhere.</p>

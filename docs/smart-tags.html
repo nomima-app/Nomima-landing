@@ -41,10 +41,12 @@
       <p>Every tag becomes an <strong>entity</strong> in your Knowledge Graph. Tag <span class="pill pill-mention">@Sara</span> in five different notes and Nomima knows they’re all about the same person — her Smart View lens, graph node and entity card collect everything in one place.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="smart-tags/formed-pills.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Formed pills in a note.</strong> Set up: write a sentence carrying an @mention and a #hashtag of different types (e.g. “@Sara owns the #launch”). In frame: the two coloured pills inline in the running text — a person-coloured @Sara mention and a project-coloured #launch hashtag — each with its type icon.</span>
+        <div class="mock" style="max-width: 460px; margin: 0 auto;">
+          <div class="mock-pad">
+            <div class="mock-line" style="color: var(--fg); font-size: 14.5px; margin: 0;">
+              <span class="pill pill-mention">👤 @Sara Chen</span> owns the <span class="pill pill-hashtag">💼 #launch</span> — kickoff review lands <span class="pill pill-date">Fri 5pm</span>.
+            </div>
+          </div>
         </div>
         <figcaption>Every tag is a small coloured pill embedded right in your text.</figcaption>
       </figure>
@@ -59,10 +61,20 @@
       <p class="note"><strong>The menu suggests the type for you.</strong> For a brand-new <span class="pill pill-mention">@mention</span> whose name Nomima’s offline gazetteer recognizes, the <strong>Create new</strong> rows lead with the predicted type as the <kbd>Enter</kbd> default — <span class="pill pill-mention">@Microsoft</span> → <em>Company</em>, <span class="pill pill-mention">@London</span> → <em>Location</em>, <span class="pill pill-mention">@Sarah</span> → <em>Person</em>. A name it doesn’t recognize leads with <em>No type</em>, and <em>No type</em> plus every other type always follow so you can override in one keystroke. Hashtags get no predicted type — they lead with <em>No type</em>.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="smart-tags/create-type-menu.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The @ menu with Create-new type rows.</strong> Set up: type “@Microsoft” (a name the offline gazetteer recognises) so the suggestion menu shows the Create-new rows. In frame: the dropdown under the caret with the predicted type leading as the <kbd>Enter</kbd> default (Company for @Microsoft), each row showing its type icon, and the remaining type rows plus “No type” below it.</span>
+        <div class="mock" style="max-width: 460px; margin: 0 auto;">
+          <div class="mock-pad mock-anchor" style="min-height: 250px;">
+            <div class="mock-line" style="color: var(--fg); font-size: 14px;">
+              Met with <span style="color: var(--teal); font-weight: 600;">@Microsoft</span><span class="mock-caret"></span> yesterday
+            </div>
+            <div class="mock-menu" style="position: absolute; left: 74px; top: 42px; min-width: 250px;">
+              <div class="mock-menu-h">Create “Microsoft” as</div>
+              <div class="mock-mi active"><span class="ic">🏢</span> Company <span class="sub" style="margin-left:auto; display:inline-flex; align-items:center; gap:7px;">predicted <kbd style="margin-left:0;">⏎</kbd></span></div>
+              <div class="mock-mi"><span class="ic">📦</span> Product</div>
+              <div class="mock-mi"><span class="ic">👤</span> Person</div>
+              <div class="mock-mi"><span class="ic">📄</span> Document</div>
+              <div class="mock-mi"><span class="ic" style="opacity:.6;">○</span> No type</div>
+            </div>
+          </div>
         </div>
         <figcaption>Pick the type right in the menu — the predicted one is the <kbd>Enter</kbd> default.</figcaption>
       </figure>
@@ -103,10 +115,37 @@
       <p>Custom types get their own color in the Knowledge Graph legend and their own grouping in search — they’re first-class citizens.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="smart-tags/custom-type-editor.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The Smart Tag Types editor.</strong> Set up: open Settings → Smart Tag Types. In frame: the two families (@ mention and # hashtag) with their type rows, each showing its icon and colour swatch, the add-type control, and one custom type freshly added to a family.</span>
+        <div class="mock tag3" style="max-width: 520px; margin: 0 auto;">
+          <style>
+            .tag3 .tag3-sec { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); margin: 4px 0 8px; }
+            .tag3 .tag3-sec:not(:first-child) { margin-top: 18px; }
+            .tag3 .tag3-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+            .tag3 .tag3-row { display: flex; align-items: center; gap: 9px; padding: 7px 10px; border-radius: 8px; border: 1px solid var(--border-soft); background: rgba(255,255,255,0.02); font-size: 12.5px; color: var(--fg); }
+            .tag3 .tag3-sw { width: 13px; height: 13px; border-radius: 4px; flex: none; }
+            .tag3 .tag3-row .ic { width: 16px; text-align: center; }
+            .tag3 .tag3-row .pen { margin-left: auto; opacity: 0.4; font-size: 11px; }
+            .tag3 .tag3-badge { margin-left: auto; font-size: 9px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-2); border: 1px solid rgba(240,72,168,0.4); border-radius: 5px; padding: 1px 5px; }
+            .tag3 .tag3-add { grid-column: 1 / -1; display: flex; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 8px; border: 1px dashed rgba(99,102,241,0.4); color: var(--accent); font-size: 12.5px; font-weight: 600; }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">Settings · Smart Tag Types</span></div>
+          <div class="mock-pad">
+            <div class="tag3-sec">@ Mention types</div>
+            <div class="tag3-grid">
+              <div class="tag3-row"><span class="tag3-sw" style="background: var(--teal);"></span><span class="ic">👤</span> Person <span class="pen">✎</span></div>
+              <div class="tag3-row"><span class="tag3-sw" style="background: var(--blue);"></span><span class="ic">🏢</span> Company <span class="pen">✎</span></div>
+              <div class="tag3-row"><span class="tag3-sw" style="background: var(--green);"></span><span class="ic">📍</span> Location <span class="pen">✎</span></div>
+              <div class="tag3-row"><span class="tag3-sw" style="background: var(--amber);"></span><span class="ic">📦</span> Product <span class="pen">✎</span></div>
+              <div class="tag3-row" style="border-color: rgba(240,72,168,0.4);"><span class="tag3-sw" style="background: var(--accent-2);"></span><span class="ic">🤝</span> Client <span class="tag3-badge">custom</span></div>
+              <div class="tag3-add"><span>＋</span> Add type</div>
+            </div>
+            <div class="tag3-sec"># Hashtag types</div>
+            <div class="tag3-grid">
+              <div class="tag3-row"><span class="tag3-sw" style="background: var(--gold);"></span><span class="ic">💼</span> Project <span class="pen">✎</span></div>
+              <div class="tag3-row"><span class="tag3-sw" style="background: var(--amber);"></span><span class="ic">💡</span> Idea <span class="pen">✎</span></div>
+              <div class="tag3-row"><span class="tag3-sw" style="background: var(--green);"></span><span class="ic">🚩</span> Status <span class="pen" style="opacity:.2;">🔒</span></div>
+              <div class="tag3-row"><span class="tag3-sw" style="background: var(--blue);"></span><span class="ic">📁</span> Area <span class="pen">✎</span></div>
+            </div>
+          </div>
         </div>
         <figcaption>Add your own types or restyle the built-ins — each keeps its own colour and icon.</figcaption>
       </figure>
@@ -122,19 +161,109 @@
       </ul>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="smart-tags/entity-card.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>An entity card.</strong> Set up: click a Person pill that has a photo and a couple of attributes filled in. In frame: the popover with the entity’s photo avatar, its editable name, the type-selector icon row, the Edit · Profile · Appears in tab bar, the Expand button, and a couple of attribute fields (e.g. Email, Role) below.</span>
+        <div class="mock tag4" style="max-width: 360px; margin: 0 auto;">
+          <style>
+            .tag4 .tag4-head { display: flex; align-items: center; gap: 12px; }
+            .tag4 .tag4-av { width: 46px; height: 46px; border-radius: 50%; flex: none; display: grid; place-items: center; font-size: 17px; font-weight: 800; color: #fff; background: linear-gradient(150deg, #2dd4bf, #0f766e); }
+            .tag4 .tag4-name { font-size: 16px; font-weight: 800; letter-spacing: -0.01em; }
+            .tag4 .tag4-type { font-size: 11.5px; color: var(--teal); display: flex; align-items: center; gap: 5px; }
+            .tag4 .tag4-exp { margin-left: auto; align-self: flex-start; color: var(--fg-faint); font-size: 14px; }
+            .tag4 .tag4-tabs { display: flex; gap: 4px; margin: 14px 0 12px; border-bottom: 1px solid var(--border-soft); }
+            .tag4 .tag4-tab { font-size: 12px; font-weight: 600; color: var(--fg-dim); padding: 6px 8px; }
+            .tag4 .tag4-tab.active { color: var(--fg); border-bottom: 2px solid var(--accent); }
+            .tag4 .tag4-typerow { display: flex; gap: 6px; margin-bottom: 14px; }
+            .tag4 .tag4-tchip { width: 26px; height: 26px; border-radius: 7px; display: grid; place-items: center; font-size: 13px; border: 1px solid var(--border-soft); color: var(--fg-dim); }
+            .tag4 .tag4-tchip.on { background: rgba(45,212,191,0.14); border-color: rgba(45,212,191,0.4); }
+            .tag4 .tag4-field { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--border-soft); font-size: 13px; }
+            .tag4 .tag4-flabel { width: 58px; color: var(--fg-faint); font-size: 11.5px; }
+            .tag4 .tag4-fval { color: var(--fg); }
+          </style>
+          <div class="mock-pad">
+            <div class="tag4-head">
+              <div class="tag4-av">SC</div>
+              <div>
+                <div class="tag4-name">Sara Chen</div>
+                <div class="tag4-type">👤 Person</div>
+              </div>
+              <span class="tag4-exp">⤢</span>
+            </div>
+            <div class="tag4-typerow">
+              <span class="tag4-tchip on">👤</span><span class="tag4-tchip">👥</span><span class="tag4-tchip">🏢</span><span class="tag4-tchip">📍</span><span class="tag4-tchip">📦</span>
+            </div>
+            <div class="tag4-tabs">
+              <span class="tag4-tab active">Edit</span>
+              <span class="tag4-tab">Profile</span>
+              <span class="tag4-tab">Appears in</span>
+            </div>
+            <div class="tag4-field"><span class="tag4-flabel">Email</span><span class="tag4-fval">sara@acme.co</span></div>
+            <div class="tag4-field"><span class="tag4-flabel">Role</span><span class="tag4-fval">Head of Design</span></div>
+            <div class="tag4-field"><span class="tag4-flabel">Team</span><span class="tag4-fval"><span class="pill pill-mention">👥 @Design</span></span></div>
+          </div>
         </div>
         <figcaption>Click any pill to open its hub — attributes, a custom photo, and everywhere it appears.</figcaption>
       </figure>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="smart-tags/entity-detail-page.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The full Entity view.</strong> Set up: on an entity card, click the Expand button to open the full-page view and stay on the Overview tab. In frame: the header with the entity’s avatar, name and type; the Overview · Mentions · Tasks · Profile tab bar; and the Overview bento — the stat cards, the “Appears with” panel and the “Connections by type” panel.</span>
+        <div class="mock tag5" style="max-width: 560px; margin: 0 auto;">
+          <style>
+            .tag5 .tag5-head { display: flex; align-items: center; gap: 13px; margin-bottom: 14px; }
+            .tag5 .tag5-av { width: 44px; height: 44px; border-radius: 50%; flex: none; display: grid; place-items: center; font-size: 16px; font-weight: 800; color: #fff; background: linear-gradient(150deg, #2dd4bf, #0f766e); }
+            .tag5 .tag5-name { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
+            .tag5 .tag5-type { font-size: 11.5px; color: var(--teal); }
+            .tag5 .tag5-tabs { display: flex; gap: 6px; margin-bottom: 14px; border-bottom: 1px solid var(--border-soft); }
+            .tag5 .tag5-tab { font-size: 12px; font-weight: 600; color: var(--fg-dim); padding: 6px 4px; }
+            .tag5 .tag5-tab.active { color: var(--fg); border-bottom: 2px solid var(--accent); }
+            .tag5 .tag5-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-bottom: 11px; }
+            .tag5 .tag5-stat { border: 1px solid var(--border-soft); border-radius: 10px; padding: 11px 12px; background: rgba(255,255,255,0.02); }
+            .tag5 .tag5-num { font-size: 21px; font-weight: 800; letter-spacing: -0.02em; }
+            .tag5 .tag5-lab { font-size: 10.5px; color: var(--fg-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+            .tag5 .tag5-bento { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+            .tag5 .tag5-panel { border: 1px solid var(--border-soft); border-radius: 10px; padding: 12px; background: rgba(255,255,255,0.02); }
+            .tag5 .tag5-ph { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 9px; }
+            .tag5 .tag5-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+            .tag5 .tag5-conn { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--fg-dim); margin-bottom: 8px; }
+            .tag5 .tag5-conn:last-child { margin-bottom: 0; }
+            .tag5 .tag5-bar { height: 6px; border-radius: 3px; flex: 1; }
+            .tag5 .tag5-cn { color: var(--fg); font-weight: 600; width: 16px; text-align: right; }
+          </style>
+          <div class="mock-bar"><span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span><span class="mock-bar-title">Entity · Sara Chen</span></div>
+          <div class="mock-pad">
+            <div class="tag5-head">
+              <div class="tag5-av">SC</div>
+              <div>
+                <div class="tag5-name">Sara Chen</div>
+                <div class="tag5-type">👤 Person</div>
+              </div>
+            </div>
+            <div class="tag5-tabs">
+              <span class="tag5-tab active">Overview</span>
+              <span class="tag5-tab">Mentions</span>
+              <span class="tag5-tab">Tasks</span>
+              <span class="tag5-tab">Profile</span>
+            </div>
+            <div class="tag5-stats">
+              <div class="tag5-stat"><div class="tag5-num">12</div><div class="tag5-lab">Mentions</div></div>
+              <div class="tag5-stat"><div class="tag5-num">4</div><div class="tag5-lab">Open tasks</div></div>
+              <div class="tag5-stat"><div class="tag5-num">5</div><div class="tag5-lab">Notebooks</div></div>
+            </div>
+            <div class="tag5-bento">
+              <div class="tag5-panel">
+                <div class="tag5-ph">Appears with</div>
+                <div class="tag5-chips">
+                  <span class="pill pill-mention">@Sam Ortiz</span>
+                  <span class="pill pill-hashtag">#launch</span>
+                  <span class="pill pill-mention">@Acme Co</span>
+                  <span class="pill pill-hashtag">#research</span>
+                </div>
+              </div>
+              <div class="tag5-panel">
+                <div class="tag5-ph">Connections by type</div>
+                <div class="tag5-conn"><span style="width:52px;color:var(--teal);">Person</span><span class="tag5-bar" style="background:var(--teal);max-width:70%;"></span><span class="tag5-cn">7</span></div>
+                <div class="tag5-conn"><span style="width:52px;color:var(--gold);">Project</span><span class="tag5-bar" style="background:var(--gold);max-width:45%;"></span><span class="tag5-cn">4</span></div>
+                <div class="tag5-conn"><span style="width:52px;color:var(--blue);">Company</span><span class="tag5-bar" style="background:var(--blue);max-width:22%;"></span><span class="tag5-cn">2</span></div>
+              </div>
+            </div>
+          </div>
         </div>
         <figcaption>Expand a card into a full page — computed stats, who it appears with, and its connections.</figcaption>
       </figure>
@@ -155,10 +284,30 @@
       </ol>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="smart-tags/relation-field-how-it-reads.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>The “How it reads” editor.</strong> Set up: on a Team entity card, click Add field → Relationship, set Links to → Person. In frame: the two-row “How it reads” sentence with the entity chip, the editable verb inputs (forward + reverse), the “Links to” type dropdown, and the “…is the container (members inherit it)” checkbox.</span>
+        <div class="mock tag6" style="max-width: 480px; margin: 0 auto;">
+          <style>
+            .tag6 .tag6-h { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+            .tag6 .tag6-links { display: flex; align-items: center; gap: 9px; font-size: 12.5px; color: var(--fg-dim); margin-bottom: 14px; }
+            .tag6 .tag6-dd { display: flex; align-items: center; gap: 8px; padding: 6px 11px; border-radius: 8px; border: 1px solid var(--border); background: rgba(255,255,255,0.03); color: var(--fg); font-weight: 600; }
+            .tag6 .tag6-reads { border: 1px solid var(--border-soft); border-radius: 10px; padding: 13px; background: rgba(99,102,241,0.04); }
+            .tag6 .tag6-rh { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 10px; }
+            .tag6 .tag6-row { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--fg-dim); margin-bottom: 9px; flex-wrap: wrap; }
+            .tag6 .tag6-row:last-child { margin-bottom: 0; }
+            .tag6 .tag6-verb { display: inline-block; padding: 3px 10px; border-radius: 7px; border: 1px solid rgba(99,102,241,0.45); background: rgba(99,102,241,0.10); color: var(--fg); font-weight: 600; font-size: 12.5px; }
+            .tag6 .tag6-tchip { color: var(--fg-faint); font-style: italic; }
+            .tag6 .tag6-check { display: flex; align-items: center; gap: 9px; margin-top: 13px; font-size: 12.5px; color: var(--fg-dim); }
+            .tag6 .tag6-box { width: 16px; height: 16px; border-radius: 5px; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: 11px; font-weight: 900; flex: none; }
+          </style>
+          <div class="mock-pad">
+            <div class="tag6-h">Add relationship field</div>
+            <div class="tag6-links">Links to <span class="tag6-dd">👤 Person ▾</span></div>
+            <div class="tag6-reads">
+              <div class="tag6-rh">How it reads</div>
+              <div class="tag6-row"><span class="pill pill-mention">👥 @Design</span> <span class="tag6-verb">manages ⌶</span> <span class="tag6-tchip">a Person</span></div>
+              <div class="tag6-row"><span class="tag6-tchip">a Person</span> <span class="tag6-verb">member of ⌶</span> <span class="pill pill-mention">👥 @Design</span></div>
+            </div>
+            <div class="tag6-check"><span class="tag6-box">✓</span> <span><b style="color:var(--fg);">@Design</b> is the container (members inherit it)</span></div>
+          </div>
         </div>
         <figcaption>A relationship is authored as a field: name the verb on each side, then pick who it links to.</figcaption>
       </figure>
@@ -177,10 +326,41 @@
       <p>On an entity card, relationships are <strong>read-only</strong> and grouped one row per label and direction — a team shows <em>Members: <span class="pill pill-mention">@Sara</span>, <span class="pill pill-mention">@Moe</span></em> on a single row rather than one row each. Each target is a real pill in its own type colour, and clicking it jumps to that entity. The <a href="knowledge-graph.html">Knowledge Graph</a> folds these authored links straight in as labelled edges between nodes.</p>
 
       <figure class="guide-figure">
-        <div class="figure-slot" data-shot="smart-tags/entity-card-relationships-grouped.png">
-          <span class="figure-slot-icon">▣</span>
-          <span class="figure-slot-kind">Screenshot</span>
-          <span class="figure-slot-label"><strong>Grouped relationships on a card.</strong> Set up: open a Person who is in a team that sits inside a company. In frame: the Relationships section with a direct row (e.g. “member of → @L2”) and a muted <em>inherited · @L2</em> row showing the company, demonstrating one-row-per-label grouping.</span>
+        <div class="mock tag7" style="max-width: 380px; margin: 0 auto;">
+          <style>
+            .tag7 .tag7-head { display: flex; align-items: center; gap: 11px; margin-bottom: 14px; }
+            .tag7 .tag7-av { width: 40px; height: 40px; border-radius: 50%; flex: none; display: grid; place-items: center; font-size: 15px; font-weight: 800; color: #fff; background: linear-gradient(150deg, #2dd4bf, #0f766e); }
+            .tag7 .tag7-name { font-size: 15px; font-weight: 800; }
+            .tag7 .tag7-type { font-size: 11px; color: var(--teal); }
+            .tag7 .tag7-ph { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-faint); margin: 4px 0 10px; }
+            .tag7 .tag7-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 11px; }
+            .tag7 .tag7-lab { flex: none; width: 84px; font-size: 12px; color: var(--fg-dim); }
+            .tag7 .tag7-vals { display: flex; flex-wrap: wrap; gap: 5px; }
+            .tag7 .tag7-inh { opacity: 0.55; }
+            .tag7 .tag7-via { font-size: 10.5px; color: var(--fg-faint); font-style: italic; margin-left: 3px; }
+          </style>
+          <div class="mock-pad">
+            <div class="tag7-head">
+              <div class="tag7-av">SC</div>
+              <div>
+                <div class="tag7-name">Sara Chen</div>
+                <div class="tag7-type">👤 Person</div>
+              </div>
+            </div>
+            <div class="tag7-ph">Relationships</div>
+            <div class="tag7-row">
+              <span class="tag7-lab">Member of</span>
+              <span class="tag7-vals"><span class="pill pill-mention">👥 @Design</span></span>
+            </div>
+            <div class="tag7-row">
+              <span class="tag7-lab">Reports to</span>
+              <span class="tag7-vals"><span class="pill pill-mention">👤 @Moe Diaz</span></span>
+            </div>
+            <div class="tag7-row tag7-inh">
+              <span class="tag7-lab">Member of</span>
+              <span class="tag7-vals"><span class="pill pill-mention">🏢 @Acme Co</span><span class="tag7-via">inherited · via @Design</span></span>
+            </div>
+          </div>
         </div>
         <figcaption>Relationships read as sentences on the card; inherited ones appear muted with their “via” path.</figcaption>
       </figure>
