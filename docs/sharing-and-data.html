@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Import, export &amp; publishing — Nomima Guide</title>
-  <meta name="description" content="Export a notebook or your whole vault to Markdown, HTML or JSON, import it back in, and publish a read-only note to the web with a private view code." />
+  <title>Backup, sharing &amp; publishing — Nomima Guide</title>
+  <meta name="description" content="Back up your vault to iCloud encrypted, AirDrop a notebook to a nearby Mac, export or import your notes, and publish a read-only note to the web with a private view code." />
   <link rel="icon" type="image/svg+xml" href="../logo.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,8 +28,8 @@
     <main class="docs-main">
       <header class="docs-header">
         <div class="docs-label">Everything else</div>
-        <h1 class="docs-title">Import, export &amp; publishing</h1>
-        <p class="docs-sub">Your notes are yours. Take a single notebook or your whole vault out to open files, bring them back in, or publish a read-only copy of one note to the web behind a private code.</p>
+        <h1 class="docs-title">Backup, sharing &amp; publishing</h1>
+        <p class="docs-sub">Your notes are yours. Keep an encrypted backup in your own iCloud, AirDrop a notebook to the Mac next to you, take everything out to open files and bring it back in — or publish a read-only copy of one note to the web behind a private code.</p>
       </header>
 
       <h2 id="export">Export</h2>
@@ -57,6 +57,48 @@
 
       <p><strong>What's included.</strong> Your blocks and their text, and the Smart Tags (@mentions, #hashtags) inside them, are all serialized. A whole-vault export also copies in every <strong>attached file</strong> under an <code>assets/</code> folder, and writes a <code>manifest.json</code> index so Nomima can rebuild your notebook hierarchy on import. A single-notebook export contains just that notebook's document.</p>
       <p class="note"><strong>Note:</strong> HTML is a one-way format — it's meant for reading, not re-importing. For a backup you can restore, export as <strong>JSON</strong> (or a JSON/Markdown vault <code>.zip</code>).</p>
+
+      <h2 id="backup">Back up to iCloud</h2>
+      <p>An export is something you do; a <strong>backup</strong> is something Nomima does for you. Turn it on in <strong>Settings&nbsp;→&nbsp;Backup</strong> and Nomima keeps an <strong>encrypted snapshot</strong> of your whole vault — notes, attached files and settings — in <em>your own</em> iCloud Drive, on the schedule you pick.</p>
+      <p>It is <strong>off until you switch it on</strong>. The snapshot is encrypted <em>before</em> it leaves your Mac and lands in your iCloud account, not ours — nobody at Nomima can read it, and there is no server in the middle.</p>
+      <ul>
+        <li><strong>Turn it on</strong> — flip <strong>Back up to iCloud</strong>. The folder it writes to is shown right under the switch. If iCloud Drive isn't set up on your Mac, Nomima tells you instead of failing silently.</li>
+        <li><strong>How often</strong> — set the interval in hours. <strong>Back up now</strong> runs one immediately; a progress bar shows it archiving, encrypting and writing.</li>
+        <li><strong>How many are kept</strong> — the latest <strong>two</strong> snapshots. Each one is a full copy of your vault, so older ones are pruned automatically rather than filling your iCloud storage.</li>
+      </ul>
+
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="sharing-and-data/backup-settings.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Settings → Backup.</strong> Set up: enable the switch and run one backup so a snapshot is listed. In frame: the &ldquo;Back up to iCloud&rdquo; switch with its destination path, the interval row, the recovery-passphrase row, and one or two snapshots with their Restore buttons.</span>
+        </div>
+        <figcaption>Backup is opt-in, encrypted, and keeps the latest two snapshots.</figcaption>
+      </figure>
+
+      <h3 id="restore">Restoring — including on a new Mac</h3>
+      <p>Every snapshot is listed with how long ago it was taken. Choose <strong>Restore…</strong> and Nomima rebuilds your vault from it and relaunches. Your previous vault isn't thrown away — it's kept beside the new one as a safety copy (a folder ending <code>.old-</code> and a timestamp) so a restore is never a one-way door.</p>
+      <p>On a <strong>brand-new Mac</strong>: install Nomima, sign into the same iCloud account, and the backup folder syncs down. Open <strong>Settings&nbsp;→&nbsp;Backup&nbsp;→&nbsp;Restore from file…</strong> and pick the snapshot.</p>
+      <p class="note"><strong>Set a recovery passphrase.</strong> It's what lets you restore on a Mac that <em>isn't</em> signed into your iCloud. You can reveal it later from the same screen to check what you set — but it can't be recovered <em>for</em> you, and without it a backup from another account can't be opened. Keep it somewhere safe (and not only inside Nomima).</p>
+
+      <h2 id="nearby-share">Share a notebook with a Mac nearby</h2>
+      <p>To hand a notebook to someone sitting next to you, you don't need an account, a link, or even a network. Right-click a notebook in the sidebar — or open the <strong>⋯</strong> menu while you're reading one — and choose <strong>Share…</strong></p>
+      <p>The standard macOS share sheet opens, so <strong>AirDrop</strong> is right there, along with Messages, Mail and Save&nbsp;to&nbsp;Files. Pick the nearby Mac and it's sent. On the other side the file opens straight into Nomima as a new notebook — nothing to import by hand.</p>
+      <ul>
+        <li><strong>Attachments come too.</strong> Files attached to the notebook travel inside it and open normally on the other Mac, keeping whether you'd added them to your knowledge base.</li>
+        <li><strong>Smart Tags reconnect.</strong> A shared note about <strong>@Priya</strong> joins up with the recipient's own Priya — their notes, attributes and Knowledge Graph — instead of arriving as a stranger. Anyone they don't already have is created.</li>
+        <li><strong>It arrives as a copy.</strong> Sharing sends a snapshot, not a live link: later edits on either Mac stay separate. (Two people editing one notebook together is a different feature, and isn't here yet.)</li>
+      </ul>
+      <figure class="guide-figure">
+        <div class="figure-slot" data-shot="sharing-and-data/share-menu.png">
+          <span class="figure-slot-icon">▣</span>
+          <span class="figure-slot-kind">Screenshot</span>
+          <span class="figure-slot-label"><strong>Share… and the macOS share sheet.</strong> Set up: right-click a notebook in the sidebar. In frame: the context menu with <em>Share…</em> above <em>Export…</em>, and the macOS share sheet open beside it with AirDrop listed.</span>
+        </div>
+        <figcaption>Share… opens the standard macOS share sheet — AirDrop included.</figcaption>
+      </figure>
+
+      <p class="note"><strong>The file is a <code>.nomima</code> document.</strong> Any Mac with Nomima installed recognises it — double-click it in Finder and it opens in the app. On a Mac <em>without</em> Nomima it's still readable plain text rather than a dead file, so what you send never becomes unopenable.</p>
 
       <h2 id="import">Import</h2>
       <p>Import lives in <strong>Settings → Import…</strong>. It opens a file picker; choose what to bring in and Nomima recreates the notebooks in your vault.</p>
