@@ -267,6 +267,7 @@
           <g class="rail-stop" data-rver="v1.22.0"><circle cx="771" cy="846" r="6" fill="#34d399"/><text x="771" y="833" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.22.0</text></g>
           <g class="rail-stop" data-rver="v1.23.0"><circle cx="682" cy="846" r="6" fill="#34d399"/><text x="682" y="833" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.23.0</text></g>
           <g class="rail-stop" data-rver="v1.24.0"><circle cx="594" cy="846" r="6" fill="#34d399" stroke="#fff" stroke-width="2"/><text x="594" y="833" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.24.0</text></g>
+          <g class="rail-stop" data-rver="v1.25.0"><circle cx="700" cy="846" r="6" fill="#34d399" stroke="#fff" stroke-width="2"/><text x="700" y="833" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.25.0</text></g>
         </svg>
       </div>
     </div>
@@ -281,8 +282,26 @@
 
         <div class="rel-card featured">
           <div class="rel-meta">
-            <div class="rel-ver">v1.24.0</div>
+            <div class="rel-ver">v1.25.0</div>
             <div class="rel-badge latest">Latest</div>
+            <div class="rel-badge editor">Connected apps</div>
+          </div>
+          <div class="rel-body">
+            <h3>Your vault, reachable from any AI app &middot; a setup card per client &middot; notes you can attach from the other side</h3>
+            <p><strong>Connect Nomima to any AI app, not just the two we picked.</strong> <em>Settings &rarr; Advanced &rarr; MCP server</em> now has a card for Claude Desktop, Claude Code, Cursor and VS Code &mdash; each with the exact setup that app needs, because they genuinely differ. <strong>A connected app can finally see what makes your vault yours:</strong> until now it got your notes and nothing else, and it can now reach the people, companies and projects behind your @mentions &mdash; with their details and how they connect to each other &mdash; plus your reference library, the passages you highlighted, and your folders. Ask a connected assistant &ldquo;what do we know about Acme?&rdquo; and you get who they are and which sources back it, instead of a text search. <strong>Attach a note from inside the other app:</strong> your notebooks show up in its attachment picker, with four ready-made prompts that already know which part of your vault to look in. <strong>Connected apps notice when your vault changes</strong> &mdash; create, rename or delete a notebook and they refresh, with no reconnecting and no picker offering a note you deleted. It stays <strong>under your control</strong>: one Never / Ask first / Allow switch, a per-tool list so a broad server cannot flood every request, and every call recorded in <em>Activity</em>. Also: entity cards show their dates again &mdash; when you first mentioned someone and when you last did had been silently missing for almost everything &mdash; and Home greets you with a tip, search hits light up where they matched, and the header floats over your notes in glass.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">A setup card per app</span>
+              <span class="rel-chip">Your people, projects &amp; references</span>
+              <span class="rel-chip">Attach a note from the other app</span>
+              <span class="rel-chip">Ready-made prompts</span>
+              <span class="rel-chip">Never / Ask first / Allow</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.24.0</div>
             <div class="rel-badge editor">Summon &amp; blocks</div>
           </div>
           <div class="rel-body">
@@ -912,6 +931,7 @@
   <script>
   (function(){
     var R = {
+      "v1.25.0": {"cat":"Connected apps","catC":"#34d399","label":"Reachable from any AI app","body":"Claude Desktop, Cursor and VS Code can read your people, projects, references and highlights"},
       "v1.24.0": {"cat":"Summon & blocks","catC":"#6d5ef7","label":"Every kind of block","body":"Summon reads and edits boards, timelines, carousels and dashboards \u2014 and builds the ones it could not"},
       "v0.1.0":  {"cat":"Platform","catC":"#fbbf24","label":"First release","body":"TipTap block editor with slash-command block picker"},
       "v0.1.1":  {"cat":"Platform","catC":"#74748a","label":"Update checker","body":"Notify-only in-app update banner (no auto-download)"},

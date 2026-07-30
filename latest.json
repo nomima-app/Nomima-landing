@@ -1,16 +1,16 @@
 {
-  "version": "1.24.0",
-  "notes": "v1.24.0: Summon now works with every kind of block, not just text — it can read what's inside your boards, timelines, dashboards and carousels, and edit one Gantt bar or kanban card in place instead of rebuilding the whole thing. It can also build blocks it couldn't before: a carousel of videos, a GitHub repo card, a news feed. Rewrites no longer lose your boards, connected MCP servers work again, and Settings → Summon → Activity records what Summon did. Plus .nomima bundles that keep your attachments, smart tags and folders — and the first universal build, running natively on Apple Silicon and Intel.",
-  "pub_date": "2026-07-30T19:00:00Z",
-  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.24.0/Nomima_1.24.0_universal.dmg",
+  "version": "1.25.0",
+  "notes": "v1.25.0: Other AI apps can now reach the part of your notes that matters. Connect Claude Desktop, Claude Code, Cursor or VS Code with a setup card made for each one, and a connected app can see the people, companies and projects behind your @mentions — with their details and how they connect — plus your reference library, your highlights and your folders. Your notebooks show up in the other app's attachment picker, four ready-made prompts come with them, and connected apps are told when your vault changes. It stays under your control: one Never / Ask first / Allow switch, a per-tool list, and every call recorded in Activity. Entity cards show their dates again, and Home greets you with a tip.",
+  "pub_date": "2026-07-31T00:00:00Z",
+  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.25.0/Nomima_1.25.0_universal.dmg",
   "platforms": {
     "darwin-aarch64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVElFYUZxVlFhOC9XclJtL3hTSG9xVVJEVFRlNzJSOTNpV2MwUldCWUNUM3Z6MG9lZFpzZmNPc2UwbjB2RzI4YVhNNE1mN2xqZWNEbVBJY3JHaEVvTWtXNnBTZUQ3TGcwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg1NDI0Mzk1CWZpbGU6Tm9taW1hLmFwcC50YXIuZ3oKWngxNVFqYnlPVXFBNEI3Ti9zTDRJSFNacmxRUzg3M2ZSOThIYUhZekNsSE9RcENoVWVhdzBidGppMGd1SFZtS2UzbFhXa3RZNFFoam9jTEV3NlVUQlE9PQo=",
-      "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.24.0/Nomima_1.24.0_universal.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVElFYUZxVlFhODdrY2U3alNWT1k0NktkdGY4SXU2R21GcU1NQml4dldpS1NmS3l2ZFg2aVRSNlJGWUN5Z09QSHpXelJXQkp1bmtSY0RDVUVONHF5NUQzYmFJNnEzbVE0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg1NDQ5OTIyCWZpbGU6Tm9taW1hLmFwcC50YXIuZ3oKc0Rhd2U5cURaNEVibHIyaDFOak8veGVrckhqNFlkODdDc0F1TWxIVGNodlZwZGlYaVAxcmlRVTljOFlRTmw1ZFdha0t2RGMvUk8rZnpjbHFPUlRiQkE9PQo=",
+      "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.25.0/Nomima.app.tar.gz"
     },
     "darwin-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVElFYUZxVlFhOC9XclJtL3hTSG9xVVJEVFRlNzJSOTNpV2MwUldCWUNUM3Z6MG9lZFpzZmNPc2UwbjB2RzI4YVhNNE1mN2xqZWNEbVBJY3JHaEVvTWtXNnBTZUQ3TGcwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg1NDI0Mzk1CWZpbGU6Tm9taW1hLmFwcC50YXIuZ3oKWngxNVFqYnlPVXFBNEI3Ti9zTDRJSFNacmxRUzg3M2ZSOThIYUhZekNsSE9RcENoVWVhdzBidGppMGd1SFZtS2UzbFhXa3RZNFFoam9jTEV3NlVUQlE9PQo=",
-      "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.24.0/Nomima_1.24.0_universal.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVElFYUZxVlFhODdrY2U3alNWT1k0NktkdGY4SXU2R21GcU1NQml4dldpS1NmS3l2ZFg2aVRSNlJGWUN5Z09QSHpXelJXQkp1bmtSY0RDVUVONHF5NUQzYmFJNnEzbVE0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg1NDQ5OTIyCWZpbGU6Tm9taW1hLmFwcC50YXIuZ3oKc0Rhd2U5cURaNEVibHIyaDFOak8veGVrckhqNFlkODdDc0F1TWxIVGNodlZwZGlYaVAxcmlRVTljOFlRTmw1ZFdha0t2RGMvUk8rZnpjbHFPUlRiQkE9PQo=",
+      "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.25.0/Nomima.app.tar.gz"
     }
   }
 }
