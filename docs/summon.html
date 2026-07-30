@@ -221,7 +221,16 @@
 
       <h2 id="memory">Memory, steps &amp; nudges</h2>
       <ul>
-        <li><strong>Persistent memory (Brain button)</strong> — a memory panel behind the Brain button in the chat input shows everything Summon has learned about you across sessions. Add facts manually, or delete any it got wrong.</li>
+        <li><strong>Persistent memory (Brain button)</strong> — a memory panel behind the Brain button in the chat input shows what Summon has picked up about <em>how you like to work</em>: the shape of answers you prefer, habits worth repeating. Add entries manually, or delete any it got wrong. Also in <strong>Settings → Summon → Memory</strong>.</li>
+        <li><strong>Memory is behaviour, not who you are</strong> — your name, role, employer and the rest live in <strong>Settings → About you</strong> instead, because they&rsquo;re true whether or not you use AI. Summon reads that profile; it never writes to it. See <a href="settings-privacy.html">Settings &amp; privacy</a>.</li>
+        <li><strong>What it refuses to remember</strong> — three things are blocked outright, so a wrong &ldquo;fact&rdquo; can&rsquo;t get repeated back to you forever:
+          <ul>
+            <li><em>Claims about other people</em> — who&rsquo;s on whose team, who reports to whom. Those belong on the person or team, where you can see and correct them; Summon offers to record them there instead. Your own details (&ldquo;my manager is @Mara&rdquo;) still save normally.</li>
+            <li><em>Guesses</em> — if it was only fairly sure (&ldquo;probably for the video platform&rdquo;), it won&rsquo;t file that away as though you&rsquo;d said it.</li>
+            <li><em>Anything that goes stale</em> — an age is wrong from your next birthday, so it asks for your date of birth instead and works the age out when needed. Same for &ldquo;next week&rdquo; versus an actual date. Anything already saved in that shape gets an amber <strong>will go out of date</strong> flag; nothing is deleted for you.</li>
+          </ul>
+        </li>
+        <li><strong>With no AI set up</strong> — memory is only ever used when Summon answers you, so if you haven&rsquo;t added a model the Memory page says so plainly rather than quietly collecting entries nothing reads. Your entries stay in your vault and start being used the moment you add one, including a fully local model that works offline.</li>
         <li><strong>Live agent steps</strong> — when Summon uses its tools, the steps stream live as collapsible “thinking” steps so you can follow its reasoning.</li>
         <li><strong>Proactive nudges</strong> — Summon can surface cold notes you might want to revisit.</li>
       </ul>
@@ -279,7 +288,7 @@
       </table>
       <p>Done and cancelled tasks tidy themselves up automatically after 30 days, so the list stays manageable over time.</p>
 
-      <p class="note"><strong>Gated actions pause for your approval.</strong> A background task can’t pop a dialog in your face, so when one wants to do something sensitive — write a file, run a shell command, or use a Mac bridge like sending mail or creating a calendar event — it stops and posts a <strong>Needs Approval</strong> card at the top of the Tasks view: <em>“A background task wants to: …”</em> with the concrete detail and inline <strong>Approve</strong> / <strong>Reject</strong> buttons. Nothing sensitive happens until you say so, and every decision is recorded. You choose which categories are even eligible — and how freely they run — in <strong>Settings → Summon → Capabilities</strong> (below).</p>
+      <p class="note"><strong>Gated actions pause for your approval.</strong> A background task can’t pop a dialog in your face, so when one wants to do something sensitive — write a file, run a shell command, or use a Mac bridge like sending mail or creating a calendar event — it stops and posts a <strong>Needs Approval</strong> card: <em>“A background task wants to: …”</em> with the concrete detail and inline <strong>Approve</strong> / <strong>Reject</strong> buttons. The card appears in <strong>two places at once</strong> — at the top of the Tasks view, and pinned just above the message box in the Summon chat, so you don’t have to be watching the Tasks view to notice that something is waiting on you. Answer it in either place. Until you do, the task is <em>paused</em>, not working — which is why Summon says a task has been <em>queued</em> rather than promising the result. Nothing sensitive happens until you say so, and every decision is recorded. You choose which categories are even eligible — and how freely they run — in <strong>Settings → Summon → Capabilities</strong> (below).</p>
 
       <figure class="guide-figure">
         <div class="mock sm-6" style="max-width: 600px; margin: 0 auto;">

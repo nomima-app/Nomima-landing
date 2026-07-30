@@ -265,7 +265,8 @@
           <!-- row 6 — v1.21.0 · v1.22.0 · v1.23.0 (current) -->
           <g class="rail-stop" data-rver="v1.21.0"><circle cx="860" cy="846" r="6" fill="#34d399"/><text x="860" y="833" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.21.0</text></g>
           <g class="rail-stop" data-rver="v1.22.0"><circle cx="771" cy="846" r="6" fill="#34d399"/><text x="771" y="833" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.22.0</text></g>
-          <g class="rail-stop" data-rver="v1.23.0"><circle cx="682" cy="846" r="6" fill="#34d399" stroke="#fff" stroke-width="2"/><text x="682" y="833" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.23.0</text></g>
+          <g class="rail-stop" data-rver="v1.23.0"><circle cx="682" cy="846" r="6" fill="#34d399"/><text x="682" y="833" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.23.0</text></g>
+          <g class="rail-stop" data-rver="v1.24.0"><circle cx="594" cy="846" r="6" fill="#34d399" stroke="#fff" stroke-width="2"/><text x="594" y="833" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--fg)">v1.24.0</text></g>
         </svg>
       </div>
     </div>
@@ -280,8 +281,30 @@
 
         <div class="rel-card featured">
           <div class="rel-meta">
-            <div class="rel-ver">v1.23.0</div>
+            <div class="rel-ver">v1.24.0</div>
             <div class="rel-badge latest">Latest</div>
+            <div class="rel-badge editor">Summon &amp; blocks</div>
+          </div>
+          <div class="rel-body">
+            <h3>Summon works with every kind of block &middot; carousels, repo cards and feeds it can build &middot; .nomima bundles &middot; Intel Macs</h3>
+            <p><strong>Summon can read and edit every kind of block, not just text.</strong> Ask what is in a carousel and it tells you which videos you picked, URL by URL; ask it to move a bar on a Gantt chart or tick one off and it changes <em>that</em> bar, keeping its colour and the people on it. Boards, timelines, dashboards, bookmarks, citations and reminders can all be read and edited in place instead of rebuilt. <strong>It can also build the blocks it could not before</strong> &mdash; &ldquo;make me a carousel of YouTube videos for learning Python&rdquo; produces a real scrolling strip of videos, each resolving its own title and thumbnail, and GitHub repo cards, news feeds, a page index, a calendar and a sketch canvas can all be created by asking. <strong>Rewrites no longer lose your boards:</strong> when Summon reorganised a notebook, a kanban board or database in it could quietly disappear &mdash; it was told to preserve them and had no way to. <strong>Connected MCP servers work again</strong> (Context7, DeepWiki or your own), asking first if you have set external calls to &ldquo;Ask&rdquo;, and <em>Settings &rarr; Summon &rarr; Activity</em> records what Summon did once more &mdash; including the actions that were refused. <strong>Export a .nomima bundle</strong> of a notebook or your whole vault, keeping attachments, smart tags and sidebar folders, and import it anywhere. And this is the <strong>first universal build</strong>: one download that runs natively on Apple Silicon <em>and</em> Intel.</p>
+            <div class="rel-chips">
+              <span class="rel-chip">Reads boards, timelines &amp; dashboards</span>
+              <span class="rel-chip">Edits one Gantt bar, not the chart</span>
+              <span class="rel-chip">Builds carousels of videos</span>
+              <span class="rel-chip">GitHub cards &middot; feeds &middot; drawings</span>
+              <span class="rel-chip">Rewrites keep your boards</span>
+              <span class="rel-chip">MCP servers restored</span>
+              <span class="rel-chip">Activity trail records again</span>
+              <span class="rel-chip">.nomima bundles</span>
+              <span class="rel-chip">Universal &mdash; Intel + Apple Silicon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rel-card">
+          <div class="rel-meta">
+            <div class="rel-ver">v1.23.0</div>
             <div class="rel-badge editor">Backup &amp; sharing</div>
           </div>
           <div class="rel-body">
@@ -889,6 +912,7 @@
   <script>
   (function(){
     var R = {
+      "v1.24.0": {"cat":"Summon & blocks","catC":"#6d5ef7","label":"Every kind of block","body":"Summon reads and edits boards, timelines, carousels and dashboards \u2014 and builds the ones it could not"},
       "v0.1.0":  {"cat":"Platform","catC":"#fbbf24","label":"First release","body":"TipTap block editor with slash-command block picker"},
       "v0.1.1":  {"cat":"Platform","catC":"#74748a","label":"Update checker","body":"Notify-only in-app update banner (no auto-download)"},
       "v0.1.2":  {"cat":"Platform","catC":"#74748a","label":"Memory fixes","body":"KV cache quantized q8_0; 2 slots / 8k ctx / --no-warmup"},

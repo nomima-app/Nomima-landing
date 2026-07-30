@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Import, export &amp; publishing — Nomima Guide</title>
-  <meta name="description" content="Export a notebook or your whole vault to Markdown, HTML or JSON, import it back in, and publish a read-only note to the web with a private view code." />
+  <meta name="description" content="Export a notebook or your whole vault as a complete .nomima bundle (files included) or as Markdown, HTML or JSON, import it back in, and publish a read-only note to the web with a private view code." />
   <link rel="icon" type="image/svg+xml" href="../logo.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -33,18 +33,19 @@
       </header>
 
       <h2 id="export">Export</h2>
-      <p>You can export <strong>a single notebook</strong> or your <strong>entire vault</strong>, in any of three formats.</p>
+      <p>You can export <strong>a single notebook</strong> or your <strong>entire vault</strong>, in any of four formats.</p>
       <ul>
         <li><strong>One notebook</strong> — hover the notebook in the sidebar, open its <strong>⋯</strong> menu and choose <strong>Export…</strong>. Pick a format and choose where to save the file.</li>
-        <li><strong>Whole vault</strong> — open <strong>Settings</strong> and use <strong>Export vault</strong>. Every notebook plus its attachments is bundled into a single <code>.zip</code>, with folders that mirror how your notebooks are nested.</li>
+        <li><strong>Whole vault</strong> — open <strong>Settings</strong> and use <strong>Export vault</strong>. Every notebook plus its attachments is bundled into a single file, laid out to mirror your sidebar: each <strong>folder</strong> becomes a directory holding its notebooks, and a page with subpages becomes a directory holding its own document plus those subpages.</li>
       </ul>
+      <p><strong>Start with the Nomima bundle.</strong> It's the first option and the default, and it's the only one that takes your <strong>attached files</strong> along with the notes. The other three are for getting your writing <em>out</em> of Nomima and into something else — so each one tells you, in the dialog, what it leaves behind.</p>
 
       <figure class="guide-figure">
         <div class="mock shr-1" style="max-width: 440px; margin: 0 auto;">
           <style>
             .shr-1 .shr-1-h { font-size: 15px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 2px; }
             .shr-1 .shr-1-sub { font-size: 11.5px; color: var(--fg-faint); margin-bottom: 15px; }
-            .shr-1 .shr-1-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+            .shr-1 .shr-1-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
             .shr-1 .shr-1-card { border: 1px solid var(--border-soft); border-radius: 10px; padding: 12px 10px; background: rgba(255,255,255,0.02); text-align: center; }
             .shr-1 .shr-1-card.on { border-color: rgba(99,102,241,0.55); background: rgba(99,102,241,0.10); }
             .shr-1 .shr-1-ic { font-size: 19px; }
@@ -58,29 +59,32 @@
             <div class="shr-1-h">Export notebook</div>
             <div class="shr-1-sub">Launch plan · choose a format</div>
             <div class="shr-1-cards">
-              <div class="shr-1-card on"><div class="shr-1-ic">📝</div><div class="shr-1-fmt">Markdown</div><div class="shr-1-ext">.md</div></div>
+              <div class="shr-1-card on"><div class="shr-1-ic">📦</div><div class="shr-1-fmt">Nomima bundle</div><div class="shr-1-ext">.nomima</div></div>
+              <div class="shr-1-card"><div class="shr-1-ic">📝</div><div class="shr-1-fmt">Markdown</div><div class="shr-1-ext">.md</div></div>
               <div class="shr-1-card"><div class="shr-1-ic">🌐</div><div class="shr-1-fmt">HTML</div><div class="shr-1-ext">.html</div></div>
               <div class="shr-1-card"><div class="shr-1-ic">🧩</div><div class="shr-1-fmt">JSON</div><div class="shr-1-ext">.json</div></div>
             </div>
-            <div class="shr-1-hint">Portable plain text that opens in any editor.</div>
+            <div class="shr-1-hint">A complete replica: the note, its attached files and its Smart Tags.</div>
             <div class="shr-1-foot">
               <button style="padding:8px 16px; border-radius:9px; background:rgba(255,255,255,0.04); border:1px solid var(--border); color:var(--fg-dim); font-weight:600; font-size:13px; cursor:pointer;">Cancel</button>
               <button style="padding:8px 18px; border-radius:9px; background:linear-gradient(180deg,#6d6ff5,#5457e0); border:1px solid rgba(99,102,241,0.5); color:#fff; font-weight:700; font-size:13px; cursor:pointer;">Export</button>
             </div>
           </div>
         </div>
-        <figcaption>Choose Markdown, HTML or JSON — for a notebook or the whole vault.</figcaption>
+        <figcaption>Four formats — for a notebook or the whole vault. Only the bundle brings your files.</figcaption>
       </figure>
 
       <table>
         <tr><th>Format</th><th>What you get</th></tr>
-        <tr><td>Markdown <code>.md</code></td><td>Portable plain text that opens in any editor. A vault export becomes a folder tree of <code>.md</code> files.</td></tr>
-        <tr><td>HTML <code>.html</code></td><td>A self-contained web page you can open in any browser — good for reading and sharing, but read-only (see the note below).</td></tr>
-        <tr><td>JSON <code>.json</code></td><td>A lossless backup that keeps everything and can be imported straight back into Nomima. The recommended choice for a backup.</td></tr>
+        <tr><td>Nomima bundle <code>.nomima</code></td><td><strong>A complete replica</strong> — the notes, <strong>every attached file</strong>, and your Smart Tags. Re-imports into any Nomima vault with the files still openable. A vault bundle carries your whole library this way. The recommended choice for moving to another Mac or keeping a restorable copy.</td></tr>
+        <tr><td>Markdown <code>.md</code></td><td>Portable plain text that opens in any editor. A vault export becomes a folder tree of <code>.md</code> files. <em>Leaves behind:</em> attached files, and your Smart Tags become plain text.</td></tr>
+        <tr><td>HTML <code>.html</code></td><td>A self-contained web page you can open in any browser — good for reading and sharing, but read-only (see the note below). <em>Leaves behind:</em> attached files, and your Smart Tags become plain text.</td></tr>
+        <tr><td>JSON <code>.json</code></td><td>A lossless copy of the <em>document</em> that can be imported straight back into Nomima, Smart Tags and all. <em>Leaves behind:</em> the attached files themselves.</td></tr>
       </table>
 
-      <p><strong>What's included.</strong> Your blocks and their text, and the Smart Tags (@mentions, #hashtags) inside them, are all serialized. A whole-vault export also copies in every <strong>attached file</strong> under an <code>assets/</code> folder, and writes a <code>manifest.json</code> index so Nomima can rebuild your notebook hierarchy on import. A single-notebook export contains just that notebook's document.</p>
-      <p class="note"><strong>Note:</strong> HTML is a one-way format — it's meant for reading, not re-importing. For a backup you can restore, export as <strong>JSON</strong> (or a JSON/Markdown vault <code>.zip</code>).</p>
+      <p><strong>What's included.</strong> Your blocks and their text, and the Smart Tags (@mentions, #hashtags) inside them, are serialized in every format. <strong>Attached files travel with a Nomima bundle</strong> — that's the difference the dialog is pointing at. A vault <code>.zip</code> also <em>contains</em> your files under an <code>assets/</code> folder, and a JSON-format one can re-attach them on import; Markdown and HTML can't, because they dropped the references that say which file belonged where.</p>
+      <p><strong>Smart Tags.</strong> A bundle and a JSON export keep your @mentions and #hashtags as real tags, and a bundle re-links them to the matching entity in whichever vault you import into (by name and type) — so a note about <code>@Robert</code> joins up with the <code>@Robert</code> already there. Markdown and HTML flatten tags to plain text, which is what makes them readable anywhere and lossy here.</p>
+      <p class="note"><strong>Note:</strong> HTML is a one-way format — it's meant for reading, not re-importing. For a copy you can fully restore, export as a <strong>Nomima bundle</strong>.</p>
 
       <h2 id="backup">Back up to iCloud</h2>
       <p>An export is something you do; a <strong>backup</strong> is something Nomima does for you. Turn it on in <strong>Settings&nbsp;→&nbsp;Backup</strong> and Nomima keeps an <strong>encrypted snapshot</strong> of your whole vault — notes, attached files and settings — in <em>your own</em> iCloud Drive, on the schedule you pick.</p>
@@ -173,15 +177,17 @@
         <figcaption>Share… opens the standard macOS share sheet — AirDrop included.</figcaption>
       </figure>
 
-      <p class="note"><strong>The file is a <code>.nomima</code> document.</strong> Any Mac with Nomima installed recognises it — double-click it in Finder and it opens in the app. On a Mac <em>without</em> Nomima it's still readable plain text rather than a dead file, so what you send never becomes unopenable.</p>
+      <p class="note"><strong>The file is a <code>.nomima</code> document.</strong> Any Mac with Nomima installed recognises it — it carries the Nomima document icon in Finder, and double-clicking it opens the app and imports it. A shared notebook is also readable plain text on a Mac <em>without</em> Nomima, so what you send never becomes unopenable. The same <code>.nomima</code> file is what <strong>Export → Nomima bundle</strong> saves, so sharing and exporting now hand over exactly the same thing.</p>
 
       <h2 id="import">Import</h2>
       <p>Import lives in <strong>Settings → Import…</strong>. It opens a file picker; choose what to bring in and Nomima recreates the notebooks in your vault.</p>
       <ul>
-        <li><strong>A Nomima export</strong> — a single notebook as <code>.json</code> (lossless) or <code>.md</code> (best-effort from Markdown).</li>
+        <li><strong>A Nomima bundle</strong> — a <code>.nomima</code> file, whether it holds one notebook or a whole vault. This is the complete one: notes, nesting, <strong>your folders</strong>, and <strong>the attached files</strong>, which Nomima re-creates in your vault and re-links to the notes that used them. If a folder of the same name already exists here, the notes join it instead of creating a second one.</li>
+        <li><strong>A Nomima export</strong> — a single notebook as <code>.json</code> (lossless document) or <code>.md</code> (best-effort from Markdown).</li>
         <li><strong>A whole vault</strong> — a vault export <code>.zip</code>. Every notebook in the archive is restored, and its nesting (which notebook lives inside which) is rebuilt from the manifest.</li>
       </ul>
-      <p>A single file lands at the top level of your vault. What round-trips cleanly is your <strong>structure, content and hierarchy</strong> — from JSON and Markdown sources. Two honest limits: a JSON or Markdown-format vault <code>.zip</code> re-imports, but an <strong>HTML</strong> export does not (Nomima will tell you to re-export as JSON or Markdown), and <strong>attached files are not yet re-imported</strong> — only the notebook documents come back for now.</p>
+      <p>A single notebook lands at the top level of your vault and opens straight away. Your <strong>structure, content and hierarchy</strong> round-trip from every importable source; <strong>attached files come back from a bundle</strong> — and from a JSON-format vault <code>.zip</code>, which carries the same index (a single <code>.json</code> or a Markdown export restores the document only). One remaining limit: an <strong>HTML</strong> export can't be imported at all — Nomima will tell you to re-export as a bundle, JSON or Markdown.</p>
+      <p>Smart Tags survive too, and are re-linked by name and type in the vault you import into — so an imported note about <code>@Robert</code> attaches to the <code>@Robert</code> you already have, with their existing details, rather than arriving as a stranger.</p>
 
       <figure class="guide-figure">
         <div class="mock shr-2" style="max-width: 520px; margin: 0 auto;">
@@ -201,12 +207,12 @@
             <div class="shr-2-sec">Import &amp; export</div>
             <div class="shr-2-row">
               <span class="shr-2-ic">📦</span>
-              <div class="shr-2-txt"><div class="shr-2-name">Export vault</div><div class="shr-2-desc">Every notebook + attachments, bundled into a single .zip</div></div>
+              <div class="shr-2-txt"><div class="shr-2-name">Export vault</div><div class="shr-2-desc">Every notebook + attachments, bundled into a single .nomima</div></div>
               <button class="shr-2-btn">Export vault…</button>
             </div>
             <div class="shr-2-row">
               <span class="shr-2-ic">📥</span>
-              <div class="shr-2-txt"><div class="shr-2-name">Import</div><div class="shr-2-desc">A Nomima export (JSON / Markdown), or a whole-vault .zip</div></div>
+              <div class="shr-2-txt"><div class="shr-2-name">Import</div><div class="shr-2-desc">A .nomima bundle, a Nomima export (JSON / Markdown), or a vault .zip</div></div>
               <button class="shr-2-btn hl">Choose files…</button>
             </div>
           </div>

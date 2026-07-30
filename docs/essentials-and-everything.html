@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Essentials &amp; Everything — Nomima Guide</title>
+  <meta name="description" content="Nomima can be a plain notebook or a full thinking environment. Switch between Essentials and Everything at any time — nothing is deleted either way." />
+  <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+  <style>
+    /* Figure-scoped: the side-by-side sidebar comparison. */
+    .em-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 720px) { .em-compare { grid-template-columns: 1fr; } }
+    .em-sb { border-radius: 12px; border: 1px solid var(--border-soft); background: rgba(255,255,255,0.012); padding: 11px 9px; }
+    .em-sb-cap { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); margin: 2px 6px 9px; display: flex; align-items: center; gap: 6px; }
+    .em-sb-cap .dot { width: 6px; height: 6px; border-radius: 50%; flex: none; }
+    .em-rule { height: 1px; background: var(--border-soft); margin: 8px 4px; }
+    .em-gone { opacity: 0.28; text-decoration: line-through; }
+    .em-count { margin-left: auto; font-size: 10.5px; color: var(--fg-faint); }
+    /* The mode cards in Settings → What you see. */
+    .em-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 620px) { .em-cards { grid-template-columns: 1fr; } }
+    .em-card { border-radius: 12px; padding: 12px; border: 1px solid var(--border-soft); background: rgba(255,255,255,0.012); }
+    .em-card.sel { border-color: var(--accent); background: rgba(99,102,241,0.10); }
+    .em-card-h { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; }
+    .em-card.sel .em-card-h { color: var(--accent); }
+    .em-card-ic { width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; font-size: 13px; background: rgba(255,255,255,0.05); flex: none; }
+    .em-card.sel .em-card-ic { background: rgba(99,102,241,0.20); }
+    .em-card-b { font-size: 11.5px; color: var(--fg-dim); margin-top: 7px; line-height: 1.45; }
+    .em-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 9px; }
+    .em-chip { font-size: 9.5px; font-weight: 600; padding: 2px 6px; border-radius: 5px; background: rgba(255,255,255,0.05); color: var(--fg-faint); }
+    /* Collapsed Customize sections. */
+    .em-sect { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 9px; background: rgba(255,255,255,0.025); margin-top: 6px; font-size: 12px; font-weight: 700; }
+    .em-sw { margin-left: auto; width: 30px; height: 17px; border-radius: 9px; background: rgba(255,255,255,0.10); position: relative; flex: none; }
+    .em-sw.on { background: var(--accent); }
+    .em-sw::after { content: ""; position: absolute; top: 2px; left: 2px; width: 13px; height: 13px; border-radius: 50%; background: #fff; }
+    .em-sw.on::after { left: 15px; }
+    .em-pro { font-size: 8.5px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); background: rgba(99,102,241,0.14); border-radius: 4px; padding: 1px 4px; }
+  </style>
+</head>
+<body>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <nav class="site-nav layer">
+    <a class="nav-logo" href="../index.html"><img src="../logo.svg" alt="Nomima" /><span class="nav-logo-name">Nomima</span></a>
+    <div class="nav-right">
+      <a class="nav-text-link active" href="index.html">Guide</a>
+      <a class="btn-nav" href="../index.html#get">Get it free</a>
+    </div>
+  </nav>
+
+  <div class="docs-shell">
+    <aside class="docs-sidebar" id="docs-sidebar"></aside>
+    <main class="docs-main">
+      <header class="docs-header">
+        <div class="docs-label">Start here</div>
+        <h1 class="docs-title">Essentials &amp; Everything</h1>
+        <p class="docs-sub">Nomima can be a plain notebook or a full thinking environment. You choose which one you're looking at — and you can change your mind at any time, without losing anything.</p>
+      </header>
+
+      <p>Nomima does a lot: a knowledge graph, an AI assistant, citations, insights, dashboards, diagrams. That's the point of it — but it's a great deal to meet on your first afternoon.</p>
+
+      <p><strong>Essentials</strong> puts almost all of it away. You get your notebooks and somewhere to write. <strong>Everything</strong> is the full app. One switch moves between them, and it takes effect immediately.</p>
+
+      <div class="tip">
+        <strong>This is a view, not a version.</strong> It isn't a free tier, a trial, or a reduced edition — it's the same app with fewer things on screen. Nothing is deleted, nothing is locked, and nothing you've written changes. Switching back brings every feature straight to where it was.
+      </div>
+
+      <h2 id="choosing">Choosing your view</h2>
+      <p>Open <strong>Settings → What you see</strong>. Pick a card. That's the whole thing.</p>
+
+      <figure class="guide-figure">
+        <div class="mock mock-pad">
+          <div class="em-cards">
+            <div class="em-card sel">
+              <div class="em-card-h"><span class="em-card-ic">📄</span> Essentials <span style="margin-left:auto; color:var(--accent);">✓</span></div>
+              <div class="em-card-b">Your notebooks and a place to write. Nothing else on screen.</div>
+              <div class="em-chips"><span class="em-chip">Notebooks</span><span class="em-chip">Editor</span><span class="em-chip">Search</span><span class="em-chip">Folders</span></div>
+            </div>
+            <div class="em-card">
+              <div class="em-card-h"><span class="em-card-ic">✨</span> Everything</div>
+              <div class="em-card-b">All of Nomima — Summon, the graph, insights and more.</div>
+              <div class="em-chips"><span class="em-chip">Summon</span><span class="em-chip">Graph</span><span class="em-chip">Insights</span><span class="em-chip">References</span><span class="em-chip">+15 more</span></div>
+            </div>
+          </div>
+        </div>
+        <figcaption><strong>Settings → What you see.</strong> The selected view is accented. Changes apply live — no relaunch, no reload.</figcaption>
+      </figure>
+
+      <p><strong>Already using Nomima?</strong> You stay on <strong>Everything</strong>. Updating never quietly takes features away — if you want the simpler view you have to ask for it. A brand-new vault starts on Essentials instead, so a first-time user meets a notebook rather than a control panel.</p>
+
+      <h2 id="what-changes">What changes</h2>
+
+      <figure class="guide-figure">
+        <div class="mock mock-pad">
+          <div class="em-compare">
+            <div class="em-sb">
+              <div class="em-sb-cap"><span class="dot" style="background:var(--accent);"></span> Everything</div>
+              <div class="mock-nav"><span class="ic">⌕</span> Search… <kbd style="margin-left:auto;">⌘K</kbd></div>
+              <div class="mock-nav"><span class="ic">⌂</span> Home <span class="em-count">9</span></div>
+              <div class="mock-nav"><span class="ic">▤</span> Inbox</div>
+              <div class="mock-nav"><span class="ic">✦</span> Summon Tasks</div>
+              <div class="em-rule"></div>
+              <div class="mock-side-h">Notebooks</div>
+              <div class="mock-nav add">+ New Notebook</div>
+              <div class="mock-nav active"><span class="ic">👋</span> Welcome to Nomima</div>
+              <div class="mock-nav"><span class="ic">▤</span> Reading list</div>
+              <div class="em-rule"></div>
+              <div class="mock-nav"><span class="ic">⋔</span> Knowledge Graph</div>
+              <div class="mock-nav"><span class="ic">◷</span> Insights</div>
+              <div class="mock-nav"><span class="ic">▤</span> References</div>
+              <div class="mock-nav"><span class="ic">⚙</span> Settings</div>
+            </div>
+            <div class="em-sb">
+              <div class="em-sb-cap"><span class="dot" style="background:var(--green);"></span> Essentials</div>
+              <div class="mock-nav"><span class="ic">⌕</span> Search… <kbd style="margin-left:auto;">⌘K</kbd></div>
+              <div class="mock-nav em-gone"><span class="ic">⌂</span> Home</div>
+              <div class="mock-nav em-gone"><span class="ic">▤</span> Inbox</div>
+              <div class="mock-nav em-gone"><span class="ic">✦</span> Summon Tasks</div>
+              <div class="em-rule"></div>
+              <div class="mock-side-h">Notebooks</div>
+              <div class="mock-nav add">+ New Notebook</div>
+              <div class="mock-nav active"><span class="ic">👋</span> Welcome to Nomima</div>
+              <div class="mock-nav"><span class="ic">▤</span> Reading list</div>
+              <div class="em-rule"></div>
+              <div class="mock-nav em-gone"><span class="ic">⋔</span> Knowledge Graph</div>
+              <div class="mock-nav em-gone"><span class="ic">◷</span> Insights</div>
+              <div class="mock-nav em-gone"><span class="ic">▤</span> References</div>
+              <div class="mock-nav"><span class="ic">⚙</span> Settings</div>
+            </div>
+          </div>
+        </div>
+        <figcaption>The sidebar in both views. <strong>Search stays</strong> — finding a note again isn't an advanced feature. So does Settings, which is how you get back.</figcaption>
+      </figure>
+
+      <table>
+        <tr><th>Where</th><th>In Essentials</th></tr>
+        <tr><td>Sidebar</td><td>Search, your notebooks and folders, Settings. Home, Inbox, Summon Tasks, Knowledge Graph, Insights and References are put away.</td></tr>
+        <tr><td>Around the page</td><td>The cover graph, table of contents, tag minimap, comment margin and version scrubber all step aside. The page starts at the title.</td></tr>
+        <tr><td>The <code>/</code> menu</td><td>Eight blocks instead of thirty-eight — paragraph, title, subtitle, to-do, quote, callout, file or image, and a divider.</td></tr>
+        <tr><td>Selecting text</td><td>Formatting only. The Comment and <em>Edit with AI</em> buttons are put away.</td></tr>
+        <tr><td>Summon</td><td>No orb, and <kbd>⌘</kbd><kbd>⇧</kbd><kbd>Space</kbd> does nothing.</td></tr>
+        <tr><td>Menu-bar tray</td><td>Shorter, and down to search, <strong>New note</strong> and your recent notebooks — see <a href="menu-bar-and-tray.html">Menu bar &amp; tray</a>.</td></tr>
+        <tr><td>Settings</td><td>Only the panels for features you have. Panels for things you've put away go with them.</td></tr>
+      </table>
+
+      <h2 id="what-doesnt">What never changes</h2>
+      <p>This is the important half, and it's worth being precise about.</p>
+      <ul>
+        <li><strong>Your notes are untouched.</strong> Both views read and write the same vault. Nothing is converted, migrated or rewritten.</li>
+        <li><strong>Every block still renders.</strong> Open a note full of Gantt charts, Kanban boards and diagrams in Essentials and they all draw and work exactly as before. Essentials changes what you can <em>insert</em>, never what you can <em>read</em>.</li>
+        <li><strong>Mentions and hashtags keep working.</strong> Type <span class="pill pill-mention">@Ada</span> or <span class="pill pill-hashtag">#roadmap</span> and they still form pills, and still build the connections underneath. Switch to Everything later and your Knowledge Graph is already full — not empty.</li>
+        <li><strong>Search finds everything</strong>, including notes and blocks you made in the other view.</li>
+        <li><strong>Nothing is deleted or disabled on disk.</strong> Reminders you've set survive; turn Reminders back on and they resume.</li>
+      </ul>
+
+      <div class="note">
+        <strong>Essentials is a starting point, not a ceiling.</strong> It's designed so you can use Nomima as a plain notebook for a month, then turn on one thing at a time as you want it — and find that it already knows about everything you wrote in the meantime.
+      </div>
+
+      <h2 id="customize">Turning individual things on</h2>
+      <p>You don't have to take a view whole. Under the two cards, <strong>Customize</strong> lists every optional feature in three sections. Each section has its own switch, so "a simple page, but keep my graph" is one click rather than nine.</p>
+
+      <figure class="guide-figure">
+        <div class="mock mock-pad">
+          <div style="font-size:12px; color:var(--fg-dim); margin-bottom:2px;">▾ Customize <span style="background:rgba(99,102,241,0.15); color:var(--accent); border-radius:5px; padding:1px 6px; font-size:10px; font-weight:700; margin-left:4px;">2 changed</span></div>
+          <div class="em-sect"><span style="color:var(--fg-faint);">›</span> Workspace <span style="font-weight:400; font-size:10.5px; color:var(--fg-faint);">1/8</span><span class="em-sw"></span></div>
+          <div class="em-sect"><span style="color:var(--fg-faint);">›</span> In the editor <span style="font-weight:400; font-size:10.5px; color:var(--fg-faint);">0/9</span><span class="em-sw"></span></div>
+          <div class="em-sect"><span style="color:var(--fg-faint);">⌄</span> AI &amp; integrations <span style="font-weight:400; font-size:10.5px; color:var(--fg-faint);">1/3</span><span class="em-sw"></span></div>
+          <div style="padding: 6px 8px 2px 26px; display:flex; align-items:center; gap:10px;">
+            <div style="flex:1;">
+              <div style="font-size:12px;">Summon <span class="em-pro">Pro</span></div>
+              <div style="font-size:10.5px; color:var(--fg-faint);">The AI assistant and its tasks</div>
+            </div>
+            <span class="em-sw on"></span>
+          </div>
+          <div style="padding: 4px 8px 2px 26px; display:flex; align-items:center; gap:10px;">
+            <div style="flex:1;">
+              <div style="font-size:12px;">MCP server <span class="em-pro">Pro</span></div>
+              <div style="font-size:10.5px; color:var(--fg-faint);">Let other apps read your vault</div>
+            </div>
+            <span class="em-sw"></span>
+          </div>
+        </div>
+        <figcaption>Sections start collapsed and carry their own switch. Expand one to set features individually; a dot marks anything that differs from the view you picked.</figcaption>
+      </figure>
+
+      <p>A few features are marked <span class="em-pro">Pro</span>. That's Nomima's licensing, and it's a separate thing entirely — Essentials and Everything are both free, and switching between them never costs anything.</p>
+
+      <p>Changed your mind about the fine-tuning? <strong>Reset to the Essentials defaults</strong> (or Everything's) clears every individual choice in one click.</p>
+
+      <h2 id="still-running">Things that deliberately stay</h2>
+      <p>Two things keep working in Essentials on purpose, because hiding them would be the wrong kind of quiet:</p>
+      <ul>
+        <li><strong>A running MCP server stays visible.</strong> If you switched the <a href="mcp.html">MCP server</a> on, it keeps serving your vault to other apps — so Essentials keeps showing it in the menu-bar tray <em>and</em> keeps its Settings panel listed, so you can always switch it off. A capability you turned on should never become invisible.</li>
+        <li><strong>Activity recording follows your privacy setting, not your view.</strong> <a href="insights.html">Insights</a> keeps its history whichever view you're in, so the record is still there if you turn Insights on next month — a gap could never be filled in afterwards. Recording is controlled only by the opt-out in <strong>Settings → Insights</strong>, which stays available in both views.</li>
+      </ul>
+
+      <h2 id="faq">Questions people ask</h2>
+      <table>
+        <tr><th>Question</th><th>Answer</th></tr>
+        <tr><td>Will I lose work if I switch?</td><td>No. Both views use the same vault, and switching changes nothing about your notes.</td></tr>
+        <tr><td>Can I switch back and forth?</td><td>As often as you like. It applies instantly and it's lossless in both directions.</td></tr>
+        <tr><td>What happens to a note full of advanced blocks?</td><td>It renders and works normally in Essentials. You just can't add new ones until you turn them back on.</td></tr>
+        <tr><td>Is Essentials a free tier?</td><td>No — it's a view. Both are free, and the Pro tags in Customize refer to Nomima's separate licensing.</td></tr>
+        <tr><td>Will an update put me into Essentials?</td><td>Never. An existing vault always stays on Everything unless you choose otherwise.</td></tr>
+        <tr><td>Where did my <code>/</code> blocks go?</td><td>Turn on <strong>Advanced blocks</strong> in Customize (In the editor), or switch to Everything.</td></tr>
+      </table>
+
+      <nav class="docs-pager" id="docs-pager"></nav>
+      <footer class="docs-foot" id="docs-foot"></footer>
+    </main>
+  </div>
+
+  <script src="docs.js" defer></script>
+</body>
+</html>
