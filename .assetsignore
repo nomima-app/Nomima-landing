@@ -5,6 +5,12 @@
 # so deploying from a git worktree doesn't publish it. Same for wrangler's build dir.
 /.git
 /.wrangler
+# Nested git worktrees live under `.claude/worktrees/*` and are NOT part of the
+# site. The `/downloads/` rule below is root-anchored, so a worktree's own
+# `downloads/` was still being collected — which fails the deploy outright
+# ("Asset too large" on a bundled .dmg) and would otherwise publish whatever a
+# worktree happens to contain.
+/.claude/
 /.github/
 /server-lock/
 /downloads/

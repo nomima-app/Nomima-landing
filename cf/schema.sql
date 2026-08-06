@@ -93,3 +93,37 @@ CREATE TABLE IF NOT EXISTS bug_rate (
   window_start  TEXT NOT NULL,
   count         INTEGER NOT NULL DEFAULT 0
 );
+
+-- ─── Nomima Pro licensing (Lemon Squeezy) ────────────────────────────────────
+CREATE TABLE IF NOT EXISTS licenses (
+  key             TEXT PRIMARY KEY,
+  email           TEXT NOT NULL,
+  order_id        TEXT,
+  subscription_id TEXT,
+  status          TEXT NOT NULL DEFAULT 'active',  -- active | revoked
+  seats           INTEGER NOT NULL DEFAULT 2,
+  expires_at      TEXT,                            -- NULL = perpetual
+  created_at      TEXT NOT NULL,
+  updated_at      TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_licenses_email ON licenses(email);
+CREATE INDEX IF NOT EXISTS idx_licenses_sub   ON licenses(subscription_id);
+
+-- Which machines hold this licence's seats. The PK makes activation idempotent:
+-- re-activating the same Mac can never consume a second seat.
+CREATE TABLE IF NOT EXISTS license_activations (
+  license_key  TEXT NOT NULL,
+  fingerprint  TEXT NOT NULL,
+  machine_name TEXT,
+  activated_at TEXT NOT NULL,
+  last_seen_at TEXT,
+  PRIMARY KEY (license_key, fingerprint)
+);
+CREATE INDEX IF NOT EXISTS idx_activations_key ON license_activations(license_key);
+
+-- Idempotency guard: one row per processed LS order.
+CREATE TABLE IF NOT EXISTS license_orders (
+  order_id    TEXT PRIMARY KEY,
+  license_key TEXT NOT NULL,
+  created_at  TEXT NOT NULL
+);

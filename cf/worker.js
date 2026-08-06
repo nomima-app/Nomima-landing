@@ -89,11 +89,31 @@ function modelMarketingName(model) {
   return model ? (MODEL_NAMES[model] || null) : null;
 }
 
+// Nomima Pro licensing — key issuance + seat-limited activation. See cf/license.js.
+// NOTE: the Nomima AI proxy routes (cf/ai.js) are deliberately NOT wired here —
+// this deploy is licensing only.
+import {
+  handleLicenseActivate, handleLicenseValidate, handleLicenseDeactivate, handleLicenseWebhook,
+} from "./license.js";
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const path = url.pathname;
 
+    // ── Pro licensing ────────────────────────────────────────────────────
+    if (path === "/api/license/activate" && request.method === "POST") {
+      return handleLicenseActivate(request, env);
+    }
+    if (path === "/api/license/validate" && request.method === "POST") {
+      return handleLicenseValidate(request, env);
+    }
+    if (path === "/api/license/deactivate" && request.method === "POST") {
+      return handleLicenseDeactivate(request, env);
+    }
+    if (path === "/api/license/webhook/lemonsqueezy" && request.method === "POST") {
+      return handleLicenseWebhook(request, env, ctx);
+    }
     if (path === "/api/request-download" && request.method === "POST") {
       return handleRequest(request, env, url, ctx);
     }
