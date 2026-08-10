@@ -741,7 +741,7 @@ async function fetchAdminData(env) {
       "SELECT email, created_at, used_at, ip_country FROM download_tokens ORDER BY created_at DESC LIMIT 500"
     ).all(),
     env.DB.prepare(
-      "SELECT b.id, b.batch_id, b.source, b.title, b.description, b.severity, b.area, b.email, b.app_version, b.os, b.ip_country, b.status, b.public_hidden, b.admin_notes, b.diagnostics_key, b.created_at, b.updated_at, " +
+      "SELECT b.id, b.batch_id, b.source, b.fingerprint, b.title, b.description, b.severity, b.area, b.email, b.app_version, b.os, b.ip_country, b.status, b.public_hidden, b.admin_notes, b.diagnostics_key, b.created_at, b.updated_at, " +
       "(SELECT COUNT(*) FROM bug_attachments a WHERE a.bug_id = b.id) AS att_count FROM bug_reports b ORDER BY b.created_at DESC LIMIT 500"
     ).all(),
     // Licences + the machines holding their seats. This is the AUTHORITATIVE
@@ -1069,7 +1069,23 @@ async function handleAdminDashboard(request, env) {
   }).join("");
 
   const SEV_COLORS = { low: "#9aa0b0", medium: "#fbbf24", high: "#f97316", crash: "#f87171" };
+  // Bug reports carry a fingerprint, so a report can be tied back to WHO sent
+  // it — plan and actual machine. Triage reads very differently when the
+  // reporter is a paying user on a current build versus an unknown install.
+  const deviceByFp = new Map(checkins.map((d) => [d.fingerprint, d]));
+
   const bugRows = bugs.map((b) => {
+    const dev = b.fingerprint ? deviceByFp.get(b.fingerprint) : null;
+    // A web-submitted report has no fingerprint at all — say so rather than
+    // showing "unknown", which would read as a failed lookup.
+    const reporter = !b.fingerprint
+      ? '<span class="badge-plan plan-unknown">web</span>'
+      : `<span class="badge-plan plan-${dev ? planFor(dev, proByFingerprint) : "unknown"}">${
+          dev ? planFor(dev, proByFingerprint) : "unknown"
+        }</span>`;
+    const devName = dev
+      ? (dev.product_name || modelMarketingName(dev.hw_model) || dev.hw_name || "")
+      : "";
     const sev = b.severity || "medium";
     const sc = SEV_COLORS[sev] || "#9aa0b0";
     const statusOpts = [...BUG_STATUSES].map((s) =>
@@ -1083,12 +1099,13 @@ async function handleAdminDashboard(request, env) {
       <td><div class="bug-title">${esc(b.title)}</div><div class="bug-desc">${esc((b.description || "").slice(0, 120))}</div></td>
       <td><span class="sev" style="color:${sc};border-color:${sc}66">${sev}</span></td>
       <td><select class="sel-status" data-id="${b.id}">${statusOpts}</select></td>
-      <td>${esc(b.app_version || "—")}<br><span class="device-specs">${esc(b.os || "")}${b.source === "web" ? " · web" : ""}</span></td>
+      <td>${reporter}</td>
+      <td>${esc(b.app_version || "—")}<br><span class="device-specs">${devName ? esc(devName) + "<br>" : ""}${esc(b.os || "")}${b.source === "web" ? " · web" : ""}</span></td>
       <td>${b.email ? esc(b.email) : '<span style="color:var(--muted)">—</span>'}</td>
       <td class="action-cell">${extras}</td>
       <td class="action-cell"><button class="btn-hide" data-id="${b.id}" data-hidden="${b.public_hidden ? 1 : 0}">${b.public_hidden ? "Show" : "Hide"}</button><button class="btn-bug-del" data-id="${b.id}">Delete</button></td>
     </tr>
-    <tr class="detail-row" id="detail-${b.id}" style="display:none"><td colspan="8"><div class="bug-detail" id="detailbox-${b.id}"></div></td></tr>`;
+    <tr class="detail-row" id="detail-${b.id}" style="display:none"><td colspan="9"><div class="bug-detail" id="detailbox-${b.id}"></div></td></tr>`;
   }).join("");
 
   const html = `<!doctype html>
@@ -1261,8 +1278,8 @@ async function handleAdminDashboard(request, env) {
   </div>
   <div class="tbl-wrap">
     <table>
-      <thead><tr><th>Reported</th><th>Title</th><th>Severity</th><th>Status</th><th>App / OS</th><th>Email</th><th>Detail</th><th>Actions</th></tr></thead>
-      <tbody>${bugRows || '<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--muted)">No bug reports yet</td></tr>'}</tbody>
+      <thead><tr><th>Reported</th><th>Title</th><th>Severity</th><th>Status</th><th>Reporter</th><th>App / OS</th><th>Email</th><th>Detail</th><th>Actions</th></tr></thead>
+      <tbody>${bugRows || '<tr><td colspan="9" style="text-align:center;padding:24px;color:var(--muted)">No bug reports yet</td></tr>'}</tbody>
     </table>
   </div>
 </section>
