@@ -378,18 +378,21 @@ export async function handleLicenseWebhook(request, env, ctx) {
 
 /** Email the buyer their license key + how to enter it. */
 async function sendLicenseEmail(env, email, key, expiresAt = null, beta = false) {
+  // Hosted PNG rather than an inline/CID attachment: Gmail and Outlook both
+  // render a plain https image, while an attachment shows up as a paperclip.
   const html = `<!doctype html><html><body style="font-family:-apple-system,Segoe UI,Inter,Helvetica,Arial,sans-serif;color:#111;max-width:520px;margin:0 auto;padding:24px">
-    <h2 style="margin:0 0 12px">${beta ? "Your Nomima beta key" : "Your Nomima Pro license"}</h2>
-    <p style="font-size:14px;line-height:1.6;color:#333">${beta ? "Thanks for testing Nomima — this key unlocks every AI feature: Summon, inline AI editing, and the MCP server." : "Thanks for buying Nomima Pro — this unlocks every AI feature: Summon, inline AI editing, and the MCP server."}</p>
+    <img src="https://nomima.io/email-logo.png" alt="Nomima" width="40" height="40" style="display:block;border:0;margin:0 0 18px">
+    <h2 style="margin:0 0 12px">${beta ? "Thanks for signing up to the Nomima beta" : "Your Nomima Pro license"}</h2>
+    <p style="font-size:14px;line-height:1.6;color:#333">${beta ? "You are in. This key unlocks every AI feature while you test: Summon, inline AI editing, and the MCP server." : "Thanks for buying Nomima Pro — this unlocks every AI feature: Summon, inline AI editing, and the MCP server."}</p>
     <p style="font-size:14px;line-height:1.6;color:#333">Enter this key in Nomima → <strong>Settings → License</strong>:</p>
     <p style="font-family:ui-monospace,Menlo,monospace;font-size:16px;letter-spacing:0.04em;background:#f4f4f5;border:1px solid #e4e4e7;border-radius:8px;padding:12px 14px;word-break:break-all">${key}</p>
     ${expiresAt ? `<p style="font-size:13px;line-height:1.6;color:#333">This beta key is valid until <strong>${new Date(expiresAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</strong>.</p>` : ""}
     <p style="font-size:13px;line-height:1.6;color:#333">Your license covers <strong>${SEAT_LIMIT} Macs</strong> at once. Moving to a new machine? Deactivate the old one in Settings → License to free a seat.</p>
-    <p style="font-size:12.5px;line-height:1.6;color:#666">Keep this key safe. Need help? Just reply to this email.</p>
+    <p style="font-size:12.5px;line-height:1.6;color:#666">Keep this key safe. Anything at all — bugs, questions, feedback — write to <a href="mailto:support@nomima.io" style="color:#5A29B6">support@nomima.io</a>.</p>
     <p style="font-size:12px;color:#999;margin-top:24px">© 2026 Nomima · Private. Offline. Yours.</p>
   </body></html>`;
   const text = [
-    beta ? "Your Nomima beta key" : "Your Nomima Pro license",
+    beta ? "Thanks for signing up to the Nomima beta" : "Your Nomima Pro license",
     "",
     "Enter this key in Nomima → Settings → License:",
     "",
@@ -399,7 +402,7 @@ async function sendLicenseEmail(env, email, key, expiresAt = null, beta = false)
     `Your license covers ${SEAT_LIMIT} Macs at once. Moving to a new machine?`,
     "Deactivate the old one in Settings → License to free a seat.",
     "",
-    "Need help? Just reply to this email.",
+    "Anything at all — bugs, questions, feedback — write to support@nomima.io.",
   ].join("\n");
   try {
     const res = await fetch("https://api.resend.com/emails", {
