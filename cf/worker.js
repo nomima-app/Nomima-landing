@@ -121,6 +121,15 @@ export default {
     if (path === "/api/request-download" && request.method === "POST") {
       return handleRequest(request, env, url, ctx);
     }
+    // Email-free download. The email gate moved to the Pro key — a download
+    // should not cost a stranger their address. Still counted, just without
+    // asking who they are.
+    // NOTE: /download is NOT usable — a static download.html shadows it, and
+    // assets resolve before the worker unless run_worker_first is set. /dl
+    // avoids that fight entirely.
+    if (path === "/dl") {
+      return handleDirectDownload(request, env, url, ctx);
+    }
     if (path === "/get") {
       return handleGet(request, env, url);
     }
@@ -279,6 +288,31 @@ async function handleGet(request, env, url) {
   }
 
   const dmg = await resolveDmgUrl(env, url);
+  return Response.redirect(dmg, 302);
+}
+
+/** Redirect straight to the DMG, recording an anonymous download first.
+ *
+ *  No token, no email, no lead row. What we keep is what a server log would
+ *  have anyway — country, coarse city, referrer, user agent — so the admin
+ *  panel can still answer "how many downloads this week" without holding an
+ *  identity we have no reason to hold. `waitUntil` so the redirect is never
+ *  delayed by the write, and a failed insert must never block a download.
+ */
+async function handleDirectDownload(request, env, url, ctx) {
+  const dmg = await resolveDmgUrl(env, url);
+  const row = env.DB.prepare(
+    "INSERT INTO downloads (id, created_at, ip_country, city, region, referrer, user_agent) VALUES (?1,?2,?3,?4,?5,?6,?7)",
+  ).bind(
+    crypto.randomUUID(),
+    new Date().toISOString(),
+    request.headers.get("cf-ipcountry") || null,
+    request.headers.get("cf-ipcity") || null,
+    request.headers.get("cf-region") || null,
+    (request.headers.get("referer") || "").slice(0, 200) || null,
+    (request.headers.get("user-agent") || "").slice(0, 200) || null,
+  ).run().catch(() => {});
+  if (ctx?.waitUntil) ctx.waitUntil(row);
   return Response.redirect(dmg, 302);
 }
 
@@ -729,7 +763,7 @@ function handleAdminLogout(request) {
 }
 
 async function fetchAdminData(env) {
-  const [checkins, blocked, leads, tokens, bugs, licences, activations] = await Promise.all([
+  const [checkins, blocked, leads, tokens, bugs, licences, activations, downloads] = await Promise.all([
     env.DB.prepare(
       "SELECT fingerprint, first_seen, last_seen, version, ip_country, city, region, os_version, hw_model, hw_name, chip, memory, cpu_cores, product_name, display, plan, trial_days_left, checkin_count FROM device_checkins ORDER BY last_seen DESC LIMIT 1000"
     ).all(),
@@ -752,6 +786,9 @@ async function fetchAdminData(env) {
     ).all(),
     env.DB.prepare(
       "SELECT license_key, fingerprint, machine_name, activated_at, last_seen_at FROM license_activations"
+    ).all(),
+    env.DB.prepare(
+      "SELECT id, created_at, ip_country, city, region, referrer FROM downloads ORDER BY created_at DESC LIMIT 1000"
     ).all(),
   ]);
   const blockedSet = new Set((blocked.results || []).map((r) => r.fingerprint));
@@ -777,6 +814,7 @@ async function fetchAdminData(env) {
     checkins: checkins.results || [], blockedSet,
     leads: leads.results || [], tokens: tokens.results || [], bugs: bugs.results || [],
     licences: licenceRows, activations: activationRows, proByFingerprint, seatsByKey, liveKeys,
+    downloads: downloads.results || [],
   };
 }
 
@@ -965,7 +1003,7 @@ async function handleAdminDashboard(request, env) {
     const origin = new URL(request.url).origin;
     return Response.redirect(`${origin}/admin/login`, 302);
   }
-  const { checkins, blockedSet, leads, tokens, bugs, licences, proByFingerprint, seatsByKey } = await fetchAdminData(env);
+  const { checkins, blockedSet, leads, tokens, bugs, licences, proByFingerprint, seatsByKey, downloads } = await fetchAdminData(env);
 
   const totalInstalls = checkins.length;
   const totalBlocked = blockedSet.size;
@@ -1217,6 +1255,7 @@ async function handleAdminDashboard(request, env) {
   <div class="card red"><div class="num">${totalBlocked}</div><div class="lbl">Blocked</div></div>
   <div class="card"><div class="num">${totalLeads}</div><div class="lbl">Download requests</div></div>
   <div class="card green"><div class="num">${totalDownloads}</div><div class="lbl">Downloads used</div></div>
+  <div class="card accent"><div class="num">${downloads.length}</div><div class="lbl" title="Direct downloads — no email required. The old email-gated count is to the left; it only moves for legacy token links.">Direct downloads</div></div>
   <div class="card yellow"><div class="num">${openBugs}</div><div class="lbl">Open bugs</div></div>
 </div>
 

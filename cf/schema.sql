@@ -127,3 +127,18 @@ CREATE TABLE IF NOT EXISTS license_orders (
   license_key TEXT NOT NULL,
   created_at  TEXT NOT NULL
 );
+
+-- Anonymous downloads. The email gate moved to the Pro key, so a download no
+-- longer creates a lead — but it still needs counting. Deliberately holds only
+-- what a server log would: no email, no fingerprint, nothing that identifies a
+-- person.
+CREATE TABLE IF NOT EXISTS downloads (
+  id          TEXT PRIMARY KEY,
+  created_at  TEXT NOT NULL,
+  ip_country  TEXT,
+  city        TEXT,
+  region      TEXT,
+  referrer    TEXT,
+  user_agent  TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_downloads_created ON downloads(created_at);
