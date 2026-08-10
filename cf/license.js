@@ -211,6 +211,100 @@ async function issueLicense(env, { email, orderId, subscriptionId, expiresAt }) 
   return key;
 }
 
+// ── POST /api/license/request ─────────────────────────────────────────────────
+
+/** Self-service key request: the user types their email in the app, we email
+ *  them a key. Beta mode issues to anyone; paid mode requires an order.
+ *
+ *  `LICENSE_FREE_ISSUE` is the switch. Set (any truthy value) = beta: a key is
+ *  issued to whoever asks. Unset = a paid LS order for that email is required,
+ *  and the response carries the checkout URL instead. Flipping it is a secret
+ *  change — no code edit, no app release.
+ */
+/** How long a beta-issued key lasts, in days. Configurable so the window can be
+ *  extended (or shortened) without a deploy; 0/empty = perpetual. Paid keys are
+ *  unaffected — their expiry comes from LS. */
+const betaDays = (env) => {
+  const n = Number(env.LICENSE_BETA_DAYS ?? 30);
+  return Number.isFinite(n) && n > 0 ? n : 0;
+};
+
+const freeIssue = (env) => {
+  const v = String(env.LICENSE_FREE_ISSUE ?? "").trim().toLowerCase();
+  return v !== "" && v !== "0" && v !== "false";
+};
+
+/** Sliding-window rate limit, reusing the `bug_rate` table (same shape, keys
+ *  namespaced). Mailing arbitrary addresses on demand is a spam vector, so the
+ *  cap is per FINGERPRINT and per IP — email alone would be trivially cycled. */
+async function rateLimited(env, key, maxPerHour) {
+  const now = Date.now();
+  const row = await env.DB.prepare(
+    "SELECT window_start, count FROM bug_rate WHERE key = ?1",
+  ).bind(key).first();
+  const start = row ? new Date(row.window_start).getTime() : 0;
+  if (row && now - start < 3600_000) {
+    if ((row.count | 0) >= maxPerHour) return true;
+    await env.DB.prepare("UPDATE bug_rate SET count = count + 1 WHERE key = ?1").bind(key).run();
+    return false;
+  }
+  await env.DB.prepare(
+    "INSERT INTO bug_rate (key, window_start, count) VALUES (?1,?2,1) " +
+    "ON CONFLICT(key) DO UPDATE SET window_start = ?2, count = 1",
+  ).bind(key, new Date(now).toISOString()).run();
+  return false;
+}
+
+export async function handleLicenseRequest(request, env, ctx) {
+  const body = await readBody(request);
+  const email = String(body?.email || "").trim().toLowerCase();
+  const fingerprint = String(body?.fingerprint || "").trim();
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || !fingerprint) {
+    return json({ error: "bad_request" }, 400);
+  }
+
+  const ip = request.headers.get("cf-connecting-ip") || "unknown";
+  if (await rateLimited(env, `lic:fp:${fingerprint}`, 3) ||
+      await rateLimited(env, `lic:ip:${ip}`, 10)) {
+    return json({ error: "rate_limited" }, 429);
+  }
+
+  // Existing licence for this email? Re-send it. Never mint a second — one
+  // buyer must not accumulate keys (and seat pools) by asking twice.
+  const existing = await env.DB.prepare(
+    "SELECT key FROM licenses WHERE email = ?1 AND status != 'revoked'",
+  ).bind(email).first();
+
+  let key = existing?.key;
+  if (!key) {
+    if (!freeIssue(env)) {
+      // Paid mode, no order: send them to checkout. Deliberately the SAME shape
+      // as the success case minus the key, so this can't be used to test which
+      // addresses have bought.
+      return json({ sent: false, checkoutUrl: env.LEMONSQUEEZY_CHECKOUT_URL || "https://nomima.io/" });
+    }
+    const now = nowIso();
+    const days = betaDays(env);
+    // A beta key is time-boxed. `expires_at` is already enforced everywhere —
+    // lookupLicense refuses an expired key, so no extra plumbing is needed and
+    // the app drops back to free on its next validate.
+    const expiresAt = days
+      ? new Date(Date.now() + days * 86400_000).toISOString()
+      : null;
+    key = makeLicenseKey();
+    await env.DB.prepare(
+      "INSERT INTO licenses (key, email, order_id, status, seats, expires_at, created_at, updated_at) " +
+      "VALUES (?1,?2,?3,'active',?4,?5,?6,?6)",
+    ).bind(key, email, `beta:${fingerprint}`, SEAT_LIMIT, expiresAt, now).run();
+  }
+
+  const row = await env.DB.prepare("SELECT expires_at FROM licenses WHERE key = ?1").bind(key).first();
+  if (env.RESEND_API_KEY) ctx.waitUntil(sendLicenseEmail(env, email, key, row?.expires_at || null));
+  // Never echo the key in the response — it goes to the inbox, which is what
+  // makes the email address mean anything at all here.
+  return json({ sent: true });
+}
+
 // ── POST /api/license/webhook/lemonsqueezy ────────────────────────────────────
 
 /** Mint + email a license on purchase; track renewal/expiry for subscriptions.
@@ -283,12 +377,13 @@ export async function handleLicenseWebhook(request, env, ctx) {
 }
 
 /** Email the buyer their license key + how to enter it. */
-async function sendLicenseEmail(env, email, key) {
+async function sendLicenseEmail(env, email, key, expiresAt = null) {
   const html = `<!doctype html><html><body style="font-family:-apple-system,Segoe UI,Inter,Helvetica,Arial,sans-serif;color:#111;max-width:520px;margin:0 auto;padding:24px">
     <h2 style="margin:0 0 12px">Your Nomima Pro license</h2>
     <p style="font-size:14px;line-height:1.6;color:#333">Thanks for buying Nomima Pro — this unlocks every AI feature: Summon, inline AI editing, and the MCP server.</p>
     <p style="font-size:14px;line-height:1.6;color:#333">Enter this key in Nomima → <strong>Settings → License</strong>:</p>
     <p style="font-family:ui-monospace,Menlo,monospace;font-size:16px;letter-spacing:0.04em;background:#f4f4f5;border:1px solid #e4e4e7;border-radius:8px;padding:12px 14px;word-break:break-all">${key}</p>
+    ${expiresAt ? `<p style="font-size:13px;line-height:1.6;color:#333">This beta key is valid until <strong>${new Date(expiresAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</strong>.</p>` : ""}
     <p style="font-size:13px;line-height:1.6;color:#333">Your license covers <strong>${SEAT_LIMIT} Macs</strong> at once. Moving to a new machine? Deactivate the old one in Settings → License to free a seat.</p>
     <p style="font-size:12.5px;line-height:1.6;color:#666">Keep this key safe. Need help? Just reply to this email.</p>
     <p style="font-size:12px;color:#999;margin-top:24px">© 2026 Nomima · Private. Offline. Yours.</p>
@@ -300,6 +395,7 @@ async function sendLicenseEmail(env, email, key) {
     "",
     key,
     "",
+    ...(expiresAt ? [`This beta key is valid until ${new Date(expiresAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}.`, ""] : []),
     `Your license covers ${SEAT_LIMIT} Macs at once. Moving to a new machine?`,
     "Deactivate the old one in Settings → License to free a seat.",
     "",

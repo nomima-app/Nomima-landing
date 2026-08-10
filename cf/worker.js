@@ -94,6 +94,7 @@ function modelMarketingName(model) {
 // this deploy is licensing only.
 import {
   handleLicenseActivate, handleLicenseValidate, handleLicenseDeactivate, handleLicenseWebhook,
+  handleLicenseRequest,
 } from "./license.js";
 
 export default {
@@ -110,6 +111,9 @@ export default {
     }
     if (path === "/api/license/deactivate" && request.method === "POST") {
       return handleLicenseDeactivate(request, env);
+    }
+    if (path === "/api/license/request" && request.method === "POST") {
+      return handleLicenseRequest(request, env, ctx);
     }
     if (path === "/api/license/webhook/lemonsqueezy" && request.method === "POST") {
       return handleLicenseWebhook(request, env, ctx);
