@@ -1,6 +1,16 @@
 {
-  "version": "1.17.0",
-  "notes": "v1.17.0: AI inline edit with accept/reject/regenerate, export (Markdown/HTML/JSON/vault zip), import, 12 curated themes, back/forward navigation, rich block ToC, Entity Detail View bento grid, notebook icons, tray live graphs, block drag-drop.",
-  "pub_date": "2026-06-28T09:00:00Z",
-  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.17.0/Nomima_1.17.0_aarch64.dmg"
+  "version": "1.26.0",
+  "notes": "Nomima opens simple now \u2014 editor, notebooks and search, with everything else one switch away. AI is Pro, and during the beta a key is free (Settings \u2192 License), good for 30 days on two Macs. Everything that isn't AI stays free. Pasting tables and Markdown finally works.",
+  "pub_date": "2026-08-10T12:00:00Z",
+  "platforms": {
+    "darwin-aarch64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVElFYUZxVlFhODhGeDlMeDlWM3hlb1JjY3pPVXlnREMwT2JLUmdVSm5FZk1qMys4TG1saGoxU0RYM2ROcCtXTWpCbHdJOC9WTnpNTU02ZmVETkxLVlpIY29OaWhoYVE4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg2MzY3MTkyCWZpbGU6Tm9taW1hLmFwcC50YXIuZ3oKY2MrKzNoYVFQcHZ2MEY1SGdXd0FzV1BOaXd2TDVkcFR5dmNkVE5wN3UwblJ1YW9wbnpSV3AzMUdKUi80dWR5V2kwRnoySG42d3dtaHM2RkhUKzliRFE9PQo=",
+      "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.26.0/Nomima.app.tar.gz"
+    },
+    "darwin-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUVElFYUZxVlFhODhGeDlMeDlWM3hlb1JjY3pPVXlnREMwT2JLUmdVSm5FZk1qMys4TG1saGoxU0RYM2ROcCtXTWpCbHdJOC9WTnpNTU02ZmVETkxLVlpIY29OaWhoYVE4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg2MzY3MTkyCWZpbGU6Tm9taW1hLmFwcC50YXIuZ3oKY2MrKzNoYVFQcHZ2MEY1SGdXd0FzV1BOaXd2TDVkcFR5dmNkVE5wN3UwblJ1YW9wbnpSV3AzMUdKUi80dWR5V2kwRnoySG42d3dtaHM2RkhUKzliRFE9PQo=",
+      "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.26.0/Nomima.app.tar.gz"
+    }
+  },
+  "url": "https://github.com/nomima-app/Nomima-landing/releases/download/v1.26.0/Nomima_1.26.0_universal.dmg"
 }
