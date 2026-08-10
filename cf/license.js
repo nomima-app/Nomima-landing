@@ -299,7 +299,7 @@ export async function handleLicenseRequest(request, env, ctx) {
   }
 
   const row = await env.DB.prepare("SELECT expires_at FROM licenses WHERE key = ?1").bind(key).first();
-  if (env.RESEND_API_KEY) ctx.waitUntil(sendLicenseEmail(env, email, key, row?.expires_at || null));
+  if (env.RESEND_API_KEY) ctx.waitUntil(sendLicenseEmail(env, email, key, row?.expires_at || null, freeIssue(env)));
   // Never echo the key in the response — it goes to the inbox, which is what
   // makes the email address mean anything at all here.
   return json({ sent: true });
@@ -377,10 +377,10 @@ export async function handleLicenseWebhook(request, env, ctx) {
 }
 
 /** Email the buyer their license key + how to enter it. */
-async function sendLicenseEmail(env, email, key, expiresAt = null) {
+async function sendLicenseEmail(env, email, key, expiresAt = null, beta = false) {
   const html = `<!doctype html><html><body style="font-family:-apple-system,Segoe UI,Inter,Helvetica,Arial,sans-serif;color:#111;max-width:520px;margin:0 auto;padding:24px">
-    <h2 style="margin:0 0 12px">Your Nomima Pro license</h2>
-    <p style="font-size:14px;line-height:1.6;color:#333">Thanks for buying Nomima Pro — this unlocks every AI feature: Summon, inline AI editing, and the MCP server.</p>
+    <h2 style="margin:0 0 12px">${beta ? "Your Nomima beta key" : "Your Nomima Pro license"}</h2>
+    <p style="font-size:14px;line-height:1.6;color:#333">${beta ? "Thanks for testing Nomima — this key unlocks every AI feature: Summon, inline AI editing, and the MCP server." : "Thanks for buying Nomima Pro — this unlocks every AI feature: Summon, inline AI editing, and the MCP server."}</p>
     <p style="font-size:14px;line-height:1.6;color:#333">Enter this key in Nomima → <strong>Settings → License</strong>:</p>
     <p style="font-family:ui-monospace,Menlo,monospace;font-size:16px;letter-spacing:0.04em;background:#f4f4f5;border:1px solid #e4e4e7;border-radius:8px;padding:12px 14px;word-break:break-all">${key}</p>
     ${expiresAt ? `<p style="font-size:13px;line-height:1.6;color:#333">This beta key is valid until <strong>${new Date(expiresAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</strong>.</p>` : ""}
@@ -389,7 +389,7 @@ async function sendLicenseEmail(env, email, key, expiresAt = null) {
     <p style="font-size:12px;color:#999;margin-top:24px">© 2026 Nomima · Private. Offline. Yours.</p>
   </body></html>`;
   const text = [
-    "Your Nomima Pro license",
+    beta ? "Your Nomima beta key" : "Your Nomima Pro license",
     "",
     "Enter this key in Nomima → Settings → License:",
     "",
@@ -405,7 +405,7 @@ async function sendLicenseEmail(env, email, key, expiresAt = null) {
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, "content-type": "application/json" },
-      body: JSON.stringify({ from: EMAIL_FROM, to: [email], reply_to: EMAIL_REPLY_TO, subject: "Your Nomima Pro license key", html, text }),
+      body: JSON.stringify({ from: EMAIL_FROM, to: [email], reply_to: EMAIL_REPLY_TO, subject: beta ? "Your Nomima beta key" : "Your Nomima Pro license key", html, text }),
     });
     if (!res.ok) console.log(`[license] email ${res.status}: ${(await res.text()).slice(0, 200)}`);
   } catch (e) { console.log(`[license] email failed: ${e}`); }
