@@ -157,6 +157,15 @@ export default {
     if (path === "/admin/logout") {
       return handleAdminLogout(request, env);
     }
+    if (path === "/admin/licence/revoke" && request.method === "POST") {
+      return handleAdminLicence(request, env, "revoke");
+    }
+    if (path === "/admin/licence/restore" && request.method === "POST") {
+      return handleAdminLicence(request, env, "restore");
+    }
+    if (path === "/admin/licence/free-seat" && request.method === "POST") {
+      return handleAdminLicence(request, env, "free-seat");
+    }
     if (path === "/admin/revoke" && request.method === "POST") {
       return handleAdminRevoke(request, env, true);
     }
@@ -308,7 +317,7 @@ async function verifyTurnstile(env, tokenStr, request) {
 // ─── /access — device check-in + access gate ────────────────────────────────
 
 async function handleAccess(request, env) {
-  let fingerprint, version, os_version, hw_model, hw_name, chip, memory, cpu_cores;
+  let fingerprint, version, os_version, hw_model, hw_name, chip, memory, cpu_cores, product_name, display, plan, trial_days_left;
   try {
     const body = await request.json();
     fingerprint = String(body.fingerprint || "").trim().slice(0, 128);
@@ -319,6 +328,16 @@ async function handleAccess(request, env) {
     chip        = body.chip       ? String(body.chip).trim().slice(0, 64)       : null;
     memory      = body.memory     ? String(body.memory).trim().slice(0, 32)     : null;
     cpu_cores   = body.cpu_cores  ? String(body.cpu_cores).trim().slice(0, 64)  : null;
+    // Apple's own marketing name, screen size + year included ("MacBook Pro
+    // (16-inch, 2023)"). Authoritative — unlike modelMarketingName(), which
+    // guesses from a board id against a table that goes stale every autumn.
+    product_name = body.product_name ? String(body.product_name).trim().slice(0, 96) : null;
+    display      = body.display      ? String(body.display).trim().slice(0, 32)      : null;
+    // The install's own view of its plan. Pro is derivable server-side (the
+    // fingerprint shows up in license_activations) but TRIAL is not — the trial
+    // runs offline with no key, so only the app can report it.
+    plan = ["active", "trial", "free"].includes(String(body.plan || "")) ? String(body.plan) : null;
+    trial_days_left = Number.isFinite(Number(body.trial_days_left)) ? Number(body.trial_days_left) : null;
   } catch {
     return json({ open: true }); // fail-open on malformed body
   }
@@ -335,8 +354,8 @@ async function handleAccess(request, env) {
   await env.DB.prepare(`
     INSERT INTO device_checkins
       (fingerprint, first_seen, last_seen, version, ip_country, city, region,
-       os_version, hw_model, hw_name, chip, memory, cpu_cores, checkin_count)
-    VALUES (?1, ?2, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, 1)
+       os_version, hw_model, hw_name, chip, memory, cpu_cores, product_name, display, plan, trial_days_left, checkin_count)
+    VALUES (?1, ?2, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15, ?16, 1)
     ON CONFLICT(fingerprint) DO UPDATE SET
       last_seen     = ?2,
       version       = ?3,
@@ -349,8 +368,12 @@ async function handleAccess(request, env) {
       chip          = COALESCE(?10, chip),
       memory        = COALESCE(?11, memory),
       cpu_cores     = COALESCE(?12, cpu_cores),
+      product_name  = COALESCE(?13, product_name),
+      display       = COALESCE(?14, display),
+      plan          = COALESCE(?15, plan),
+      trial_days_left = ?16,
       checkin_count = checkin_count + 1
-  `).bind(fingerprint, now, version, country, city, region, os_version, hw_model, hw_name, chip, memory, cpu_cores).run();
+  `).bind(fingerprint, now, version, country, city, region, os_version, hw_model, hw_name, chip, memory, cpu_cores, product_name, display, plan, trial_days_left).run();
 
   // Check revocation list.
   const blocked = await env.DB.prepare(
@@ -706,9 +729,9 @@ function handleAdminLogout(request) {
 }
 
 async function fetchAdminData(env) {
-  const [checkins, blocked, leads, tokens, bugs] = await Promise.all([
+  const [checkins, blocked, leads, tokens, bugs, licences, activations] = await Promise.all([
     env.DB.prepare(
-      "SELECT fingerprint, first_seen, last_seen, version, ip_country, city, region, os_version, hw_model, hw_name, chip, memory, cpu_cores, checkin_count FROM device_checkins ORDER BY last_seen DESC LIMIT 1000"
+      "SELECT fingerprint, first_seen, last_seen, version, ip_country, city, region, os_version, hw_model, hw_name, chip, memory, cpu_cores, product_name, display, plan, trial_days_left, checkin_count FROM device_checkins ORDER BY last_seen DESC LIMIT 1000"
     ).all(),
     env.DB.prepare("SELECT fingerprint FROM blocked_devices").all(),
     env.DB.prepare(
@@ -721,9 +744,65 @@ async function fetchAdminData(env) {
       "SELECT b.id, b.batch_id, b.source, b.title, b.description, b.severity, b.area, b.email, b.app_version, b.os, b.ip_country, b.status, b.public_hidden, b.admin_notes, b.diagnostics_key, b.created_at, b.updated_at, " +
       "(SELECT COUNT(*) FROM bug_attachments a WHERE a.bug_id = b.id) AS att_count FROM bug_reports b ORDER BY b.created_at DESC LIMIT 500"
     ).all(),
+    // Licences + the machines holding their seats. This is the AUTHORITATIVE
+    // source of who is Pro: a device's self-reported `plan` is only as honest as
+    // the client, whereas an activation row exists because our own server wrote it.
+    env.DB.prepare(
+      "SELECT key, email, status, seats, expires_at, order_id, created_at FROM licenses ORDER BY created_at DESC LIMIT 500"
+    ).all(),
+    env.DB.prepare(
+      "SELECT license_key, fingerprint, machine_name, activated_at, last_seen_at FROM license_activations"
+    ).all(),
   ]);
   const blockedSet = new Set((blocked.results || []).map((r) => r.fingerprint));
-  return { checkins: checkins.results || [], blockedSet, leads: leads.results || [], tokens: tokens.results || [], bugs: bugs.results || [] };
+  const licenceRows = licences.results || [];
+  const activationRows = activations.results || [];
+
+  const now = Date.now();
+  const liveKeys = new Set(
+    licenceRows
+      .filter((l) => l.status !== "revoked" && (!l.expires_at || new Date(l.expires_at).getTime() > now))
+      .map((l) => l.key),
+  );
+  // fingerprint → the licence it is activated against.
+  const proByFingerprint = new Map();
+  const seatsByKey = new Map();
+  for (const a of activationRows) {
+    if (liveKeys.has(a.license_key)) proByFingerprint.set(a.fingerprint, a.license_key);
+    if (!seatsByKey.has(a.license_key)) seatsByKey.set(a.license_key, []);
+    seatsByKey.get(a.license_key).push(a);
+  }
+
+  return {
+    checkins: checkins.results || [], blockedSet,
+    leads: leads.results || [], tokens: tokens.results || [], bugs: bugs.results || [],
+    licences: licenceRows, activations: activationRows, proByFingerprint, seatsByKey, liveKeys,
+  };
+}
+
+/** The plan to show for a device.
+ *
+ *  Server truth wins: an activation row means we issued a seat, regardless of
+ *  what the client claims. Only without one do we fall back to the app's
+ *  self-report, which is the only way to see a TRIAL at all. Installs predating
+ *  the field are "unknown", NOT "free" — counting them free would understate
+ *  conversion. */
+function planFor(row, proByFingerprint) {
+  if (proByFingerprint.has(row.fingerprint)) return "pro";
+  if (row.plan === "active") return "pro";
+  if (row.plan === "trial") return "trial";
+  if (row.plan === "free") return "free";
+  return "unknown";
+}
+
+/** Beta keys carry `beta:<fingerprint>`; a paid one carries the LS order id. */
+const isBetaKey = (l) => String(l.order_id || "").startsWith("beta:");
+
+/** active | expired | revoked — what the server would actually enforce. */
+function licenceState(l) {
+  if (l.status === "revoked") return "revoked";
+  if (l.expires_at && new Date(l.expires_at).getTime() <= Date.now()) return "expired";
+  return "active";
 }
 
 async function handleAdminData(request, env) {
@@ -731,6 +810,30 @@ async function handleAdminData(request, env) {
   const { checkins, blockedSet, leads, tokens, bugs } = await fetchAdminData(env);
   const checkinsWithStatus = checkins.map((r) => ({ ...r, blocked: blockedSet.has(r.fingerprint) }));
   return json({ checkins: checkinsWithStatus, leads, tokens, bugs });
+}
+
+/** Revoke / restore a LICENCE (not a device). Revoking is enforced server-side
+ *  already — lookupLicense refuses a revoked key — so this only flips status. */
+async function handleAdminLicence(request, env, action) {
+  if (!await adminSessionCheck(request, env)) return json({ error: "unauthorized" }, 401);
+  let body;
+  try { body = await request.json(); } catch { return json({ error: "bad_request" }, 400); }
+  const key = String(body.key || "").trim().toUpperCase();
+  if (!key) return json({ error: "missing_key" }, 400);
+
+  if (action === "free-seat") {
+    const fp = String(body.fingerprint || "").trim();
+    if (!fp) return json({ error: "missing_fingerprint" }, 400);
+    await env.DB.prepare(
+      "DELETE FROM license_activations WHERE license_key = ?1 AND fingerprint = ?2",
+    ).bind(key, fp).run();
+    return json({ ok: true });
+  }
+
+  await env.DB.prepare(
+    "UPDATE licenses SET status = ?1, updated_at = ?2 WHERE key = ?3",
+  ).bind(action === "revoke" ? "revoked" : "active", new Date().toISOString(), key).run();
+  return json({ ok: true });
 }
 
 async function handleAdminRevoke(request, env, revoke) {
@@ -862,13 +965,47 @@ async function handleAdminDashboard(request, env) {
     const origin = new URL(request.url).origin;
     return Response.redirect(`${origin}/admin/login`, 302);
   }
-  const { checkins, blockedSet, leads, tokens, bugs } = await fetchAdminData(env);
+  const { checkins, blockedSet, leads, tokens, bugs, licences, proByFingerprint, seatsByKey } = await fetchAdminData(env);
 
   const totalInstalls = checkins.length;
   const totalBlocked = blockedSet.size;
   const totalLeads = leads.length;
   const totalDownloads = tokens.filter((t) => t.used_at).length;
   const openBugs = bugs.filter((b) => b.status !== "fixed" && b.status !== "wontfix").length;
+
+  // Plan mix. `unknown` stays its own bucket — installs predating self-reporting
+  // would otherwise inflate "free" and make conversion look worse than it is.
+  const planCounts = { pro: 0, trial: 0, free: 0, unknown: 0 };
+  for (const r of checkins) planCounts[planFor(r, proByFingerprint)]++;
+  const liveLicences = licences.filter((l) => licenceState(l) === "active");
+  const betaLicences = liveLicences.filter(isBetaKey).length;
+
+  const fmtDay = (iso) => (iso ? String(iso).slice(0, 10) : "—");
+
+  // Licence rows. `seatsByKey` is already grouped, so the seat list costs no
+  // extra query — it is what turns "2 of 2 used" into something actionable.
+  const licenceRows = licences.map((l) => {
+    const st = licenceState(l);
+    const seats = seatsByKey.get(l.key) || [];
+    const machines = seats.length
+      ? seats.map((m) => `<div class="seat-row"><span>${esc(m.machine_name || "Unnamed Mac")}</span>` +
+          `<button class="btn-freeseat" data-key="${l.key}" data-fp="${m.fingerprint}" title="Free this seat">Free</button></div>`).join("")
+      : '<span style="color:var(--muted)">No machines activated</span>';
+    return `<tr>
+      <td class="key-mono">${l.key}</td>
+      <td>${esc(l.email || "—")}</td>
+      <td><span class="badge-plan lic-${st}">${st}</span>${isBetaKey(l) ? ' <span class="badge-plan plan-unknown">beta</span>' : ""}</td>
+      <td>${l.expires_at ? fmtDay(l.expires_at) : '<span style="color:var(--muted)">perpetual</span>'}</td>
+      <td class="num">${seats.length} / ${l.seats ?? 2}</td>
+      <td>${machines}</td>
+      <td>${fmtDay(l.created_at)}</td>
+      <td class="action-cell">${
+        st === "revoked"
+          ? `<button class="btn-unrevoke-lic" data-key="${l.key}">Restore</button>`
+          : `<button class="btn-revoke-lic" data-key="${l.key}">Revoke</button>`
+      }</td>
+    </tr>`;
+  }).join("");
 
   const fmt = (iso) => iso ? iso.replace("T", " ").slice(0, 16) + " UTC" : "—";
   const fp = (s) => s ? `${s.slice(0, 8)}…${s.slice(-4)}` : "—";
@@ -891,17 +1028,24 @@ async function handleAdminDashboard(request, env) {
     const del = `<button class="btn-delete" data-fp="${r.fingerprint}" title="Delete record and permanently revoke">Delete</button>`;
     const specs = [r.chip, r.memory, r.cpu_cores ? r.cpu_cores.replace(/ \(.*\)/, '') + ' cores' : null]
       .filter(Boolean).join(' · ');
-    const friendly = modelMarketingName(r.hw_model) || r.hw_name || r.hw_model;
+    // The device's OWN reported name wins; modelMarketingName() is the fallback
+    // for rows recorded before the app started sending it.
+    const friendly = r.product_name || modelMarketingName(r.hw_model) || r.hw_name || r.hw_model;
+    const plan = planFor(r, proByFingerprint);
+    const planCell = `<span class="badge-plan plan-${plan}">${
+      plan === "trial" && r.trial_days_left != null ? `trial · ${r.trial_days_left}d` : plan
+    }</span>`;
     const deviceCell = friendly
       ? `<span class="device-name">${friendly}</span>` +
         (r.hw_model ? `<br><span class="device-id">${r.hw_model}</span>` : '') +
-        (specs ? `<br><span class="device-specs">${specs}</span>` : '')
+        (specs ? `<br><span class="device-specs">${specs}${r.display ? ' · ' + r.display : ''}</span>` : '')
       : "—";
     const locationParts = [r.city, r.region, r.ip_country].filter(Boolean);
     const location = locationParts.length ? locationParts.join(", ") : "—";
     return `<tr class="${isBlocked ? "blocked-row" : ""}">
       <td class="mono" title="${r.fingerprint}">${fp(r.fingerprint)}</td>
       <td>${deviceCell}</td>
+      <td>${planCell}</td>
       <td>${r.os_version || "—"}</td>
       <td>${r.version || "—"}</td>
       <td>${location}</td>
@@ -982,6 +1126,19 @@ async function handleAdminDashboard(request, env) {
   td { padding: 9px 12px; vertical-align: middle; white-space: nowrap; }
   td.mono { font-family: monospace; font-size: 12px; color: var(--muted); cursor: default; }
   td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .badge-plan { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; white-space: nowrap; text-transform: capitalize; }
+  .plan-pro     { background: rgba(52,211,153,0.12); border: 1px solid rgba(52,211,153,0.3); color: var(--green); }
+  .plan-trial   { background: rgba(99,102,241,0.14); border: 1px solid rgba(99,102,241,0.34); color: #a5b4fc; }
+  .plan-free    { background: rgba(148,163,184,0.10); border: 1px solid rgba(148,163,184,0.24); color: var(--muted); }
+  .plan-unknown { background: transparent; border: 1px dashed rgba(148,163,184,0.30); color: var(--muted); }
+  .lic-active   { background: rgba(52,211,153,0.12); border: 1px solid rgba(52,211,153,0.3); color: var(--green); }
+  .lic-expired  { background: rgba(148,163,184,0.10); border: 1px solid rgba(148,163,184,0.24); color: var(--muted); }
+  .lic-revoked  { background: rgba(248,113,113,0.12); border: 1px solid rgba(248,113,113,0.3); color: var(--red, #f87171); }
+  .seat-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 1px 0; }
+  .btn-freeseat { font-size: 10.5px; padding: 1px 6px; border-radius: 5px; cursor: pointer; background: rgba(148,163,184,0.12); border: 1px solid rgba(148,163,184,0.26); color: var(--muted); }
+  .btn-revoke-lic { background: rgba(248,113,113,0.15); color: var(--red); border: 1px solid rgba(248,113,113,0.3); }
+  .btn-unrevoke-lic { background: rgba(52,211,153,0.14); color: var(--green); border: 1px solid rgba(52,211,153,0.3); }
+  .key-mono { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; letter-spacing: 0.02em; }
   .badge-active { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; background: rgba(52,211,153,0.12); border: 1px solid rgba(52,211,153,0.3); color: var(--green); }
   .badge-blocked { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; background: rgba(248,113,113,0.12); border: 1px solid rgba(248,113,113,0.3); color: var(--red); }
   .badge-pending { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--muted); }
@@ -1046,9 +1203,18 @@ async function handleAdminDashboard(request, env) {
   <div class="card yellow"><div class="num">${openBugs}</div><div class="lbl">Open bugs</div></div>
 </div>
 
+<div class="cards">
+  <div class="card green"><div class="num">${planCounts.pro}</div><div class="lbl">Pro installs</div></div>
+  <div class="card accent"><div class="num">${planCounts.trial}</div><div class="lbl">In trial</div></div>
+  <div class="card"><div class="num">${planCounts.free}</div><div class="lbl">Free (trial over)</div></div>
+  <div class="card"><div class="num">${liveLicences.length}</div><div class="lbl">Active licences</div></div>
+  <div class="card"><div class="num">${betaLicences}</div><div class="lbl">of those, beta</div></div>
+</div>
+
 <div class="tabs" role="tablist">
   <button class="tab" data-tab="installs">Installs <span class="tab-count">${totalInstalls}</span></button>
   <button class="tab" data-tab="downloads">Downloads <span class="tab-count">${totalLeads}</span></button>
+  <button class="tab" data-tab="licences">Licences <span class="tab-count">${licences.length}</span></button>
   <button class="tab" data-tab="bugs">Bug reports <span class="tab-count">${bugs.length}</span></button>
 </div>
 
@@ -1059,8 +1225,8 @@ async function handleAdminDashboard(request, env) {
   </div>
   <div class="tbl-wrap">
     <table>
-      <thead><tr><th>Fingerprint</th><th>Device</th><th>macOS</th><th>App ver</th><th>Location</th><th>First seen</th><th>Last active</th><th>Check-ins</th><th>Status</th><th>Actions</th></tr></thead>
-      <tbody id="device-tbody">${checkinRows || '<tr><td colspan="10" style="text-align:center;padding:24px;color:var(--muted)">No devices yet</td></tr>'}</tbody>
+      <thead><tr><th>Fingerprint</th><th>Device</th><th>Plan</th><th>macOS</th><th>App ver</th><th>Location</th><th>First seen</th><th>Last active</th><th>Check-ins</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody id="device-tbody">${checkinRows || '<tr><td colspan="11" style="text-align:center;padding:24px;color:var(--muted)">No devices yet</td></tr>'}</tbody>
     </table>
   </div>
 </section>
@@ -1074,6 +1240,16 @@ async function handleAdminDashboard(request, env) {
     <table>
       <thead><tr><th>Email</th><th>Country</th><th>Requested</th><th>Downloaded</th><th></th></tr></thead>
       <tbody>${leadRows || '<tr><td colspan="5" style="text-align:center;padding:24px;color:var(--muted)">No requests yet</td></tr>'}</tbody>
+    </table>
+  </div>
+</section>
+
+<section class="tab-panel" id="panel-licences">
+  <div class="tbl-toolbar"><h2>Licences</h2></div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Key</th><th>Email</th><th>State</th><th>Expires</th><th>Seats</th><th>Machines</th><th>Issued</th><th>Actions</th></tr></thead>
+      <tbody id="licence-tbody">${licenceRows || '<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--muted)">No licences yet</td></tr>'}</tbody>
     </table>
   </div>
 </section>
@@ -1111,8 +1287,24 @@ async function apiPost(path, body) {
 }
 
 document.addEventListener('click', async (e) => {
-  const btn = e.target.closest('.btn-revoke, .btn-unrevoke, .btn-delete, .btn-delete-lead, .btn-detail, .btn-hide, .btn-bug-del');
+  const btn = e.target.closest('.btn-revoke, .btn-unrevoke, .btn-delete, .btn-delete-lead, .btn-detail, .btn-hide, .btn-bug-del, .btn-revoke-lic, .btn-unrevoke-lic, .btn-freeseat');
   if (!btn) return;
+
+  // Licence revoke / restore / free a seat
+  if (btn.classList.contains('btn-revoke-lic') || btn.classList.contains('btn-unrevoke-lic') || btn.classList.contains('btn-freeseat')) {
+    const key = btn.dataset.key;
+    const freeing = btn.classList.contains('btn-freeseat');
+    const revoking = btn.classList.contains('btn-revoke-lic');
+    if (revoking && !confirm('Revoke this licence?\\n\\n' + key + '\\n\\nEvery Mac on it loses AI at its next check.')) return;
+    btn.disabled = true;
+    const url = freeing ? '/admin/licence/free-seat' : (revoking ? '/admin/licence/revoke' : '/admin/licence/restore');
+    try {
+      const data = await apiPost(url, freeing ? { key, fingerprint: btn.dataset.fp } : { key });
+      if (data.ok) { toast(freeing ? 'Seat freed' : (revoking ? 'Licence revoked' : 'Licence restored'), true); setTimeout(() => location.reload(), 800); }
+      else { toast('Error: ' + (data.error || 'unknown'), false); btn.disabled = false; }
+    } catch { toast('Network error', false); btn.disabled = false; }
+    return;
+  }
 
   // Device revoke / unrevoke
   if (btn.classList.contains('btn-revoke') || btn.classList.contains('btn-unrevoke')) {
