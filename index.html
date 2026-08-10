@@ -287,7 +287,6 @@
     <h2>Get Nomima.</h2>
     <p class="lead">No account. No subscription. No email. Download it and start writing.</p>
     <div class="card">
-      <p class="price-note">macOS 13+ · Intel &amp; Apple Silicon · offline-first (AI is opt-in).</p>
 
       <div id="get-notice">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:1px;flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -295,16 +294,23 @@
       </div>
 
       <div id="get-capture">
-        <p style="margin:0 0 16px"><a href="/dl" style="display:inline-block;background:var(--accent);color:#fff;border-radius:12px;padding:13px 24px;font-size:16px;font-weight:650;text-decoration:none">Download for Mac ↓</a></p>
-        <p class="capture-label">Prefer it by email? We'll send you the link</p>
+        <p style="margin:0 0 12px;text-align:center">
+          <a href="/dl" style="display:inline-block;background:var(--accent);color:#fff;border-radius:14px;padding:17px 40px;font-size:18px;font-weight:700;text-decoration:none;box-shadow:0 8px 28px rgba(108,108,255,0.32)">Download for Mac</a>
+        </p>
+        <p class="price-note" style="text-align:center;margin:0 0 18px">Free · macOS 13+ · Intel &amp; Apple Silicon · 66 MB</p>
+        <p style="text-align:center;margin:0">
+          <button type="button" id="email-toggle" style="background:none;border:0;padding:0;color:var(--muted);font-size:13.5px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-family:inherit">or have the link emailed to you</button>
+        </p>
+        <div id="email-form" hidden style="margin-top:16px">
         <div class="input-row">
           <input id="get-email" type="email" placeholder="your@email.com" autocomplete="email" aria-label="Email address" />
           <button id="get-btn" type="button">Email my link</button>
         </div>
         <p class="fine">
           <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:3px;flex-shrink:0;"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Optional. A welcome note and a download link, valid 30 days. No spam — unsubscribe any time.
+          A welcome note and a download link, valid 30 days. No spam — unsubscribe any time.
         </p>
+        </div>
       </div>
       <div class="beta-success" id="get-success">
         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#36d399" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 2px;display:block;"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
@@ -389,6 +395,20 @@
     }, { passive: true });
     window.addEventListener('resize', update);
     update();
+  })();
+  </script>
+
+  <script>
+  /* The email link is a fallback, not the path. Hidden until asked for, so the
+     download button is the only thing competing for attention. */
+  (function () {
+    var t = document.getElementById('email-toggle'), f = document.getElementById('email-form');
+    if (!t || !f) return;
+    t.addEventListener('click', function () {
+      f.hidden = !f.hidden;
+      t.textContent = f.hidden ? 'or have the link emailed to you' : 'never mind, just download it';
+      if (!f.hidden) { var i = document.getElementById('get-email'); if (i) i.focus(); }
+    });
   })();
   </script>
 
